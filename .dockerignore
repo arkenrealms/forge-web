@@ -1,0 +1,16 @@
+# ignore coverage report
+coverage
+
+# ignore dotenv
+.env
+
+# ignore npm installed packages
+node_modules
+
+# ignore built ts files
+dist
+
+# ignore log files but keep folder
+*.log
+logs/*
+!logs/.keep

@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "module": "esnext",
+    "lib": ["ES2020", "DOM"],
+    "noImplicitAny": false,
+    "outDir": "build",
+    "preserveSymlinks": false,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "checkJs": true,
+    "sourceMap": true,
+    "target": "ES2020",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["jest", "node"],
+    "paths": {
+      "react": ["./node_modules/react"],
+      "react-dom": ["./node_modules/react-dom"],
+      "~/*": ["./src/*"]
+    },
+    "baseUrl": "./",
+    "allowJs": true,
+    "declaration": false,
+    "isolatedModules": true,
+    "noFallthroughCasesInSwitch": true,
+    "noEmit": true
+  },
+  "include": ["./src/", "fs-override.js"],
+  "exclude": []
+}

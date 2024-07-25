@@ -1,0 +1,19 @@
+# Build stage
+FROM node:20 AS build
+
+ARG PUBLIC_URL
+ARG BUILD_PATH
+ARG BUILD_NUMBER
+ARG REACT_APP_SERVICE_URI
+ARG REACT_APP_PUBLIC_URI
+ARG REACT_APP_AUTHORIZATION_ENABLED
+
+ENV NODE_OPTIONS=--max-old-space-size=8192
+ENV INLINE_RUNTIME_CHUNK=false
+
+WORKDIR /app
+COPY packages ./packages
+COPY *.json ./
+
+WORKDIR /app/packages/cerebro-ui
+RUN npm build

@@ -1,0 +1,12 @@
+# Build stage
+FROM node:20 AS build
+
+ENV NODE_OPTIONS=--max-old-space-size=8192
+ENV INLINE_RUNTIME_CHUNK=false
+
+WORKDIR /app
+COPY packages ./packages
+COPY *.json ./
+
+WORKDIR /app/packages/cerebro/ui
+RUN npm build
