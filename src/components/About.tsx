@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import styled from 'styled-components'
-import BottomCTA from '~/components/BottomCTA'
-import Linker from '~/components/Linker'
-import { useModal } from '~/components/Modal'
-import { PurchaseModal } from '~/components/PurchaseModal'
-import { Card, CardBody, Heading } from '~/ui'
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+import BottomCTA from '~/components/BottomCTA';
+import Linker from '~/components/Linker';
+import { useModal } from '~/components/Modal';
+import { PurchaseModal } from '~/components/PurchaseModal';
+import { Card, CardBody, Heading } from '~/ui';
 
 const Image = styled.img`
   border-radius: 7px;
-`
+`;
 
 const BoxHeading = styled(Heading)`
   margin-bottom: 16px;
-`
+`;
 const PitchCard = styled.div`
   ${({ theme }) => theme.mediaQueries.lg} {
     display: flex;
@@ -28,11 +28,11 @@ const PitchCard = styled.div`
     & > div {
     }
   }
-`
+`;
 const Rules = () => {
-  const { t } = useTranslation()
-  const [showVision, setShowVision] = useState(false)
-  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />)
+  const { t } = useTranslation();
+  const [showVision, setShowVision] = useState(false);
+  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
   return (
     <>
@@ -134,7 +134,7 @@ const Rules = () => {
               <br />
               <p>
                 <Linker id="about-3">
-                  Rune tokens are needed to craft <strong>Runeword Items</strong> (NFTs), unique and powerful weapons
+                  Rune tokens are needed to craft <strong>Runeform Items</strong> (NFTs), unique and powerful weapons
                   and armor used to enhance your Arken: Runic Raids farm rewards, or buff your Arken: Infinite Arena
                   hero. <br />
                   <br />
@@ -224,7 +224,7 @@ const Rules = () => {
               <ol>
                 <li>Character Cost - The cost of creating a new character is around $25-30 USD paid in $RXS</li>
                 <li>
-                  Item Perfection - Item attributes are random. Perfect items should be quite rare, and so Runewords are
+                  Item Perfection - Item attributes are random. Perfect items should be quite rare, and so Runeforms are
                   retired frequently.
                 </li>
                 <li>
@@ -236,7 +236,7 @@ const Rules = () => {
                   development continues.
                 </li>
                 <li>
-                  Unique Items - Rune is building thousands of items with unique images/stats that can be found very
+                  Unique Items - Arken is building thousands of items with unique images/stats that can be found very
                   rarely and randomly while farming, depending on your Magic Find.
                 </li>
               </ol>
@@ -265,7 +265,7 @@ const Rules = () => {
                 </li>
                 <li>
                   Congruency - The Rune team want to build the best game that can be built for the ARPG genre. For that
-                  reason, Rune will not have bunny skins or snowman pets. Rune is inspired by many games, Chrono
+                  reason, Arken will not have bunny skins or snowman pets. Arken is inspired by many games, Chrono
                   Trigger, Diablo, RuneScape, Zelda, Yu-Gi-Oh, etc. The team wants to take that genre to the next level,
                   not be everything to everybody.
                 </li>
@@ -282,7 +282,7 @@ const Rules = () => {
       </Card>
       <BottomCTA />
     </>
-  )
-}
+  );
+};
 
-export default Rules
+export default Rules;

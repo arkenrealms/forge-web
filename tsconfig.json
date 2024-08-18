@@ -3,7 +3,7 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "module": "esnext",
-    "lib": ["ES2020", "DOM"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "noImplicitAny": false,
     "outDir": "build",
     "preserveSymlinks": false,
@@ -31,7 +31,9 @@
     "declaration": false,
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
-    "noEmit": true
+    "noEmit": false,
+    "noEmitOnError": false,
+    "strictNullChecks": false
   },
   "include": ["./src/", "fs-override.js"],
   "exclude": []

@@ -1,0 +1,35 @@
+.arcane-triangle-top-left {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid white;
+  transform: translateX(0) translateY(0) rotate(-45deg) translateZ(0);
+}
+
+.arcane-triangle-top-right {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid white;
+  transform: translateX(0) translateY(0) rotate(45deg) translateZ(0);
+}
+
+.arcane-triangle-bottom-right {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid white;
+  transform: translateX(0) translateY(0) rotate(-45deg) translateZ(0);
+}
+
+.arcane-triangle-bottom-left {
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid white;
+  transform: translateX(0) translateY(0) rotate(45deg) translateZ(0);
+}

@@ -1,8 +1,8 @@
-import { Nft } from './types'
+import { Nft } from './types';
 
 const Nfts: Nft[] = [
   {
-    name: 'Barbarian',
+    name: 'Warrior',
     description: 'He is unequaled in close-quarters combat and mastery of weapons.',
     images: {
       lg: 'barbarian.png',
@@ -105,6 +105,6 @@ const Nfts: Nft[] = [
   //   sortOrder: 904,
   //   characterId: 7,
   // },
-]
+];
 
-export default Nfts
+export default Nfts;

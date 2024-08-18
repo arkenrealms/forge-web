@@ -1,0 +1,32 @@
+import React from 'react'
+import styled from 'styled-components'
+import { ChevronDownIcon, ChevronUpIcon, Text } from '~/ui'
+
+export interface ExpandableSectionButtonProps {
+  onClick?: () => void
+  expanded?: boolean
+}
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: url('/images/cursor3.png'), pointer;
+
+  svg {
+    fill: ${({ theme }) => theme.colors.primary};
+  }
+`
+
+const ExpandableSectionButton: React.FC<ExpandableSectionButtonProps> = ({ onClick, expanded = false }) => {
+  return (
+    <Wrapper aria-label="Hide or show expandable content" role="button" onClick={() => onClick()}>
+      <Text color="primary" bold>
+        {expanded ? 'Hide' : 'Details'}
+      </Text>
+      {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
+    </Wrapper>
+  )
+}
+
+export default ExpandableSectionButton

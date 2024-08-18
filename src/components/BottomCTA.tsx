@@ -1,21 +1,21 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import styled from 'styled-components'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { Button, Flex, Card, Heading, Link, CardBody, BaseLayout, OpenNewIcon } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import Page from '~/components/layout/Page'
-import { PurchaseModal } from '~/components/PurchaseModal'
-import i18n from '~/config/i18n'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import styled from 'styled-components';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Button, Flex, Card, Heading, Link, CardBody, BaseLayout, OpenNewIcon } from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import Page from '~/components/layout/Page';
+import { PurchaseModal } from '~/components/PurchaseModal';
+import i18n from '~/config/i18n';
 
-const Container = styled.div``
+const Container = styled.div``;
 
 const Img = styled.img`
   filter: contrast(1.1) drop-shadow(2px 4px 6px black);
   ${({ theme }) => theme.mediaQueries.sm} {
     width: 100%;
   }
-`
+`;
 const HeadingSilver = styled.div`
   background-image: -webkit-linear-gradient(
     top,
@@ -38,7 +38,7 @@ const HeadingSilver = styled.div`
   // filter: sepia(1) saturate(5) hue-rotate(-25deg);
   // sepia(1) saturate(5) hue-rotate(-25deg) grayscale(1) drop-shadow(0px 0px 10px #000) invert(1)
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
-`
+`;
 
 const HeadingPlain = styled.div`
   color: #cecece;
@@ -50,7 +50,7 @@ const HeadingPlain = styled.div`
   // filter: sepia(1) saturate(5) hue-rotate(-25deg);
   // sepia(1) saturate(5) hue-rotate(-25deg) grayscale(1) drop-shadow(0px 0px 10px #000) invert(1)
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
-`
+`;
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -73,7 +73,7 @@ const Cards = styled(BaseLayout)`
       grid-column: span 6;
     }
   }
-`
+`;
 const Text = styled.div`
   * {
     font-family: 'Alegreya Sans', Cambria, Verdana, Arial, Helvetica, sans-serif;
@@ -81,22 +81,22 @@ const Text = styled.div`
     color: #ddd;
     font-size: 1.2rem;
   }
-`
+`;
 
 const HightlightText = styled.span`
   color: #7576df;
-`
+`;
 
 const StyledCard = styled(Card)`
   background: rgba(0, 0, 0, 0.8);
   z-index: 2;
-`
+`;
 
-const LogoImg = styled.img``
+const LogoImg = styled.img``;
 
 const BottomCTA = () => {
-  const { t } = useTranslation()
-  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />)
+  const { t } = useTranslation();
+  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
   return (
     <Cards>
@@ -110,7 +110,7 @@ const BottomCTA = () => {
           </Heading>
           <Text>
             <p>
-              Rune is the future of gaming. <br />
+              Arken is the future of gaming. <br />
               <br />
               We're building modern game experiences, backed by open immutable hash technology. Aligning incentives
               between games and gamers in new revolutionary ways. Soon you won't know you're using blockchain, but
@@ -191,7 +191,7 @@ const BottomCTA = () => {
             to="/games"
             style={{ zoom: 1.5, padding: '6px 20px', textAlign: 'center' }}
             onClick={() => {
-              window.scrollTo(0, 0)
+              window.scrollTo(0, 0);
             }}>
             {t('Play Now')}
             {/* <OpenNewIcon color="white" ml="4px" /> */}
@@ -203,7 +203,7 @@ const BottomCTA = () => {
               to="/account"
               style={{ zoom: 1, padding: '6px 20px', textAlign: 'center', background: '#222' }}
               onClick={() => {
-                window.scrollTo(0, 0)
+                window.scrollTo(0, 0);
               }}>
               {t('Create Account')}
             </Button>
@@ -212,7 +212,7 @@ const BottomCTA = () => {
               to="/guide"
               style={{ zoom: 1, padding: '6px 20px', textAlign: 'center', background: '#222', marginLeft: 10 }}
               onClick={() => {
-                window.scrollTo(0, 0)
+                window.scrollTo(0, 0);
               }}>
               {t('Starter Guide')}
             </Button>
@@ -233,7 +233,7 @@ const BottomCTA = () => {
         </Flex>
       </div>
     </Cards>
-  )
-}
+  );
+};
 
-export default BottomCTA
+export default BottomCTA;

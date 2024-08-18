@@ -1,0 +1,310 @@
+{
+  "name": "Rune Default List",
+  "timestamp": "2021-03-17T09:56:23Z",
+  "version": {
+    "major": 2,
+    "minor": 5,
+    "patch": 0
+  },
+  "tags": {},
+  "logoURI": "https://swap.arken.gg/images/rune-500x500.png",
+  "keywords": ["pancake", "default"],
+  "tokens": [
+    {
+      "name": "Rune Token",
+      "symbol": "RUNE",
+      "address": "0xa9776b590bfc2f956711b3419910a5ec1f63153e",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/rune-500x500.png"
+    },
+    {
+      "name": "Arken Realm Shards",
+      "symbol": "RXS",
+      "address": "0x2098fef7eeae592038f4f3c4b008515fed0d5886",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/rune-500x500.png"
+    },
+    {
+      "name": "Ex Rune",
+      "symbol": "EL",
+      "address": "0x210c14fbecc2bd9b6231199470da12ad45f64d45",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/el.png"
+    },
+    {
+      "name": "Elm Rune",
+      "symbol": "ELD",
+      "address": "0xe00b8109bcb70b1edeb4cf87914efc2805020995",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/eld.png"
+    },
+    {
+      "name": "Eva Rune",
+      "symbol": "ETH",
+      "address": "0x919676B73a8d124597cBbA2E400f81Aa91Aa2450",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/eth.png"
+    },
+    {
+      "name": "TIR Rune",
+      "symbol": "TIR",
+      "address": "0x125a3e00a9a11317d4d95349e68ba0bc744addc4",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/tir.png"
+    },
+    {
+      "name": "Nen Rune",
+      "symbol": "NEF",
+      "address": "0xef4f66506aaaeeff6d10775ad6f994105d8f11b4",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/nef.png"
+    },
+    {
+      "name": "Isa Rune",
+      "symbol": "ITH",
+      "address": "0x098Afb73F809D8Fe145363F802113E3825d7490C",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/ith.png"
+    },
+    {
+      "name": "Tai Rune",
+      "symbol": "TAL",
+      "address": "0x5DE72A6fca2144Aa134650bbEA92Cc919244F05D",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/tal.png"
+    },
+    {
+      "name": "Ro Rune",
+      "symbol": "RAL",
+      "address": "0x2F25DbD430CdbD1a6eC184c79C56C18918fcc97D",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/ral.png"
+    },
+    {
+      "name": "Ore Rune",
+      "symbol": "ORT",
+      "address": "0x33bc7539D83C1ADB95119A255134e7B584cd5c59",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/ort.png"
+    },
+    {
+      "name": "Thal Rune",
+      "symbol": "THUL",
+      "address": "0x1fC5bffCf855B9D7897F1921363547681F6847Aa",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/thul.png"
+    },
+    {
+      "name": "Ash Rune",
+      "symbol": "AMN",
+      "address": "0x346C03fe8BE489baAAc5CE67e817Ff11fb580F98",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/amn.png"
+    },
+    {
+      "name": "Solo Rune",
+      "symbol": "SOL",
+      "address": "0x4ffd3b8ba90f5430cda7f4cc4c0a80df3cd0e495",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/sol.png"
+    },
+    {
+      "name": "Sen Rune",
+      "symbol": "SHAEL",
+      "address": "0x56DeFe2310109624c20c2E985c3AEa63b9718319",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/shael.png"
+    },
+    {
+      "name": "Da Rune",
+      "symbol": "DOL",
+      "address": "0x94F2E23c7422fa8c5A348a0E6D7C05b0a6C8a5b8",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/dol.png"
+    },
+    {
+      "name": "Han Rune",
+      "symbol": "HEL",
+      "address": "0x0D3877152BaaC86D42A4123ABBeCd1178d784cC7",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/hel.png"
+    },
+    {
+      "name": "Ion Rune",
+      "symbol": "IO",
+      "address": "0xa00672c2a70E4CD3919afc2043b4b46e95041425",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/io.png"
+    },
+    {
+      "name": "Luph Rune",
+      "symbol": "LUM",
+      "address": "0xD481F4eA902e207AAda9Fa093f80d50B19444253",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/lum.png"
+    },
+    {
+      "name": "Ka Rune",
+      "symbol": "KO",
+      "address": "0x2a74b7d7d44025Bcc344E7dA80d542e7b0586330",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/ko.png"
+    },
+    {
+      "name": "Fus Rune",
+      "symbol": "FAL",
+      "address": "0xcd06c743a1628fB02C15946a56037CD7020F3Bd2",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/fal.png"
+    },
+    {
+      "name": "Lex Rune",
+      "symbol": "LEM",
+      "address": "0xFF0682D330C7a6381214fa541d8D288dD0D098ED",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/lem.png"
+    },
+    {
+      "name": "Pai Rune",
+      "symbol": "PUL",
+      "address": "0xfa3f14C55adaDDC2035083146c1cF768bD035E06",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/pul.png"
+    },
+    {
+      "name": "Uln Rune",
+      "symbol": "UM",
+      "address": "0x7e8a6d548a68339481c500f2B56367698A9F7213",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/um.png"
+    },
+    {
+      "name": "Mor Rune",
+      "symbol": "MAL",
+      "address": "0xdfFeB26FbaCF79823C50a4e7DCF69378667c9941",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/mal.png"
+    },
+    {
+      "name": "Isk Rune",
+      "symbol": "IST",
+      "address": "0x90132915EbDe0CF93283D55AB3fBBA15449f95A9",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/ist.png"
+    },
+    {
+      "name": "Gon Rune",
+      "symbol": "GUL",
+      "address": "0xa89805AB2ca5B70c89B74b3B0346a88a5B8eAc85",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/gul.png"
+    },
+    {
+      "name": "Val Rune",
+      "symbol": "VEX",
+      "address": "0x60E3538610e9f4974A36670842044CB4936e5232",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/vex.png"
+    },
+    {
+      "name": "Oh Rune",
+      "symbol": "OHM",
+      "address": "0x9449D198AB998388a577D4eBfDa4656D9fa3468a",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/ohm.png"
+    },
+    {
+      "name": "Lor Rune",
+      "symbol": "LO",
+      "address": "0x08fb6740Cc5170e48B2Ad8Cc07422d3302EF5e78",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/lo.png"
+    },
+    {
+      "name": "Su Rune",
+      "symbol": "SUR",
+      "address": "0x191472E8E899E98048AeB82faa1AE4Ec3801b936",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/sur.png"
+    },
+    {
+      "name": "Beru Rune",
+      "symbol": "BER",
+      "address": "0x1656f8d69F2354a9989Fe705c0107190A4815287",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/ber.png"
+    },
+    {
+      "name": "Jua Rune",
+      "symbol": "JAH",
+      "address": "0xBC996F2f6703cc13AA494F846A1c563A4A0f1A80",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/jah.png"
+    },
+    {
+      "name": "Chin Rune",
+      "symbol": "CHAM",
+      "address": "0xfb134f1721bc602Eb14148f89e1225dC7C93D8d4",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/cham.png"
+    },
+    {
+      "name": "Zel Rune",
+      "symbol": "ZOD",
+      "address": "0x3e151ca82b3686f555c381530732df1cfc3c7890",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/zod.png"
+    },
+    {
+      "name": "WBNB Token",
+      "symbol": "WBNB",
+      "address": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/bnb.png"
+    },
+    {
+      "name": "BUSD Token",
+      "symbol": "BUSD",
+      "address": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+      "chainId": 56,
+      "decimals": 18,
+      "logoURI": "https://swap.arken.gg/images/farms/busd.png"
+    }
+  ]
+}

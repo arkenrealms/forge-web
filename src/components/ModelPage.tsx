@@ -1,15 +1,15 @@
-import Layout from '~/components/Layout'
-import FormFieldText from '@arken/forge-ui/components/FormFieldText'
-import useDocumentTitle from '@arken/forge-ui/hooks/useDocumentTitle'
+import Layout from '~/components/Layout';
+import FormFieldText from '@arken/forge-ui/components/FormFieldText';
+import useDocumentTitle from '@arken/forge-ui/hooks/useDocumentTitle';
 
-import * as log from '@arken/node/util/log'
-import { Avatar, List } from 'antd'
-import _ from 'lodash'
-import qs from 'qs'
-import React, { JSX, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { css } from 'styled-components'
-import App from '@arken/forge-ui/components/App'
+import * as log from '@arken/node/util/log';
+import { Avatar, List } from 'antd';
+import _ from 'lodash';
+import qs from 'qs';
+import React, { JSX, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { css } from 'styled-components';
+import App from '@arken/forge-ui/components/App';
 import {
   useModel,
   useGetModelCall,
@@ -20,22 +20,22 @@ import {
   useUpdateModel,
   useUpsertModel,
   useDeleteModel,
-} from '@arken/forge-ui/hooks'
-import { generateLongId } from '@arken/node/util/db'
+} from '@arken/forge-ui/hooks';
+import { generateLongId } from '@arken/node/util/db';
 
 type NexusModel<T> = T & {
-  __original?: T
-  meta: any
-}
+  __original?: T;
+  meta: any;
+};
 
-type ModelWithRelations = NexusModel<any>
+type ModelWithRelations = NexusModel<any>;
 
 function getDocumentTitle(params: any, contentItem: ModelWithRelations = undefined) {
   if (contentItem?.name) {
-    return `ASI Cerebro - Model - ${contentItem.name}`
+    return `ASI Cerebro - Model - ${contentItem.name}`;
   }
 
-  return 'ASI Cerebro - Models'
+  return 'ASI Cerebro - Models';
 }
 
 const contentItemDefault: ModelWithRelations = {
@@ -46,9 +46,9 @@ const contentItemDefault: ModelWithRelations = {
   updatedDate: undefined,
   deletedDate: undefined,
   meta: {},
-}
+};
 
-const contentItemTemp: ModelWithRelations = { ...contentItemDefault }
+const contentItemTemp: ModelWithRelations = { ...contentItemDefault };
 
 const query = `
   id
@@ -56,7 +56,7 @@ const query = `
   createdDate
   updatedDate
   deletedDate
-`
+`;
 
 const permissions = [
   { name: 'Process Forms', id: 'Process Forms' },
@@ -71,15 +71,15 @@ const permissions = [
   { name: 'View Workflows', id: 'View Workflows' },
   { name: 'Manage Settings', id: 'Manage Settings' },
   { name: 'Deletion', id: 'Deletion' },
-]
+];
 
 export default ({ themeConfig }: any) => {
-  const [cacheKey, setCacheKey] = useState('0')
-  const history = useNavigate()
+  const [cacheKey, setCacheKey] = useState('0');
+  const history = useNavigate();
 
   const localParams: any = {
     ...qs.parse(window.location.search.replace('?', '')),
-  }
+  };
 
   const { isLoading: contentItemLoading, data: contentItemSearch }: any = useGetModel({
     key: 'Model',
@@ -92,9 +92,9 @@ export default ({ themeConfig }: any) => {
           },
         }
       : null,
-  })
+  });
 
-  const contentItem = getContentItem({ params: localParams })
+  const contentItem = getContentItem({ params: localParams });
 
   const { isLoading: contentListLoading, data: contentListSearch }: any = useSearchModels({
     key: 'Model',
@@ -102,13 +102,13 @@ export default ({ themeConfig }: any) => {
     query,
     variables: {
       where: {
-        __model: 'CryptoToken',
+        __model: 'ChainToken',
       },
       orderBy: {
         name: 'asc',
       },
     },
-  })
+  });
 
   const { isPending: createLoading, mutateAsync: createModel } = useCreateModel({
     key: 'Model',
@@ -116,7 +116,7 @@ export default ({ themeConfig }: any) => {
     query: `
       id
     `,
-  })
+  });
 
   const { isPending: updateLoading, mutateAsync: updateModel } = useUpdateModel({
     key: 'Model',
@@ -124,29 +124,29 @@ export default ({ themeConfig }: any) => {
     query: `
       id
     `,
-  })
+  });
 
   const rerender = function () {
-    setCacheKey('cache' + Math.random())
-  }
+    setCacheKey('cache' + Math.random());
+  };
 
   const onSaveContentItem = async (values: Partial<ModelWithRelations>) => {
     try {
-      const contentItem = getContentItem({ params: localParams })
+      const contentItem = getContentItem({ params: localParams });
       for (const index in values) {
         // @ts-ignore
-        contentItem[index] = values[index]
+        contentItem[index] = values[index];
       }
 
       if (contentItem.__original) {
-        log.dev('Updating Model', contentItem, contentItemSearch)
+        log.dev('Updating Model', contentItem, contentItemSearch);
         const res = await updateModel({
           before: contentItem.__original,
           after: contentItem,
           where: {
             id: contentItem.id,
           },
-        })
+        });
 
         return {
           message: `Success`,
@@ -154,10 +154,10 @@ export default ({ themeConfig }: any) => {
           placement: 'topRight' as any,
           duration: 3,
           contentId: res.id,
-        }
+        };
       } else {
-        log.dev('Creating Model', contentItem, contentItemSearch)
-        const res = await createModel({ data: contentItem })
+        log.dev('Creating Model', contentItem, contentItemSearch);
+        const res = await createModel({ data: contentItem });
 
         return {
           message: `Success`,
@@ -165,13 +165,13 @@ export default ({ themeConfig }: any) => {
           placement: 'topRight' as any,
           duration: 3,
           contentId: res.id,
-        }
+        };
       }
     } catch (e) {
-      console.log('Error saving role', e)
-      throw e
+      console.log('Error saving role', e);
+      throw e;
     }
-  }
+  };
 
   async function getColumns({ params }: any) {
     const columns = [
@@ -196,7 +196,7 @@ export default ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
         sorter: (a: any, b: any) => a.name.localeCompare(b.name),
       },
@@ -225,43 +225,38 @@ export default ({ themeConfig }: any) => {
       //   },
       //   sorter: (a: any, b: any) => a.description.localeCompare(b.description),
       // },
-    ]
+    ];
 
-    return columns
+    return columns;
   }
 
   function getContentList({ params }: any) {
-    if (!contentListSearch) return []
+    if (!contentListSearch) return [];
 
-    const result = contentListSearch
+    const result = contentListSearch;
 
-    return result
+    return result;
   }
 
   function getContentItem({ params }: any) {
     if (params?.contentId && contentItemSearch?.id && contentItemTemp.id !== contentItemSearch.id) {
-      console.log(
-        'Resetting content item object due to search',
-        contentItemTemp,
-        ':',
-        contentItemSearch?.id
-      )
+      console.log('Resetting content item object due to search', contentItemTemp, ':', contentItemSearch?.id);
       for (const k of Object.keys(contentItemDefault)) {
         // @ts-ignore
-        contentItemTemp[k] = contentItemDefault[k]
+        contentItemTemp[k] = contentItemDefault[k];
       }
       for (const k of Object.keys(contentItemSearch)) {
         // @ts-ignore
-        contentItemTemp[k] = contentItemSearch[k]
+        contentItemTemp[k] = contentItemSearch[k];
       }
 
       // @ts-ignore
       if (!contentItemTemp.__original) {
         // @ts-ignore
-        contentItemTemp.__original = _.cloneDeep(contentItemSearch)
+        contentItemTemp.__original = _.cloneDeep(contentItemSearch);
       }
 
-      setCacheKey('cache' + Math.random())
+      setCacheKey('cache' + Math.random());
     }
     //  else if (!params?.contentMode && !params?.contentId) {
     //   console.log(
@@ -289,11 +284,11 @@ export default ({ themeConfig }: any) => {
 
     // console.log('Set temp content item', contentItemTemp)
 
-    return contentItemTemp
+    return contentItemTemp;
   }
 
   function getBreadcrumb({ contentItem, params }: any) {
-    return [] as any
+    return [] as any;
   }
 
   function onRemove({ params }: any) {
@@ -301,11 +296,11 @@ export default ({ themeConfig }: any) => {
     onSaveContentItem({
       id: params.contentId,
       // Status: 'Archived',
-    })
+    });
   }
 
   function getTabs({ params }: any) {
-    const tabs: any[] = []
+    const tabs: any[] = [];
 
     tabs.push({
       label: 'Information',
@@ -347,9 +342,9 @@ export default ({ themeConfig }: any) => {
           ],
         },
       ],
-    })
+    });
 
-    return tabs
+    return tabs;
   }
 
   const config: any = {
@@ -376,13 +371,13 @@ export default ({ themeConfig }: any) => {
     onRemove,
     getTabs,
     themeConfig,
-  }
+  };
 
-  useDocumentTitle(getDocumentTitle(localParams, contentItem))
+  useDocumentTitle(getDocumentTitle(localParams, contentItem));
 
   return (
     <Layout>
       <App {...config} />
     </Layout>
-  )
-}
+  );
+};

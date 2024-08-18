@@ -1,43 +1,43 @@
-import React, { useEffect } from 'react'
-import { ConfigProvider, theme, notification } from 'antd'
-import { ThemeProvider } from 'antd-style'
-import { ThemeProvider as StyledThemeProvider } from 'styled-components'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { ApolloProvider } from '@apollo/client'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { useBrand, useMatchBreakpoints, useSettings } from '@arken/forge-ui/hooks'
-import { PromptProvider } from '@arken/forge-ui/hooks/usePrompt'
-import { AuthProvider } from '@arken/forge-ui/hooks/useAuth'
-import { NavProvider } from '@arken/forge-ui/hooks/useNav'
-import { NoticeProvider } from '@arken/forge-ui/hooks/useNotice'
+import React, { useEffect } from 'react';
+import { ConfigProvider, theme, notification } from 'antd';
+import { ThemeProvider } from 'antd-style';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useBrand, useMatchBreakpoints, useSettings } from '@arken/forge-ui/hooks';
+import { PromptProvider } from '@arken/forge-ui/hooks/usePrompt';
+import { AuthProvider } from '@arken/forge-ui/hooks/useAuth';
+import { NavProvider } from '@arken/forge-ui/hooks/useNav';
+import { NoticeProvider } from '@arken/forge-ui/hooks/useNotice';
 // import cerebro from '@arken/forge-ui'
-import { lightTheme, darkTheme } from '~/themes'
-import ResetStyles from '~/reset-styles'
-import GlobalStyles from '~/global-styles'
-import Authorize from './components/Authorize'
-import { TourProvider } from './hooks/useTour'
-import { SettingsProvider } from './hooks/useSettings'
-import FormPage from './components/FormPage'
-import ModelPage from './components/ModelPage'
-import Dashboard from './views'
-import Users from './views/users'
-import Roles from './views/roles'
-import Settings from './views/settings'
-import Forms from './views/forms'
-import Groups from './views/groups'
-import Templates from './views/templates'
-import PageNotFound from './views/404'
+import { lightTheme, darkTheme } from '~/themes';
+import ResetStyles from '~/reset-styles';
+import GlobalStyles from '~/global-styles';
+import Authorize from './components/Authorize';
+import { TourProvider } from './hooks/useTour';
+import { SettingsProvider } from './hooks/useSettings';
+import FormPage from './components/FormPage';
+import ModelPage from './components/ModelPage';
+import Dashboard from './views';
+import Users from './views/users';
+import Roles from './views/roles';
+import Settings from './views/settings';
+import Forms from './views/forms';
+import Groups from './views/groups';
+import Templates from './views/templates';
+import PageNotFound from './views/404';
 
-window.queryClient = new QueryClient()
+window.queryClient = new QueryClient();
 
 // TODO: remove?
 // @ts-ignore
 // window.cerebro = cerebro
 
 const App = ({ apolloClient }: any) => {
-  const { brand } = useBrand()
-  const { isMobile } = useMatchBreakpoints()
-  const { settings } = useSettings()
+  const { brand } = useBrand();
+  const { isMobile } = useMatchBreakpoints();
+  const { settings } = useSettings();
 
   const themeConfig: any = {
     algorithm: settings.DarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm, //theme.compactAlgorithm,
@@ -52,19 +52,19 @@ const App = ({ apolloClient }: any) => {
       colorFillQuaternary: 'rgba(0, 0, 0, 0.04)',
       // colorBgBase: '#fff',
     },
-  }
+  };
 
   if (settings.DarkMode) {
     // themeConfig.token.colorBgBase = '#fff'
-    themeConfig.token.colorBgContainer = 'transparent'
-    themeConfig.token.colorFillContent = 'transparent'
+    themeConfig.token.colorBgContainer = 'transparent';
+    themeConfig.token.colorFillContent = 'transparent';
   }
 
   const themeSettings = {
     ...(settings.DarkMode ? darkTheme[brand] : lightTheme[brand]),
     brand,
     isMobile,
-  }
+  };
 
   // const ThemeProvider2 = ThemeProvider as any
 
@@ -180,7 +180,7 @@ const App = ({ apolloClient }: any) => {
         {/* </ThemeProvider2> */}
       </StyledThemeProvider>
     </ConfigProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

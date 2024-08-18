@@ -1,71 +1,71 @@
-import React from 'react'
-import styled, { DefaultTheme } from 'styled-components'
-import CheckmarkCircleIcon from '../Svg/Icons/CheckmarkCircle'
-import ErrorIcon from '../Svg/Icons/Error'
-import BlockIcon from '../Svg/Icons/Block'
-import InfoIcon from '../Svg/Icons/Info'
-import { Text } from '../Text'
-import { IconButton } from '../Button'
-import { CloseIcon } from '../Svg'
-import Flex from '../Box/Flex'
-import { AlertProps, variants } from './types'
+import React from 'react';
+import styled, { DefaultTheme } from 'styled-components';
+import CheckmarkCircleIcon from '../Svg/Icons/CheckmarkCircle';
+import ErrorIcon from '../Svg/Icons/Error';
+import BlockIcon from '../Svg/Icons/Block';
+import InfoIcon from '../Svg/Icons/Info';
+import { Text } from '../Text';
+import { IconButton } from '../Button3';
+import { CloseIcon } from '../Svg';
+import Flex from '../Box/Flex';
+import { AlertProps, variants } from './types';
 
 interface ThemedIconLabel {
-  variant: AlertProps['variant']
-  theme: DefaultTheme
-  hasDescription: boolean
+  variant: AlertProps['variant'];
+  theme: DefaultTheme;
+  hasDescription: boolean;
 }
 
 const getThemeColor = ({ theme, variant = variants.INFO }: ThemedIconLabel) => {
   switch (variant) {
     case variants.DANGER:
-      return theme.colors.failure
+      return theme.colors.failure;
     case variants.WARNING:
-      return theme.colors.warning
+      return theme.colors.warning;
     case variants.SUCCESS:
-      return theme.colors.success
+      return theme.colors.success;
     case variants.INFO:
     default:
-      return theme.colors.secondary
+      return theme.colors.secondary;
   }
-}
+};
 
 const getIcon = (variant: AlertProps['variant'] = variants.INFO) => {
   switch (variant) {
     case variants.DANGER:
-      return BlockIcon
+      return BlockIcon;
     case variants.WARNING:
-      return ErrorIcon
+      return ErrorIcon;
     case variants.SUCCESS:
-      return CheckmarkCircleIcon
+      return CheckmarkCircleIcon;
     case variants.INFO:
     default:
-      return InfoIcon
+      return InfoIcon;
   }
-}
+};
 
 const IconLabel = styled.div<ThemedIconLabel>`
   background-color: ${getThemeColor};
   // border-radius: 16px 0 0 16px;
   color: ${({ theme }) => theme.alert.background};
   padding: 12px;
-`
+`;
 
-const withHandlerSpacing = 32 + 12 + 8 // button size + inner spacing + handler position
+const withHandlerSpacing = 32 + 12 + 8; // button size + inner spacing + handler position
 const Details = styled.div<{ hasHandler: boolean }>`
   flex: 1;
   padding-bottom: 6px;
   padding-left: 6px;
   padding-right: ${({ hasHandler }) => (hasHandler ? `${withHandlerSpacing}px` : '6px')};
   padding-top: 6px;
-`
+`;
 
 const CloseHandler = styled.div`
   border-radius: 0 16px 16px 0;
   right: 8px;
   position: absolute;
   top: 8px;
-`
+`;
 
 const StyledAlert = styled(Flex)`
   position: relative;
@@ -78,10 +78,10 @@ const StyledAlert = styled(Flex)`
   filter: drop-shadow(rgba(0, 0, 0, 0.6) 0px 0px 1px) drop-shadow(rgba(0, 0, 0, 0.6) 0px 0px 4px);
   color: #fff;
   padding: 4px;
-`
+`;
 
 const Alert: React.FC<AlertProps> = ({ title, children, variant, onClick }) => {
-  const Icon = getIcon(variant)
+  const Icon = getIcon(variant);
 
   return (
     <StyledAlert>
@@ -100,7 +100,7 @@ const Alert: React.FC<AlertProps> = ({ title, children, variant, onClick }) => {
         </CloseHandler>
       )}
     </StyledAlert>
-  )
-}
+  );
+};
 
-export default Alert
+export default Alert;

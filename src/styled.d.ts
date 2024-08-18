@@ -1,13 +1,14 @@
-import type {} from 'styled-components/cssprop'
-import { CSSProp } from 'styled-components'
-import type { MainTheme } from '@arken/forge-ui/themes'
+import type {} from 'styled-components/cssprop';
+import { CSSProp } from 'styled-components';
+import type { MainTheme } from '@arken/forge-ui/themes';
 
 // This will make it so any styled theme stuff (DefaultTheme) is extending our theme (MainTheme)
 declare module 'styled-components' {
   export interface DefaultTheme extends MainTheme {
+    brand?: string;
     colors: {
-      bodyBackground: string
-    }
+      bodyBackground: string;
+    };
   }
 }
 
@@ -15,20 +16,20 @@ declare module 'styled-components' {
 declare module 'react' {
   export interface DefaultTheme extends MainTheme {}
   interface Attributes {
-    css?: CSSProp
+    css?: CSSProp<MyTheme>;
   }
   interface HTMLAttributes<T> extends DOMAttributes<T> {
-    css?: CSSProp<DefaultTheme>
+    css?: CSSProp<DefaultTheme>;
   }
 }
 
 declare module '*.png' {
-  const value: any
-  export default value
+  const value: any;
+  export default value;
 }
 
 declare global {
   interface Window {
-    queryClient: any
+    queryClient: any;
   }
 }

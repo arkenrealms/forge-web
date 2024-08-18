@@ -1,7 +1,7 @@
-import { MenuEntry } from '~/components/Menu/types'
-import accounts from '~/views/service/accounts'
+import { MenuEntry } from '~/components/Menu/types';
+import accounts from '~/views/service/accounts';
 
-import info from '../../package.json'
+import info from '../../package.json';
 
 const runeConfig: MenuEntry[] = [
   {
@@ -18,14 +18,14 @@ const runeConfig: MenuEntry[] = [
         label: 'Buy & Swap Runes',
         href: '/swap',
       },
-      {
-        label: 'Item Market',
-        href: '/market',
-      },
-      {
-        label: 'Item Catalog',
-        href: '/catalog',
-      },
+      // {
+      //   label: 'Item Market',
+      //   href: '/market',
+      // },
+      // {
+      //   label: 'Item Catalog',
+      //   href: '/catalog',
+      // },
       // {
       //   label: 'Add/Remove Liquidity',
       //   href: '/swap/pool',
@@ -562,7 +562,7 @@ const runeConfig: MenuEntry[] = [
   //   icon: 'SunIcon',
   //   href: '/',
   // },
-]
+];
 
 const evoConfig: MenuEntry[] = [
   {
@@ -649,7 +649,7 @@ const evoConfig: MenuEntry[] = [
       },
     ],
   },
-]
+];
 
 const infiniteConfig: MenuEntry[] = [
   {
@@ -719,7 +719,7 @@ const infiniteConfig: MenuEntry[] = [
       },
     ],
   },
-]
+];
 
 const raidConfig: MenuEntry[] = [
   {
@@ -801,7 +801,7 @@ const raidConfig: MenuEntry[] = [
       },
     ],
   },
-]
+];
 
 const sanctuaryConfig: MenuEntry[] = [
   {
@@ -935,7 +935,7 @@ const sanctuaryConfig: MenuEntry[] = [
       },
     ],
   },
-]
+];
 
 const guardiansConfig: MenuEntry[] = [
   {
@@ -1005,7 +1005,7 @@ const guardiansConfig: MenuEntry[] = [
       },
     ],
   },
-]
+];
 
 const w4Config: MenuEntry[] = [
   {
@@ -1320,7 +1320,7 @@ const w4Config: MenuEntry[] = [
       },
     ],
   },
-]
+];
 
 export default {
   arken: runeConfig,
@@ -1330,4 +1330,4 @@ export default {
   raid: raidConfig,
   guardians: guardiansConfig,
   w4: w4Config,
-}
+};

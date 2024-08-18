@@ -1,33 +1,33 @@
-import areas from 'rune-backend-sdk/build/data/generated/areas.json'
-import characterClasses from 'rune-backend-sdk/build/data/generated/characterClasses.json'
-import characterFactions from 'rune-backend-sdk/build/data/generated/characterFactions.json'
-import characterRaces from 'rune-backend-sdk/build/data/generated/characterRaces.json'
-import eras from 'rune-backend-sdk/build/data/generated/eras.json'
-import games from 'rune-backend-sdk/build/data/generated/games.json'
-import npcs from 'rune-backend-sdk/build/data/generated/npcs.json'
-import { itemData, ItemRarity, RuneNames } from 'rune-backend-sdk/build/data/items'
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type'
-import { decodeItem, normalizeItem } from 'rune-backend-sdk/build/util/item-decoder'
-import React, { useContext } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
-import { ArrowContainer, Popover } from 'react-tiny-popover'
-import styled, { css } from 'styled-components'
-import EvolutionIcon from '~/assets/images/icons/evolution-desktop.png'
-import GuardiansIcon from '~/assets/images/icons/guardians-desktop.png'
-import InfiniteIcon from '~/assets/images/icons/infinite-desktop.png'
-import RaidIcon from '~/assets/images/icons/raid-desktop.png'
-import SanctuaryIcon from '~/assets/images/icons/sanctuary-desktop.png'
-import AreaPreview from '~/components/AreaPreview'
-import CharacterClassPreview from '~/components/CharacterClassPreview'
-import CharacterFactionPreview from '~/components/CharacterFactionPreview'
-import CharacterRacePreview from '~/components/CharacterRacePreview'
-import EraPreview from '~/components/EraPreview'
-import Item from '~/components/Item'
-import NpcPreview from '~/components/NpcPreview'
-import ItemsContext from '~/contexts/ItemsContext'
-import history from '~/routerHistory'
+import areas from 'rune-backend-sdk/build/data/generated/areas.json';
+import characterClasses from 'rune-backend-sdk/build/data/generated/characterClasses.json';
+import characterFactions from 'rune-backend-sdk/build/data/generated/characterFactions.json';
+import characterRaces from 'rune-backend-sdk/build/data/generated/characterRaces.json';
+import eras from 'rune-backend-sdk/build/data/generated/eras.json';
+import games from 'rune-backend-sdk/build/data/generated/games.json';
+import npcs from 'rune-backend-sdk/build/data/generated/npcs.json';
+import { itemData, ItemRarity, RuneNames } from 'rune-backend-sdk/build/data/items';
+import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { decodeItem, normalizeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import React, { useContext } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { ArrowContainer, Popover } from 'react-tiny-popover';
+import styled, { css } from 'styled-components';
+import EvolutionIcon from '~/assets/images/icons/evolution-desktop.png';
+import GuardiansIcon from '~/assets/images/icons/guardians-desktop.png';
+import InfiniteIcon from '~/assets/images/icons/infinite-desktop.png';
+import RaidIcon from '~/assets/images/icons/raid-desktop.png';
+import SanctuaryIcon from '~/assets/images/icons/sanctuary-desktop.png';
+import AreaPreview from '~/components/AreaPreview';
+import CharacterClassPreview from '~/components/CharacterClassPreview';
+import CharacterFactionPreview from '~/components/CharacterFactionPreview';
+import CharacterRacePreview from '~/components/CharacterRacePreview';
+import EraPreview from '~/components/EraPreview';
+import Item from '~/components/Item';
+import NpcPreview from '~/components/NpcPreview';
+import ItemsContext from '~/contexts/ItemsContext';
+import history from '~/routerHistory';
 
-const zzz = styled.div``
+const zzz = styled.div``;
 
 const gameInfo = {
   Raid: {
@@ -55,7 +55,7 @@ const gameInfo = {
     icon: GuardiansIcon,
     color: '#b59494', //'#2fff0f'
   },
-}
+};
 
 const gameNames = [
   'Arken: Evolution Isles',
@@ -68,7 +68,7 @@ const gameNames = [
   'Sanctuary',
   'Guardians',
   'Raid',
-]
+];
 
 const stringReplacements = {
   '0xA9B91...': 'Market contract',
@@ -79,11 +79,11 @@ const stringReplacements = {
   '0x5fE24...': 'Barracks contract',
   '0x2C51b...': 'Profile contract',
   '0xdAE69...': 'Old market contract',
-}
+};
 
 const stringLinks = {
   Market: '/market',
-}
+};
 
 const glossary = {
   Play4Rewards: {
@@ -118,7 +118,7 @@ const glossary = {
     key: 'TheShardening',
     info: (
       <>
-        The Shardening was an event that took place November 2021, splitting every RUNE into 10,000 Arken Rune Shards.
+        The Shardening was an event that took place November 2021, splitting every RUNE into 10,000 Arken Realm Shards.
       </>
     ),
     to: '/shards',
@@ -152,21 +152,21 @@ const glossary = {
     ),
     to: '/tokenomics',
   },
-}
+};
 
 function setItemToRarity(item) {
-  item.attributes = item.branches[1].attributes
+  item.attributes = item.branches[1].attributes;
   for (const key in item.attributes) {
-    if (!item.branches[1].perfection?.[key]) continue
+    if (!item.branches[1].perfection?.[key]) continue;
 
     item.attributes[key].value = item.branches[1].presets?.[item.rarity.id]?.[key]
       ? item.branches[1].presets[item.rarity.id][key]
-      : item.branches[1].perfection[key]
+      : item.branches[1].perfection[key];
   }
 
-  item.mods = [{}, {}, {}, {}, {}, {}, {}, {}]
+  item.mods = [{}, {}, {}, {}, {}, {}, {}, {}];
 
-  return item
+  return item;
 }
 
 const Linker = function ({
@@ -190,44 +190,44 @@ const Linker = function ({
   replaceRuneNames = true,
   defaultItemBranch = undefined,
 }) {
-  const message = children
+  const message = children;
 
-  const { itemPreviewed, setItemPreviewed } = useContext(ItemsContext)
+  const { itemPreviewed, setItemPreviewed } = useContext(ItemsContext);
 
   // if (typeof message !== 'string') {
   //   message.readOnly = false
   // }
 
-  const fragments = typeof message === 'string' ? [message] : [...message]
+  const fragments = typeof message === 'string' ? [message] : [...message];
 
   const matchedItemReplacements = itemData[ItemsMainCategoriesType.OTHER]
     .map((r) => r.name)
     .filter((v) => {
       return !!fragments.filter((f) => {
-        if (typeof f !== 'string') return false
-        return f.includes(v)
-      })
-    })
+        if (typeof f !== 'string') return false;
+        return f.includes(v);
+      });
+    });
   if (replaceItems && matchedItemReplacements.length > 0) {
     for (const matchedItemReplacement of matchedItemReplacements) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedItemReplacement) !== -1) {
-            const split = fragment.split(matchedItemReplacement)
+            const split = fragment.split(matchedItemReplacement);
 
-            const rawItem = itemData[ItemsMainCategoriesType.OTHER].find((r) => r.name === matchedItemReplacement)
+            const rawItem = itemData[ItemsMainCategoriesType.OTHER].find((r) => r.name === matchedItemReplacement);
             const item = normalizeItem(
               setItemToRarity({ ...JSON.parse(JSON.stringify(rawItem)), rarity: ItemRarity.Mythic })
-            )
+            );
 
-            fragments.splice(i, 1)
+            fragments.splice(i, 1);
 
             for (let j = split.length - 1; j > 0; j--) {
-              const previewId = `linker-item-${id}-${item.tokenId}-${i}-${j}`
+              const previewId = `linker-item-${id}-${item.tokenId}-${i}-${j}`;
 
-              fragments.splice(i, 0, split[j])
+              fragments.splice(i, 0, split[j]);
               fragments.splice(
                 i,
                 0,
@@ -301,11 +301,11 @@ const Linker = function ({
                     <span style={{ borderBottom: '1px solid transparent', marginRight: '4px' }}>{itemName}</span>
                   </Item>
                 </span>
-              )
+              );
             }
-            fragments.splice(i, 0, split[0])
+            fragments.splice(i, 0, split[0]);
 
-            i = -1
+            i = -1;
           }
         }
       }
@@ -316,28 +316,28 @@ const Linker = function ({
     .map((r) => r.name)
     .filter((v) => {
       return !!fragments.filter((f) => {
-        if (typeof f !== 'string') return false
-        return f.includes(v)
-      })
-    })
+        if (typeof f !== 'string') return false;
+        return f.includes(v);
+      });
+    });
   if (replaceCharacterFactions && matchedCharacterFactionReplacements.length > 0) {
     for (const matchedCharacterFactionReplacement of matchedCharacterFactionReplacements) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedCharacterFactionReplacement) !== -1) {
-            const split = fragment.split(matchedCharacterFactionReplacement)
+            const split = fragment.split(matchedCharacterFactionReplacement);
 
-            const characterFaction = characterFactions.find((r) => r.name === matchedCharacterFactionReplacement)
-            const factionId = characterFaction.name?.toLowerCase().replace("'", '').replace(' ', '-')
+            const characterFaction = characterFactions.find((r) => r.name === matchedCharacterFactionReplacement);
+            const factionId = characterFaction.name?.toLowerCase().replace("'", '').replace(' ', '-');
 
-            fragments.splice(i, 1)
+            fragments.splice(i, 1);
 
             for (let j = split.length - 1; j > 0; j--) {
-              const previewId = `linker-faction-${id}-${factionId}-${i}-${j}`
+              const previewId = `linker-faction-${id}-${factionId}-${i}-${j}`;
 
-              fragments.splice(i, 0, split[j])
+              fragments.splice(i, 0, split[j]);
               fragments.splice(
                 i,
                 0,
@@ -359,11 +359,11 @@ const Linker = function ({
                     </span>
                   </Popover>
                 </span>
-              )
+              );
             }
-            fragments.splice(i, 0, split[0])
+            fragments.splice(i, 0, split[0]);
 
-            i = -1
+            i = -1;
           }
         }
       }
@@ -374,32 +374,32 @@ const Linker = function ({
     ...characterRaces.map((r) => r.name),
     // ...characterRaces.map((r) => r.name?.toLowerCase()),
   ].filter((v) => {
-    if (!v) return false
+    if (!v) return false;
     return !!fragments.filter((f) => {
-      if (typeof f !== 'string') return false
-      return f.includes(v)
-    })
-  })
+      if (typeof f !== 'string') return false;
+      return f.includes(v);
+    });
+  });
   if (replaceCharacterRaces && matchedCharacterRaceReplacements.length > 0) {
     for (const matchedCharacterRaceReplacement of matchedCharacterRaceReplacements) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedCharacterRaceReplacement) !== -1) {
-            const split = fragment.split(matchedCharacterRaceReplacement)
+            const split = fragment.split(matchedCharacterRaceReplacement);
 
             const characterRace = characterRaces.find(
               (r) => r.name.toLowerCase() === matchedCharacterRaceReplacement.toLowerCase()
-            )
-            const raceId = characterRace.name?.toLowerCase().replace("'", '').replace(' ', '-')
+            );
+            const raceId = characterRace.name?.toLowerCase().replace("'", '').replace(' ', '-');
 
-            fragments.splice(i, 1)
+            fragments.splice(i, 1);
 
             for (let j = split.length - 1; j > 0; j--) {
-              const previewId = `linker-race-${id}-${raceId}-${i}-${j}`
+              const previewId = `linker-race-${id}-${raceId}-${i}-${j}`;
 
-              fragments.splice(i, 0, split[j])
+              fragments.splice(i, 0, split[j]);
               fragments.splice(
                 i,
                 0,
@@ -421,11 +421,11 @@ const Linker = function ({
                     </span>
                   </Popover>
                 </span>
-              )
+              );
             }
-            fragments.splice(i, 0, split[0])
+            fragments.splice(i, 0, split[0]);
 
-            i = -1
+            i = -1;
           }
         }
       }
@@ -436,28 +436,28 @@ const Linker = function ({
     .map((r) => r.name)
     .filter((v) => {
       return !!fragments.filter((f) => {
-        if (typeof f !== 'string') return false
-        return f.includes(v)
-      })
-    })
+        if (typeof f !== 'string') return false;
+        return f.includes(v);
+      });
+    });
   if (replaceNpcs && matchedNpcReplacements.length > 0) {
     for (const matchedNpcReplacement of matchedNpcReplacements) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedNpcReplacement) !== -1) {
-            const split = fragment.split(matchedNpcReplacement)
+            const split = fragment.split(matchedNpcReplacement);
 
-            const npc = npcs.find((r) => r.name === matchedNpcReplacement)
-            const npcId = npc.name?.toLowerCase().replace("'", '').replace(' ', '-')
+            const npc = npcs.find((r) => r.name === matchedNpcReplacement);
+            const npcId = npc.name?.toLowerCase().replace("'", '').replace(' ', '-');
 
-            fragments.splice(i, 1)
+            fragments.splice(i, 1);
 
             for (let j = split.length - 1; j > 0; j--) {
-              const previewId = `linker-npc-${id}-${npcId}-${i}-${j}`
+              const previewId = `linker-npc-${id}-${npcId}-${i}-${j}`;
 
-              fragments.splice(i, 0, split[j])
+              fragments.splice(i, 0, split[j]);
               fragments.splice(
                 i,
                 0,
@@ -479,11 +479,11 @@ const Linker = function ({
                     </span>
                   </Popover>
                 </span>
-              )
+              );
             }
-            fragments.splice(i, 0, split[0])
+            fragments.splice(i, 0, split[0]);
 
-            i = -1
+            i = -1;
           }
         }
       }
@@ -494,29 +494,29 @@ const Linker = function ({
     .map((r) => r.name)
     .filter((v) => {
       return !!fragments.filter((f) => {
-        if (typeof f !== 'string') return false
-        return f.includes(v)
-      })
-    })
+        if (typeof f !== 'string') return false;
+        return f.includes(v);
+      });
+    });
   // console.log(9999, message, matchedAreaReplacements)
   if (replaceAreas && matchedAreaReplacements.length > 0) {
     for (const matchedAreaReplacement of matchedAreaReplacements) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedAreaReplacement) !== -1) {
-            const split = fragment.split(matchedAreaReplacement)
+            const split = fragment.split(matchedAreaReplacement);
 
-            const area = areas.find((r) => r.name === matchedAreaReplacement)
-            const areaId = area.name?.toLowerCase().replace("'", '').replace(' ', '-')
+            const area = areas.find((r) => r.name === matchedAreaReplacement);
+            const areaId = area.name?.toLowerCase().replace("'", '').replace(' ', '-');
 
-            fragments.splice(i, 1)
+            fragments.splice(i, 1);
 
             for (let j = split.length - 1; j > 0; j--) {
-              const previewId = `linker-area-${id}-${areaId}-${i}-${j}`
+              const previewId = `linker-area-${id}-${areaId}-${i}-${j}`;
 
-              fragments.splice(i, 0, split[j])
+              fragments.splice(i, 0, split[j]);
               fragments.splice(
                 i,
                 0,
@@ -538,11 +538,11 @@ const Linker = function ({
                     </span>
                   </Popover>
                 </span>
-              )
+              );
             }
-            fragments.splice(i, 0, split[0])
+            fragments.splice(i, 0, split[0]);
 
-            i = -1
+            i = -1;
           }
         }
       }
@@ -553,29 +553,29 @@ const Linker = function ({
     .map((r) => r.name)
     .filter((v) => {
       return !!fragments.filter((f) => {
-        if (typeof f !== 'string') return false
-        return f.includes(v)
-      })
-    })
+        if (typeof f !== 'string') return false;
+        return f.includes(v);
+      });
+    });
   // console.log(9999, message, matchedEraReplacements)
   if (replaceEras && matchedEraReplacements.length > 0) {
     for (const matchedEraReplacement of matchedEraReplacements) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedEraReplacement) !== -1) {
-            const split = fragment.split(matchedEraReplacement)
+            const split = fragment.split(matchedEraReplacement);
 
-            const era = eras.find((r) => r.name === matchedEraReplacement)
-            const eraId = era.name?.toLowerCase().replace("'", '').replace(' ', '-')
+            const era = eras.find((r) => r.name === matchedEraReplacement);
+            const eraId = era.name?.toLowerCase().replace("'", '').replace(' ', '-');
 
-            fragments.splice(i, 1)
+            fragments.splice(i, 1);
 
             for (let j = split.length - 1; j > 0; j--) {
-              const previewId = `linker-era-${id}-${eraId}-${i}-${j}`
+              const previewId = `linker-era-${id}-${eraId}-${i}-${j}`;
 
-              fragments.splice(i, 0, split[j])
+              fragments.splice(i, 0, split[j]);
               fragments.splice(
                 i,
                 0,
@@ -597,11 +597,11 @@ const Linker = function ({
                     </span>
                   </Popover>
                 </span>
-              )
+              );
             }
-            fragments.splice(i, 0, split[0])
+            fragments.splice(i, 0, split[0]);
 
-            i = -1
+            i = -1;
           }
         }
       }
@@ -612,28 +612,28 @@ const Linker = function ({
     .map((r) => r.name)
     .filter((v) => {
       return !!fragments.filter((f) => {
-        if (typeof f !== 'string') return false
-        return f.includes(v)
-      })
-    })
+        if (typeof f !== 'string') return false;
+        return f.includes(v);
+      });
+    });
   if (replaceCharacterClasses && matchedCharacterClassReplacements.length > 0) {
     for (const matchedCharacterClassReplacement of matchedCharacterClassReplacements) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedCharacterClassReplacement) !== -1) {
-            const split = fragment.split(matchedCharacterClassReplacement)
+            const split = fragment.split(matchedCharacterClassReplacement);
 
-            const characterClass = characterClasses.find((r) => r.name === matchedCharacterClassReplacement)
-            const classId = characterClass.name?.toLowerCase().replace("'", '').replace(' ', '-')
+            const characterClass = characterClasses.find((r) => r.name === matchedCharacterClassReplacement);
+            const classId = characterClass.name?.toLowerCase().replace("'", '').replace(' ', '-');
 
-            fragments.splice(i, 1)
+            fragments.splice(i, 1);
 
             for (let j = split.length - 1; j > 0; j--) {
-              const previewId = `linker-class-${id}-${classId}-${i}-${j}`
+              const previewId = `linker-class-${id}-${classId}-${i}-${j}`;
 
-              fragments.splice(i, 0, split[j])
+              fragments.splice(i, 0, split[j]);
               fragments.splice(
                 i,
                 0,
@@ -655,11 +655,11 @@ const Linker = function ({
                     </span>
                   </Popover>
                 </span>
-              )
+              );
             }
-            fragments.splice(i, 0, split[0])
+            fragments.splice(i, 0, split[0]);
 
-            i = -1
+            i = -1;
           }
         }
       }
@@ -668,14 +668,14 @@ const Linker = function ({
 
   if (username) {
     for (let i = 0; i < fragments.length; i++) {
-      const fragment = fragments[i]
+      const fragment = fragments[i];
 
       if (typeof fragment === 'string') {
         if (fragment.indexOf(username) !== -1) {
-          const split = fragment.split(username)
+          const split = fragment.split(username);
 
-          fragments.splice(i, 1)
-          fragments.splice(i, 0, split[0])
+          fragments.splice(i, 1);
+          fragments.splice(i, 0, split[0]);
           fragments.splice(
             i + 1,
             0,
@@ -687,8 +687,8 @@ const Linker = function ({
               onClick={() => history.push(`/user/${username}`)}>
               {username}
             </span>
-          )
-          fragments.splice(i + 2, 0, split[1])
+          );
+          fragments.splice(i + 2, 0, split[1]);
         }
       }
     }
@@ -696,14 +696,14 @@ const Linker = function ({
 
   if (username2) {
     for (let i = 0; i < fragments.length; i++) {
-      const fragment = fragments[i]
+      const fragment = fragments[i];
 
       if (typeof fragment === 'string') {
         if (fragment.indexOf(username2) !== -1) {
-          const split = fragment.split(username2)
+          const split = fragment.split(username2);
 
-          fragments.splice(i, 1)
-          fragments.splice(i, 0, split[0])
+          fragments.splice(i, 1);
+          fragments.splice(i, 0, split[0]);
           fragments.splice(
             i + 1,
             0,
@@ -715,8 +715,8 @@ const Linker = function ({
               onClick={() => history.push(`/user/${username2}`)}>
               {username2}
             </span>
-          )
-          fragments.splice(i + 2, 0, split[1])
+          );
+          fragments.splice(i + 2, 0, split[1]);
         }
       }
     }
@@ -724,14 +724,14 @@ const Linker = function ({
 
   if (itemName) {
     for (let i = 0; i < fragments.length; i++) {
-      const fragment = fragments[i]
+      const fragment = fragments[i];
 
       if (typeof fragment === 'string') {
         if (fragment.indexOf(itemName) !== -1) {
-          const split = fragment.replace('found', 'crafted').replace('!', '').split(itemName)
+          const split = fragment.replace('found', 'crafted').replace('!', '').split(itemName);
 
-          fragments.splice(i, 1)
-          fragments.splice(i, 0, split[0])
+          fragments.splice(i, 1);
+          fragments.splice(i, 0, split[0]);
           fragments.splice(
             i + 1,
             0,
@@ -803,8 +803,8 @@ const Linker = function ({
                 <span style={{ borderBottom: '1px solid transparent', marginRight: '4px' }}>{itemName}</span>
               </Item>
             </span>
-          )
-          fragments.splice(i + 2, 0, split[1])
+          );
+          fragments.splice(i + 2, 0, split[1]);
         }
       }
     }
@@ -812,26 +812,26 @@ const Linker = function ({
 
   const matchedGameNameReplacements = gameNames.filter((v) => {
     return !!fragments.filter((f) => {
-      if (typeof f !== 'string') return false
-      return f.includes(v)
-    })
-  })
+      if (typeof f !== 'string') return false;
+      return f.includes(v);
+    });
+  });
   if (replaceGameNames && matchedGameNameReplacements.length > 0) {
     for (const matchedGameNameReplacement of matchedGameNameReplacements) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedGameNameReplacement) !== -1) {
-            const gameKey = matchedGameNameReplacement.replace('Rune ', '')
-            const split = fragment.split(matchedGameNameReplacement)
+            const gameKey = matchedGameNameReplacement.replace('Rune ', '');
+            const split = fragment.split(matchedGameNameReplacement);
 
-            fragments.splice(i, 1)
+            fragments.splice(i, 1);
 
             for (let j = 0; j < split.length - 1; j++) {
-              const previewId = `linker-game-${id}-${gameKey}-${i}-${j}`
+              const previewId = `linker-game-${id}-${gameKey}-${i}-${j}`;
 
-              fragments.splice(i + j, 0, split[j])
+              fragments.splice(i + j, 0, split[j]);
               fragments.splice(
                 i + j + 1,
                 0,
@@ -894,11 +894,11 @@ const Linker = function ({
                     {matchedGameNameReplacement}
                   </RouterLink>
                 </Popover>
-              )
+              );
             }
-            fragments.splice(i + split.length, 0, split[split.length - 1])
+            fragments.splice(i + split.length, 0, split[split.length - 1]);
 
-            i = -1
+            i = -1;
           }
         }
       }
@@ -907,26 +907,26 @@ const Linker = function ({
 
   const matchedGlossaryReplacements = Object.keys(glossary).filter((v) => {
     return !!fragments.filter((f) => {
-      if (typeof f !== 'string') return false
-      return f.includes(v)
-    })
-  })
+      if (typeof f !== 'string') return false;
+      return f.includes(v);
+    });
+  });
   if (replaceGlossary && matchedGlossaryReplacements.length > 0) {
     for (const matchedGlossaryReplacement of matchedGlossaryReplacements) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedGlossaryReplacement) !== -1) {
-            const glossaryItem = glossary[matchedGlossaryReplacement]
-            const split = fragment.split(matchedGlossaryReplacement)
+            const glossaryItem = glossary[matchedGlossaryReplacement];
+            const split = fragment.split(matchedGlossaryReplacement);
 
-            fragments.splice(i, 1)
+            fragments.splice(i, 1);
 
             for (let j = 0; j < split.length - 1; j++) {
-              const previewId = `linker-glossary-${id}-${glossaryItem.key}-${i}-${j}`
+              const previewId = `linker-glossary-${id}-${glossaryItem.key}-${i}-${j}`;
               // console.log(9999, previewId, glossaryItem.info)
-              fragments.splice(i + j, 0, split[j])
+              fragments.splice(i + j, 0, split[j]);
               fragments.splice(
                 i + j + 1,
                 0,
@@ -989,11 +989,11 @@ const Linker = function ({
                     </span>
                   )}
                 </Popover>
-              )
+              );
             }
-            fragments.splice(i + split.length, 0, split[split.length - 1])
+            fragments.splice(i + split.length, 0, split[split.length - 1]);
 
-            i = -1
+            i = -1;
           }
         }
       }
@@ -1002,43 +1002,43 @@ const Linker = function ({
 
   const matchedStringReplacements = Object.keys(stringReplacements).filter((v) => {
     return !!fragments.filter((f) => {
-      if (typeof f !== 'string') return false
-      return f.includes(v)
-    })
-  })
+      if (typeof f !== 'string') return false;
+      return f.includes(v);
+    });
+  });
   if (matchedStringReplacements.length) {
     for (const matchedStringReplacement of matchedStringReplacements) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedStringReplacement) !== -1) {
-            const split = fragment.split(matchedStringReplacement)
+            const split = fragment.split(matchedStringReplacement);
 
-            fragments.splice(i, 1)
-            fragments.splice(i, 0, split[0])
-            fragments.splice(i + 1, 0, stringReplacements[matchedStringReplacement])
-            fragments.splice(i + 2, 0, split[1])
+            fragments.splice(i, 1);
+            fragments.splice(i, 0, split[0]);
+            fragments.splice(i + 1, 0, stringReplacements[matchedStringReplacement]);
+            fragments.splice(i + 2, 0, split[1]);
           }
         }
       }
     }
   }
 
-  const newMessage = fragments.join('')
+  const newMessage = fragments.join('');
 
-  const matchedStringLinks = Object.keys(stringLinks).filter((v) => newMessage.includes(v))
+  const matchedStringLinks = Object.keys(stringLinks).filter((v) => newMessage.includes(v));
   if (replaceStringLinks && !!matchedStringLinks.length) {
     for (const matchedStringLink of matchedStringLinks) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedStringLink) !== -1) {
-            const split = fragment.split(matchedStringLink)
+            const split = fragment.split(matchedStringLink);
 
-            fragments.splice(i, 1)
-            fragments.splice(i, 0, split[0])
+            fragments.splice(i, 1);
+            fragments.splice(i, 0, split[0]);
             fragments.splice(
               i + 1,
               0,
@@ -1051,8 +1051,8 @@ const Linker = function ({
                 `}>
                 {matchedStringLink}
               </span>
-            )
-            fragments.splice(i + 2, 0, split[1])
+            );
+            fragments.splice(i + 2, 0, split[1]);
           }
         }
       }
@@ -1097,25 +1097,25 @@ const Linker = function ({
     .sort((a: any, b: any) => (a.length > b.length ? -1 : 1))
     .filter((v) => {
       return !!fragments.filter((f) => {
-        if (typeof f !== 'string') return false
-        return f.includes(v as any)
-      })
-    }) as any
+        if (typeof f !== 'string') return false;
+        return f.includes(v as any);
+      });
+    }) as any;
   if (replaceRuneNames && matchedRuneNameReplacements.length > 0) {
     for (const matchedRuneNameReplacement of matchedRuneNameReplacements) {
       for (let i = 0; i < fragments.length; i++) {
-        const fragment = fragments[i]
+        const fragment = fragments[i];
 
         if (typeof fragment === 'string') {
           if (fragment.indexOf(matchedRuneNameReplacement) !== -1) {
-            const split = fragment.split(matchedRuneNameReplacement)
+            const split = fragment.split(matchedRuneNameReplacement);
 
-            fragments.splice(i, 1)
+            fragments.splice(i, 1);
 
             for (let j = split.length - 1; j > 0; j--) {
-              const previewId = `live-${id}-${matchedRuneNameReplacement}-${i}-${j}`
+              const previewId = `live-${id}-${matchedRuneNameReplacement}-${i}-${j}`;
 
-              fragments.splice(i, 0, split[j])
+              fragments.splice(i, 0, split[j]);
               fragments.splice(
                 i,
                 0,
@@ -1192,11 +1192,11 @@ const Linker = function ({
                     </span>
                   </Item>
                 </span>
-              )
+              );
             }
-            fragments.splice(i, 0, split[0])
+            fragments.splice(i, 0, split[0]);
 
-            i = -1
+            i = -1;
           }
         }
       }
@@ -1209,7 +1209,7 @@ const Linker = function ({
         <span key={index}>{f} </span>
       ))}
     </>
-  )
-}
+  );
+};
 
-export default Linker
+export default Linker;

@@ -1,14 +1,14 @@
-import React, { useLayoutEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
-import useSettings from '~/hooks/useSettings'
-import Svg from '../../Svg/Svg'
-import { SvgProps } from '../../Svg/types'
+import React, { useLayoutEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
+import useSettings from '~/hooks/useSettings2';
+import Svg from '../../Svg/Svg';
+import { SvgProps } from '../../Svg/types';
 
 interface LogoProps extends SvgProps {
-  isDark: boolean
-  isMobile: boolean
-  heading: any
-  subheading: any
+  isDark: boolean;
+  isMobile: boolean;
+  heading: any;
+  subheading: any;
 }
 // f1d497
 // aa2b18 - red
@@ -16,33 +16,33 @@ interface LogoProps extends SvgProps {
 // c76e4c - lighter red
 // b23b24
 const Logo: React.FC<LogoProps> = ({ isDark, isMobile, heading, subheading, ...props }) => {
-  const [pageLoaded, setPageLoaded] = useState(false)
-  const settings = useSettings()
-  const textColor = isDark ? '#FFFFFF' : '#000000'
+  const [pageLoaded, setPageLoaded] = useState(false);
+  const settings = useSettings();
+  const textColor = isDark ? '#FFFFFF' : '#000000';
 
   useLayoutEffect(() => {
-    if (!window || !window.document || !window.location) return
+    if (!window || !window.document || !window.location) return;
     if (
       window.location.hostname === 'localhost' ||
       window.location.hostname === '127.0.0.1' ||
       window.location.hostname === '0.0.0.0'
     )
-      return
+      return;
 
     function switchToFancyLogo() {
       setTimeout(() => {
-        setPageLoaded(true)
-      }, 100)
+        setPageLoaded(true);
+      }, 100);
     }
 
     if (window.document.readyState === 'complete') {
-      switchToFancyLogo()
+      switchToFancyLogo();
     } else {
-      window.addEventListener('load', switchToFancyLogo)
+      window.addEventListener('load', switchToFancyLogo);
     }
 
-    return () => window.removeEventListener('load', switchToFancyLogo)
-  }, [])
+    return () => window.removeEventListener('load', switchToFancyLogo);
+  }, []);
 
   return (
     <div
@@ -67,8 +67,8 @@ const Logo: React.FC<LogoProps> = ({ isDark, isMobile, heading, subheading, ...p
         {subheading}
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Heading = styled.div`
   background-image: -webkit-linear-gradient(
@@ -99,7 +99,7 @@ const Heading = styled.div`
     font-family: 'webfontexl', 'Palatino Linotype', 'Times', serif !important;
     font-weight: normal;
   }
-`
+`;
 
 const HeadingSilver = styled.div`
   background-image: -webkit-linear-gradient(
@@ -123,7 +123,7 @@ const HeadingSilver = styled.div`
   // filter: sepia(1) saturate(5) hue-rotate(-25deg);
   // sepia(1) saturate(5) hue-rotate(-25deg) grayscale(1) drop-shadow(0px 0px 10px #000) invert(1)
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
-`
+`;
 
 // const HeadingFire = styled.div`
 //   background-image: -webkit-linear-gradient(
@@ -205,4 +205,4 @@ const HeadingSilver = styled.div`
 //   }
 // `;
 
-export default React.memo(Logo, (prev, next) => prev.isDark === next.isDark)
+export default React.memo(Logo, (prev, next) => prev.isDark === next.isDark);
