@@ -1158,8 +1158,8 @@ const Creator = () => {
               onClick={() => setAttribute1Name(`Worldstone Shard Upon Harvest`)}>{`Worldstone Shard Upon Harvest`}</div>
             <div
               onClick={() =>
-                setAttribute1Name(`Unable to use a certain runeword for a set time`)
-              }>{`Unable to use a certain runeword for a set time`}</div>
+                setAttribute1Name(`Unable to use a certain runeform for a set time`)
+              }>{`Unable to use a certain runeform for a set time`}</div>
             <div
               onClick={() =>
                 setAttribute1Name(`Chance to Create Random Runeform`)

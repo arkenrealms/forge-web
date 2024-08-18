@@ -4,7 +4,7 @@ import utf8 from 'utf8';
 import { formatDistance } from 'date-fns';
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useHistory, useLocation } from 'react-router-dom';
 import Unity, { UnityContext } from 'react-unity-webgl';
 import { rewardTokenIdMap } from 'rune-backend-sdk/build/data/items';
 import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
@@ -21,7 +21,7 @@ import useCache from '~/hooks/useCache';
 import { useRuneSender } from '~/hooks/useContract';
 import useFetch from '~/hooks/useFetch';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
-import useSettings from '~/hooks/useSettings2';
+import useSettings from '~/hooks/useSettings';
 import useWeb3 from '~/hooks/useWeb3';
 import { useProfile, useToast } from '~/state/hooks';
 import { getUsername } from '~/state/profiles/getProfile';
@@ -658,7 +658,7 @@ const endpoints = {
 
 const Evolution: any = ({ open }) => {
   const location = useLocation();
-  const history = useNavigate();
+  const history = useHistory();
   const brand = useBrand();
   const settings = useSettings();
   const cache = useCache();
@@ -692,7 +692,7 @@ const Evolution: any = ({ open }) => {
   // const [realms, setRealms] = useState([])
   const [payoutInfo, setPayoutInfo] = useState(null);
   const [payoutHistory, setPayoutHistory] = useState(null);
-  // const { profile } = useProfile();
+  const { profile } = useProfile();
   const runeSender = useRuneSender();
   const [isAdmin, setIsAdmin] = useState(
     window.location.hostname === 'dev.arken.gg' || playerWhitelist.includes(username)
@@ -1751,10 +1751,11 @@ const Evolution: any = ({ open }) => {
                     text-align: center;
                     width: 100%;
                   `}>
-                  {/* {!account || !profile?.nft ? (
+                  {!account || !profile?.nft ? (
                     <>
                       <p>
                         You aren't on BSC network and don't have an account yet.
+                        {/* You can play but won't receive rewards. */}
                       </p>
                       <br />
                       <Button
@@ -1767,11 +1768,11 @@ const Evolution: any = ({ open }) => {
                         Create Account
                       </Button>
                     </>
-                  ) : null} */}
+                  ) : null}
                   <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
                     <SpecialButton title="TEST GAME" onClick={startOldGame} />
                   </HeadingFire>
-                  {/* {account && realm && profile?.nft ? (
+                  {account && realm && profile?.nft ? (
                     <Flex flexDirection="column" alignItems="center" justifyContent="center">
                       <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
                         <SpecialButton title="Start Game" onClick={startOldGame} />
@@ -1799,7 +1800,7 @@ const Evolution: any = ({ open }) => {
                         </p>
                       ) : null}
                     </Flex>
-                  ) : null} */}
+                  ) : null}
                 </div>
               </MainCard>
               <MainCard>
@@ -1827,7 +1828,7 @@ const Evolution: any = ({ open }) => {
                     Your Rewards
                   </Heading>
                   <br />
-                  {/* {!profile?.nft ? (
+                  {!profile?.nft ? (
                     <>
                       <br />
                       <br />
@@ -1874,7 +1875,7 @@ const Evolution: any = ({ open }) => {
                         Reward Centre
                       </Button>
                     </>
-                  )} */}
+                  )}
                 </Flex>
               </MainCard>
             </Cards>

@@ -70,13 +70,13 @@ const Runeforms = function () {
                 Poor Bob.
               </li>
               <li>
-                <strong>Runewords</strong> in <strong>Arken: Runic Raids</strong> have farming related attributes. The
-                same <strong>Runeword</strong> would have battle related attributes in{' '}
+                <strong>Runeforms</strong> in <strong>Arken: Runic Raids</strong> have farming related attributes. The
+                same <strong>Runeform</strong> would have battle related attributes in{' '}
                 <strong>Arken: Infinite Arena</strong> or <strong>Arken: Heart of the Oasis</strong>.
               </li>
               <li>
-                You will get different attributes every time you craft a <strong>Runeword</strong>, making every{' '}
-                <strong>Runeword</strong> unique and entirely different from the next.{' '}
+                You will get different attributes every time you craft a <strong>Runeform</strong>, making every{' '}
+                <strong>Runeform</strong> unique and entirely different from the next.{' '}
               </li>
             </ul>
             <p>‍</p>
@@ -86,19 +86,19 @@ const Runeforms = function () {
             <p>
               We all love crafting a Mythic, but in their quest for one some of our raiders have found themselves with
               quite the collection of weapons and armor that are just collecting dust, so what to do with them? Well,
-              here at Rune we usually like to see things burn, but as those Runewords are all rather special, the fire
+              here at Rune we usually like to see things burn, but as those Runeforms are all rather special, the fire
               didn’t seem quite appropriate this time. So instead, we’ll just take them apart. The smart contracts have
               been written and tested, so once the stars align they shall activate. <br />
             </p>
             <p>
-              Within them, they tell a tale of mystical disenchanting powers that turn Runewords back into runes. But
-              rather than the runes used to craft the Runeword, you’ll receive LEM runes instead. As this process
+              Within them, they tell a tale of mystical disenchanting powers that turn Runeforms back into runes. But
+              rather than the runes used to craft the Runeform, you’ll receive LEM runes instead. As this process
               requires some degree of sorcery, items of a higher perfection will yield more LEM than more common ones.
-              LEM can then be used to upgrade your other items, or for crafting more Runewords.
+              LEM can then be used to upgrade your other items, or for crafting more Runeforms.
             </p>
             <p>‍</p>
             <p>
-              <strong>Example Runewords</strong>
+              <strong>Example Runeforms</strong>
             </p>
             <figure className="w-richtext-align-center w-richtext-figure-type-image">
               <div>
@@ -168,7 +168,7 @@ const Runeforms = function () {
                           by crafting it with a Worldstone Shard. This is also known as "slamming". <br />
                           <br />
                           You are sending your item through time and space by putting the Worldstone Shard and the
-                          Runeword in the Cube once again and transmuting them, where it comes back to you in a
+                          Runeform in the Cube once again and transmuting them, where it comes back to you in a
                           different form. <br />
                           <br />
                           This new item could be stronger, weaker, or even fractured. <br />
@@ -188,4 +188,4 @@ const Runeforms = function () {
   );
 };
 
-export default Runewords;
+export default Runeforms;

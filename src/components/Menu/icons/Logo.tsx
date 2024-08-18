@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import useSettings from '~/hooks/useSettings2';
+import useSettings from '~/hooks/useSettings';
 import Svg from '../../Svg/Svg';
 import { SvgProps } from '../../Svg/types';
 
@@ -58,10 +58,10 @@ const Logo: React.FC<LogoProps> = ({ isDark, isMobile, heading, subheading, ...p
           margin-left: 3px;
           font-family: 'Alegreya Sans', sans-serif, monospace;
           color: #d8c692;
-          font-size: 16px;
-          line-height: 16px;
+          font-size: 20px;
+          line-height: 17px;
           font-weight: 500;
-          letter-spacing: 6px;
+          letter-spacing: 9px;
           white-space: nowrap;
         `}>
         {subheading}

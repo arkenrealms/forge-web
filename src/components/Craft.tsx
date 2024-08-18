@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import React, { useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
 import {
   Heading,
   Text,
@@ -17,14 +17,14 @@ import {
   LinkExternal,
   Link,
   BlockIcon,
-} from '~/ui'
-import useWeb3 from '~/hooks/useWeb3'
-import { useTranslation } from 'react-i18next'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import TipCard from '~/components/TipCard'
-import { itemData, getFilteredItems } from 'rune-backend-sdk/build/data/items'
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type'
-import { RecipeInfo } from '~/components/RecipeInfo'
+} from '~/ui';
+import useWeb3 from '~/hooks/useWeb3';
+import { useTranslation } from 'react-i18next';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import TipCard from '~/components/TipCard';
+import { itemData, getFilteredItems } from 'rune-backend-sdk/build/data/items';
+import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { RecipeInfo } from '~/components/RecipeInfo';
 
 const ItemContainer = styled.div`
   display: grid;
@@ -38,7 +38,7 @@ const ItemContainer = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     grid-template-columns: repeat(2, 1fr);
   }
-`
+`;
 
 const ItemCard = styled(Card)`
   position: relative;
@@ -68,13 +68,13 @@ const ItemCard = styled(Card)`
 
   ${({ theme }) => theme.mediaQueries.lg} {
   }
-`
+`;
 
-const items = getFilteredItems(itemData[ItemsMainCategoriesType.OTHER])
+const items = getFilteredItems(itemData[ItemsMainCategoriesType.OTHER]);
 
-const Runewords: React.FC = () => {
-  const { t } = useTranslation()
-  const { address: account } = useWeb3()
+const Runeforms: React.FC = () => {
+  const { t } = useTranslation();
+  const { address: account } = useWeb3();
 
   return (
     <>
@@ -86,7 +86,7 @@ const Runewords: React.FC = () => {
           <RouterLink to="/swap" style={{ borderBottom: '1px solid #fff' }}>
             Swap Tokens
           </RouterLink>{' '}
-          to purchase your runes. Once you have your runes, choose the Runeword you would like to transmute with the
+          to purchase your runes. Once you have your runes, choose the Runeform you would like to transmute with the
           cube below!
         </p>
         <br />
@@ -138,7 +138,7 @@ const Runewords: React.FC = () => {
           to="/catalog"
           style={{ zoom: 1.3, padding: '6px 20px', textAlign: 'center' }}
           onClick={() => {
-            window.scrollTo(0, 0)
+            window.scrollTo(0, 0);
           }}>
           Browse Full Catalog
         </Button>
@@ -146,7 +146,7 @@ const Runewords: React.FC = () => {
       <br />
       <br />
     </>
-  )
-}
+  );
+};
 
-export default Runewords
+export default Runeforms;

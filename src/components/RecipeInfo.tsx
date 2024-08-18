@@ -1,19 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Link as RouterLink } from 'react-router-dom'
-import { itemData } from 'rune-backend-sdk/build/data/items'
-import styled from 'styled-components'
-import Tooltip from '~/components/Tooltip/Tooltip'
-import useCache from '~/hooks/useCache'
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints'
-import { Button, ButtonMenu, ButtonMenuItem } from '~/ui'
+import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link as RouterLink } from 'react-router-dom';
+import { itemData } from 'rune-backend-sdk/build/data/items';
+import styled from 'styled-components';
+import Tooltip from '~/components/Tooltip/Tooltip';
+import useCache from '~/hooks/useCache';
+import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
+import { Button, ButtonMenu, ButtonMenuItem } from '~/ui';
 
 const RecipeName = styled.div`
   font-size: 2.3rem;
   line-height: 2.3rem;
   margin-bottom: 10px;
   z-index: 1;
-`
+`;
 
 const ItemType = styled.div<{ rarity?: string }>`
   font-size: 1rem;
@@ -28,30 +28,30 @@ const ItemType = styled.div<{ rarity?: string }>`
   ${({ rarity }) => (rarity === 'Epic' ? 'color: #b885c3;' : '')}
   ${({ rarity }) => (rarity === 'Rare' ? 'color: #c2c385;' : '')}
   ${({ rarity }) => (rarity === 'Magical' ? 'color: #a9c5f7;' : '')}
-`
+`;
 const NotImplemented = styled.span`
   color: #b9463e;
   font-weight: bold;
   font-size: 0.9rem;
   vertical-align: top;
   margin: 0 3px 0 -2px;
-`
+`;
 
 const ItemSubType = styled.div`
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.5);
   margin: 5px 0;
   z-index: 1;
-`
+`;
 
-const RecipeRequirements = styled.div``
+const RecipeRequirements = styled.div``;
 
 const RecipeRequirement = styled.div`
   display: inline-block;
   color: #fff;
   margin-right: 10px;
   font-size: 1.2rem;
-`
+`;
 
 const RecipeDescription = styled.div`
   font-style: italic;
@@ -59,11 +59,11 @@ const RecipeDescription = styled.div`
   color: #bbb;
   margin-bottom: 10px;
   line-height: 20px;
-`
+`;
 
 const RecipeAttributes = styled.div`
   text-align: left;
-`
+`;
 
 const RecipeAttribute = styled.div`
   line-height: 1.8rem;
@@ -83,7 +83,7 @@ const RecipeAttribute = styled.div`
   //   left: 0;
   //   content: '•';
   // }
-`
+`;
 
 const ItemAttributeCenter = styled.div`
   line-height: 25px;
@@ -93,7 +93,7 @@ const ItemAttributeCenter = styled.div`
   padding-left: 12px;
   text-shadow: 0 0 1px #7576df;
   text-align: center;
-`
+`;
 
 const RecipeRunes = styled.div`
   font-size: 1.3rem;
@@ -101,7 +101,7 @@ const RecipeRunes = styled.div`
 
   letter-spacing: 0.1rem;
   z-index: 1;
-`
+`;
 
 const Container = styled.div`
   position: relative;
@@ -109,7 +109,7 @@ const Container = styled.div`
   height: 100%;
   width: 100%;
   z-index: 1;
-`
+`;
 
 const ItemImage = styled.div<{ path: string }>`
   position: absolute !important;
@@ -129,7 +129,7 @@ const ItemImage = styled.div<{ path: string }>`
     width: calc(256px / 2);
     height: calc(256px / 2);
   }
-`
+`;
 
 const Footer = styled.div`
   position: absolute;
@@ -137,12 +137,12 @@ const Footer = styled.div`
   width: 100%;
   height: auto;
   text-align: center;
-`
+`;
 
 const Video = styled.video`
   position: relative;
   z-index: 1;
-`
+`;
 
 export const RecipeInfo: React.FC<any> = ({
   item,
@@ -153,32 +153,32 @@ export const RecipeInfo: React.FC<any> = ({
   showStats = false,
   showDetailsButton = false,
 }) => {
-  const cache = useCache()
-  const { t } = useTranslation()
-  const [gameTabIndex, setGameTabIndex] = useState(0)
+  const cache = useCache();
+  const { t } = useTranslation();
+  const [gameTabIndex, setGameTabIndex] = useState(0);
 
-  const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints()
-  const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl
+  const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
+  const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
 
-  const videoRef = useRef()
-  const previousUrl = useRef(item.video)
+  const videoRef = useRef();
+  const previousUrl = useRef(item.video);
 
   useEffect(() => {
-    if (!item.video) return
-    if (previousUrl.current === item.video) return
+    if (!item.video) return;
+    if (previousUrl.current === item.video) return;
 
     // @ts-ignore
-    videoRef.current?.load()
+    videoRef.current?.load();
 
-    previousUrl.current = item.video
-  }, [item.video])
+    previousUrl.current = item.video;
+  }, [item.video]);
 
-  let description = item.branches[gameTabIndex + 1]?.description || item.description
+  let description = item.branches[gameTabIndex + 1]?.description || item.description;
   if (item.id === 1212) {
     description = `Redeemed for a random runeword: ${itemData.runeword
       .filter((i) => i.isCraftable && !i.isSecret && !(i as any).isUltraSecret)
       .map((i) => i.name)
-      .join(', ')} (the list will be updated with new runewords, and retired runewords will be removed)`
+      .join(', ')} (the list will be updated with new runeforms, and retired runeforms will be removed)`;
   }
 
   return (
@@ -199,7 +199,7 @@ export const RecipeInfo: React.FC<any> = ({
       <RecipeDescription>{description}</RecipeDescription>
       <RecipeAttributes>
         {item.branches[gameTabIndex + 1]?.attributes.map((attribute) => {
-          if (attribute.id === 40) return
+          if (attribute.id === 40) return;
 
           if (!attribute.param1) {
             attribute.param1 = {
@@ -207,9 +207,9 @@ export const RecipeInfo: React.FC<any> = ({
               max: attribute.max,
               value: attribute.value,
               map: attribute.map,
-            }
+            };
           }
-          const { param1, param2, param3 } = attribute
+          const { param1, param2, param3 } = attribute;
 
           let value1 = param1.map
             ? Object.values(param1.map)
@@ -222,9 +222,9 @@ export const RecipeInfo: React.FC<any> = ({
             ? param1.value
             : param1.min === param1.max
             ? param1.min
-            : `${param1.min}-${param1.max}`
+            : `${param1.min}-${param1.max}`;
 
-          if (typeof value1 === 'string') value1 = value1.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill')
+          if (typeof value1 === 'string') value1 = value1.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
 
           const value2 = param2
             ? param2.map
@@ -239,7 +239,7 @@ export const RecipeInfo: React.FC<any> = ({
               : param2.min === param2.max
               ? param2.min
               : `${param2.min}-${param2.max}`
-            : ''
+            : '';
 
           const value3 = param3
             ? param3.map
@@ -254,7 +254,7 @@ export const RecipeInfo: React.FC<any> = ({
               : param3.min === param3.max
               ? param3.min
               : `${param3.min}-${attribute.param3.max}`
-            : ''
+            : '';
 
           const attr = attribute.description
             ?.replace(/{value}/gi, attribute.paramType1 === 'percent' || param1?.isPercent ? value1 + '%' : value1)
@@ -268,7 +268,7 @@ export const RecipeInfo: React.FC<any> = ({
             .replace(/{param3}/gi, attribute.paramType3 === 'percent' || param3?.isPercent ? value3 + '%' : value3)
             .replace('(Not Implemented)', '')
             .replace(/\.$/, '')
-            .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
+            .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
           const explanation = attribute.explanation
             ?.replace(/{value}/gi, attribute.paramType1 === 'percent' || param1?.isPercent ? value1 + '%' : value1)
             .replace(/{Value}/gi, attribute.paramType1 === 'percent' || param1?.isPercent ? value1 + '%' : value1)
@@ -281,9 +281,9 @@ export const RecipeInfo: React.FC<any> = ({
             .replace(/{param3}/gi, attribute.paramType3 === 'percent' || param3?.isPercent ? value3 + '%' : value3)
             .replace('(Not Implemented)', '')
             .replace(/\.$/, '')
-            .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
+            .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
 
-          if (!attr) return
+          if (!attr) return;
           // if (attribute.id === ItemAttributesByName[1].Sockets.id) {
           //   return (
           //     <ItemAttributeCenter key={attr} style={{marginTop: 10}}>
@@ -293,7 +293,7 @@ export const RecipeInfo: React.FC<any> = ({
           // }
 
           const isNotImplemented =
-            attribute.description?.indexOf('Not Implemented') !== -1 || attribute.isImplemented === false
+            attribute.description?.indexOf('Not Implemented') !== -1 || attribute.isImplemented === false;
 
           return (
             <RecipeAttribute key={attr}>
@@ -321,7 +321,7 @@ export const RecipeInfo: React.FC<any> = ({
                 </Tooltip>
               ) : null}
             </RecipeAttribute>
-          )
+          );
         })}
       </RecipeAttributes>
       {gameTabIndex !== 0 ? (
@@ -392,7 +392,7 @@ export const RecipeInfo: React.FC<any> = ({
         ) : null}
       </Footer>
     </Container>
-  )
-}
+  );
+};
 
-export default RecipeInfo
+export default RecipeInfo;

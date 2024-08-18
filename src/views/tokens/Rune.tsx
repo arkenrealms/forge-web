@@ -1,21 +1,21 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import { Button, Flex, LinkExternal, Text } from '~/ui'
-import ItemInformation from '~/components/ItemInformation'
-import { ItemCategoriesType, ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type'
-import useRuneBalance from '~/hooks/useRuneBalance'
-import { useRunePrice } from '~/state/hooks'
-import Page from '~/components/layout/Page'
-import PageWindow from '~/components/PageWindow'
-import { getBalanceNumber } from '~/utils/formatBalance'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import { Button, Flex, LinkExternal, Text } from '~/ui';
+import ItemInformation from '~/components/ItemInformation';
+import { ItemCategoriesType, ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import useRuneBalance from '~/hooks/useRuneBalance';
+import { useRunePrice } from '~/state/hooks';
+import Page from '~/components/layout/Page';
+import PageWindow from '~/components/PageWindow';
+import { getBalanceNumber } from '~/utils/formatBalance';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
 
 const InventoryInner = ({ showFull }) => {
-  const { t } = useTranslation()
-  const runePrice = useRunePrice('RUNE')
-  const runeBalance = useRuneBalance('RUNE')
-  const balance = getBalanceNumber(runeBalance)
-  const price = parseFloat(runePrice.toNumber().toLocaleString('en-US'))
+  const { t } = useTranslation();
+  const runePrice = useRunePrice('RUNE');
+  const runeBalance = useRuneBalance('RUNE');
+  const balance = getBalanceNumber(runeBalance);
+  const price = parseFloat(runePrice.toNumber().toLocaleString('en-US'));
 
   const item = {
     id: 99999,
@@ -24,10 +24,10 @@ const InventoryInner = ({ showFull }) => {
     icon: process.env.REACT_APP_PUBLIC_URL + 'images/rune.png',
     value: balance + '',
     isNew: false,
-    description: ['Rune protocol token.'],
+    description: ['Legacy token.'],
     recipe: { requirement: [] },
     details: {
-      Distribution: 'Fair launch farm',
+      Distribution: 'Fair launch',
       Date: 'March 31, 2021',
       Supply: '19,500',
       Burned: '3,030',
@@ -41,9 +41,9 @@ const InventoryInner = ({ showFull }) => {
       { description: '', attributes: [] },
     ],
     attributes: [],
-  }
+  };
 
-  const tokenAddress = '0xa9776b590bfc2f956711b3419910a5ec1f63153e'
+  const tokenAddress = '0xa9776b590bfc2f956711b3419910a5ec1f63153e';
 
   return (
     <Page>
@@ -83,15 +83,15 @@ const InventoryInner = ({ showFull }) => {
         <br />
       </PageWindow>
     </Page>
-  )
-}
+  );
+};
 
 const Inventory = ({ showFull }) => {
-  return <InventoryInner showFull={showFull} />
-}
+  return <InventoryInner showFull={showFull} />;
+};
 
 Inventory.defaultProps = {
   showFull: false,
-}
+};
 
-export default Inventory
+export default Inventory;

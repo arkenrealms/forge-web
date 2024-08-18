@@ -13,7 +13,7 @@ import { PurchaseModal } from '~/components/PurchaseModal';
 import { RecipeInfo } from '~/components/RecipeInfo';
 import useCache from '~/hooks/useCache';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
-import useSettings from '~/hooks/useSettings2';
+import useSettings from '~/hooks/useSettings';
 import useWeb3 from '~/hooks/useWeb3';
 import { Button, Card, CloseIcon, Flex, Heading, Text } from '~/ui';
 // import initReactFastclick from "react-fastclick";

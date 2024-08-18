@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../Button3/Button';
+import Button from '../Button/Button';
 import Text from '../Text/Text';
 import { connectorLocalStorageKey } from './config';
 import { Login, Config } from './types';

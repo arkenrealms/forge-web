@@ -1,37 +1,37 @@
-import React, { useEffect, useRef } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
-import styled, { css } from 'styled-components'
-import Page from '~/components/layout/Page'
-import FarmStakingCard from '~/components/raid/FarmStakingCard'
-import useWeb3 from '~/hooks/useWeb3'
-import { BaseLayout, Button, Flex, Heading } from '~/ui'
-import { useTranslation } from 'react-i18next'
-import { bg3, trailerImg } from '~/assets/data/images'
+import React, { useEffect, useRef } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import Page from '~/components/layout/Page';
+import FarmStakingCard from '~/components/raid/FarmStakingCard';
+import useWeb3 from '~/hooks/useWeb3';
+import { BaseLayout, Button, Flex, Heading } from '~/ui';
+import { useTranslation } from 'react-i18next';
+import { bg3, trailerImg } from '~/assets/data/images';
 
 // Import Swiper styles
 //import '~swiper/swiper.min.css'
 //import '~swiper/modules/free-mode/free-mode.min.css'
 //import '~swiper/modules/navigation/navigation.min.css'
 //import '~swiper/modules/thumbs/thumbs.min.css'
-import 'swiper/css'
-import 'swiper/css/free-mode'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import 'swiper/css/thumbs'
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
 
-import ChampionHome from '~/components/ChampionHome'
-import ChampionWelcome from '~/components/ChampionWelcome'
-import { ProfileInfo } from '~/components/ProfileInfo'
-import EarnAPYCard from '~/components/raid/EarnAPYCard'
-import RuneStats from '~/components/raid/RuneStats'
+import ChampionHome from '~/components/ChampionHome';
+import ChampionWelcome from '~/components/ChampionWelcome';
+import { ProfileInfo } from '~/components/ProfileInfo';
+import EarnAPYCard from '~/components/raid/EarnAPYCard';
+import RuneStats from '~/components/raid/RuneStats';
 
 const Trailer = (props) => {
-  const iframeRef = useRef(null)
+  const iframeRef = useRef(null);
 
   useEffect(() => {
-    const height = (iframeRef.current.offsetWidth * 9) / 16 + 'px'
-    iframeRef.current.setAttribute('height', height)
-  }, [])
+    const height = (iframeRef.current.offsetWidth * 9) / 16 + 'px';
+    iframeRef.current.setAttribute('height', height);
+  }, []);
 
   return (
     <ChampionHome
@@ -100,7 +100,7 @@ const Trailer = (props) => {
               ref={iframeRef}
               width="100%"
               title="trailer"
-              src="https://www.youtube.com/embed/K3oZXgCoRSM"
+              src="https://www.youtube.com/embed/K3oZXgCoRSN"
               css={css`
                 border-width: 9px;
                 border-style: solid;
@@ -112,8 +112,8 @@ const Trailer = (props) => {
       </div>
       {props.children}
     </ChampionHome>
-  )
-}
+  );
+};
 
 const VerticalCards = styled(BaseLayout)`
   align-items: stretch;
@@ -125,14 +125,14 @@ const VerticalCards = styled(BaseLayout)`
     grid-column: span 12;
     width: 100%;
   }
-`
+`;
 
 const HeadingFire = styled.div<{
-  fireStrength: number
-  color1: string
-  color2: string
-  color3: string
-  color4: string
+  fireStrength: number;
+  color1: string;
+  color2: string;
+  color3: string;
+  color4: string;
 }>`
   background-image: -webkit-linear-gradient(
     top,
@@ -213,7 +213,7 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 18}px ${(props) => props.color4};
     }
   }
-`
+`;
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -236,7 +236,7 @@ const Cards = styled(BaseLayout)`
       grid-column: span 6;
     }
   }
-`
+`;
 
 const CTACards = styled(BaseLayout)`
   align-items: start;
@@ -257,7 +257,7 @@ const CTACards = styled(BaseLayout)`
       grid-column: span 6;
     }
   }
-`
+`;
 
 const Frame = styled.iframe`
   position: absolute;
@@ -266,7 +266,7 @@ const Frame = styled.iframe`
   width: 100%;
   height: 100%;
   z-index: 1;
-`
+`;
 
 const FrameWrapper = styled(RouterLink)`
   position: relative;
@@ -278,7 +278,7 @@ const FrameWrapper = styled(RouterLink)`
     cursor: url('/images/cursor3.png'), pointer;
   }
   overflow: hidden;
-`
+`;
 const FrameOverlay = styled.div`
   position: absolute;
   top: 0;
@@ -292,29 +292,29 @@ const FrameOverlay = styled.div`
   border-image: url('/images/frame.png') 5 repeat;
   border-image-width: 5px;
   background-color: rgba(0, 0, 0, 0);
-`
+`;
 
 const LogoImg = styled.img`
   max-width: 200px;
-`
+`;
 
 const BoxHeading = styled(Heading)`
   text-align: center;
   margin-bottom: 16px;
-`
+`;
 
 const Img = styled.img`
   filter: contrast(1.1) drop-shadow(2px 4px 6px black);
   ${({ theme }) => theme.mediaQueries.sm} {
     width: 100%;
   }
-`
+`;
 
 const Raid: React.FC = () => {
-  const { t } = useTranslation()
-  const { account, library } = useWeb3()
+  const { t } = useTranslation();
+  const { account, library } = useWeb3();
 
-  const holders = []
+  const holders = [];
   return (
     <>
       <div
@@ -487,7 +487,7 @@ const Raid: React.FC = () => {
           `}>
           <ChampionWelcome
             title="Arken: Runic Raids"
-            description={`Arken: Runic Raids is the first blockchain game with onchain NFT item mechanics. Earn and use runes to craft gear (NFTs) to make your character more powerful. Soon, battle & steal from players and bosses in the more interactive Arken: Runic Raids 2. `}>
+            description={`Arken: Runic Raids is the first game with onchain NFT item mechanics. Use runes to craft gear (NFTs) to make your character more powerful. `}>
             <div>
               {account && holders.find((p) => p.address.toLowerCase() === account.toLowerCase()) ? (
                 <Button as={RouterLink} scale="md" to="/download/raid" style={{ zoom: 1.5 }}>
@@ -500,7 +500,7 @@ const Raid: React.FC = () => {
                     to="/account"
                     style={{ zoom: 1.5, padding: '6px 20px', textAlign: 'center' }}
                     onClick={() => {
-                      window.scrollTo(0, 0)
+                      window.scrollTo(0, 0);
                     }}>
                     Create Account
                   </Button>
@@ -512,7 +512,7 @@ const Raid: React.FC = () => {
                       to="/cube"
                       style={{ zoom: 1, padding: '6px 20px', textAlign: 'center', background: '#222' }}
                       onClick={() => {
-                        window.scrollTo(0, 0)
+                        window.scrollTo(0, 0);
                       }}>
                       Founder's Edition
                     </Button>
@@ -623,7 +623,7 @@ const Raid: React.FC = () => {
         </Cards>
       </Page>
     </>
-  )
-}
+  );
+};
 
-export default Raid
+export default Raid;

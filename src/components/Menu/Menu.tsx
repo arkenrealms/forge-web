@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react'
-import styled from 'styled-components'
-import throttle from 'lodash/throttle'
-import useWeb3 from '~/hooks/useWeb3'
-import { useRunePrice, useProfile } from '~/state/hooks'
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints'
-import Overlay from '../Overlay/Overlay'
-import Flex from '../Box/Flex'
-import Logo from './components/Logo'
-import Panel from './components/Panel'
-import UserBlock from './components/UserBlock'
-import { NavProps } from './types'
-import Avatar from './components/Avatar'
-import { MENU_HEIGHT, SIDEBAR_WIDTH_REDUCED, SIDEBAR_WIDTH_FULL } from './config'
-import useInterval from '~/hooks/useInterval'
-import useBrand from '~/hooks/useBrand'
+import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
+import throttle from 'lodash/throttle';
+import useWeb3 from '~/hooks/useWeb3';
+import { useRunePrice, useProfile } from '~/state/hooks';
+import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
+import Overlay from '../Overlay/Overlay';
+import Flex from '../Box/Flex';
+import Logo from './components/Logo';
+import Panel from './components/Panel';
+import UserBlock from './components/UserBlock';
+import { NavProps } from './types';
+import Avatar from './components/Avatar';
+import { MENU_HEIGHT, SIDEBAR_WIDTH_REDUCED, SIDEBAR_WIDTH_FULL } from './config';
+import useInterval from '~/hooks/useInterval';
+import useBrand from '~/hooks/useBrand';
 
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-`
+`;
 
 const StyledNav = styled.nav<{ showMenu: boolean }>`
   position: fixed;
@@ -33,12 +33,12 @@ const StyledNav = styled.nav<{ showMenu: boolean }>`
   width: 100%;
   height: ${MENU_HEIGHT}px;
   z-index: 20;
-`
+`;
 
 const BodyWrapper = styled.div`
   position: relative;
   display: flex;
-`
+`;
 
 const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
   // top: 66px;
@@ -56,7 +56,7 @@ const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
     margin-left: ${({ isPushed }) => `${isPushed ? SIDEBAR_WIDTH_FULL : SIDEBAR_WIDTH_REDUCED}px`};
     max-width: ${({ isPushed }) => `calc(100% - ${isPushed ? SIDEBAR_WIDTH_FULL : SIDEBAR_WIDTH_REDUCED}px)`};
   }
-`
+`;
 
 const MobileOnlyOverlay = styled(Overlay)`
   position: fixed;
@@ -65,9 +65,9 @@ const MobileOnlyOverlay = styled(Overlay)`
   ${({ theme }) => theme.mediaQueries.nav} {
     display: none;
   }
-`
+`;
 
-let init = false
+let init = false;
 
 const Menu: React.FC<NavProps> = ({
   location,
@@ -83,20 +83,20 @@ const Menu: React.FC<NavProps> = ({
   children,
   content,
 }) => {
-  const { address: account } = useWeb3()
-  const { isXl } = useMatchBreakpoints()
-  const { profile: profile2 } = useProfile(account)
+  const { address: account } = useWeb3();
+  const { isXl } = useMatchBreakpoints();
+  const { profile: profile2 } = useProfile(account);
   const profile = {
     username: profile2?.username,
     image: profile2?.nft ? `/images/nfts/${profile2.nft?.images.sm}` : undefined,
     profileLink: '/account',
     noProfileLink: '/account',
     showPip: !profile2?.username,
-  }
-  const isMobile = isXl === false
-  const [isPushed, setIsPushed] = useState(false)
-  const [showMenu, setShowMenu] = useState(true)
-  const { brand } = useBrand()
+  };
+  const isMobile = isXl === false;
+  const [isPushed, setIsPushed] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
+  const { brand } = useBrand();
   // const refPrevOffset = useRef(window.pageYOffset)
   // useEffect(() => {
   //   const handleScroll = () => {
@@ -128,48 +128,52 @@ const Menu: React.FC<NavProps> = ({
   // }, []);
 
   useInterval(() => {
-    const pushedSetting = window.localStorage ? !!parseInt(window.localStorage.getItem('autoPushSidebar') || '1') : true
+    const pushedSetting = window.localStorage
+      ? !!parseInt(window.localStorage.getItem('autoPushSidebar') || '1')
+      : true;
     if (pushedSetting !== isPushed) {
-      setIsPushed(pushedSetting)
+      setIsPushed(pushedSetting);
     }
-  }, 1 * 1000)
+  }, 1 * 1000);
 
   useEffect(() => {
-    if (init) return
+    if (init) return;
 
-    init = true
+    init = true;
 
-    setIsPushed(true)
-  }, [isPushed])
+    setIsPushed(true);
+  }, [isPushed]);
 
   useEffect(() => {
-    if (!window || !window.localStorage) return
+    if (!window || !window.localStorage) return;
 
-    const pushedSetting = window.localStorage ? !!parseInt(window.localStorage.getItem('autoPushSidebar') || '1') : true
+    const pushedSetting = window.localStorage
+      ? !!parseInt(window.localStorage.getItem('autoPushSidebar') || '1')
+      : true;
     if (pushedSetting !== isPushed) {
-      setIsPushed(pushedSetting)
+      setIsPushed(pushedSetting);
     }
-  }, [isPushed, setIsPushed])
+  }, [isPushed, setIsPushed]);
   // Find the home link if provided
-  const homeLink = links.find((link) => link.label === 'Home')
+  const homeLink = links.find((link) => link.label === 'Home');
 
   const brandHeading = {
-    rune: 'RUNE',
-    w4: 'RUNE',
-  }
+    rune: 'ARKEN',
+    w4: 'ARKEN',
+  };
 
   const brandSubheading = {
-    rune: 'METAVERSE',
+    rune: 'REALMS',
     raid: 'RAID',
     evolution: 'EVOLUTION',
     infinite: 'INFINITE',
     sanctuary: 'SANCTUARY',
     guardians: 'GUARDIANS',
     w4: 'GAME SERVICES',
-  }
+  };
 
-  const headingText = brandHeading[brand] || brandHeading.rune
-  const subheadingText = brandSubheading[brand] || brandSubheading.rune
+  const headingText = brandHeading[brand] || brandHeading.rune;
+  const subheadingText = brandSubheading[brand] || brandSubheading.rune;
 
   return (
     <Wrapper>
@@ -178,9 +182,9 @@ const Menu: React.FC<NavProps> = ({
           isPushed={isPushed}
           togglePush={() => {
             setIsPushed((prevState: boolean) => {
-              window.localStorage.setItem('autoPushSidebar', prevState ? '0' : '1')
-              return !prevState
-            })
+              window.localStorage.setItem('autoPushSidebar', prevState ? '0' : '1');
+              return !prevState;
+            });
           }}
           isDark={isDark}
           isMobile={isMobile}
@@ -213,8 +217,8 @@ const Menu: React.FC<NavProps> = ({
           currentLang={currentLang}
           runePriceUsd={runePriceUsd}
           pushNav={(pushed) => {
-            setIsPushed(pushed)
-            window.localStorage.setItem('autoPushSidebar', pushed ? '1' : '0')
+            setIsPushed(pushed);
+            window.localStorage.setItem('autoPushSidebar', pushed ? '1' : '0');
           }}
           links={links}
         />
@@ -224,14 +228,14 @@ const Menu: React.FC<NavProps> = ({
         <MobileOnlyOverlay
           show={isPushed}
           onClick={() => {
-            setIsPushed(false)
-            window.localStorage.setItem('autoPushSidebar', '0')
+            setIsPushed(false);
+            window.localStorage.setItem('autoPushSidebar', '0');
           }}
           role="presentation"
         />
       </BodyWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

@@ -348,7 +348,7 @@ const Guide: React.FC = () => {
 
   const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
-  const { totalRunes, totalRuneforms } = cache.stats;
+  const { totalRunes, totalRunewords } = cache.stats;
 
   const referer = Cookies.get(`referer`);
 
@@ -461,7 +461,7 @@ const Guide: React.FC = () => {
                 4th-10th = 5%
                 <br />
                 <br />
-                Additionally, random rune and runeword items spawn around the map every ~10 seconds.
+                Additionally, random rune and runeform items spawn around the map every ~10 seconds.
                 <br />
                 <br />
                 The amount of the rewards changes each round, and is based on the # of legitimate players in the game.

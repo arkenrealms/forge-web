@@ -1,10 +1,11 @@
-import React from 'react'
-import { Currency, Percent, Price } from '@arcanefinance/sdk'
-import { Text } from '~/ui'
-import { AutoColumn } from '~/components/Column'
-import { AutoRow } from '~/components/Row'
-import { ONE_BIPS } from '../../../../constants'
-import { Field } from '../../../../state/mint/actions'
+import React from 'react';
+import { Currency, Percent, Price } from '@arcanefinance/sdk';
+import { Text } from '~/ui';
+import { AutoColumn } from '~/components/Column';
+import { AutoRow } from '~/components/Row';
+import symbolMap from '~/utils/symbolMap';
+import { ONE_BIPS } from '../../../../constants';
+import { Field } from '../../../../state/mint/actions';
 
 export function PoolPriceBar({
   currencies,
@@ -12,10 +13,10 @@ export function PoolPriceBar({
   poolTokenPercentage,
   price,
 }: {
-  currencies: { [field in Field]?: Currency }
-  noLiquidity?: boolean
-  poolTokenPercentage?: Percent
-  price?: Price
+  currencies: { [field in Field]?: Currency };
+  noLiquidity?: boolean;
+  poolTokenPercentage?: Percent;
+  price?: Price;
 }) {
   return (
     <AutoColumn gap="md">
@@ -23,13 +24,13 @@ export function PoolPriceBar({
         <AutoColumn justify="center">
           <Text>{price?.toSignificant(6) ?? '-'}</Text>
           <Text fontSize="14px" color="textSubtle" pt={1}>
-            {currencies[Field.CURRENCY_B]?.symbol} per {currencies[Field.CURRENCY_A]?.symbol}
+            {symbolMap(currencies[Field.CURRENCY_B]?.symbol)} per {symbolMap(currencies[Field.CURRENCY_A]?.symbol)}
           </Text>
         </AutoColumn>
         <AutoColumn justify="center">
           <Text>{price?.invert()?.toSignificant(6) ?? '-'}</Text>
           <Text fontSize="14px" color="textSubtle" pt={1}>
-            {currencies[Field.CURRENCY_A]?.symbol} per {currencies[Field.CURRENCY_B]?.symbol}
+            {symbolMap(currencies[Field.CURRENCY_A]?.symbol)} per {symbolMap(currencies[Field.CURRENCY_B]?.symbol)}
           </Text>
         </AutoColumn>
         <AutoColumn justify="center">
@@ -45,7 +46,7 @@ export function PoolPriceBar({
         </AutoColumn>
       </AutoRow>
     </AutoColumn>
-  )
+  );
 }
 
-export default PoolPriceBar
+export default PoolPriceBar;

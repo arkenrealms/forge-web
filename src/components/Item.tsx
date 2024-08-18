@@ -3,9 +3,10 @@ import styled, { css, keyframes } from 'styled-components';
 import React, { useContext, useEffect, useState } from 'react';
 import { BsCheckSquareFill } from 'react-icons/bs';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
-import useSettings from '~/hooks/useSettings2';
+import useSettings from '~/hooks/useSettings';
 import { Popover } from 'react-tiny-popover';
 import ItemsContext from '~/contexts/ItemsContext';
+import symbolMap from '~/utils/symbolMap';
 import { ItemCategoriesType, ItemDetails, ItemsBonusType, ItemType } from 'rune-backend-sdk/build/data/items.type';
 import { toFixed } from 'rune-backend-sdk/build/util/math';
 import useCache from '~/hooks/useCache';
@@ -391,7 +392,7 @@ const Item: React.FC<Props> = ({
                 line-height: 1.1em;
                 color: #fff;
               `}>
-              {name.replace(' Rune', '')}
+              {symbolMap(name).replace(' Rune', '')}
             </div>
           ) : null}
         </div>

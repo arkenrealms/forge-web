@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Heading from '../Heading/Heading';
 import Flex from '../Box/Flex';
 import { ArrowBackIcon, CloseIcon } from '../Svg';
-import { IconButton } from '../Button3';
+import { IconButton } from '../Button';
 import { InjectedProps } from './types';
 
 interface Props extends InjectedProps {

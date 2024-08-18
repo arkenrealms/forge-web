@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import styled from 'styled-components';
-import cx from 'classnames';
-import navigateToDirection from '~/utils/navigateToDirection';
-import useSettings from '~/hooks/useSettings2';
+import React, { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import styled from 'styled-components'
+import cx from 'classnames'
+import navigateToDirection from '~/utils/navigateToDirection'
+import useSettings from '~/hooks/useSettings'
 
 export enum NavigationArrowVariant {
   LEFT = 'left',
@@ -11,36 +11,37 @@ export enum NavigationArrowVariant {
 }
 
 type Props = {
-  currentPage: number;
-  setPage: React.Dispatch<React.SetStateAction<[number, number]>>;
-  variant: NavigationArrowVariant;
-  maxPage?: number;
-};
+  currentPage: number
+  setPage: React.Dispatch<React.SetStateAction<[number, number]>>
+  variant: NavigationArrowVariant
+  maxPage?: number
+}
 
 const Arrow = styled.div`
   cursor: url('/images/cursor3.png'), pointer;
   top: 0;
   height: 300px;
-`;
+`
 
 const NavigationArrow: React.FC<Props> = ({ currentPage, variant, setPage, maxPage = 2 }) => {
-  const { quality } = useSettings();
-  const [showAnimation, setShowAnimation] = useState(false);
+  const { quality } = useSettings()
+  const [showAnimation, setShowAnimation] = useState(false)
 
-  const isLeftArrow = variant === NavigationArrowVariant.LEFT;
-  const isDisabled = (isLeftArrow && currentPage === 0) || (!isLeftArrow && currentPage === maxPage - 1);
+  const isLeftArrow = variant === NavigationArrowVariant.LEFT
+  const isDisabled = (isLeftArrow && currentPage === 0) || (!isLeftArrow && currentPage === maxPage - 1)
 
   useEffect(() => {
-    if (showAnimation) return;
-    setShowAnimation(true);
-  }, [showAnimation, setShowAnimation]);
+    if (showAnimation) return
+    setShowAnimation(true)
+  }, [showAnimation, setShowAnimation])
 
   return (
     <Arrow
       className={cx(
         { 'left-minus-40': isLeftArrow, 'right-minus-40': !isLeftArrow },
         'absolute h-full hidden flex items-center z-30'
-      )}>
+      )}
+    >
       {quality === 'bad' ? (
         <img
           onClick={() =>
@@ -88,7 +89,7 @@ const NavigationArrow: React.FC<Props> = ({ currentPage, variant, setPage, maxPa
         />
       )}
     </Arrow>
-  );
-};
+  )
+}
 
-export default NavigationArrow;
+export default NavigationArrow

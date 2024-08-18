@@ -1,27 +1,27 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { FarmWithStakedValue } from '~/components/FarmCard/FarmCard'
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { FarmWithStakedValue } from '~/components/FarmCard/FarmCard';
+import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
 
-import Apr, { AprProps } from './Apr'
-import Farm, { FarmProps } from './Farm'
-import Earned, { EarnedProps } from './Earned'
-import Details from './Details'
-import Multiplier, { MultiplierProps } from './Multiplier'
-import Liquidity, { LiquidityProps } from './Liquidity'
-import ActionPanel from './Actions/ActionPanel'
-import CellLayout from './CellLayout'
-import { DesktopColumnSchema, MobileColumnSchema } from '../../types'
+import Apr, { AprProps } from './Apr';
+import Farm, { FarmProps } from './Farm';
+import Earned, { EarnedProps } from './Earned';
+import Details from './Details';
+import Multiplier, { MultiplierProps } from './Multiplier';
+import Liquidity, { LiquidityProps } from './Liquidity';
+import ActionPanel from './Actions/ActionPanel';
+import CellLayout from './CellLayout';
+import { DesktopColumnSchema, MobileColumnSchema } from '../../types';
 
 export interface RowProps {
-  apr: AprProps
-  farm: FarmProps
-  earned: EarnedProps
-  multiplier: MultiplierProps
-  liquidity: LiquidityProps
-  details: FarmWithStakedValue
+  apr: AprProps;
+  farm: FarmProps;
+  earned: EarnedProps;
+  multiplier: MultiplierProps;
+  liquidity: LiquidityProps;
+  details: FarmWithStakedValue;
 }
 
 const cells = {
@@ -31,7 +31,7 @@ const cells = {
   details: Details,
   multiplier: Multiplier,
   liquidity: Liquidity,
-}
+};
 
 const CellInner = styled.div`
   padding: 24px 0px;
@@ -43,49 +43,49 @@ const CellInner = styled.div`
   ${({ theme }) => theme.mediaQueries.xl} {
     padding-right: 32px;
   }
-`
+`;
 
 const StyledTr = styled.tr`
   cursor: url('/images/cursor3.png'), pointer;
   border-bottom: 2px solid ${({ theme }) => theme.colors.borderColor};
-`
+`;
 
 const EarnedMobileCell = styled.td`
   padding: 16px 0 24px 16px;
-`
+`;
 
 const AprMobileCell = styled.td`
   padding-top: 16px;
   padding-bottom: 24px;
-`
+`;
 
 const FarmMobileCell = styled.td`
   padding-top: 24px;
-`
+`;
 
 const Row: React.FunctionComponent<RowProps> = (props) => {
-  const { details } = props
-  const [actionPanelToggled, setActionPanelToggled] = useState(false)
-  const { t } = useTranslation()
+  const { details } = props;
+  const [actionPanelToggled, setActionPanelToggled] = useState(false);
+  const { t } = useTranslation();
 
   const toggleActionPanel = () => {
-    setActionPanelToggled(!actionPanelToggled)
-  }
+    setActionPanelToggled(!actionPanelToggled);
+  };
 
-  const { isXl, isXs } = useMatchBreakpoints()
+  const { isXl, isXs } = useMatchBreakpoints();
 
-  const isMobile = !isXl
-  const tableSchema = isMobile ? MobileColumnSchema : DesktopColumnSchema
-  const columnNames = tableSchema.map((column) => column.name)
+  const isMobile = !isXl;
+  const tableSchema = isMobile ? MobileColumnSchema : DesktopColumnSchema;
+  const columnNames = tableSchema.map((column) => column.name);
 
   const handleRenderRow = () => {
     if (!isXs) {
       return (
         <StyledTr onClick={toggleActionPanel}>
           {Object.keys(props).map((key) => {
-            const columnIndex = columnNames.indexOf(key)
+            const columnIndex = columnNames.indexOf(key);
             if (columnIndex === -1) {
-              return null
+              return null;
             }
 
             switch (key) {
@@ -98,7 +98,7 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
                       </CellLayout>
                     </CellInner>
                   </td>
-                )
+                );
               case 'apr':
                 return (
                   <td key={key}>
@@ -108,7 +108,7 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
                       </CellLayout>
                     </CellInner>
                   </td>
-                )
+                );
               default:
                 return (
                   <td key={key}>
@@ -118,11 +118,11 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
                       </CellLayout>
                     </CellInner>
                   </td>
-                )
+                );
             }
           })}
         </StyledTr>
-      )
+      );
     }
 
     return (
@@ -137,7 +137,7 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
           </tr>
           <tr>
             <EarnedMobileCell>
-              <CellLayout label={t('Earned')}>
+              <CellLayout label={t('Rewarded')}>
                 <Earned {...props.earned} />
               </CellLayout>
             </EarnedMobileCell>
@@ -156,8 +156,8 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
           </CellInner>
         </td>
       </StyledTr>
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -170,7 +170,7 @@ const Row: React.FunctionComponent<RowProps> = (props) => {
         </tr>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Row
+export default Row;

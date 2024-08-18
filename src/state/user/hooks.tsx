@@ -4,6 +4,7 @@ import { useCallback, useMemo } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useWeb3 from '~/hooks/useWeb3';
 import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from '~/constants';
+
 import { useAllTokens } from '~/hooks/Tokens';
 import { AppDispatch, AppState } from '../index';
 import {

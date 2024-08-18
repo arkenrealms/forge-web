@@ -1,5 +1,5 @@
 import styled, { DefaultTheme } from 'styled-components';
-import { Variant, variants } from '../Button3/types';
+import { Variant, variants } from '../Button/types';
 
 type StyledButtonMenuProps = {
   variant: Variant;

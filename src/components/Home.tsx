@@ -1054,7 +1054,7 @@ z-index: 999;
                   <Linker id="home-1">
                     Runes are needed to{' '}
                     <RouterLink to="/craft" style={{ borderBottom: '1px solid #fff' }}>
-                      craft Runewords
+                      craft Runeforms
                     </RouterLink>{' '}
                     (NFTs), unique and powerful weapons and armor used to enhance your Arken: Runic Raids farm rewards,
                     or buff your Arken: Infinite Arena hero. <br />

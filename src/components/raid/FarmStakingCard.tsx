@@ -1,62 +1,63 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import styled from 'styled-components'
-import { Heading, Card, CardBody, Button, AutoRenewIcon } from '~/ui'
-import useWeb3 from '~/hooks/useWeb3'
-import { useTranslation } from 'react-i18next'
-import { BigNumber } from 'bignumber.js'
-import useInventory from '~/hooks/useInventory'
-import { useAllHarvest } from '~/hooks/useHarvest'
-import useFarmsWithBalance from '~/hooks/useFarmsWithBalance'
-import UnlockButton from '~/components/UnlockButton'
-import { Text } from '~/ui'
-import useAllEarnings from '~/hooks/useAllEarnings'
-import useRuneBalance from '~/hooks/useRuneBalance'
-import { getBalanceNumber } from '~/utils/formatBalance'
-import { useRunePrice } from '~/state/hooks'
-import { Flex, LinkExternal } from '~/ui'
-import { provider } from 'web3-core'
-import { getRuneContract } from '~/utils/erc20'
-import { getMasterChefAddress } from '~/utils/addressHelpers'
-import { useFarmStatus } from '~/hooks/useFarmStatus'
-import { useApprove } from '~/hooks/useApprove'
-import { useMasterchef } from '~/hooks/useContract'
-import CardValue from './CardValue'
-import CardBusdValue from './CardBusdValue'
-import RuneHarvestBalance from './RuneHarvestBalance'
-import RuneWalletBalance from './RuneWalletBalance'
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import { Heading, Card, CardBody, Button, AutoRenewIcon } from '~/ui';
+import useWeb3 from '~/hooks/useWeb3';
+import { useTranslation } from 'react-i18next';
+import { BigNumber } from 'bignumber.js';
+import useInventory from '~/hooks/useInventory';
+import { useAllHarvest } from '~/hooks/useHarvest';
+import useFarmsWithBalance from '~/hooks/useFarmsWithBalance';
+import UnlockButton from '~/components/UnlockButton';
+import { Text } from '~/ui';
+import useAllEarnings from '~/hooks/useAllEarnings';
+import useRuneBalance from '~/hooks/useRuneBalance';
+import { getBalanceNumber } from '~/utils/formatBalance';
+import { useRunePrice } from '~/state/hooks';
+import { Flex, LinkExternal } from '~/ui';
+import { provider } from 'web3-core';
+import { getRuneContract } from '~/utils/erc20';
+import { getMasterChefAddress } from '~/utils/addressHelpers';
+import { useFarmStatus } from '~/hooks/useFarmStatus';
+import { useApprove } from '~/hooks/useApprove';
+import { useMasterchef } from '~/hooks/useContract';
+import symbolMap from '~/utils/symbolMap';
+import CardValue from './CardValue';
+import CardBusdValue from './CardBusdValue';
+import RuneHarvestBalance from './RuneHarvestBalance';
+import RuneWalletBalance from './RuneWalletBalance';
 
-const StyledFarmStakingCard = styled(Card)``
+const StyledFarmStakingCard = styled(Card)``;
 
 const Block = styled.div`
   margin-bottom: 16px;
-`
+`;
 
 const CardImage = styled.img`
   margin-bottom: 16px;
-`
+`;
 
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
   font-size: 14px;
-`
+`;
 
 const Actions = styled.div`
   margin-top: 24px;
-`
+`;
 
 const WalletBalance = ({ symbol }) => {
-  const { t } = useTranslation()
-  const balance = useRuneBalance(symbol)
-  const busdBalance = new BigNumber(getBalanceNumber(balance)).multipliedBy(useRunePrice(symbol)).toNumber()
-  const { address: account } = useWeb3()
+  const { t } = useTranslation();
+  const balance = useRuneBalance(symbol);
+  const busdBalance = new BigNumber(getBalanceNumber(balance)).multipliedBy(useRunePrice(symbol)).toNumber();
+  const { address: account } = useWeb3();
 
   if (!account) {
     return (
       <Text color="textDisabled" style={{ lineHeight: '54px' }}>
         {t('Locked')}
       </Text>
-    )
+    );
   }
 
   return (
@@ -64,8 +65,8 @@ const WalletBalance = ({ symbol }) => {
       <CardValue value={getBalanceNumber(balance)} decimals={4} fontSize="24px" lineHeight="36px" />
       <CardBusdValue value={busdBalance} />
     </>
-  )
-}
+  );
+};
 
 const StyledMaxText = styled.div`
   color: ${(props) => props.theme.colors.primary};
@@ -74,125 +75,125 @@ const StyledMaxText = styled.div`
   line-height: 22px;
   justify-content: flex-end;
   font-style: italic;
-`
+`;
 
 const FarmedStakingCard = () => {
-  const [pendingTx, setPendingTx] = useState(false)
-  const { address: account } = useWeb3()
-  const { web3 } = useWeb3()
-  const { t } = useTranslation()
-  const farmsWithBalance = useFarmsWithBalance()
-  const balancesWithValue = farmsWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0)
+  const [pendingTx, setPendingTx] = useState(false);
+  const { address: account } = useWeb3();
+  const { web3 } = useWeb3();
+  const { t } = useTranslation();
+  const farmsWithBalance = useFarmsWithBalance();
+  const balancesWithValue = farmsWithBalance.filter((balanceType) => balanceType.balance.toNumber() > 0);
 
-  const { onReward } = useAllHarvest(balancesWithValue.map((farmWithBalance) => farmWithBalance.pid))
-  const { contract: masterChefContract } = useMasterchef()
+  const { onReward } = useAllHarvest(balancesWithValue.map((farmWithBalance) => farmWithBalance.pid));
+  const { contract: masterChefContract } = useMasterchef();
 
-  const { meta: buffs } = useInventory()
-  const harvestFeeTokenBalance = useRuneBalance(buffs.harvestFeeToken)
-  const harvestFeeBalance = getBalanceNumber(harvestFeeTokenBalance)
-  const [requestedApproval, setRequestedApproval] = useState(false)
-  const { currentFarmSymbol, nextFarmSymbol, currentFarmPaused } = useFarmStatus()
+  const { meta: buffs } = useInventory();
+  const harvestFeeTokenBalance = useRuneBalance(buffs.harvestFeeToken);
+  const harvestFeeBalance = getBalanceNumber(harvestFeeTokenBalance);
+  const [requestedApproval, setRequestedApproval] = useState(false);
+  const { currentFarmSymbol, nextFarmSymbol, currentFarmPaused } = useFarmStatus();
 
-  const allEarnings = useAllEarnings(currentFarmSymbol)
+  const allEarnings = useAllEarnings(currentFarmSymbol);
   const earnings = allEarnings.reduce((accum, earning) => {
-    return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
-  }, 0)
-  const harvestFee = earnings > 0 ? earnings * (buffs.harvestFeePercent / 100) * 1.05 : 0
-  const [feeAllowance, setFeeAllowance] = useState(new BigNumber(0))
+    return accum + new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber();
+  }, 0);
+  const harvestFee = earnings > 0 ? earnings * (buffs.harvestFeePercent / 100) * 1.05 : 0;
+  const [feeAllowance, setFeeAllowance] = useState(new BigNumber(0));
 
-  const rawEarningsBalance = earnings
-  const isFeeApproved = buffs.harvestFeePercent === 0 || (account && feeAllowance && feeAllowance.isGreaterThan(0))
+  const rawEarningsBalance = earnings;
+  const isFeeApproved = buffs.harvestFeePercent === 0 || (account && feeAllowance && feeAllowance.isGreaterThan(0));
 
   const furyFeeTokenContract = useMemo(() => {
-    return getRuneContract(web3 as provider, 'RAL')
-  }, [web3])
+    return getRuneContract(web3 as provider, 'RAL');
+  }, [web3]);
 
-  const { onApprove: onApproveFuryFeeToken } = useApprove(furyFeeTokenContract)
+  const { onApprove: onApproveFuryFeeToken } = useApprove(furyFeeTokenContract);
 
   const feeTokenContract = useMemo(() => {
-    return getRuneContract(web3 as provider, buffs.harvestFeeToken)
-  }, [web3, buffs.harvestFeeToken])
+    return getRuneContract(web3 as provider, buffs.harvestFeeToken);
+  }, [web3, buffs.harvestFeeToken]);
 
-  const { onApprove: onApproveFeeToken } = useApprove(feeTokenContract)
+  const { onApprove: onApproveFeeToken } = useApprove(feeTokenContract);
 
   const handleApprove = useCallback(async () => {
     try {
-      setRequestedApproval(true)
-      await onApproveFeeToken()
-      setRequestedApproval(false)
+      setRequestedApproval(true);
+      await onApproveFeeToken();
+      setRequestedApproval(false);
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
-  }, [onApproveFeeToken])
+  }, [onApproveFeeToken]);
 
   const harvestAllFarms = useCallback(async () => {
-    setPendingTx(true)
+    setPendingTx(true);
     try {
       if (isFeeApproved) {
-        await onReward()
+        await onReward();
       } else {
-        await handleApprove()
+        await handleApprove();
       }
     } catch (error) {
       // TODO: find a way to handle when the user rejects transaction or it fails
     } finally {
-      setPendingTx(false)
+      setPendingTx(false);
     }
-  }, [onReward, handleApprove, isFeeApproved])
+  }, [onReward, handleApprove, isFeeApproved]);
 
   useEffect(() => {
     const fetchAllowance = async () => {
-      if (!account) return
+      if (!account) return;
 
-      const res = await feeTokenContract.methods.allowance(account, getMasterChefAddress()).call()
-      setFeeAllowance(new BigNumber(res))
-    }
+      const res = await feeTokenContract.methods.allowance(account, getMasterChefAddress()).call();
+      setFeeAllowance(new BigNumber(res));
+    };
 
     if (account) {
-      fetchAllowance()
+      fetchAllowance();
     }
-    const refreshInterval = setInterval(fetchAllowance, 10000)
-    return () => clearInterval(refreshInterval)
-  }, [account, feeTokenContract])
+    const refreshInterval = setInterval(fetchAllowance, 10000);
+    return () => clearInterval(refreshInterval);
+  }, [account, feeTokenContract]);
 
   const harvestAllFarmsMagic = useCallback(async () => {
-    setPendingTx(true)
+    setPendingTx(true);
     try {
       if (isFeeApproved) {
         await masterChefContract.methods
           .harvestAll()
           .send({ from: account })
           .on('transactionHash', (tx) => {
-            return tx.transactionHash
-          })
+            return tx.transactionHash;
+          });
       } else {
-        await handleApprove()
+        await handleApprove();
       }
     } catch (error) {
       // TODO: find a way to handle when the user rejects transaction or it fails
     } finally {
-      setPendingTx(false)
+      setPendingTx(false);
     }
-  }, [account, handleApprove, isFeeApproved, masterChefContract])
+  }, [account, handleApprove, isFeeApproved, masterChefContract]);
 
-  let submitType
-  let submitText
+  let submitType;
+  let submitText;
 
   if (pendingTx) {
-    submitText = t('Pending')
-    submitType = 'pending'
+    submitText = t('Pending');
+    submitType = 'pending';
   } else if (rawEarningsBalance === 0) {
-    submitText = t('Confirm')
-    submitType = 'confirm'
+    submitText = t('Confirm');
+    submitType = 'confirm';
   } else if (!isFeeApproved) {
-    submitText = 'Approve'
-    submitType = 'approve'
+    submitText = 'Approve';
+    submitType = 'approve';
   } else if (buffs.harvestFeePercent > 0 && harvestFeeBalance < harvestFee) {
-    submitText = `${harvestFee.toFixed(10)} ${buffs.harvestFeeToken} REQUIRED`
-    submitType = 'needfee'
+    submitText = `${harvestFee.toFixed(10)} ${buffs.harvestFeeToken} REQUIRED`;
+    submitType = 'needfee';
   } else {
-    submitText = t('Confirm')
-    submitType = 'confirm'
+    submitText = t('Confirm');
+    submitType = 'confirm';
   }
 
   return (
@@ -204,11 +205,11 @@ const FarmedStakingCard = () => {
           </Heading>
         </Flex>
         <Block>
-          <Label>{t(currentFarmSymbol + ' to Harvest')}:</Label>
+          <Label>{t(symbolMap(currentFarmSymbol) + ' to Harvest')}:</Label>
           <RuneHarvestBalance symbol={currentFarmSymbol} />
         </Block>
         <Block>
-          <Label>{t(currentFarmSymbol + ' in Wallet')}:</Label>
+          <Label>{t(symbolMap(currentFarmSymbol) + ' in Wallet')}:</Label>
           <WalletBalance symbol={currentFarmSymbol} />
         </Block>
         {/* <Block>
@@ -295,11 +296,14 @@ const FarmedStakingCard = () => {
               disabled={harvestFeeBalance < harvestFee || balancesWithValue.length <= 0 || pendingTx}
               onClick={harvestAllFarms}
               width="100%"
-              endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : undefined}
-            >
+              endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : undefined}>
               {!isFeeApproved ? `Approve ${buffs.harvestFeeToken} Fee To Harvest` : null}
               {isFeeApproved
-                ? t(pendingTx ? 'Collecting ' + currentFarmSymbol : `Harvest all (${balancesWithValue.length})`)
+                ? t(
+                    pendingTx
+                      ? 'Collecting ' + symbolMap(currentFarmSymbol)
+                      : `Harvest all (${balancesWithValue.length})`
+                  )
                 : null}
             </Button>
           ) : (
@@ -327,7 +331,7 @@ const FarmedStakingCard = () => {
         </Actions>
       </CardBody>
     </StyledFarmStakingCard>
-  )
-}
+  );
+};
 
-export default FarmedStakingCard
+export default FarmedStakingCard;

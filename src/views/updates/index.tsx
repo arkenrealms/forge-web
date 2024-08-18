@@ -375,7 +375,7 @@ const Updates = () => {
                         Improve crafting cube interface <UX />
                       </li>
                       <li>
-                        Add Zavox's Fortune: the first transmutable item into a random active runeword <Game />
+                        Add Zavox's Fortune: the first transmutable item into a random active runeform <Game />
                       </li>
                     </ol>
                   </PatchNote>
@@ -456,7 +456,7 @@ const Updates = () => {
                     </Heading>
                     <ol>
                       <li>
-                        New runeword for helm option: Pledge. <Game />
+                        New runeform for helm option: Pledge. <Game />
                       </li>
                       <li>
                         Lorekeeper no longer craftable. <Game />
@@ -527,10 +527,10 @@ const Updates = () => {
                         Fixed an issue being unable to load more than 4000 items in inventory. <Bug />
                       </li>
                       <li>
-                        All runewords should be visible and link to crafting or market. <UX />
+                        All runeforms should be visible and link to crafting or market. <UX />
                       </li>
                       <li>
-                        New runewords: Wrath and Elder. <Game />
+                        New runeforms: Wrath and Elder. <Game />
                       </li>
                     </ol>
                   </PatchNote>
@@ -550,7 +550,7 @@ const Updates = () => {
                         Smoke no longer be craftable. <Game />
                       </li>
                       <li>
-                        Should be able to mass craft 10/40 runewords at a time. <UX />
+                        Should be able to mass craft 10/40 runeforms at a time. <UX />
                       </li>
                       <li>
                         Leaderboard should be updated for June. <Game />
@@ -559,7 +559,7 @@ const Updates = () => {
                         Yield bonus should not be shown in Harvest All or any Harvest calculation. <UX />
                       </li>
                       <li>
-                        Stats for new runewords should be on /stats page. <UX />
+                        Stats for new runeforms should be on /stats page. <UX />
                       </li>
                       <li>
                         Crafting page should not prompt for unnecessary El approval. <Bug />

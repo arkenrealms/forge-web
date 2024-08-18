@@ -1,15 +1,15 @@
-import React from 'react'
-import LoreContainer from '~/components/LoreContainer'
-import { useTranslation } from 'react-i18next'
-import styled, { css } from 'styled-components'
-import { CardBody, Heading } from '~/ui'
-import NftList from '~/components/characters/NftList'
+import React from 'react';
+import LoreContainer from '~/components/LoreContainer';
+import { useTranslation } from 'react-i18next';
+import styled, { css } from 'styled-components';
+import { CardBody, Heading } from '~/ui';
+import NftList from '~/components/characters/NftList';
 
 const StyledHero = styled.div`
   border-bottom: 2px solid ${({ theme }) => theme.colors.textSubtle};
   margin-bottom: 24px;
   padding-bottom: 32px;
-`
+`;
 
 const CharacterContainer = styled.div`
   zoom: 0.5;
@@ -36,10 +36,10 @@ const CharacterContainer = styled.div`
   @media (min-width: 1980px) {
     grid-template-columns: repeat(7, 1fr);
   }
-`
+`;
 
 const Collectibles = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <>
@@ -52,7 +52,7 @@ const Collectibles = () => {
             Choose from seven classes of heroes. Each class has its own unique weapons and power.
             <br />
             <br />
-            In Arken: Runic Raids, develop your raiding strategy by equipping your character with Runewords that give
+            In Arken: Runic Raids, develop your raiding strategy by equipping your character with Runeforms that give
             unique raiding yield bonuses.
           </p>
           <div
@@ -66,7 +66,7 @@ const Collectibles = () => {
         </CardBody>
       </LoreContainer>
     </>
-  )
-}
+  );
+};
 
-export default Collectibles
+export default Collectibles;

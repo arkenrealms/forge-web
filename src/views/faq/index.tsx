@@ -413,10 +413,10 @@ const Rules = () => {
           </p>
           <p>‍</p> */}
           <p>
-            <strong>Q. What happens to character fees and runeword runes used for crafting?</strong>
+            <strong>Q. What happens to character fees and runeform runes used for crafting?</strong>
           </p>
           <p>
-            Character fees and runeword runes used in crafting go to the Rune Vault. From there, they are burned at
+            Character fees and runeform runes used in crafting go to the Rune Vault. From there, they are burned at
             strategic times, used to pay for moderators, CMs, and development, and at a later date a certain portion
             will go back to token holders providing governance or liquidity.
           </p>

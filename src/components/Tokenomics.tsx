@@ -469,7 +469,7 @@ const Rules = () => {
                 </li>
               </ul>
             </ul>
-            <h4> Runewords </h4>
+            <h4> Runeforms </h4>
             <ul>
               <strong>Utility</strong>
               <ul>

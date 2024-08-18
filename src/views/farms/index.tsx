@@ -1,8 +1,8 @@
-import React, { useEffect, useCallback, useState } from 'react'
-import { Route, useRouteMatch, useLocation, Router } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import BigNumber from 'bignumber.js'
-import history from '~/routerHistory'
+import React, { useEffect, useCallback, useState } from 'react';
+import { Route, useRouteMatch, useLocation, Router } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import BigNumber from 'bignumber.js';
+import history from '~/routerHistory';
 import {
   Image,
   Heading,
@@ -16,28 +16,28 @@ import {
   LinkExternal,
   ButtonMenu,
   ButtonMenuItem,
-} from '~/ui'
-import styled, { keyframes } from 'styled-components'
-import { BLOCKS_PER_YEAR, REWARD_PER_BLOCK, REWARD_BUSD_POOL_PID } from '~/config'
-import { useRewardPerBlock } from '~/hooks/useRewardPerBlock'
-import PageWindow from '~/components/PageWindow'
-import useWeb3 from '~/hooks/useWeb3'
-import { useMasterchef } from '~/hooks/useContract'
-import Page from '~/components/layout/Page'
-import { useBnbPrice, useFarms, useGetApiPrice, useRunePrice } from '~/state/hooks'
-import useRefresh from '~/hooks/useRefresh'
-import { fetchFarmUserDataAsync } from '~/state/actions'
-import { QuoteToken } from '~/config/constants/types'
-import { useTranslation } from 'react-i18next'
-import { orderBy } from 'lodash'
-import FarmCard, { FarmWithStakedValue } from '~/components/FarmCard/FarmCard'
-import SearchInput from '~/components/SearchInput'
-import { FarmHeader } from '~/components/FarmHeader'
-import Select, { OptionProps } from '~/components/Select/Select'
-import useInventory from '~/hooks/useInventory'
-import { useProfile } from '~/state/hooks'
-import { ClassNames } from 'rune-backend-sdk/build/data/items'
-import { ConnectNetwork } from '~/components/ConnectNetwork'
+} from '~/ui';
+import styled, { keyframes } from 'styled-components';
+import { BLOCKS_PER_YEAR, REWARD_PER_BLOCK, REWARD_BUSD_POOL_PID } from '~/config';
+import { useRewardPerBlock } from '~/hooks/useRewardPerBlock';
+import PageWindow from '~/components/PageWindow';
+import useWeb3 from '~/hooks/useWeb3';
+import { useMasterchef } from '~/hooks/useContract';
+import Page from '~/components/layout/Page';
+import { useBnbPrice, useFarms, useGetApiPrice, useRunePrice } from '~/state/hooks';
+import useRefresh from '~/hooks/useRefresh';
+import { fetchFarmUserDataAsync } from '~/state/actions';
+import { QuoteToken } from '~/config/constants/types';
+import { useTranslation } from 'react-i18next';
+import { orderBy } from 'lodash';
+import FarmCard, { FarmWithStakedValue } from '~/components/FarmCard/FarmCard';
+import SearchInput from '~/components/SearchInput';
+import { FarmHeader } from '~/components/FarmHeader';
+import Select, { OptionProps } from '~/components/Select/Select';
+import useInventory from '~/hooks/useInventory';
+import { useProfile } from '~/state/hooks';
+import { ClassNames } from 'rune-backend-sdk/build/data/items';
+import { ConnectNetwork } from '~/components/ConnectNetwork';
 
 // const ItemCard = styled(Card)`
 //   position: relative;
@@ -88,7 +88,7 @@ const FarmLayout = styled(BaseLayout)`
       grid-column: span 3;
     }
   }
-`
+`;
 
 const ControlContainer = styled.div`
   display: flex;
@@ -104,7 +104,7 @@ const ControlContainer = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
   }
-`
+`;
 
 const ToggleWrapper = styled.div`
   display: flex;
@@ -114,13 +114,13 @@ const ToggleWrapper = styled.div`
   ${Text} {
     margin-left: 8px;
   }
-`
+`;
 
 const LabelWrapper = styled.div`
   > ${Text} {
     font-size: 12px;
   }
-`
+`;
 
 const RainbowLight = keyframes`
 	0% {
@@ -132,7 +132,7 @@ const RainbowLight = keyframes`
 	100% {
 		background-position: 0% 50%;
 	}
-`
+`;
 
 const AdvancedButton = styled(Button)`
   margin-top: 12px;
@@ -156,7 +156,7 @@ const AdvancedButton = styled(Button)`
   // padding: 10px;
   // opacity: 0.3;
   // color: #000;
-`
+`;
 
 const FilterContainer = styled.div`
   display: flex;
@@ -168,7 +168,7 @@ const FilterContainer = styled.div`
     width: auto;
     padding: 0;
   }
-`
+`;
 
 const ViewControls = styled.div`
   flex-wrap: wrap;
@@ -189,44 +189,44 @@ const ViewControls = styled.div`
       padding: 0;
     }
   }
-`
+`;
 
-const Header = styled.div``
+const Header = styled.div``;
 
 export interface FarmsProps {
-  tokenMode?: boolean
+  tokenMode?: boolean;
 }
 
 const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
-  const { path } = useRouteMatch()
-  const { pathname } = useLocation()
-  const { t } = useTranslation()
-  const farmsLP = useFarms()
-  const runePrice = useRunePrice('RUNE')
-  const elPrice = useRunePrice('EL')
-  const eldPrice = useRunePrice('ELD')
-  const tirPrice = useRunePrice('TIR')
-  const nefPrice = useRunePrice('NEF')
-  const bnbPrice = useBnbPrice() //useGetApiPrice('WBNB')
+  const { path } = useRouteMatch();
+  const { pathname } = useLocation();
+  const { t } = useTranslation();
+  const farmsLP = useFarms();
+  const runePrice = useRunePrice('RUNE');
+  const elPrice = useRunePrice('EL');
+  const eldPrice = useRunePrice('ELD');
+  const tirPrice = useRunePrice('TIR');
+  const nefPrice = useRunePrice('NEF');
+  const bnbPrice = useBnbPrice(); //useGetApiPrice('WBNB')
 
-  const { profile } = useProfile()
-  const { meta: buffs } = useInventory()
-  const [query, setQuery] = useState('')
-  const { address: account } = useWeb3()
-  const [sortOption, setSortOption] = useState('multiplier')
-  const { contract: masterChefContract, setChefKey, chefKey } = useMasterchef()
+  const { profile } = useProfile();
+  const { meta: buffs } = useInventory();
+  const [query, setQuery] = useState('');
+  const { address: account } = useWeb3();
+  const [sortOption, setSortOption] = useState('multiplier');
+  const { contract: masterChefContract, setChefKey, chefKey } = useMasterchef();
 
-  const dispatch = useDispatch()
-  const { fastRefresh } = useRefresh()
+  const dispatch = useDispatch();
+  const { fastRefresh } = useRefresh();
   useEffect(() => {
     if (account) {
-      dispatch(fetchFarmUserDataAsync(account, chefKey))
+      dispatch(fetchFarmUserDataAsync(account, chefKey));
     }
-  }, [account, dispatch, chefKey, fastRefresh])
+  }, [account, dispatch, chefKey, fastRefresh]);
 
-  const [stackedOnly, setStackedOnly] = useState(false)
+  const [stackedOnly, setStackedOnly] = useState(false);
 
-  const { rewardPerBlock } = useRewardPerBlock()
+  const { rewardPerBlock } = useRewardPerBlock();
   const activeFarms = farmsLP
     .filter((f) => f.chefKey === chefKey)
     .filter(
@@ -271,7 +271,7 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
     //       farm.userData &&
     //       new BigNumber(farm.userData.stakedBalance).isGreaterThan(0)),
     // )
-    .filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier !== '0X')
+    .filter((farm) => !!farm.isTokenOnly === !!tokenMode && farm.multiplier !== '0X');
   // const inactiveFarms = farmsLP
   //   .filter((f) => f.chefKey === chefKey)
   //   // .filter(
@@ -285,22 +285,22 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
 
   const stackedOnlyFarms = activeFarms.filter(
     (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0)
-  )
+  );
 
   const sortFarms = (farms: FarmWithStakedValue[]): FarmWithStakedValue[] => {
     switch (sortOption) {
       case 'apr':
-        return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.apy.toNumber()), 'desc')
+        return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.apy.toNumber()), 'desc');
       case 'multiplier':
-        return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.multiplier.slice(0, -1)), 'desc')
+        return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.multiplier.slice(0, -1)), 'desc');
       case 'earned':
-        return orderBy(farms, (farm: FarmWithStakedValue) => (farm.userData ? farm.userData.earnings : 0), 'desc')
+        return orderBy(farms, (farm: FarmWithStakedValue) => (farm.userData ? farm.userData.earnings : 0), 'desc');
       case 'liquidity':
-        return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.liquidity), 'desc')
+        return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.liquidity), 'desc');
       default:
-        return farms
+        return farms;
     }
-  }
+  };
 
   // /!\ This function will be removed soon
   // This function compute the APY for each farm and will be replaced when we have a reliable API
@@ -309,15 +309,15 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
     (farmsToDisplay): FarmWithStakedValue[] => {
       const tokenPriceVsBUSD = new BigNumber(
         farmsLP.find((farm) => farm.pid === REWARD_BUSD_POOL_PID)?.tokenPriceVsQuote || 0
-      )
+      );
       //console.log(tokenPriceVsBUSD.toNumber(), bnbPrice.toNumber())
       let farmsToDisplayWithAPY: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
         //console.log(farm.lpTotalInQuoteToken)
         if (!farm.tokenAmount || !farm.lpTotalInQuoteToken) {
-          return farm
+          return farm;
         }
-        const tokenRewardPerBlock = rewardPerBlock.times(farm.poolWeight)
-        const tokenRewardPerYear = tokenRewardPerBlock.times(BLOCKS_PER_YEAR)
+        const tokenRewardPerBlock = rewardPerBlock.times(farm.poolWeight);
+        const tokenRewardPerYear = tokenRewardPerBlock.times(BLOCKS_PER_YEAR);
         // if (farm.lpSymbol === 'ITH-BUSD LP') {
         //   console.log(tokenPriceVsBUSD.toNumber())
         //   console.log(
@@ -330,76 +330,76 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
         // }
         // console.log(getBalanceNumber(tokenPriceVsBUSD), farmsLP.find((farm2) => farm2.pid === REWARD_BUSD_POOL_PID))
         // runePriceInQuote * tokenRewardPerYear / lpTotalInQuoteToken
-        let apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken)
+        let apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken);
         // console.log(tokenPriceVsBUSD, tokenRewardPerYear, farm.lpTotalInQuoteToken)
         if (farm.quoteTokenSymbol === QuoteToken.BNB) {
-          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(bnbPrice)
+          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(bnbPrice);
         } else if (farm.quoteTokenSymbol === QuoteToken.RUNE) {
-          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(runePrice)
+          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(runePrice);
         } else if (farm.quoteTokenSymbol === QuoteToken.EL) {
-          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(elPrice)
+          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(elPrice);
         } else if (farm.quoteTokenSymbol === QuoteToken.ELD) {
-          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(eldPrice)
+          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(eldPrice);
         } else if (farm.quoteTokenSymbol === QuoteToken.TIR) {
-          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(tirPrice)
+          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(tirPrice);
         } else if (farm.quoteTokenSymbol === QuoteToken.NEF) {
-          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(nefPrice)
+          apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken).div(nefPrice);
         }
 
-        let liquidity = farm.lpTotalInQuoteToken
+        let liquidity = farm.lpTotalInQuoteToken;
 
         if (!farm.lpTotalInQuoteToken) {
-          liquidity = null
+          liquidity = null;
         }
         if (farm.quoteTokenSymbol === QuoteToken.BNB) {
-          liquidity = bnbPrice.times(farm.lpTotalInQuoteToken)
+          liquidity = bnbPrice.times(farm.lpTotalInQuoteToken);
         }
         if (farm.quoteTokenSymbol === QuoteToken.RUNE) {
-          liquidity = runePrice.times(farm.lpTotalInQuoteToken)
+          liquidity = runePrice.times(farm.lpTotalInQuoteToken);
         }
         if (farm.quoteTokenSymbol === QuoteToken.EL) {
-          liquidity = elPrice.times(farm.lpTotalInQuoteToken)
+          liquidity = elPrice.times(farm.lpTotalInQuoteToken);
         }
         if (farm.quoteTokenSymbol === QuoteToken.TIR) {
-          liquidity = tirPrice.times(farm.lpTotalInQuoteToken)
+          liquidity = tirPrice.times(farm.lpTotalInQuoteToken);
         }
         if (farm.quoteTokenSymbol === QuoteToken.NEF) {
-          liquidity = nefPrice.times(farm.lpTotalInQuoteToken)
+          liquidity = nefPrice.times(farm.lpTotalInQuoteToken);
         }
 
-        return { ...farm, apy, liquidity }
-      })
+        return { ...farm, apy, liquidity };
+      });
 
       if (query) {
-        const lowercaseQuery = query.toLowerCase()
+        const lowercaseQuery = query.toLowerCase();
         farmsToDisplayWithAPY = farmsToDisplayWithAPY.filter((farm: FarmWithStakedValue) => {
           if (farm.lpSymbol.toLowerCase().includes(lowercaseQuery)) {
-            return true
+            return true;
           }
 
-          return false
-        })
+          return false;
+        });
       }
-      return farmsToDisplayWithAPY
+      return farmsToDisplayWithAPY;
     },
     [bnbPrice, farmsLP, query, rewardPerBlock, elPrice, eldPrice, tirPrice, nefPrice, runePrice]
-  )
+  );
 
   const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value)
-  }
+    setQuery(event.target.value);
+  };
 
-  const isActive = !pathname.includes('history')
-  let farmsStaked = []
+  const isActive = !pathname.includes('history');
+  let farmsStaked = [];
   if (isActive) {
-    farmsStaked = stackedOnly ? farmsList(stackedOnlyFarms) : farmsList(activeFarms)
+    farmsStaked = stackedOnly ? farmsList(stackedOnlyFarms) : farmsList(activeFarms);
   } else {
-    farmsStaked = [] //farmsList(inactiveFarms)
+    farmsStaked = []; //farmsList(inactiveFarms)
   }
 
-  farmsStaked = sortFarms(farmsStaked)
+  farmsStaked = sortFarms(farmsStaked);
 
-  const renderContent = (): JSX.Element => {
+  const renderContent = (): any => {
     return (
       <div>
         <FarmLayout>
@@ -410,12 +410,12 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
           {/* </Route> */}
         </FarmLayout>
       </div>
-    )
-  }
+    );
+  };
 
   const handleSortOptionChange = (option: OptionProps): void => {
-    setSortOption(option.value)
-  }
+    setSortOption(option.value);
+  };
 
   // console.log(profile?.nft, profile?.nft.characterId, buffs?.classRequired)
 
@@ -439,7 +439,7 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
             <p>You won&apos;t be able to harvest, withdraw or deposit until you change class, or unequip the item.</p>
           </PageWindow>
         </Page>
-      )
+      );
     }
   }
 
@@ -479,7 +479,7 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
                       value: 'multiplier',
                     },
                     {
-                      label: 'Earned',
+                      label: 'Rewarded',
                       value: 'earned',
                     },
                     {
@@ -500,7 +500,7 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
         </PageWindow>
       </Page>
     </div>
-  )
-}
+  );
+};
 
-export default Farms
+export default Farms;

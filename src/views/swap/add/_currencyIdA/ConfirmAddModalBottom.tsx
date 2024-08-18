@@ -1,10 +1,11 @@
-import { Currency, CurrencyAmount, Fraction, Percent } from '@arcanefinance/sdk'
-import React from 'react'
-import { Button, Text } from '~/ui'
-import { TranslateString } from '~/utils/translateTextHelpers'
-import { RowBetween, RowFixed } from '~/components/Row'
-import CurrencyLogo from '~/components/CurrencyLogo'
-import { Field } from '../../../../state/mint/actions'
+import { Currency, CurrencyAmount, Fraction, Percent } from '@arcanefinance/sdk';
+import React from 'react';
+import { Button, Text } from '~/ui';
+import { TranslateString } from '~/utils/translateTextHelpers';
+import { RowBetween, RowFixed } from '~/components/Row';
+import symbolMap from '~/utils/symbolMap';
+import CurrencyLogo from '~/components/CurrencyLogo';
+import { Field } from '../../../../state/mint/actions';
 
 export function ConfirmAddModalBottom({
   noLiquidity,
@@ -14,24 +15,24 @@ export function ConfirmAddModalBottom({
   poolTokenPercentage,
   onAdd,
 }: {
-  noLiquidity?: boolean
-  price?: Fraction
-  currencies: { [field in Field]?: Currency }
-  parsedAmounts: { [field in Field]?: CurrencyAmount }
-  poolTokenPercentage?: Percent
-  onAdd: () => void
+  noLiquidity?: boolean;
+  price?: Fraction;
+  currencies: { [field in Field]?: Currency };
+  parsedAmounts: { [field in Field]?: CurrencyAmount };
+  poolTokenPercentage?: Percent;
+  onAdd: () => void;
 }) {
   return (
     <>
       <RowBetween>
-        <Text>{currencies[Field.CURRENCY_A]?.symbol} Deposited</Text>
+        <Text>{symbolMap(currencies[Field.CURRENCY_A]?.symbol)} Deposited</Text>
         <RowFixed>
           <CurrencyLogo currency={currencies[Field.CURRENCY_A]} style={{ marginRight: '8px' }} />
           <Text>{parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)}</Text>
         </RowFixed>
       </RowBetween>
       <RowBetween>
-        <Text>{currencies[Field.CURRENCY_B]?.symbol} Deposited</Text>
+        <Text>{symbolMap(currencies[Field.CURRENCY_B]?.symbol)} Deposited</Text>
         <RowFixed>
           <CurrencyLogo currency={currencies[Field.CURRENCY_B]} style={{ marginRight: '8px' }} />
           <Text>{parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)}</Text>
@@ -40,16 +41,16 @@ export function ConfirmAddModalBottom({
       <RowBetween>
         <Text>Rates</Text>
         <Text>
-          {`1 ${currencies[Field.CURRENCY_A]?.symbol} = ${price?.toSignificant(4)} ${
+          {`1 ${symbolMap(currencies[Field.CURRENCY_A]?.symbol)} = ${price?.toSignificant(4)} ${symbolMap(
             currencies[Field.CURRENCY_B]?.symbol
-          }`}
+          )}`}
         </Text>
       </RowBetween>
       <RowBetween style={{ justifyContent: 'flex-end' }}>
         <Text>
-          {`1 ${currencies[Field.CURRENCY_B]?.symbol} = ${price?.invert().toSignificant(4)} ${
+          {`1 ${symbolMap(currencies[Field.CURRENCY_B]?.symbol)} = ${price?.invert().toSignificant(4)} ${symbolMap(
             currencies[Field.CURRENCY_A]?.symbol
-          }`}
+          )}`}
         </Text>
       </RowBetween>
       <RowBetween>
@@ -60,7 +61,7 @@ export function ConfirmAddModalBottom({
         {noLiquidity ? TranslateString(250, 'Create Pool & Supply') : 'Confirm Supply'}
       </Button>
     </>
-  )
+  );
 }
 
-export default ConfirmAddModalBottom
+export default ConfirmAddModalBottom;

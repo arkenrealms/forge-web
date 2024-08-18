@@ -16,7 +16,7 @@ import { getBalanceNumber } from '~/utils/formatBalance';
 import getItems, { emptyItem } from '~/utils/getItems';
 import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'; // 'src/utils/decodeItem' //
 import { orderBy } from 'lodash';
-import useSettings from '~/hooks/useSettings2';
+import useSettings from '~/hooks/useSettings';
 import useGetWalletItems from '~/hooks/useGetWalletItems';
 import {
   getIndexFromMaxtrixPosition,
@@ -541,26 +541,26 @@ const InventoryInner = ({
 
   const walletRefresh2 = useRef(walletRefresh);
 
-  useEffect(() => {
-    console.log('Refreshing from Inventory component');
-    walletRefresh2.current();
-  }, [walletRefresh2]);
+  // useEffect(() => {
+  //   console.log('Refreshing from Inventory component');
+  //   walletRefresh2.current();
+  // }, [walletRefresh2]);
 
   const defaultItemSelectedIndex =
     defaultItemSelected && itemsPaginated && itemsPaginated[page]
       ? itemsPaginated[page].items.indexOf(itemsPaginated[page].items.find((i) => i.id === defaultItemSelected.id))
       : 0;
 
-  useLayoutEffect(() => {
-    if (account) {
-      if (itemsPaginated?.[page]?.items?.length) return; // We're already somewhere decent
+  // useLayoutEffect(() => {
+  //   if (account) {
+  //     if (itemsPaginated?.[page]?.items?.length) return; // We're already somewhere decent
 
-      console.log('Resetting inventory page');
-      _setItemSelected('inventory' + defaultItemSelectedIndex);
-      _setPage([0, 0]);
-      setShowAll(showFull);
-    }
-  }, [account, defaultItemSelectedIndex, itemsPaginated, page, showFull, _setPage, _setItemSelected]);
+  //     console.log('Resetting inventory page');
+  //     _setItemSelected('inventory' + defaultItemSelectedIndex);
+  //     _setPage([0, 0]);
+  //     setShowAll(showFull);
+  //   }
+  // }, [account, defaultItemSelectedIndex, itemsPaginated, page, showFull, _setPage, _setItemSelected]);
 
   if (!itemsPaginated || !itemsPaginated[page]) {
     return <></>;
@@ -699,6 +699,7 @@ const Inventory = ({
     playSelect,
     playAction,
   };
+
   return (
     <SoundContext.Provider value={contextState}>
       <InventoryInner

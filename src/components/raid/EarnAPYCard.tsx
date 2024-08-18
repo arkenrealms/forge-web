@@ -11,6 +11,7 @@ import { getBalanceNumber } from '~/utils/formatBalance';
 import { useRewardPerBlock } from '~/hooks/useRewardPerBlock';
 import { useFarmStatus } from '~/hooks/useFarmStatus';
 import { useMasterchef } from '~/hooks/useContract';
+import symbolMap from '~/utils/symbolMap';
 import { PurchaseModal } from '~/components/PurchaseModal';
 import { CURRENT_FARM_SYMBOL, NEXT_FARM_SYMBOL, CURRENT_FARM_PAUSED } from '~/config';
 import { QuoteToken } from '~/config/constants/types';
@@ -190,7 +191,7 @@ const EarnAPYCard = () => {
                   {/* {prevFarmSymbol} RUNIC RAIDS FINISHED.
                 <br />
                 <br /> */}
-                  {currentFarmSymbol} RUNIC RAIDS STARTS SOON!
+                  {symbolMap(currentFarmSymbol)} RUNIC RAIDS STARTS SOON!
                   <br />
                   <br />
                   Start block: {startBlock}
@@ -212,10 +213,10 @@ const EarnAPYCard = () => {
             {currentFarmPaused ? (
               <>
                 <Heading color="contrast" size="md">
-                  {currentFarmSymbol} RUNIC RAIDS FINISHED.
+                  {symbolMap(currentFarmSymbol)} RUNIC RAIDS FINISHED.
                   <br />
                   <br />
-                  {nextFarmSymbol} RUNIC RAIDS STARTS SOON.
+                  {symbolMap(nextFarmSymbol)} RUNIC RAIDS STARTS SOON.
                   <br />
                   <br />
                   <LinkExternal href="https://t.me/ArkenRealms">Open Announcements</LinkExternal>
@@ -232,7 +233,7 @@ const EarnAPYCard = () => {
             {!currentFarmPaused && !currentFarmPending ? (
               <>
                 <Heading color="text" size="md" style={{ textAlign: 'center' }}>
-                  {currentFarmSymbol} RUNIC RAIDS IS ACTIVE
+                  {symbolMap(currentFarmSymbol)} RUNIC RAIDS IS ACTIVE
                   <br />
                   <br />
                   <span style={{ fontSize: boost + 'rem' }}>{boost > 1 ? `${boost}X Boost` : 'No Boost'}</span>
@@ -240,7 +241,7 @@ const EarnAPYCard = () => {
                 <br />
                 <br />
                 <Heading color="contrast" size="lg">
-                  Earn up to
+                  Rewards up to
                 </Heading>
                 <CardMidContent color="#e9a053">
                   {getHighestAPY() && maxAPY.current !== 0 ? (

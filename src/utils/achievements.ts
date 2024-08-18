@@ -1,6 +1,7 @@
-import { Campaign } from '~/config/constants/types';
-import { campaignMap } from '~/config/constants/campaigns';
-import { Achievement, TranslatableText } from '~/state/types';
+import { Campaign } from '~/config/constants/types'
+import { campaignMap } from '~/config/constants/campaigns'
+import { Achievement, TranslatableText } from '~/state/types'
+import { makeBatchRequest } from '~/utils/web3'
 
 export const getAchievementTitle = (campaign: Campaign): TranslatableText => {
   switch (campaign.type) {
@@ -11,11 +12,11 @@ export const getAchievementTitle = (campaign: Campaign): TranslatableText => {
         data: {
           name: campaign.title as string,
         },
-      };
+      }
     default:
-      return campaign.title;
+      return campaign.title
   }
-};
+}
 
 export const getAchievementDescription = (campaign: Campaign): TranslatableText => {
   switch (campaign.type) {
@@ -26,11 +27,11 @@ export const getAchievementDescription = (campaign: Campaign): TranslatableText 
         data: {
           name: campaign.title as string,
         },
-      };
+      }
     default:
-      return campaign.description;
+      return campaign.description
   }
-};
+}
 
 /**
  * Checks if a wallet is eligble to claim points from valid IFO's

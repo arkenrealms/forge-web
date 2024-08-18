@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../Button3/Button';
+import Button from '../Button/Button';
 import Text from '../Text/Text';
 import LinkExternal from '../Link/LinkExternal';
 import Flex from '../Box/Flex';

@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react'
-import { useIsMounted } from './useIsMounted'
+import React, { useEffect } from 'react';
+import { useIsMounted } from './useIsMounted';
 
 export const useUpdateEffect: typeof useEffect = function useUpdateEffect(effect, dependencies) {
-  const isMounted = useIsMounted()
-  const isInitialMount = React.useRef(true)
+  const isMounted = useIsMounted();
+  const isInitialMount = React.useRef(true);
 
   React.useEffect(() => {
-    let effectCleanupFunc = function noop() {} // eslint-disable-line @typescript-eslint/no-empty-function
+    let effectCleanupFunc = function noop() {}; // eslint-disable-line @typescript-eslint/no-empty-function
 
     if (isInitialMount.current) {
-      isInitialMount.current = false
+      isInitialMount.current = false;
     } else {
-      effectCleanupFunc = effect() || effectCleanupFunc
+      effectCleanupFunc = effect() || effectCleanupFunc;
     }
     return () => {
-      effectCleanupFunc()
+      effectCleanupFunc();
       if (!isMounted.current) {
-        isInitialMount.current = true
+        isInitialMount.current = true;
       }
-    }
-  }, dependencies) // eslint-disable-line react-hooks/exhaustive-deps
-}
+    };
+  }, dependencies);
+};

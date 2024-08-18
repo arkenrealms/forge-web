@@ -504,7 +504,7 @@ const Team = ({ match }) => {
             ),
             status: 'done',
             notes: [
-              <>You'll receive one Rune character (choose your class).</>,
+              <>You'll receive one Arken character (choose your class).</>,
               <>Entry Requirement: None</>,
               <>Winner: Maiev</>,
               <>
@@ -641,7 +641,7 @@ const Team = ({ match }) => {
             ),
             status: 'pending',
             notes: [
-              <>You'll receive one Rune character (choose your class).</>,
+              <>You'll receive one Arken character (choose your class).</>,
               <>Entry Requirement: None</>,
               <>Winner: TBD</>,
             ],
@@ -701,7 +701,7 @@ const Team = ({ match }) => {
         ) : (
           <Card>
             <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-              Join Rune <PerformanceTag>Currently Only Mods</PerformanceTag>
+              Join Arken <PerformanceTag>Currently Only Mods</PerformanceTag>
             </Heading>
             <hr />
             <CardBody>
@@ -737,7 +737,7 @@ const Team = ({ match }) => {
                 Interested in helping anyway?
               </Heading>
               <div>
-                Rune was built from the ground up by the community. We believe in community. If you're somebody who
+                Arken was built from the ground up by the community. We believe in community. If you're somebody who
                 understands <RouterLink to="/about">our vision</RouterLink> and wants to be part of building the Rune
                 Metaverse, please reach out on{' '}
                 <a target="_blank" rel="noreferrer noopener" href="https://discord.gg/rune">
@@ -753,8 +753,8 @@ const Team = ({ match }) => {
               </div>
               <br />
               <ol>
-                <li>Working with the Rune Lorekeepers on Sanctuary storyline/act structure</li>
-                <li>Working with the Rune Blacksmiths on item descriptions and/or create from scratch</li>
+                <li>Working with the Arken Lorekeepers on Sanctuary storyline/act structure</li>
+                <li>Working with the Arken Blacksmiths on item descriptions and/or create from scratch</li>
                 <li>Come up with enemies/monster data to populate through the world (spreadsheet)</li>
                 <li>Come up with good skill combination ideas, or balancing suggestions</li>
                 <li>Come up with interesting boss designs (before we hire the professional artists)</li>

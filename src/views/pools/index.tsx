@@ -418,7 +418,7 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
 
   farmsStaked = sortFarms(farmsStaked);
 
-  const renderContent = (): JSX.Element => {
+  const renderContent = (): any => {
     return (
       <div>
         <FlexLayout>

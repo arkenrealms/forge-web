@@ -12,9 +12,9 @@ import jQ from './jquery';
 import something from './something';
 import loadDragdealer from './dragdealer';
 
+let $;
 const zzz = styled.div``;
 
-let $;
 const StatsComponent = lazy(() => import(/* webpackChunkName: "StatsComponent" */ '~/components/Stats'));
 
 const Lore = () => {
@@ -282,9 +282,9 @@ const Lore = () => {
           $(this).css('margin-top', posY + 'em');
           // @ts-ignore
           const loadPageURL = $(this).children('.load-page').html();
-          //   $(this).data( "load-page", loadPageURL );
+          //   jQuery(this).data( "load-page", loadPageURL );
           // @ts-ignore
-          // $(this).attr( "data-load-page", "/area/"+loadPageURL.replace(/\s+/g, '-').toLowerCase() );
+          // jQuery(this).attr( "data-load-page", "/area/"+loadPageURL.replace(/\s+/g, '-').toLowerCase() );
         });
 
         // @ts-ignore
@@ -497,7 +497,7 @@ const Lore = () => {
       }
 
       // @ts-ignore
-      setTimeout(() => $(document).ready(initializeMap), 100);
+      setTimeout(() => jQ(document).ready(initializeMap), 100);
     },
     [breakpoints]
   );
@@ -508,7 +508,7 @@ const Lore = () => {
     // @ts-ignore
     document.getElementById('slide-open').play();
     // @ts-ignore
-    const sectionTarget = $('#map-container .item');
+    const sectionTarget: any = $('#map-container .item');
 
     sectionTarget.addClass('is--show');
 

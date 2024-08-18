@@ -1,9 +1,9 @@
-import BigNumber from 'bignumber.js';
+import BigNumber from 'bignumber.js'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
   DECIMAL_PLACES: 80,
-});
+})
 
 const config = {
   port: process.env.REACT_APP_PORT || 3004,
@@ -42,12 +42,11 @@ export const device = {
   desktop: `(min-width: ${size.desktop})`,
   desktopL: `(min-width: ${size.desktop})`,
 };
-
-export const OLD_VERSION = 6;
-export const PREV_FARM_SYMBOL = 'GUL';
-export const CURRENT_FARM_SYMBOL = 'OHM';
-export const CURRENT_FARM_PAUSED = false;
-export const NEXT_FARM_SYMBOL = 'SUR';
+export const OLD_VERSION = 6
+export const PREV_FARM_SYMBOL = 'GUL'
+export const CURRENT_FARM_SYMBOL = 'OHM'
+export const CURRENT_FARM_PAUSED = false
+export const NEXT_FARM_SYMBOL = 'SUR'
 export const CHEF_MAP = [
   'EL',
   'TIR',
@@ -74,7 +73,7 @@ export const CHEF_MAP = [
   'VEX',
   'OHM',
   'LO',
-];
+]
 export const allRuneList = [
   'el',
   'eld',
@@ -109,7 +108,7 @@ export const allRuneList = [
   'jah',
   'cham',
   'zod',
-];
+]
 export const safeRuneList = [
   'el',
   'eld',
@@ -136,13 +135,13 @@ export const safeRuneList = [
   'gul',
   'lo',
   'zod',
-];
+]
 
-export const REWARD_PER_BLOCK = 0; // new BigNumber(0.0025); // CHANGE
-export const BLOCKS_PER_YEAR = 0; // new BigNumber(10512000);
-export const BSC_BLOCK_TIME = 3;
-export const REWARD_BUSD_POOL_PID = 86; // CHANGE
-export const BASE_EXCHANGE_URL = 'https://arken.gg/swap';
-export const BASE_ADD_LIQUIDITY_URL = `${BASE_EXCHANGE_URL}/#/add`;
-export const BASE_LIQUIDITY_POOL_URL = `${BASE_EXCHANGE_URL}/#/pool`;
-export const CURRENT_GAME_BRANCH_ID = 1;
+export const REWARD_PER_BLOCK = new BigNumber(0.0025) // CHANGE
+export const BLOCKS_PER_YEAR = new BigNumber(10512000)
+export const BSC_BLOCK_TIME = 3
+export const REWARD_BUSD_POOL_PID = 86 // CHANGE
+export const BASE_EXCHANGE_URL = 'https://arken.gg/swap'
+export const BASE_ADD_LIQUIDITY_URL = `${BASE_EXCHANGE_URL}/#/add`
+export const BASE_LIQUIDITY_POOL_URL = `${BASE_EXCHANGE_URL}/#/pool`
+export const CURRENT_GAME_BRANCH_ID = 1

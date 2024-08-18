@@ -1,17 +1,18 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import styled, { css } from 'styled-components'
-import { RaidInfo } from '~/components/RaidInfo'
-import { useMasterchef } from '~/hooks/useContract'
-import { useFarmStatus } from '~/hooks/useFarmStatus'
-import { Card, CardBody, Heading } from '~/ui'
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import styled, { css } from 'styled-components';
+import { RaidInfo } from '~/components/RaidInfo';
+import { useMasterchef } from '~/hooks/useContract';
+import { useFarmStatus } from '~/hooks/useFarmStatus';
+import symbolMap from '~/utils/symbolMap';
+import { Card, CardBody, Heading } from '~/ui';
 
-const Container = styled.div``
+const Container = styled.div``;
 
 export const FarmHeader: React.FC<{ title: string }> = ({ title }) => {
-  const { contract: masterChefContract, setChefKey, chefKey } = useMasterchef()
-  const { t } = useTranslation()
-  const { currentFarmSymbol, nextFarmSymbol, currentFarmPending, currentFarmPaused } = useFarmStatus()
+  const { contract: masterChefContract, setChefKey, chefKey } = useMasterchef();
+  const { t } = useTranslation();
+  const { currentFarmSymbol, nextFarmSymbol, currentFarmPending, currentFarmPaused } = useFarmStatus();
 
   return (
     <Container>
@@ -38,7 +39,7 @@ export const FarmHeader: React.FC<{ title: string }> = ({ title }) => {
               ? `Farm getting ready `
               : currentFarmPaused
               ? `Farm has paused or ended`
-              : `Currently farming ${currentFarmSymbol} runes. To battle!`}
+              : `Currently farming ${symbolMap(currentFarmSymbol)} runes. To battle!`}
           </p>
           <RaidInfo />
         </CardBody>
@@ -79,7 +80,7 @@ export const FarmHeader: React.FC<{ title: string }> = ({ title }) => {
         </>
       ) : null} */}
     </Container>
-  )
-}
+  );
+};
 
-export default FarmHeader
+export default FarmHeader;

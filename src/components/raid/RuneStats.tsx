@@ -1,18 +1,18 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
-import { safeRuneList } from '~/config'
-import useCache from '~/hooks/useCache'
-import useWeb3 from '~/hooks/useWeb3'
-import { Card, CardBody, Flex, Heading, Text } from '~/ui'
-import { getArcaneCharacterContract } from '~/utils/contractHelpers'
-import CardValue from './CardValue'
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import { safeRuneList } from '~/config';
+import useCache from '~/hooks/useCache';
+import useWeb3 from '~/hooks/useWeb3';
+import { Card, CardBody, Flex, Heading, Text } from '~/ui';
+import { getArcaneCharacterContract } from '~/utils/contractHelpers';
+import CardValue from './CardValue';
 
 const StyledRuneStats = styled(Card)`
   margin-left: auto;
   margin-right: auto;
-`
+`;
 
 const Row = styled.div`
   align-items: center;
@@ -20,40 +20,40 @@ const Row = styled.div`
   font-size: 14px;
   justify-content: space-between;
   margin-bottom: 8px;
-`
+`;
 
 const Row2 = styled(Row)`
   @media (max-width: 768px) {
     flex-direction: column;
   }
-`
+`;
 
-const arcaneCharactersContract = getArcaneCharacterContract()
+const arcaneCharactersContract = getArcaneCharacterContract();
 
 const RuneStats = () => {
-  const { t } = useTranslation()
-  const { address: account } = useWeb3()
-  const cache = useCache()
+  const { t } = useTranslation();
+  const { address: account } = useWeb3();
+  const cache = useCache();
 
-  const runeSupply = cache.runes.rxs.circulatingSupply
-  const runePrice = cache.runes.rxs.price
-  const runeBurned = cache.runes.rxs.totalBurned
-  const runeMarketCap = cache.runes.rxs.circulatingSupply * cache.runes.rxs.price
-  const runes = safeRuneList
+  const runeSupply = cache.runes.rxs.circulatingSupply;
+  const runePrice = cache.runes.rxs.price;
+  const runeBurned = cache.runes.rxs.totalBurned;
+  const runeMarketCap = cache.runes.rxs.circulatingSupply * cache.runes.rxs.price;
+  const runes = safeRuneList;
   const runesMarketCap = runes
     .slice(0, runes.length - 2)
     .map((rune) => (cache.runes[rune] ? cache.runes[rune].circulatingSupply * cache.runes[rune].price : 0))
-    .reduce((a, b) => a + b)
+    .reduce((a, b) => a + b);
 
-  const characterCount = cache.stats.totalCharacters
-  const itemCount = cache.stats.totalItems
+  const characterCount = cache.stats.totalCharacters;
+  const itemCount = cache.stats.totalItems;
 
   return (
     <StyledRuneStats>
       <CardBody>
         <Flex flexDirection="column" alignItems="center" justifyContent="center">
           <Heading size="xl" mb="24px" color="white">
-            {t('Rune Stats')}
+            {t('Stats')}
           </Heading>
         </Flex>
         <Row>
@@ -64,7 +64,7 @@ const RuneStats = () => {
           <Text>{t('Total Items')}</Text>
           {itemCount && <CardValue fontSize="16px" value={itemCount} decimals={0} />}
         </Row>
-        <Row>
+        {/* <Row>
           <Text>{t('Total RXS Supply')}</Text>
           {runeSupply && <CardValue fontSize="16px" value={runeSupply} decimals={0} />}
         </Row>
@@ -81,13 +81,13 @@ const RuneStats = () => {
             <Text>{t('Market Cap ($RXS + runes)')}</Text>
             {runeSupply && <CardValue fontSize="16px" value={runeMarketCap + runesMarketCap} decimals={0} prefix="$" />}
           </Row>
-        ) : null}
+        ) : null} */}
         <Row></Row>
         <Row></Row>
         <Row></Row>
-        {['rxs', ...safeRuneList].map((rune) => {
-          if (!cache.runes[rune]) return null
-          const { price } = cache.runes[rune]
+        {/* {['rxs', ...safeRuneList].map((rune) => {
+          if (!cache.runes[rune]) return null;
+          const { price } = cache.runes[rune];
 
           return (
             <div key={rune}>
@@ -95,8 +95,8 @@ const RuneStats = () => {
                 <strong>{t(rune.toUpperCase())}</strong> {`$${price.toFixed(4)}`}
               </Text>
             </div>
-          )
-        })}
+          );
+        })} */}
         <Flex justifyContent="space-between">
           <NavLink exact activeClassName="active" to="/stats"></NavLink>
           <NavLink exact activeClassName="active" to="/stats">
@@ -106,7 +106,7 @@ const RuneStats = () => {
         </Flex>
       </CardBody>
     </StyledRuneStats>
-  )
-}
+  );
+};
 
-export default RuneStats
+export default RuneStats;

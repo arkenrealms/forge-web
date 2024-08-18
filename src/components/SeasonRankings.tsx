@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { Counter } from 'react95';
 import { Link as RouterLink } from 'react-router-dom';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
-import useSettings from '~/hooks/useSettings2';
+import useSettings from '~/hooks/useSettings';
 import Paragraph from '~/components/Paragraph';
 import Linker from '~/components/Linker';
 import { normalizeItem, decodeItem } from 'rune-backend-sdk/build/util/item-decoder';

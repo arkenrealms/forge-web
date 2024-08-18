@@ -1,18 +1,18 @@
-import { FC } from 'react'
-import { SvgProps } from '../Svg/types'
+import { FC } from 'react';
+import { SvgProps } from '../Svg/types';
 
 export enum ConnectorNames {
   Injected = 'injected',
   WalletConnect = 'walletconnect',
   BSC = 'bsc',
   // MEW = 'mew',
-  Flame = 'injected',
+  // Flame = 'injected',
 }
 
-export type Login = (connectorId: ConnectorNames) => void
+export type Login = (connectorId: ConnectorNames) => void;
 
 export interface Config {
-  title: string
-  icon: FC<SvgProps>
-  connectorId: ConnectorNames
+  title: string;
+  icon: FC<SvgProps>;
+  connectorId: ConnectorNames;
 }

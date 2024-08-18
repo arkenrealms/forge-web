@@ -4,8 +4,7 @@ import { Skeleton } from '~/ui';
 import useIntersectionObserver from '~/hooks/useIntersectionObserver';
 import useBrand from '~/hooks/useBrand';
 import Page from '~/components/layout/Page';
-import Dashboard from '~/components/Dashboard';
-import Layout from '~/components/Layout';
+import Swap from '~/components/Swap';
 
 const zzz = styled.div``;
 
@@ -116,13 +115,7 @@ const Home: React.FC<any> = ({ active, match }) => {
   // if (!loaded) return <></>
   // if (!active) return <></>
 
-  return (
-    <div style={{ padding: 25 }}>
-      <Layout>
-        <Dashboard />
-      </Layout>
-    </div>
-  );
+  return <div css={css`padding-top: 30px;`}><Swap showMenu /></div>;
 
   return (
     <div>

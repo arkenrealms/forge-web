@@ -164,7 +164,7 @@ const PublicProfile = ({ match }) => {
         </CardHeader>
         <CardBody>
           <Heading as="h4" size="md" mb="16px">
-            {t('Overall Rune Stats')}
+            {t('Overall Arken Stats')}
           </Heading>
           <StatRow>
             <StatBox icon={PrizeIcon} title={cache.overview[account]?.points || 0} subtitle={t('Points')} mb="24px" />

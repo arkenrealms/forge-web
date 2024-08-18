@@ -407,14 +407,14 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Release Runewords (NFTs)</strong> <Core />
+                <strong>Release Runeforms (NFTs)</strong> <Core />
               </>
             ),
             status: 'done',
             notes: [
               <>Craft weapons and armor for your character</>,
               <>
-                Link to <RouterLink to="/catalog">Runewords</RouterLink>
+                Link to <RouterLink to="/catalog">Runeforms</RouterLink>
               </>,
             ],
           },
@@ -1155,12 +1155,12 @@ const Roadmap = () => {
           {
             content: (
               <>
-                Runeword disenchanting <Core />
+                Runeform disenchanting <Core />
               </>
             ),
             status: 'working',
             notes: [
-              <>Runewords will be disenchantable for LEM runes using the Transmute Cube</>,
+              <>Runeforms will be disenchantable for LEM runes using the Transmute Cube</>,
               <>
                 Link to <RouterLink to="/runes">Runes</RouterLink>
               </>,
@@ -1169,12 +1169,12 @@ const Roadmap = () => {
           {
             content: (
               <>
-                Runeword upgrading <Core />
+                Runeform upgrading <Core />
               </>
             ),
             status: 'working',
             notes: [
-              <>Runewords will be upgradeable using LEM runes + worldstone shards using the Transmute Cube</>,
+              <>Runeforms will be upgradeable using LEM runes + worldstone shards using the Transmute Cube</>,
               <>
                 Link to <RouterLink to="/runes">Runes</RouterLink>
               </>,

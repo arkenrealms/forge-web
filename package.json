@@ -119,7 +119,14 @@
     "multicodec": "~3.2.1",
     "multihashes": "~4.0.3",
     "@popperjs/core": "~2.11.8",
-    "lodash.flatmap": "~4.5.0"
+    "lodash.flatmap": "~4.5.0",
+    "@ethersproject/address": "~5.7.0",
+    "@ethersproject/bignumber": "~5.7.0",
+    "@uniswap/token-lists": "~1.0.0-beta.34",
+    "@uniswap/v2-periphery": "~1.1.0-beta.0",
+    "ajv": "~8.17.1",
+    "@ethersproject/units": "~5.7.0",
+    "react-transition-group": "~4.4.5"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",

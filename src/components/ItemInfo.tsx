@@ -16,6 +16,7 @@ import Linker from '~/components/Linker';
 import Tooltip from '~/components/Tooltip/Tooltip';
 import useCache from '~/hooks/useCache';
 import useWeb3 from '~/hooks/useWeb3';
+import symbolMap, { runeformMap } from '~/utils/symbolMap';
 import { useRunePrice } from '~/state/hooks';
 import { Button, ButtonMenu, ButtonMenuItem, Text } from '~/ui';
 // import {
@@ -364,10 +365,10 @@ export const ItemInfo: React.FC<any> = ({
   let description = isRune ? item.description : branch?.description || item.description || 'To Be Announced';
 
   if (item.id === 1212) {
-    description = `Redeemed for a random runeword: \n${itemData.runeword
+    description = `Redeemed for a random runeform: \n${itemData.runeword
       .filter((i) => i.isCraftable && !i.isSecret && !(i as any).isUltraSecret)
       .map((i) => i.name)
-      .join(' ')} \n(the list will be updated with new runewords, and retired runewords will be removed)`;
+      .join(' ')} \n(the list will be updated with new runeforms, and retired runeforms will be removed)`;
   }
 
   return (
@@ -397,7 +398,7 @@ export const ItemInfo: React.FC<any> = ({
         </TransformWrapper>
       ) : null}
       <ItemTitle rarity={item.rarity}>
-        {item.name}
+        {symbolMap(item.name)}
         {quantity > 1 ? ` x${quantity}` : ''}
       </ItemTitle>
       <ItemType rarity={item.rarity?.name}>
@@ -405,7 +406,7 @@ export const ItemInfo: React.FC<any> = ({
       </ItemType>
       <ItemSubtype>{item.details?.['Subtype']}</ItemSubtype>
       {!hideRecipe && item.details?.['Rune Word'] ? (
-        <ItemRecipe>&apos;{item.details?.['Rune Word']}&apos;</ItemRecipe>
+        <ItemRecipe>&apos;{runeformMap(item.details?.['Rune Word'])}&apos;</ItemRecipe>
       ) : null}
       <br />
       {!hideAttributes ? (
@@ -669,7 +670,7 @@ export const ItemInfo: React.FC<any> = ({
             <DetailItem>
               <Tooltip
                 content={t(
-                  `When the charge reaches zero, the item won't be usable until recharged. There are no known way to charge runewords yet, until one is found.`
+                  `When the charge reaches zero, the item won't be usable until recharged. There are no known way to charge runeforms yet, until one is found.`
                 )}
                 style={{ textShadow: 'none' }}>
                 <span>Charge:</span>{' '}

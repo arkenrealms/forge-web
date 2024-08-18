@@ -168,7 +168,7 @@ async function getCraftableItemsFromRunes(runes) {
 
     if (!itemDef.recipe?.requirement) continue;
 
-    for (const rune of itemDef.recipe?.requirement) {
+    for (const rune of itemDef.recipe.requirement) {
       if (!RuneNames[rune.id]) continue;
 
       if (!runes[RuneNames[rune.id].toLowerCase()]) {

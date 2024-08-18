@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import {
   Heading,
   Text,
@@ -19,31 +19,31 @@ import {
   BlockIcon,
   ButtonMenu,
   ButtonMenuItem,
-} from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import Cookies from 'js-cookie'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import history from '~/routerHistory'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import Page from '~/components/layout/Page'
-import { getBalanceNumber } from '~/utils/formatBalance'
-import { useTotalSupply, useBurnedBalance } from '~/hooks/useTokenBalance'
-import { useProfile } from '~/state/hooks'
-import { useRunePrice } from '~/state/hooks'
-import PageWindow from '~/components/PageWindow'
-import CardHeader from '~/components/account/CardHeader'
-import useGetWalletNfts from '~/hooks/useGetWalletNfts'
-import { getNativeAddress, getRuneAddress } from '~/utils/addressHelpers'
-import { itemData } from 'rune-backend-sdk/build/data/items'
-import CardValueUnstyled from '~/components/raid/CardValueUnstyled'
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type'
-import { RecipeInfo } from '~/components/RecipeInfo'
-import { ProfileInfo } from '~/components/ProfileInfo'
-import { PurchaseModal } from '~/components/PurchaseModal'
-import NftList from '~/components/characters/NftList'
-import useStats from '~/hooks/useStats'
-import useCache from '~/hooks/useCache'
+} from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import Cookies from 'js-cookie';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import history from '~/routerHistory';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import Page from '~/components/layout/Page';
+import { getBalanceNumber } from '~/utils/formatBalance';
+import { useTotalSupply, useBurnedBalance } from '~/hooks/useTokenBalance';
+import { useProfile } from '~/state/hooks';
+import { useRunePrice } from '~/state/hooks';
+import PageWindow from '~/components/PageWindow';
+import CardHeader from '~/components/account/CardHeader';
+import useGetWalletNfts from '~/hooks/useGetWalletNfts';
+import { getNativeAddress, getRuneAddress } from '~/utils/addressHelpers';
+import { itemData } from 'rune-backend-sdk/build/data/items';
+import CardValueUnstyled from '~/components/raid/CardValueUnstyled';
+import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { RecipeInfo } from '~/components/RecipeInfo';
+import { ProfileInfo } from '~/components/ProfileInfo';
+import { PurchaseModal } from '~/components/PurchaseModal';
+import NftList from '~/components/characters/NftList';
+import useStats from '~/hooks/useStats';
+import useCache from '~/hooks/useCache';
 
 const GuideContainer = styled.div`
   display: grid;
@@ -53,7 +53,7 @@ const GuideContainer = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     grid-template-columns: repeat(2, 1fr);
   }
-`
+`;
 
 const Partners = styled.div`
   display: grid;
@@ -73,23 +73,23 @@ const Partners = styled.div`
       display: inline-block;
     }
   }
-`
+`;
 
 const Img = styled.img`
   filter: contrast(1.1) drop-shadow(2px 4px 6px black);
   ${({ theme }) => theme.mediaQueries.sm} {
     width: 100%;
   }
-`
+`;
 
 const LogoImg = styled.img`
   max-width: 200px;
-`
+`;
 
 const BoxHeading = styled(Heading)`
   text-align: center;
   margin-bottom: 16px;
-`
+`;
 
 const HeadingSilver = styled.div`
   background-image: -webkit-linear-gradient(
@@ -113,7 +113,7 @@ const HeadingSilver = styled.div`
   // filter: sepia(1) saturate(5) hue-rotate(-25deg);
   // sepia(1) saturate(5) hue-rotate(-25deg) grayscale(1) drop-shadow(0px 0px 10px #000) invert(1)
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
-`
+`;
 
 const HeadingPlain = styled.div`
   color: #cecece;
@@ -125,12 +125,12 @@ const HeadingPlain = styled.div`
   // filter: sepia(1) saturate(5) hue-rotate(-25deg);
   // sepia(1) saturate(5) hue-rotate(-25deg) grayscale(1) drop-shadow(0px 0px 10px #000) invert(1)
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
-`
+`;
 
 const ProfileContainer = styled.div`
   background: #000;
   background-size: 400px;
-`
+`;
 
 const BigCard = styled.div`
   color: ${({ theme }) => theme.colors.text};
@@ -155,7 +155,7 @@ const BigCard = styled.div`
   ${({ theme }) => theme.mediaQueries.sm} {
     border-width: 40px 40px;
   }
-`
+`;
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -178,9 +178,9 @@ const Cards = styled(BaseLayout)`
       grid-column: span 6;
     }
   }
-`
+`;
 
-const BulletPoints = styled.div``
+const BulletPoints = styled.div``;
 
 const BulletPoint = styled.div`
   line-height: 2rem;
@@ -196,7 +196,7 @@ const BulletPoint = styled.div`
     left: 0;
     content: '•';
   }
-`
+`;
 
 const HeadingWrapper = styled.div`
   position: relative;
@@ -215,7 +215,7 @@ const HeadingWrapper = styled.div`
     background-size: 100%;
     overflow: hidden;
   }
-`
+`;
 
 const Row = styled.div`
   align-items: center;
@@ -223,7 +223,7 @@ const Row = styled.div`
   font-size: 14px;
   justify-content: space-between;
   margin-bottom: 8px;
-`
+`;
 
 const ItemContainer = styled.div`
   display: grid;
@@ -233,7 +233,7 @@ const ItemContainer = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     grid-template-columns: repeat(3, 1fr);
   }
-`
+`;
 
 const CharacterContainer = styled.div`
   zoom: 0.5;
@@ -260,7 +260,7 @@ const CharacterContainer = styled.div`
   @media (min-width: 1980px) {
     grid-template-columns: repeat(7, 1fr);
   }
-`
+`;
 
 const VerticalCards = styled(BaseLayout)`
   align-items: stretch;
@@ -271,7 +271,7 @@ const VerticalCards = styled(BaseLayout)`
     grid-column: span 12;
     width: 100%;
   }
-`
+`;
 
 const ItemCard = styled(Card)`
   position: relative;
@@ -299,7 +299,7 @@ const ItemCard = styled(Card)`
 
   ${({ theme }) => theme.mediaQueries.lg} {
   }
-`
+`;
 
 const BuyLink = styled.a`
   color: #fff;
@@ -311,9 +311,9 @@ const BuyLink = styled.a`
   &:hover {
     color: #bb955e;
   }
-`
+`;
 
-const HelpText = styled.p``
+const HelpText = styled.p``;
 
 const HelpLinks = styled.div`
   text-align: left;
@@ -328,24 +328,24 @@ const HelpLinks = styled.div`
     color: #bb955e;
     line-height: 1.5rem;
   }
-`
+`;
 
 const PurchaseLink = styled.div`
   font-family: 'Alegreya Sans', sans-serif, monospace;
   text-transform: none;
   color: #ddd;
-`
+`;
 
 const Guide: React.FC = () => {
-  const { t } = useTranslation()
-  const cache = useCache()
-  const [tabIndex, setTabIndex] = useState(0)
+  const { t } = useTranslation();
+  const cache = useCache();
+  const [tabIndex, setTabIndex] = useState(0);
 
-  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />)
+  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
-  const { totalRunes, totalRunewords } = cache.stats
+  const { totalRunes, totalRuneforms } = cache.stats;
 
-  const referer = Cookies.get(`referer`)
+  const referer = Cookies.get(`referer`);
 
   return (
     <Page>
@@ -367,7 +367,7 @@ const Guide: React.FC = () => {
                 to={'/user/' + referer}
                 style={{ zoom: 1, padding: '6px 20px', textAlign: 'center' }}
                 onClick={() => {
-                  window.scrollTo(0, 0)
+                  window.scrollTo(0, 0);
                 }}>
                 View {referer}'s Profile
                 <OpenNewIcon color="white" ml="4px" />
@@ -456,7 +456,7 @@ const Guide: React.FC = () => {
                 4th-10th = 5%
                 <br />
                 <br />
-                Additionally, random rune and runeword items spawn around the map every ~10 seconds.
+                Additionally, random rune and runeform items spawn around the map every ~10 seconds.
                 <br />
                 <br />
                 The amount of the rewards changes each round, and is based on the # of legitimate players in the game.
@@ -465,8 +465,8 @@ const Guide: React.FC = () => {
               <br />
               <Button
                 onClick={() => {
-                  window.scrollTo(0, 0)
-                  setTabIndex(1)
+                  window.scrollTo(0, 0);
+                  setTabIndex(1);
                 }}>
                 Learn About Objects
               </Button>
@@ -896,8 +896,8 @@ const Guide: React.FC = () => {
               <br />
               <Button
                 onClick={() => {
-                  window.scrollTo(0, 0)
-                  setTabIndex(2)
+                  window.scrollTo(0, 0);
+                  setTabIndex(2);
                 }}>
                 Learn About Game Modes
               </Button>
@@ -944,7 +944,7 @@ const Guide: React.FC = () => {
         </Card> */}
       {/* </PageWindow> */}
     </Page>
-  )
-}
+  );
+};
 
-export default Guide
+export default Guide;

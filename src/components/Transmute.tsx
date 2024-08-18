@@ -506,7 +506,7 @@ const Container: React.FC<any> = ({ match }) => {
       <TipCard heading={t('Transmutation Cube')} id="transmutation-cube" npc="kevin" npcMargin={70}>
         <p>
           By placing runes in the Crafting Cube, a number of NFTs with added utility can be created. These NFTs are
-          called runewords. These runewords can be universal or character specific items. Equipping the item(s) rewards
+          called runeforms. These runeforms can be universal or character specific items. Equipping the item(s) rewards
           the wearer with extra utility. These include increasing farm yield, gaining access to hidden pools, access to
           worldstone shard and many more.
           <br />

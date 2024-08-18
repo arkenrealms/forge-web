@@ -15,7 +15,7 @@ const runeConfig: MenuEntry[] = [
     initialOpenState: true,
     items: [
       {
-        label: 'Buy & Swap Runes',
+        label: 'Swap',
         href: '/swap',
       },
       // {
@@ -200,7 +200,7 @@ const runeConfig: MenuEntry[] = [
       //   href: '/skills',
       // },
       {
-        label: 'Runewords',
+        label: 'Runeforms',
         href: '/runewords',
       },
       // {
@@ -230,31 +230,31 @@ const runeConfig: MenuEntry[] = [
         label: 'Pools',
         href: '/pools',
       },
-      // {
-      //   label: 'Characters',
-      //   href: '/characters',
-      // },
+      {
+        label: 'Characters',
+        href: '/characters',
+      },
     ],
   },
-  // {
-  //   label: 'Games',
-  //   icon: 'SunIcon',
-  //   initialOpenState: true,
-  //   items: [
-  //     {
-  //       label: 'Second Wind',
-  //       href: '/evolution',
-  //     },
-  //     {
-  //       label: 'Infinite Arena',
-  //       href: '/infinite',
-  //     },
-  //     {
-  //       label: 'Arcane Sanctuary',
-  //       href: '/arcane',
-  //     },
-  //   ],
-  // },
+  {
+    label: 'Games',
+    icon: 'SunIcon',
+    initialOpenState: true,
+    items: [
+      {
+        label: 'Second Wind',
+        href: '/evolution',
+      },
+      {
+        label: 'Infinite Arena',
+        href: '/infinite',
+      },
+      {
+        label: 'Arcane Sanctuary',
+        href: '/arcane',
+      },
+    ],
+  },
   {
     label: 'Craft',
     icon: 'CraftIcon',
@@ -301,207 +301,207 @@ const runeConfig: MenuEntry[] = [
       },
     ],
   },
-  // {
-  //   label: 'My Profile',
-  //   icon: 'TicketIcon',
-  //   href: '/profile',
-  // },
-  // {
-  //   label: 'Refer-a-friend',
-  //   icon: 'GroupsIcon',
-  //   href: '/refer',
-  // },
-  // {
-  //   label: 'Runes',
-  //   icon: 'NftIcon',
-  //   items: [
-  //     {
-  //       label: 'EL',
-  //       href: '/runes/el',
-  //     },
-  //     {
-  //       label: 'ELD',
-  //       href: '/runes/eld',
-  //     },
-  //     {
-  //       label: 'TIR',
-  //       href: '/runes/tir',
-  //     },
-  //     {
-  //       label: 'NEF',
-  //       href: '/runes/nef',
-  //     },
-  //     {
-  //       label: 'ITH',
-  //       href: '/runes/ith',
-  //     },
-  //     {
-  //       label: 'TAL',
-  //       href: '/runes/tal',
-  //     },
-  //     {
-  //       label: 'RAL',
-  //       href: '/runes/ral',
-  //     },
-  //     {
-  //       label: 'ORT',
-  //       href: '/runes/ort',
-  //     },
-  //     {
-  //       label: 'THUL',
-  //       href: '/runes/thul',
-  //     },
-  //     {
-  //       label: 'AMN',
-  //       href: '/runes/amn',
-  //     },
-  //     {
-  //       label: 'SOL',
-  //       href: '/runes/sol',
-  //     },
-  //     {
-  //       label: 'SHAEL',
-  //       href: '/runes/shael',
-  //     },
-  //     {
-  //       label: 'DOL',
-  //       href: '/runes/dol',
-  //     },
-  //     {
-  //       label: 'HEL',
-  //       href: '/runes/hel',
-  //     },
-  //     {
-  //       label: 'IO',
-  //       href: '/runes/io',
-  //     },
-  //     {
-  //       label: 'LUM',
-  //       href: '/runes/lum',
-  //     },
-  //     {
-  //       label: 'KO',
-  //       href: '/runes/ko',
-  //     },
-  //     {
-  //       label: 'FAL',
-  //       href: '/runes/fal',
-  //     },
-  //     {
-  //       label: 'LEM',
-  //       href: '/runes/lem',
-  //     },
-  //     {
-  //       label: 'PUL',
-  //       href: '/runes/pul',
-  //     },
-  //     {
-  //       label: 'UM',
-  //       href: '/runes/um',
-  //     },
-  //     {
-  //       label: 'MAL',
-  //       href: '/runes/mal',
-  //     },
-  //     {
-  //       label: 'IST',
-  //       href: '/runes/ist',
-  //     },
-  //     {
-  //       label: 'GUL',
-  //       href: '/runes/gul',
-  //     },
-  //     {
-  //       label: 'VEX',
-  //       href: '/runes/vex',
-  //     },
-  //     {
-  //       label: 'OHM',
-  //       href: '/runes/ohm',
-  //     },
-  //     {
-  //       label: 'LO',
-  //       href: '/runes/lo',
-  //     },
-  //     {
-  //       label: 'SUR',
-  //       href: '/runes/sur',
-  //     },
-  //     {
-  //       label: 'BER',
-  //       href: '/runes/ber',
-  //     },
-  //     {
-  //       label: 'JAH',
-  //       href: '/runes/jah',
-  //     },
-  //     {
-  //       label: 'CHAM',
-  //       href: '/runes/cham',
-  //     },
-  //     {
-  //       label: 'ZOD',
-  //       href: '/runes/zod',
-  //     },
-  //   ],
-  // },
-  // {
-  //   label: 'RuneWords',
-  //   icon: 'NftIcon',
-  //   items: [
-  //     {
-  //       label: 'Steel',
-  //       href: '/crafting/steel',
-  //     },
-  //     {
-  //       label: 'Fury',
-  //       href: '/crafting/fury',
-  //     },
-  //     {
-  //       label: 'Lorekeeper',
-  //       href: '/crafting/lorekeeper',
-  //     },
-  //   ],
-  // },
-  // {
-  //   label: 'Marketplace',
-  //   icon: 'NftIcon',
-  //   href: '/marketplace',
-  // },
-  // {
-  //   label: 'Links',
-  //   icon: 'InfoIcon',
-  //   items: [
-  //     {
-  //       label: 'Trade: Arken Swap',
-  //       href: '/swap',
-  //     },
-  //     {
-  //       label: 'Trade: PancakeSwap',
-  //       href: 'https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xa9776b590bfc2f956711b3419910a5ec1f63153e',
-  //     },
-  //     // {
-  //     //   label: 'CoinGecko (TODO)',
-  //     //   href: 'https://www.coingecko.com/en/coins/rune-farm',
-  //     // },
-  //     // {
-  //     //   label: 'CoinMarketCap (TODO)',
-  //     //   href: 'https://coinmarketcap.com/currencies/rune-farm/',
-  //     // },
-  //     {
-  //       label: 'Chart: AstroTools',
-  //       href: 'https://app.astrotools.io/pancake-pair-explorer/0xf9444c39bbdcc3673033609204f8da00d1ae3f52',
-  //     },
-  //     {
-  //       label: 'Chart: Swapp',
-  //       href: 'https://goswapp-bsc.web.app/0xa9776b590bfc2f956711b3419910a5ec1f63153e',
-  //     },
-  //     {
-  //       label: 'Chart: Poo',
-  //       href: 'https://poocoin.app/tokens/0xa9776b590bfc2f956711b3419910a5ec1f63153e',
-  //     },
-  //   ],
-  // },
+  {
+    label: 'My Profile',
+    icon: 'TicketIcon',
+    href: '/profile',
+  },
+  {
+    label: 'Refer-a-friend',
+    icon: 'GroupsIcon',
+    href: '/refer',
+  },
+  {
+    label: 'Runes',
+    icon: 'NftIcon',
+    items: [
+      {
+        label: 'EL',
+        href: '/runes/el',
+      },
+      {
+        label: 'ELD',
+        href: '/runes/eld',
+      },
+      {
+        label: 'TIR',
+        href: '/runes/tir',
+      },
+      {
+        label: 'NEF',
+        href: '/runes/nef',
+      },
+      {
+        label: 'ITH',
+        href: '/runes/ith',
+      },
+      {
+        label: 'TAL',
+        href: '/runes/tal',
+      },
+      {
+        label: 'RAL',
+        href: '/runes/ral',
+      },
+      {
+        label: 'ORT',
+        href: '/runes/ort',
+      },
+      {
+        label: 'THUL',
+        href: '/runes/thul',
+      },
+      {
+        label: 'AMN',
+        href: '/runes/amn',
+      },
+      {
+        label: 'SOL',
+        href: '/runes/sol',
+      },
+      {
+        label: 'SHAEL',
+        href: '/runes/shael',
+      },
+      {
+        label: 'DOL',
+        href: '/runes/dol',
+      },
+      {
+        label: 'HEL',
+        href: '/runes/hel',
+      },
+      {
+        label: 'IO',
+        href: '/runes/io',
+      },
+      {
+        label: 'LUM',
+        href: '/runes/lum',
+      },
+      {
+        label: 'KO',
+        href: '/runes/ko',
+      },
+      {
+        label: 'FAL',
+        href: '/runes/fal',
+      },
+      {
+        label: 'LEM',
+        href: '/runes/lem',
+      },
+      {
+        label: 'PUL',
+        href: '/runes/pul',
+      },
+      {
+        label: 'UM',
+        href: '/runes/um',
+      },
+      {
+        label: 'MAL',
+        href: '/runes/mal',
+      },
+      {
+        label: 'IST',
+        href: '/runes/ist',
+      },
+      {
+        label: 'GUL',
+        href: '/runes/gul',
+      },
+      {
+        label: 'VEX',
+        href: '/runes/vex',
+      },
+      {
+        label: 'OHM',
+        href: '/runes/ohm',
+      },
+      {
+        label: 'LO',
+        href: '/runes/lo',
+      },
+      {
+        label: 'SUR',
+        href: '/runes/sur',
+      },
+      {
+        label: 'BER',
+        href: '/runes/ber',
+      },
+      {
+        label: 'JAH',
+        href: '/runes/jah',
+      },
+      {
+        label: 'CHAM',
+        href: '/runes/cham',
+      },
+      {
+        label: 'ZOD',
+        href: '/runes/zod',
+      },
+    ],
+  },
+  {
+    label: 'RuneWords',
+    icon: 'NftIcon',
+    items: [
+      {
+        label: 'Steel',
+        href: '/crafting/steel',
+      },
+      {
+        label: 'Fury',
+        href: '/crafting/fury',
+      },
+      {
+        label: 'Lorekeeper',
+        href: '/crafting/lorekeeper',
+      },
+    ],
+  },
+  {
+    label: 'Marketplace',
+    icon: 'NftIcon',
+    href: '/marketplace',
+  },
+  {
+    label: 'Links',
+    icon: 'InfoIcon',
+    items: [
+      {
+        label: 'Trade: Arken Swap',
+        href: '/swap',
+      },
+      {
+        label: 'Trade: PancakeSwap',
+        href: 'https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xa9776b590bfc2f956711b3419910a5ec1f63153e',
+      },
+      // {
+      //   label: 'CoinGecko (TODO)',
+      //   href: 'https://www.coingecko.com/en/coins/rune-farm',
+      // },
+      // {
+      //   label: 'CoinMarketCap (TODO)',
+      //   href: 'https://coinmarketcap.com/currencies/rune-farm/',
+      // },
+      {
+        label: 'Chart: AstroTools',
+        href: 'https://app.astrotools.io/pancake-pair-explorer/0xf9444c39bbdcc3673033609204f8da00d1ae3f52',
+      },
+      {
+        label: 'Chart: Swapp',
+        href: 'https://goswapp-bsc.web.app/0xa9776b590bfc2f956711b3419910a5ec1f63153e',
+      },
+      {
+        label: 'Chart: Poo',
+        href: 'https://poocoin.app/tokens/0xa9776b590bfc2f956711b3419910a5ec1f63153e',
+      },
+    ],
+  },
   {
     label: 'More',
     icon: 'MoreIcon',
@@ -515,10 +515,10 @@ const runeConfig: MenuEntry[] = [
       //   label: 'Polls',
       //   href: '/polls',
       // },
-      {
-        label: 'Bounties',
-        href: '/bounties',
-      },
+      // {
+      //   label: 'Bounties',
+      //   href: '/bounties',
+      // },
       // {
       //   label: 'Press',
       //   href: '/press',
@@ -722,67 +722,110 @@ const infiniteConfig: MenuEntry[] = [
 ];
 
 const raidConfig: MenuEntry[] = [
+  // {
+  //   label: 'Home',
+  //   icon: 'HomeIcon',
+  //   href: '/',
+  // },
   {
-    label: 'Home',
-    icon: 'HomeIcon',
-    href: '/',
-  },
-  {
-    label: 'Raid',
-    icon: 'RaidIcon',
-    href: '/',
+    label: 'Arken Legacy',
+    icon: 'TradeIcon',
     initialOpenState: true,
     items: [
       {
-        label: 'Play Now',
-        href: '/',
+        label: 'Swap',
+        href: '/swap',
       },
       {
-        label: 'Getting Started',
-        href: '/guide',
+        label: 'Inventory',
+        href: '/account',
       },
       {
-        label: 'Farms',
+        label: 'Raids',
         href: '/farms',
       },
       {
         label: 'Pools',
         href: '/pools',
       },
+      {
+        label: 'Bounties',
+        href: '/bounties',
+      },
+      // {
+      //   label: 'World Firsts',
+      //   href: '/bounties',
+      // },
+      // {
+      //   label: 'Item Market',
+      //   href: '/market',
+      // },
+      // {
+      //   label: 'Item Catalog',
+      //   href: '/catalog',
+      // },
+      // {
+      //   label: 'Add/Remove Liquidity',
+      //   href: '/swap/pool',
+      // },
     ],
   },
-  {
-    label: 'Account',
-    icon: 'AccountIcon',
-    initialOpenState: false,
-    items: [
-      {
-        label: 'Inventory',
-        href: '/account',
-      },
-      {
-        label: 'Achievements',
-        href: '/account/achievements',
-      },
-      {
-        label: 'Quests',
-        href: '/account/quests',
-      },
-      {
-        label: 'Public Profile',
-        href: '/account/public',
-      },
-    ],
-  },
+  // {
+  //   label: 'Raid',
+  //   icon: 'RaidIcon',
+  //   href: '/',
+  //   initialOpenState: true,
+  //   items: [
+  //     // {
+  //     //   label: 'Play Now',
+  //     //   href: '/raid',
+  //     // },
+  //     // {
+  //     //   label: 'Getting Started',
+  //     //   href: '/guide',
+  //     // },
+  //     {
+  //       label: 'Farms',
+  //       href: '/farms',
+  //     },
+  //     {
+  //       label: 'Pools',
+  //       href: '/pools',
+  //     },
+  //   ],
+  // },
+  // {
+  //   label: 'Account',
+  //   icon: 'AccountIcon',
+  //   initialOpenState: false,
+  //   items: [
+  //     {
+  //       label: 'Inventory',
+  //       href: '/account',
+  //     },
+  //     // {
+  //     //   label: 'Achievements',
+  //     //   href: '/account/achievements',
+  //     // },
+  //     // {
+  //     //   label: 'Quests',
+  //     //   href: '/account/quests',
+  //     // },
+  //     // {
+  //     //   label: 'Public Profile',
+  //     //   href: '/account/public',
+  //     // },
+  //   ],
+  // },
   {
     label: 'More',
     icon: 'MoreIcon',
     initialOpenState: false,
     items: [
-      {
-        label: 'Settings',
-        href: '/settings',
-      },
+      // {
+      //   label: 'Settings',
+      //   href: '/settings',
+      // },
       // {
       //   label: 'Terms & Conditions',
       //   href: '/terms',
@@ -876,8 +919,8 @@ const sanctuaryConfig: MenuEntry[] = [
       //   href: '/skills',
       // },
       {
-        label: 'Runewords',
-        href: '/runewords',
+        label: 'Runeforms',
+        href: '/runeforms',
       },
       // {
       //   label: 'Mechanics',
@@ -885,42 +928,42 @@ const sanctuaryConfig: MenuEntry[] = [
       // },
     ],
   },
-  {
-    label: 'Account',
-    icon: 'AccountIcon',
-    initialOpenState: false,
-    items: [
-      {
-        label: 'Inventory',
-        href: '/account',
-      },
-      {
-        label: 'Achievements',
-        href: '/account/achievements',
-      },
-      {
-        label: 'Quests',
-        href: '/account/quests',
-      },
-      {
-        label: 'Public Profile',
-        href: '/account/public',
-      },
-    ],
-  },
+  // {
+  //   label: 'Account',
+  //   icon: 'AccountIcon',
+  //   initialOpenState: false,
+  //   items: [
+  //     {
+  //       label: 'Inventory',
+  //       href: '/account',
+  //     },
+  //     {
+  //       label: 'Achievements',
+  //       href: '/account/achievements',
+  //     },
+  //     {
+  //       label: 'Quests',
+  //       href: '/account/quests',
+  //     },
+  //     {
+  //       label: 'Public Profile',
+  //       href: '/account/public',
+  //     },
+  //   ],
+  // },
   {
     label: 'More',
     icon: 'MoreIcon',
     initialOpenState: false,
     items: [
-      {
-        label: 'Settings',
-        href: '/settings',
-      },
-      {
-        label: 'Terms & Conditions',
-        href: '/terms',
-      },
+      // {
+      //   label: 'Settings',
+      //   href: '/settings',
+      // },
+      // {
+      //   label: 'Terms & Conditions',
+      //   href: '/terms',
+      // },
       {
         label: 'Github',
         href: 'https://github.arken.gg',
@@ -1327,7 +1370,8 @@ export default {
   evolution: evoConfig,
   infinite: infiniteConfig,
   sanctuary: sanctuaryConfig,
-  raid: raidConfig,
+  raid: runeConfig,
+  rune: runeConfig,
   guardians: guardiansConfig,
   w4: w4Config,
 };

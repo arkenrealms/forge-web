@@ -173,12 +173,12 @@ const BottomCTA = () => {
         <Page2>
           <Row>
             <Column>
-              <Img
+              {/* <Img
                 src="/images/rune-text-logo.png"
                 css={css`
                   width: 220px;
                 `}
-              />
+              /> */}
               <p style={{ marginTop: 20 }}>
                 The world’s first and most comprehensive fantasy omniverse driven by crypto and non-fungible tokens
                 (NFTs). Battle, win &amp; collect items.
@@ -197,7 +197,9 @@ const BottomCTA = () => {
                 sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
                 className="discord-widget"
                 title="Discord"></iframe>
-              <Heading style={{ color: '#fff', marginTop: 40 }}>{t(`RUNE © ${new Date().getFullYear()}`)}</Heading>
+              <Heading style={{ color: '#fff', marginTop: 40 }}>
+                {t(`ARKEN REALMS © ${new Date().getFullYear()}`)}
+              </Heading>
             </Column>
             <Column style={{ minWidth: 200 }}>
               <Heading size="md">Contact</Heading>
@@ -231,7 +233,7 @@ const BottomCTA = () => {
             <Column>
               <Heading>Social</Heading>
               <br />
-              <p>
+              {/* <p>
                 <a
                   style={{ marginBottom: 20, display: 'inline-block' }}
                   target="_blank"
@@ -320,7 +322,7 @@ const BottomCTA = () => {
                   href={`https://github.arken.gg`}>
                   Github
                 </a>
-              </p>
+              </p> */}
             </Column>
           </Row>
         </Page2>

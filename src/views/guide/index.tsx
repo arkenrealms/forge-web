@@ -200,7 +200,7 @@ const Guide: React.FC = () => {
 
   const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
-  const { totalRunes, totalRuneforms } = cache.stats;
+  const { totalRunes, totalRunewords } = cache.stats;
 
   const referer = Cookies.get(`referer`);
 

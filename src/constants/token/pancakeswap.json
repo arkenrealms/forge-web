@@ -11,14 +11,6 @@
   "keywords": ["pancake", "default"],
   "tokens": [
     {
-      "name": "Rune Token",
-      "symbol": "RUNE",
-      "address": "0xa9776b590bfc2f956711b3419910a5ec1f63153e",
-      "chainId": 56,
-      "decimals": 18,
-      "logoURI": "https://swap.arken.gg/images/rune-500x500.png"
-    },
-    {
       "name": "Arken Realm Shards",
       "symbol": "RXS",
       "address": "0x2098fef7eeae592038f4f3c4b008515fed0d5886",

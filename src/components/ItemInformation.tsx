@@ -1,47 +1,48 @@
-import { BigNumber } from 'bignumber.js'
-import cx from 'classnames'
-import React, { useEffect, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { ItemType } from 'rune-backend-sdk/build/data/items.type'
-import styled from 'styled-components'
-import CraftModal from '~/components/CraftModal'
-import EquipModal from '~/components/EquipModal'
-import { ItemInfo } from '~/components/ItemInfo'
-import { useModal } from '~/components/Modal'
-import NoteModal from '~/components/NoteModal'
-import CardBusdValue from '~/components/raid/CardBusdValue'
-import CardValue from '~/components/raid/CardValue'
-import RuneDetailsModal from '~/components/RuneDetailsModal'
-import SkinModal from '~/components/SkinModal'
-import TradeModal from '~/components/TradeModal'
-import TransferModal from '~/components/TransferModal'
-import TransmuteModal from '~/components/TransmuteModal'
-import TrianglesBox from '~/components/TrianglesBox'
-import UnequipModal from '~/components/UnequipModal'
-import UpgradeModal from '~/components/UpgradeModal'
-import runes from '~/config/constants/runes'
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints'
-import useWeb3 from '~/hooks/useWeb3'
-import history from '~/routerHistory'
-import { useRunePrice } from '~/state/hooks'
-import { Text } from '~/ui'
-import { getRuneAddress } from '~/utils/addressHelpers'
+import { BigNumber } from 'bignumber.js';
+import cx from 'classnames';
+import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ItemType } from 'rune-backend-sdk/build/data/items.type';
+import styled from 'styled-components';
+import CraftModal from '~/components/CraftModal';
+import EquipModal from '~/components/EquipModal';
+import { ItemInfo } from '~/components/ItemInfo';
+import { useModal } from '~/components/Modal';
+import NoteModal from '~/components/NoteModal';
+import CardBusdValue from '~/components/raid/CardBusdValue';
+import CardValue from '~/components/raid/CardValue';
+import RuneDetailsModal from '~/components/RuneDetailsModal';
+import SkinModal from '~/components/SkinModal';
+import TradeModal from '~/components/TradeModal';
+import TransferModal from '~/components/TransferModal';
+import TransmuteModal from '~/components/TransmuteModal';
+import TrianglesBox from '~/components/TrianglesBox';
+import UnequipModal from '~/components/UnequipModal';
+import UpgradeModal from '~/components/UpgradeModal';
+import runes from '~/config/constants/runes';
+import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
+import useWeb3 from '~/hooks/useWeb3';
+import history from '~/routerHistory';
+import symbolMap from '~/utils/symbolMap';
+import { useRunePrice } from '~/state/hooks';
+import { Text } from '~/ui';
+import { getRuneAddress } from '~/utils/addressHelpers';
 
 type Props = {
-  item: ItemType
-  price?: number
-  background?: boolean
-  hideDetails?: boolean
-  hideImage?: boolean
-  hideMetadata?: boolean
-  showActions?: boolean
-  showPerfection?: boolean
-  showBranches?: boolean
-  hideRoll?: boolean
-  showOwner?: boolean
-  defaultBranch?: string
-  quantity?: number
-}
+  item: ItemType;
+  price?: number;
+  background?: boolean;
+  hideDetails?: boolean;
+  hideImage?: boolean;
+  hideMetadata?: boolean;
+  showActions?: boolean;
+  showPerfection?: boolean;
+  showBranches?: boolean;
+  hideRoll?: boolean;
+  showOwner?: boolean;
+  defaultBranch?: string;
+  quantity?: number;
+};
 
 enum ModalOptions {
   NONE = 0,
@@ -67,38 +68,38 @@ const ItemOption = styled.div`
   &:hover {
     border: 2px solid #fff;
   }
-`
+`;
 
 const Label = styled.div`
   color: ${({ theme }) => theme.colors.textSubtle};
   font-size: 14px;
-`
+`;
 
 const WalletBalance = ({ symbol, balance }) => {
-  const { t } = useTranslation()
-  const busdBalance = new BigNumber(balance).multipliedBy(useRunePrice(runes[symbol].usdFarmPid)).toNumber()
+  const { t } = useTranslation();
+  const busdBalance = new BigNumber(balance).multipliedBy(useRunePrice(runes[symbol].usdFarmPid)).toNumber();
 
-  const { address: account } = useWeb3()
+  const { address: account } = useWeb3();
 
   if (!account) {
     return (
       <>
-        <Label>{t(symbol.toUpperCase() + ' in Wallet')}:</Label>
+        <Label>{t(symbolMap(symbol).toUpperCase() + ' in Wallet')}:</Label>
         <Text color="textDisabled" style={{ lineHeight: '54px' }}>
           {t('Locked')}
         </Text>
       </>
-    )
+    );
   }
 
   return (
     <>
-      <Label>{t(symbol.toUpperCase() + ' in Wallet')}:</Label>
+      <Label>{t(symbolMap(symbol).toUpperCase() + ' in Wallet')}:</Label>
       <CardValue value={balance} decimals={4} fontSize="24px" lineHeight="36px" />
       <CardBusdValue value={busdBalance} />
     </>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   margin: 0 auto 0;
@@ -108,7 +109,7 @@ const Container = styled.div`
   // overflow: hidden;
   max-width: 400px;
   filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 1));
-`
+`;
 
 const StyledCardAccent = styled.div`
   position: absolute;
@@ -120,7 +121,7 @@ const StyledCardAccent = styled.div`
   pointer-events: none;
   filter: hue-rotate(295deg) blur(1px);
   opacity: 0.9;
-`
+`;
 const StyledCardAccentTop = styled.div`
   background: #d0f0dd;
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
@@ -130,7 +131,7 @@ const StyledCardAccentTop = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-`
+`;
 const StyledCardAccentLeft = styled.div`
   background: #d0f0dd;
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
@@ -140,7 +141,7 @@ const StyledCardAccentLeft = styled.div`
   left: 0;
   height: 100%;
   width: 4px;
-`
+`;
 const StyledCardAccentRight = styled.div`
   background: #d0f0dd;
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
@@ -150,7 +151,7 @@ const StyledCardAccentRight = styled.div`
   top: 0;
   right: 0;
   height: 100%;
-`
+`;
 const StyledCardAccentBottom = styled.div`
   background: #d0f0dd;
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
@@ -160,136 +161,136 @@ const StyledCardAccentBottom = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-`
+`;
 
 const StyledCardAccentTopNormal = styled(StyledCardAccentTop)`
   box-shadow: 0px 0px 0 #fff, 0px 0px 4px #fff, 0px 0px 8px #fff, 0px 0px 16px #fff;
   filter: hue-rotate(305deg);
-`
+`;
 const StyledCardAccentLeftNormal = styled(StyledCardAccentLeft)`
   box-shadow: 0px 0px 0 #fff, 0px 0px 4px #fff, 0px 0px 8px #fff, 0px 0px 16px #fff;
   filter: hue-rotate(305deg);
-`
+`;
 const StyledCardAccentRightNormal = styled(StyledCardAccentRight)`
   box-shadow: 0px 0px 0 #fff, 0px 0px 4px #fff, 0px 0px 8px #fff, 0px 0px 16px #fff;
   filter: hue-rotate(305deg);
-`
+`;
 const StyledCardAccentBottomNormal = styled(StyledCardAccentBottom)`
   box-shadow: 0px 0px 0 #fff, 0px 0px 4px #fff, 0px 0px 8px #fff, 0px 0px 16px #fff;
   filter: hue-rotate(305deg);
-`
+`;
 const StyledCardAccentTopMythic = styled(StyledCardAccentTop)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(305deg);
-`
+`;
 const StyledCardAccentLeftMythic = styled(StyledCardAccentLeft)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(305deg);
-`
+`;
 const StyledCardAccentRightMythic = styled(StyledCardAccentRight)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(305deg);
-`
+`;
 const StyledCardAccentBottomMythic = styled(StyledCardAccentBottom)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(305deg);
-`
+`;
 const StyledCardAccentTopLegendary = styled(StyledCardAccentTop)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
-`
+`;
 const StyledCardAccentLeftLegendary = styled(StyledCardAccentLeft)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
-`
+`;
 const StyledCardAccentRightLegendary = styled(StyledCardAccentRight)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
-`
+`;
 const StyledCardAccentBottomLegendary = styled(StyledCardAccentBottom)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
-`
+`;
 const StyledCardAccentTopUnique = styled(StyledCardAccentTop)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(340deg);
-`
+`;
 const StyledCardAccentLeftUnique = styled(StyledCardAccentLeft)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(340deg);
-`
+`;
 const StyledCardAccentRightUnique = styled(StyledCardAccentRight)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(340deg);
-`
+`;
 const StyledCardAccentBottomUnique = styled(StyledCardAccentBottom)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(340deg);
-`
+`;
 
 const StyledCardAccentTopEpic = styled(StyledCardAccentTop)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(235deg);
-`
+`;
 const StyledCardAccentLeftEpic = styled(StyledCardAccentLeft)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(235deg);
-`
+`;
 const StyledCardAccentRightEpic = styled(StyledCardAccentRight)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(235deg);
-`
+`;
 const StyledCardAccentBottomEpic = styled(StyledCardAccentBottom)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(235deg);
-`
+`;
 
 const StyledCardAccentTopRare = styled(StyledCardAccentTop)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
-`
+`;
 const StyledCardAccentLeftRare = styled(StyledCardAccentLeft)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
-`
+`;
 const StyledCardAccentRightRare = styled(StyledCardAccentRight)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
-`
+`;
 const StyledCardAccentBottomRare = styled(StyledCardAccentBottom)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
-`
+`;
 
 const StyledCardAccentTopMagical = styled(StyledCardAccentTop)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(140deg);
-`
+`;
 const StyledCardAccentLeftMagical = styled(StyledCardAccentLeft)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(140deg);
-`
+`;
 const StyledCardAccentRightMagical = styled(StyledCardAccentRight)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(140deg);
-`
+`;
 const StyledCardAccentBottomMagical = styled(StyledCardAccentBottom)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(140deg);
-`
+`;
 
 const StyledCardAccentTopSet = styled(StyledCardAccentTop)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
-`
+`;
 const StyledCardAccentLeftSet = styled(StyledCardAccentLeft)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
-`
+`;
 const StyledCardAccentRightSet = styled(StyledCardAccentRight)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
-`
+`;
 const StyledCardAccentBottomSet = styled(StyledCardAccentBottom)`
   box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
-`
+`;
 
 const Perfection = styled.div`
   position: absolute;
@@ -300,7 +301,7 @@ const Perfection = styled.div`
   color: #fff;
   opacity: 0.1;
   font-family: 'webfontexl', Verdana, Arial, Helvetica, sans-serif;
-`
+`;
 
 const RarityEffect = styled.div`
   position: absolute;
@@ -311,35 +312,35 @@ const RarityEffect = styled.div`
   height: 100%;
   pointer-events: none;
   overflow: hidden;
-`
-const NormalEffect = styled(RarityEffect)``
+`;
+const NormalEffect = styled(RarityEffect)``;
 const MythicEffect = styled(RarityEffect)`
   background: linear-gradient(0deg, #b9463e80 0%, #b9463e10 100%);
-`
+`;
 const UniqueEffect = styled(RarityEffect)`
   background: linear-gradient(0deg, #ffb74380 0%, #ffb74310 100%);
   filter: hue-rotate(350deg);
-`
+`;
 const LegendaryEffect = styled(RarityEffect)`
   background: linear-gradient(0deg, #ffb74380 0%, #ffb74310 100%);
-`
+`;
 const EpicEffect = styled(RarityEffect)`
   background: linear-gradient(0deg, #945ebb80 0%, #945ebb10 100%);
-`
+`;
 const RareEffect = styled(RarityEffect)`
   background: linear-gradient(0deg, #bbad5e80 0%, #bbad5e10 100%);
-`
+`;
 const MagicalEffect = styled(RarityEffect)`
   background: linear-gradient(0deg, #3e6db980 0%, #3e6db910 100%);
-`
+`;
 const SetEffect = styled(RarityEffect)`
   background: linear-gradient(0deg, #b0b93e80 0%, #b0b93e10 100%);
-`
+`;
 
 const Video = styled.video`
   position: relative;
   z-index: 1;
-`
+`;
 
 const ItemInformation: React.FC<Props> = ({
   item,
@@ -357,14 +358,14 @@ const ItemInformation: React.FC<Props> = ({
   defaultBranch = '1',
   quantity = 1,
 }) => {
-  const isRune = item.name?.slice(-4).toLowerCase() === 'rune'
-  const symbol = item.name?.toLowerCase().replace(' rune', '')
-  const [gameTabIndex, setGameTabIndex] = useState(0)
-  const [selectedOption, setSelectedOption] = useState(ModalOptions.NONE)
-  const [onPresentCraftModal] = useModal(<CraftModal onSuccess={() => {}} />)
-  const [onPresentTradeModal] = useModal(<TradeModal item={item} onSuccess={() => {}} />)
-  const [onPresentEquipModal] = useModal(<EquipModal tokenId={item.tokenId} onSuccess={() => {}} />)
-  const [onPresentUnequipModal] = useModal(<UnequipModal tokenId={item.tokenId} onSuccess={() => {}} />)
+  const isRune = item.name?.slice(-4).toLowerCase() === 'rune';
+  const symbol = item.name?.toLowerCase().replace(' rune', '');
+  const [gameTabIndex, setGameTabIndex] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(ModalOptions.NONE);
+  const [onPresentCraftModal] = useModal(<CraftModal onSuccess={() => {}} />);
+  const [onPresentTradeModal] = useModal(<TradeModal item={item} onSuccess={() => {}} />);
+  const [onPresentEquipModal] = useModal(<EquipModal tokenId={item.tokenId} onSuccess={() => {}} />);
+  const [onPresentUnequipModal] = useModal(<UnequipModal tokenId={item.tokenId} onSuccess={() => {}} />);
   const [onPresentTransferModal] = useModal(
     <TransferModal
       symbol={symbol}
@@ -373,10 +374,10 @@ const ItemInformation: React.FC<Props> = ({
       tokenId={item.tokenId}
       onSuccess={() => {}}
     />
-  )
-  const [onPresentTransmuteModal] = useModal(<TransmuteModal tokenId={item.tokenId} onSuccess={() => {}} />)
-  const [onPresentSkinModal] = useModal(<SkinModal tokenId={item.tokenId} onSuccess={() => {}} />)
-  const [onPresentNoteModal] = useModal(<NoteModal tokenId={item.tokenId} onSuccess={() => {}} />)
+  );
+  const [onPresentTransmuteModal] = useModal(<TransmuteModal tokenId={item.tokenId} onSuccess={() => {}} />);
+  const [onPresentSkinModal] = useModal(<SkinModal tokenId={item.tokenId} onSuccess={() => {}} />);
+  const [onPresentNoteModal] = useModal(<NoteModal tokenId={item.tokenId} onSuccess={() => {}} />);
   const [onPresentDetailsModal] = useModal(
     <RuneDetailsModal
       tokenAddress={isRune ? getRuneAddress(symbol) : null}
@@ -384,75 +385,75 @@ const ItemInformation: React.FC<Props> = ({
       item={item}
       onSuccess={() => {}}
     />
-  )
-  const [onPresentUpgradeModal] = useModal(<UpgradeModal tokenId={item.tokenId} onSuccess={() => {}} />)
+  );
+  const [onPresentUpgradeModal] = useModal(<UpgradeModal tokenId={item.tokenId} onSuccess={() => {}} />);
 
-  const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints()
-  const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl
+  const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
+  const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
 
-  const videoRef = useRef()
-  const previousUrl = useRef(item.video)
+  const videoRef = useRef();
+  const previousUrl = useRef(item.video);
 
   useEffect(() => {
-    if (!item.video) return
-    if (previousUrl.current === item.video) return
+    if (!item.video) return;
+    if (previousUrl.current === item.video) return;
 
     // @ts-ignore
-    videoRef.current?.load()
+    videoRef.current?.load();
 
-    previousUrl.current = item.video
-  }, [item.video])
+    previousUrl.current = item.video;
+  }, [item.video]);
 
   const onEquip = () => {
-    setSelectedOption(ModalOptions.EQUIP)
-    onPresentEquipModal()
-  }
+    setSelectedOption(ModalOptions.EQUIP);
+    onPresentEquipModal();
+  };
 
   const onUnequip = () => {
-    setSelectedOption(ModalOptions.UNEQUIP)
-    onPresentUnequipModal()
-  }
+    setSelectedOption(ModalOptions.UNEQUIP);
+    onPresentUnequipModal();
+  };
 
   const onTransfer = () => {
-    setSelectedOption(ModalOptions.TRANSFER)
-    onPresentTransferModal()
-  }
+    setSelectedOption(ModalOptions.TRANSFER);
+    onPresentTransferModal();
+  };
 
   const onTrade = () => {
-    setSelectedOption(ModalOptions.TRADE)
-    onPresentTradeModal()
-  }
+    setSelectedOption(ModalOptions.TRADE);
+    onPresentTradeModal();
+  };
 
   const onCraft = () => {
-    setSelectedOption(ModalOptions.CRAFT)
-    history.push(`/transmute/${item.name.toLowerCase()}`)
+    setSelectedOption(ModalOptions.CRAFT);
+    history.push(`/transmute/${item.name.toLowerCase()}`);
     // onPresentCraftModal()
-  }
+  };
 
   const onDetails = () => {
-    setSelectedOption(ModalOptions.DETAILS)
-    onPresentDetailsModal()
-  }
+    setSelectedOption(ModalOptions.DETAILS);
+    onPresentDetailsModal();
+  };
 
   const onUpgrade = () => {
-    setSelectedOption(ModalOptions.UPGRADE)
-    onPresentUpgradeModal()
-  }
+    setSelectedOption(ModalOptions.UPGRADE);
+    onPresentUpgradeModal();
+  };
 
   const onTransmute = () => {
-    setSelectedOption(ModalOptions.TRANSMUTE)
-    onPresentTransmuteModal()
-  }
+    setSelectedOption(ModalOptions.TRANSMUTE);
+    onPresentTransmuteModal();
+  };
 
   const onSkin = () => {
-    setSelectedOption(ModalOptions.SKIN)
-    onPresentSkinModal()
-  }
+    setSelectedOption(ModalOptions.SKIN);
+    onPresentSkinModal();
+  };
 
   const onNote = () => {
-    setSelectedOption(ModalOptions.NOTE)
-    onPresentNoteModal()
-  }
+    setSelectedOption(ModalOptions.NOTE);
+    onPresentNoteModal();
+  };
 
   return (
     <Container className={cx('relative w-full z-10', 'text-white text-sm py-4 px-6 md:mx-4')}>
@@ -780,7 +781,7 @@ const ItemInformation: React.FC<Props> = ({
         </div>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default ItemInformation
+export default ItemInformation;

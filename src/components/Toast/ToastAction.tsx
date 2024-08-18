@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import getExternalLinkProps from '~/utils/getExternalLinkProps';
-import { Button } from '../Button3';
+import { Button } from '../Button';
 import { ToastAction as Action } from './types';
 
 interface ToastActionProps {

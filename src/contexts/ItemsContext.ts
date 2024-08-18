@@ -1,5 +1,4 @@
-import React from 'react';
-import { createContext } from 'react';
+import React, { createContext } from 'react';
 import { ItemType } from 'rune-backend-sdk/build/data/items.type';
 
 type ContextProps = {

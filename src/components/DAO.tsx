@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import styled, { css } from 'styled-components';
-import { Button } from '~/components/Button3';
+import { Button } from '~/components/Button';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toFixed } from 'rune-backend-sdk/build/util/math';

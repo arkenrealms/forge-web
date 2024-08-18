@@ -5,7 +5,7 @@ import ErrorIcon from '../Svg/Icons/Error';
 import BlockIcon from '../Svg/Icons/Block';
 import InfoIcon from '../Svg/Icons/Info';
 import { Text } from '../Text';
-import { IconButton } from '../Button3';
+import { IconButton } from '../Button';
 import { CloseIcon } from '../Svg';
 import Flex from '../Box/Flex';
 import { AlertProps, variants } from './types';
