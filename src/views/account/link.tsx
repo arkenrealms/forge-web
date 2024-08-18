@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useEffect, useContext, useState } from 'react'
-import styled from 'styled-components'
-import Cookies from 'js-cookie'
-import history from '~/routerHistory'
-import BigNumber from 'bignumber.js'
+import React, { ChangeEvent, useEffect, useContext, useState } from 'react';
+import styled from 'styled-components';
+import Cookies from 'js-cookie';
+import history from '~/routerHistory';
+import BigNumber from 'bignumber.js';
 import {
   Card,
   CardBody,
@@ -15,41 +15,41 @@ import {
   WarningIcon,
   Skeleton,
   Checkbox,
-} from '~/ui'
-import UIKitInput from '~/components/Input/Input'
-import { parseISO, formatDistance } from 'date-fns'
-import nftList from '~/config/constants/nfts'
-import { useToast } from '~/state/hooks'
-import useWeb3 from '~/hooks/useWeb3'
-import useI18n from '~/hooks/useI18n'
-import useAccount from '~/hooks/useAccount'
-import { useTranslation } from 'react-i18next'
-import { getArcaneProfileAddress } from '~/utils/addressHelpers'
-import { useCharacters } from '~/hooks/useContract'
-import useGetWalletNfts from '~/hooks/useGetWalletNfts'
-import useHasRuneBalance from '~/hooks/useHasRuneBalance'
-import debounce from 'lodash/debounce'
-import Page from '~/components/layout/Page'
-import { ConnectNetwork } from '~/components/ConnectNetwork'
-import { RowBetween } from '~/components/Row'
-import { AutoColumn } from '~/components/Column'
+} from '~/ui';
+import UIKitInput from '~/components/Input/Input';
+import { parseISO, formatDistance } from 'date-fns';
+import nftList from '~/config/constants/nfts';
+import { useToast } from '~/state/hooks';
+import useWeb3 from '~/hooks/useWeb3';
+import useI18n from '~/hooks/useI18n';
+import useAccount from '~/hooks/useAccount';
+import { useTranslation } from 'react-i18next';
+import { getArcaneProfileAddress } from '~/utils/addressHelpers';
+import { useCharacters } from '~/hooks/useContract';
+import useGetWalletNfts from '~/hooks/useGetWalletNfts';
+import useHasRuneBalance from '~/hooks/useHasRuneBalance';
+import debounce from 'lodash/debounce';
+import Page from '~/components/layout/Page';
+import { ConnectNetwork } from '~/components/ConnectNetwork';
+import { RowBetween } from '~/components/Row';
+import { AutoColumn } from '~/components/Column';
 // import { useFeathers } from '~/hooks/useFeathers'
 
-const EMAIL_MIN_LENGTH = 5
-const EMAIL_MAX_LENGTH = 100
+const EMAIL_MIN_LENGTH = 5;
+const EMAIL_MAX_LENGTH = 100;
 
-const PASSWORD_MIN_LENGTH = 6
-const PASSWORD_MAX_LENGTH = 100
+const PASSWORD_MIN_LENGTH = 6;
+const PASSWORD_MAX_LENGTH = 100;
 
 const InputWrap = styled.div`
   position: relative;
   max-width: 240px;
   margin-bottom: 15px;
-`
+`;
 
 const Input = styled(UIKitInput)`
   padding-right: 40px;
-`
+`;
 
 const Indicator = styled(Flex)`
   align-items: center;
@@ -60,21 +60,21 @@ const Indicator = styled(Flex)`
   right: 16px;
   top: 50%;
   width: 24px;
-`
+`;
 
 const MigrateAccount: React.FC<any> = () => {
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
-  const [passwordRepeat, setPasswordRepeat] = useState(null)
-  const { t } = useTranslation()
-  const { toastError } = useToast()
-  const { web3, address, library } = useWeb3()
-  const [error, setError] = useState(null)
-  const [isEmailValid, setIsEmailValid] = useState(false)
-  const [isPasswordValid, setIsPasswordValid] = useState(false)
-  const [isPasswordRepeatValid, setIsPasswordRepeatValid] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [message, setMessage] = useState('')
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [passwordRepeat, setPasswordRepeat] = useState(null);
+  const { t } = useTranslation();
+  const { toastError } = useToast();
+  const { web3, address, library } = useWeb3();
+  const [error, setError] = useState(null);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isPasswordRepeatValid, setIsPasswordRepeatValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
   // const { client, user, login, signup, services } = useFeathers()
   // {
   // binzy4@arken.gg
@@ -107,15 +107,15 @@ const MigrateAccount: React.FC<any> = () => {
   async function getSignature(_address, value) {
     const hash = library?.bnbSign
       ? (await library.bnbSign(_address, value))?.signature
-      : await web3.eth.personal.sign(value, _address, null)
+      : await web3.eth.personal.sign(value, _address, null);
 
-    return hash
+    return hash;
   }
 
   async function link(_email, _password, _address, _setError) {
-    console.log(_email, _password, _address, _setError)
+    console.log(_email, _password, _address, _setError);
     // await signup(_email, _password, _setError)
-    const _signature = await getSignature(_address, `Rune.Connect("${_address}")`)
+    const _signature = await getSignature(_address, `Rune.Connect("${_address}")`);
 
     // const res = await services.accounts.link({
     //   email: _email,
@@ -128,7 +128,7 @@ const MigrateAccount: React.FC<any> = () => {
     //   const res2 = await login(_email, _password, _setError)
 
     //   console.log(res2)
-    //   history.push('/account')
+    //   history('/account')
     // } else {
     //   _setError({
     //     message: 'Could not link, please contact support.',
@@ -166,28 +166,28 @@ const MigrateAccount: React.FC<any> = () => {
                 <InputWrap>
                   <Input
                     onChange={(event) => {
-                      setError(null)
-                      setEmail(event.target.value)
-                      setIsEmailValid(false)
+                      setError(null);
+                      setEmail(event.target.value);
+                      setIsEmailValid(false);
 
                       if (
                         event.target.value.length < EMAIL_MIN_LENGTH ||
                         event.target.value.length > EMAIL_MAX_LENGTH
                       ) {
                         //  || event.target.value.indexOf('@') < 2 || event.target.value.indexOf('.') < 2
-                        return
+                        return;
                       }
 
-                      const regex = new RegExp('(.+)@(.+){2,}.(.+){2,}')
+                      const regex = new RegExp('(.+)@(.+){2,}.(.+){2,}');
 
                       if (!regex.test(event.target.value)) {
                         setError({
                           message: 'Invalid email',
-                        })
-                        return
+                        });
+                        return;
                       }
 
-                      setIsEmailValid(true)
+                      setIsEmailValid(true);
                     }}
                     isWarning={email && !isEmailValid}
                     isSuccess={email && isEmailValid}
@@ -212,27 +212,27 @@ const MigrateAccount: React.FC<any> = () => {
                 <InputWrap>
                   <Input
                     onChange={(event) => {
-                      setError(null)
-                      setPassword(event.target.value)
-                      setIsPasswordValid(false)
+                      setError(null);
+                      setPassword(event.target.value);
+                      setIsPasswordValid(false);
 
                       if (
                         event.target.value.length < PASSWORD_MIN_LENGTH ||
                         event.target.value.length > PASSWORD_MAX_LENGTH
                       ) {
-                        return
+                        return;
                       }
 
-                      const regex = new RegExp('^(?=.*[a-z])(?=.*[0-9!@#$%^&*]).{8,}$')
+                      const regex = new RegExp('^(?=.*[a-z])(?=.*[0-9!@#$%^&*]).{8,}$');
 
                       if (!regex.test(event.target.value)) {
                         setError({
                           message: 'Password too simple',
-                        })
-                        return
+                        });
+                        return;
                       }
 
-                      setIsPasswordValid(true)
+                      setIsPasswordValid(true);
                     }}
                     isWarning={password && !isPasswordValid}
                     isSuccess={password && isPasswordValid}
@@ -259,25 +259,25 @@ const MigrateAccount: React.FC<any> = () => {
                 <InputWrap>
                   <Input
                     onChange={(event) => {
-                      setError(null)
-                      setPasswordRepeat(event.target.value)
-                      setIsPasswordRepeatValid(false)
+                      setError(null);
+                      setPasswordRepeat(event.target.value);
+                      setIsPasswordRepeatValid(false);
 
                       if (
                         event.target.value.length < PASSWORD_MIN_LENGTH ||
                         event.target.value.length > PASSWORD_MAX_LENGTH
                       ) {
-                        return
+                        return;
                       }
 
                       if (event.target.value !== password) {
                         setError({
                           message: 'Password does not match',
-                        })
-                        return
+                        });
+                        return;
                       }
 
-                      setIsPasswordRepeatValid(true)
+                      setIsPasswordRepeatValid(true);
                     }}
                     isWarning={passwordRepeat && !isPasswordRepeatValid}
                     isSuccess={passwordRepeat && isPasswordRepeatValid}
@@ -312,7 +312,7 @@ const MigrateAccount: React.FC<any> = () => {
         </Card>
       ) : null}
     </Page>
-  )
-}
+  );
+};
 
-export default MigrateAccount
+export default MigrateAccount;

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import React, { useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
 import {
   Heading,
   Text,
@@ -17,30 +17,30 @@ import {
   LinkExternal,
   Link,
   BlockIcon,
-} from '~/ui'
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import history from '~/routerHistory'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import Page from '~/components/layout/Page'
-import { getBalanceNumber } from '~/utils/formatBalance'
-import { useTotalSupply, useBurnedBalance } from '~/hooks/useTokenBalance'
-import { useProfile } from '~/state/hooks'
-import { useRunePrice } from '~/state/hooks'
-import TipCard from '~/components/TipCard'
-import useWeb3 from '~/hooks/useWeb3'
-import CardHeader from '~/components/account/CardHeader'
-import useGetWalletNfts from '~/hooks/useGetWalletNfts'
-import { getNativeAddress, getRuneAddress } from '~/utils/addressHelpers'
-import { itemData, ItemType } from 'rune-backend-sdk/build/data/items'
-import CardValueUnstyled from '~/components/raid/CardValueUnstyled'
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type'
-import { RecipeInfo } from '~/components/RecipeInfo'
-import { ProfileInfo } from '~/components/ProfileInfo'
-import NftList from '~/components/characters/NftList'
-import ItemsTable from '~/components/ItemsTable'
-import LoreContainer from '~/components/LoreContainer'
+} from '~/ui';
+import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import history from '~/routerHistory';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import Page from '~/components/layout/Page';
+import { getBalanceNumber } from '~/utils/formatBalance';
+import { useTotalSupply, useBurnedBalance } from '~/hooks/useTokenBalance';
+import { useProfile } from '~/state/hooks';
+import { useRunePrice } from '~/state/hooks';
+import TipCard from '~/components/TipCard';
+import useWeb3 from '~/hooks/useWeb3';
+import CardHeader from '~/components/account/CardHeader';
+import useGetWalletNfts from '~/hooks/useGetWalletNfts';
+import { getNativeAddress, getRuneAddress } from '~/utils/addressHelpers';
+import { itemData, ItemType } from 'rune-backend-sdk/build/data/items';
+import CardValueUnstyled from '~/components/raid/CardValueUnstyled';
+import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { RecipeInfo } from '~/components/RecipeInfo';
+import { ProfileInfo } from '~/components/ProfileInfo';
+import NftList from '~/components/characters/NftList';
+import ItemsTable from '~/components/ItemsTable';
+import LoreContainer from '~/components/LoreContainer';
 
 const ItemContainer = styled.div`
   display: grid;
@@ -54,7 +54,7 @@ const ItemContainer = styled.div`
   ${({ theme }) => theme.mediaQueries.md} {
     grid-template-columns: repeat(2, 1fr);
   }
-`
+`;
 
 const ItemCard = styled.div`
   position: relative;
@@ -84,11 +84,11 @@ const ItemCard = styled.div`
 
   ${({ theme }) => theme.mediaQueries.lg} {
   }
-`
+`;
 
-const Catalog: React.FC = () => {
-  const { t } = useTranslation()
-  const { address: account } = useWeb3()
+const Catalog: React.FC<any> = () => {
+  const { t } = useTranslation();
+  const { address: account } = useWeb3();
 
   return (
     <Page>
@@ -132,7 +132,7 @@ const Catalog: React.FC = () => {
       <br />
       <br />
     </Page>
-  )
-}
+  );
+};
 
-export default Catalog
+export default Catalog;

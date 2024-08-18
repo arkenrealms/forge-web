@@ -1,29 +1,29 @@
-import React from 'react'
-import { Link, Redirect, useParams } from 'react-router-dom'
-import { ChevronLeftIcon, Flex, Text } from '~/ui'
-import PageLoader from '~/components/PageLoader'
-import teams from '~/config/constants/teams'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import { useTeam } from '~/state/hooks'
-import Page from '~/components/layout/Page'
-import PageWindow from '~/components/PageWindow'
-import TeamCard from '~/components/guilds/TeamCard'
-import TeamHeader from '~/components/guilds/TeamHeader'
+import React from 'react';
+import { Link, Navigate, useParams } from 'react-router-dom';
+import { ChevronLeftIcon, Flex, Text } from '~/ui';
+import PageLoader from '~/components/PageLoader';
+import teams from '~/config/constants/teams';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import { useTeam } from '~/state/hooks';
+import Page from '~/components/layout/Page';
+import PageWindow from '~/components/PageWindow';
+import TeamCard from '~/components/guilds/TeamCard';
+import TeamHeader from '~/components/guilds/TeamHeader';
 
 const Team = ({ match }) => {
-  const { id: idStr }: { id: string } = match.params
-  const id = Number(idStr)
-  const { t } = useTranslation()
-  const isValidTeamId = teams.findIndex((team) => team.id === id) !== -1
-  const team = useTeam(id)
+  const { id: idStr }: { id: string } = match.params;
+  const id = Number(idStr);
+  const { t } = useTranslation();
+  const isValidTeamId = teams.findIndex((team) => team.id === id) !== -1;
+  const team = useTeam(id);
 
   if (!isValidTeamId) {
-    return <Redirect to="/404" />
+    return <Navigate to="/404" />;
   }
 
   if (!team) {
-    return <PageLoader />
+    return <PageLoader />;
   }
 
   return (
@@ -41,7 +41,7 @@ const Team = ({ match }) => {
         <TeamCard team={team} />
       </PageWindow>
     </Page>
-  )
-}
+  );
+};
 
-export default Team
+export default Team;

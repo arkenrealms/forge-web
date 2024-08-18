@@ -89,14 +89,14 @@ const parseMatch = (location) => {
 const Updates = () => {
   const location = useLocation();
   const match = parseMatch(location);
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [tabIndex, setTabIndex] = useState(match?.params?.game ? parseInt(match?.params?.game + '') : 0);
 
   const updateHistory = useCallback(
     (key, val) => {
       setTimeout(() => {
         try {
-          history.push({
+          navigate({
             pathname: '/updates',
             search:
               '?' +

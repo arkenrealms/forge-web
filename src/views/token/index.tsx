@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'
-import styled from 'styled-components'
-import { Link as RouterLink, Redirect, useParams } from 'react-router-dom'
-import { Button, Flex, Card, Heading, OpenNewIcon, Link } from '~/ui'
-import Page from '~/components/layout/Page'
-import PageWindow from '~/components/PageWindow'
-import ItemInformation from '~/components/ItemInformation'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import styled from 'styled-components';
+import { Button, Flex, Card, Heading, OpenNewIcon, Link } from '~/ui';
+import Page from '~/components/layout/Page';
+import PageWindow from '~/components/PageWindow';
+import ItemInformation from '~/components/ItemInformation';
 
-import { ItemInfo } from '~/components/ItemInfo'
+import { ItemInfo } from '~/components/ItemInfo';
 
-const Container = styled.div``
+const Container = styled.div``;
 
 const ItemCard = styled(Card)`
   position: relative;
@@ -37,7 +36,7 @@ const ItemCard = styled(Card)`
   ${({ theme }) => theme.mediaQueries.lg} {
     max-width: 470px;
   }
-`
+`;
 const ItemCard2 = styled.div`
   position: relative;
   font-weight: bold;
@@ -66,7 +65,7 @@ const ItemCard2 = styled.div`
 
   ${({ theme }) => theme.mediaQueries.lg} {
   }
-`
+`;
 
 const AddressLink = styled(Link)`
   display: inline-block;
@@ -81,12 +80,12 @@ const AddressLink = styled(Link)`
     font-size: 16px;
     width: auto;
   }
-`
+`;
 
 const Token = ({ match }) => {
-  const { id: tokenId }: { id: string } = match.params
-  const item = decodeItem(tokenId)
-  console.log(JSON.stringify(item, null, 2))
+  const { id: tokenId }: { id: string } = match.params;
+  const item = decodeItem(tokenId);
+  console.log(JSON.stringify(item, null, 2));
   return (
     <Page>
       <Container>
@@ -137,7 +136,7 @@ const Token = ({ match }) => {
         </Flex>
       </Container>
     </Page>
-  )
-}
+  );
+};
 
-export default Token
+export default Token;

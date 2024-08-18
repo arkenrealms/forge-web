@@ -16,7 +16,7 @@ import { getBalanceNumber } from '~/utils/formatBalance';
 import getItems, { emptyItem } from '~/utils/getItems';
 import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'; // 'src/utils/decodeItem' //
 import { orderBy } from 'lodash';
-import useSettings from '~/hooks/useSettings';
+import useSettings from '~/hooks/useSettings2';
 import useGetWalletItems from '~/hooks/useGetWalletItems';
 import {
   getIndexFromMaxtrixPosition,

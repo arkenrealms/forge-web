@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
 import useSound from 'use-sound';
 import styled from 'styled-components';
-import { Link, Redirect, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Button, Flex, BaseLayout, Card, CardBody, Text, LinkExternal, AutoRenewIcon, Heading } from '~/ui';
 import ItemInformation from '~/components/ItemInformation';
 import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';

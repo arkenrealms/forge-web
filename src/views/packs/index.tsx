@@ -292,7 +292,7 @@ const Image = styled.img`
   }
 `;
 
-const Home: React.FC = () => {
+const Home: React.FC<any> = () => {
   const { address: account } = useWeb3();
   const { t } = useTranslation();
   const cache = useCache();

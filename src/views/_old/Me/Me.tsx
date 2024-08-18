@@ -169,7 +169,7 @@ const EquipmentContainer = styled.div`
   }
 `;
 
-const Me: React.FC = () => {
+const Me: React.FC<any> = () => {
   const { t } = useTranslation();
   const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
   const [perfectOnly, setPerfectOnly] = useState(false);

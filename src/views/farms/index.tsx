@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { Route, useRouteMatch, useLocation, Router } from 'react-router-dom';
+import { Route, useLocation, Router } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import BigNumber from 'bignumber.js';
 import history from '~/routerHistory';
@@ -198,7 +198,6 @@ export interface FarmsProps {
 }
 
 const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
-  const { path } = useRouteMatch();
   const { pathname } = useLocation();
   const { t } = useTranslation();
   const farmsLP = useFarms();

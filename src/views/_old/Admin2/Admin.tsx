@@ -36,7 +36,7 @@ export const getAddress = (address: Address): string => {
   return address[chainId] ? address[chainId] : address[mainNetChainId];
 };
 
-const Governance: React.FC = () => {
+const Governance: React.FC<any> = () => {
   const block = useBlock();
   const { library, account } = useWeb3();
   const { t } = useTranslation();

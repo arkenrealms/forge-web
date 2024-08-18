@@ -1,9 +1,9 @@
-import React from 'react'
-import { Result, Button } from 'antd'
-import { useNavigate, Link } from 'react-router-dom'
+import React from 'react';
+import { Result, Button } from 'antd';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function () {
-  const history = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <Result
@@ -11,10 +11,10 @@ export default function () {
       title="Error"
       subTitle="Sorry, an error occurred."
       extra={
-        <Button type="primary" onClick={() => history('/')}>
+        <Button type="primary" onClick={() => navigate('/')}>
           Back To Home
         </Button>
       }
     />
-  )
+  );
 }

@@ -1,21 +1,21 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
-import cx from 'classnames'
-import styled from 'styled-components'
-import { Text } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import RuneDetailsModal from '~/components/RuneDetailsModal'
-import { getRuneAddress } from '~/utils/addressHelpers'
-import CraftModal from '~/components/CraftModal'
-import TradeModal from '~/components/TradeModal'
-import history from '~/routerHistory'
-import EquipModal from '~/components/EquipModal'
-import UnequipModal from '~/components/UnequipModal'
-import TransferModal from '~/components/TransferModal'
-import TransmuteModal from '~/components/TransmuteModal'
-import TrianglesBox from './TrianglesBox'
-import useClickOutside from '~/utils/hooks/useClickOutside'
-import ItemsContext from '~/contexts/ItemsContext'
-import SoundContext from '~/contexts/SoundContext'
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import cx from 'classnames';
+import styled from 'styled-components';
+import { Text } from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import RuneDetailsModal from '~/components/RuneDetailsModal';
+import { getRuneAddress } from '~/utils/addressHelpers';
+import CraftModal from '~/components/CraftModal';
+import TradeModal from '~/components/TradeModal';
+import history from '~/routerHistory';
+import EquipModal from '~/components/EquipModal';
+import UnequipModal from '~/components/UnequipModal';
+import TransferModal from '~/components/TransferModal';
+import TransmuteModal from '~/components/TransmuteModal';
+import TrianglesBox from './TrianglesBox';
+import useClickOutside from '~/utils/hooks/useClickOutside';
+import ItemsContext from '~/contexts/ItemsContext';
+import SoundContext from '~/contexts/SoundContext';
 
 const Container = styled.div`
   user-select: none;
@@ -23,7 +23,7 @@ const Container = styled.div`
   &:hover {
     cursor: url('/images/cursor3.png'), pointer;
   }
-`
+`;
 
 enum ModalOptions {
   NONE = 0,
@@ -40,15 +40,15 @@ enum ModalOptions {
 }
 
 export default ({ name, item, symbol, details, onClose = undefined, style = {} }) => {
-  const { closeModal } = useContext(ItemsContext)
-  const [selectedOption, setSelectedOption] = useState(ModalOptions.DETAILS)
-  const modalRef = useRef<HTMLDivElement>(null)
-  const { playSelect } = useContext(SoundContext)
-  const isRune = name.indexOf('Rune') !== -1
-  const [onPresentCraftModal] = useModal(<CraftModal onSuccess={() => {}} />)
-  const [onPresentTradeModal] = useModal(<TradeModal item={item} onSuccess={() => {}} />)
-  const [onPresentEquipModal] = useModal(<EquipModal tokenId={item.tokenId} onSuccess={() => {}} />)
-  const [onPresentUnequipModal] = useModal(<UnequipModal tokenId={item.tokenId} onSuccess={() => {}} />)
+  const { closeModal } = useContext(ItemsContext);
+  const [selectedOption, setSelectedOption] = useState(ModalOptions.DETAILS);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const { playSelect } = useContext(SoundContext);
+  const isRune = name.indexOf('Rune') !== -1;
+  const [onPresentCraftModal] = useModal(<CraftModal onSuccess={() => {}} />);
+  const [onPresentTradeModal] = useModal(<TradeModal item={item} onSuccess={() => {}} />);
+  const [onPresentEquipModal] = useModal(<EquipModal tokenId={item.tokenId} onSuccess={() => {}} />);
+  const [onPresentUnequipModal] = useModal(<UnequipModal tokenId={item.tokenId} onSuccess={() => {}} />);
   const [onPresentTransferModal] = useModal(
     <TransferModal
       symbol={symbol}
@@ -57,8 +57,8 @@ export default ({ name, item, symbol, details, onClose = undefined, style = {} }
       tokenId={item.tokenId}
       onSuccess={() => {}}
     />
-  )
-  const [onPresentTransmuteModal] = useModal(<TransmuteModal tokenId={item.tokenId} onSuccess={() => {}} />)
+  );
+  const [onPresentTransmuteModal] = useModal(<TransmuteModal tokenId={item.tokenId} onSuccess={() => {}} />);
 
   const [onPresentDetailsModal] = useModal(
     <RuneDetailsModal
@@ -67,90 +67,90 @@ export default ({ name, item, symbol, details, onClose = undefined, style = {} }
       details={details}
       onSuccess={() => {}}
     />
-  )
+  );
 
-  const handleClose = onClose ? onClose : closeModal
+  const handleClose = onClose ? onClose : closeModal;
 
-  useClickOutside(modalRef, handleClose)
+  useClickOutside(modalRef, handleClose);
 
   const onTrade = () => {
-    setSelectedOption(ModalOptions.TRADE)
-    onPresentTradeModal()
-  }
+    setSelectedOption(ModalOptions.TRADE);
+    onPresentTradeModal();
+  };
 
   const onCraft = () => {
     setSelectedOption(ModalOptions.CRAFT)
     history.push('/transmute')
     // onPresentCraftModal()
-  }
+  };
 
   const onEquip = () => {
-    setSelectedOption(ModalOptions.EQUIP)
-    onPresentEquipModal()
-  }
+    setSelectedOption(ModalOptions.EQUIP);
+    onPresentEquipModal();
+  };
 
   const onUnequip = () => {
-    setSelectedOption(ModalOptions.UNEQUIP)
-    onPresentUnequipModal()
-  }
+    setSelectedOption(ModalOptions.UNEQUIP);
+    onPresentUnequipModal();
+  };
 
   const onTransfer = () => {
-    setSelectedOption(ModalOptions.TRANSFER)
-    onPresentTransferModal()
-  }
+    setSelectedOption(ModalOptions.TRANSFER);
+    onPresentTransferModal();
+  };
 
   const onDetails = () => {
-    setSelectedOption(ModalOptions.DETAILS)
-    onPresentDetailsModal()
-  }
+    setSelectedOption(ModalOptions.DETAILS);
+    onPresentDetailsModal();
+  };
 
   const onTransmute = () => {
-    setSelectedOption(ModalOptions.TRANSMUTE)
-    onPresentTransmuteModal()
-  }
+    setSelectedOption(ModalOptions.TRANSMUTE);
+    onPresentTransmuteModal();
+  };
 
   const handleKeyPressed = (event: React.KeyboardEvent) => {
-    event.stopPropagation()
-    event.preventDefault()
+    event.stopPropagation();
+    event.preventDefault();
     if (event.key === 'ArrowUp') {
-      setSelectedOption(Math.max(selectedOption - 1, 0))
-      playSelect()
+      setSelectedOption(Math.max(selectedOption - 1, 0));
+      playSelect();
     } else if (event.key === 'ArrowDown') {
-      setSelectedOption(Math.min(selectedOption + 1, 6))
-      playSelect()
+      setSelectedOption(Math.min(selectedOption + 1, 6));
+      playSelect();
     } else if (event.key === 'Enter') {
       switch (selectedOption) {
         case ModalOptions.TRADE:
-          onTrade()
-          break
+          onTrade();
+          break;
         case ModalOptions.CRAFT:
-          onCraft()
-          break
+          onCraft();
+          break;
         case ModalOptions.EQUIP:
-          onEquip()
-          break
+          onEquip();
+          break;
         case ModalOptions.UNEQUIP:
-          onUnequip()
-          break
+          onUnequip();
+          break;
         case ModalOptions.DETAILS:
-          onDetails()
-          break
+          onDetails();
+          break;
         case ModalOptions.TRANSMUTE:
-          onTransmute()
-          break
+          onTransmute();
+          break;
         default:
-          closeModal && closeModal()
-          break
+          closeModal && closeModal();
+          break;
       }
-      closeModal && closeModal()
+      closeModal && closeModal();
     }
-  }
+  };
 
   useEffect(() => {
     if (modalRef.current) {
-      modalRef.current.focus()
+      modalRef.current.focus();
     }
-  }, [])
+  }, []);
 
   return (
     <Container
@@ -272,5 +272,5 @@ export default ({ name, item, symbol, details, onClose = undefined, style = {} }
         </div>
       </div>
     </Container>
-  )
-}
+  );
+};

@@ -42,6 +42,7 @@ type Props = {
   showOwner?: boolean;
   defaultBranch?: string;
   quantity?: number;
+  children?: any;
 };
 
 enum ModalOptions {

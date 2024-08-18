@@ -1,13 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Heading, Text, BaseLayout } from '~/ui'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import Page from '~/components/layout/Page'
-import PageWindow from '~/components/PageWindow'
+import React from 'react';
+import styled from 'styled-components';
+import { Heading, Text, BaseLayout } from '~/ui';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import Page from '~/components/layout/Page';
+import PageWindow from '~/components/PageWindow';
 
-const Marketplace: React.FC = () => {
-  const { t } = useTranslation()
+const Marketplace: React.FC<any> = () => {
+  const { t } = useTranslation();
 
   return (
     <Page>
@@ -20,7 +20,7 @@ const Marketplace: React.FC = () => {
         </Heading>
       </PageWindow>
     </Page>
-  )
-}
+  );
+};
 
-export default Marketplace
+export default Marketplace;

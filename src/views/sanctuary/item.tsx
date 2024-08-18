@@ -1,15 +1,14 @@
-import React from 'react'
-import { Link, Redirect, useParams } from 'react-router-dom'
-import Item from '~/components/Sanctuary/Item'
-import LoreContainer from '~/components/LoreContainer'
+import React from 'react';
+import Item from '~/components/Sanctuary/Item';
+import LoreContainer from '~/components/LoreContainer';
 
 const ItemView = ({ match }) => {
-  const { id }: { id: string } = match.params
+  const { id }: { id: string } = match.params;
   return (
     <LoreContainer>
       <Item id={id} />
     </LoreContainer>
-  )
-}
+  );
+};
 
-export default ItemView
+export default ItemView;

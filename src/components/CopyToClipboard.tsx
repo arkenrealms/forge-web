@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { Text, CopyIcon } from '~/ui'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Text, CopyIcon } from '~/ui';
 
 interface Props {
-  toCopy: string
+  toCopy: string;
+  children?: any;
 }
 
 const StyleButton = styled(Text).attrs({ role: 'button' })`
@@ -11,7 +12,7 @@ const StyleButton = styled(Text).attrs({ role: 'button' })`
   display: inline-flex;
   align-items: center;
   color: ${({ theme }) => theme.colors.primary};
-`
+`;
 
 const Tooltip = styled.div<{ isTooltipDisplayed: boolean }>`
   display: ${({ isTooltipDisplayed }) => (isTooltipDisplayed ? 'block' : 'none')};
@@ -24,10 +25,10 @@ const Tooltip = styled.div<{ isTooltipDisplayed: boolean }>`
   color: ${({ theme }) => theme.colors.invertedContrast};
   border-radius: 16px;
   opacity: 0.7;
-`
+`;
 
 export const CopyToClipboard: React.FC<Props> = ({ toCopy, children, ...props }) => {
-  const [isTooltipDisplayed, setIsTooltipDisplayed] = useState(false)
+  const [isTooltipDisplayed, setIsTooltipDisplayed] = useState(false);
 
   return (
     <StyleButton
@@ -35,18 +36,17 @@ export const CopyToClipboard: React.FC<Props> = ({ toCopy, children, ...props })
       bold
       onClick={() => {
         if (navigator.clipboard) {
-          navigator.clipboard.writeText(toCopy)
-          setIsTooltipDisplayed(true)
+          navigator.clipboard.writeText(toCopy);
+          setIsTooltipDisplayed(true);
           setTimeout(() => {
-            setIsTooltipDisplayed(false)
-          }, 1000)
+            setIsTooltipDisplayed(false);
+          }, 1000);
         }
       }}
-      {...props}
-    >
+      {...props}>
       {children}
       <CopyIcon width="20px" color="primary" ml="4px" />
       <Tooltip isTooltipDisplayed={isTooltipDisplayed}>Copied</Tooltip>
     </StyleButton>
-  )
-}
+  );
+};

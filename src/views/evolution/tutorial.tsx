@@ -342,7 +342,7 @@ const PurchaseLink = styled.div`
   color: #ddd;
 `;
 
-const Guide: React.FC = () => {
+const Guide: React.FC<any> = () => {
   const { t } = useTranslation();
   const cache = useCache();
   const [tabIndex, setTabIndex] = useState(0);

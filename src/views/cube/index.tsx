@@ -234,10 +234,10 @@ const Promo1 = styled.div`
   margin-top: 10px;
 `;
 
-const Evolution: React.FC = () => {
+const Evolution: React.FC<any> = () => {
   const { t } = useTranslation();
   const location = useLocation();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const match = parseMatch(location);
   const { web3 } = useWeb3();
 
@@ -252,7 +252,7 @@ const Evolution: React.FC = () => {
       <MainCard>
         <Promo1
           onClick={() => {
-            history.push('/fundraiser');
+            navigate('/fundraiser');
           }}>
           <Heading
             as="h2"
@@ -302,7 +302,7 @@ const Evolution: React.FC = () => {
             <SpecialButton
               title="Buy Now"
               onClick={() => {
-                history.push('/fundraiser');
+                navigate('/fundraiser');
               }}>
               {/* <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">Sss</HeadingFire> */}
             </SpecialButton>

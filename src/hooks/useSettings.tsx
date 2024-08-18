@@ -1,38 +1,37 @@
-import React, { useEffect, useState, useContext, createContext } from 'react'
-import styled, { createGlobalStyle, css } from 'styled-components'
-import _ from 'lodash'
-import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from 'antd'
-import useNexusSettings from '@arken/forge-ui/hooks/useSettings'
-import Settings from '../components/Settings'
+import React, { useEffect, useState, useContext, createContext } from 'react';
+import styled, { createGlobalStyle, css } from 'styled-components';
+import _ from 'lodash';
+import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from 'antd';
+import useNexusSettings from '@arken/forge-ui/hooks/useSettings';
+import Settings from '../components/Settings';
 
-const { Option } = Select
+const { Option } = Select;
 
-const zzz = styled.div``
+const zzz = styled.div``;
 
 const SettingsContext = createContext<any>({
   settings: {},
   show: () => {},
-})
+});
 
 const SettingsProvider = ({ children }: any) => {
-  const { settings } = useNexusSettings()
-  const [open, setOpen] = useState(false)
+  const { settings } = useNexusSettings();
+  const [open, setOpen] = useState(false);
 
   const show = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const onClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <SettingsContext.Provider
       value={{
         settings,
         show,
-      }}
-    >
+      }}>
       {children}
       <Drawer
         title="Settings"
@@ -151,13 +150,13 @@ const SettingsProvider = ({ children }: any) => {
         <Settings />
       </Drawer>
     </SettingsContext.Provider>
-  )
-}
+  );
+};
 
 function useSettings() {
-  const context = useContext(SettingsContext)
+  const context = useContext(SettingsContext);
 
-  return context
+  return context;
 }
 
-export { useSettings, SettingsProvider, SettingsContext }
+export { useSettings, SettingsProvider, SettingsContext };

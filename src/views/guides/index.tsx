@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, Redirect, useParams } from 'react-router-dom';
 import { Card, CardBody, Heading } from '~/ui';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import Page from '~/components/layout/Page';

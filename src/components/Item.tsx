@@ -3,7 +3,7 @@ import styled, { css, keyframes } from 'styled-components';
 import React, { useContext, useEffect, useState } from 'react';
 import { BsCheckSquareFill } from 'react-icons/bs';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
-import useSettings from '~/hooks/useSettings';
+import useSettings from '~/hooks/useSettings2';
 import { Popover } from 'react-tiny-popover';
 import ItemsContext from '~/contexts/ItemsContext';
 import symbolMap from '~/utils/symbolMap';

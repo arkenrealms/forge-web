@@ -1,27 +1,27 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { Text, Button, Flex } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import history from '~/routerHistory'
-import { delay } from 'lodash'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import confetti from 'canvas-confetti'
-import nftList from '~/config/constants/nfts'
-import { BULL_NFT, HICCUP_NFT } from '../../views/characters/hooks/useGetBullHiccupClaimableStatus'
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { Text, Button, Flex } from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import history from '~/routerHistory';
+import { delay } from 'lodash';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import confetti from 'canvas-confetti';
+import nftList from '~/config/constants/nfts';
+import { BULL_NFT, HICCUP_NFT } from '../../views/characters/hooks/useGetBullHiccupClaimableStatus';
 
 interface ClaimBullHiccupNftModalProps extends InjectedModalProps {
-  isBullClaimable: boolean
-  isHiccupClaimable: boolean
+  isBullClaimable: boolean;
+  isHiccupClaimable: boolean;
 }
 
-const bullNft = nftList.find((nft) => nft.characterId === BULL_NFT)
-const hiccupNft = nftList.find((nft) => nft.characterId === HICCUP_NFT)
+const bullNft = nftList.find((nft) => nft.characterId === BULL_NFT);
+const hiccupNft = nftList.find((nft) => nft.characterId === HICCUP_NFT);
 
 const NftImage = styled.img`
   border-radius: 50%;
   margin-bottom: 24px;
-`
+`;
 
 const showConfetti = () => {
   confetti({
@@ -34,29 +34,31 @@ const showConfetti = () => {
       x: 0.5,
       y: 0.3,
     },
-  })
-}
+  });
+};
 
 const renderNftPreview = (isBullClaimable: boolean, isHiccupClaimable: boolean) => {
   if (isBullClaimable && isHiccupClaimable) {
-    return <img src="/images/bull-hiccup.png" height="128px" width="128px" alt="nft" style={{ marginBottom: '24px' }} />
+    return (
+      <img src="/images/bull-hiccup.png" height="128px" width="128px" alt="nft" style={{ marginBottom: '24px' }} />
+    );
   }
 
   if (isBullClaimable) {
-    return <NftImage src={`/images/nfts/${bullNft.images.md}`} height="128px" width="128px" alt="nft" />
+    return <NftImage src={`/images/nfts/${bullNft.images.md}`} height="128px" width="128px" alt="nft" />;
   }
 
-  return <NftImage src={`/images/nfts/${hiccupNft.images.md}`} height="128px" width="128px" alt="nft" />
-}
+  return <NftImage src={`/images/nfts/${hiccupNft.images.md}`} height="128px" width="128px" alt="nft" />;
+};
 
 const ClaimBullHiccupNftModal: React.FC<ClaimBullHiccupNftModalProps> = ({
   isBullClaimable,
   isHiccupClaimable,
   onDismiss,
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const collectibleMessage =
-    isBullClaimable && isHiccupClaimable ? t('You won two Collectibles!') : t('You won a collectible!')
+    isBullClaimable && isHiccupClaimable ? t('You won two Collectibles!') : t('You won a collectible!');
 
   // This is required because the modal exists outside the Router
   const handleClick = () => {
@@ -65,8 +67,8 @@ const ClaimBullHiccupNftModal: React.FC<ClaimBullHiccupNftModalProps> = ({
   }
 
   useEffect(() => {
-    delay(showConfetti, 100)
-  }, [])
+    delay(showConfetti, 100);
+  }, []);
 
   return (
     <Modal title={t('Congratulations!')} onDismiss={onDismiss}>
@@ -78,7 +80,7 @@ const ClaimBullHiccupNftModal: React.FC<ClaimBullHiccupNftModalProps> = ({
         <Button onClick={handleClick}>{t('Claim now')}</Button>
       </Flex>
     </Modal>
-  )
-}
+  );
+};
 
-export default ClaimBullHiccupNftModal
+export default ClaimBullHiccupNftModal;

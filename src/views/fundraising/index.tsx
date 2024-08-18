@@ -361,7 +361,7 @@ const parseMatch = (location) => {
 let init = false;
 
 const Market = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { address: account } = useWeb3();
   const location = useLocation();
@@ -397,7 +397,7 @@ const Market = () => {
     (key, val) => {
       setTimeout(() => {
         try {
-          history.push({
+          navigate({
             pathname: '/fundraising',
             search:
               '?' +
@@ -425,7 +425,7 @@ const Market = () => {
       }, 500);
     },
     [
-      history,
+      navigate,
       tab,
       advanced,
       meOnly,

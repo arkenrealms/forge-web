@@ -272,11 +272,11 @@ async function callRealmServer(realm, name, data = undefined) {
 
 let signature;
 
-const Evolution: React.FC = () => {
+const Evolution: React.FC<any> = () => {
   const location = useLocation();
   const match = parseMatch(location);
   const { t } = useTranslation();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { account: address, library } = useWeb3();
   const { web3 } = useWeb3();
   const [realm, setRealm] = useState(null);
@@ -313,7 +313,7 @@ const Evolution: React.FC = () => {
     (key, val) => {
       setTimeout(() => {
         try {
-          history.push({
+          navigate({
             pathname: '/mod',
             search:
               '?' +
@@ -328,7 +328,7 @@ const Evolution: React.FC = () => {
         }
       }, 500);
     },
-    [history, tab]
+    [navigate, tab]
   );
 
   const updateTab = (val) => {

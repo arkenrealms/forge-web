@@ -1,21 +1,22 @@
-import cx from 'classnames'
-import React, { useContext } from 'react'
-import SoundContext from '~/contexts/SoundContext'
+import cx from 'classnames';
+import React, { useContext } from 'react';
+import SoundContext from '~/contexts/SoundContext';
 
 type Props = {
-  category: string
-  setCategory: React.Dispatch<React.SetStateAction<[string, number]>>
-  isSelected: boolean
-}
+  category: string;
+  setCategory: React.Dispatch<React.SetStateAction<[string, number]>>;
+  isSelected: boolean;
+  children?: any;
+};
 
 const CategoriesMenuItem: React.FC<Props> = ({ category, setCategory, isSelected, children }) => {
-  const { playAction } = useContext(SoundContext)
+  const { playAction } = useContext(SoundContext);
 
   return (
     <div
       onClick={() => {
-        setCategory([category, 0])
-        playAction()
+        setCategory([category, 0]);
+        playAction();
       }}
       className={cx(
         {
@@ -26,7 +27,7 @@ const CategoriesMenuItem: React.FC<Props> = ({ category, setCategory, isSelected
       )}>
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default CategoriesMenuItem
+export default CategoriesMenuItem;

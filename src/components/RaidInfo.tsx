@@ -60,7 +60,7 @@ const EquipmentModal = ({ onDismiss }) => {
   );
 };
 
-export const RaidInfo: React.FC = () => {
+export const RaidInfo: React.FC<any> = () => {
   const { contract: masterChefContract, setChefKey, chefKey } = useMasterchef();
   const { account, library } = useWeb3();
   const { profile } = useProfile(account);

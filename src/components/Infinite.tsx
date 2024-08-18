@@ -254,7 +254,7 @@ const UtilityModalClose = styled.div`
   padding: 10px;
   color: #999;
 `;
-const Home: React.FC = () => {
+const Home: React.FC<any> = () => {
   const cache = useCache();
   const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
   const [pageLoaded, setPageLoaded] = useState(false);

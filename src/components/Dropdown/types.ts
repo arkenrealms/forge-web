@@ -1,10 +1,11 @@
-export type Position = 'top' | 'top-right' | 'bottom'
+export type Position = 'top' | 'top-right' | 'bottom';
 
 export interface PositionProps {
-  position?: Position
+  position?: Position;
 }
 
 export interface DropdownProps extends PositionProps {
-  onClick?: any
-  target: React.ReactElement
+  onClick?: any;
+  target: React.ReactElement;
+  children: any;
 }

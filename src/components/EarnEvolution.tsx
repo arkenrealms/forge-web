@@ -1,21 +1,9 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Link as RouterLink } from 'react-router-dom';
 import { Heading, Card, CardBody, Flex, ArrowForwardIcon, Button, OpenNewIcon, Skeleton, LinkExternal } from '~/ui';
 import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
-import { NavLink } from 'react-router-dom';
 import useI18n from '~/hooks/useI18n';
 import { useTranslation } from 'react-i18next';
-import BigNumber from 'bignumber.js';
-import { getBalanceNumber } from '~/utils/formatBalance';
-import { useRewardPerBlock } from '~/hooks/useRewardPerBlock';
-import { useFarmStatus } from '~/hooks/useFarmStatus';
-import { useMasterchef } from '~/hooks/useContract';
-import { PurchaseModal } from '~/components/PurchaseModal';
-import { CURRENT_FARM_SYMBOL, NEXT_FARM_SYMBOL, CURRENT_FARM_PAUSED } from '~/config';
-import { QuoteToken } from '~/config/constants/types';
-import { useBnbPrice, useFarms, useGetApiPrice, useRunePrice } from '~/state/hooks';
-import { BLOCKS_PER_YEAR, REWARD_PER_BLOCK, REWARD_BUSD_POOL_PID, OLD_VERSION } from '~/config';
 
 const RainbowLight = keyframes`
 	0% {

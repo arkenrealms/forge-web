@@ -18,7 +18,7 @@ import { Rnd } from 'react-rnd';
 import {
   Link as RouterLink,
   matchPath,
-  Redirect,
+  Navigate,
   Route,
   Router,
   useNavigate,
@@ -1659,7 +1659,7 @@ const DraggableWindow: React.FC<any> = React.memo(
       _rnd.current.updateSize({ width: 700, height: 700 });
       _rnd.current.updatePosition({ x: 300, y: 300 });
 
-      window.localStorage.setItem(`WindowPath-${routePath}`, match?.url);
+      window.localStorage.setItem(`WindowPath-${routePath}`, match?.pathname);
       window.localStorage.setItem(`WindowPosition-${routePath}`, JSON.stringify({ x: 300, y: 300 }));
       window.localStorage.setItem(`WindowSize-${routePath}`, JSON.stringify({ width: 700, height: 700 }));
       window.localStorage.setItem(`WindowStatus-${routePath}`, 'opened');
@@ -1725,92 +1725,95 @@ const DraggableWindow: React.FC<any> = React.memo(
 
     console.log('Render page:', title);
 
+    // @ts-ignore
     return (
-      <Rnd
-        ref={rnd}
-        default={{
-          x: windowPosition.x < 0 ? 0 : windowPosition.x,
-          y: windowPosition.y < 0 ? 0 : windowPosition.y,
-          width: windowSize.width,
-          height: windowSize.height,
-        }}
-        dragHandleClassName="handle"
-        resizeGrid={[50, 50]}
-        dragGrid={[50, 50]}
-        disableDragging={isMaximized}
-        enableResizing={!isMaximized}
-        onDragStart={() => {
-          onFocus(function (index) {
-            setZIndex(index);
-          });
-        }}
-        onDrag={(e, d) => {
-          // this.setState({ x: d.x, y: d.y });
-          window.localStorage.setItem(`WindowPath-${routePath}`, match?.url);
-          window.localStorage.setItem(`WindowStatus-${routePath}`, 'opened');
-          window.localStorage.setItem(`WindowPosition-${routePath}`, JSON.stringify({ x: d.x, y: d.y }));
-        }}
-        onResizeStart={() => {
-          onFocus(function (index) {
-            setZIndex(index);
-          });
-        }}
-        onResize={(e, direction, ref, delta, _position) => {
-          // debugger
-          window.localStorage.setItem(`WindowPath-${routePath}`, match?.url);
-          window.localStorage.setItem(`WindowStatus-${routePath}`, 'opened');
-          window.localStorage.setItem(
-            `WindowPosition-${routePath}`,
-            JSON.stringify({ x: _position.x, y: _position.y })
-          );
-          window.localStorage.setItem(
-            `WindowSize-${routePath}`,
-            JSON.stringify({ width: ref.offsetWidth, height: ref.offsetHeight })
-          );
+      <>
+        {/* @ts-ignore */}
+        <Rnd
+          ref={rnd}
+          default={{
+            x: windowPosition.x < 0 ? 0 : windowPosition.x,
+            y: windowPosition.y < 0 ? 0 : windowPosition.y,
+            width: windowSize.width,
+            height: windowSize.height,
+          }}
+          dragHandleClassName="handle"
+          resizeGrid={[50, 50]}
+          dragGrid={[50, 50]}
+          disableDragging={isMaximized}
+          enableResizing={!isMaximized}
+          onDragStart={() => {
+            onFocus(function (index) {
+              setZIndex(index);
+            });
+          }}
+          onDrag={(e, d) => {
+            // this.setState({ x: d.x, y: d.y });
+            window.localStorage.setItem(`WindowPath-${routePath}`, match?.pathname);
+            window.localStorage.setItem(`WindowStatus-${routePath}`, 'opened');
+            window.localStorage.setItem(`WindowPosition-${routePath}`, JSON.stringify({ x: d.x, y: d.y }));
+          }}
+          onResizeStart={() => {
+            onFocus(function (index) {
+              setZIndex(index);
+            });
+          }}
+          onResize={(e, direction, ref, delta, _position) => {
+            // debugger
+            window.localStorage.setItem(`WindowPath-${routePath}`, match?.pathname);
+            window.localStorage.setItem(`WindowStatus-${routePath}`, 'opened');
+            window.localStorage.setItem(
+              `WindowPosition-${routePath}`,
+              JSON.stringify({ x: _position.x, y: _position.y })
+            );
+            window.localStorage.setItem(
+              `WindowSize-${routePath}`,
+              JSON.stringify({ width: ref.offsetWidth, height: ref.offsetHeight })
+            );
 
-          rnd.current.updateSize({ width: ref.offsetWidth, height: ref.offsetHeight });
-          // this.setState({
-          //   width: ref.style.width,
-          //   height: ref.style.height,
-          //   ...position
-          // });
-        }}
-        bounds="parent"
-        minWidth="360px"
-        minHeight="500px"
-        key={match?.url || routePath}
-        style={{ zIndex }}>
-        <FullPageWindow ref={pageElement} className="app__fullpage-window">
-          <WindowHeader active={active} className="app__fullpage-window__header handle">
-            <SiteNav id={subnav} />
-            <AppToolbar key="app-toolbar" showMenu className="app__toolbar">
-              <Flex
-                alignItems={['start', null, 'center']}
-                justifyContent={['start', null, 'space-between']}
-                flexDirection={['column', null, 'row']}
-                style={{ maxHeight: 43 }}>
+            rnd.current.updateSize({ width: ref.offsetWidth, height: ref.offsetHeight });
+            // this.setState({
+            //   width: ref.style.width,
+            //   height: ref.style.height,
+            //   ...position
+            // });
+          }}
+          bounds="parent"
+          minWidth="360px"
+          minHeight="500px"
+          key={match?.pathname || routePath}
+          style={{ zIndex }}>
+          <FullPageWindow ref={pageElement} className="app__fullpage-window">
+            <WindowHeader active={active} className="app__fullpage-window__header handle">
+              <SiteNav id={subnav} />
+              <AppToolbar key="app-toolbar" showMenu className="app__toolbar">
                 <Flex
-                  justifyContent="start"
-                  alignItems="center"
-                  css={css`
-                    button {
-                      border-bottom: 2px solid transparent;
+                  alignItems={['start', null, 'center']}
+                  justifyContent={['start', null, 'space-between']}
+                  flexDirection={['column', null, 'row']}
+                  style={{ maxHeight: 43 }}>
+                  <Flex
+                    justifyContent="start"
+                    alignItems="center"
+                    css={css`
+                      button {
+                        border-bottom: 2px solid transparent;
 
-                      &.active,
-                      &:hover {
-                        border-bottom: 2px solid #fff;
-                        border-radius: 0;
-                        color: #fff;
+                        &.active,
+                        &:hover {
+                          border-bottom: 2px solid #fff;
+                          border-radius: 0;
+                          color: #fff;
+                        }
                       }
-                    }
-                  `}>
-                  {toolbarNav ? toolbarNav(subnav, setSubnav) : title && brand === 'w4' ? title : null}
-                  {/* (
+                    `}>
+                    {toolbarNav ? toolbarNav(subnav, setSubnav) : title && brand === 'w4' ? title : null}
+                    {/* (
                     <Button scale="sm" variant="text" onClick={() => {}}>
                       {title}
                     </Button>
                   ) */}
-                  {/* {isMobile ? (
+                    {/* {isMobile ? (
                   <Button scale="sm" onClick={() => setShowMenu(!showMenu)} style={{ zoom: 0.8, marginLeft: 10 }}>
                     {showMenu ? 'Hide' : 'Show'} Menu
                   </Button>
@@ -1826,61 +1829,61 @@ const DraggableWindow: React.FC<any> = React.memo(
                     Tutorial 
                   </Button>
                 )} */}
-                </Flex>
-                <Flex justifyContent="space-between" alignItems="center">
-                  {isMaximized ? <ToolbarNotification /> : null}
-                  {isMaximized && settings.isCrypto ? (
-                    <div css={{ marginTop: -8 }}>
-                      <Button
-                        scale="sm"
-                        onClick={onPresentPurchaseModal}
-                        style={{ zoom: 0.7, marginLeft: 10, marginRight: 10, fontFamily: 'arial, sans-serif' }}>
-                        Buy $RXS
-                      </Button>
-                      <Button
-                        scale="sm"
-                        onClick={() => history.push('/swap')}
-                        style={{ zoom: 0.7, marginLeft: 10, marginRight: 10, fontFamily: 'arial, sans-serif' }}>
-                        Swap Runes
-                      </Button>
-                    </div>
-                  ) : null}
-                  <span>&nbsp;</span>{' '}
-                  <Button
-                    scale="sm"
-                    variant="text"
-                    onClick={() => (isMaximized ? goUnmaximized(rnd) : goMaximized(rnd))}
-                    style={{ padding: '0 5px' }}>
-                    {isMaximized ? <FiMinimize style={{ zoom: 0.9 }} /> : <FiMaximize style={{ zoom: 0.9 }} />}
-                  </Button>
-                  <Button
-                    scale="sm"
-                    variant="text"
-                    onClick={() =>
-                      !window.screenTop && !window.screenY ? exitFullscreen() : goFullscreen(pageElement.current)
-                    }
-                    style={{ padding: '0 5px' }}>
-                    {isFullscreen ? <FiMinimize2 style={{ zoom: 0.9 }} /> : <FiMaximize2 style={{ zoom: 0.9 }} />}
-                  </Button>
-                  <Button
-                    scale="sm"
-                    variant="text"
-                    onClick={() => {
-                      window.localStorage.removeItem(`WindowPath-${routePath}`);
-                      window.localStorage.removeItem(`WindowStatus-${routePath}`);
-                      window.localStorage.removeItem(`WindowPosition-${routePath}`);
-                      window.localStorage.removeItem(`WindowSize-${routePath}`);
-                      onClose(routePath);
-                    }}
-                    style={{ padding: '0 5px' }}>
-                    <BsX style={{ zoom: 1.3 }} />
-                  </Button>
-                  {/* {loaded && !claimRewardStatus ? (
+                  </Flex>
+                  <Flex justifyContent="space-between" alignItems="center">
+                    {isMaximized ? <ToolbarNotification /> : null}
+                    {isMaximized && settings.isCrypto ? (
+                      <div css={{ marginTop: -8 }}>
+                        <Button
+                          scale="sm"
+                          onClick={onPresentPurchaseModal}
+                          style={{ zoom: 0.7, marginLeft: 10, marginRight: 10, fontFamily: 'arial, sans-serif' }}>
+                          Buy $RXS
+                        </Button>
+                        <Button
+                          scale="sm"
+                          onClick={() => history.push('/swap')}
+                          style={{ zoom: 0.7, marginLeft: 10, marginRight: 10, fontFamily: 'arial, sans-serif' }}>
+                          Swap Runes
+                        </Button>
+                      </div>
+                    ) : null}
+                    <span>&nbsp;</span>{' '}
+                    <Button
+                      scale="sm"
+                      variant="text"
+                      onClick={() => (isMaximized ? goUnmaximized(rnd) : goMaximized(rnd))}
+                      style={{ padding: '0 5px' }}>
+                      {isMaximized ? <FiMinimize style={{ zoom: 0.9 }} /> : <FiMaximize style={{ zoom: 0.9 }} />}
+                    </Button>
+                    <Button
+                      scale="sm"
+                      variant="text"
+                      onClick={() =>
+                        !window.screenTop && !window.screenY ? exitFullscreen() : goFullscreen(pageElement.current)
+                      }
+                      style={{ padding: '0 5px' }}>
+                      {isFullscreen ? <FiMinimize2 style={{ zoom: 0.9 }} /> : <FiMaximize2 style={{ zoom: 0.9 }} />}
+                    </Button>
+                    <Button
+                      scale="sm"
+                      variant="text"
+                      onClick={() => {
+                        window.localStorage.removeItem(`WindowPath-${routePath}`);
+                        window.localStorage.removeItem(`WindowStatus-${routePath}`);
+                        window.localStorage.removeItem(`WindowPosition-${routePath}`);
+                        window.localStorage.removeItem(`WindowSize-${routePath}`);
+                        onClose(routePath);
+                      }}
+                      style={{ padding: '0 5px' }}>
+                      <BsX style={{ zoom: 1.3 }} />
+                    </Button>
+                    {/* {loaded && !claimRewardStatus ? (
                   <Button scale="sm" onClick={claimRewards} style={{zoom: 0.8, marginTop: 5}}>
                     Claim Rewards
                   </Button>
                 ) : null} */}
-                  {/* {!isMobile && isGameStarted && !isGameHidden ? (
+                    {/* {!isMobile && isGameStarted && !isGameHidden ? (
                   <span
                     id="breakCountdown"
                     style={{
@@ -1890,12 +1893,12 @@ const DraggableWindow: React.FC<any> = React.memo(
                     }}
                   ></span>
                 ) : null} */}
-                  {/* {!isMobile && isGameStarted && !isGameHidden ? (
+                    {/* {!isMobile && isGameStarted && !isGameHidden ? (
                     <Button scale="sm" variant="text" onClick={hideGame} style={{ marginLeft: 10 }}>
                       Rewards: ${totalRewardValue.toFixed(2)}
                     </Button>
                   ) : null} */}
-                  {/* {isMobile ? (
+                    {/* {isMobile ? (
                   <Button
                     scale="sm"
                     onClick={() => {
@@ -1907,7 +1910,7 @@ const DraggableWindow: React.FC<any> = React.memo(
                     Tutorial
                   </Button>
                 ) : null} */}
-                  {/* {isGameStarted && !isGameHidden ? (
+                    {/* {isGameStarted && !isGameHidden ? (
                     <Button
                       scale="sm"
                       onClick={() => onPresentReportModal()}
@@ -1916,7 +1919,7 @@ const DraggableWindow: React.FC<any> = React.memo(
                       Report
                     </Button>
                   ) : null} */}
-                  {/* {isGameStarted && !isGameHidden ? (
+                    {/* {isGameStarted && !isGameHidden ? (
                   <Button scale="sm" onClick={hideGame} style={{ zoom: 0.8, marginLeft: 10, marginRight: 10 }}>
                     Show Intro
                   </Button>
@@ -1926,7 +1929,7 @@ const DraggableWindow: React.FC<any> = React.memo(
                     Show Game
                   </Button>
                 ) : null} */}
-                  {/* {isGameStarted && !isGameHidden && !isGamePaused ? (
+                    {/* {isGameStarted && !isGameHidden && !isGamePaused ? (
                     <Button scale="sm" onClick={pauseGame} style={{ zoom: 0.8, marginLeft: 10, marginRight: 10 }}>
                       Pause Game
                     </Button>
@@ -1936,16 +1939,16 @@ const DraggableWindow: React.FC<any> = React.memo(
                       Resume Game
                     </Button>
                   ) : null} */}
-                  {/* {isGameStarted && !isGameHidden ? (
+                    {/* {isGameStarted && !isGameHidden ? (
                   <Button scale="sm" variant="text" onClick={goFullscreen}>
                     <BsArrowsFullscreen />
                   </Button>
                 ) : null} */}
+                  </Flex>
                 </Flex>
-              </Flex>
-            </AppToolbar>
+              </AppToolbar>
 
-            {/* <RouterLink to="/evolution">
+              {/* <RouterLink to="/evolution">
               <TopBanner>
                 <TopBannerBg />
                 Play Arken: Evolution Isles Beta
@@ -1957,56 +1960,57 @@ const DraggableWindow: React.FC<any> = React.memo(
                 $RXS released. Shard $RUNE now!
               </TopBanner2>
             </RouterLink> */}
-            {brand === 'arken' ? (
-              <ToolbarBanner path={path} id="evolutionSeason1" to="/evolution">
-                <TopBanner3>
-                  <TopBannerBg3 />
-                  Play Arken: Evolution Isles Season Ladder
-                </TopBanner3>
-              </ToolbarBanner>
-            ) : null}
-          </WindowHeader>
-          <SWindowContent
-            onMouseDown={() =>
-              onFocus(function (index) {
-                setZIndex(index);
-              })
-            }
-            className="app__fullpage-window__content">
-            {isMaximized &&
-            !['/lore', '/evolution', '/whitepaper', '/art', '*'].includes(routePath) &&
-            brand !== 'w4' ? (
-              <div
-                css={css`
-                  position: relative;
-                `}>
+              {brand === 'arken' ? (
+                <ToolbarBanner path={path} id="evolutionSeason1" to="/evolution">
+                  <TopBanner3>
+                    <TopBannerBg3 />
+                    Play Arken: Evolution Isles Season Ladder
+                  </TopBanner3>
+                </ToolbarBanner>
+              ) : null}
+            </WindowHeader>
+            <SWindowContent
+              onMouseDown={() =>
+                onFocus(function (index) {
+                  setZIndex(index);
+                })
+              }
+              className="app__fullpage-window__content">
+              {isMaximized &&
+              !['/lore', '/evolution', '/whitepaper', '/art', '*'].includes(routePath) &&
+              brand !== 'w4' ? (
                 <div
                   css={css`
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    z-index: -2;
+                    position: relative;
+                  `}>
+                  <div
+                    css={css`
+                      position: absolute;
+                      left: 0;
+                      top: 0;
+                      right: 0;
+                      bottom: 0;
+                      z-index: -2;
 
-                    pointer-events: none;
-                    ${isMaximized ? 'min-height: 100vh;' : ''}
-                  `}
-                  className="app__window-content-bg"></div>
-                {children}
-                <PageFooter />
-              </div>
-            ) : (
-              children
-            )}
-          </SWindowContent>
-          {footer ? (
-            <SWindowFooter variant="well" onMouseDown={onFocus}>
-              {footer}
-            </SWindowFooter>
-          ) : null}
-        </FullPageWindow>
-      </Rnd>
+                      pointer-events: none;
+                      ${isMaximized ? 'min-height: 100vh;' : ''}
+                    `}
+                    className="app__window-content-bg"></div>
+                  {children}
+                  <PageFooter />
+                </div>
+              ) : (
+                children
+              )}
+            </SWindowContent>
+            {footer ? (
+              <SWindowFooter variant="well" onMouseDown={onFocus}>
+                {footer}
+              </SWindowFooter>
+            ) : null}
+          </FullPageWindow>
+        </Rnd>
+      </>
     );
   }
 );
@@ -2215,26 +2219,15 @@ const AppContent = ({
     const { setTab } = useMarket();
     const settings = useSettings();
 
-    const route = query.routes.find((r) =>
-      matchPath(location2.pathname, {
-        path: r.path,
-        exact: r.exact,
-        strict: r.strict,
-      })
-    );
+    const route = query.routes.find((r) => matchPath(r.path, location2.pathname));
 
     if (!route) {
       console.log('Page not found', location2, query);
       return null;
     }
 
-    // if (window.localStorage.getItem(`WindowStatus-${route.path}`) === 'opened') return null // We can assume its already opened by the other logic
-
-    const match = matchPath(location2.pathname, {
-      path: route.path,
-      exact: route.exact,
-      strict: route.strict,
-    });
+    // Updated matchPath usage
+    const match = matchPath(route.path, location2.pathname);
 
     const currentRouteIndex = Math.max(
       ...query.routes.map((r) => (r.props.routeIndex > 0 ? r.props.routeIndex : 1000))
@@ -2244,7 +2237,7 @@ const AppContent = ({
     if (
       currentRouteIndex === 1000 ||
       route.props.routeIndex !== currentRouteIndex ||
-      (match?.url.startsWith('/swap/add') && currentRoute.match?.url !== match?.url)
+      (match?.pathname.startsWith('/swap/add') && currentRoute.match?.pathname !== match?.pathname)
     ) {
       console.log('Page setting up', query, location2, route);
 
@@ -2377,10 +2370,10 @@ const AppContent = ({
     return (
       <DraggableWindow
         settings={settings}
-        path={match.url || route.path}
+        path={match.pathname || route.path}
         {...route.props}
         brand={brand}
-        key={match.url || route.path}
+        key={match.pathname || route.path}
         onPresentPurchaseModal={onPresentPurchaseModal}
         onPresentSwapModal={onPresentSwapModal}>
         <Suspense
@@ -2472,13 +2465,7 @@ const AppContent = ({
   const location3 = useLocation();
 
   const getRoute = function () {
-    return routes.find((r) =>
-      matchPath(location3.pathname, {
-        path: r.path,
-        exact: r.exact,
-        strict: r.strict,
-      })
-    );
+    return routes.find((r) => matchPath(r.path, location3.pathname));
   };
 
   const routeNotFound = !getRoute();
@@ -2515,7 +2502,7 @@ const AppContent = ({
         {/* <AnimatePresence> */}
 
         <Route path={baseRouteUrl + '/fundraiser'}>
-          <Redirect to="/market?query=0x191727d22f2693100acef8e48F8FeaEaa06d30b1&advanced=false" />
+          <Navigate to="/market?query=0x191727d22f2693100acef8e48F8FeaEaa06d30b1&advanced=false" />
         </Route>
         {routes.map((route: any) => {
           if (window.localStorage.getItem(`WindowStatus-${route.path}`) !== 'opened') return null;
@@ -2579,11 +2566,9 @@ const AppContent = ({
           //   return <NotFound key="approutes2" defaultNotFoundValue />
           // }
 
-          const match = matchPath(window.localStorage.getItem(`WindowPath-${route.path}`) || route.path, {
-            path: route.path,
-            exact: route.exact,
-            strict: route.strict,
-          });
+          const pathToMatch = window.localStorage.getItem(`WindowPath-${route.path}`) || route.path;
+
+          const match = matchPath(pathToMatch, route.path);
 
           const currentRouteIndex = window.localStorage.getItem(`WindowIndex-${route.path}`)
             ? parseInt(window.localStorage.getItem(`WindowIndex-${route.path}`))
@@ -2611,9 +2596,9 @@ const AppContent = ({
 
           return (
             <DraggableWindow
-              path={match?.url || route.path}
+              path={match?.pathname || route.path}
               {...route.props}
-              key={match?.url || route.path}
+              key={match?.pathname || route.path}
               onPresentPurchaseModal={onPresentPurchaseModal}
               onPresentSwapModal={onPresentSwapModal}>
               <Suspense fallback={<></>}>{route.props.open ? <route.component {...route.props} /> : null}</Suspense>
@@ -2655,7 +2640,7 @@ const mediaWidthTemplates = Object.keys(MEDIA_WIDTHS).reduce((accumulator, size)
   return accumulator;
 }, {});
 
-const App: React.FC = (props) => {
+const App: React.FC<any> = (props) => {
   const { address: account } = useWeb3();
   const { brand } = useBrand();
   const settings = useSettings();
@@ -2768,7 +2753,8 @@ const App: React.FC = (props) => {
           z-index: 2;
         `}>
         {/* <GlobalStyle useExocetFont={i18n.language === 'en'} /> */}
-        <Router history={history}>
+        {/* @ts-ignore */}
+        <Router>
           <Menu
             location={''}
             login={login}

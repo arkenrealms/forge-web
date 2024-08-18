@@ -165,7 +165,7 @@ const App = ({ apolloClient }: any) => {
                                   </Authorize>
                                 }
                               />
-                              <Route path="*" element={<PageNotFound />} />
+                              <Route path="*" element={<PageNotFound defaultNotFoundValue={false} />} />
                             </Routes>
                           </SettingsProvider>
                         </TourProvider>

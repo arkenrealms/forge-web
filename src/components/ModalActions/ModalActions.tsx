@@ -1,10 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
-import Spacer from '../Spacer'
+import Spacer from '../Spacer';
 
-const ModalActions: React.FC = ({ children }) => {
-  const l = React.Children.toArray(children).length
+const ModalActions: React.FC<any> = ({ children }) => {
+  const l = React.Children.toArray(children).length;
   return (
     <StyledModalActions>
       {React.Children.map(children, (child, i) => (
@@ -14,8 +14,8 @@ const ModalActions: React.FC = ({ children }) => {
         </>
       ))}
     </StyledModalActions>
-  )
-}
+  );
+};
 
 const StyledModalActions = styled.div`
   align-items: center;
@@ -26,10 +26,10 @@ const StyledModalActions = styled.div`
   @media (max-width: 768px) {
     flex-flow: column;
   }
-`
+`;
 
 const StyledModalAction = styled.div`
   flex: 1;
-`
+`;
 
-export default ModalActions
+export default ModalActions;

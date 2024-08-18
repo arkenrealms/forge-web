@@ -1,26 +1,26 @@
-import React, { useMemo } from 'react'
-import { Card, CardBody, CommunityIcon, Flex, Heading, Text } from '~/ui'
-import shuffle from 'lodash/shuffle'
-import orderBy from 'lodash/orderBy'
-import { useTeams } from '~/state/hooks'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import SelectionCard from '~/components/account/SelectionCard'
-import NextStepButton from '~/components/account/NextStepButton'
-import useProfileCreation from './contexts/hook'
+import React, { useMemo } from 'react';
+import { Card, CardBody, CommunityIcon, Flex, Heading, Text } from '~/ui';
+import shuffle from 'lodash/shuffle';
+import orderBy from 'lodash/orderBy';
+import { useTeams } from '~/state/hooks';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import SelectionCard from '~/components/account/SelectionCard';
+import NextStepButton from '~/components/account/NextStepButton';
+import useProfileCreation from './contexts/hook';
 
 interface Team {
-  name: string
-  description: string
-  isJoinable: boolean
+  name: string;
+  description: string;
+  isJoinable: boolean;
 }
 
-const Team: React.FC = () => {
-  const { teamId: currentTeamId, actions } = useProfileCreation()
-  const { t } = useTranslation()
-  const { teams } = useTeams()
-  const handleTeamSelection = (value: string) => actions.setTeamId(parseInt(value, 10))
-  const teamList = orderBy(teams, ['id', 'name'], ['desc', 'asc', 'asc'])
+const Team: React.FC<any> = () => {
+  const { teamId: currentTeamId, actions } = useProfileCreation();
+  const { t } = useTranslation();
+  const { teams } = useTeams();
+  const handleTeamSelection = (value: string) => actions.setTeamId(parseInt(value, 10));
+  const teamList = orderBy(teams, ['id', 'name'], ['desc', 'asc', 'asc']);
   // const teamValues = useMemo(() => shuffle(Object.values(teams)), [teams])
 
   return (
@@ -68,7 +68,7 @@ const Team: React.FC = () => {
                 <Text>{team.users?.toLocaleString() || 0}</Text>
               </Flex>
             </SelectionCard>
-          )
+          );
         })}
       {/* </CardBody>
       </Card> */}
@@ -76,7 +76,7 @@ const Team: React.FC = () => {
         {t('Next Step')}
       </NextStepButton>
     </>
-  )
-}
+  );
+};
 
-export default Team
+export default Team;

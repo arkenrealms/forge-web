@@ -1,12 +1,12 @@
-import React from 'react'
-import { Text, TextProps } from '~/ui'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import { TranslatableText } from '~/state/types'
-import styled from 'styled-components'
+import React from 'react';
+import { Text, TextProps } from '~/ui';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import { TranslatableText } from '~/state/types';
+import styled from 'styled-components';
 
 interface AchievementDescriptionProps extends TextProps {
-  description?: TranslatableText | TranslatableText[]
+  description?: TranslatableText | TranslatableText[];
 }
 
 const Description = styled(Text).attrs({ as: 'p', fontSize: '14px' })`
@@ -15,14 +15,14 @@ const Description = styled(Text).attrs({ as: 'p', fontSize: '14px' })`
   ${({ theme }) => theme.mediaQueries.md} {
     display: block;
   }
-`
+`;
 
 const AchievementDescription: React.FC<AchievementDescriptionProps> = ({ description, ...props }) => {
-  const TranslateString = useI18n()
-  const { t } = useTranslation()
+  const TranslateString = useI18n();
+  const { t } = useTranslation();
 
   if (!description) {
-    return null
+    return null;
   }
 
   if (Array.isArray(description)) {
@@ -30,11 +30,11 @@ const AchievementDescription: React.FC<AchievementDescriptionProps> = ({ descrip
       <>
         {description.map((i) => (
           <Text key={i as string} as="p" color="textSubtle" fontSize="14px" {...props}>
-            {i}
+            {i as any}
           </Text>
         ))}
       </>
-    )
+    );
   }
 
   if (typeof description === 'string') {
@@ -42,17 +42,17 @@ const AchievementDescription: React.FC<AchievementDescriptionProps> = ({ descrip
       <Text as="p" color="textSubtle" fontSize="14px" {...props}>
         {description}
       </Text>
-    )
+    );
   }
 
   // @ts-ignore
-  const { id, fallback, data = {} } = description
+  const { id, fallback, data = {} } = description;
 
   return (
     <Description color="textSubtle" {...props}>
       {TranslateString(id, fallback, data)}
     </Description>
-  )
-}
+  );
+};
 
-export default AchievementDescription
+export default AchievementDescription;

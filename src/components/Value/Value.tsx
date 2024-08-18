@@ -25,6 +25,7 @@ const Value: React.FC<ValueProps> = ({ value, decimals, fontSize = '30px' }) => 
       {typeof value === 'string' ? (
         value
       ) : (
+        /* @ts-ignore */
         <CountUp
           start={start}
           end={end}

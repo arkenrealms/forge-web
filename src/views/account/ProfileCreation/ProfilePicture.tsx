@@ -1,66 +1,67 @@
-import React, { useContext, useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { AutoRenewIcon, Button, Card, CardBody, Heading, Skeleton, Text } from '~/ui'
-import { Link as RouterLink } from 'react-router-dom'
-import nftList from '~/config/constants/nfts'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import { useToast } from '~/state/hooks'
-import { getArcaneProfileAddress } from '~/utils/addressHelpers'
-import { useCharacters } from '~/hooks/useContract'
-import useGetWalletNfts from '~/hooks/useGetWalletNfts'
-import useWeb3 from '~/hooks/useWeb3'
-import SelectionCard from '~/components/account/SelectionCard'
-import NextStepButton from '~/components/account/NextStepButton'
-import { ProfileCreationContext } from './contexts/ProfileCreationProvider'
+import React, { useContext, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { AutoRenewIcon, Button, Card, CardBody, Heading, Skeleton, Text } from '~/ui';
+import { Link as RouterLink } from 'react-router-dom';
+import nftList from '~/config/constants/nfts';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import { useToast } from '~/state/hooks';
+import { getArcaneProfileAddress } from '~/utils/addressHelpers';
+import { useCharacters } from '~/hooks/useContract';
+import useGetWalletNfts from '~/hooks/useGetWalletNfts';
+import useWeb3 from '~/hooks/useWeb3';
+import SelectionCard from '~/components/account/SelectionCard';
+import NextStepButton from '~/components/account/NextStepButton';
+import { ProfileCreationContext } from './contexts/ProfileCreationProvider';
 
 const Link = styled(RouterLink)`
   color: ${({ theme }) => theme.colors.primary};
-`
+`;
 
 const NftWrapper = styled.div`
   margin-bottom: 24px;
-`
+`;
 
-const ProfilePicture: React.FC = () => {
-  const [isApproved, setIsApproved] = useState(false)
-  const [isApproving, setIsApproving] = useState(false)
-  const { tokenId, actions } = useContext(ProfileCreationContext)
-  const { t } = useTranslation()
-  const { isLoading, nfts: nftsInWallet } = useGetWalletNfts()
-  const arcaneCharactersContract = useCharacters()
-  const { address: account } = useWeb3()
-  const { toastError } = useToast()
-  const characterIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem))
-  const walletNfts = nftList.filter((nft) => characterIds.includes(nft.characterId))
+const ProfilePicture: React.FC<any> = () => {
+  const [isApproved, setIsApproved] = useState(false);
+  const [isApproving, setIsApproving] = useState(false);
+  const { tokenId, actions } = useContext(ProfileCreationContext);
+  const { t } = useTranslation();
+  const { isLoading, nfts: nftsInWallet } = useGetWalletNfts();
+  const arcaneCharactersContract = useCharacters();
+  const { address: account } = useWeb3();
+  const { toastError } = useToast();
+  const characterIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem));
+  const walletNfts = nftList.filter((nft) => characterIds.includes(nft.characterId));
 
   const handleApprove = () => {
     arcaneCharactersContract.methods
       .approve(getArcaneProfileAddress(), tokenId)
       .send({ from: account })
       .on('sending', () => {
-        setIsApproving(true)
+        setIsApproving(true);
       })
       .on('receipt', () => {
-        setIsApproving(false)
-        setIsApproved(true)
+        setIsApproving(false);
+        setIsApproved(true);
       })
       .on('error', (error) => {
-        toastError('Error', error?.message)
-        setIsApproving(false)
-      })
-  }
+        toastError('Error', error?.message);
+        setIsApproving(false);
+      });
+  };
 
   useEffect(() => {
     if (tokenId !== null) {
+      // @ts-ignore
       arcaneCharactersContract.methods.getApproved(tokenId).call({ from: account }, function (error, res) {
-        if (error) return
+        if (error) return;
         if (res.toLowerCase() === getArcaneProfileAddress().toLowerCase()) {
-          setIsApproved(true)
+          setIsApproved(true);
         }
-      })
+      });
     }
-  }, [account, arcaneCharactersContract.methods, tokenId, nftsInWallet, walletNfts])
+  }, [account, arcaneCharactersContract.methods, tokenId, nftsInWallet, walletNfts]);
 
   if (!isLoading && walletNfts.length === 0) {
     return (
@@ -77,7 +78,7 @@ const ProfilePicture: React.FC = () => {
           )}
         </Text>
       </>
-    )
+    );
   }
 
   return (
@@ -109,7 +110,7 @@ const ProfilePicture: React.FC = () => {
           <Skeleton height="80px" mb="16px" />
         ) : (
           walletNfts.map((walletNft) => {
-            const [firstTokenId] = nftsInWallet[walletNft.characterId].tokenIds
+            const [firstTokenId] = nftsInWallet[walletNft.characterId].tokenIds;
 
             return (
               <SelectionCard
@@ -121,7 +122,7 @@ const ProfilePicture: React.FC = () => {
                 onChange={(value: string) => actions.setTokenId(parseInt(value, 10))}>
                 <Text bold>{walletNft.name}</Text>
               </SelectionCard>
-            )
+            );
           })
         )}
       </NftWrapper>
@@ -148,7 +149,7 @@ const ProfilePicture: React.FC = () => {
         {t('Next Step')}
       </NextStepButton>
     </>
-  )
-}
+  );
+};
 
-export default ProfilePicture
+export default ProfilePicture;

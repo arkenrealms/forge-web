@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import styled, { css } from 'styled-components'
-import { Button, Heading, Text, LogoIcon } from '~/ui'
-import { useTranslation } from 'react-i18next'
-import { useEffect } from 'react'
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
+import { Button, Heading, Text, LogoIcon } from '~/ui';
+import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
-import RaidIcon from '~/assets/images/icons/raid-desktop.png'
-import InfiniteIcon from '~/assets/images/icons/infinite-desktop.png'
-import EvolutionIcon from '~/assets/images/icons/evolution-desktop.png'
-import SanctuaryIcon from '~/assets/images/icons/sanctuary-desktop.png'
-import GuardiansIcon from '~/assets/images/icons/guardians-desktop.png'
-import history from '~/routerHistory'
+import RaidIcon from '~/assets/images/icons/raid-desktop.png';
+import InfiniteIcon from '~/assets/images/icons/infinite-desktop.png';
+import EvolutionIcon from '~/assets/images/icons/evolution-desktop.png';
+import SanctuaryIcon from '~/assets/images/icons/sanctuary-desktop.png';
+import GuardiansIcon from '~/assets/images/icons/guardians-desktop.png';
+import history from '~/routerHistory';
 
 const StyledNotFound = styled.div`
   position: fixed;
@@ -20,7 +20,7 @@ const StyledNotFound = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`
+`;
 const ShortcutBay = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -30,7 +30,7 @@ const ShortcutBay = styled.div`
   flex-direction: column;
   align-content: flex-start;
   margin-left: 20px;
-`
+`;
 
 const Shortcut = styled.div`
   text-align: center;
@@ -50,30 +50,30 @@ const Shortcut = styled.div`
     height: 50px;
     image-rendering: pixelated;
   }
-`
+`;
 
 const NotFound = ({ defaultNotFoundValue }) => {
-  const { t } = useTranslation()
-  const [notFound, setNotFound] = useState(defaultNotFoundValue || false)
-  const [show, setShow] = useState(false)
+  const { t } = useTranslation();
+  const [notFound, setNotFound] = useState(defaultNotFoundValue);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (!window) return
+    if (!window) return;
 
     if (!show) {
-      setShow(true)
+      setShow(true);
     }
 
     const timeout = setTimeout(() => {
-      setNotFound(true)
-    }, 5 * 1000)
+      setNotFound(true);
+    }, 5 * 1000);
 
     return () => {
-      clearTimeout(timeout)
-    }
-  }, [show, setNotFound])
+      clearTimeout(timeout);
+    };
+  }, [show, setNotFound]);
 
-  if (!show) return <></>
+  if (!show) return <></>;
 
   return (
     <>
@@ -123,7 +123,7 @@ const NotFound = ({ defaultNotFoundValue }) => {
                 }
               `}
               onClick={() => {
-                history.push('/raid')
+                history.push('/raid');
               }}>
               <img src={RaidIcon} />
               <p>Raid</p>
@@ -243,7 +243,7 @@ const NotFound = ({ defaultNotFoundValue }) => {
         )}
       </StyledNotFound>
     </>
-  )
-}
+  );
+};
 
-export default NotFound
+export default NotFound;

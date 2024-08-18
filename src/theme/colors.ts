@@ -1,4 +1,4 @@
-import { Colors } from './types'
+import { Colors } from './types';
 
 export const baseColors = {
   failure: '#ED4B9E',
@@ -9,15 +9,16 @@ export const baseColors = {
   secondary: '#6e0000',
   success: '#31D0AA',
   warning: '#FFB237',
-}
+};
 
 export const brandColors = {
   binance: '#F0B90B',
-}
+};
 
 export const lightColors: Colors = {
   ...baseColors,
   ...brandColors,
+  bodyBackground: '#fff',
   background: '#FAF9FA',
   backgroundDisabled: '#E9EAEB',
   contrast: '#191326',
@@ -33,11 +34,12 @@ export const lightColors: Colors = {
   gradients: {
     bubblegum: 'linear-gradient(139.73deg, #E6FDFF 0%, #F3EFFF 100%)',
   },
-}
+};
 
 export const darkColors: Colors = {
   ...baseColors,
   ...brandColors,
+  bodyBackground: '#000',
   secondary: '#fff',
   background: 'rgba(0, 0, 0, 50%)',
   backgroundDisabled: '#3c3742',
@@ -55,4 +57,4 @@ export const darkColors: Colors = {
   gradients: {
     bubblegum: 'linear-gradient(139.73deg, #313D5C 0%, #3D2A54 100%)',
   },
-}
+};

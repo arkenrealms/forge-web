@@ -14,6 +14,7 @@ import useI18n from '~/hooks/useI18n';
 import useWeb3 from '~/hooks/useWeb3';
 import { AutoColumn, ColumnCenter } from '~/components/Column';
 import CurrencyInputPanel from '~/components/CurrencyInputPanel';
+import symbolMap from '~/utils/symbolMap';
 import DoubleCurrencyLogo from '~/components/DoubleLogo';
 import { AddRemoveTabs } from '~/components/NavigationTabs';
 import { MinimalPositionCard } from '~/components/PositionCard';
@@ -27,7 +28,6 @@ import { useCurrency } from '~/hooks/Tokens';
 import { usePairContract } from '~/hooks/useContract';
 
 import AppBody from '~/components/AppBody';
-import symbolMap from '~/utils/symbolMap';
 import { StyledInternalLink } from '~/components/Shared';
 import { Dots } from '~/components/swap/styleds';
 import { ApprovalState, useApproveCallback } from '~/hooks/useApproveCallback';
@@ -554,7 +554,7 @@ export default function RemoveLiquidity({
                         <Text fontSize="24px">{formattedAmounts[Field.CURRENCY_A] || '-'}</Text>
                         <RowFixed>
                           <CurrencyLogo currency={currencyA} style={{ marginRight: '12px' }} />
-                          <Text fontSize="24px" id="remove-liquidity-tokena-symbol">
+                          <Text fontSize="24px" id="remove-liquidity-symbolMap(tokena-symbol)">
                             {symbolMap(currencyA?.symbol)}
                           </Text>
                         </RowFixed>
@@ -563,7 +563,7 @@ export default function RemoveLiquidity({
                         <Text fontSize="24px">{formattedAmounts[Field.CURRENCY_B] || '-'}</Text>
                         <RowFixed>
                           <CurrencyLogo currency={currencyB} style={{ marginRight: '12px' }} />
-                          <Text fontSize="24px" id="remove-liquidity-tokenb-symbol">
+                          <Text fontSize="24px" id="remove-liquidity-symbolMap(tokenb-symbol)">
                             {symbolMap(currencyB?.symbol)}
                           </Text>
                         </RowFixed>

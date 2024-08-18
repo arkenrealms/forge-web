@@ -1,9 +1,9 @@
-import queryString from 'query-string'
-import React from 'react'
-import { Link as RouterLink, useLocation } from 'react-router-dom'
-import styled from 'styled-components'
-import useWeb3 from '~/hooks/useWeb3'
-import { Button, Card, Flex, Heading } from '~/ui'
+import queryString from 'query-string';
+import React from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import useWeb3 from '~/hooks/useWeb3';
+import { Button, Card, Flex, Heading } from '~/ui';
 
 const MainCard = styled(Card)`
   position: relative;
@@ -23,31 +23,31 @@ const MainCard = styled(Card)`
   color: #bb955e;
   text-shadow: 1px 1px 1px black;
   font-weight: bold;
-`
+`;
 
 const parseMatch = (location) => {
   const match = {
     params: queryString.parse(location?.search || ''),
-  }
+  };
 
   for (const key in match.params) {
     if (match.params[key] === 'false') {
       // @ts-ignore
-      match.params[key] = false
+      match.params[key] = false;
     } else if (match.params[key] === 'true') {
       // @ts-ignore
-      match.params[key] = true
+      match.params[key] = true;
     }
   }
 
-  return match
-}
+  return match;
+};
 
-const Register: React.FC = () => {
-  const location = useLocation()
-  const match = parseMatch(location)
-  const { account, library } = useWeb3()
-  const { web3 } = useWeb3()
+const Register: React.FC<any> = () => {
+  const location = useLocation();
+  const match = parseMatch(location);
+  const { account, library } = useWeb3();
+  const { web3 } = useWeb3();
   return (
     <div>
       <MainCard>
@@ -65,7 +65,7 @@ const Register: React.FC = () => {
               as={RouterLink}
               to="/account"
               onClick={() => {
-                window.scrollTo(0, 0)
+                window.scrollTo(0, 0);
               }}>
               Create Character
             </Button>
@@ -73,9 +73,9 @@ const Register: React.FC = () => {
         </Flex>
       </MainCard>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
 
 // {/* <p>Loading {progression * 100} percent...</p> */}

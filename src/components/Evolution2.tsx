@@ -411,6 +411,7 @@ const Evolution: any = ({ open }) => {
               </StyledNotFound>
             ) : null}
             {isInitialized ? (
+              /* @ts-ignore */
               <Unity
                 ref={gameRef}
                 unityContext={unityInstance}

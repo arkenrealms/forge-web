@@ -1,14 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
 import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components';
-import { Link, Redirect, useParams } from 'react-router-dom';
 import { Button, Flex, Card, Heading, CardBody, BaseLayout } from '~/ui';
 import Page from '~/components/layout/Page';
-import PageWindow from '~/components/PageWindow';
-
-import { ItemInfo } from '~/components/ItemInfo';
-import { ItemCategoriesType } from 'rune-backend-sdk/build/data/items.type';
 
 const Container = styled.div`
   h2 {

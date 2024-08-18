@@ -4,12 +4,10 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { TransactionResponse } from '@ethersproject/providers';
 import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@arcanefinance/sdk';
 import { Button, CardBody, AddIcon, Text as UIKitText } from '~/ui';
-import { RouteComponentProps } from 'react-router-dom';
 import LightCard from '~/components/Card/GreyCard';
 import { AutoColumn, ColumnCenter } from '~/components/Column';
 import TransactionConfirmationModal, { ConfirmationModalContent } from '~/components/TransactionConfirmationModal';
 import CardNav from '~/components/CardNav';
-import symbolMap from '~/utils/symbolMap';
 import CurrencyInputPanel from '~/components/CurrencyInputPanel';
 import DoubleCurrencyLogo from '~/components/DoubleLogo';
 import { AddRemoveTabs } from '~/components/NavigationTabs';
@@ -202,11 +200,9 @@ export default function AddLiquidity({
           setAttemptingTxn(false);
 
           addTransaction(response, {
-            summary: `Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${symbolMap(
+            summary: `Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
               currencies[Field.CURRENCY_A]?.symbol
-            )} and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${symbolMap(
-              currencies[Field.CURRENCY_B]?.symbol
-            )}`,
+            } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencies[Field.CURRENCY_B]?.symbol}`,
           });
 
           setTxHash(response.hash);
@@ -227,7 +223,7 @@ export default function AddLiquidity({
         <LightCard mt="20px" borderRadius="20px">
           <RowFlat>
             <UIKitText fontSize="48px" mr="8px">
-              {`${symbolMap(currencies[Field.CURRENCY_A]?.symbol)}/${symbolMap(currencies[Field.CURRENCY_B]?.symbol)}`}
+              {`${currencies[Field.CURRENCY_A]?.symbol}/${currencies[Field.CURRENCY_B]?.symbol}`}
             </UIKitText>
             <DoubleCurrencyLogo
               currency0={currencies[Field.CURRENCY_A]}
@@ -251,9 +247,7 @@ export default function AddLiquidity({
         </RowFlat>
         <Row>
           <UIKitText fontSize="24px">
-            {`${symbolMap(currencies[Field.CURRENCY_A]?.symbol)}/${symbolMap(
-              currencies[Field.CURRENCY_B]?.symbol
-            )} Pool Tokens`}
+            {`${currencies[Field.CURRENCY_A]?.symbol}/${currencies[Field.CURRENCY_B]?.symbol} Pool Tokens`}
           </UIKitText>
         </Row>
         <UIKitText small textAlign="left" padding="8px 0 0 0 " style={{ fontStyle: 'italic' }}>
@@ -278,9 +272,9 @@ export default function AddLiquidity({
     );
   };
 
-  const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${symbolMap(
+  const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
     currencies[Field.CURRENCY_A]?.symbol
-  )} and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${symbolMap(currencies[Field.CURRENCY_B]?.symbol)}`;
+  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`;
 
   const handleCurrencyASelect = useCallback(
     (currA: Currency) => {
@@ -433,9 +427,9 @@ export default function AddLiquidity({
                             disabled={approvalA === ApprovalState.PENDING}
                             style={{ width: approvalB !== ApprovalState.APPROVED ? '48%' : '100%' }}>
                             {approvalA === ApprovalState.PENDING ? (
-                              <Dots>Approving {symbolMap(currencies[Field.CURRENCY_A]?.symbol)}</Dots>
+                              <Dots>Approving {currencies[Field.CURRENCY_A]?.symbol}</Dots>
                             ) : (
-                              `Approve ${symbolMap(currencies[Field.CURRENCY_A]?.symbol)}`
+                              `Approve ${currencies[Field.CURRENCY_A]?.symbol}`
                             )}
                           </Button>
                         )}
@@ -445,9 +439,9 @@ export default function AddLiquidity({
                             disabled={approvalB === ApprovalState.PENDING}
                             style={{ width: approvalA !== ApprovalState.APPROVED ? '48%' : '100%' }}>
                             {approvalB === ApprovalState.PENDING ? (
-                              <Dots>Approving {symbolMap(currencies[Field.CURRENCY_B]?.symbol)}</Dots>
+                              <Dots>Approving {currencies[Field.CURRENCY_B]?.symbol}</Dots>
                             ) : (
-                              `Approve ${symbolMap(currencies[Field.CURRENCY_B]?.symbol)}`
+                              `Approve ${currencies[Field.CURRENCY_B]?.symbol}`
                             )}
                           </Button>
                         )}

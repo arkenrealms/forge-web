@@ -1,13 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Heading, Text, BaseLayout } from '~/ui'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import Page from '~/components/layout/Page'
-import PageWindow from '~/components/PageWindow'
+import React from 'react';
+import styled from 'styled-components';
+import { Heading, Text, BaseLayout } from '~/ui';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import Page from '~/components/layout/Page';
+import PageWindow from '~/components/PageWindow';
 
-const Gambling: React.FC = () => {
-  const { t } = useTranslation()
+const Gambling: React.FC<any> = () => {
+  const { t } = useTranslation();
 
   return (
     <Page>
@@ -20,7 +20,7 @@ const Gambling: React.FC = () => {
         </Heading>
       </PageWindow>
     </Page>
-  )
-}
+  );
+};
 
-export default Gambling
+export default Gambling;

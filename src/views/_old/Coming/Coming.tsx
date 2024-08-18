@@ -1,15 +1,15 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Heading, Text, BaseLayout } from '~/ui'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import Page from '~/components/layout/Page'
-import FarmStakingCard from '~/components/raid/FarmStakingCard'
+import React from 'react';
+import styled from 'styled-components';
+import { Heading, Text, BaseLayout } from '~/ui';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import Page from '~/components/layout/Page';
+import FarmStakingCard from '~/components/raid/FarmStakingCard';
 // import LotteryCard from '~/views/Dashboard/components/LotteryCard'
-import RuneStats from '~/components/raid/RuneStats'
-import TotalValueLockedCard from '~/components/raid/TotalValueLockedCard'
-import EarnAPYCard from '~/components/raid/EarnAPYCard'
-import EarnAssetCard from '~/components/raid/EarnAssetCard'
+import RuneStats from '~/components/raid/RuneStats';
+import TotalValueLockedCard from '~/components/raid/TotalValueLockedCard';
+import EarnAPYCard from '~/components/raid/EarnAPYCard';
+import EarnAssetCard from '~/components/raid/EarnAssetCard';
 // import WinCard from '~/views/Dashboard/components/WinCard'
 
 const Hero = styled.div`
@@ -31,7 +31,7 @@ const Hero = styled.div`
     height: 165px;
     padding-top: 0;
   }
-`
+`;
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -54,7 +54,7 @@ const Cards = styled(BaseLayout)`
       grid-column: span 6;
     }
   }
-`
+`;
 
 const CTACards = styled(BaseLayout)`
   align-items: start;
@@ -75,10 +75,10 @@ const CTACards = styled(BaseLayout)`
       grid-column: span 4;
     }
   }
-`
+`;
 
-const Coming: React.FC = () => {
-  const { t } = useTranslation()
+const Coming: React.FC<any> = () => {
+  const { t } = useTranslation();
 
   return (
     <Page>
@@ -104,7 +104,7 @@ const Coming: React.FC = () => {
         </Cards>
       </div>
     </Page>
-  )
-}
+  );
+};
 
-export default Coming
+export default Coming;

@@ -364,7 +364,7 @@ const MarketTradeInner = ({ trade }) => {
                           <CounterBlock>
                             <p>DAYS</p>
                             <Counter
-                              value={endCount.days}
+                              value={parseInt(endCount.days)}
                               minLength={1}
                               size="md"
                               className="counter"
@@ -376,7 +376,7 @@ const MarketTradeInner = ({ trade }) => {
                           <CounterBlock>
                             <p>HOURS</p>
                             <Counter
-                              value={endCount.hours}
+                              value={parseInt(endCount.hours)}
                               minLength={2}
                               size="md"
                               className="counter"
@@ -388,7 +388,7 @@ const MarketTradeInner = ({ trade }) => {
                           <CounterBlock>
                             <p>MINS</p>
                             <Counter
-                              value={endCount.minutes}
+                              value={parseInt(endCount.minutes)}
                               minLength={2}
                               size="md"
                               className="counter"
@@ -400,7 +400,7 @@ const MarketTradeInner = ({ trade }) => {
                           <CounterBlock>
                             <p>SECS</p>
                             <Counter
-                              value={endCount.seconds}
+                              value={parseInt(endCount.seconds)}
                               minLength={2}
                               size="md"
                               className="counter"

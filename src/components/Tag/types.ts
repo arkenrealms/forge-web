@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
-import { SpaceProps } from 'styled-system'
+import { ReactNode } from 'react';
+import { SpaceProps } from 'styled-system';
 
 export const variants = {
   PRIMARY: 'primary',
@@ -9,13 +9,14 @@ export const variants = {
   TEXTSUBTLE: 'textSubtle',
   BINANCE: 'binance',
   FAILURE: 'failure',
-} as const
+} as const;
 
-export type Variants = typeof variants[keyof typeof variants]
+export type Variants = typeof variants[keyof typeof variants];
 
 export interface TagProps extends SpaceProps {
-  variant?: Variants
-  startIcon?: ReactNode
-  endIcon?: ReactNode
-  outline?: boolean
+  variant?: Variants;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
+  outline?: boolean;
+  children?: any;
 }

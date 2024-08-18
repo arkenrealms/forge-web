@@ -64,7 +64,7 @@ const BigCard = styled.div<{ align?: string }>`
       : ''}
 `;
 
-const Home: React.FC = () => {
+const Home: React.FC<any> = () => {
   const cache = useCache();
   const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
   const [pageLoaded, setPageLoaded] = useState(false);

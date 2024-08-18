@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import BigNumber from 'bignumber.js'
-import { Button, Card, CardBody, Heading, Text } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction'
-import { useRxs, useCharacterFactory } from '~/hooks/useContract'
-import useHasShardBalance from '~/hooks/useHasShardBalance'
-import nftList from '~/config/constants/nfts'
-import { PurchaseModal } from '~/components/PurchaseModal'
-import useGetWalletNfts from '~/hooks/useGetWalletNfts'
-import { useConfig } from '~/hooks/useConfig'
-import useWeb3 from '~/hooks/useWeb3'
-import SelectionCard from '~/components/account/SelectionCard'
-import NextStepButton from '~/components/account/NextStepButton'
-import ApproveConfirmButtons from '~/components/account/ApproveConfirmButtons'
-import useProfileCreation from './contexts/hook'
-import { STARTER_CHARACTER_IDS } from './config'
+import React, { useEffect, useState } from 'react';
+import BigNumber from 'bignumber.js';
+import { Button, Card, CardBody, Heading, Text } from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction';
+import { useRxs, useCharacterFactory } from '~/hooks/useContract';
+import useHasShardBalance from '~/hooks/useHasShardBalance';
+import nftList from '~/config/constants/nfts';
+import { PurchaseModal } from '~/components/PurchaseModal';
+import useGetWalletNfts from '~/hooks/useGetWalletNfts';
+import { useConfig } from '~/hooks/useConfig';
+import useWeb3 from '~/hooks/useWeb3';
+import SelectionCard from '~/components/account/SelectionCard';
+import NextStepButton from '~/components/account/NextStepButton';
+import ApproveConfirmButtons from '~/components/account/ApproveConfirmButtons';
+import useProfileCreation from './contexts/hook';
+import { STARTER_CHARACTER_IDS } from './config';
 
-const nfts = nftList.filter((nft) => STARTER_CHARACTER_IDS.includes(nft.characterId))
+const nfts = nftList.filter((nft) => STARTER_CHARACTER_IDS.includes(nft.characterId));
 
-const Mint: React.FC = () => {
-  const { mintCost, registerCost } = useConfig()
-  const [characterId, setCharacterId] = useState(null)
-  const { actions, minimumRuneRequired, allowance, tokenId } = useProfileCreation()
-  const minimumRuneBalanceToMint = new BigNumber(mintCost + registerCost).multipliedBy(new BigNumber(10).pow(18))
+const Mint: React.FC<any> = () => {
+  const { mintCost, registerCost } = useConfig();
+  const [characterId, setCharacterId] = useState(null);
+  const { actions, minimumRuneRequired, allowance, tokenId } = useProfileCreation();
+  const minimumRuneBalanceToMint = new BigNumber(mintCost + registerCost).multipliedBy(new BigNumber(10).pow(18));
   const [onPresentPurchaseModal] = useModal(
     <PurchaseModal defaultAmount={mintCost + registerCost + ''} onSuccess={() => {}} />
-  )
+  );
 
-  const { address: account } = useWeb3()
-  const runeContract = useRxs()
-  const characterFactoryContract = useCharacterFactory()
-  const { t } = useTranslation()
-  const hasMinimumRuneRequired = useHasShardBalance(minimumRuneBalanceToMint)
+  const { address: account } = useWeb3();
+  const runeContract = useRxs();
+  const characterFactoryContract = useCharacterFactory();
+  const { t } = useTranslation();
+  const hasMinimumRuneRequired = useHasShardBalance(minimumRuneBalanceToMint);
 
   const { isApproving, isApproved, isConfirmed, isConfirming, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
@@ -42,23 +42,23 @@ const Mint: React.FC = () => {
         try {
           const response = await runeContract.methods
             .allowance(account, characterFactoryContract.options.address)
-            .call()
-          const currentAllowance = new BigNumber(response)
-          return currentAllowance.gte(minimumRuneRequired)
+            .call();
+          const currentAllowance = new BigNumber(response as any);
+          return currentAllowance.gte(minimumRuneRequired);
         } catch (error) {
-          return false
+          return false;
         }
       },
       onApprove: () => {
         return runeContract.methods
           .approve(characterFactoryContract.options.address, allowance.toJSON())
-          .send({ from: account })
+          .send({ from: account });
       },
       onConfirm: () => {
-        return characterFactoryContract.methods.mintNFT(characterId).send({ from: account })
+        return characterFactoryContract.methods.mintNFT(characterId).send({ from: account });
       },
       onSuccess: () => actions.nextStep(),
-    })
+    });
 
   // useEffect(() => {
   //   if (walletNfts.length) {
@@ -66,9 +66,9 @@ const Mint: React.FC = () => {
   //   }
   // }, [walletNfts])
 
-  const { isLoading, nfts: nftsInWallet } = useGetWalletNfts()
-  const characterIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem))
-  const walletNfts = nftList.filter((nft) => characterIds.includes(nft.characterId))
+  const { isLoading, nfts: nftsInWallet } = useGetWalletNfts();
+  const characterIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem));
+  const walletNfts = nftList.filter((nft) => characterIds.includes(nft.characterId));
 
   return (
     <>
@@ -93,7 +93,7 @@ const Mint: React.FC = () => {
       </Text> */}
       {walletNfts.length
         ? walletNfts.map((walletNft) => {
-            const [firstTokenId] = nftsInWallet[walletNft.characterId].tokenIds
+            const [firstTokenId] = nftsInWallet[walletNft.characterId].tokenIds;
 
             return (
               <SelectionCard
@@ -106,13 +106,13 @@ const Mint: React.FC = () => {
                 disabled={isApproving || isConfirming || isConfirmed}>
                 <Text bold>{walletNft.name}</Text>
               </SelectionCard>
-            )
+            );
           })
         : null}
       {!walletNfts.length ? (
         <>
           {nfts.map((nft) => {
-            const handleChange = (value: string) => setCharacterId(parseInt(value, 10))
+            const handleChange = (value: string) => setCharacterId(parseInt(value, 10));
 
             return (
               <SelectionCard
@@ -125,7 +125,7 @@ const Mint: React.FC = () => {
                 disabled={isApproving || isConfirming || isConfirmed || !hasMinimumRuneRequired}>
                 <Text bold>{nft.name}</Text>
               </SelectionCard>
-            )
+            );
           })}
           {hasMinimumRuneRequired && (
             <Text as="p" mb="16px" color="failure">
@@ -158,7 +158,7 @@ const Mint: React.FC = () => {
         {t('Next Step')}
       </NextStepButton>
     </>
-  )
-}
+  );
+};
 
-export default Mint
+export default Mint;

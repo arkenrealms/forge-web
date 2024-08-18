@@ -105,13 +105,13 @@ const FarmedStakingCard = () => {
   const isFeeApproved = buffs.harvestFeePercent === 0 || (account && feeAllowance && feeAllowance.isGreaterThan(0));
 
   const furyFeeTokenContract = useMemo(() => {
-    return getRuneContract(web3 as provider, 'RAL');
+    return getRuneContract(web3 as any, 'RAL');
   }, [web3]);
 
   const { onApprove: onApproveFuryFeeToken } = useApprove(furyFeeTokenContract);
 
   const feeTokenContract = useMemo(() => {
-    return getRuneContract(web3 as provider, buffs.harvestFeeToken);
+    return getRuneContract(web3 as any, buffs.harvestFeeToken);
   }, [web3, buffs.harvestFeeToken]);
 
   const { onApprove: onApproveFeeToken } = useApprove(feeTokenContract);

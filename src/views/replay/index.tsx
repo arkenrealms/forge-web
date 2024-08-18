@@ -482,6 +482,7 @@ const Evolution: React.FC<any> = ({ match }) => {
       ) : null}
       {isGameStarted && !maintenance && !banned ? (
         <>
+          {/* @ts-ignore */}
           <Unity
             ref={gameRef}
             unityContext={unityInstance}

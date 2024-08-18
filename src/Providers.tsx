@@ -37,7 +37,7 @@ try {
 
 // const client = createFeathersClient()
 
-const Providers: React.FC = ({ children }) => {
+const Providers: React.FC<any> = ({ children }) => {
   const [itemPreviewed, setItemPreviewed] = useState(null);
   const [itemSelected, setItemSelected] = useState(null);
   const { brand } = useBrand();

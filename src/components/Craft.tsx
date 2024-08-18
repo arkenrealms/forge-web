@@ -72,7 +72,7 @@ const ItemCard = styled(Card)`
 
 const items = getFilteredItems(itemData[ItemsMainCategoriesType.OTHER]);
 
-const Runeforms: React.FC = () => {
+const Runeforms: React.FC<any> = () => {
   const { t } = useTranslation();
   const { address: account } = useWeb3();
 

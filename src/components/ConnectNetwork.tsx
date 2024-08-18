@@ -22,7 +22,7 @@ import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
 import ConnectModal from '~/components/WalletModal/ConnectModal';
 import AccountModal from '~/components/WalletModal/AccountModal';
 import styled from 'styled-components';
-import { Link, Redirect, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import CardHeader from '~/components/account/CardHeader';
 import Collectibles from '~/components/account/Collectibles';
 import WalletNotConnected from '~/components/account/WalletNotConnected';

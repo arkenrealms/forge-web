@@ -487,7 +487,7 @@ const StyledCardAccent = styled.div`
 const cubeItem = normalizeItem(itemData[ItemsMainCategoriesType.OTHER].find((r) => r.name === "Founder's Cube"));
 
 const Market = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { address: account } = useWeb3();
   const location = useLocation();
@@ -616,7 +616,7 @@ const Market = () => {
 
         // searchParams.append('query', key === 'tab' ? '' : query)
         // query: key === 'tab' ? '' : [...searchOptions.map(s => s.value), query],
-        history.push({
+        navigate({
           pathname: '/market',
           search:
             '?' +
@@ -630,7 +630,7 @@ const Market = () => {
       // }, 200)
     },
     [
-      history,
+      navigate,
       tab,
       advanced,
       meOnly,
@@ -668,7 +668,7 @@ const Market = () => {
         page: defaultFilters.page.toString(),
       });
 
-      history.push({
+      navigate({
         pathname: '/market',
         search:
           '?' +
@@ -678,7 +678,7 @@ const Market = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [defaultFilters, history, account]);
+  }, [defaultFilters, navigate, account]);
 
   useEffect(() => {
     // if (init) return

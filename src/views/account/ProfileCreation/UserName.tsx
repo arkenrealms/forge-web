@@ -1,26 +1,26 @@
-import BigNumber from 'bignumber.js'
-import { formatDistance, parseISO } from 'date-fns'
-import Cookies from 'js-cookie'
-import debounce from 'lodash/debounce'
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import styled from 'styled-components'
-import UIKitInput from '~/components/Input/Input'
-import { useModal } from '~/components/Modal'
-import nftList from '~/config/constants/nfts'
-import { useCharacters } from '~/hooks/useContract'
-import useGetWalletNfts from '~/hooks/useGetWalletNfts'
-import useHasRuneBalance from '~/hooks/useHasRuneBalance'
-import useWeb3 from '~/hooks/useWeb3'
-import history from '~/routerHistory'
-import { useToast } from '~/state/hooks'
-import { AutoRenewIcon, Button, CheckmarkIcon, Flex, Heading, Skeleton, Text, WarningIcon } from '~/ui'
-import { getArcaneProfileAddress } from '~/utils/addressHelpers'
-import ApproveConfirmButtons from '~/components/account/ApproveConfirmButtons'
-import ConfirmProfileCreationModal from '~/components/account/ConfirmProfileCreationModal'
-import useProfileCreation from './contexts/hook'
+import BigNumber from 'bignumber.js';
+import { formatDistance, parseISO } from 'date-fns';
+import Cookies from 'js-cookie';
+import debounce from 'lodash/debounce';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+import UIKitInput from '~/components/Input/Input';
+import { useModal } from '~/components/Modal';
+import nftList from '~/config/constants/nfts';
+import { useCharacters } from '~/hooks/useContract';
+import useGetWalletNfts from '~/hooks/useGetWalletNfts';
+import useHasRuneBalance from '~/hooks/useHasRuneBalance';
+import useWeb3 from '~/hooks/useWeb3';
+import history from '~/routerHistory';
+import { useToast } from '~/state/hooks';
+import { AutoRenewIcon, Button, CheckmarkIcon, Flex, Heading, Skeleton, Text, WarningIcon } from '~/ui';
+import { getArcaneProfileAddress } from '~/utils/addressHelpers';
+import ApproveConfirmButtons from '~/components/account/ApproveConfirmButtons';
+import ConfirmProfileCreationModal from '~/components/account/ConfirmProfileCreationModal';
+import useProfileCreation from './contexts/hook';
 
-import { REGISTER_COST, USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH } from './config'
+import { REGISTER_COST, USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH } from './config';
 
 enum ExistingUserState {
   IDLE = 'idle', // initial state
@@ -28,17 +28,17 @@ enum ExistingUserState {
   NEW = 'new', // username has not been created
 }
 
-const profileApiUrl = process.env.REACT_APP_API_PROFILE
-const minimumRuneToRegister = new BigNumber(REGISTER_COST).multipliedBy(new BigNumber(10).pow(18))
+const profileApiUrl = process.env.REACT_APP_API_PROFILE;
+const minimumRuneToRegister = new BigNumber(REGISTER_COST).multipliedBy(new BigNumber(10).pow(18));
 
 const InputWrap = styled.div`
   position: relative;
   max-width: 240px;
-`
+`;
 
 const Input = styled(UIKitInput)`
   padding-right: 40px;
-`
+`;
 
 const Indicator = styled(Flex)`
   align-items: center;
@@ -49,30 +49,30 @@ const Indicator = styled(Flex)`
   right: 16px;
   top: 50%;
   width: 24px;
-`
+`;
 
-const UserName: React.FC = () => {
-  const [isApproved, setIsApproved] = useState(false)
-  const [isApproving, setIsApproving] = useState(false)
-  const { isLoading: nftsLoading, nfts: nftsInWallet } = useGetWalletNfts()
-  const arcaneCharactersContract = useCharacters()
-  const characterIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem))
-  const walletNfts = nftList.filter((nft) => characterIds.includes(nft.characterId))
-  const [isAcknowledged, setIsAcknoledged] = useState(true)
-  const { teamId, userName, actions, minimumRuneRequired, allowance } = useProfileCreation()
-  const { t } = useTranslation()
-  const { account, library } = useWeb3()
-  const { toastError } = useToast()
-  const { web3 } = useWeb3()
-  const [existingUserState, setExistingUserState] = useState<ExistingUserState>(ExistingUserState.IDLE)
-  const [isValid, setIsValid] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [message, setMessage] = useState('')
-  const hasMinimumRuneRequired = useHasRuneBalance(minimumRuneToRegister)
+const UserName: React.FC<any> = () => {
+  const [isApproved, setIsApproved] = useState(false);
+  const [isApproving, setIsApproving] = useState(false);
+  const { isLoading: nftsLoading, nfts: nftsInWallet } = useGetWalletNfts();
+  const arcaneCharactersContract = useCharacters();
+  const characterIds = Object.keys(nftsInWallet).map((nftWalletItem) => Number(nftWalletItem));
+  const walletNfts = nftList.filter((nft) => characterIds.includes(nft.characterId));
+  const [isAcknowledged, setIsAcknoledged] = useState(true);
+  const { teamId, userName, actions, minimumRuneRequired, allowance } = useProfileCreation();
+  const { t } = useTranslation();
+  const { account, library } = useWeb3();
+  const { toastError } = useToast();
+  const { web3 } = useWeb3();
+  const [existingUserState, setExistingUserState] = useState<ExistingUserState>(ExistingUserState.IDLE);
+  const [isValid, setIsValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const hasMinimumRuneRequired = useHasRuneBalance(minimumRuneToRegister);
   const tokenId =
     nftsInWallet && walletNfts && walletNfts.length > 0 && nftsInWallet[walletNfts[0].characterId]
       ? nftsInWallet[walletNfts[0].characterId].tokenIds[0]
-      : null
+      : null;
 
   const [onPresentConfirmProfileCreation] = useModal(
     <ConfirmProfileCreationModal
@@ -82,44 +82,44 @@ const UserName: React.FC = () => {
       minimumRuneRequired={minimumRuneRequired}
       allowance={allowance}
       onDismiss={() => {
-        history.push('/games')
+        history.push('/games');
       }}
     />,
     false
-  )
-  const isUserCreated = existingUserState === ExistingUserState.CREATED
+  );
+  const isUserCreated = existingUserState === ExistingUserState.CREATED;
 
   const checkUsernameValidity = debounce(async (value: string) => {
     try {
-      setIsLoading(true)
-      const res = await fetch(`${profileApiUrl}/users/valid/${value}`)
+      setIsLoading(true);
+      const res = await fetch(`${profileApiUrl}/users/valid/${value}`);
 
       if (res.ok) {
-        setIsValid(true)
-        setMessage('')
+        setIsValid(true);
+        setMessage('');
       } else {
-        const data = await res.json()
-        setIsValid(false)
-        setMessage(data?.error?.message || 'Username is taken or invalid')
+        const data = await res.json();
+        setIsValid(false);
+        setMessage(data?.error?.message || 'Username is taken or invalid');
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }, 200)
+  }, 200);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target
-    actions.setUserName(value)
-    checkUsernameValidity(value)
-  }
+    const { value } = event.target;
+    actions.setUserName(value);
+    checkUsernameValidity(value);
+  };
 
   const handleConfirm = async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
 
       const signature = library?.bnbSign
         ? (await library.bnbSign(account, userName))?.signature
-        : await web3.eth.personal.sign(userName, account, null) // Last param is the password, and is null to request a signature in the wallet
+        : await web3.eth.personal.sign(userName, account, null); // Last param is the password, and is null to request a signature in the wallet
 
       const response = await fetch(`${profileApiUrl}/users/register`, {
         method: 'POST',
@@ -131,98 +131,99 @@ const UserName: React.FC = () => {
           username: userName,
           signature,
         }),
-      })
+      });
 
       if (response.ok) {
-        setExistingUserState(ExistingUserState.CREATED)
+        setExistingUserState(ExistingUserState.CREATED);
 
-        const referer = Cookies.get(`referer`)
+        const referer = Cookies.get(`referer`);
 
         if (referer) {
           try {
             fetch(
               `https://coordinator.arken.gg/refer/${referer.replace('%2520', ' ')}/${account}/${userName}/${signature}`
             ).catch(() => {
-              alert('Referral error. Please report in Telegram or Discord.')
-            })
+              alert('Referral error. Please report in Telegram or Discord.');
+            });
           } catch (e) {
-            alert('Referral error. Please report in Telegram or Discord.')
+            alert('Referral error. Please report in Telegram or Discord.');
           }
         }
       } else {
-        const data = await response.json()
-        toastError(data?.error?.message)
+        const data = await response.json();
+        toastError(data?.error?.message);
       }
     } catch (error) {
       // @ts-ignore
-      toastError(error?.message ? error.message : JSON.stringify(error))
+      toastError(error?.message ? error.message : JSON.stringify(error));
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleApprove = () => {
     arcaneCharactersContract.methods
       .approve(getArcaneProfileAddress(), tokenId + '')
       .send({ from: account })
       .on('sending', () => {
-        setIsApproving(true)
+        setIsApproving(true);
       })
       .on('receipt', () => {
-        setIsApproving(false)
-        setIsApproved(true)
+        setIsApproving(false);
+        setIsApproved(true);
       })
       .on('error', (error) => {
-        toastError('Error', error?.message)
-        setIsApproving(false)
-      })
-  }
+        toastError('Error', error?.message);
+        setIsApproving(false);
+      });
+  };
 
   useEffect(() => {
     if (tokenId !== null) {
+      // @ts-ignore
       arcaneCharactersContract.methods.getApproved(tokenId + '').call({ from: account }, function (error, res) {
-        if (error) return
+        if (error) return;
         if (res.toLowerCase() === getArcaneProfileAddress().toLowerCase()) {
-          setIsApproved(true)
+          setIsApproved(true);
         }
-      })
+      });
     }
-  }, [account, arcaneCharactersContract.methods, tokenId, nftsInWallet, walletNfts])
+  }, [account, arcaneCharactersContract.methods, tokenId, nftsInWallet, walletNfts]);
 
-  const handleAcknoledge = () => setIsAcknoledged(!isAcknowledged)
+  const handleAcknoledge = () => setIsAcknoledged(!isAcknowledged);
 
   // Perform an initial check to see if the wallet has already created a username
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(`${profileApiUrl}/users/${account}`)
-        const data = await response.json()
+        const response = await fetch(`${profileApiUrl}/users/${account}`);
+        const data = await response.json();
 
         if (response.ok) {
-          let dateCreated
+          let dateCreated;
           try {
-            dateCreated = formatDistance(parseISO(data.created_at), new Date())
+            dateCreated = formatDistance(parseISO(data.created_at), new Date());
           } catch (e) {
-            dateCreated = formatDistance(parseISO(new Date(data.created_at).toISOString()), new Date())
+            dateCreated = formatDistance(parseISO(new Date(data.created_at).toISOString()), new Date());
           }
-          setMessage(`Created ${dateCreated} ago`)
+          setMessage(`Created ${dateCreated} ago`);
 
-          actions.setUserName(data.username)
-          setExistingUserState(ExistingUserState.CREATED)
-          setIsValid(true)
-          setIsLoading(false)
+          actions.setUserName(data.username);
+          setExistingUserState(ExistingUserState.CREATED);
+          setIsValid(true);
+          setIsLoading(false);
         } else {
-          setExistingUserState(ExistingUserState.NEW)
+          setExistingUserState(ExistingUserState.NEW);
         }
       } catch (error) {
-        toastError('Error: Unable to verify username')
+        toastError('Error: Unable to verify username');
       }
-    }
+    };
 
     if (account) {
-      fetchUser()
+      fetchUser();
     }
-  }, [account, setExistingUserState, setIsValid, setMessage, actions, toastError, isAcknowledged])
+  }, [account, setExistingUserState, setIsValid, setMessage, actions, toastError, isAcknowledged]);
 
   return (
     <>
@@ -331,7 +332,7 @@ const UserName: React.FC = () => {
         </Text>
       )}
     </>
-  )
-}
+  );
+};
 
-export default UserName
+export default UserName;

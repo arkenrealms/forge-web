@@ -1,9 +1,16 @@
-import React from 'react'
-import { Redirect, RouteComponentProps } from 'react-router-dom'
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-// Redirects to swap but only replace the pathname
-export function RedirectPathToSwapOnly({ location }: RouteComponentProps) {
-  return <Redirect to={{ ...location, pathname: '/swap' }} />
+export function RedirectPathToSwapOnly() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Use navigate to redirect while preserving the rest of the location
+  React.useEffect(() => {
+    navigate('/swap', { replace: true, state: location.state });
+  }, [navigate, location]);
+
+  return null; // No need to render anything
 }
 
-export default RedirectPathToSwapOnly
+export default RedirectPathToSwapOnly;

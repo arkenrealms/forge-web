@@ -1,9 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { Route, useRouteMatch, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import BigNumber from 'bignumber.js';
-import { NavLink } from 'react-router-dom';
-import history from '~/routerHistory';
 import {
   Image,
   Heading,
@@ -127,36 +125,36 @@ const Header = styled.div`
   }
 `;
 
-const SpecialButton = styled(NavLink)`
-  height: 110px;
-  width: 360px;
-  border-width: 44px 132px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0);
-  border-image-source: url(/images/special-button.png);
-  border-image-slice: 110 330 fill;
-  filter: drop-shadow(rgba(0, 0, 0, 0.6) 1px 1px 1px) drop-shadow(rgba(0, 0, 0, 0.6) 0px 0px 4px);
-  font-family: 'webfontexl', sans-serif !important;
-  text-transform: uppercase;
+// const SpecialButton = styled(NavLink)`
+//   height: 110px;
+//   width: 360px;
+//   border-width: 44px 132px;
+//   border-style: solid;
+//   border-color: rgba(0, 0, 0, 0);
+//   border-image-source: url(/images/special-button.png);
+//   border-image-slice: 110 330 fill;
+//   filter: drop-shadow(rgba(0, 0, 0, 0.6) 1px 1px 1px) drop-shadow(rgba(0, 0, 0, 0.6) 0px 0px 4px);
+//   font-family: 'webfontexl', sans-serif !important;
+//   text-transform: uppercase;
 
-  top: 35px;
-  position: relative;
-  zoom: 0.8;
+//   top: 35px;
+//   position: relative;
+//   zoom: 0.8;
 
-  &:before {
-    content: 'Old Pools';
-    position: absolute;
-    top: 0;
-    white-space: nowrap;
-    font-size: 24px;
-    left: -70px;
-    color: #d2c8ae;
-  }
+//   &:before {
+//     content: 'Old Pools';
+//     position: absolute;
+//     top: 0;
+//     white-space: nowrap;
+//     font-size: 24px;
+//     left: -70px;
+//     color: #d2c8ae;
+//   }
 
-  @media (max-width: 768px) {
-    zoom: 0.7;
-  }
-`;
+//   @media (max-width: 768px) {
+//     zoom: 0.7;
+//   }
+// `;
 
 const HeadingWrapper = styled.div`
   position: relative;
@@ -186,8 +184,8 @@ export interface FarmsProps {
 }
 
 const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
-  const { path } = useRouteMatch();
   const { pathname } = useLocation();
+  const navigate = useNavigate(); // Replace `history.push`
   const { t } = useTranslation();
   const farmsLP = useFarms();
   const runePrice = useRunePrice('RUNE');
@@ -234,84 +232,12 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
     .filter((f) => f.chefKey === chefKey)
     .filter(
       (farm) =>
-        // ![
-        //   'EL-RUNE LP',
-        //   'TIR-RUNE LP',
-        //   'IO-BNB LP',
-        //   'ITH-ELD LP',
-        //   'ITH-NEF LP',
-        //   'NEF-TIR LP',
-        //   'NEF-EL LP',
-        //   'NEF-RUNE LP',
-        //   'TIR-EL LP',
-        //   'LUM-BNB LP',
-        //   'TAL-BNB LP',
-        //   'ITH-BNB LP',
-        //   'NEF-BNB LP',
-        //   'TIR-BNB LP',
-        //   'EL-BNB LP',
-        //   'ZOD-BNB LP',
-        //   'HEL-BNB LP',
-        //   'DOL-BNB LP',
-        //   'SHAEL-BNB LP',
-        //   'SOL-BNB LP',
-        //   'AMN-BNB LP',
-        //   'THUL-BNB LP',
-        //   'ORT-BNB LP',
-        //   'RAL-BNB LP',
-        //   'RAL-BNB LP',
-        //   'RUNE-BNB LP',
-        // ].includes(farm.lpSymbol) ||
         !farm.isRetired ||
         (farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0)) ||
         window.location.hostname === 'dev.arken.gg' ||
         window.location.hostname === 'localhost'
     )
     .filter((farm) => farm.isTokenOnly === true && farm.multiplier !== '0X');
-  // const inactiveFarms = farmsLP
-  //   .filter((f) => f.chefKey === chefKey)
-  //   .filter(
-  //     (farm) =>
-  //       farm.lpSymbol !== 'ITH' ||
-  //       (farm.lpSymbol === 'ITH' && farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0)),
-  //   )
-  //   .filter((f) => f.chefKey === chefKey)
-  //   .filter(
-  //     (farm) =>
-  //       // ![
-  //       //   'EL-RUNE LP',
-  //       //   'TIR-RUNE LP',
-  //       //   'IO-BNB LP',
-  //       //   'ITH-ELD LP',
-  //       //   'ITH-NEF LP',
-  //       //   'NEF-TIR LP',
-  //       //   'NEF-EL LP',
-  //       //   'NEF-RUNE LP',
-  //       //   'TIR-EL LP',
-  //       //   'LUM-BNB LP',
-  //       //   'TAL-BNB LP',
-  //       //   'ITH-BNB LP',
-  //       //   'NEF-BNB LP',
-  //       //   'TIR-BNB LP',
-  //       //   'EL-BNB LP',
-  //       //   'ZOD-BNB LP',
-  //       //   'HEL-BNB LP',
-  //       //   'DOL-BNB LP',
-  //       //   'SHAEL-BNB LP',
-  //       //   'SOL-BNB LP',
-  //       //   'AMN-BNB LP',
-  //       //   'THUL-BNB LP',
-  //       //   'ORT-BNB LP',
-  //       //   'RAL-BNB LP',
-  //       //   'RAL-BNB LP',
-  //       //   'RUNE-BNB LP',
-  //       // ].includes(farm.lpSymbol) ||
-  //       !farm.isRetired ||
-  //       (farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0)) ||
-  //       window.location.hostname === 'dev.arken.gg' ||
-  //       window.location.hostname === 'localhost',
-  //   )
-  //   .filter((farm) => !!farm.isTokenOnly === true) // [{"fid":0,"pid":0,"risk":6,"poolWeight":600,"depositFeeBP":0,"inactive":true,"lpSymbol":"RUNE-BNB LP","lpAddresses":{"56":"0xf9444c39bbdcc3673033609204f8da00d1ae3f52","97":""},"tokenSymbol":"RUNE","tokenAddresses":{"56":"0xa9776b590bfc2f956711b3419910a5ec1f63153e","97":"0xa9776b590bfc2f956711b3419910a5ec1f63153e"},"quoteTokenSymbol":"BNB","quoteTokenAdresses":{"56":"0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c","97":"0xae13d989dac2f0debff460ac112a837c89baa7cd"}},{"fid":0,"pid":1,"risk":6,"poolWeight":600,"depositFeeBP":0,"inactive":true,"lpSymbol":"RUNE-BUSD LP","lpAddresses":{"56":"0x68513e24495b9d1d1fedee0906872a96858e8ad2","97":""},"tokenSymbol":"RUNE","tokenAddresses":{"56":"0xa9776b590bfc2f956711b3419910a5ec1f63153e","97":"0xa9776b590bfc2f956711b3419910a5ec1f63153e"},"quoteTokenSymbol":"BUSD","quoteTokenAdresses":{"56":"0xe9e7cea3dedca5984780bafc599bd69add087d56","97":""}},{"fid":0,"pid":2,"risk":6,"poolWeight":600,"depositFeeBP":0,"inactive":true,"lpSymbol":"RUNE-SLME LP","lpAddresses":{"56":"0x996dbbbb92fb273fb5e1c79f201d0cb9ac637bb8","97":""},"tokenSymbol":"RUNE","tokenAddresses":{"56":"0xa9776b590bfc2f956711b3419910a5ec1f63153e","97":"0xa9776b590bfc2f956711b3419910a5ec1f63153e"},"quoteTokenSymbol":"SLME","quoteTokenAdresses":{"56":"0x4fcfa6cc8914ab455b5b33df916d90bfe70b6ab1","97":""}},{"fid":0,"pid":3,"risk":1,"poolWeight":300,"depositFeeBP":0,"inactive":true,"lpSymbol":"BUSD-BNB LP","lpAddresses":{"56":"0x1b96b92314c44b159149f7e0303511fb2fc4774f","97":""},"tokenSymbol":"BUSD","tokenAddresses":{"56":"0xe9e7cea3dedca5984780bafc599bd69add087d56","97":""},"quoteTokenSymbol":"BNB","quoteTokenAdresses":{"56":"0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c","97":"0xae13d989dac2f0debff460ac112a837c89baa7cd"}},{"fid":0,"pid":4,"risk":1,"poolWeight":300,"depositFeeBP":0,"inactive":true,"lpSymbol":"BTCB-BNB LP","lpAddresses":{"56":"0x7561EEe90e24F3b348E1087A005F78B4c8453524","97":""},"tokenSymbol":"BTCB","tokenAddresses":{"56":"0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c","97":""},"quoteTokenSymbol":"BNB","quoteTokenAdresses":{"56":"0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c","97":"0xae13d989dac2f0debff460ac112a837c89baa7cd"}},{"fid":0,"pid":5,"risk":1,"poolWeight":200,"depositFeeBP":0,"inactive":true,"lpSymbol":"USDT-BUSD LP","lpAddresses":{"56":"0xc15fa3e22c912a276550f3e5fe3b0deb87b55acd","97":""},"tokenSymbol":"USDT","tokenAddresses":{"56":"0x55d398326f99059ff775485246999027b3197955","97":""},"quoteTokenSymbol":"BUSD","quoteTokenAdresses":{"56":"0xe9e7cea3dedca5984780bafc599bd69add087d56","97":""}}]
 
   const stackedOnlyFarms = activeFarms.filter(
     (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0)
@@ -336,24 +262,19 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
     }
   };
 
-  // /!\ This function will be removed soon
-  // This function compute the APY for each farm and will be replaced when we have a reliable API
-  // to retrieve assets prices against USD
   const farmsList = useCallback(
     (farmsToDisplay): FarmWithStakedValue[] => {
       const tokenPriceVsBUSD = new BigNumber(
         farmsLP.find((farm) => farm.pid === REWARD_BUSD_POOL_PID)?.tokenPriceVsQuote || 0
       );
-      //console.log(tokenPriceVsBUSD.toNumber(), bnbPrice.toNumber())
+
       let farmsToDisplayWithAPY: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
-        //console.log(farm.lpTotalInQuoteToken)
         if (!farm.tokenAmount || !farm.lpTotalInQuoteToken) {
           return farm;
         }
         const tokenRewardPerBlock = rewardPerBlock.times(farm.poolWeight);
         const tokenRewardPerYear = tokenRewardPerBlock.times(BLOCKS_PER_YEAR);
 
-        // runePriceInQuote * tokenRewardPerYear / lpTotalInQuoteToken
         let apy = tokenPriceVsBUSD.times(tokenRewardPerYear).div(farm.lpTotalInQuoteToken);
 
         if (farm.quoteTokenSymbol === QuoteToken.BUSD) {
@@ -413,7 +334,7 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
   if (isActive) {
     farmsStaked = stackedOnly ? farmsList(stackedOnlyFarms) : farmsList(activeFarms);
   } else {
-    farmsStaked = []; //farmsList(inactiveFarms)
+    farmsStaked = [];
   }
 
   farmsStaked = sortFarms(farmsStaked);
@@ -422,28 +343,9 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
     return (
       <div>
         <FlexLayout>
-          {/* <Route exact path={`${path}`}> */}
           {farmsStaked.map((farm) => {
             return <FarmCard key={farm.pid} farm={farm} account={account} removed={false} />;
           })}
-          {/* </Route> */}
-          {/* <Route exact path={`${path}/history`}>
-            {farmsStaked.map((farm) => (
-              <FarmCard
-                key={farm.pid}
-                farm={farm}
-                tirPrice={tirPrice}
-                elPrice={elPrice}
-                eldPrice={eldPrice}
-                nefPrice={nefPrice}
-                bnbPrice={new BigNumber(bnbPrice)}
-                runePrice={runePrice}
-                slmePrice={new BigNumber(slmePrice)}
-                account={account}
-                removed
-              />
-            ))}
-          </Route> */}
         </FlexLayout>
       </div>
     );
@@ -489,7 +391,7 @@ const Farms: React.FC<FarmsProps> = ({ tokenMode }) => {
         <ControlContainer>
           <ViewControls>
             <ToggleWrapper>
-              <Toggle checked={false} onChange={() => history.push('/expert')} scale="sm" />
+              <Toggle checked={false} onChange={() => navigate('/expert')} scale="sm" />
               <Text> {t('Expert Mode')}</Text>
             </ToggleWrapper>
             <ToggleWrapper>

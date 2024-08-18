@@ -387,7 +387,7 @@ const items = getFilteredItems(itemData[ItemsMainCategoriesType.OTHER]);
 const Container: React.FC<any> = ({ match }) => {
   const { t } = useTranslation();
   const { id }: { id: string } = match.params;
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   // const { itemSelected, setItemSelected, isModalOpened, setIsModalOpened, itemsEquipped } = useContext(ItemsContext)
   const [itemsPaginated, setItemsPaginated] = useState(
@@ -619,7 +619,7 @@ const Container: React.FC<any> = ({ match }) => {
                       You don't have the required runes.
                       <br />
                       <br />
-                      <SpecialButton title={'Buy Runes'} onClick={() => history.push('/swap')}></SpecialButton>
+                      <SpecialButton title={'Buy Runes'} onClick={() => navigate('/swap')}></SpecialButton>
                     </p>
                   ) : (
                     <>
@@ -659,7 +659,7 @@ const Container: React.FC<any> = ({ match }) => {
                     <br />
                     <Button
                       onClick={() => {
-                        history.push('/account/inventory');
+                        navigate('/account/inventory');
                       }}>
                       Go To Inventory
                     </Button>
@@ -677,7 +677,7 @@ const Container: React.FC<any> = ({ match }) => {
                   <br />
                   <Button
                     onClick={() => {
-                      history.push('/account/inventory');
+                      navigate('/account/inventory');
                     }}>
                     Go To Inventory
                   </Button>

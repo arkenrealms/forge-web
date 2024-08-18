@@ -1,11 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import orderBy from 'lodash/orderBy'
-import { Heading, Card, CardBody, Flex, ArrowForwardIcon } from '~/ui'
-import { NavLink } from 'react-router-dom'
-import pools from '~/config/constants/pools'
-import { Pool } from '~/state/types'
-import { useFarmStatus } from '~/hooks/useFarmStatus'
+import React from 'react';
+import styled from 'styled-components';
+import { Heading, Card, CardBody, Flex, ArrowForwardIcon } from '~/ui';
+import { NavLink } from 'react-router-dom';
 
 const StyledFarmStakingCard = styled(Card)`
   background: linear-gradient(#e9a053, #d97d45);
@@ -16,20 +12,21 @@ const StyledFarmStakingCard = styled(Card)`
     margin: 0;
     max-width: none;
   }
-`
+`;
+
 const CardMidContent = styled(Heading).attrs({ size: 'xl' })`
   line-height: 44px;
-`
+`;
+
 const EarnAssetCard = () => {
   return (
     <StyledFarmStakingCard>
       <NavLink
-        exact
-        activeClassName="active"
         to="/"
+        className={({ isActive }) => (isActive ? 'active' : '')}
         id="pool-cta"
         onClick={() => {
-          window.location.href = '/swap'
+          window.location.href = '/swap';
         }}>
         <CardBody>
           <Heading color="contrast" size="lg">
@@ -45,7 +42,7 @@ const EarnAssetCard = () => {
         </CardBody>
       </NavLink>
     </StyledFarmStakingCard>
-  )
-}
+  );
+};
 
-export default EarnAssetCard
+export default EarnAssetCard;

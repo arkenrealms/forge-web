@@ -1,29 +1,29 @@
-import contracts from 'rune-backend-sdk/build/contractInfo'
-import BigNumber from 'bignumber.js'
-import { ethers } from 'ethers'
-import React, { useEffect, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import history from '~/routerHistory'
-import styled from 'styled-components'
-import { InjectedModalProps, Modal } from '~/components/Modal'
-import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction'
-import { useArcaneItems, useMasterchef, useRouterV2, useRune } from '~/hooks/useContract'
-import useWeb3 from '~/hooks/useWeb3'
-import { useToast } from '~/state/hooks'
-import { AutoRenewIcon, Button, Flex } from '~/ui'
-import { getAddress } from '~/utils/addressHelpers'
-import { getContract } from '~/utils/contractHelpers'
-import { getBalanceNumber } from '~/utils/formatBalance'
-import NumericalInput from './NumericalInput'
+import contracts from 'rune-backend-sdk/build/contractInfo';
+import BigNumber from 'bignumber.js';
+import { ethers } from 'ethers';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import history from '~/routerHistory';
+import styled from 'styled-components';
+import { InjectedModalProps, Modal } from '~/components/Modal';
+import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction';
+import { useArcaneItems, useMasterchef, useRouterV2, useRune } from '~/hooks/useContract';
+import useWeb3 from '~/hooks/useWeb3';
+import { useToast } from '~/state/hooks';
+import { AutoRenewIcon, Button, Flex } from '~/ui';
+import { getAddress } from '~/utils/addressHelpers';
+import { getContract } from '~/utils/contractHelpers';
+import { getBalanceNumber } from '~/utils/formatBalance';
+import NumericalInput from './NumericalInput';
 
 interface PurchaseModalProps extends InjectedModalProps {
-  defaultAmount?: string
-  onSuccess: () => void
+  defaultAmount?: string;
+  onSuccess: () => void;
 }
 
 const ModalContent = styled.div`
   margin-bottom: 16px;
-`
+`;
 
 const InputPanel = styled.div`
   display: flex;
@@ -33,25 +33,25 @@ const InputPanel = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   z-index: 1;
   width: 100%;
-`
+`;
 const InputContainer = styled.div`
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.input};
   box-shadow: ${({ theme }) => theme.shadows.inset};
-`
+`;
 
 const Actions = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 8px;
-`
+`;
 
 const InputRow = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   padding: 0.75rem 0.75rem 0.75rem 1rem;
-`
+`;
 
 const BuyLink = styled.a`
   color: #fff;
@@ -63,58 +63,58 @@ const BuyLink = styled.a`
   &:hover {
     color: #bb955e;
   }
-`
+`;
 function round(num, precision) {
-  const _precision = 10 ** precision
-  return Math.ceil(num * _precision) / _precision
+  const _precision = 10 ** precision;
+  return Math.ceil(num * _precision) / _precision;
 }
 
 export const PurchaseModal: React.FC<PurchaseModalProps> = ({ defaultAmount, onSuccess, onDismiss }) => {
-  const { t } = useTranslation()
-  const { toastError, toastSuccess } = useToast()
-  const { contract: masterChefContract } = useMasterchef()
-  const arcaneItemsContract = useArcaneItems()
+  const { t } = useTranslation();
+  const { toastError, toastSuccess } = useToast();
+  const { contract: masterChefContract } = useMasterchef();
+  const arcaneItemsContract = useArcaneItems();
   // const { refresh } = useGetWalletItems()
-  const [amount, setAmount] = useState('')
-  const [bnbBalance, setBnbBalance] = useState('')
-  const [estimate, setEstimate] = useState('0')
-  const [tabIndex, setTabIndex] = useState(0)
-  const [runeAllowance, setRuneAllowance] = useState<BigNumber>(new BigNumber(0))
-  const runeContract = useRune('RXS')
-  const routerContract = useRouterV2()
+  const [amount, setAmount] = useState('');
+  const [bnbBalance, setBnbBalance] = useState('');
+  const [estimate, setEstimate] = useState('0');
+  const [tabIndex, setTabIndex] = useState(0);
+  const [runeAllowance, setRuneAllowance] = useState<BigNumber>(new BigNumber(0));
+  const runeContract = useRune('RXS');
+  const routerContract = useRouterV2();
   // const runeBalance = useRuneBalance('RUNE')
 
-  const { web3, address: account } = useWeb3()
+  const { web3, address: account } = useWeb3();
 
   const { isApproving, isApproved, isConfirmed, isConfirming, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
       onRequiresApproval: async () => {
         try {
-          const response = await runeContract.methods.allowance(account, getAddress(contracts.pancakeFactoryV2)).call()
-          const currentAllowance = new BigNumber(response)
-          return currentAllowance.gte(amount ? parseFloat(amount) : 0)
+          const response = await runeContract.methods.allowance(account, getAddress(contracts.pancakeFactoryV2)).call();
+          const currentAllowance = new BigNumber(response as any);
+          return currentAllowance.gte(amount ? parseFloat(amount) : 0);
         } catch (error) {
-          return false
+          return false;
         }
       },
       onApprove: () => {
         return runeContract.methods
           .approve(getAddress(contracts.pancakeFactoryV2), ethers.constants.MaxUint256)
-          .send({ from: account })
+          .send({ from: account });
       },
       onConfirm: () => {
-        const _amount = ethers.utils.parseEther(parseFloat(amount) + '')
-        const _estimate = ethers.utils.parseEther(parseFloat(estimate) + '')
-        const WBNB = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
-        const BUSD = '0xe9e7cea3dedca5984780bafc599bd69add087d56'
-        const RUNE = '0x2098fef7eeae592038f4f3c4b008515fed0d5886'
-        const _to = account
-        const _path = [WBNB, BUSD, RUNE]
-        const _deadline = Math.floor(Date.now() / 1000) + 60 * 20
+        const _amount = ethers.utils.parseEther(parseFloat(amount) + '');
+        const _estimate = ethers.utils.parseEther(parseFloat(estimate) + '');
+        const WBNB = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
+        const BUSD = '0xe9e7cea3dedca5984780bafc599bd69add087d56';
+        const RUNE = '0x2098fef7eeae592038f4f3c4b008515fed0d5886';
+        const _to = account;
+        const _path = [WBNB, BUSD, RUNE];
+        const _deadline = Math.floor(Date.now() / 1000) + 60 * 20;
 
         return routerContract.methods
           .swapExactETHForTokens(_amount, _path, _to, _deadline)
-          .send({ from: account, value: _estimate })
+          .send({ from: account, value: _estimate });
 
         // const PancakeRouterABI = (await (await fetch('/abi/pancakeRouter.json')).json()) as any
         // const signer = new ethers.providers.Web3Provider(library).getSigner()
@@ -162,83 +162,83 @@ export const PurchaseModal: React.FC<PurchaseModalProps> = ({ defaultAmount, onS
 
         // onDismiss()
 
-        setTabIndex(2)
+        setTabIndex(2);
       },
-    })
+    });
 
   const onChange = useMemo(async () => {
-    const WBNB = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
-    const BUSD = '0xe9e7cea3dedca5984780bafc599bd69add087d56'
-    const RUNE = '0x2098fef7eeae592038f4f3c4b008515fed0d5886'
-    const path = [RUNE, BUSD, WBNB]
+    const WBNB = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
+    const BUSD = '0xe9e7cea3dedca5984780bafc599bd69add087d56';
+    const RUNE = '0x2098fef7eeae592038f4f3c4b008515fed0d5886';
+    const path = [RUNE, BUSD, WBNB];
 
     if (!parseFloat(amount)) {
-      setEstimate('0')
-      return
+      setEstimate('0');
+      return;
     }
 
-    const _amount = ethers.utils.parseEther(parseFloat(amount) + '')
+    const _amount = ethers.utils.parseEther(parseFloat(amount) + '');
 
-    const amounts = await routerContract.methods.getAmountsOut(_amount, path).call({ from: account })
+    const amounts = await routerContract.methods.getAmountsOut(_amount, path).call({ from: account });
 
-    const amountOutMin = getBalanceNumber(amounts[2]) * 1.1
+    const amountOutMin = getBalanceNumber(amounts[2]) * 1.1;
 
-    setEstimate(round(amountOutMin, 4).toFixed(4))
-  }, [amount, account, routerContract.methods])
+    setEstimate(round(amountOutMin, 4).toFixed(4));
+  }, [amount, account, routerContract.methods]);
 
   useEffect(() => {
-    if (!account || !defaultAmount) return
+    if (!account || !defaultAmount) return;
     async function init() {
-      setAmount(defaultAmount)
+      setAmount(defaultAmount);
     }
 
-    init()
-  }, [defaultAmount, account, web3])
+    init();
+  }, [defaultAmount, account, web3]);
 
   useEffect(() => {
-    if (!account) return
+    if (!account) return;
     async function init() {
-      const balance = await web3.eth.getBalance(account)
-      setBnbBalance(getBalanceNumber(new BigNumber(balance)) + '')
+      const balance = await web3.eth.getBalance(account);
+      setBnbBalance(getBalanceNumber(new BigNumber(balance)) + '');
     }
 
-    init()
-  }, [account, web3])
+    init();
+  }, [account, web3]);
 
   useEffect(() => {
     async function init() {
-      const abi = (await (await fetch('/abi/erc20.json')).json()) as any
-      const contract = getContract(abi, getAddress(contracts.rxs), web3)
+      const abi = (await (await fetch('/abi/erc20.json')).json()) as any;
+      const contract = getContract(abi, getAddress(contracts.rxs), web3);
 
-      const response = await contract.methods.allowance(account, getAddress(contracts.pancakeFactoryV2)).call()
-      const currentAllowance = new BigNumber(response)
-      setRuneAllowance(currentAllowance)
+      const response = await contract.methods.allowance(account, getAddress(contracts.pancakeFactoryV2)).call();
+      const currentAllowance = new BigNumber(response as any);
+      setRuneAllowance(currentAllowance);
     }
 
-    init()
-  }, [account, web3])
+    init();
+  }, [account, web3]);
 
-  const buy = async () => {}
+  const buy = async () => {};
 
   const onMax = async () => {
-    setEstimate((parseFloat(bnbBalance) * 0.95).toFixed(0))
+    setEstimate((parseFloat(bnbBalance) * 0.95).toFixed(0));
 
     if (!parseFloat(bnbBalance)) {
-      setEstimate('0')
-      return
+      setEstimate('0');
+      return;
     }
 
-    const WBNB = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
-    const BUSD = '0xe9e7cea3dedca5984780bafc599bd69add087d56'
-    const RUNE = '0x2098fef7eeae592038f4f3c4b008515fed0d5886'
-    const path = [WBNB, BUSD, RUNE]
+    const WBNB = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
+    const BUSD = '0xe9e7cea3dedca5984780bafc599bd69add087d56';
+    const RUNE = '0x2098fef7eeae592038f4f3c4b008515fed0d5886';
+    const path = [WBNB, BUSD, RUNE];
 
-    const _value = ethers.utils.parseEther((parseFloat(bnbBalance) * 0.95).toFixed(4))
-    const amounts = await routerContract.methods.getAmountsOut(_value, path).call({ from: account })
-    const amountOutMin = getBalanceNumber(amounts[2]) * 0.91
+    const _value = ethers.utils.parseEther((parseFloat(bnbBalance) * 0.95).toFixed(4));
+    const amounts = await routerContract.methods.getAmountsOut(_value, path).call({ from: account });
+    const amountOutMin = getBalanceNumber(amounts[2]) * 0.91;
 
-    setAmount(amountOutMin.toFixed(0))
-  }
+    setAmount(amountOutMin.toFixed(0));
+  };
 
   return (
     <Modal title={t('Purchase $RXS')} onDismiss={onDismiss}>
@@ -281,7 +281,7 @@ export const PurchaseModal: React.FC<PurchaseModalProps> = ({ defaultAmount, onS
                     <NumericalInput
                       value={amount}
                       onUserInput={(val) => {
-                        setAmount(val)
+                        setAmount(val);
                       }}
                     />
                     <Button onClick={onMax} scale="sm" variant="text">
@@ -335,8 +335,8 @@ export const PurchaseModal: React.FC<PurchaseModalProps> = ({ defaultAmount, onS
             <Button
               variant="tertiary"
               onClick={() => {
-                history.push('/swap')
-                onDismiss()
+                history.push('/swap');
+                onDismiss();
               }}>
               {t('Swap tokens')}
             </Button>
@@ -400,17 +400,17 @@ export const PurchaseModal: React.FC<PurchaseModalProps> = ({ defaultAmount, onS
         ) : null} */}
       {/* </> */}
     </Modal>
-  )
-}
+  );
+};
 
-export default PurchaseModal
+export default PurchaseModal;
 
 const Tips = styled.div`
   margin-left: 0.4em;
   font-size: 14px;
   font-weight: 600;
   color: ${(props) => props.theme.colors.primary};
-`
+`;
 
 const Final = styled.div`
   margin-top: 1em;
@@ -418,9 +418,9 @@ const Final = styled.div`
   font-size: 20px;
   font-weight: 600;
   color: ${(props) => props.theme.colors.primary};
-`
+`;
 const Announce = styled.div`
   margin-top: 1em;
   margin-left: 0.4em;
   color: #ed4b9e;
-`
+`;

@@ -291,7 +291,7 @@ const Image = styled.img`
   }
 `;
 
-const Home: React.FC = () => {
+const Home: React.FC<any> = () => {
   const { t } = useTranslation();
   const cache = useCache();
   const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);

@@ -1,10 +1,10 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Result } from 'antd'
-import Button from './Button'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Result } from 'antd';
+import Button from './Button2';
 
 export default () => {
-  const history = useNavigate()
+  const history = useNavigate();
   return (
     <Result
       status="404"
@@ -16,5 +16,5 @@ export default () => {
         </Button>
       }
     />
-  )
-}
+  );
+};

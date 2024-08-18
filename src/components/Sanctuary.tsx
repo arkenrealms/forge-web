@@ -13,7 +13,7 @@ import { PurchaseModal } from '~/components/PurchaseModal';
 import { RecipeInfo } from '~/components/RecipeInfo';
 import useCache from '~/hooks/useCache';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
-import useSettings from '~/hooks/useSettings';
+import useSettings from '~/hooks/useSettings2';
 import useWeb3 from '~/hooks/useWeb3';
 import { Button, Card, CloseIcon, Flex, Heading, Text } from '~/ui';
 // import initReactFastclick from "react-fastclick";
@@ -221,7 +221,7 @@ const UtilityModalClose = styled.div`
   padding: 10px;
   color: #999;
 `;
-const Home: React.FC = () => {
+const Home: React.FC<any> = () => {
   const cache = useCache();
   const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
   const [pageLoaded, setPageLoaded] = useState(false);
@@ -229,7 +229,7 @@ const Home: React.FC = () => {
   const { account, library } = useWeb3();
   const settings = useSettings();
   const { t } = useTranslation();
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const [itemSelected, _setItemSelected] = useState(null);
   const onItemSelected = (value, item) => {
@@ -784,7 +784,7 @@ const Home: React.FC = () => {
         {isHighRes ? (
           <Promo1
             onClick={() => {
-              history.push('/cube');
+              navigate('/cube');
             }}>
             <Heading
               as="h2"

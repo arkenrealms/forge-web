@@ -20,7 +20,7 @@ const { Item } = Menu;
 
 export default ({ user = { name: null, picture: null }, login = () => {}, logout = () => {}, ...props }: IAvatar) => {
   const { name, picture } = user;
-  const history = useNavigate();
+  const navigate = useNavigate();
   const tour = useTour();
   const { settings, show: showSettings } = useSettings();
 
@@ -56,7 +56,7 @@ export default ({ user = { name: null, picture: null }, login = () => {}, logout
       label: 'View permissions',
       key: 'permissions',
       onClick: async () => {
-        history('/roles');
+        navigate('/roles');
       },
     },
     settings.LoginAsUser

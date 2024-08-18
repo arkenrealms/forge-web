@@ -24,7 +24,7 @@ const parseMatch = (location) => {
   return match;
 };
 
-const ClassDesigner: React.FC = () => {
+const ClassDesigner: React.FC<any> = () => {
   const location = useLocation();
   const history = useNavigate();
   const match = parseMatch(location);

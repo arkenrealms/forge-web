@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import useSettings from '~/hooks/useSettings';
+import useSettings from '~/hooks/useSettings2';
 import Svg from '../../Svg/Svg';
 import { SvgProps } from '../../Svg/types';
 

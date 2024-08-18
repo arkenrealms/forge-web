@@ -1,27 +1,24 @@
-import { Column, ColumnConfig } from '@ant-design/plots'
-import { Card, Col, Image, Row, Typography, Result } from 'antd'
-import React, { Component, useEffect, useState, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
-import CountUp from 'react-countup'
-import styled, { css, createGlobalStyle } from 'styled-components'
-import { RiSurveyLine } from 'react-icons/ri'
-import { SlRefresh } from 'react-icons/sl'
-import { LuFileType, LuFileLock } from 'react-icons/lu'
-
-import Button from '~/components/Button'
-import { useCreateModel, useSearchModels, useGetModel } from '@arken/forge-ui/hooks'
-import useSettings from '@arken/forge-ui/hooks/useSettings'
-import useDocumentTitle from '@arken/forge-ui/hooks/useDocumentTitle'
-import { average } from '@arken/node/util/math'
-import debounce from '@arken/node/util/debounce'
-import { useInterval } from '@arken/forge-ui/hooks/useInterval'
-import echarts from '~/lib/echarts'
-import { useAuth } from '@arken/forge-ui/hooks/useAuth'
-import packagejson from '../../package.json'
+import { Column, ColumnConfig } from '@ant-design/plots';
+import { Card, Col, Image, Row, Typography, Result } from 'antd';
+import React, { Component, useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import CountUp from 'react-countup';
+import styled, { css, createGlobalStyle } from 'styled-components';
+import { RiSurveyLine } from 'react-icons/ri';
+import { SlRefresh } from 'react-icons/sl';
+import { useCreateModel, useSearchModels, useGetModel } from '@arken/forge-ui/hooks';
+import useSettings from '@arken/forge-ui/hooks/useSettings';
+import useDocumentTitle from '@arken/forge-ui/hooks/useDocumentTitle';
+import { average } from '@arken/node/util/math';
+import debounce from '@arken/node/util/debounce';
+import { useInterval } from '@arken/forge-ui/hooks/useInterval';
+import echarts from '~/lib/echarts';
+import { useAuth } from '@arken/forge-ui/hooks/useAuth';
+import packagejson from '../../package.json';
 // @ts-ignore
-import DashboardLandingImage from '../assets/dashboard.png'
+import DashboardLandingImage from '../assets/dashboard.png';
 
-const zzz = styled.div``
+const zzz = styled.div``;
 
 const GlobalStyles = createGlobalStyle`
 body {
@@ -32,14 +29,14 @@ body {
   from {-webkit-transform: rotate(0deg);}
   to   {-webkit-transform: rotate(359deg);}
 }
-`
+`;
 
-const { Title, Text } = Typography
+const { Title, Text } = Typography;
 
 type Status = {
-  type: string
-  sales: number
-}
+  type: string;
+  sales: number;
+};
 
 const StatusList: Status[] = [
   {
@@ -62,9 +59,9 @@ const StatusList: Status[] = [
     type: 'Pending',
     sales: 5,
   },
-]
+];
 
-const DemoColumn: React.FC = () => {
+const DemoColumn: React.FC<any> = () => {
   const config: ColumnConfig = {
     data: StatusList,
     xField: 'type',
@@ -90,26 +87,26 @@ const DemoColumn: React.FC = () => {
         alias: '',
       },
     },
-  }
+  };
 
-  return <Column {...config} />
-}
+  return <Column {...config} />;
+};
 
 const query = `
   id
   number
   createdDate
   meta
-`
+`;
 
 function getStat(previousStat: any, nextStat: any) {
-  const res = {} as any
+  const res = {} as any;
 
   for (const index in previousStat) {
-    res[index] = nextStat[index] - previousStat[index]
+    res[index] = nextStat[index] - previousStat[index];
   }
 
-  return res
+  return res;
 }
 
 const StatusTile = ({ number, color, title, description, isLoading, ...props }: any) => (
@@ -117,8 +114,7 @@ const StatusTile = ({ number, color, title, description, isLoading, ...props }: 
     css={css`
       margin-bottom: 40px;
     `}
-    {...props}
-  >
+    {...props}>
     <Col
       xs={12}
       css={css`
@@ -133,8 +129,8 @@ const StatusTile = ({ number, color, title, description, isLoading, ...props }: 
         font-weight: 300;
         font-style: normal;
         color: ${color};
-      `}
-    >
+      `}>
+      {/* @ts-ignore */}
       {!isLoading ? <CountUp end={number} start={0} /> : null}
     </Col>
     <Col xs={10}>
@@ -143,16 +139,14 @@ const StatusTile = ({ number, color, title, description, isLoading, ...props }: 
           font-size: 20px;
           margin-bottom: 4px;
           padding: 0;
-        `}
-      >
+        `}>
         {title}
       </div>
       <div
         css={css`
           font-size: 14px;
           font-weight: 300;
-        `}
-      >
+        `}>
         {description}
       </div>
     </Col>
@@ -162,8 +156,7 @@ const StatusTile = ({ number, color, title, description, isLoading, ...props }: 
         width: 100%;
         height: 100%;
         align-self: center;
-      `}
-    >
+      `}>
       <svg
         version="1.1"
         baseProfile="tiny"
@@ -173,8 +166,7 @@ const StatusTile = ({ number, color, title, description, isLoading, ...props }: 
         aria-hidden="true"
         touch-action="pan-x pan-y"
         viewBox="0 0 8 8"
-        style={{ width: 8, height: 8 }}
-      >
+        style={{ width: 8, height: 8 }}>
         <ellipse fill={color} rx="4" ry="4" cx="4" cy="4"></ellipse>
         <ellipse
           data-bind="attr: {
@@ -194,15 +186,14 @@ const StatusTile = ({ number, color, title, description, isLoading, ...props }: 
           rx="4"
           ry="4"
           cx="4"
-          cy="4"
-        ></ellipse>
+          cy="4"></ellipse>
       </svg>
     </Col>
   </Row>
-)
+);
 
 const SpecialButton = ({ icon, title, path, onClick, ...props }: any) => {
-  const history = useNavigate()
+  const navigate = useNavigate();
   return (
     <div
       css={css`
@@ -223,11 +214,10 @@ const SpecialButton = ({ icon, title, path, onClick, ...props }: any) => {
         }
       `}
       onClick={() => {
-        history(path)
-        onClick?.()
+        navigate(path);
+        onClick?.();
       }}
-      {...props}
-    >
+      {...props}>
       <div
         css={css`
           display: inline-flex;
@@ -238,8 +228,7 @@ const SpecialButton = ({ icon, title, path, onClick, ...props }: any) => {
           text-align: center;
           align-items: center;
           vertical-align: middle;
-        `}
-      >
+        `}>
         {icon}
       </div>
       <span
@@ -249,29 +238,28 @@ const SpecialButton = ({ icon, title, path, onClick, ...props }: any) => {
           vertical-align: middle;
           color: #035d92;
           font-size: 14px;
-        `}
-      >
+        `}>
         {title}
       </span>
     </div>
-  )
-}
+  );
+};
 
-const oneWeekAgo = new Date()
-oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
+const oneWeekAgo = new Date();
+oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
 export default function AdminDashboard() {
-  const history = useNavigate()
-  const { settings } = useSettings()
-  const { user } = useAuth()
-  const [refreshCountdown, setRefreshCountdown] = useState(15)
-  const [info, setInfo] = useState(undefined)
+  const navigate = useNavigate();
+  const { settings } = useSettings();
+  const { user } = useAuth();
+  const [refreshCountdown, setRefreshCountdown] = useState(15);
+  const [info, setInfo] = useState(undefined);
 
   const { mutateAsync: createStat }: any = useCreateModel({
     key: 'Stat',
     action: 'createOneStat',
     query,
-  })
+  });
 
   useEffect(function () {
     async function run() {
@@ -279,13 +267,13 @@ export default function AdminDashboard() {
         await fetch(`${process.env.REACT_APP_SERVICE_URI}/info`, {
           method: 'GET',
         })
-      ).json()
+      ).json();
 
-      setInfo(res)
+      setInfo(res);
     }
 
-    run()
-  }, [])
+    run();
+  }, []);
 
   // TODO: this is a workaround to get a daily metric, remove when we have an azure cronjob
   useGetModel({
@@ -299,7 +287,7 @@ export default function AdminDashboard() {
         }
       }
     `,
-  })
+  });
 
   const {
     data: contentListSearch,
@@ -318,17 +306,17 @@ export default function AdminDashboard() {
         number: 'desc',
       },
     },
-  })
+  });
 
   useInterval(function () {
     if (refreshCountdown === 1) {
-      refreshStats()
+      refreshStats();
     }
 
-    setRefreshCountdown(refreshCountdown > 0 ? refreshCountdown - 1 : 15)
-  }, 1000)
+    setRefreshCountdown(refreshCountdown > 0 ? refreshCountdown - 1 : 15);
+  }, 1000);
 
-  const todayStat = contentListSearch?.[0]
+  const todayStat = contentListSearch?.[0];
 
   const colorMap: any = {
     New: '#ff9080',
@@ -336,22 +324,22 @@ export default function AdminDashboard() {
     Complete: '#80ffb0',
     Cancelled: '#ff9080',
     Pending: '#eb80ff',
-  }
+  };
 
   function OrderChart() {
-    const [chart, setChart] = useState(null)
-    const chartRef = useRef(null)
+    const [chart, setChart] = useState(null);
+    const chartRef = useRef(null);
 
     function resize() {
-      if (!chartRef?.current) return
-      debounce(chartRef.current.resize, 300)()
+      if (!chartRef?.current) return;
+      debounce(chartRef.current.resize, 300)();
     }
 
     function initChart() {
-      if (!chartRef?.current) return
+      if (!chartRef?.current) return;
 
-      const chart2 = echarts.init(chartRef.current, 'macarons')
-      setChart(chart2)
+      const chart2 = echarts.init(chartRef.current, 'macarons');
+      setChart(chart2);
 
       const xData = (function () {
         // const data = []
@@ -359,10 +347,10 @@ export default function AdminDashboard() {
         //   data.push(i + 'month')
         // }
         // return data
-        return ['02/2023', '03/2023', '04/2023']
-      })()
+        return ['02/2023', '03/2023', '04/2023'];
+      })();
 
-      const series = []
+      const series = [];
 
       for (const status of StatusList) {
         series.push({
@@ -381,20 +369,18 @@ export default function AdminDashboard() {
                 },
                 position: 'insideTop',
                 formatter(p: any) {
-                  return p.Total > 0 ? p.Total : ''
+                  return p.Total > 0 ? p.Total : '';
                 },
               },
             },
           },
           data: contentListSearch.map((item: any) => item.meta[`Total${status.type}Forms`]),
-        })
+        });
       }
 
-      const averageData = []
+      const averageData = [];
       for (const item of contentListSearch) {
-        averageData.push(
-          average(StatusList.map((status: any) => item.meta[`Total${status.type}Forms`]))
-        )
+        averageData.push(average(StatusList.map((status: any) => item.meta[`Total${status.type}Forms`])));
       }
 
       // average
@@ -413,13 +399,13 @@ export default function AdminDashboard() {
               show: true,
               position: 'top',
               formatter(p: any) {
-                return p.Total > 0 ? p.Total : ''
+                return p.Total > 0 ? p.Total : '';
               },
             },
           },
         },
         data: averageData,
-      })
+      });
 
       // {
       //   name: 'male',
@@ -556,18 +542,18 @@ export default function AdminDashboard() {
           },
         ],
         series,
-      })
+      });
     }
 
     useEffect(function () {
-      debounce(initChart, 300)()
+      debounce(initChart, 300)();
 
-      window.addEventListener('resize', resize)
+      window.addEventListener('resize', resize);
 
       return function () {
-        window.removeEventListener('resize', resize)
-      }
-    }, [])
+        window.removeEventListener('resize', resize);
+      };
+    }, []);
 
     // useEffect(function() {
     //     if (sidebarCollapsed !== props.sidebarCollapsed) {
@@ -579,18 +565,17 @@ export default function AdminDashboard() {
       <div style={{ width: '100%', height: 'calc(100vh - 100px)' }}>
         <div style={{ width: '100%', height: '100%' }} ref={chartRef}></div>
       </div>
-    )
+    );
   }
 
-  useDocumentTitle('ASI Nexus')
+  useDocumentTitle('ASI Nexus');
 
   return (
     <div
       css={css`
         margin: 50px;
         text-align: center;
-      `}
-    >
+      `}>
       <GlobalStyles />
       {settings.DeveloperMode && user?.permissions['Developer Tools'] ? <OrderChart /> : null}
       {/* <h1
@@ -614,8 +599,7 @@ export default function AdminDashboard() {
         css={css`
           text-align: left;
           margin-top: 40px;
-        `}
-      >
+        `}>
         <Col
           xs={4}
           md={8}
@@ -624,14 +608,12 @@ export default function AdminDashboard() {
             font-size: 16px;
             font-weight: bold;
           `}
-          data-testid="dashboard-stats"
-        >
+          data-testid="dashboard-stats">
           <Row
             css={css`
               margin-bottom: 30px;
             `}
-            onClick={() => refreshStats()}
-          >
+            onClick={() => refreshStats()}>
             <Col
               xs={12}
               css={css`
@@ -639,8 +621,7 @@ export default function AdminDashboard() {
                   text-align: right;
                   color rgb(128, 128, 128);
                   align-self: center;
-                `}
-            >
+                `}>
               <SlRefresh
                 css={css`
                   transform: rotate(0deg);
@@ -657,8 +638,7 @@ export default function AdminDashboard() {
               css={css`
                 font-size: 16px;
                 font-weight: bold;
-              `}
-            >
+              `}>
               Application Status
               <br />
               <div
@@ -666,8 +646,7 @@ export default function AdminDashboard() {
                   color: #8b9a9f;
                   font-size: 12px;
                   font-weight: 300;
-                `}
-              >
+                `}>
                 Refresh: {refreshCountdown}
               </div>
             </Col>
@@ -719,8 +698,7 @@ export default function AdminDashboard() {
           xl={8}
           css={css`
             margin-top: 30px;
-          `}
-        >
+          `}>
           {/* <img
             src={DashboardLandingImage}
             css={css`
@@ -735,16 +713,14 @@ export default function AdminDashboard() {
               padding: 10px 0;
               font-size: 16px;
               font-weight: bold;
-            `}
-          >
+            `}>
             Common Activities
             <br />
             <div
               css={css`
                 font-size: 12px;
                 font-weight: 300;
-              `}
-            >
+              `}>
               &nbsp;
             </div>
           </div>
@@ -770,8 +746,7 @@ export default function AdminDashboard() {
         css={css`
           margin: 20px;
           text-align: center;
-        `}
-      >
+        `}>
         <Col xs={24} md={6} style={{ marginTop: 40 }}>
           <Title level={3}></Title>
           <br />
@@ -796,13 +771,12 @@ export default function AdminDashboard() {
             padding: 10px;
             height: 65px;
             color: #666;
-          `}
-        >
+          `}>
           cerebro-ui@{packagejson.version} ({process.env.BUILD_NUMBER || 'local.dev.box'})
           <br />
           cerebro-backend@{info.version} ({info.build})
         </div>
       ) : null}
     </div>
-  )
+  );
 }

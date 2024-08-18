@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import useSound from 'use-sound'
-import { useTranslation } from 'react-i18next'
-import styled, { css } from 'styled-components'
-import { Link, Redirect, useParams } from 'react-router-dom'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import useSound from 'use-sound';
+import { useTranslation } from 'react-i18next';
+import styled, { css } from 'styled-components';
 import {
   Button,
   Flex,
@@ -15,17 +14,17 @@ import {
   LinkExternal,
   AutoRenewIcon,
   Heading,
-} from '~/ui'
-import Input from '~/components/Input/Input'
-import Select, { OptionProps } from '~/components/Select/Select'
-import ItemCatalog from '~/components/ItemCatalog'
-import useGetCatalogItems from '~/hooks/useGetCatalogItems'
+} from '~/ui';
+import Input from '~/components/Input/Input';
+import Select, { OptionProps } from '~/components/Select/Select';
+import ItemCatalog from '~/components/ItemCatalog';
+import useGetCatalogItems from '~/hooks/useGetCatalogItems';
 
 const StyledInput = styled(Input)`
   margin-left: auto;
   border: 2px solid #555;
   border-radius: 6px;
-`
+`;
 
 const InputWrapper = styled.div`
   position: relative;
@@ -33,18 +32,18 @@ const InputWrapper = styled.div`
     width: 234px;
     display: block;
   }
-`
+`;
 
-const SearchContainer = styled.div<{ toggled: boolean }>``
+const SearchContainer = styled.div<{ toggled: boolean }>``;
 
 interface SearchProps {
-  value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const SearchInput: React.FC<SearchProps> = ({ value, onChange }) => {
-  const [toggled, setToggled] = useState(false)
-  const inputEl = useRef(null)
+  const [toggled, setToggled] = useState(false);
+  const inputEl = useRef(null);
 
   return (
     <SearchContainer toggled={toggled}>
@@ -58,8 +57,8 @@ const SearchInput: React.FC<SearchProps> = ({ value, onChange }) => {
         />
       </InputWrapper>
     </SearchContainer>
-  )
-}
+  );
+};
 
 const FilterContainer = styled.div`
   display: flex;
@@ -71,7 +70,7 @@ const FilterContainer = styled.div`
     width: auto;
     padding: 0;
   }
-`
+`;
 
 const ViewControls = styled.div`
   flex-wrap: wrap;
@@ -92,7 +91,7 @@ const ViewControls = styled.div`
       padding: 0;
     }
   }
-`
+`;
 
 const ControlContainer = styled.div`
   display: flex;
@@ -108,7 +107,7 @@ const ControlContainer = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
   }
-`
+`;
 
 const ToggleWrapper = styled.div`
   display: flex;
@@ -117,13 +116,13 @@ const ToggleWrapper = styled.div`
   ${Text} {
     margin-left: 8px;
   }
-`
+`;
 
 const LabelWrapper = styled.div`
   > ${Text} {
     font-size: 12px;
   }
-`
+`;
 export default function ({
   rows = 5,
   columns = 7,
@@ -137,35 +136,35 @@ export default function ({
   onItemMultiSelected = null,
   defaultBranch = undefined,
 }) {
-  const { t } = useTranslation()
-  const { nfts, fetchItem } = useGetCatalogItems()
-  const [showFilters, setShowFilters] = useState(false)
-  const [enableSellMode, setEnableSellMode] = useState(false)
+  const { t } = useTranslation();
+  const { nfts, fetchItem } = useGetCatalogItems();
+  const [showFilters, setShowFilters] = useState(false);
+  const [enableSellMode, setEnableSellMode] = useState(false);
 
   const refresh = () => {
     if (itemId) {
-      fetchItem(itemId)
+      fetchItem(itemId);
     }
-  }
+  };
 
-  const refresh2 = useRef(refresh)
+  const refresh2 = useRef(refresh);
 
   useEffect(() => {
-    console.log('Refreshing from ItemCatalog component')
-    refresh2.current()
-  }, [refresh2])
+    console.log('Refreshing from ItemCatalog component');
+    refresh2.current();
+  }, [refresh2]);
 
-  const [perfectOnly, setPerfectOnly] = useState(false)
-  const [sortOption, setSortOption] = useState(sort)
-  const [query, setQuery] = useState('')
+  const [perfectOnly, setPerfectOnly] = useState(false);
+  const [sortOption, setSortOption] = useState(sort);
+  const [query, setQuery] = useState('');
 
   const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value.toLowerCase())
-  }
+    setQuery(event.target.value.toLowerCase());
+  };
 
   const handleSortOptionChange = (option: OptionProps): void => {
-    setSortOption(option.value)
-  }
+    setSortOption(option.value);
+  };
 
   return (
     <>
@@ -248,5 +247,5 @@ export default function ({
         selectMode={selectMode}
       />
     </>
-  )
+  );
 }

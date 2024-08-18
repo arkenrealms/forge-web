@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react'
-import styled from 'styled-components'
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+import styled from 'styled-components';
 import {
   Heading,
   Text,
@@ -17,14 +17,14 @@ import {
   LinkExternal,
   Link,
   BlockIcon,
-} from '~/ui'
-import Unity, { UnityContext } from 'react-unity-webgl'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import history from '~/routerHistory'
-import { getUsername } from '~/state/profiles/getProfile'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import Page from '~/components/layout/Page'
+} from '~/ui';
+import Unity, { UnityContext } from 'react-unity-webgl';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import history from '~/routerHistory';
+import { getUsername } from '~/state/profiles/getProfile';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import Page from '~/components/layout/Page';
 
 const Mana = styled.div`
   position: absolute;
@@ -35,7 +35,7 @@ const Mana = styled.div`
   background: url(images_extra/mana.png?3) repeat;
   animation: animate-mana linear 20s infinite;
   clip-path: circle(50%);
-`
+`;
 
 const Health = styled.div`
   position: absolute;
@@ -46,7 +46,7 @@ const Health = styled.div`
   background: url(images_extra/health.png?3) repeat;
   animation: animate-health linear 20s infinite;
   clip-path: circle(50%);
-`
+`;
 
 const StyledNotFound = styled.div`
   align-items: center;
@@ -54,7 +54,7 @@ const StyledNotFound = styled.div`
   flex-direction: column;
   height: calc(100vh - 85px);
   justify-content: center;
-`
+`;
 
 const MainCard = styled(Card)`
   position: relative;
@@ -80,8 +80,8 @@ const MainCard = styled(Card)`
     text-transform: none;
     font-family: 'Alegreya Sans', sans-serif, Cambria, Verdana, monospace;
   }
-`
-const Home: React.FC = () => {
+`;
+const Home: React.FC<any> = () => {
   return (
     <StyledNotFound>
       <MainCard>
@@ -101,7 +101,7 @@ const Home: React.FC = () => {
         <p style={{ color: 'white' }}>See the Nexus for more info.</p>
       </MainCard>
     </StyledNotFound>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

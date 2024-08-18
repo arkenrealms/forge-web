@@ -1,31 +1,11 @@
-import React, { useState } from 'react'
-import Page from '~/components/layout/Page'
-import styled, { css } from 'styled-components'
-import { Link, Redirect, useParams } from 'react-router-dom'
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CheckmarkCircleIcon,
-  Heading,
-  BlockIcon,
-  Tag,
-  ChevronLeftIcon,
-  Flex,
-  Text,
-  Button,
-  BaseLayout,
-} from '~/ui'
-import PageLoader from '~/components/PageLoader'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import PageWindow from '~/components/PageWindow'
-import TeamComponent from '~/components/Team'
-import useWeb3 from '~/hooks/useWeb3'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
+import React, { useState } from 'react';
+import Page from '~/components/layout/Page';
+import PageWindow from '~/components/PageWindow';
+import useWeb3 from '~/hooks/useWeb3';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
 
 const Sitemap = () => {
-  const { address: account, library } = useWeb3()
+  const { address: account, library } = useWeb3();
 
   return (
     <Page>
@@ -51,7 +31,7 @@ const Sitemap = () => {
         </ul>
       </PageWindow>
     </Page>
-  )
-}
+  );
+};
 
-export default Sitemap
+export default Sitemap;

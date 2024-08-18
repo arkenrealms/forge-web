@@ -1,40 +1,40 @@
-import React from 'react'
-import { css } from 'styled-components'
-import { motion, AnimatePresence } from 'framer-motion'
-import Item from '~/components/Item'
-import { ItemType, ItemCategoriesType } from 'rune-backend-sdk/build/data/items.type'
-import useSettings from '~/hooks/useSettings'
+import React from 'react';
+import { css } from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
+import Item from '~/components/Item';
+import { ItemType, ItemCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import useSettings from '~/hooks/useSettings2';
 
 type Props = {
-  id: string
-  items: ItemType[]
-  page: number
-  direction: number
-  columns: number
-  rows: number
-  showAll: boolean
-  showNames?: boolean
-  showQuantity?: boolean
-  showItemDropdown?: boolean
-  noDisabled?: boolean
-  disableAnimation?: boolean
-  selectMode?: boolean
-  isSelectable?: boolean
-  defaultBranch?: string
-}
+  id: string;
+  items: ItemType[];
+  page: number;
+  direction: number;
+  columns: number;
+  rows: number;
+  showAll: boolean;
+  showNames?: boolean;
+  showQuantity?: boolean;
+  showItemDropdown?: boolean;
+  noDisabled?: boolean;
+  disableAnimation?: boolean;
+  selectMode?: boolean;
+  isSelectable?: boolean;
+  defaultBranch?: string;
+};
 
 const variants = {
   enter: (direction: number) => {
     return {
       x: direction * 100,
       opacity: 0,
-    }
+    };
   },
   center: {
     x: 0,
     opacity: 1,
   },
-}
+};
 
 const ItemsGrid: React.FC<Props> = ({
   showAll,
@@ -53,7 +53,7 @@ const ItemsGrid: React.FC<Props> = ({
   selectMode = false,
   isSelectable = false,
 }) => {
-  const { quality } = useSettings()
+  const { quality } = useSettings();
 
   if (quality === 'bad' || disableAnimation)
     return (
@@ -76,7 +76,7 @@ const ItemsGrid: React.FC<Props> = ({
           />
         ))}
       </div>
-    )
+    );
 
   return (
     <motion.div
@@ -108,7 +108,7 @@ const ItemsGrid: React.FC<Props> = ({
         />
       ))}
     </motion.div>
-  )
-}
+  );
+};
 
-export default ItemsGrid
+export default ItemsGrid;

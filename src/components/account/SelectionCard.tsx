@@ -1,20 +1,21 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Card, Radio } from '~/ui'
+import React from 'react';
+import styled from 'styled-components';
+import { Card, Radio } from '~/ui';
 
 interface SelectionCardProps {
-  name: string
-  value: string | number
-  isChecked?: boolean
-  onChange: (val: any) => void
-  image: string
-  disabled?: boolean
+  name: string;
+  value: string | number;
+  isChecked?: boolean;
+  onChange: (val: any) => void;
+  image: string;
+  disabled?: boolean;
+  children?: any;
 }
 
 const StyledCard = styled(Card)`
   ${({ isSuccess }) => !isSuccess && 'box-shadow: none;'}
   margin-bottom: 16px;
-`
+`;
 
 const Label = styled.label<{ isDisabled: boolean }>`
   cursor: ${({ isDisabled }) => (isDisabled ? 'not-allowed' : 'url("/images/cursor3.png"), pointer')};
@@ -32,7 +33,7 @@ const Label = styled.label<{ isDisabled: boolean }>`
       font-size: 1rem;
     }
   }
-`
+`;
 
 const Body = styled.div`
   align-items: center;
@@ -40,11 +41,11 @@ const Body = styled.div`
   flex-grow: 1;
   height: 80px;
   padding: 8px 16px;
-`
+`;
 
 const Children = styled.div`
   margin-left: 16px;
-`
+`;
 
 const StyledBackgroundImage = styled.div<{ src: string }>`
   align-self: stretch;
@@ -59,7 +60,7 @@ const StyledBackgroundImage = styled.div<{ src: string }>`
   ${({ theme }) => theme.mediaQueries.sm} {
     width: 60px;
   }
-`
+`;
 
 const SelectionCard: React.FC<SelectionCardProps> = ({
   name,
@@ -88,7 +89,7 @@ const SelectionCard: React.FC<SelectionCardProps> = ({
         <StyledBackgroundImage src={image} />
       </Label>
     </StyledCard>
-  )
-}
+  );
+};
 
-export default SelectionCard
+export default SelectionCard;

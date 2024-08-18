@@ -1,11 +1,11 @@
-import React from 'react'
-import { Link, Redirect, useParams } from 'react-router-dom'
-import { Card, CardBody, Heading } from '~/ui'
-import Page from '~/components/layout/Page'
-import PageWindow from '~/components/PageWindow'
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Card, CardBody, Heading } from '~/ui';
+import Page from '~/components/layout/Page';
+import PageWindow from '~/components/PageWindow';
 
 const Guide = ({ match }) => {
-  const { id }: { id: string } = match.params
+  const { id }: { id: string } = match.params;
   return (
     <Page>
       <PageWindow>
@@ -32,8 +32,7 @@ const Guide = ({ match }) => {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              style={{ width: '100%', height: '500px' }}
-            ></iframe>
+              style={{ width: '100%', height: '500px' }}></iframe>
             <br />
             <br />
             <h3>Instructions:</h3>
@@ -62,7 +61,7 @@ const Guide = ({ match }) => {
         </Card>
       </PageWindow>
     </Page>
-  )
-}
+  );
+};
 
-export default Guide
+export default Guide;

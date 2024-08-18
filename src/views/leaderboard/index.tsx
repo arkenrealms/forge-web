@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useContext, useCallback } from 'rea
 import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
 import styled, { css } from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
-import { Link, Redirect, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 import { Button, Flex, Card, Heading, CardBody, BaseLayout, Skeleton, ButtonMenu, ButtonMenuItem } from '~/ui';
 import Page from '~/components/layout/Page';
 import { Link as RouterLink } from 'react-router-dom';
@@ -122,7 +122,7 @@ const parseMatch = (location) => {
 const Leaderboard = () => {
   const currentSeason = 6;
 
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { address, library } = useWeb3();
   const location = useLocation();
   const match = parseMatch(location);
@@ -141,7 +141,7 @@ const Leaderboard = () => {
     (key, keys) => {
       setTimeout(
         () =>
-          history.push({
+          navigate({
             pathname: '/leaderboard',
             search:
               '?' +
@@ -155,7 +155,7 @@ const Leaderboard = () => {
         500
       );
     },
-    [history, tab, subtab]
+    [navigate, tab, subtab]
   );
 
   const updateTab = (val) => {

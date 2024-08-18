@@ -310,7 +310,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, account }) => {
           ) : null}
           <CardActionsContainer
             farm={farm}
-            ethereum={web3}
+            ethereum={web3 as any}
             account={account}
             harvestFee={harvestFee}
             hasPreviousEarnings={!!previousRuneRewards.length}

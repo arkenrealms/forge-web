@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
+import React, { useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
 import {
   Heading,
   Text,
@@ -19,27 +19,27 @@ import {
   BlockIcon,
   ButtonMenu,
   ButtonMenuItem,
-} from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints'
-import Cookies from 'js-cookie'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import history from '~/routerHistory'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import Page from '~/components/layout/Page'
-import Skills from '~/components/Skills'
-import useCache from '~/hooks/useCache'
+} from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
+import Cookies from 'js-cookie';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import history from '~/routerHistory';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import Page from '~/components/layout/Page';
+import Skills from '~/components/Skills';
+import useCache from '~/hooks/useCache';
 
 const BoxHeading = styled(Heading)`
   text-align: center;
   margin-bottom: 16px;
-`
+`;
 
-const Guide: React.FC = () => {
-  const { t } = useTranslation()
-  const cache = useCache()
-  const [tabIndex, setTabIndex] = useState(0)
+const Guide: React.FC<any> = () => {
+  const { t } = useTranslation();
+  const cache = useCache();
+  const [tabIndex, setTabIndex] = useState(0);
   // const [onPresentSkillsModal] = useModal(
   //   <Modal title="Skills">
   //     <ModalContent><Skills /></ModalContent>
@@ -119,7 +119,7 @@ const Guide: React.FC = () => {
       <br />
       <br />
     </Page>
-  )
-}
+  );
+};
 
-export default Guide
+export default Guide;

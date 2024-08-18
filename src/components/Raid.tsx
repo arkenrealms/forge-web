@@ -310,7 +310,7 @@ const Img = styled.img`
   }
 `;
 
-const Raid: React.FC = () => {
+const Raid: React.FC<any> = () => {
   const { t } = useTranslation();
   const { account, library } = useWeb3();
 

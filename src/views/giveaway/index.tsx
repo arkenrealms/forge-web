@@ -1,17 +1,17 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'
-import styled from 'styled-components'
-import { createGlobalStyle } from 'styled-components'
-import { Link, Redirect, useParams } from 'react-router-dom'
-import { Button, Flex, Card, Heading, CardBody, BaseLayout, ButtonMenu, ButtonMenuItem } from '~/ui'
-import Page from '~/components/layout/Page'
-import { Link as RouterLink } from 'react-router-dom'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import PageWindow from '~/components/PageWindow'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
+import { Button, Flex, Card, Heading, CardBody, BaseLayout, ButtonMenu, ButtonMenuItem } from '~/ui';
+import Page from '~/components/layout/Page';
+import { Link as RouterLink } from 'react-router-dom';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import PageWindow from '~/components/PageWindow';
 
-import { ItemInfo } from '~/components/ItemInfo'
-import { ItemCategoriesType } from 'rune-backend-sdk/build/data/items.type'
+import { ItemInfo } from '~/components/ItemInfo';
+import { ItemCategoriesType } from 'rune-backend-sdk/build/data/items.type';
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -35,9 +35,9 @@ const Cards = styled(BaseLayout)`
       grid-column: span 6;
     }
   }
-`
+`;
 
-const VerticalCards = styled.div``
+const VerticalCards = styled.div``;
 
 const Container = styled.div`
   background: #000;
@@ -47,13 +47,13 @@ const Container = styled.div`
     font-family: 'webfontexl', 'Palatino Linotype', 'Times', serif;
     color: #fff;
   }
-`
+`;
 
 const List = styled.div`
   width: 100%;
   margin-bottom: 30px;
   padding: 25px 15px 0;
-`
+`;
 
 const ListItem = styled.div`
   width: 100%;
@@ -64,28 +64,28 @@ const ListItem = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-gap: 32px;
-`
+`;
 
 const ListItemLeft = styled.div`
   grid-column: span 1;
   width: 30px;
-`
+`;
 
 const ListItemCenter = styled.div`
   grid-column: span 8;
   width: 100%;
-`
+`;
 
 const ListItemRight = styled.div`
   grid-column: span 3;
   text-align: center;
   width: 30px;
-`
+`;
 
 const MainHeading = styled.div`
   font-size: 2.5rem;
   line-height: 3.5rem;
-`
+`;
 
 const SubHeading = styled.div`
   width: 100%;
@@ -93,17 +93,17 @@ const SubHeading = styled.div`
   line-height: 2rem;
   text-align: center;
   text-decoration: underline;
-`
+`;
 
 const Giveaway = () => {
-  const [tabIndex, setTabIndex] = useState(0)
-  const { t } = useTranslation()
+  const [tabIndex, setTabIndex] = useState(0);
+  const { t } = useTranslation();
 
   const GlobalStyles = createGlobalStyle`
   input, textarea {
     text-transform: none;
   }
-  `
+  `;
 
   // useEffect(() => {
   //   if (!window) return
@@ -116,13 +116,13 @@ const Giveaway = () => {
     steel: null,
     fury: null,
     lorekeeper: null,
-  }
+  };
   const rank = {
     total: 1,
     steel: 1,
     fury: 1,
     lorekeeper: 1,
-  }
+  };
 
   return (
     <Page>
@@ -198,7 +198,7 @@ const Giveaway = () => {
         ) : null}
       </Container>
     </Page>
-  )
-}
+  );
+};
 
-export default Giveaway
+export default Giveaway;

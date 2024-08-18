@@ -1,14 +1,14 @@
 import type {} from 'styled-components/cssprop';
 import { CSSProp } from 'styled-components';
-import type { MainTheme } from '@arken/forge-ui/themes';
+// import type { MainTheme } from '@arken/forge-ui/themes';
+import { MainTheme } from './theme';
 
 // This will make it so any styled theme stuff (DefaultTheme) is extending our theme (MainTheme)
 declare module 'styled-components' {
   export interface DefaultTheme extends MainTheme {
     brand?: string;
-    colors: {
-      bodyBackground: string;
-    };
+    name?: string;
+    // fonts: { material: 'sans-serif', default: 'sans-serif' },
   }
 }
 

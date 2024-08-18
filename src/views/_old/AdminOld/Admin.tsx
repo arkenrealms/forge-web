@@ -43,7 +43,7 @@ export const getAddress = (address: Address): string => {
 //   return context.active ? context : contextNetwork
 // }
 
-const Governance: React.FC = () => {
+const Governance: React.FC<any> = () => {
   // const { web3 } = useWeb3()
   const block = useBlock();
   const { library, account } = useWeb3();

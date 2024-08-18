@@ -227,7 +227,7 @@ for (const contractKey of Object.keys(addresses)) {
   contractAddressToKey[addresses[contractKey][56]] = contractKey;
 }
 
-const Evolution: React.FC = () => {
+const Evolution: React.FC<any> = () => {
   const location = useLocation();
   const { account, library } = useWeb3();
   const { web3 } = useWeb3();

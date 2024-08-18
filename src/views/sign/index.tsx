@@ -86,7 +86,7 @@ const Textarea = styled.textarea`
   font-family: 'Alegreya Sans', Cambria, Verdana, Arial, Helvetica, sans-serif;
 `;
 
-const Evolution: React.FC = () => {
+const Evolution: React.FC<any> = () => {
   const location = useLocation();
   const history = useNavigate();
   const cache = useCache();
@@ -186,9 +186,7 @@ const Evolution: React.FC = () => {
                     <>
                       <br />
                       <br />
-                      <p>
-                        Address <CopyToClipboard toCopy={account}>Copy</CopyToClipboard>
-                      </p>
+                      <p>{/* Address <CopyToClipboard toCopy={account}>Copy</CopyToClipboard> */}</p>
                       <br />
                       <InputWrap style={{ border: '1px solid #fff' }}>
                         <Textarea rows={10} style={{ width: '100%' }}>
@@ -197,9 +195,7 @@ const Evolution: React.FC = () => {
                       </InputWrap>
                       <br />
                       <br />
-                      <p>
-                        Signature <CopyToClipboard toCopy={signature}>Copy</CopyToClipboard>
-                      </p>
+                      <p>{/* Signature <CopyToClipboard toCopy={signature}>Copy</CopyToClipboard> */}</p>
                       <br />
                       <InputWrap style={{ border: '1px solid #fff' }}>
                         <Textarea rows={10} style={{ width: '100%' }}>

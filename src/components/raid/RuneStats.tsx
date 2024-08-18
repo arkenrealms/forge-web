@@ -64,42 +64,9 @@ const RuneStats = () => {
           <Text>{t('Total Items')}</Text>
           {itemCount && <CardValue fontSize="16px" value={itemCount} decimals={0} />}
         </Row>
-        {/* <Row>
-          <Text>{t('Total RXS Supply')}</Text>
-          {runeSupply && <CardValue fontSize="16px" value={runeSupply} decimals={0} />}
-        </Row>
-        <Row>
-          <Text>{t('Total RXS Burned')}</Text>
-          <CardValue fontSize="16px" decimals={0} value={runeBurned} />
-        </Row>
-        <Row>
-          <Text>{t('Market Cap ($RXS only)')}</Text>
-          {runeSupply && <CardValue fontSize="16px" value={runePrice * runeSupply} decimals={0} prefix="$" />}
-        </Row>
-        {runeMarketCap + runesMarketCap > 0 ? (
-          <Row>
-            <Text>{t('Market Cap ($RXS + runes)')}</Text>
-            {runeSupply && <CardValue fontSize="16px" value={runeMarketCap + runesMarketCap} decimals={0} prefix="$" />}
-          </Row>
-        ) : null} */}
-        <Row></Row>
-        <Row></Row>
-        <Row></Row>
-        {/* {['rxs', ...safeRuneList].map((rune) => {
-          if (!cache.runes[rune]) return null;
-          const { price } = cache.runes[rune];
-
-          return (
-            <div key={rune}>
-              <Text color="textSubtle" mb="5px">
-                <strong>{t(rune.toUpperCase())}</strong> {`$${price.toFixed(4)}`}
-              </Text>
-            </div>
-          );
-        })} */}
         <Flex justifyContent="space-between">
-          <NavLink exact activeClassName="active" to="/stats"></NavLink>
-          <NavLink exact activeClassName="active" to="/stats">
+          <NavLink to="/stats" className={({ isActive }) => (isActive ? 'active' : '')}></NavLink>
+          <NavLink to="/stats" className={({ isActive }) => (isActive ? 'active' : '')}>
             <span style={{ padding: '5px', marginTop: '26px', float: 'left', fontSize: '18px' }}>View more</span>
             {/* <ArrowForwardIcon mt={30} color="primary" /> */}
           </NavLink>

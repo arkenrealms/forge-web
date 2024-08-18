@@ -1,61 +1,61 @@
-import acts from 'rune-backend-sdk/build/data/generated/acts.json'
-import areas from 'rune-backend-sdk/build/data/generated/areas.json'
-import characterClasses from 'rune-backend-sdk/build/data/generated/characterClasses.json'
-import characterFactions from 'rune-backend-sdk/build/data/generated/characterFactions.json'
-import characterRaces from 'rune-backend-sdk/build/data/generated/characterRaces.json'
-import eras from 'rune-backend-sdk/build/data/generated/eras.json'
-import runeItems from 'rune-backend-sdk/build/data/generated/items.json'
-import npcs from 'rune-backend-sdk/build/data/generated/npcs.json'
-import planets from 'rune-backend-sdk/build/data/generated/planets.json'
-import solarSystems from 'rune-backend-sdk/build/data/generated/solarSystems.json'
-import { ProGallery } from 'pro-gallery'
-import 'pro-gallery/dist/statics/main.css'
-import React, { useLayoutEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { createGlobalStyle } from 'styled-components'
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints'
-import { Skeleton } from '~/ui'
+import acts from 'rune-backend-sdk/build/data/generated/acts.json';
+import areas from 'rune-backend-sdk/build/data/generated/areas.json';
+import characterClasses from 'rune-backend-sdk/build/data/generated/characterClasses.json';
+import characterFactions from 'rune-backend-sdk/build/data/generated/characterFactions.json';
+import characterRaces from 'rune-backend-sdk/build/data/generated/characterRaces.json';
+import eras from 'rune-backend-sdk/build/data/generated/eras.json';
+import runeItems from 'rune-backend-sdk/build/data/generated/items.json';
+import npcs from 'rune-backend-sdk/build/data/generated/npcs.json';
+import planets from 'rune-backend-sdk/build/data/generated/planets.json';
+import solarSystems from 'rune-backend-sdk/build/data/generated/solarSystems.json';
+import { ProGallery } from 'pro-gallery';
+import 'pro-gallery/dist/statics/main.css';
+import React, { useLayoutEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { createGlobalStyle } from 'styled-components';
+import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
+import { Skeleton } from '~/ui';
 
 async function fixGalleryItems(items) {
-  const promises = []
+  const promises = [];
 
   for (const item of items) {
     const promise = new Promise(function (resolve, reject) {
-      const img = new Image()
+      const img = new Image();
 
       img.onload = function () {
         // @ts-ignore
-        item.metaData.width = this.width
+        item.metaData.width = this.width;
         // @ts-ignore
-        item.metaData.height = this.height
+        item.metaData.height = this.height;
 
-        resolve(item)
-      }
+        resolve(item);
+      };
 
-      img.src = item.mediaUrl
-    })
+      img.src = item.mediaUrl;
+    });
 
-    promises.push(promise)
+    promises.push(promise);
   }
 
-  return Promise.all(promises)
+  return Promise.all(promises);
 }
 
 function shuffle(array) {
-  let currentIndex = array.length
-  let randomIndex
+  let currentIndex = array.length;
+  let randomIndex;
 
   // While there remain elements to shuffle.
   while (currentIndex !== 0) {
     // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex)
-    currentIndex--
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
 
     // And swap it with the current element.
-    ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
   }
 
-  return array
+  return array;
 }
 
 const GlobalStyles = createGlobalStyle`
@@ -81,21 +81,21 @@ body {
   color: #ddd;
   zoom: 1.3;
 }
-`
+`;
 
-const items = []
+const items = [];
 
 const ArtInner = () => {
-  const { t } = useTranslation()
-  const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints()
-  const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl
-  const [galleryItems, setGalleryItems] = useState([])
+  const { t } = useTranslation();
+  const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
+  const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
+  const [galleryItems, setGalleryItems] = useState([]);
 
   useLayoutEffect(
     function () {
-      if (items.length) return
+      if (items.length) return;
 
-      console.log('REGEN GALLERY')
+      console.log('REGEN GALLERY');
 
       const categories = [
         {
@@ -138,16 +138,16 @@ const ArtInner = () => {
           name: 'items',
           items: runeItems,
         },
-      ]
+      ];
 
       for (const category of categories) {
         for (const item of category.items) {
           // @ts-ignore
-          if (!item.isEnabled) continue
+          if (!item.isEnabled) continue;
           // @ts-ignore
-          const image = item.image || item.images?.[0]
-          if (!image) continue
-          if (items.find((i) => i.mediaUrl === image)) continue
+          const image = item.image || item.images?.[0];
+          if (!image) continue;
+          if (items.find((i) => i.mediaUrl === image)) continue;
 
           items.push({
             itemId: category.name + '-' + item.id,
@@ -165,11 +165,11 @@ const ArtInner = () => {
                 target: '_blank',
               },
             },
-          })
+          });
         }
       }
 
-      shuffle(items)
+      shuffle(items);
       //   { // Image item:
       //           itemId: 'sample-id',
       //           mediaUrl: 'https://i.picsum.photos/id/674/200/300.jpg?hmac=kS3VQkm7AuZdYJGUABZGmnNj_3KtZ6Twgb5Qb9ITssY',
@@ -218,19 +218,19 @@ const ArtInner = () => {
       // ]
 
       async function run() {
-        setGalleryItems(await fixGalleryItems(items.slice(0, 10)))
+        setGalleryItems(await fixGalleryItems(items.slice(0, 10)));
       }
 
-      run()
+      run();
     },
     [setGalleryItems]
-  )
+  );
 
   // The size of the gallery container. The images will fit themselves in it
   const container = {
     width: window.innerWidth,
     height: window.innerHeight,
-  }
+  };
 
   // The eventsListener will notify you anytime something has happened in the gallery.
   const eventsListener = async (eventName, eventData) => {
@@ -238,14 +238,14 @@ const ArtInner = () => {
 
     if (eventName === 'NEED_MORE_ITEMS') {
       // GALLERY_SCROLLED
-      if (eventData + 10 > items.length) return
-      setGalleryItems(await fixGalleryItems(items.slice(0, eventData + 10)))
+      if (eventData + 10 > items.length) return;
+      setGalleryItems(await fixGalleryItems(items.slice(0, eventData + 10)));
       // console.log(8888, eventData, items)
     }
-  }
+  };
 
   // The scrollingElement is usually the window, if you are scrolling inside another element, suplly it here
-  const scrollingElement = window
+  const scrollingElement = window;
 
   // The options of the gallery (from the playground current state)
   const options = {
@@ -278,23 +278,26 @@ const ArtInner = () => {
         clickAction: 'LINK' as any,
       },
     },
-  }
+  };
   // console.log(8888, 'zzz', galleryItems)
   return (
     <>
       <GlobalStyles />
       {!galleryItems.length ? <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" /> : null}
       {galleryItems.length ? (
-        <ProGallery
-          items={galleryItems}
-          options={options}
-          container={container}
-          eventsListener={eventsListener}
-          scrollingElement={scrollingElement}
-        />
+        <>
+          {/* @ts-ignore */}
+          <ProGallery
+            items={galleryItems}
+            options={options}
+            container={container}
+            eventsListener={eventsListener}
+            scrollingElement={scrollingElement}
+          />
+        </>
       ) : null}
     </>
-  )
-}
+  );
+};
 
-export default ArtInner
+export default ArtInner;

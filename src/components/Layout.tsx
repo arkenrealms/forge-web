@@ -236,7 +236,7 @@ export default ({ children }) => {
           );
         }}
         onMenuHeaderClick={(e) => console.log(e)}
-        menuItemRender={(item, dom) => (
+        menuItemRender={(item, dom: any) => (
           <a
             onClick={() => {
               setPathname(item.path || '/welcome');
