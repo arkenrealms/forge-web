@@ -80,8 +80,10 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
 
     .app__fullpage-window {
       background: rgb(27, 28, 45);
-      border-radius: 3px;
-      background: radial-gradient(circle at 50% 70px, hsl(240, 20%, 28%) 0%, hsl(240, 27%, 12%) 100%);
+      border-radius: 6px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 70px, rgba(57, 57, 86, 0.3) 0%, rgba(22, 22, 39, 0.3) 100%);
+      backdrop-filter: blur(50px);
       border: 1px solid rgba(0, 0, 0, 0.5);
       filter: drop-shadow(rgba(0,0,0,0.6) 1px 1px 1px) drop-shadow(rgba(0,0,0,0.6) 0px 0px 4px);
     }
@@ -91,7 +93,8 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
     }
 
     .app__toolbar {
-      background: rgba(0, 0, 0, 0.3);
+      background-color: rgba(40, 40, 63, 0.5) !important;
+      // background: rgba(0, 0, 0, 0.3);
       // background: linear-gradient(166.77deg,#3B4155 0%,#464454 100%);
       // background: linear-gradient(166.77deg,#3B4155 0%,#3A3045 100%);
       
@@ -99,8 +102,12 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
       text-shadow: 1px 1px 1px rgb(0 0 0 / 50%);
     }
 
+    .ant-pro-layout .ant-pro-sider .ant-layout-sider-children {
+    border-inline-end: none;
+    }
+
     .ant-layout-sider {
-      background-color: #28283f !important;
+      background-color: rgba(40, 40, 63, 0.5) !important;
       filter: drop-shadow(rgba(0,0,0,0.6) 1px 1px 1px) drop-shadow(rgba(0,0,0,0.6) 0px 0px 4px);
     }
 

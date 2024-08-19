@@ -1836,7 +1836,7 @@ const DraggableWindow: React.FC<any> = React.memo(
                   </Flex>
                   <Flex justifyContent="space-between" alignItems="center">
                     {isMaximized ? <ToolbarNotification /> : null}
-                    {isMaximized && settings.isCrypto ? (
+                    {isMaximized && settings?.isCrypto ? (
                       <div css={{ marginTop: -8 }}>
                         <Button
                           scale="sm"
@@ -2781,7 +2781,7 @@ const App: React.FC<any> = (props) => {
                           flexDirection={['column', null, 'row']}
                           style={{ marginLeft: 0 }}>
                           <Flex justifyContent="space-between" alignItems="center">
-                            {!isMobile && settings.isCrypto
+                            {!isMobile && settings?.isCrypto
                               ? pageState
                                   .filter((r) => !!r.showable)
                                   .filter((r) => !!r.navPosition || r.props.open)
