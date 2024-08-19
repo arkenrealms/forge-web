@@ -1,21 +1,14 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState, useContext, useCallback } from 'react'
-import useSound from 'use-sound'
-import { Button, Flex, ButtonMenu, ButtonMenuItem } from '~/ui'
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints'
-import styled, { css } from 'styled-components'
-import ItemInformation from '~/components/ItemInformation'
-import useWeb3 from '~/hooks/useWeb3'
-import SoundContext from '~/contexts/SoundContext'
-import useInventory from '~/hooks/useInventory'
-import {
-  ClassNames,
-  GamesById,
-  itemData,
-  ItemSlot,
-  ItemType,
-  ItemAttributesById,
-} from 'rune-backend-sdk/build/data/items'
-import { ItemsMainCategoriesType, ItemCategoriesType } from 'rune-backend-sdk/build/data/items.type'
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState, useContext, useCallback } from 'react';
+import useSound from 'use-sound';
+import { Button, Flex, ButtonMenu, ButtonMenuItem } from '~/ui';
+import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
+import styled, { css } from 'styled-components';
+import ItemInformation from '~/components/ItemInformation';
+import useWeb3 from '~/hooks/useWeb3';
+import SoundContext from '~/contexts/SoundContext';
+import useInventory from '~/hooks/useInventory';
+import { ClassNames, GamesById, itemData, ItemSlot, ItemType, ItemAttributesById } from '@arken/node/data/items';
+import { ItemsMainCategoriesType, ItemCategoriesType } from '@arken/node/data/items.type';
 
 const Container = styled.div`
   // margin-bottom: 30px;
@@ -24,7 +17,7 @@ const Container = styled.div`
   position: relative;
   height: 738px;
   min-width: 512px;
-`
+`;
 
 const Background1 = styled.div`
   position: absolute;
@@ -62,7 +55,7 @@ const Background1 = styled.div`
       }
     }
   }
-`
+`;
 const Background2 = styled.div`
   position: absolute;
   top: 0;
@@ -79,7 +72,7 @@ const Background2 = styled.div`
     left: 0;
     background-size: contain;
   }
-`
+`;
 
 const Mod = styled.div`
   width: 100%;
@@ -89,9 +82,9 @@ const Mod = styled.div`
   border: 1px solid #bb955e;
   border-radius: 5px;
   padding: 0 0 0 6px;
-`
+`;
 
-const CharStats = styled.div``
+const CharStats = styled.div``;
 
 const SlotContainer = styled.div<{ top: string; left: string }>`
   position: absolute;
@@ -116,7 +109,7 @@ const SlotContainer = styled.div<{ top: string; left: string }>`
     height: 53px;
     z-index: 1;
   }
-`
+`;
 const SlotContainerBackground = styled.div<{ position: number; background: string }>`
   position: absolute;
   top: 0;
@@ -150,95 +143,95 @@ const SlotContainerBackground = styled.div<{ position: number; background: strin
     filter: drop-shadow(2px 4px 6px black);
     z-index: 1;
   }
-`
+`;
 
 const Slot = ({ position, equip, onClick, onClose, hidePreview, isModalOpened }) => {
-  const [showInformation, setShowInformation] = useState(false)
-  const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints()
-  const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl
+  const [showInformation, setShowInformation] = useState(false);
+  const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
+  const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
 
-  let top = '0%'
-  let left = '0%'
+  let top = '0%';
+  let left = '0%';
   if (position === ItemSlot.LeftHand) {
-    top = '59%'
-    left = '23%'
+    top = '59%';
+    left = '23%';
   }
   if (position === ItemSlot.RightHand) {
-    top = '59%'
-    left = '65%'
+    top = '59%';
+    left = '65%';
   }
   if (position === ItemSlot.Head) {
-    top = '17%'
-    left = '43%'
+    top = '17%';
+    left = '43%';
   }
   if (position === ItemSlot.Body) {
-    top = '55%'
-    left = '43%'
+    top = '55%';
+    left = '43%';
   }
   if (position === ItemSlot.Neck) {
-    top = '5%'
-    left = '85%'
+    top = '5%';
+    left = '85%';
   }
   // if (position === ItemSlot.Shoulder) {
   //   top = '28%'
   //   left = '29%'
   // }
   if (position === ItemSlot.Chest) {
-    top = '32%'
-    left = '43%'
+    top = '32%';
+    left = '43%';
   }
   if (position === ItemSlot.Waist) {
-    top = '42%'
-    left = '43%'
+    top = '42%';
+    left = '43%';
   }
   if (position === ItemSlot.Hands) {
-    top = '49%'
-    left = '23%'
+    top = '49%';
+    left = '23%';
   }
   if (position === ItemSlot.Wrists) {
-    top = '49%'
-    left = '65%'
+    top = '49%';
+    left = '65%';
   }
   if (position === ItemSlot.Legs) {
-    top = '52%'
-    left = '43%'
+    top = '52%';
+    left = '43%';
   }
   if (position === ItemSlot.Feet) {
-    top = '76%'
-    left = '43%'
+    top = '76%';
+    left = '43%';
   }
   if (position === ItemSlot.Finger1) {
-    top = '15%'
-    left = '85%'
+    top = '15%';
+    left = '85%';
   }
   if (position === ItemSlot.Finger2) {
-    top = '25%'
-    left = '85%'
+    top = '25%';
+    left = '85%';
   }
   if (position === ItemSlot.Trinket1) {
-    top = '65%'
-    left = '85%'
+    top = '65%';
+    left = '85%';
   }
   if (position === ItemSlot.Trinket2) {
-    top = '75%'
-    left = '85%'
+    top = '75%';
+    left = '85%';
   }
   if (position === ItemSlot.Trinket3) {
-    top = '85%'
-    left = '85%'
+    top = '85%';
+    left = '85%';
   }
   if (position === ItemSlot.Pet) {
-    top = '85%'
-    left = '5%'
+    top = '85%';
+    left = '5%';
   }
   const onMouseEnter = () => {
-    if (isMobile) return
-    setShowInformation(true)
-  }
+    if (isMobile) return;
+    setShowInformation(true);
+  };
   const onMouseLeave = () => {
-    if (isMobile) return
-    setShowInformation(false)
-  }
+    if (isMobile) return;
+    setShowInformation(false);
+  };
 
   return (
     <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
@@ -292,52 +285,52 @@ const Slot = ({ position, equip, onClick, onClose, hidePreview, isModalOpened })
         />
       )} */}
     </div>
-  )
-}
+  );
+};
 
 const EquipmentInner = ({ address, hidePreview, children }) => {
-  const [itemSelected, setItemSelected] = useState(null)
-  const [gameTabIndex, setGameTabIndex] = useState(0)
+  const [itemSelected, setItemSelected] = useState(null);
+  const [gameTabIndex, setGameTabIndex] = useState(0);
 
-  const { playAction } = useContext(SoundContext)
+  const { playAction } = useContext(SoundContext);
 
-  const { address: account } = useWeb3()
+  const { address: account } = useWeb3();
 
   const forceShowSlots =
-    window.location.hostname === 'dev.arken.gg' || account === '0xa987f487639920A3c2eFe58C8FBDedB96253ed9B'
+    window.location.hostname === 'dev.arken.gg' || account === '0xa987f487639920A3c2eFe58C8FBDedB96253ed9B';
 
   const handleClick = (itemType) => {
     if (itemSelected === itemType) {
       //   setItemSelected(null)
     } else {
-      setItemSelected(itemType)
-      playAction()
+      setItemSelected(itemType);
+      playAction();
     }
-  }
+  };
 
   const handleClose = () => {
     // setItemSelected(null)
-  }
+  };
 
-  const inventory = useInventory(address)
-  const { items, equipment, setUserAddress, refreshEquipment } = inventory
-  const buffs = inventory.meta
+  const inventory = useInventory(address);
+  const { items, equipment, setUserAddress, refreshEquipment } = inventory;
+  const buffs = inventory.meta;
 
   useLayoutEffect(() => {
-    setUserAddress(address)
-    refreshEquipment()
-  }, [address, setUserAddress, refreshEquipment])
+    setUserAddress(address);
+    refreshEquipment();
+  }, [address, setUserAddress, refreshEquipment]);
 
   const getAttributeList = (attributeList, gameId) => {
     return Object.keys(attributeList).map((attributeId) => {
-      if (!attributeList[attributeId]) return null
-      if (!ItemAttributesById[attributeId]?.description) return
-      const attribute = ItemAttributesById[attributeId]
-      if (attribute.id === 2 || attribute.id === 3 || attribute.id === 39 || attribute.id === 40) return
-      if (attribute.game !== gameId) return
+      if (!attributeList[attributeId]) return null;
+      if (!ItemAttributesById[attributeId]?.description) return;
+      const attribute = ItemAttributesById[attributeId];
+      if (attribute.id === 2 || attribute.id === 3 || attribute.id === 39 || attribute.id === 40) return;
+      if (attribute.game !== gameId) return;
       // if (attribute.id > 1000) return
 
-      const parent1 = attribute.param1 || attribute
+      const parent1 = attribute.param1 || attribute;
 
       let value1 = parent1.map
         ? parent1.value !== undefined
@@ -352,11 +345,11 @@ const EquipmentInner = ({ address, hidePreview, children }) => {
         ? parent1.value
         : parent1.min === parent1.max
         ? parent1.min
-        : `${parent1.min}-${parent1.max}`
+        : `${parent1.min}-${parent1.max}`;
 
-      if (typeof value1 === 'string') value1 = value1.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill')
+      if (typeof value1 === 'string') value1 = value1.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
 
-      const parent2 = attribute.param2 || attribute
+      const parent2 = attribute.param2 || attribute;
 
       let value2 = parent2.map
         ? parent2.value !== undefined
@@ -371,11 +364,11 @@ const EquipmentInner = ({ address, hidePreview, children }) => {
         ? parent2.value
         : parent2.min === parent2.max
         ? parent2.min
-        : `${parent2.min}-${parent2.max}`
+        : `${parent2.min}-${parent2.max}`;
 
-      if (typeof value2 === 'string') value2 = value2.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill')
+      if (typeof value2 === 'string') value2 = value2.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
 
-      const parent3 = attribute.param3 || attribute
+      const parent3 = attribute.param3 || attribute;
 
       let value3 = parent3.map
         ? parent3.value !== undefined
@@ -390,12 +383,12 @@ const EquipmentInner = ({ address, hidePreview, children }) => {
         ? parent3.value
         : parent3.min === parent3.max
         ? parent3.min
-        : `${parent3.min}-${parent3.max}`
+        : `${parent3.min}-${parent3.max}`;
 
-      if (typeof value3 === 'string') value3 = value3.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill')
+      if (typeof value3 === 'string') value3 = value3.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
 
       const isNotImplemented =
-        attribute.description?.indexOf('Not Implemented') !== -1 || attribute.isImplemented === false
+        attribute.description?.indexOf('Not Implemented') !== -1 || attribute.isImplemented === false;
 
       const attr = attribute.description
         ?.replace(/{value}/gi, '')
@@ -409,17 +402,17 @@ const EquipmentInner = ({ address, hidePreview, children }) => {
         .replace(/{param3}/gi, '')
         .replace('(Not Implemented)', '')
         .replace(/\.$/, '')
-        .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())
+        .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
 
-      if (!attr.trim()) return
+      if (!attr.trim()) return;
 
       return (
         <Mod key={attr}>
           <strong>{attribute.displayName}</strong>: {attributeList[attributeId]}%
         </Mod>
-      )
-    })
-  }
+      );
+    });
+  };
 
   return (
     <>
@@ -673,23 +666,23 @@ const EquipmentInner = ({ address, hidePreview, children }) => {
         {buffs.attributes ? getAttributeList(buffs.attributes, gameTabIndex + 1) : null}
       </Flex>
     </>
-  )
-}
+  );
+};
 
 const Equipment = (props) => {
-  const [playSelect] = useSound('/assets/sounds/select.mp3')
-  const [playAction] = useSound('/assets/sounds/action.mp3', { volume: 0.5 })
+  const [playSelect] = useSound('/assets/sounds/select.mp3');
+  const [playAction] = useSound('/assets/sounds/action.mp3', { volume: 0.5 });
   const contextState = {
     playSelect,
     playAction,
-  }
+  };
   return (
     <SoundContext.Provider value={contextState}>
       <EquipmentInner {...props} />
     </SoundContext.Provider>
-  )
-}
+  );
+};
 
-Equipment.defaultProps = {}
+Equipment.defaultProps = {};
 
-export default Equipment
+export default Equipment;

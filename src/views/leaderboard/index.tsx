@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useContext, useCallback } from 'react';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { decodeItem } from '@arken/node/util/decoder';
 import styled, { css } from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
@@ -14,7 +14,7 @@ import useWeb3 from '~/hooks/useWeb3';
 import { getUsername } from '~/state/profiles/getProfile';
 
 import { ItemInfo } from '~/components/ItemInfo';
-import { ItemCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { ItemCategoriesType } from '@arken/node/data/items.type';
 import useCache from '~/hooks/useCache';
 import craftersData from './crafters.json';
 import craftingCompetition1Data from './competition1.json';

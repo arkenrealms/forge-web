@@ -1,34 +1,34 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { useToast } from '~/state/hooks'
-import { Button, Text, Flex, LinkExternal } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import useWeb3 from '~/hooks/useWeb3'
-import { useTranslation } from 'react-i18next'
-import { ItemCategoriesType, ItemDetails, ItemType } from 'rune-backend-sdk/build/data/items.type'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useToast } from '~/state/hooks';
+import { Button, Text, Flex, LinkExternal } from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import useWeb3 from '~/hooks/useWeb3';
+import { useTranslation } from 'react-i18next';
+import { ItemCategoriesType, ItemDetails, ItemType } from '@arken/node/data/items.type';
 
 interface RuneDetailsModalProps extends InjectedModalProps {
-  tokenAddress: string
-  item: ItemType
-  details?: ItemDetails
-  onSuccess: () => void
+  tokenAddress: string;
+  item: ItemType;
+  details?: ItemDetails;
+  onSuccess: () => void;
 }
 
 const ModalContent = styled.div`
   margin-bottom: 16px;
-`
+`;
 
 const Actions = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 8px;
-`
+`;
 
 const RuneDetailsModal: React.FC<RuneDetailsModalProps> = ({ tokenAddress, details, item, onSuccess, onDismiss }) => {
-  const [isConfirming, setIsConfirming] = useState(false)
-  const { t } = useTranslation()
-  const { address: account } = useWeb3()
-  const { toastError, toastSuccess } = useToast()
+  const [isConfirming, setIsConfirming] = useState(false);
+  const { t } = useTranslation();
+  const { address: account } = useWeb3();
+  const { toastError, toastSuccess } = useToast();
 
   const handleConfirm = async () => {
     // characterFactoryContract.methods
@@ -47,7 +47,7 @@ const RuneDetailsModal: React.FC<RuneDetailsModalProps> = ({ tokenAddress, detai
     //     toastError('Error', 'Unable to create NFT, please try again.')
     //     setIsConfirming(false)
     //   })
-  }
+  };
 
   return (
     <Modal title={t('Details')} onDismiss={onDismiss}>
@@ -92,7 +92,7 @@ const RuneDetailsModal: React.FC<RuneDetailsModalProps> = ({ tokenAddress, detai
         </Button> */}
       </Actions>
     </Modal>
-  )
-}
+  );
+};
 
-export default RuneDetailsModal
+export default RuneDetailsModal;

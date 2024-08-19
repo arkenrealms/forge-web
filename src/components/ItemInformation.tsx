@@ -2,7 +2,7 @@ import { BigNumber } from 'bignumber.js';
 import cx from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ItemType } from 'rune-backend-sdk/build/data/items.type';
+import { ItemType } from '@arken/node/data/items.type';
 import styled from 'styled-components';
 import CraftModal from '~/components/CraftModal';
 import EquipModal from '~/components/EquipModal';

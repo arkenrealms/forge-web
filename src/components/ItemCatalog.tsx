@@ -3,9 +3,9 @@ import { formatDistance, parseISO } from 'date-fns';
 import { orderBy } from 'lodash';
 import React, { useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ItemType as ItemTypeType } from 'rune-backend-sdk/build/data/items';
-import { ItemsBonusType, ItemType } from 'rune-backend-sdk/build/data/items.type';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'; // 'src/utils/decodeItem' //
+import { ItemType as ItemTypeType } from '@arken/node/data/items';
+import { ItemsBonusType, ItemType } from '@arken/node/data/items.type';
+import { decodeItem } from '@arken/node/util/decoder'; // 'src/utils/decodeItem' //
 import styled, { css } from 'styled-components';
 import useSound from 'use-sound';
 import CategoriesMenu from '~/components/CategoriesMenu';
@@ -30,8 +30,8 @@ import {
   goUp,
 } from '~/utils/keyboardNavigation';
 import navigateToDirection from '~/utils/navigateToDirection';
-import { itemData as itemDataJson } from 'rune-backend-sdk/build/data/items';
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { itemData as itemDataJson } from '@arken/node/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
 
 const NoItems = styled.div`
   margin: 0 auto;

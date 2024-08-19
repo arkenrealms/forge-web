@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import factions from 'rune-backend-sdk/build/data/generated/characterFactions.json';
+import factions from '@arken/node/data/generated/characterFactions.json';
 import styled from 'styled-components';
 import Linker from '~/components/Linker';
 import { Skeleton } from '~/ui';

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
 import { Counter } from 'react95';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { decodeItem } from '@arken/node/util/decoder';
 import styled, { createGlobalStyle, css } from 'styled-components';
 import { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';

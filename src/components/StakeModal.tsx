@@ -1,31 +1,31 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { ethers } from 'ethers'
-import BigNumber from 'bignumber.js'
-import { Button, Skeleton, Text, Flex, AutoRenewIcon } from '~/ui'
-import { Modal, InjectedModalProps } from '~/components/Modal'
-import history from '~/routerHistory'
-import { useToast } from '~/state/hooks'
-import useAccount from '~/hooks/useAccount'
-import { useTranslation } from 'react-i18next'
-import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction'
-import { useArcaneItems, useMasterchef, useRouterV2, useRune } from '~/hooks/useContract'
-import { getAddress, getMasterChefAddress, getRuneAddress } from '~/utils/addressHelpers'
-import styled from 'styled-components'
-import { toFixed } from 'rune-backend-sdk/build/util/math'
-import contracts from 'rune-backend-sdk/build/contractInfo'
-import { getBalanceNumber } from '~/utils/formatBalance'
-import useWeb3 from '~/hooks/useWeb3'
-import { getContract } from '~/utils/contractHelpers'
-import NumericalInput from './NumericalInput'
+import React, { useEffect, useMemo, useState } from 'react';
+import { ethers } from 'ethers';
+import BigNumber from 'bignumber.js';
+import { Button, Skeleton, Text, Flex, AutoRenewIcon } from '~/ui';
+import { Modal, InjectedModalProps } from '~/components/Modal';
+import history from '~/routerHistory';
+import { useToast } from '~/state/hooks';
+import useAccount from '~/hooks/useAccount';
+import { useTranslation } from 'react-i18next';
+import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction';
+import { useArcaneItems, useMasterchef, useRouterV2, useRune } from '~/hooks/useContract';
+import { getAddress, getMasterChefAddress, getRuneAddress } from '~/utils/addressHelpers';
+import styled from 'styled-components';
+import { toFixed } from '@arken/node/util/math';
+import contracts from '@arken/node/contractInfo';
+import { getBalanceNumber } from '~/utils/formatBalance';
+import useWeb3 from '~/hooks/useWeb3';
+import { getContract } from '~/utils/contractHelpers';
+import NumericalInput from './NumericalInput';
 
 interface StakeProps extends InjectedModalProps {
-  defaultAmount?: string
-  onSuccess: () => void
+  defaultAmount?: string;
+  onSuccess: () => void;
 }
 
 const ModalContent = styled.div`
   margin-bottom: 16px;
-`
+`;
 
 const InputPanel = styled.div`
   display: flex;
@@ -35,25 +35,25 @@ const InputPanel = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   z-index: 1;
   width: 100%;
-`
+`;
 const InputContainer = styled.div`
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.input};
   box-shadow: ${({ theme }) => theme.shadows.inset};
-`
+`;
 
 const Actions = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 8px;
-`
+`;
 
 const InputRow = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   padding: 0.75rem 0.75rem 0.75rem 1rem;
-`
+`;
 
 const BuyLink = styled.a`
   color: #fff;
@@ -65,47 +65,47 @@ const BuyLink = styled.a`
   &:hover {
     color: #bb955e;
   }
-`
+`;
 function round(num, precision) {
-  const _precision = 10 ** precision
-  return Math.ceil(num * _precision) / _precision
+  const _precision = 10 ** precision;
+  return Math.ceil(num * _precision) / _precision;
 }
 
 export const StakeModal: React.FC<StakeProps> = ({ defaultAmount, onSuccess, onDismiss }) => {
-  const { walletTokens, stakedTokens } = useAccount()
-  const { t } = useTranslation()
-  const { toastError, toastSuccess } = useToast()
-  const { contract: masterChefContract } = useMasterchef()
-  const [amount, setAmount] = useState('')
-  const [bnbBalance, setBnbBalance] = useState('')
-  const [tabIndex, setTabIndex] = useState(0)
+  const { walletTokens, stakedTokens } = useAccount();
+  const { t } = useTranslation();
+  const { toastError, toastSuccess } = useToast();
+  const { contract: masterChefContract } = useMasterchef();
+  const [amount, setAmount] = useState('');
+  const [bnbBalance, setBnbBalance] = useState('');
+  const [tabIndex, setTabIndex] = useState(0);
   // const [runeAllowance, setRuneAllowance] = useState<BigNumber>(new BigNumber(0))
-  const runeContract = useRune('RXS')
-  const routerContract = useRouterV2()
+  const runeContract = useRune('RXS');
+  const routerContract = useRouterV2();
 
-  const { web3, address: account } = useWeb3()
+  const { web3, address: account } = useWeb3();
 
   const { isApproving, isApproved, isConfirmed, isConfirming, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
       onRequiresApproval: async () => {
         try {
-          const response = await runeContract.methods.allowance(account, getAddress(contracts.raid)).call()
-          const currentAllowance = getBalanceNumber(new BigNumber(response))
-          return currentAllowance >= parseFloat(amount)
+          const response = await runeContract.methods.allowance(account, getAddress(contracts.raid)).call();
+          const currentAllowance = getBalanceNumber(new BigNumber(response));
+          return currentAllowance >= parseFloat(amount);
         } catch (error) {
-          return false
+          return false;
         }
       },
       onApprove: () => {
         return runeContract.methods
           .approve(getAddress(contracts.raid), ethers.constants.MaxUint256)
-          .send({ from: account })
+          .send({ from: account });
       },
       onConfirm: () => {
-        const _amount = ethers.utils.parseEther(amount)
+        const _amount = ethers.utils.parseEther(amount);
 
-        const address = getRuneAddress('RXS')
-        return masterChefContract.methods.deposit(75, _amount).send({ from: account })
+        const address = getRuneAddress('RXS');
+        return masterChefContract.methods.deposit(75, _amount).send({ from: account });
       },
       onSuccess: async () => {
         // refresh()
@@ -114,27 +114,27 @@ export const StakeModal: React.FC<StakeProps> = ({ defaultAmount, onSuccess, onD
 
         // onDismiss()
 
-        setTabIndex(2)
+        setTabIndex(2);
       },
-    })
+    });
 
   useEffect(() => {
-    if (!account || !walletTokens) return
+    if (!account || !walletTokens) return;
     async function init() {
-      setAmount(toFixed(walletTokens, 0).replace('.', ''))
+      setAmount(toFixed(walletTokens, 0).replace('.', ''));
     }
 
-    init()
-  }, [walletTokens, account, web3])
+    init();
+  }, [walletTokens, account, web3]);
 
   useEffect(() => {
-    if (!account) return
+    if (!account) return;
     async function init() {
-      setBnbBalance(toFixed(walletTokens, 0).replace('.', ''))
+      setBnbBalance(toFixed(walletTokens, 0).replace('.', ''));
     }
 
-    init()
-  }, [account, walletTokens, web3])
+    init();
+  }, [account, walletTokens, web3]);
 
   // useEffect(() => {
   //   async function init() {
@@ -150,17 +150,17 @@ export const StakeModal: React.FC<StakeProps> = ({ defaultAmount, onSuccess, onD
   // }, [account, web3])
 
   const onMax = async () => {
-    setAmount(toFixed(walletTokens, 0).replace('.', ''))
+    setAmount(toFixed(walletTokens, 0).replace('.', ''));
 
     if (!walletTokens) {
-      setAmount('0')
-      return
+      setAmount('0');
+      return;
     }
 
-    const _value = toFixed(walletTokens, 0).replace('.', '')
+    const _value = toFixed(walletTokens, 0).replace('.', '');
 
-    setAmount(_value)
-  }
+    setAmount(_value);
+  };
 
   return (
     <Modal title={t('Stake $RXS')} onDismiss={onDismiss}>
@@ -174,7 +174,7 @@ export const StakeModal: React.FC<StakeProps> = ({ defaultAmount, onSuccess, onD
                     <NumericalInput
                       value={amount}
                       onUserInput={(val) => {
-                        setAmount(toFixed(parseFloat(val), 0).replace('.', ''))
+                        setAmount(toFixed(parseFloat(val), 0).replace('.', ''));
                       }}
                     />
                     <Button onClick={onMax} scale="sm" variant="text">
@@ -285,17 +285,17 @@ export const StakeModal: React.FC<StakeProps> = ({ defaultAmount, onSuccess, onD
         ) : null} */}
       {/* </> */}
     </Modal>
-  )
-}
+  );
+};
 
-export default StakeModal
+export default StakeModal;
 
 const Tips = styled.div`
   margin-left: 0.4em;
   font-size: 14px;
   font-weight: 600;
   color: ${(props) => props.theme.colors.primary};
-`
+`;
 
 const Final = styled.div`
   margin-top: 1em;
@@ -303,9 +303,9 @@ const Final = styled.div`
   font-size: 20px;
   font-weight: 600;
   color: ${(props) => props.theme.colors.primary};
-`
+`;
 const Announce = styled.div`
   margin-top: 1em;
   margin-left: 0.4em;
   color: #ed4b9e;
-`
+`;

@@ -1,38 +1,38 @@
-import { achievementData } from 'rune-backend-sdk/build/data/achievements'
-import React, { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Link as RouterLink } from 'react-router-dom'
-import styled, { css } from 'styled-components'
-import Collectibles from '~/components/account/Collectibles'
-import { ConnectNetwork } from '~/components/ConnectNetwork'
-import Page from '~/components/layout/Page'
-import useCache from '~/hooks/useCache'
-import useWeb3 from '~/hooks/useWeb3'
-import { useFetchProfile, useProfile } from '~/state/hooks'
-import { Button, Card, CardBody, CardHeader, Flex, Heading } from '~/ui'
-import AchievementAvatar from '~/components/AchievementAvatar'
-import Header from '~/components/account/Header'
-import Menu from '~/components/account/Menu'
-import WalletNotConnected from '~/components/account/WalletNotConnected'
-import ProfileCreation from './ProfileCreation'
+import { achievementData } from '@arken/node/data/achievements';
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link as RouterLink } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import Collectibles from '~/components/account/Collectibles';
+import { ConnectNetwork } from '~/components/ConnectNetwork';
+import Page from '~/components/layout/Page';
+import useCache from '~/hooks/useCache';
+import useWeb3 from '~/hooks/useWeb3';
+import { useFetchProfile, useProfile } from '~/state/hooks';
+import { Button, Card, CardBody, CardHeader, Flex, Heading } from '~/ui';
+import AchievementAvatar from '~/components/AchievementAvatar';
+import Header from '~/components/account/Header';
+import Menu from '~/components/account/Menu';
+import WalletNotConnected from '~/components/account/WalletNotConnected';
+import ProfileCreation from './ProfileCreation';
 
 const Section = styled.div`
   margin-bottom: 40px;
-`
+`;
 
 const TaskCenter = ({ match }) => {
-  const { id }: { id: string } = match.params
-  const { address: _account, library } = useWeb3()
-  const address = id ? id : _account
-  useFetchProfile(address)
-  const { profile, hasProfile } = useProfile(address)
-  const { t } = useTranslation()
-  const cache = useCache()
-  const achievements = cache.achievements[address]?.map((a) => achievementData.find((b) => b.id === a)) || []
+  const { id }: { id: string } = match.params;
+  const { address: _account, library } = useWeb3();
+  const address = id ? id : _account;
+  useFetchProfile(address);
+  const { profile, hasProfile } = useProfile(address);
+  const { t } = useTranslation();
+  const cache = useCache();
+  const achievements = cache.achievements[address]?.map((a) => achievementData.find((b) => b.id === a)) || [];
 
   useEffect(() => {
-    cache.fetchAddress(address)
-  }, [cache, address])
+    cache.fetchAddress(address);
+  }, [cache, address]);
   //   if (!address) {
   //     return <Page><WalletNotConnected /></Page>
   //   }
@@ -50,7 +50,7 @@ const TaskCenter = ({ match }) => {
       <Page>
         <ProfileCreation />
       </Page>
-    )
+    );
   }
 
   return (
@@ -119,7 +119,7 @@ const TaskCenter = ({ match }) => {
         </CardBody>
       </Card>
     </Page>
-  )
-}
+  );
+};
 
-export default TaskCenter
+export default TaskCenter;

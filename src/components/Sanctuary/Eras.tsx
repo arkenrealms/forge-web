@@ -5,7 +5,7 @@ import useFetch from '~/hooks/useFetch';
 import history from '~/routerHistory';
 import LoreBlock1 from '~/components/LoreBlock1';
 import { Skeleton } from '~/ui';
-import eras from 'rune-backend-sdk/build/data/generated/eras.json';
+import eras from '@arken/node/data/generated/eras.json';
 
 const Eras = function () {
   // const url = `https://envoy.arken.gg/eras.json`

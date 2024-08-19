@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import classes from 'rune-backend-sdk/build/data/generated/characterClasses.json';
+import classes from '@arken/node/data/generated/characterClasses.json';
 import styled, { css } from 'styled-components';
 import Linker from '~/components/Linker';
 import { ButtonMenu, ButtonMenuItem, Flex, Skeleton } from '~/ui';

@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { itemData } from 'rune-backend-sdk/build/data/items';
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { itemData } from '@arken/node/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
 import Inventory from '~/components/Inventory';
 import Page from '~/components/layout/Page';
 import Lore from '~/components/Lore';

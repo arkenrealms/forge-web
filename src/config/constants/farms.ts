@@ -1,9 +1,9 @@
-import { CURRENT_FARM_SYMBOL } from '~/config'
-import contracts from 'rune-backend-sdk/build/contractInfo'
-import { FarmConfig, QuoteToken } from './types'
+import { CURRENT_FARM_SYMBOL } from '~/config';
+import contracts from '@arken/node/contractInfo';
+import { FarmConfig, QuoteToken } from './types';
 
-export const MAINNET = 56
-export const TESTNET = 97
+export const MAINNET = 56;
+export const TESTNET = 97;
 
 const farms2: FarmConfig[] = [
   {
@@ -2146,6 +2146,6 @@ const farms2: FarmConfig[] = [
     quoteTokenSymbol: QuoteToken.BUSD,
     quoteTokenAdresses: contracts.busd,
   },
-]
+];
 
-export default farms2
+export default farms2;

@@ -16,8 +16,8 @@ import { getBlacksmithAddress } from '~/utils/addressHelpers';
 import { Button, Flex, Heading } from '~/ui';
 import ApproveConfirmButtons from '~/components/account/ApproveConfirmButtons';
 import useGetWalletItems from '~/hooks/useGetWalletItems';
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
-import { itemData } from 'rune-backend-sdk/build/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { itemData } from '@arken/node/data/items';
 import Slider from '~/components/Slider';
 import useDebouncedChangeHandler from '~/utils/useDebouncedChangeHandler';
 

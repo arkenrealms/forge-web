@@ -8,7 +8,7 @@ import useInventory from '~/hooks/useInventory';
 import useWeb3 from '~/hooks/useWeb3';
 import shortId from 'shortid';
 import PlayerAction from '~/components/PlayerAction';
-import { log, logError } from 'rune-backend-sdk/build/util';
+import { log, logError } from '@arken/node/util';
 
 const getSocket = (endpoint) => {
   console.log('Connecting to', endpoint);

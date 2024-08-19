@@ -1,12 +1,12 @@
-import React from 'react'
-import BonusBox from './BonusBox'
-import { ItemsBonusType } from 'rune-backend-sdk/build/data/items.type'
+import React from 'react';
+import BonusBox from './BonusBox';
+import { ItemsBonusType } from '@arken/node/data/items.type';
 
 type Props = {
-  fire: number
-  swimming: number
-  climbing: number
-}
+  fire: number;
+  swimming: number;
+  climbing: number;
+};
 
 const BonusList: React.FC<Props> = ({ fire, climbing, swimming }) => (
   <>
@@ -14,6 +14,6 @@ const BonusList: React.FC<Props> = ({ fire, climbing, swimming }) => (
     {climbing > 0 && <BonusBox bonusType={ItemsBonusType.CLIMBING} value={climbing} />}
     {swimming > 0 && <BonusBox bonusType={ItemsBonusType.SWIMMING} value={swimming} />}
   </>
-)
+);
 
-export default BonusList
+export default BonusList;

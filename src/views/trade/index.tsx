@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'
-import Page from '~/components/layout/Page'
-import MarketTrade from '~/components/MarketTrade'
-import { ItemType } from '~/contexts/MarketContext'
-import useMarket from '~/hooks/useMarket'
-import { Skeleton } from '~/ui'
+import React, { useEffect, useState } from 'react';
+import { decodeItem } from '@arken/node/util/decoder';
+import Page from '~/components/layout/Page';
+import MarketTrade from '~/components/MarketTrade';
+import { ItemType } from '~/contexts/MarketContext';
+import useMarket from '~/hooks/useMarket';
+import { Skeleton } from '~/ui';
 
-let init = false
+let init = false;
 
 const MarketTradeView = ({ match }) => {
-  const { id }: { id: string } = match.params
-  const [trade, setTrade] = useState(null)
-  const { trades, setQuery, setStatus } = useMarket()
+  const { id }: { id: string } = match.params;
+  const [trade, setTrade] = useState(null);
+  const { trades, setQuery, setStatus } = useMarket();
   // console.log(4444, id)
   useEffect(() => {
-    if (!trades || !trades[ItemType.NFTs] || trades[ItemType.NFTs].length === 0) return
-    const tradeData = trades[ItemType.NFTs].find((t) => t.id === parseInt(id))
+    if (!trades || !trades[ItemType.NFTs] || trades[ItemType.NFTs].length === 0) return;
+    const tradeData = trades[ItemType.NFTs].find((t) => t.id === parseInt(id));
 
     if (tradeData) {
       setTrade({
         ...tradeData,
         item: decodeItem(tradeData.tokenId),
-      })
+      });
     }
-  }, [id, trades])
+  }, [id, trades]);
 
   useEffect(() => {
-    if (init) return
-    if (!id) return
+    if (init) return;
+    if (!id) return;
 
-    init = true
+    init = true;
 
-    setStatus('')
-    setQuery([id])
-  }, [id, trades, setQuery, setStatus])
+    setStatus('');
+    setQuery([id]);
+  }, [id, trades, setQuery, setStatus]);
 
   return (
     <Page>
@@ -45,7 +45,7 @@ const MarketTradeView = ({ match }) => {
         </div>
       )}
     </Page>
-  )
-}
+  );
+};
 
-export default MarketTradeView
+export default MarketTradeView;

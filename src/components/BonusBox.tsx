@@ -1,15 +1,15 @@
-import React from 'react'
-import BonusIcon from './BonusIcon'
-import { ItemsBonusType } from 'rune-backend-sdk/build/data/items.type'
+import React from 'react';
+import BonusIcon from './BonusIcon';
+import { ItemsBonusType } from '@arken/node/data/items.type';
 
 type Props = {
-  bonusType: ItemsBonusType
-  value: number
-}
+  bonusType: ItemsBonusType;
+  value: number;
+};
 
 const BonusBox: React.FC<Props> = ({ bonusType, value }) => {
-  const activeBonus = new Array(value).fill('')
-  const inactiveBonus = new Array(3 - value).fill('')
+  const activeBonus = new Array(value).fill('');
+  const inactiveBonus = new Array(3 - value).fill('');
   // @ts-ignore
   return (
     <div className="w-10 h-10 mr-2 md:mr-2 md:mb-2">
@@ -23,7 +23,7 @@ const BonusBox: React.FC<Props> = ({ bonusType, value }) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BonusBox
+export default BonusBox;

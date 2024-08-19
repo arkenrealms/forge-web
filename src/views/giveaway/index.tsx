@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { decodeItem } from '@arken/node/util/decoder';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import PageWindow from '~/components/PageWindow';
 
 import { ItemInfo } from '~/components/ItemInfo';
-import { ItemCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { ItemCategoriesType } from '@arken/node/data/items.type';
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;

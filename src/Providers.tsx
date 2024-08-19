@@ -1,7 +1,7 @@
 import { createWeb3ReactRoot, getWeb3ReactContext, Web3ReactProvider } from '@web3-react/core';
 import React, { useState } from 'react';
 import { I18nextProvider } from 'react-i18next';
-// import { Provider } from 'react-redux'
+import { Provider as ReduxProvider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { ConfigProvider, theme } from 'antd';
 import { ModalProvider } from '~/components/Modal';
@@ -64,37 +64,39 @@ const Providers: React.FC<any> = ({ children }) => {
               colorBgBase: '#2c2c44',
             },
           }}>
-          <LiveContextProvider>
-            <CacheContextProvider>
-              <ItemCatalogContextProvider>
-                <WalletItemsContextProvider>
-                  <MasterchefContextProvider>
-                    <ThemeContextProvider>
-                      <LanguageContextProvider>
-                        <BlockContextProvider>
-                          <InventoryContextProvider>
-                            <SettingsContextProvider>
-                              <MarketContextProvider>
-                                <RefreshContextProvider>
-                                  <I18nextProvider i18n={i18n}>
-                                    <ThemeProvider theme={{ ...dark, brand }}>
-                                      <ItemsContext.Provider value={contextState}>
-                                        <ModalProvider>{children}</ModalProvider>
-                                      </ItemsContext.Provider>
-                                    </ThemeProvider>
-                                  </I18nextProvider>
-                                </RefreshContextProvider>
-                              </MarketContextProvider>
-                            </SettingsContextProvider>
-                          </InventoryContextProvider>
-                        </BlockContextProvider>
-                      </LanguageContextProvider>
-                    </ThemeContextProvider>
-                  </MasterchefContextProvider>
-                </WalletItemsContextProvider>
-              </ItemCatalogContextProvider>
-            </CacheContextProvider>
-          </LiveContextProvider>
+          <ReduxProvider store={store}>
+            <LiveContextProvider>
+              <CacheContextProvider>
+                <ItemCatalogContextProvider>
+                  <WalletItemsContextProvider>
+                    <MasterchefContextProvider>
+                      <ThemeContextProvider>
+                        <LanguageContextProvider>
+                          <BlockContextProvider>
+                            <InventoryContextProvider>
+                              <SettingsContextProvider>
+                                <MarketContextProvider>
+                                  <RefreshContextProvider>
+                                    <I18nextProvider i18n={i18n}>
+                                      <ThemeProvider theme={{ ...dark, brand }}>
+                                        <ItemsContext.Provider value={contextState}>
+                                          <ModalProvider>{children}</ModalProvider>
+                                        </ItemsContext.Provider>
+                                      </ThemeProvider>
+                                    </I18nextProvider>
+                                  </RefreshContextProvider>
+                                </MarketContextProvider>
+                              </SettingsContextProvider>
+                            </InventoryContextProvider>
+                          </BlockContextProvider>
+                        </LanguageContextProvider>
+                      </ThemeContextProvider>
+                    </MasterchefContextProvider>
+                  </WalletItemsContextProvider>
+                </ItemCatalogContextProvider>
+              </CacheContextProvider>
+            </LiveContextProvider>
+          </ReduxProvider>
         </ConfigProvider>
         {/* </FeathersContext.Provider> */}
       </Web3ProviderNetwork>

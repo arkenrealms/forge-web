@@ -10,9 +10,9 @@ import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import useSettings from '~/hooks/useSettings2';
 import Paragraph from '~/components/Paragraph';
 import Linker from '~/components/Linker';
-import { normalizeItem, decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
-import { ItemType, itemData } from 'rune-backend-sdk/build/data/items';
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { normalizeItem, decodeItem } from '@arken/node/util/decoder';
+import { ItemType, itemData } from '@arken/node/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
 
 const isLocal = process.env.REACT_APP_RUNE_ENV === 'local';
 

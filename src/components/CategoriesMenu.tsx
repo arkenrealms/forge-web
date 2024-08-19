@@ -1,19 +1,19 @@
-import React from 'react'
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type'
-import { Flex, Button, CardBody } from '~/ui'
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints'
-import CategoriesMenuItem from './CategoriesMenuItem'
-import Armor from './Icons/Armor'
-import Shield from './Icons/Shield'
-import Sword from './Icons/Sword'
-import Rune from './Icons/Rune'
-import Accessory from './Icons/Accessory'
+import React from 'react';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { Flex, Button, CardBody } from '~/ui';
+import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
+import CategoriesMenuItem from './CategoriesMenuItem';
+import Armor from './Icons/Armor';
+import Shield from './Icons/Shield';
+import Sword from './Icons/Sword';
+import Rune from './Icons/Rune';
+import Accessory from './Icons/Accessory';
 
 type Props = {
-  categorySelected: ItemsMainCategoriesType
-  setCategory: React.Dispatch<React.SetStateAction<[string, number]>>
-  showRunes?: boolean
-}
+  categorySelected: ItemsMainCategoriesType;
+  setCategory: React.Dispatch<React.SetStateAction<[string, number]>>;
+  showRunes?: boolean;
+};
 
 const CategoriesMenu: React.FC<Props> = ({ categorySelected, setCategory, showRunes = true }) => {
   return (
@@ -52,7 +52,7 @@ const CategoriesMenu: React.FC<Props> = ({ categorySelected, setCategory, showRu
         <Accessory className="fill-current h-10 w-16 pb-3 px-4" />
       </CategoriesMenuItem>
     </Flex>
-  )
-}
+  );
+};
 
-export default CategoriesMenu
+export default CategoriesMenu;

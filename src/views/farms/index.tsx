@@ -36,7 +36,7 @@ import { FarmHeader } from '~/components/FarmHeader';
 import Select, { OptionProps } from '~/components/Select/Select';
 import useInventory from '~/hooks/useInventory';
 import { useProfile } from '~/state/hooks';
-import { ClassNames } from 'rune-backend-sdk/build/data/items';
+import { ClassNames } from '@arken/node/data/items';
 import { ConnectNetwork } from '~/components/ConnectNetwork';
 
 // const ItemCard = styled(Card)`

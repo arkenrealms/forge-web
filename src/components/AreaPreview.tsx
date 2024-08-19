@@ -1,18 +1,18 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import areas from 'rune-backend-sdk/build/data/generated/areas.json'
-import styled, { css } from 'styled-components'
-import { Heading } from '~/ui'
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import areas from '@arken/node/data/generated/areas.json';
+import styled, { css } from 'styled-components';
+import { Heading } from '~/ui';
 
-const Abc = styled.div``
+const Abc = styled.div``;
 
 const AreaPreview = function ({ id }) {
-  const area = areas.find((z) => z.name.toLowerCase().replace(' ', '-') === id)
-  const { t } = useTranslation()
+  const area = areas.find((z) => z.name.toLowerCase().replace(' ', '-') === id);
+  const { t } = useTranslation();
 
-  const { shortDescription } = area
+  const { shortDescription } = area;
 
   return (
     <div
@@ -95,7 +95,7 @@ const AreaPreview = function ({ id }) {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default AreaPreview
+export default AreaPreview;

@@ -3,14 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Link as RouterLink } from 'react-router-dom';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
-import {
-  ClassNames,
-  ItemAttributesByName,
-  itemData,
-  ItemSlotToText,
-  ItemTypeNames,
-} from 'rune-backend-sdk/build/data/items';
-import { toFixed } from 'rune-backend-sdk/build/util/math';
+import { ClassNames, ItemAttributesByName, itemData, ItemSlotToText, ItemTypeNames } from '@arken/node/data/items';
+import { toFixed } from '@arken/node/util/math';
 import styled from 'styled-components';
 import Linker from '~/components/Linker';
 import Tooltip from '~/components/Tooltip/Tooltip';
@@ -21,7 +15,7 @@ import { useRunePrice } from '~/state/hooks';
 import { Button, ButtonMenu, ButtonMenuItem, Text } from '~/ui';
 // import {
 //   decodeItem
-// } from 'rune-backend-sdk/build/util/item-decoder'
+// } from '@arken/node/util/decoder'
 
 const Container = styled.div`
   position: relative;

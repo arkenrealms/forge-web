@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { decodeItem } from '@arken/node/util/decoder';
 import styled, { createGlobalStyle } from 'styled-components';
 import Page from '~/components/layout/Page';
 import { BaseLayout, Button, Card, CardBody, Heading } from '~/ui';
 
-import { itemData } from 'rune-backend-sdk/build/data/items';
-import { ItemCategoriesType, ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { itemData } from '@arken/node/data/items';
+import { ItemCategoriesType, ItemsMainCategoriesType } from '@arken/node/data/items.type';
 import ItemInformation from '~/components/ItemInformation';
 
 function pad(n, width, z = '0') {

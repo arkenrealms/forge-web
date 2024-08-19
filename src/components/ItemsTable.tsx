@@ -1,6 +1,6 @@
-import React from 'react'
-import { itemData } from 'rune-backend-sdk/build/data/items'
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type'
+import React from 'react';
+import { itemData } from '@arken/node/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
 
 const items = {
   Wands: [itemData[ItemsMainCategoriesType.OTHER].find((r) => r.name === 'The Oculus')],
@@ -97,7 +97,7 @@ const items = {
   DLC: [],
   Mauls: [],
   Axes: [],
-}
+};
 
 const sections = [
   'Swords',
@@ -130,7 +130,7 @@ const sections = [
   'Homage',
   'DLC',
   'Misc',
-]
+];
 
 const ItemsTable = function () {
   return (
@@ -171,7 +171,7 @@ const ItemsTable = function () {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default ItemsTable
+export default ItemsTable;

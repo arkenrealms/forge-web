@@ -98,8 +98,17 @@ const App = ({ apolloClient }: any) => {
                 <>
                   <ResetStyles />
                   <GlobalStyles />
-                  <AuthProvider>
-                    <BrowserRouter basename="/">
+                  <Providers>
+                    <>
+                      <ListsUpdater />
+                      <ApplicationUpdater />
+                      <TransactionUpdater />
+                      <MulticallUpdater />
+                      <ToastListener />
+                    </>
+                    <AppInner />
+                  </Providers>
+                  {/* <BrowserRouter basename="/">
                       <NavProvider>
                         <TourProvider>
                           <SettingsProvider>
@@ -206,8 +215,7 @@ const App = ({ apolloClient }: any) => {
                           </SettingsProvider>
                         </TourProvider>
                       </NavProvider>
-                    </BrowserRouter>
-                  </AuthProvider>
+                    </BrowserRouter> */}
                 </>
               </ApolloProvider>
             </NoticeProvider>

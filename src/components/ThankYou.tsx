@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
-import { itemData } from 'rune-backend-sdk/build/data/items';
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
-import { normalizeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { itemData } from '@arken/node/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { normalizeItem } from '@arken/node/util/decoder';
 import styled, { css } from 'styled-components';
 import Item from '~/components/Item';
 import { Heading } from '~/ui';

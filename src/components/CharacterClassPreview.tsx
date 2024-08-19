@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useFetch from '~/hooks/useFetch';
 import { useTranslation } from 'react-i18next';
-import classes from 'rune-backend-sdk/build/data/generated/characterClasses.json';
+import classes from '@arken/node/data/generated/characterClasses.json';
 import {
   Image,
   Heading,

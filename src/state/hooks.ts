@@ -9,7 +9,7 @@ import useRefresh from '~/hooks/useRefresh';
 import { useMasterchef } from '~/hooks/useContract';
 import useWeb3 from '~/hooks/useWeb3';
 import runes from '~/config/constants/runes';
-import farmsConfig from 'rune-backend-sdk/build/farmInfo';
+import farmsConfig from '@arken/node/farmInfo';
 import { getBalanceNumber } from '~/utils/formatBalance';
 import { fetchFarmsPublicDataAsync, push as pushToast, remove as removeToast, clear as clearToast } from './actions';
 import { State, Farm, Pool, ProfileState, TeamsState, AchievementState, PriceState } from './types';

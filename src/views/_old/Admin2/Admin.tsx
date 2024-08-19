@@ -11,7 +11,7 @@ import Page from '~/components/layout/Page';
 import PageWindow from '~/components/PageWindow';
 
 import { getNativeAddress } from '~/utils/addressHelpers';
-import addresses from 'rune-backend-sdk/build/contractInfo';
+import addresses from '@arken/node/contractInfo';
 import { Address } from '~/config/constants/types';
 import useBlock from '~/hooks/useBlock';
 // import { INIT_CODE_HASH } from '../src/constants'

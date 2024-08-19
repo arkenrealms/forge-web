@@ -1,149 +1,149 @@
-import React, { useState, useRef } from 'react'
-import styled, { css, createGlobalStyle } from 'styled-components'
-import useSound from 'use-sound'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import useInventory from '~/hooks/useInventory'
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'
-import { useToast } from '~/state/hooks'
-import Item from '~/components/Item'
-import { useTranslation } from 'react-i18next'
-import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction'
-import { useArcaneItems, useMasterchef, useBarracks, useBlacksmith } from '~/hooks/useContract'
-import { useProfile } from '~/state/hooks'
-import { motion } from 'framer-motion'
-import { getContractAddress } from '~/utils/addressHelpers'
-import useGetWalletItems from '~/hooks/useGetWalletItems'
-import useWeb3 from '~/hooks/useWeb3'
-import ApproveConfirmButtons from './account/ApproveConfirmButtons'
+import React, { useState, useRef } from 'react';
+import styled, { css, createGlobalStyle } from 'styled-components';
+import useSound from 'use-sound';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import useInventory from '~/hooks/useInventory';
+import { decodeItem } from '@arken/node/util/decoder';
+import { useToast } from '~/state/hooks';
+import Item from '~/components/Item';
+import { useTranslation } from 'react-i18next';
+import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction';
+import { useArcaneItems, useMasterchef, useBarracks, useBlacksmith } from '~/hooks/useContract';
+import { useProfile } from '~/state/hooks';
+import { motion } from 'framer-motion';
+import { getContractAddress } from '~/utils/addressHelpers';
+import useGetWalletItems from '~/hooks/useGetWalletItems';
+import useWeb3 from '~/hooks/useWeb3';
+import ApproveConfirmButtons from './account/ApproveConfirmButtons';
 
 interface TransmuteModalProps extends InjectedModalProps {
-  tokenId: string
-  onSuccess: () => void
+  tokenId: string;
+  onSuccess: () => void;
 }
 
 const ModalContent = styled.div`
   margin-bottom: 16px;
-`
+`;
 
-const Actions = styled.div``
+const Actions = styled.div``;
 
 const ItemTitle = styled.div`
   color: #fff;
   font-size: 2.5rem;
-`
+`;
 const ItemDescription = styled.div`
   font-style: italic;
   font-size: 0.9em;
   color: #bbb;
   margin-bottom: 10px;
   line-height: 20px;
-`
+`;
 
 const TransmuteModal: React.FC<TransmuteModalProps> = ({ tokenId, onSuccess, onDismiss }) => {
-  const { t } = useTranslation()
-  const { address: account } = useWeb3()
-  const { toastError, toastSuccess } = useToast()
-  const arcaneItem = decodeItem(tokenId)
-  const { equipment, refreshEquipment } = useInventory()
-  const equipItem = decodeItem(tokenId)
-  const arcaneItemsContract = useArcaneItems()
-  const blacksmithContract = useBlacksmith()
-  const { refresh } = useGetWalletItems()
-  const [transmutedItem, setTransmutedItem] = useState(null)
-  const [opened, setOpened] = useState(false)
-  const [transmuting, setTransmuting] = useState(false)
-  const [shaking, setShaking] = useState(false)
-  const [playActionSound] = useSound('/assets/sounds/action.mp3')
-  const [playFoundSound] = useSound('/assets/sounds/found.mp3', { volume: 0.1 })
+  const { t } = useTranslation();
+  const { address: account } = useWeb3();
+  const { toastError, toastSuccess } = useToast();
+  const arcaneItem = decodeItem(tokenId);
+  const { equipment, refreshEquipment } = useInventory();
+  const equipItem = decodeItem(tokenId);
+  const arcaneItemsContract = useArcaneItems();
+  const blacksmithContract = useBlacksmith();
+  const { refresh } = useGetWalletItems();
+  const [transmutedItem, setTransmutedItem] = useState(null);
+  const [opened, setOpened] = useState(false);
+  const [transmuting, setTransmuting] = useState(false);
+  const [shaking, setShaking] = useState(false);
+  const [playActionSound] = useSound('/assets/sounds/action.mp3');
+  const [playFoundSound] = useSound('/assets/sounds/found.mp3', { volume: 0.1 });
 
-  let slotId = equipItem.slots[0] //mapIdToSlot[equipItem.id]
+  let slotId = equipItem.slots[0]; //mapIdToSlot[equipItem.id]
 
   for (const slot of equipItem.slots) {
     if (!equipment[slot]) {
-      slotId = slot
-      break
+      slotId = slot;
+      break;
     }
   }
 
-  console.log('TransmuteModal', slotId, equipment, equipItem.slots)
+  console.log('TransmuteModal', slotId, equipment, equipItem.slots);
 
   const { isApproving, isApproved, isConfirmed, isConfirming, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
       onRequiresApproval: async () => {
         try {
-          const response = await arcaneItemsContract.methods.getApproved(tokenId).call()
-          if (response === getContractAddress('blacksmith')) return true
+          const response = await arcaneItemsContract.methods.getApproved(tokenId).call();
+          if (response === getContractAddress('blacksmith')) return true;
 
           const response2 = await arcaneItemsContract.methods
             .isApprovedForAll(account, getContractAddress('blacksmith'))
-            .call() // setApprovalForAll/isApprovedForAll
+            .call(); // setApprovalForAll/isApprovedForAll
 
-          return response2
+          return response2;
         } catch (e) {
-          return false
+          return false;
         }
       },
       onApprove: () => {
         return arcaneItemsContract.methods
           .setApprovalForAll(getContractAddress('blacksmith'), true)
-          .send({ from: account })
+          .send({ from: account });
       },
       onConfirm: () => {
-        playActionSound()
+        playActionSound();
 
-        setOpened(true)
-        setTransmuting(true)
+        setOpened(true);
+        setTransmuting(true);
 
         setTimeout(() => {
-          setOpened(false)
+          setOpened(false);
 
           setTimeout(() => {
-            setShaking(true)
-          }, 1500)
-        }, 1000)
+            setShaking(true);
+          }, 1500);
+        }, 1000);
 
         if (arcaneItem.id === 1212) {
-          return blacksmithContract.methods.craftFromTicket(tokenId).send({ from: account })
+          return blacksmithContract.methods.craftFromTicket(tokenId).send({ from: account });
         }
-        return blacksmithContract.methods.craftFromTicket(tokenId).send({ from: account })
+        return blacksmithContract.methods.craftFromTicket(tokenId).send({ from: account });
       },
       onError: (error) => {
-        setShaking(false)
-        setOpened(true)
+        setShaking(false);
+        setOpened(true);
 
         setTimeout(() => {
-          setTransmuting(false)
-          setOpened(false)
-        }, 1000)
+          setTransmuting(false);
+          setOpened(false);
+        }, 1000);
 
-        playFoundSound()
+        playFoundSound();
       },
       onSuccess: (state, payload) => {
-        refresh()
-        refreshEquipment()
-        console.log(state, payload)
+        refresh();
+        refreshEquipment();
+        console.log(state, payload);
         if (payload?.events && (payload?.events as any).ItemMint.returnValues[1]) {
-          const foundItem = decodeItem((payload?.events as any).ItemMint.returnValues[1])
+          const foundItem = decodeItem((payload?.events as any).ItemMint.returnValues[1]);
 
           // toastSuccess(`${foundItem.name} transmuted!`)
 
-          setTransmutedItem(foundItem)
-          setShaking(false)
-          setOpened(true)
+          setTransmutedItem(foundItem);
+          setShaking(false);
+          setOpened(true);
 
           setTimeout(() => {
-            setTransmuting(false)
-            setOpened(false)
-          }, 1000)
+            setTransmuting(false);
+            setOpened(false);
+          }, 1000);
 
-          playFoundSound()
+          playFoundSound();
 
           // onDismiss()
         } else {
-          toastError(`Transmute failure`)
+          toastError(`Transmute failure`);
         }
       },
-    })
+    });
 
   return (
     <Modal
@@ -380,7 +380,7 @@ const TransmuteModal: React.FC<TransmuteModalProps> = ({ tokenId, onSuccess, onD
         <br /> */}
       </Actions>
     </Modal>
-  )
-}
+  );
+};
 
-export default TransmuteModal
+export default TransmuteModal;

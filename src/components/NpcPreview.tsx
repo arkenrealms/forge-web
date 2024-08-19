@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import npcs from 'rune-backend-sdk/build/data/generated/npcs.json';
+import npcs from '@arken/node/data/generated/npcs.json';
 import styled, { css } from 'styled-components';
 import { Heading } from '~/ui';
 

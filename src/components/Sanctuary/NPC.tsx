@@ -4,7 +4,7 @@ import remarkGfm from 'remark-gfm';
 import { Skeleton } from '~/ui';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import Linker from '~/components/Linker';
-import npcs from 'rune-backend-sdk/build/data/generated/npcs.json';
+import npcs from '@arken/node/data/generated/npcs.json';
 
 // Import Swiper styles
 //import '~swiper/swiper.min.css'

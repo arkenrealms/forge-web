@@ -1,20 +1,20 @@
-import { achievementData } from 'rune-backend-sdk/build/data/achievements'
-import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
-import { ConnectNetwork } from '~/components/ConnectNetwork'
-import Page from '~/components/layout/Page'
-import useCache from '~/hooks/useCache'
-import useWeb3 from '~/hooks/useWeb3'
-import { useFetchAchievements, useFetchProfile, useProfile } from '~/state/hooks'
-import { getUsername } from '~/state/profiles/getProfile'
-import { Button, Card, CardBody, CardHeader, Flex, Heading, Text } from '~/ui'
-import AchievementCard from '~/components/AchievementCard'
-import AchievementsList from '~/components/AchievementsList'
-import Header from '~/components/account/Header'
-import Menu from '~/components/account/Menu'
-import ProfileCreation from './ProfileCreation'
+import { achievementData } from '@arken/node/data/achievements';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import { ConnectNetwork } from '~/components/ConnectNetwork';
+import Page from '~/components/layout/Page';
+import useCache from '~/hooks/useCache';
+import useWeb3 from '~/hooks/useWeb3';
+import { useFetchAchievements, useFetchProfile, useProfile } from '~/state/hooks';
+import { getUsername } from '~/state/profiles/getProfile';
+import { Button, Card, CardBody, CardHeader, Flex, Heading, Text } from '~/ui';
+import AchievementCard from '~/components/AchievementCard';
+import AchievementsList from '~/components/AchievementsList';
+import Header from '~/components/account/Header';
+import Menu from '~/components/account/Menu';
+import ProfileCreation from './ProfileCreation';
 
 const Grid = styled.div`
   display: grid;
@@ -24,49 +24,49 @@ const Grid = styled.div`
   // ${({ theme }) => theme.mediaQueries.sm} {
   //   grid-template-columns: repeat(2, 1fr);
   // }
-`
+`;
 
 const Section = styled.div`
   margin-bottom: 40px;
-`
+`;
 
 const PublicProfile = ({ match }) => {
-  const { id }: { id: string } = match.params
-  const { address: _account, library } = useWeb3()
-  const account = id ? id : _account
-  useFetchProfile(account)
-  const { profile, hasProfile } = useProfile(account)
-  const { t } = useTranslation()
-  const cache = useCache()
-  const achievements = cache.achievements[account]?.map((a) => achievementData.find((b) => b.id === a)) || []
+  const { id }: { id: string } = match.params;
+  const { address: _account, library } = useWeb3();
+  const account = id ? id : _account;
+  useFetchProfile(account);
+  const { profile, hasProfile } = useProfile(account);
+  const { t } = useTranslation();
+  const cache = useCache();
+  const achievements = cache.achievements[account]?.map((a) => achievementData.find((b) => b.id === a)) || [];
   const otherAchievements = achievementData.filter(
     (a) => !cache.achievements[account]?.find((b) => b === a.id) && a.isEnabled
-  )
+  );
 
-  const [username, setUsername] = useState(null)
+  const [username, setUsername] = useState(null);
 
-  useFetchAchievements()
+  useFetchAchievements();
 
   useEffect(
     function () {
-      if (!account) return
+      if (!account) return;
 
       async function init() {
         try {
-          const res = await getUsername(account)
+          const res = await getUsername(account);
           // @ts-ignore
           if (res) {
-            setUsername(res)
+            setUsername(res);
           }
         } catch (e) {
-          console.log(e)
+          console.log(e);
         }
       }
 
-      init()
+      init();
     },
     [account, setUsername]
-  )
+  );
 
   // if (!account) {
   //   return <Page><WalletNotConnected /></Page>
@@ -77,7 +77,7 @@ const PublicProfile = ({ match }) => {
       <Page>
         <ProfileCreation />
       </Page>
-    )
+    );
   }
 
   return (
@@ -129,7 +129,7 @@ const PublicProfile = ({ match }) => {
         </Flex>
       )}
     </Page>
-  )
-}
+  );
+};
 
-export default PublicProfile
+export default PublicProfile;

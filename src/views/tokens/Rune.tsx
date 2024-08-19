@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
 import { Button, Flex, LinkExternal, Text } from '~/ui';
 import ItemInformation from '~/components/ItemInformation';
-import { ItemCategoriesType, ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { ItemCategoriesType, ItemsMainCategoriesType } from '@arken/node/data/items.type';
 import useRuneBalance from '~/hooks/useRuneBalance';
 import { useRunePrice } from '~/state/hooks';
 import Page from '~/components/layout/Page';

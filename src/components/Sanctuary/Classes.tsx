@@ -6,7 +6,7 @@ import useFetch from '~/hooks/useFetch';
 import history from '~/routerHistory';
 import LoreBlock1 from '~/components/LoreBlock1';
 import { Flex, Skeleton } from '~/ui';
-import classes from 'rune-backend-sdk/build/data/generated/characterClasses.json';
+import classes from '@arken/node/data/generated/characterClasses.json';
 
 const Abc = styled.div``;
 

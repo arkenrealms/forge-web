@@ -2,7 +2,7 @@ import React, { useCallback, useLayoutEffect, useMemo, useEffect, useState, useR
 import { BsArrowRightSquareFill } from 'react-icons/bs';
 import styled, { css } from 'styled-components';
 import ReactJson from 'react18-json-view';
-import addresses from 'rune-backend-sdk/build/contractInfo';
+import addresses from '@arken/node/contractInfo';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import { Card, CardBody, CardHeader, Flex, Heading, Text } from '~/ui';
 import { HomeOutlined, UserOutlined, InboxOutlined, UploadOutlined } from '@ant-design/icons';

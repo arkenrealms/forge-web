@@ -4,7 +4,7 @@ import useSound from 'use-sound';
 import useCache from '~/hooks/useCache';
 import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
 import useInventory from '~/hooks/useInventory';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { decodeItem } from '@arken/node/util/decoder';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import { useToast } from '~/state/hooks';
 import Item from '~/components/Item';

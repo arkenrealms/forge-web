@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { decodeItem } from '@arken/node/util/decoder';
 import styled from 'styled-components';
 import { Button, Flex, Card, Heading, OpenNewIcon, Link } from '~/ui';
 import Page from '~/components/layout/Page';

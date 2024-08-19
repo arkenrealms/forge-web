@@ -1,4 +1,4 @@
-import contracts from 'rune-backend-sdk/build/contractInfo';
+import contracts from '@arken/node/contractInfo';
 import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
 import React, { useEffect, useMemo, useState } from 'react';

@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import Item from '~/components/Item';
-import { ItemType, ItemCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { ItemType, ItemCategoriesType } from '@arken/node/data/items.type';
 import useSettings from '~/hooks/useSettings2';
 
 type Props = {

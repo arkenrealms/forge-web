@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useFetch from '~/hooks/useFetch';
 import { useTranslation } from 'react-i18next';
-import races from 'rune-backend-sdk/build/data/generated/characterRaces.json';
+import races from '@arken/node/data/generated/characterRaces.json';
 import {
   Image,
   Heading,

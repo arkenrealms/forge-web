@@ -15,7 +15,7 @@ import useGetWalletItems from '~/hooks/useGetWalletItems';
 import useWeb3 from '~/hooks/useWeb3';
 import { getContractAddress } from '~/utils/addressHelpers';
 import ApproveConfirmButtons from '~/components/account/ApproveConfirmButtons';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { decodeItem } from '@arken/node/util/decoder';
 import ItemsContext from '~/contexts/ItemsContext';
 
 interface MarketUpdateModalProps extends InjectedModalProps {

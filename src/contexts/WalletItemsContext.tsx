@@ -1,48 +1,48 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { getWeb3NoAccount } from '~/utils/web3'
-import BigNumber from 'bignumber.js'
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'
-import { getArcaneItemContract } from '~/utils/contractHelpers'
-import { makeBatchRequest } from '~/utils/web3'
-import useInterval from '~/hooks/useInterval'
-import { useBarracks, useMasterchef } from '~/hooks/useContract'
-import useWeb3 from '~/hooks/useWeb3'
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { getWeb3NoAccount } from '~/utils/web3';
+import BigNumber from 'bignumber.js';
+import { decodeItem } from '@arken/node/util/decoder';
+import { getArcaneItemContract } from '~/utils/contractHelpers';
+import { makeBatchRequest } from '~/utils/web3';
+import useInterval from '~/hooks/useInterval';
+import { useBarracks, useMasterchef } from '~/hooks/useContract';
+import useWeb3 from '~/hooks/useWeb3';
 
-const arcaneItemsContract = getArcaneItemContract()
+const arcaneItemsContract = getArcaneItemContract();
 
 export type NftMap = {
   [key: number]: {
-    tokenUri: string
-    tokenIds: number[]
-  }
-}
+    tokenUri: string;
+    tokenIds: number[];
+  };
+};
 
 const WalletItemsContext = React.createContext({
   nfts: {},
   items: {},
   refresh: () => {},
   setUserAddress: (() => {}) as any,
-})
+});
 
 function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 const WalletItemsContextProvider = ({ children }) => {
-  const { address: account } = useWeb3()
+  const { address: account } = useWeb3();
   // const account = '0xEB16739C0286115A0Bf00a4a22E3721a0764F04e'
-  const [nfts, setNfts] = useState({})
-  const [items, setItems] = useState({})
-  const [userAddress, setUserAddress] = useState(undefined)
-  const [lastUpdatedTime, setLastUpdatedTime] = useState(new Date().getTime() + 10 * 1000)
+  const [nfts, setNfts] = useState({});
+  const [items, setItems] = useState({});
+  const [userAddress, setUserAddress] = useState(undefined);
+  const [lastUpdatedTime, setLastUpdatedTime] = useState(new Date().getTime() + 10 * 1000);
 
   useEffect(() => {
     // const diff = new Date().getTime() - lastUpdatedTime
     // console.log('vvvv', new Date().getTime() , lastUpdatedTime, account ,userAddress, diff)
     // console.log(account, userAddress, lastUpdatedTime)
-    if (!account) return //  || (diff < 10 * 1000 && (!userAddress || account === userAddress))
+    if (!account) return; //  || (diff < 10 * 1000 && (!userAddress || account === userAddress))
 
-    const loadFromAccount = userAddress || account
+    const loadFromAccount = userAddress || account;
 
     // setLastUpdatedTime(new Date().getTime())
     // dispatch({ type: 'refresh', state, timestamp: Date.now() })
@@ -52,14 +52,14 @@ const WalletItemsContextProvider = ({ children }) => {
     // setNfts(fetchedNfts)
 
     const fetchNfts = async () => {
-      console.log('Fetching items for', loadFromAccount)
+      console.log('Fetching items for', loadFromAccount);
 
       try {
-        const balanceOf = await arcaneItemsContract.methods.balanceOf(loadFromAccount).call()
+        const balanceOf = await arcaneItemsContract.methods.balanceOf(loadFromAccount).call();
 
         if (balanceOf > 0) {
-          let fetchedNfts: NftMap = {}
-          console.log('Item total: ', balanceOf)
+          let fetchedNfts: NftMap = {};
+          console.log('Item total: ', balanceOf);
 
           // const getTokenIdAndItemId = async (index: number) => {
           //   try {
@@ -74,12 +74,12 @@ const WalletItemsContextProvider = ({ children }) => {
           //   }
           // }
 
-          let tokenIdPromises = []
-          let tokenIdsOwnedByWallet = []
+          let tokenIdPromises = [];
+          let tokenIdsOwnedByWallet = [];
 
           for (let i = 0; i < balanceOf; i++) {
-            const { tokenOfOwnerByIndex, getItemId, tokenURI } = arcaneItemsContract.methods
-            tokenIdPromises.push(tokenOfOwnerByIndex(loadFromAccount, i).call)
+            const { tokenOfOwnerByIndex, getItemId, tokenURI } = arcaneItemsContract.methods;
+            tokenIdPromises.push(tokenOfOwnerByIndex(loadFromAccount, i).call);
 
             if (tokenIdPromises.length >= 100) {
               // @ts-ignore
@@ -87,11 +87,11 @@ const WalletItemsContextProvider = ({ children }) => {
                 ...tokenIdsOwnedByWallet,
                 // @ts-ignore
                 ...(await makeBatchRequest(tokenIdPromises)).map((tokenId: string) => {
-                  return [parseInt(tokenId.slice(4, 9)), tokenId]
+                  return [parseInt(tokenId.slice(4, 9)), tokenId];
                 }),
-              ]
+              ];
 
-              tokenIdPromises = []
+              tokenIdPromises = [];
             }
           }
 
@@ -101,9 +101,9 @@ const WalletItemsContextProvider = ({ children }) => {
             ...tokenIdsOwnedByWallet,
             // @ts-ignore
             ...(await makeBatchRequest(tokenIdPromises)).map((tokenId: string) => {
-              return [parseInt(tokenId.slice(4, 9)), tokenId]
+              return [parseInt(tokenId.slice(4, 9)), tokenId];
             }),
-          ]
+          ];
 
           // console.log('2222', tokenIdsOwnedByWallet)
 
@@ -111,18 +111,18 @@ const WalletItemsContextProvider = ({ children }) => {
 
           fetchedNfts = tokenIdsOwnedByWallet.reduce((accum, association) => {
             if (!association) {
-              return accum
+              return accum;
             }
 
-            const [itemId, tokenId] = association
+            const [itemId, tokenId] = association;
 
             return {
               ...accum,
               [itemId]: {
                 tokenIds: accum[itemId] ? [...accum[itemId].tokenIds, tokenId] : [tokenId],
               },
-            }
-          }, {})
+            };
+          }, {});
 
           // console.log('3333', fetchedNfts)
 
@@ -294,20 +294,20 @@ const WalletItemsContextProvider = ({ children }) => {
           // }
 
           if (Object.keys(fetchedNfts).length > 30) {
-            document.body.classList.add(`override-bad-quality`)
-            document.body.classList.add(`bad-quality`)
-            document.body.classList.remove(`good-quality`)
-            document.body.classList.remove(`average-quality`)
+            document.body.classList.add(`override-bad-quality`);
+            document.body.classList.add(`bad-quality`);
+            document.body.classList.remove(`good-quality`);
+            document.body.classList.remove(`average-quality`);
           }
           // console.log(JSON.stringify(fetchedNfts))
           // console.log(account, fetchedNfts)
 
-          const itemData = {}
+          const itemData = {};
 
           for (const tokenIndex in tokenIdsOwnedByWallet) {
-            const tokenData = tokenIdsOwnedByWallet[tokenIndex]
+            const tokenData = tokenIdsOwnedByWallet[tokenIndex];
             // console.log(tokenData, tokenData[1])
-            const tokenId = tokenData[1] //new BigNumber(tokenData[1] + '').toString()
+            const tokenId = tokenData[1]; //new BigNumber(tokenData[1] + '').toString()
             // itemData[tokenId] = decodeItem(tokenId)
 
             // if (parseInt(tokenIndex) % 10 === 0) { // Sleep every 10 decodes
@@ -315,46 +315,46 @@ const WalletItemsContextProvider = ({ children }) => {
             // }
           }
 
-          console.log('Setting items', fetchedNfts)
+          console.log('Setting items', fetchedNfts);
 
-          setNfts(fetchedNfts)
-          setItems(itemData)
+          setNfts(fetchedNfts);
+          setItems(itemData);
         } else {
-          console.log('Resetting wallet items')
+          console.log('Resetting wallet items');
           // Reset it in case of wallet change
-          setNfts({})
-          setItems({})
+          setNfts({});
+          setItems({});
         }
       } catch (e) {
-        console.warn(e)
+        console.warn(e);
         //dispatch({ type: 'reset', state })
       }
-    }
+    };
 
-    fetchNfts()
-  }, [account, userAddress, lastUpdatedTime, setNfts, setItems])
+    fetchNfts();
+  }, [account, userAddress, lastUpdatedTime, setNfts, setItems]);
 
   const refresh = () => {
-    console.log('Refreshing inventory')
+    console.log('Refreshing inventory');
 
-    if (!account) return
+    if (!account) return;
     // console.log('eeeee')
-    console.log(lastUpdatedTime, new Date().getTime())
+    console.log(lastUpdatedTime, new Date().getTime());
     if (lastUpdatedTime >= new Date().getTime()) {
-      setTimeout(refresh, 5 * 1000)
-      return
+      setTimeout(refresh, 5 * 1000);
+      return;
     }
     // const diff = new Date().getTime() - lastUpdatedTime
     // console.log('vvvv', new Date().getTime() , lastUpdatedTime, account ,userAddress, diff)
 
     // setUserAddress(account)
 
-    console.log('Updating last update  time to: ' + new Date().getTime() + 10 * 1000)
+    console.log('Updating last update  time to: ' + new Date().getTime() + 10 * 1000);
 
-    setLastUpdatedTime(new Date().getTime() + 10 * 1000)
+    setLastUpdatedTime(new Date().getTime() + 10 * 1000);
 
     // setLastUpdatedTime(0)
-  } //dispatch({ type: 'refresh', state, timestamp: Date.now() })
+  }; //dispatch({ type: 'refresh', state, timestamp: Date.now() })
 
   // useInterval(() => {
   //   if (lastUpdatedTime <= new Date().getTime()) {
@@ -372,7 +372,7 @@ const WalletItemsContextProvider = ({ children }) => {
       }}>
       {children}
     </WalletItemsContext.Provider>
-  )
-}
+  );
+};
 
-export { WalletItemsContext, WalletItemsContextProvider }
+export { WalletItemsContext, WalletItemsContextProvider };

@@ -1,8 +1,8 @@
 import React from 'react';
-import addresses from 'rune-backend-sdk/build/contractInfo';
-import { itemData, rewardTokenIdMap, RuneNames } from 'rune-backend-sdk/build/data/items';
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import addresses from '@arken/node/contractInfo';
+import { itemData, rewardTokenIdMap, RuneNames } from '@arken/node/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { decodeItem } from '@arken/node/util/decoder';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
-import { itemData } from 'rune-backend-sdk/build/data/items';
+import { itemData } from '@arken/node/data/items';
 import styled from 'styled-components';
 import Tooltip from '~/components/Tooltip/Tooltip';
 import useCache from '~/hooks/useCache';

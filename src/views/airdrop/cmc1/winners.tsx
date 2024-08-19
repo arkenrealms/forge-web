@@ -1,25 +1,25 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import styled from 'styled-components'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'
-import { useTranslation } from 'react-i18next'
-import { Button, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import Page from '~/components/layout/Page'
-import { PurchaseModal } from '~/components/PurchaseModal'
-import ItemInformation from '~/components/ItemInformation'
-import i18n from '~/config/i18n'
-import { ItemInfo } from '~/components/ItemInfo'
-import winners from './winners.json'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import styled from 'styled-components';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import { decodeItem } from '@arken/node/util/decoder';
+import { useTranslation } from 'react-i18next';
+import { Button, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import Page from '~/components/layout/Page';
+import { PurchaseModal } from '~/components/PurchaseModal';
+import ItemInformation from '~/components/ItemInformation';
+import i18n from '~/config/i18n';
+import { ItemInfo } from '~/components/ItemInfo';
+import winners from './winners.json';
 
-const Container = styled.div``
+const Container = styled.div``;
 
 const Img = styled.img`
   filter: contrast(1.1) drop-shadow(2px 4px 6px black);
   ${({ theme }) => theme.mediaQueries.sm} {
     width: 100%;
   }
-`
+`;
 const HeadingSilver = styled.div`
   background-image: -webkit-linear-gradient(
     top,
@@ -42,7 +42,7 @@ const HeadingSilver = styled.div`
   // filter: sepia(1) saturate(5) hue-rotate(-25deg);
   // sepia(1) saturate(5) hue-rotate(-25deg) grayscale(1) drop-shadow(0px 0px 10px #000) invert(1)
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
-`
+`;
 
 const HeadingPlain = styled.div`
   color: #cecece;
@@ -54,7 +54,7 @@ const HeadingPlain = styled.div`
   // filter: sepia(1) saturate(5) hue-rotate(-25deg);
   // sepia(1) saturate(5) hue-rotate(-25deg) grayscale(1) drop-shadow(0px 0px 10px #000) invert(1)
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
-`
+`;
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -77,7 +77,7 @@ const Cards = styled(BaseLayout)`
       grid-column: span 6;
     }
   }
-`
+`;
 
 const Text = styled.div`
   * {
@@ -85,20 +85,20 @@ const Text = styled.div`
     text-transform: none;
     color: #ddd;
   }
-`
+`;
 
 const HighlightLink = styled.a`
   color: #7576df;
-`
+`;
 
 const StyledCard = styled(Card)`
   background: rgba(0, 0, 0, 0.8);
   z-index: 2;
-`
+`;
 
 const LogoImg = styled.img`
   max-width: 200px;
-`
+`;
 
 const ItemCard = styled(Card)`
   position: relative;
@@ -121,11 +121,11 @@ const ItemCard = styled(Card)`
     position: relative;
     z-index: 2;
   }
-`
+`;
 
 const HightlightText = styled.span`
   color: #7576df;
-`
+`;
 
 const LearnMore = styled.div`
   text-align: center;
@@ -137,17 +137,17 @@ const LearnMore = styled.div`
   &:hover {
     cursor: url('/images/cursor3.png'), pointer;
   }
-`
+`;
 
 const Rules = () => {
-  const { t } = useTranslation()
-  const [showVision, setShowVision] = useState(false)
-  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />)
+  const { t } = useTranslation();
+  const [showVision, setShowVision] = useState(false);
+  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
-  const mythicItem = decodeItem('1003000291320400032001005200805020130202007010000000000000000000000000')
-  const epicItem = decodeItem('1003000291320400042001004200804020130182007010000000000000000000000002')
-  const rareItem = decodeItem('1003000291320400052001003200803020130162007010000000000000000000000102')
-  const magicalItem = decodeItem('1003000291320400062001002200802020130142007010000000000000000000000999')
+  const mythicItem = decodeItem('1003000291320400032001005200805020130202007010000000000000000000000000');
+  const epicItem = decodeItem('1003000291320400042001004200804020130182007010000000000000000000000002');
+  const rareItem = decodeItem('1003000291320400052001003200803020130162007010000000000000000000000102');
+  const magicalItem = decodeItem('1003000291320400062001002200802020130142007010000000000000000000000999');
 
   return (
     <Page>
@@ -179,7 +179,7 @@ const Rules = () => {
                   {winners
                     .filter((w) => w.item === 'mythic')
                     .map((winner) => {
-                      return <p>{winner.address} - Mythic Dragonlight</p>
+                      return <p>{winner.address} - Mythic Dragonlight</p>;
                     })}
                   <br />
                   <br />
@@ -189,7 +189,7 @@ const Rules = () => {
                   {winners
                     .filter((w) => w.item === 'epic')
                     .map((winner) => {
-                      return <p>{winner.address} - Epic Dragonlight</p>
+                      return <p>{winner.address} - Epic Dragonlight</p>;
                     })}
                   <br />
                   <br />
@@ -199,7 +199,7 @@ const Rules = () => {
                   {winners
                     .filter((w) => w.item === 'rare')
                     .map((winner) => {
-                      return <p>{winner.address} - Rare Dragonlight</p>
+                      return <p>{winner.address} - Rare Dragonlight</p>;
                     })}
                   <br />
                   <br />
@@ -209,7 +209,7 @@ const Rules = () => {
                   {winners
                     .filter((w) => w.item === 'magical')
                     .map((winner) => {
-                      return <p>{winner.address} - Magical Dragonlight</p>
+                      return <p>{winner.address} - Magical Dragonlight</p>;
                     })}
                 </Flex>
               </Text>
@@ -236,7 +236,7 @@ const Rules = () => {
                 to="/raid"
                 style={{ zoom: 1.5, padding: '6px 20px', textAlign: 'center' }}
                 onClick={() => {
-                  window.scrollTo(0, 0)
+                  window.scrollTo(0, 0);
                 }}>
                 {t('Open App')}
                 <OpenNewIcon color="white" ml="4px" />
@@ -248,7 +248,7 @@ const Rules = () => {
                   to="/account"
                   style={{ zoom: 1, padding: '6px 20px', textAlign: 'center', background: '#222' }}
                   onClick={() => {
-                    window.scrollTo(0, 0)
+                    window.scrollTo(0, 0);
                   }}>
                   {t('Create Account')}
                 </Button>
@@ -257,7 +257,7 @@ const Rules = () => {
                   to="/guide"
                   style={{ zoom: 1, padding: '6px 20px', textAlign: 'center', background: '#222', marginLeft: 10 }}
                   onClick={() => {
-                    window.scrollTo(0, 0)
+                    window.scrollTo(0, 0);
                   }}>
                   {t('Starter Guide')}
                 </Button>
@@ -280,7 +280,7 @@ const Rules = () => {
         </Cards>
       </Container>
     </Page>
-  )
-}
+  );
+};
 
-export default Rules
+export default Rules;

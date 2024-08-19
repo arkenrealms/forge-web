@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import farmsConfig from 'rune-backend-sdk/build/farmInfo'
-import styled from 'styled-components'
-import Page from '~/components/layout/Page'
-import { useModal } from '~/components/Modal'
-import PageWindow from '~/components/PageWindow'
-import { PurchaseModal } from '~/components/PurchaseModal'
-import Trollbox from '~/components/Trollbox'
-import { CHEF_MAP } from '~/config'
-import useAccount from '~/hooks/useAccount'
-import { useTotalSupply } from '~/hooks/useTokenBalance'
-import useWeb3 from '~/hooks/useWeb3'
-import { Button, ButtonMenu, ButtonMenuItem, Card, CardBody, Flex, Heading, LinkExternal } from '~/ui'
-import { getArcaneCharacterContract, getArcaneItemContract } from '~/utils/contractHelpers'
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import farmsConfig from '@arken/node/farmInfo';
+import styled from 'styled-components';
+import Page from '~/components/layout/Page';
+import { useModal } from '~/components/Modal';
+import PageWindow from '~/components/PageWindow';
+import { PurchaseModal } from '~/components/PurchaseModal';
+import Trollbox from '~/components/Trollbox';
+import { CHEF_MAP } from '~/config';
+import useAccount from '~/hooks/useAccount';
+import { useTotalSupply } from '~/hooks/useTokenBalance';
+import useWeb3 from '~/hooks/useWeb3';
+import { Button, ButtonMenu, ButtonMenuItem, Card, CardBody, Flex, Heading, LinkExternal } from '~/ui';
+import { getArcaneCharacterContract, getArcaneItemContract } from '~/utils/contractHelpers';
 
 const StyledRuneStats = styled(Card)`
   margin-left: auto;
   margin-right: auto;
-`
+`;
 
 const Row = styled.div`
   align-items: center;
@@ -25,19 +25,19 @@ const Row = styled.div`
   font-size: 14px;
   justify-content: space-between;
   margin-bottom: 8px;
-`
+`;
 
 const Row2 = styled(Row)`
   @media (max-width: 768px) {
     flex-direction: column;
   }
-`
+`;
 
 const Cards = styled.div`
   align-items: stretch;
   justify-content: stretch;
   margin-bottom: 32px;
-`
+`;
 
 const BuyLink = styled.a`
   color: #fff;
@@ -49,29 +49,29 @@ const BuyLink = styled.a`
   &:hover {
     color: #bb955e;
   }
-`
+`;
 
 const Frame = styled.iframe`
   width: 100%;
   height: 700px;
-`
+`;
 
-const arcaneCharactersContract = getArcaneCharacterContract()
-const arcaneItemsContract = getArcaneItemContract()
+const arcaneCharactersContract = getArcaneCharacterContract();
+const arcaneItemsContract = getArcaneItemContract();
 
 const Teams = () => {
-  const { t } = useTranslation()
-  const totalSupply = useTotalSupply('RUNE')
-  const { stakedTokens } = useAccount()
+  const { t } = useTranslation();
+  const totalSupply = useTotalSupply('RUNE');
+  const { stakedTokens } = useAccount();
   // const burnedBalance = getBalanceNumber(useBurnedBalance(getRuneAddress('RUNE')), 18)
-  const [onPresentPurchaseModal] = useModal(<PurchaseModal defaultAmount={1 + ''} onSuccess={() => {}} />)
+  const [onPresentPurchaseModal] = useModal(<PurchaseModal defaultAmount={1 + ''} onSuccess={() => {}} />);
   // const runeSupply = totalSupply ? getBalanceNumber(totalSupply, 18) - burnedBalance : 0
   // const runePrice = useRunePrice('RUNE')
 
-  const [tabIndex, setTabIndex] = useState(CHEF_MAP.length - 1)
-  const [path, setPath] = useState('')
+  const [tabIndex, setTabIndex] = useState(CHEF_MAP.length - 1);
+  const [path, setPath] = useState('');
 
-  const { address: account } = useWeb3()
+  const { address: account } = useWeb3();
 
   // const runeBalance = useRuneBalance('RXS')
   // const farmsLP = useFarms()
@@ -82,7 +82,7 @@ const Teams = () => {
   //     new BigNumber(farm.userData.stakedBalance).isGreaterThan(9500),
   // ).length
   // const hasRuneWallet = getBalanceNumber(runeBalance) >= 9500
-  const hasRequirement = stakedTokens >= 10000
+  const hasRequirement = stakedTokens >= 10000;
 
   // const path = tabMap[tabIndex]
 
@@ -93,20 +93,20 @@ const Teams = () => {
       2: 'https://dnsonly.arken.gg/bsc/rune-nef',
       3: 'https://dnsonly.arken.gg/bsc/rune-ith',
       4: 'https://dnsonly.arken.gg/bsc/rune-tal',
-    }
+    };
 
-    let p = tabMap[tabIndex]
+    let p = tabMap[tabIndex];
 
     if (!p) {
-      const symbol = CHEF_MAP[tabIndex]
-      const { chefKey } = farmsConfig[0]
-      const farmCount = farmsConfig.filter((f) => f.chefKey === chefKey).length
-      p = `https://dnsonly.arken.gg/bsc/rune/#${symbol}-${farmCount}`
+      const symbol = CHEF_MAP[tabIndex];
+      const { chefKey } = farmsConfig[0];
+      const farmCount = farmsConfig.filter((f) => f.chefKey === chefKey).length;
+      p = `https://dnsonly.arken.gg/bsc/rune/#${symbol}-${farmCount}`;
     }
 
-    setPath('https://dnsonly.arken.gg/bsc/rune-el')
-    setTimeout(() => setPath(p), 500)
-  }, [tabIndex])
+    setPath('https://dnsonly.arken.gg/bsc/rune-el');
+    setTimeout(() => setPath(p), 500);
+  }, [tabIndex]);
 
   return (
     <Page>
@@ -170,7 +170,7 @@ const Teams = () => {
         ) : null}
       </PageWindow>
     </Page>
-  )
-}
+  );
+};
 
-export default Teams
+export default Teams;

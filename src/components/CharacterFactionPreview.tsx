@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import useFetch from '~/hooks/useFetch'
-import { useTranslation } from 'react-i18next'
-import factions from 'rune-backend-sdk/build/data/generated/characterFactions.json'
+import React, { useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import useFetch from '~/hooks/useFetch';
+import { useTranslation } from 'react-i18next';
+import factions from '@arken/node/data/generated/characterFactions.json';
 import {
   Image,
   Heading,
@@ -17,16 +17,16 @@ import {
   LinkExternal,
   ButtonMenu,
   ButtonMenuItem,
-} from '~/ui'
-import { Skeleton } from '~/ui'
+} from '~/ui';
+import { Skeleton } from '~/ui';
 
-const Abc = styled.div``
+const Abc = styled.div``;
 
 const FactionPreview = function ({ id }) {
-  const faction = factions.find((z) => z.name.toLowerCase().replace(' ', '-') === id)
-  const { t } = useTranslation()
+  const faction = factions.find((z) => z.name.toLowerCase().replace(' ', '-') === id);
+  const { t } = useTranslation();
 
-  const { shortDescription } = faction
+  const { shortDescription } = faction;
 
   return (
     <div
@@ -98,7 +98,7 @@ const FactionPreview = function ({ id }) {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default FactionPreview
+export default FactionPreview;

@@ -1,5 +1,5 @@
-import farms from 'rune-backend-sdk/build/farmInfo'
-import contracts from 'rune-backend-sdk/build/contractInfo'
+import farms from '@arken/node/farmInfo';
+import contracts from '@arken/node/contractInfo';
 
 export default {
   rune: {
@@ -141,4 +141,4 @@ export default {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'ZOD-BUSD LP')?.pid,
     contract: contracts.zod,
   },
-}
+};

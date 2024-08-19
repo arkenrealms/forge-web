@@ -5,8 +5,8 @@
 //   ItemType,
 //   ItemRarity,
 //   ItemRarityNameById,
-// } from 'rune-backend-sdk/build/data/items'
-// import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type'
+// } from '@arken/node/data/items'
+// import { ItemsMainCategoriesType } from '@arken/node/data/items.type'
 
 // const average = (arr: any) => arr.reduce((p: any, c: any) => p + c, 0) / arr.length
 
@@ -728,4 +728,4 @@
 //   return `1${pad(version, 3)}${pad(item.id, 5)}${pad(item.type, 2)}${attrs}`
 // }
 
-export default {}
+export default {};

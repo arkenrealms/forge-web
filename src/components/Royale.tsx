@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
-import { itemData, RuneNames } from 'rune-backend-sdk/build/data/items';
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { itemData, RuneNames } from '@arken/node/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { decodeItem } from '@arken/node/util/decoder';
 import shortId from 'shortid';
 import io from 'socket.io-client';
 import styled, { css } from 'styled-components';

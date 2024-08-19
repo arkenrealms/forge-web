@@ -1,17 +1,17 @@
-import BigNumber from 'bignumber.js'
-import erc20 from '~/config/abi/erc20.json'
-import masterchefABI from '~/config/abi/masterchef.json'
-import multicall from '~/utils/multicall'
-import { getMasterChefAddress } from '~/utils/addressHelpers'
-import farmsConfig from 'rune-backend-sdk/build/farmInfo'
-import { getBalanceNumber } from '~/utils/formatBalance'
-import { QuoteToken } from '~/config/constants/types'
+import BigNumber from 'bignumber.js';
+import erc20 from '~/config/abi/erc20.json';
+import masterchefABI from '~/config/abi/masterchef.json';
+import multicall from '~/utils/multicall';
+import { getMasterChefAddress } from '~/utils/addressHelpers';
+import farmsConfig from '@arken/node/farmInfo';
+import { getBalanceNumber } from '~/utils/formatBalance';
+import { QuoteToken } from '~/config/constants/types';
 
-const CHAIN_ID = process.env.REACT_APP_CHAIN_ID
+const CHAIN_ID = process.env.REACT_APP_CHAIN_ID;
 
 const fetchFarms = async (chefKey: string) => {
-  if (window?.location?.hostname === 'testnet.arken.gg') return []
-  if (!getMasterChefAddress()) return []
+  if (window?.location?.hostname === 'testnet.arken.gg') return [];
+  if (!getMasterChefAddress()) return [];
   // return []
   const data = await Promise.all(
     farmsConfig
@@ -19,7 +19,7 @@ const fetchFarms = async (chefKey: string) => {
       .map(async (farmConfig) => {
         const lpAdress = farmConfig.isTokenOnly
           ? farmConfig.tokenLpAddresses[CHAIN_ID]
-          : farmConfig.lpAddresses[CHAIN_ID]
+          : farmConfig.lpAddresses[CHAIN_ID];
         const calls = [
           // Balance of token in the LP contract
           {
@@ -54,45 +54,45 @@ const fetchFarms = async (chefKey: string) => {
             address: farmConfig.quoteTokenAdresses[CHAIN_ID],
             name: 'decimals',
           },
-        ]
+        ];
 
         const [tokenBalanceLP, quoteTokenBlanceLP, lpTokenBalanceMC, lpTotalSupply, tokenDecimals, quoteTokenDecimals] =
-          await multicall(erc20, calls)
+          await multicall(erc20, calls);
 
-        let tokenAmount
-        let lpTotalInQuoteToken
-        let tokenPriceVsQuote
+        let tokenAmount;
+        let lpTotalInQuoteToken;
+        let tokenPriceVsQuote;
 
         if (farmConfig.isTokenOnly) {
-          tokenAmount = new BigNumber(lpTokenBalanceMC).div(new BigNumber(10).pow(tokenDecimals))
+          tokenAmount = new BigNumber(lpTokenBalanceMC).div(new BigNumber(10).pow(tokenDecimals));
           if (farmConfig.tokenSymbol === QuoteToken.BUSD && farmConfig.quoteTokenSymbol === QuoteToken.BUSD) {
-            tokenPriceVsQuote = new BigNumber(1)
+            tokenPriceVsQuote = new BigNumber(1);
           } else {
-            tokenPriceVsQuote = new BigNumber(quoteTokenBlanceLP).div(new BigNumber(tokenBalanceLP))
+            tokenPriceVsQuote = new BigNumber(quoteTokenBlanceLP).div(new BigNumber(tokenBalanceLP));
           }
-          lpTotalInQuoteToken = tokenAmount.times(tokenPriceVsQuote)
+          lpTotalInQuoteToken = tokenAmount.times(tokenPriceVsQuote);
         } else {
           // Ratio in % a LP tokens that are in staking, vs the total number in circulation
-          const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply))
+          const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply));
 
           // Total value in staking in quote token value
           lpTotalInQuoteToken = new BigNumber(quoteTokenBlanceLP)
             .div(new BigNumber(10).pow(18))
             .times(new BigNumber(2))
-            .times(lpTokenRatio)
+            .times(lpTokenRatio);
 
           // Amount of token in the LP that are considered staking (i.e amount of token * lp ratio)
-          tokenAmount = new BigNumber(tokenBalanceLP).div(new BigNumber(10).pow(tokenDecimals)).times(lpTokenRatio)
+          tokenAmount = new BigNumber(tokenBalanceLP).div(new BigNumber(10).pow(tokenDecimals)).times(lpTokenRatio);
           const quoteTokenAmount = new BigNumber(quoteTokenBlanceLP)
             .div(new BigNumber(10).pow(quoteTokenDecimals))
-            .times(lpTokenRatio)
+            .times(lpTokenRatio);
 
           if (farmConfig.tokenSymbol === QuoteToken.BUSD && farmConfig.quoteTokenSymbol === QuoteToken.BUSD) {
-            tokenPriceVsQuote = new BigNumber(1)
+            tokenPriceVsQuote = new BigNumber(1);
           } else if (tokenAmount.comparedTo(0) > 0) {
-            tokenPriceVsQuote = quoteTokenAmount.div(tokenAmount)
+            tokenPriceVsQuote = quoteTokenAmount.div(tokenAmount);
           } else {
-            tokenPriceVsQuote = new BigNumber(quoteTokenBlanceLP).div(new BigNumber(tokenBalanceLP))
+            tokenPriceVsQuote = new BigNumber(quoteTokenBlanceLP).div(new BigNumber(tokenBalanceLP));
           }
         }
 
@@ -106,10 +106,10 @@ const fetchFarms = async (chefKey: string) => {
             address: getMasterChefAddress(),
             name: 'totalAllocPoint',
           },
-        ])
+        ]);
 
         if (!info) {
-          return farmConfig
+          return farmConfig;
         }
         // if (farmConfig.pid === 3) console.log(farmConfig, [
         //   getBalanceNumber(tokenBalanceLP),
@@ -122,8 +122,8 @@ const fetchFarms = async (chefKey: string) => {
         //   new BigNumber(quoteTokenBlanceLP).div(new BigNumber(tokenBalanceLP)),
         //   getBalanceNumber(quoteTokenBlanceLP) / getBalanceNumber(tokenBalanceLP)
         // ])
-        const allocPoint = new BigNumber(info.allocPoint._hex)
-        const poolWeight = allocPoint.div(new BigNumber(totalAllocPoint))
+        const allocPoint = new BigNumber(info.allocPoint._hex);
+        const poolWeight = allocPoint.div(new BigNumber(totalAllocPoint));
 
         return {
           ...farmConfig,
@@ -134,10 +134,10 @@ const fetchFarms = async (chefKey: string) => {
           poolWeight: poolWeight.toNumber(),
           multiplier: `${allocPoint.div(100).toString()}X`,
           depositFeeBP: info.depositFeeBP,
-        }
+        };
       })
-  )
-  return data
-}
+  );
+  return data;
+};
 
-export default fetchFarms
+export default fetchFarms;

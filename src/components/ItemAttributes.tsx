@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Card, Flex, Heading, CardBody, ButtonMenu, ButtonMenuItem } from '~/ui';
 import Page from '~/components/layout/Page';
-import itemAttributes from 'rune-backend-sdk/build/data/generated/itemAttributes.json';
+import itemAttributes from '@arken/node/data/generated/itemAttributes.json';
 
 const ItemAttributes = () => {
   const { t } = useTranslation();

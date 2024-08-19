@@ -6,8 +6,8 @@ import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import Unity, { UnityContext } from 'react-unity-webgl';
-import { rewardTokenIdMap } from 'rune-backend-sdk/build/data/items';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { rewardTokenIdMap } from '@arken/node/data/items';
+import { decodeItem } from '@arken/node/util/decoder';
 import io from 'socket.io-client';
 import styled, { createGlobalStyle, css } from 'styled-components';
 import ItemInformation from '~/components/ItemInformation';
@@ -27,7 +27,7 @@ import { useProfile, useToast } from '~/state/hooks';
 import { getUsername } from '~/state/profiles/getProfile';
 import { BaseLayout, Button, Card, CardBody, Flex, Heading, Link, OpenNewIcon, Text, Toggle } from '~/ui';
 
-import addresses from 'rune-backend-sdk/build/contractInfo';
+import addresses from '@arken/node/contractInfo';
 
 // var unityInstance = UnityLoader.instantiate("unityContainer", "Build/public.json", {onProgress: UnityProgress});
 let unityInstance;

@@ -4,7 +4,7 @@ import remarkGfm from 'remark-gfm';
 import useFetch from '~/hooks/useFetch';
 import { Skeleton } from '~/ui';
 import Linker from '~/components/Linker';
-import areas from 'rune-backend-sdk/build/data/generated/areas.json';
+import areas from '@arken/node/data/generated/areas.json';
 
 const Area = function ({ id }) {
   // const url = `https://envoy.arken.gg/areas.json`

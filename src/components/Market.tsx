@@ -1,4 +1,4 @@
-import { decodeItem, normalizeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { decodeItem, normalizeItem } from '@arken/node/util/decoder';
 import { formatDistance, parseISO } from 'date-fns';
 import queryString from 'query-string';
 import React, { KeyboardEventHandler, useCallback, useEffect, useRef, useState } from 'react';
@@ -39,8 +39,8 @@ import {
 } from '~/ui';
 // @ts-ignore
 // @ts-ignore
-import { itemData, ItemType } from 'rune-backend-sdk/build/data/items';
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { itemData, ItemType } from '@arken/node/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
 
 interface SearchProps {
   value: string;

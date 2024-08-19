@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { BsX } from 'react-icons/bs';
 import { PurchaseModal } from '~/components/PurchaseModal';
 import { SwapModal } from '~/components/SwapModal';
@@ -8,9 +7,13 @@ import { useEagerConnect, useInactiveListener } from '~/hooks';
 import useAuth from '~/hooks/useAuth';
 import useBrand from '~/hooks/useBrand';
 import useMarket from '~/hooks/useMarket';
+import { AuthProvider } from '@arken/forge-ui/hooks/useAuth';
+import { NavProvider } from '@arken/forge-ui/hooks/useNav';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import useTheme from '~/hooks/useTheme';
 import useWeb3 from '~/hooks/useWeb3';
+import { TourProvider } from './hooks/useTour';
+import { SettingsProvider } from './hooks/useSettings';
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiMaximize, FiMaximize2, FiMinimize, FiMinimize2 } from 'react-icons/fi';
@@ -20,7 +23,8 @@ import {
   matchPath,
   Navigate,
   Route,
-  Router,
+  Routes,
+  BrowserRouter,
   useNavigate,
   useLocation,
   useParams,
@@ -2500,10 +2504,9 @@ const AppContent = ({
 
            */}
         {/* <AnimatePresence> */}
-
-        <Route path={baseRouteUrl + '/fundraiser'}>
-          <Navigate to="/market?query=0x191727d22f2693100acef8e48F8FeaEaa06d30b1&advanced=false" />
-        </Route>
+        {/* <Route path={baseRouteUrl + '/fundraiser'}>
+            <Navigate to="/market?query=0x191727d22f2693100acef8e48F8FeaEaa06d30b1&advanced=false" />
+          </Route> */}
         {routes.map((route: any) => {
           if (window.localStorage.getItem(`WindowStatus-${route.path}`) !== 'opened') return null;
 
@@ -2754,55 +2757,59 @@ const App: React.FC<any> = (props) => {
         `}>
         {/* <GlobalStyle useExocetFont={i18n.language === 'en'} /> */}
         {/* @ts-ignore */}
-        <Router>
-          <Menu
-            location={''}
-            login={login}
-            logout={logout}
-            isDark={isDark}
-            toggleTheme={toggleTheme}
-            currentLang={i18n.language}
-            langs={[EN]} //langs={[EN, JP, CN, DE, ES, FR, VI, SV]}
-            setLang={updateLanguage}
-            runePriceUsd={0}
-            links={config[brand]}
-            content={
-              <Nav>
-                <Flex
-                  alignItems={['start', null, 'center']}
-                  justifyContent={['start', null, 'space-between']}
-                  flexDirection={['column', null, 'row']}
-                  style={{ marginLeft: 0 }}>
-                  <Flex justifyContent="space-between" alignItems="center">
-                    {!isMobile && settings.isCrypto
-                      ? pageState
-                          .filter((r) => !!r.showable)
-                          .filter((r) => !!r.navPosition || r.props.open)
-                          .sort((a, b) => (a.navPosition || 1) - (b.navPosition || 1))
-                          .reverse()
-                          .map((r) => {
-                            return (
-                              <NavItem
-                                key={r.path}
-                                // isFocused={false}
-                                // isFocused={r.props.open && r.props.routeIndex === currentRouteIndex}
-                                to={r.path}>
-                                {/* {pageState[page].focused ? <Icon
+        <BrowserRouter>
+          <AuthProvider>
+            <NavProvider>
+              <TourProvider>
+                <SettingsProvider>
+                  <Menu
+                    location={''}
+                    login={login}
+                    logout={logout}
+                    isDark={isDark}
+                    toggleTheme={toggleTheme}
+                    currentLang={i18n.language}
+                    langs={[EN]} //langs={[EN, JP, CN, DE, ES, FR, VI, SV]}
+                    setLang={updateLanguage}
+                    runePriceUsd={0}
+                    links={config[brand]}
+                    content={
+                      <Nav>
+                        <Flex
+                          alignItems={['start', null, 'center']}
+                          justifyContent={['start', null, 'space-between']}
+                          flexDirection={['column', null, 'row']}
+                          style={{ marginLeft: 0 }}>
+                          <Flex justifyContent="space-between" alignItems="center">
+                            {!isMobile && settings.isCrypto
+                              ? pageState
+                                  .filter((r) => !!r.showable)
+                                  .filter((r) => !!r.navPosition || r.props.open)
+                                  .sort((a, b) => (a.navPosition || 1) - (b.navPosition || 1))
+                                  .reverse()
+                                  .map((r) => {
+                                    return (
+                                      <NavItem
+                                        key={r.path}
+                                        // isFocused={false}
+                                        // isFocused={r.props.open && r.props.routeIndex === currentRouteIndex}
+                                        to={r.path}>
+                                        {/* {pageState[page].focused ? <Icon
                             src={pageState[page].icon}
                             alt="icon"
                           /> : null} */}
-                                {r.props.title}
-                              </NavItem>
-                            );
-                          })
-                      : null}
-                  </Flex>
-                  {/* <Flex justifyContent="space-between" alignItems="center">
+                                        {r.props.title}
+                                      </NavItem>
+                                    );
+                                  })
+                              : null}
+                          </Flex>
+                          {/* <Flex justifyContent="space-between" alignItems="center">
                         <NavItem to="/play">Buy RUNE ${runePriceUsd.toNumber()}</NavItem>
                         <NavItem to="/play">MCAP ${runePriceUsd.toNumber()}</NavItem>
                     </Flex> */}
-                </Flex>
-                {/* <NavBar
+                        </Flex>
+                        {/* <NavBar
                   pageState={pageState}
                   pageSort={pageSort}
                   onChangePage={(page, path) => {
@@ -2813,7 +2820,7 @@ const App: React.FC<any> = (props) => {
                     });
                   }}
                 /> */}
-                {/* <Flex
+                        {/* <Flex
                   alignItems={['start', null, 'center']}
                   justifyContent={['start', null, 'space-between']}
                   flexDirection={['column', null, 'row']}
@@ -2829,21 +2836,25 @@ const App: React.FC<any> = (props) => {
                     ) : null}
                   </Flex>
                 </Flex> */}
-              </Nav>
-            }>
-            <AppContent
-              pendingPageUpdate={pendingPageUpdate}
-              setPendingPageUpdate={setPendingPageUpdate}
-              pageState={pageState}
-              setPageState={setPageState}
-              pageSort={pageSort}
-              setPageSort={setPageSort}
-              onChangePage={onChangePage}
-              brand={brand}
-            />
-          </Menu>
+                      </Nav>
+                    }>
+                    <AppContent
+                      pendingPageUpdate={pendingPageUpdate}
+                      setPendingPageUpdate={setPendingPageUpdate}
+                      pageState={pageState}
+                      setPageState={setPageState}
+                      pageSort={pageSort}
+                      setPageSort={setPageSort}
+                      onChangePage={onChangePage}
+                      brand={brand}
+                    />
+                  </Menu>
+                </SettingsProvider>
+              </TourProvider>
+            </NavProvider>
+          </AuthProvider>
           <ToastListener />
-        </Router>
+        </BrowserRouter>
         {/* <EasterEgg iterations={2} /> */}
         {/* <GlobalCheckBullHiccupClaimStatus /> */}
       </div>

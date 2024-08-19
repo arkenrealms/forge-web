@@ -14,7 +14,7 @@ import SoundContext from '~/contexts/SoundContext';
 import useRuneBalance from '~/hooks/useRuneBalance';
 import { getBalanceNumber } from '~/utils/formatBalance';
 import getItems, { emptyItem } from '~/utils/getItems';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'; // 'src/utils/decodeItem' //
+import { decodeItem } from '@arken/node/util/decoder'; // 'src/utils/decodeItem' //
 import { orderBy } from 'lodash';
 import useSettings from '~/hooks/useSettings2';
 import useGetWalletItems from '~/hooks/useGetWalletItems';
@@ -30,10 +30,10 @@ import CategoriesMenu from '~/components/CategoriesMenu';
 import NavigationArrow from '~/components/NavigationArrow';
 import { NavigationArrowVariant } from '~/components/NavigationArrow';
 import navigateToDirection from '~/utils/navigateToDirection';
-import { ItemsBonusType, ItemType } from 'rune-backend-sdk/build/data/items.type';
+import { ItemsBonusType, ItemType } from '@arken/node/data/items.type';
 import EnduranceGauge from '~/components/EnduranceGauge';
-import { itemData as itemDataJson } from 'rune-backend-sdk/build/data/items';
-import { ItemsMainCategoriesType, ItemCategoriesType } from 'rune-backend-sdk/build/data/items.type';
+import { itemData as itemDataJson } from '@arken/node/data/items';
+import { ItemsMainCategoriesType, ItemCategoriesType } from '@arken/node/data/items.type';
 import BonusList from './BonusList';
 
 const NoItems = styled.div`

@@ -1,32 +1,32 @@
-import BigNumber from 'bignumber.js'
-import React, { useContext, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'
-import styled, { css } from 'styled-components'
-import ApproveConfirmButtons from '~/components/account/ApproveConfirmButtons'
-import Input from '~/components/Input/Input'
-import Item from '~/components/Item'
-import { InjectedModalProps, Modal } from '~/components/Modal'
-import ItemsContext from '~/contexts/ItemsContext'
-import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction'
-import { useArcaneItems, useMarketContract } from '~/hooks/useContract'
-import useGetWalletItems from '~/hooks/useGetWalletItems'
-import useWeb3 from '~/hooks/useWeb3'
-import { useToast } from '~/state/hooks'
-import { Flex } from '~/ui'
-import { getContractAddress } from '~/utils/addressHelpers'
+import BigNumber from 'bignumber.js';
+import React, { useContext, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { decodeItem } from '@arken/node/util/decoder';
+import styled, { css } from 'styled-components';
+import ApproveConfirmButtons from '~/components/account/ApproveConfirmButtons';
+import Input from '~/components/Input/Input';
+import Item from '~/components/Item';
+import { InjectedModalProps, Modal } from '~/components/Modal';
+import ItemsContext from '~/contexts/ItemsContext';
+import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction';
+import { useArcaneItems, useMarketContract } from '~/hooks/useContract';
+import useGetWalletItems from '~/hooks/useGetWalletItems';
+import useWeb3 from '~/hooks/useWeb3';
+import { useToast } from '~/state/hooks';
+import { Flex } from '~/ui';
+import { getContractAddress } from '~/utils/addressHelpers';
 
 interface MarketBuyModalProps extends InjectedModalProps {
-  tokenIds: Record<string, unknown>
-  trades: Array<any>
-  onSuccess: () => void
+  tokenIds: Record<string, unknown>;
+  trades: Array<any>;
+  onSuccess: () => void;
 }
 
 const StyledInput = styled(Input)`
   margin-left: auto;
   border: 2px solid #555;
   border-radius: 6px;
-`
+`;
 
 const InputWrapper = styled.div`
   position: relative;
@@ -34,48 +34,50 @@ const InputWrapper = styled.div`
     width: 234px;
     display: block;
   }
-`
+`;
 
 const ModalContent = styled.div`
   margin-bottom: 16px;
-`
+`;
 
 const Actions = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 8px;
-`
+`;
 
 const MarketBuyModal: React.FC<MarketBuyModalProps> = ({ tokenIds, trades, onSuccess, onDismiss }) => {
-  const { t } = useTranslation()
-  const { address: account } = useWeb3()
-  const [isLoading, setIsLoading] = useState(false)
-  const { toastError, toastSuccess } = useToast()
-  const [error, setError] = useState(null)
-  const inputEl = useRef(null)
-  const arcaneItemsContract = useArcaneItems()
-  const [prices, setPrices] = useState({})
-  const marketContract = useMarketContract()
-  const { refresh } = useGetWalletItems()
-  const { setItemPreviewed } = useContext(ItemsContext)
+  const { t } = useTranslation();
+  const { address: account } = useWeb3();
+  const [isLoading, setIsLoading] = useState(false);
+  const { toastError, toastSuccess } = useToast();
+  const [error, setError] = useState(null);
+  const inputEl = useRef(null);
+  const arcaneItemsContract = useArcaneItems();
+  const [prices, setPrices] = useState({});
+  const marketContract = useMarketContract();
+  const { refresh } = useGetWalletItems();
+  const { setItemPreviewed } = useContext(ItemsContext);
   const { isApproving, isApproved, isConfirmed, isConfirming, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
       onRequiresApproval: async () => {
         try {
-          const response = await arcaneItemsContract.methods.getApproved(Object.keys(tokenIds)[0]).call()
-          if (response === getContractAddress('market')) return true
+          const response = await arcaneItemsContract.methods.getApproved(Object.keys(tokenIds)[0]).call();
+          if (response === getContractAddress('market')) return true;
 
           const response2 = await arcaneItemsContract.methods
             .isApprovedForAll(account, getContractAddress('market'))
-            .call() // setApprovalForAll/isApprovedForAll
+            .call(); // setApprovalForAll/isApprovedForAll
 
-          return response2
+          return response2;
         } catch (e) {
-          return false
+          return false;
         }
       },
       onApprove: () => {
-        return arcaneItemsContract.methods.setApprovalForAll(getContractAddress('market'), true).send({ from: account })
+        return arcaneItemsContract.methods
+          .setApprovalForAll(getContractAddress('market'), true)
+          .send({ from: account });
       },
       onConfirm: () => {
         return marketContract.methods
@@ -88,39 +90,39 @@ const MarketBuyModal: React.FC<MarketBuyModalProps> = ({ tokenIds, trades, onSuc
                 .toString()
             )
           )
-          .send({ from: account })
+          .send({ from: account });
       },
       onSuccess: () => {
-        refresh()
+        refresh();
 
-        toastSuccess(`Items purchased. Check back in a few minutes.`)
+        toastSuccess(`Items purchased. Check back in a few minutes.`);
 
-        onSuccess()
-        onDismiss()
+        onSuccess();
+        onDismiss();
       },
-    })
+    });
 
   const items = Object.keys(tokenIds)
     .map((tokenId) => decodeItem(tokenId))
     .sort(function (a, b) {
-      return a.perfection > b.perfection ? 1 : -1
-    })
+      return a.perfection > b.perfection ? 1 : -1;
+    });
 
   const onChangePrice = (tokenId, value) => {
-    prices[tokenId] = value
+    prices[tokenId] = value;
 
-    setPrices(JSON.parse(JSON.stringify(prices)))
-  }
+    setPrices(JSON.parse(JSON.stringify(prices)));
+  };
 
-  let totalPrice = 0
+  let totalPrice = 0;
 
   for (const tokenId of Object.keys(tokenIds)) {
-    totalPrice += trades.find((t2) => t2.tokenId === tokenId).price
+    totalPrice += trades.find((t2) => t2.tokenId === tokenId).price;
   }
 
   const onMouseLeave = () => {
-    setItemPreviewed(null)
-  }
+    setItemPreviewed(null);
+  };
 
   return (
     <Modal
@@ -251,10 +253,10 @@ const MarketBuyModal: React.FC<MarketBuyModalProps> = ({ tokenIds, trades, onSuc
         />
       </Actions>
     </Modal>
-  )
-}
+  );
+};
 
-export default MarketBuyModal
+export default MarketBuyModal;
 
 const Final = styled.div`
   margin-top: 1em;
@@ -262,4 +264,4 @@ const Final = styled.div`
   font-size: 20px;
   font-weight: 600;
   color: ${(props) => props.theme.colors.primary};
-`
+`;

@@ -1,5 +1,5 @@
-import contracts, { MAINNET, TESTNET } from 'rune-backend-sdk/build/contractInfo'
-import { PoolConfig, QuoteToken, PoolCategory } from './types'
+import contracts, { MAINNET, TESTNET } from '@arken/node/contractInfo';
+import { PoolConfig, QuoteToken, PoolCategory } from './types';
 
 const pools: PoolConfig[] = [
   // {
@@ -30,6 +30,6 @@ const pools: PoolConfig[] = [
   //   isFinished: false,
   //   tokenDecimals: 18,
   // },
-]
+];
 
-export default pools
+export default pools;

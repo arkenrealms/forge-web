@@ -5,7 +5,7 @@ import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
 import history from '~/routerHistory';
 import useWeb3 from '~/hooks/useWeb3';
 import useInventory from '~/hooks/useInventory';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { decodeItem } from '@arken/node/util/decoder';
 import { useToast } from '~/state/hooks';
 import { useTranslation } from 'react-i18next';
 import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction';
@@ -13,7 +13,7 @@ import { useArcaneItems, useMasterchef, useBarracks } from '~/hooks/useContract'
 import { useProfile } from '~/state/hooks';
 import { getContractAddress } from '~/utils/addressHelpers';
 import useGetWalletItems from '~/hooks/useGetWalletItems';
-import { ItemAttributesByName, ItemSlot, ItemType } from 'rune-backend-sdk/build/data/items';
+import { ItemAttributesByName, ItemSlot, ItemType } from '@arken/node/data/items';
 import ApproveConfirmButtons from './account/ApproveConfirmButtons';
 
 interface EquipModalProps extends InjectedModalProps {

@@ -1,14 +1,14 @@
-import BigNumber from 'bignumber.js'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import contracts from 'rune-backend-sdk/build/contractInfo'
-import { ItemSlot } from 'rune-backend-sdk/build/data/items'
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder'
-import { allRuneList } from '~/config'
-import { useCurrency } from '~/hooks/Tokens'
-import { useBarracks } from '~/hooks/useContract'
-import useWeb3 from '~/hooks/useWeb3'
-import { useCurrencyBalancesWithLoadingIndicator } from '~/state/wallet/hooks'
-import { getAddress, getRuneAddress } from '~/utils/addressHelpers'
+import BigNumber from 'bignumber.js';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import contracts from '@arken/node/contractInfo';
+import { ItemSlot } from '@arken/node/data/items';
+import { decodeItem } from '@arken/node/util/decoder';
+import { allRuneList } from '~/config';
+import { useCurrency } from '~/hooks/Tokens';
+import { useBarracks } from '~/hooks/useContract';
+import useWeb3 from '~/hooks/useWeb3';
+import { useCurrencyBalancesWithLoadingIndicator } from '~/state/wallet/hooks';
+import { getAddress, getRuneAddress } from '~/utils/addressHelpers';
 
 const defaultValues = {
   meta: {
@@ -69,20 +69,20 @@ const defaultValues = {
   refreshEquipment: () => {},
   setUserAddress: (userAddress) => {},
   tokenBalancesLoading: true,
-}
-const InventoryContext = React.createContext(defaultValues)
+};
+const InventoryContext = React.createContext(defaultValues);
 
 // let init = false
 
 const InventoryContextProvider = ({ children }) => {
-  const tokenIdsRef = useRef([])
-  const [tokenIds, setTokenIds] = useState([])
-  const { web3, address: account } = useWeb3()
-  const barracks = useBarracks()
-  const [userAddress, setUserAddress] = useState(account)
-  const [runes, setRunes] = useState({ ...defaultValues.runes })
-  const cachedTokenBalancesRef = useRef(null)
-  const cachedAddressRef2 = useRef(null)
+  const tokenIdsRef = useRef([]);
+  const [tokenIds, setTokenIds] = useState([]);
+  const { web3, address: account } = useWeb3();
+  const barracks = useBarracks();
+  const [userAddress, setUserAddress] = useState(account);
+  const [runes, setRunes] = useState({ ...defaultValues.runes });
+  const cachedTokenBalancesRef = useRef(null);
+  const cachedAddressRef2 = useRef(null);
   const currencies = [
     useCurrency(getAddress(contracts.el)),
     useCurrency(getAddress(contracts.tir)),
@@ -117,103 +117,103 @@ const InventoryContextProvider = ({ children }) => {
     useCurrency(getAddress(contracts.jah)),
     useCurrency(getAddress(contracts.cham)),
     useCurrency(getAddress(contracts.zod)),
-  ]
+  ];
   const [currencyBalances, tokenBalancesLoading] = useCurrencyBalancesWithLoadingIndicator(
     userAddress || account,
     currencies
-  )
+  );
 
   const forceRefreshEquipment = useCallback(
     async (loadFromAccount) => {
       try {
-        console.log('Fetching staked items', loadFromAccount)
+        console.log('Fetching staked items', loadFromAccount);
 
-        const ids = []
+        const ids = [];
 
-        const leftHand = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.LeftHand).call()
-        if (leftHand) ids.push([ItemSlot.LeftHand, new BigNumber(leftHand).toString()])
+        const leftHand = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.LeftHand).call();
+        if (leftHand) ids.push([ItemSlot.LeftHand, new BigNumber(leftHand).toString()]);
 
-        const rightHand = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.RightHand).call()
-        if (rightHand) ids.push([ItemSlot.RightHand, new BigNumber(rightHand).toString()])
+        const rightHand = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.RightHand).call();
+        if (rightHand) ids.push([ItemSlot.RightHand, new BigNumber(rightHand).toString()]);
 
-        const head = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Head).call()
-        if (head) ids.push([ItemSlot.Head, new BigNumber(head).toString()])
+        const head = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Head).call();
+        if (head) ids.push([ItemSlot.Head, new BigNumber(head).toString()]);
 
-        const hands = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Hands).call()
-        if (hands) ids.push([ItemSlot.Hands, new BigNumber(hands).toString()])
+        const hands = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Hands).call();
+        if (hands) ids.push([ItemSlot.Hands, new BigNumber(hands).toString()]);
 
-        const belt = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Waist).call()
-        if (belt) ids.push([ItemSlot.Waist, new BigNumber(belt).toString()])
+        const belt = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Waist).call();
+        if (belt) ids.push([ItemSlot.Waist, new BigNumber(belt).toString()]);
 
-        const legs = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Legs).call()
-        if (legs) ids.push([ItemSlot.Legs, new BigNumber(legs).toString()])
+        const legs = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Legs).call();
+        if (legs) ids.push([ItemSlot.Legs, new BigNumber(legs).toString()]);
 
-        const chest = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Chest).call()
-        if (chest) ids.push([ItemSlot.Chest, new BigNumber(chest).toString()])
+        const chest = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Chest).call();
+        if (chest) ids.push([ItemSlot.Chest, new BigNumber(chest).toString()]);
 
-        const feet = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Feet).call()
-        if (feet) ids.push([ItemSlot.Feet, new BigNumber(feet).toString()])
+        const feet = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Feet).call();
+        if (feet) ids.push([ItemSlot.Feet, new BigNumber(feet).toString()]);
 
-        const trinket1 = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Trinket1).call()
-        if (trinket1) ids.push([ItemSlot.Trinket1, new BigNumber(trinket1).toString()])
+        const trinket1 = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Trinket1).call();
+        if (trinket1) ids.push([ItemSlot.Trinket1, new BigNumber(trinket1).toString()]);
 
-        const trinket2 = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Trinket2).call()
-        if (trinket2) ids.push([ItemSlot.Trinket2, new BigNumber(trinket2).toString()])
+        const trinket2 = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Trinket2).call();
+        if (trinket2) ids.push([ItemSlot.Trinket2, new BigNumber(trinket2).toString()]);
 
-        const trinket3 = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Trinket3).call()
-        if (trinket3) ids.push([ItemSlot.Trinket3, new BigNumber(trinket3).toString()])
+        const trinket3 = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Trinket3).call();
+        if (trinket3) ids.push([ItemSlot.Trinket3, new BigNumber(trinket3).toString()]);
 
-        const pet = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Pet).call()
-        if (pet) ids.push([ItemSlot.Pet, new BigNumber(pet).toString()])
+        const pet = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Pet).call();
+        if (pet) ids.push([ItemSlot.Pet, new BigNumber(pet).toString()]);
 
-        const neck = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Neck).call()
-        if (neck) ids.push([ItemSlot.Neck, new BigNumber(neck).toString()])
+        const neck = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Neck).call();
+        if (neck) ids.push([ItemSlot.Neck, new BigNumber(neck).toString()]);
 
-        const finger1 = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Finger1).call()
-        if (finger1) ids.push([ItemSlot.Finger1, new BigNumber(finger1).toString()])
+        const finger1 = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Finger1).call();
+        if (finger1) ids.push([ItemSlot.Finger1, new BigNumber(finger1).toString()]);
 
-        const finger2 = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Finger2).call()
-        if (finger2) ids.push([ItemSlot.Finger2, new BigNumber(finger2).toString()])
+        const finger2 = await barracks.methods.getEquippedItem(loadFromAccount, ItemSlot.Finger2).call();
+        if (finger2) ids.push([ItemSlot.Finger2, new BigNumber(finger2).toString()]);
 
-        tokenIdsRef.current = ids
+        tokenIdsRef.current = ids;
       } catch (e) {
-        tokenIdsRef.current = []
+        tokenIdsRef.current = [];
       }
 
-      setTokenIds(tokenIdsRef.current)
+      setTokenIds(tokenIdsRef.current);
 
-      console.log('Gear fetched', tokenIdsRef.current)
+      console.log('Gear fetched', tokenIdsRef.current);
     },
     [tokenIdsRef, barracks.methods]
-  )
+  );
 
   const refreshEquipment = useCallback(async () => {
-    const loadFromAccount = userAddress || account
+    const loadFromAccount = userAddress || account;
 
-    const didAddressChange = cachedAddressRef2.current !== loadFromAccount
+    const didAddressChange = cachedAddressRef2.current !== loadFromAccount;
 
-    if (!didAddressChange) return
+    if (!didAddressChange) return;
 
-    forceRefreshEquipment(loadFromAccount)
+    forceRefreshEquipment(loadFromAccount);
 
-    cachedAddressRef2.current = loadFromAccount
-  }, [userAddress, account, forceRefreshEquipment])
+    cachedAddressRef2.current = loadFromAccount;
+  }, [userAddress, account, forceRefreshEquipment]);
 
   const refreshRunes = useCallback(async () => {
-    if (tokenBalancesLoading) return
+    if (tokenBalancesLoading) return;
 
-    const loadFromAccount = userAddress || account
+    const loadFromAccount = userAddress || account;
 
-    if (!loadFromAccount) return
+    if (!loadFromAccount) return;
 
-    const cacheKey = JSON.stringify(currencyBalances.map((c) => c?.toSignificant(9, undefined, 2)))
-    const tokenBalancesChanged = cachedTokenBalancesRef.current !== cacheKey
+    const cacheKey = JSON.stringify(currencyBalances.map((c) => c?.toSignificant(9, undefined, 2)));
+    const tokenBalancesChanged = cachedTokenBalancesRef.current !== cacheKey;
 
-    if (!tokenBalancesChanged) return
+    if (!tokenBalancesChanged) return;
 
-    cachedTokenBalancesRef.current = cacheKey
+    cachedTokenBalancesRef.current = cacheKey;
 
-    console.log('Fetching wallet runes', loadFromAccount)
+    console.log('Fetching wallet runes', loadFromAccount);
 
     try {
       // const fetchBalance = async (tokenAddress) => {
@@ -222,34 +222,34 @@ const InventoryContextProvider = ({ children }) => {
       //   const res = await contract.methods.balanceOf(loadFromAccount).call()
       //   return new BigNumber(res)
       // }
-      const newRunes = { ...defaultValues.runes }
+      const newRunes = { ...defaultValues.runes };
 
       for (const runeIndex in allRuneList) {
-        const runeSymbol = allRuneList[runeIndex]
-        const tokenAddress = getRuneAddress(runeSymbol)
+        const runeSymbol = allRuneList[runeIndex];
+        const tokenAddress = getRuneAddress(runeSymbol);
         // const balance = currencyBalances.find(c => c.currency.symbol === runeSymbol).toSignificant(4)//await fetchBalance(tokenAddress)
         const balanceNumber = currencyBalances
           .find((c) => c.currency.symbol === runeSymbol.toUpperCase())
-          .toSignificant(9, undefined, 2)
-        newRunes[runeIndex] = balanceNumber
-        console.log(`${runeSymbol} = ${balanceNumber} (${tokenAddress})`)
+          .toSignificant(9, undefined, 2);
+        newRunes[runeIndex] = balanceNumber;
+        console.log(`${runeSymbol} = ${balanceNumber} (${tokenAddress})`);
       }
 
-      setRunes(newRunes)
+      setRunes(newRunes);
     } catch (e) {
-      console.log('Error fetching wallet balances', e)
+      console.log('Error fetching wallet balances', e);
     }
-    console.log('Runes fetched')
-  }, [userAddress, account, tokenBalancesLoading, currencyBalances, setRunes])
+    console.log('Runes fetched');
+  }, [userAddress, account, tokenBalancesLoading, currencyBalances, setRunes]);
 
   useEffect(() => {
-    if (tokenBalancesLoading) return
+    if (tokenBalancesLoading) return;
 
     // init = true
 
-    refreshRunes()
-    refreshEquipment()
-  }, [tokenBalancesLoading, refreshRunes, refreshEquipment])
+    refreshRunes();
+    refreshEquipment();
+  }, [tokenBalancesLoading, refreshRunes, refreshEquipment]);
 
   const totalMeta = {
     feeReduction: 0,
@@ -266,7 +266,7 @@ const InventoryContextProvider = ({ children }) => {
     classRequired: null,
     harvestFees: {},
     attributes: {},
-  }
+  };
 
   const equipment = {
     [ItemSlot.LeftHand]: undefined,
@@ -275,7 +275,7 @@ const InventoryContextProvider = ({ children }) => {
     [ItemSlot.Hands]: undefined,
     [ItemSlot.Chest]: undefined,
     [ItemSlot.Feet]: undefined,
-  }
+  };
 
   //   useEffect(() => {
   //     console.log('Updating', tokenIdsRef.current)
@@ -285,15 +285,15 @@ const InventoryContextProvider = ({ children }) => {
   const items = tokenIdsRef.current
     .sort((a, b) => (a[0] > b[0] ? 1 : -1))
     .map((props) => {
-      const [slotId, tokenId] = props
+      const [slotId, tokenId] = props;
 
-      if (tokenId === '0') return
+      if (tokenId === '0') return;
 
-      const item = decodeItem(new BigNumber(tokenId + '').toString())
+      const item = decodeItem(new BigNumber(tokenId + '').toString());
 
-      if (!item) return
+      if (!item) return;
 
-      console.log(555, item)
+      console.log(555, item);
 
       const meta = {
         slotId,
@@ -307,71 +307,71 @@ const InventoryContextProvider = ({ children }) => {
         randomRuneExchange: 0,
         worldstoneShardChance: 0,
         ...(item ? item.meta : {}),
-      }
+      };
 
       for (const attributeKey of Object.keys(item.meta)) {
-        const value = item.meta[attributeKey]
+        const value = item.meta[attributeKey];
 
         if (attributeKey === 'harvestYield') {
-          totalMeta.harvestYield += value
+          totalMeta.harvestYield += value;
 
-          totalMeta.totalYield += totalMeta.totalYield * (value / 100)
+          totalMeta.totalYield += totalMeta.totalYield * (value / 100);
         } else if (attributeKey === 'harvestBurn') {
-          totalMeta.harvestBurn += value
+          totalMeta.harvestBurn += value;
 
-          totalMeta.totalYield -= totalMeta.totalYield * (value / 100)
+          totalMeta.totalYield -= totalMeta.totalYield * (value / 100);
         } else if (attributeKey === 'harvestFeeToken') {
-          totalMeta.harvestFeeToken = item.meta.harvestFeeToken
+          totalMeta.harvestFeeToken = item.meta.harvestFeeToken;
         } else if (attributeKey === 'harvestFeePercent') {
-          totalMeta.harvestFeePercent = item.meta.harvestFeePercent
+          totalMeta.harvestFeePercent = item.meta.harvestFeePercent;
         } else if (attributeKey === 'unstakeLocked') {
-          totalMeta.unstakeLocked = item.meta.unstakeLocked
+          totalMeta.unstakeLocked = item.meta.unstakeLocked;
         } else if (attributeKey === 'classRequired') {
-          totalMeta.classRequired = item.meta.classRequired
+          totalMeta.classRequired = item.meta.classRequired;
         } else if (attributeKey === 'harvestFees') {
-          totalMeta.harvestFees = item.meta.harvestFees
+          totalMeta.harvestFees = item.meta.harvestFees;
         } else if (typeof value === 'number') {
-          if (!totalMeta[attributeKey]) totalMeta[attributeKey] = 0
+          if (!totalMeta[attributeKey]) totalMeta[attributeKey] = 0;
 
-          totalMeta[attributeKey] += value
+          totalMeta[attributeKey] += value;
         } else if (Array.isArray(value)) {
-          if (!totalMeta[attributeKey]) totalMeta[attributeKey] = []
+          if (!totalMeta[attributeKey]) totalMeta[attributeKey] = [];
 
           for (const kk of Object.keys(value)) {
             if (typeof value[kk] === 'number') {
-              totalMeta[attributeKey][kk] += value[kk]
+              totalMeta[attributeKey][kk] += value[kk];
             } else {
-              totalMeta[attributeKey][kk] = value[kk]
+              totalMeta[attributeKey][kk] = value[kk];
             }
           }
         } else if (value !== null && typeof value === 'object') {
-          if (!totalMeta[attributeKey]) totalMeta[attributeKey] = {}
+          if (!totalMeta[attributeKey]) totalMeta[attributeKey] = {};
 
           for (const kk of Object.keys(value)) {
             if (typeof value[kk] === 'number') {
-              if (!totalMeta[attributeKey][kk]) totalMeta[attributeKey][kk] = 0
+              if (!totalMeta[attributeKey][kk]) totalMeta[attributeKey][kk] = 0;
 
-              totalMeta[attributeKey][kk] += value[kk]
+              totalMeta[attributeKey][kk] += value[kk];
             } else {
-              totalMeta[attributeKey][kk] = value[kk]
+              totalMeta[attributeKey][kk] = value[kk];
             }
           }
         } else {
-          totalMeta[attributeKey] = value
+          totalMeta[attributeKey] = value;
         }
       }
 
-      item.isEquipable = false
-      item.isEquipped = true
+      item.isEquipable = false;
+      item.isEquipped = true;
 
-      equipment[slotId] = item
+      equipment[slotId] = item;
 
       return {
         ...item,
         meta,
-      }
+      };
     })
-    .filter((item) => !!item)
+    .filter((item) => !!item);
 
   // feeReduction = feeReduction > 100 ? 100 : feeReduction
   totalMeta.harvestFeePercent =
@@ -379,34 +379,34 @@ const InventoryContextProvider = ({ children }) => {
       ? 0
       : parseFloat(
           (totalMeta.harvestFeePercent - totalMeta.harvestFeePercent * (totalMeta.feeReduction / 100)).toFixed(2)
-        )
+        );
 
   const addTokenId = useCallback(
     function (slotId, tokenId) {
-      if (tokenIdsRef.current.find((item) => item[0] === slotId && item[1] === tokenId)) return
+      if (tokenIdsRef.current.find((item) => item[0] === slotId && item[1] === tokenId)) return;
 
-      tokenIdsRef.current.push([slotId, tokenId])
+      tokenIdsRef.current.push([slotId, tokenId]);
 
-      setTokenIds(tokenIdsRef.current)
+      setTokenIds(tokenIdsRef.current);
 
-      console.log('Added token from equipment')
+      console.log('Added token from equipment');
     },
     [tokenIdsRef, setTokenIds]
-  )
+  );
 
   const removeTokenId = useCallback(
     function (slotId, tokenId) {
-      if (!tokenIdsRef.current.find((item) => item[0] === slotId && item[1] === tokenId)) return
+      if (!tokenIdsRef.current.find((item) => item[0] === slotId && item[1] === tokenId)) return;
 
-      tokenIdsRef.current = tokenIdsRef.current.filter((item) => !(item[0] === slotId && item[1] === tokenId))
+      tokenIdsRef.current = tokenIdsRef.current.filter((item) => !(item[0] === slotId && item[1] === tokenId));
 
-      setTokenIds(tokenIdsRef.current)
+      setTokenIds(tokenIdsRef.current);
 
-      console.log('Removed token from equipment')
+      console.log('Removed token from equipment');
     },
     [tokenIdsRef, setTokenIds]
-  )
-  console.log(555, totalMeta)
+  );
+  console.log(555, totalMeta);
   // console.log(4444, equipment, tokenIds)
   return (
     <InventoryContext.Provider
@@ -424,7 +424,7 @@ const InventoryContextProvider = ({ children }) => {
       }}>
       {children}
     </InventoryContext.Provider>
-  )
-}
+  );
+};
 
-export { InventoryContext, InventoryContextProvider }
+export { InventoryContext, InventoryContextProvider };

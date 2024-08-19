@@ -1,5 +1,5 @@
-import { ItemCategoriesType, ItemsPage } from 'rune-backend-sdk/build/data/items.type'
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type'
+import { ItemCategoriesType, ItemsPage } from '@arken/node/data/items.type';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
 
 export const emptyItem = {
   name: '',
@@ -8,7 +8,7 @@ export const emptyItem = {
   description: '',
   attributes: [],
   category: ItemCategoriesType.RUNE,
-}
+};
 
 const getItems = (items, itemsPerPage, showCategories = null, showUnobtained = false): ItemsPage[] => {
   const itemsGrid = [
@@ -17,9 +17,9 @@ const getItems = (items, itemsPerPage, showCategories = null, showUnobtained = f
     // { items: [], mainCategory: ItemsMainCategoriesType.SHIELDS, page: 2 },
     // { items: [], mainCategory: ItemsMainCategoriesType.ARMORS, page: 3 },
     // { items: [], mainCategory: ItemsMainCategoriesType.ACCESSORIES, page: 4 },
-  ]
+  ];
 
-  let page = 0
+  let page = 0;
 
   const categories = showCategories
     ? showCategories
@@ -29,7 +29,7 @@ const getItems = (items, itemsPerPage, showCategories = null, showUnobtained = f
         ItemsMainCategoriesType.SHIELDS as ItemsMainCategoriesType,
         ItemsMainCategoriesType.ARMORS as ItemsMainCategoriesType,
         ItemsMainCategoriesType.ACCESSORIES as ItemsMainCategoriesType,
-      ]
+      ];
 
   for (const mainItemsCategory of categories) {
     // // @ts-ignore
@@ -42,26 +42,26 @@ const getItems = (items, itemsPerPage, showCategories = null, showUnobtained = f
     //   page: 0,
     // })
 
-    if (!items[mainItemsCategory]) continue
+    if (!items[mainItemsCategory]) continue;
 
     const filteredItems = showUnobtained
       ? items[mainItemsCategory]
-      : items[mainItemsCategory].filter((i) => parseFloat(i.value) > 0)
+      : items[mainItemsCategory].filter((i) => parseFloat(i.value) > 0);
 
     if (!filteredItems.length) {
       itemsGrid[page] = {
         items: new Array(itemsPerPage).fill(emptyItem),
         mainCategory: mainItemsCategory as ItemsMainCategoriesType,
         page,
-      }
-      page++
+      };
+      page++;
     }
 
     for (let i = 0, l = Math.ceil(filteredItems.length / itemsPerPage); i < l; i++) {
       // @ts-ignore
-      const newPage = filteredItems.slice(i * itemsPerPage, i * itemsPerPage + itemsPerPage)
+      const newPage = filteredItems.slice(i * itemsPerPage, i * itemsPerPage + itemsPerPage);
 
-      if (newPage.length === 0) continue
+      if (newPage.length === 0) continue;
 
       // .concat(
       //   new Array(itemsPerPage - items[mainItemsCategory].slice(i * itemsPerPage, itemsPerPage).length).fill(emptyItem),
@@ -74,13 +74,13 @@ const getItems = (items, itemsPerPage, showCategories = null, showUnobtained = f
             : newPage.concat(new Array(itemsPerPage - newPage.length).fill(emptyItem)),
         mainCategory: mainItemsCategory as ItemsMainCategoriesType,
         page,
-      }
+      };
 
-      page++
+      page++;
     }
   }
 
-  return itemsGrid
-}
+  return itemsGrid;
+};
 
-export default getItems
+export default getItems;

@@ -1,10 +1,10 @@
-import React from 'react'
-import { achievementData } from 'rune-backend-sdk/build/data/achievements'
-import { useTranslation } from 'react-i18next'
-import styled from 'styled-components'
-import useCache from '~/hooks/useCache'
-import { Flex, Heading } from '~/ui'
-import AchievementCard from './AchievementCard'
+import React from 'react';
+import { achievementData } from '@arken/node/data/achievements';
+import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+import useCache from '~/hooks/useCache';
+import { Flex, Heading } from '~/ui';
+import AchievementCard from './AchievementCard';
 
 const Grid = styled.div`
   display: grid;
@@ -14,13 +14,13 @@ const Grid = styled.div`
   // ${({ theme }) => theme.mediaQueries.sm} {
   //   grid-template-columns: repeat(2, 1fr);
   // }
-`
+`;
 
 const AchievementsList = ({ address }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   // const achievements = useAchievements()
-  const cache = useCache()
-  const achievements = cache.achievements[address]?.map((a) => achievementData.find((b) => b.id === a)) || []
+  const cache = useCache();
+  const achievements = cache.achievements[address]?.map((a) => achievementData.find((b) => b.id === a)) || [];
 
   return (
     <>
@@ -37,7 +37,7 @@ const AchievementsList = ({ address }) => {
         </Flex>
       )}
     </>
-  )
-}
+  );
+};
 
-export default AchievementsList
+export default AchievementsList;

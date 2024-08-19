@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { getFilteredItems, itemData } from 'rune-backend-sdk/build/data/items';
-import { ItemsMainCategoriesType } from 'rune-backend-sdk/build/data/items.type';
-import { decodeItem } from 'rune-backend-sdk/build/util/item-decoder';
+import { getFilteredItems, itemData } from '@arken/node/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { decodeItem } from '@arken/node/util/decoder';
 import styled, { css } from 'styled-components';
 import useSound from 'use-sound';
 import Inventory from '~/components/Inventory';

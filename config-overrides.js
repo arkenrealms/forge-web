@@ -42,6 +42,8 @@ module.exports = function (config, env) {
   config.resolve.symlinks = true;
   config.resolve.fallback.path = require.resolve('path-browserify');
   config.resolve.fallback.fs = require.resolve('browserify-fs');
+  config.resolve.fallback.util = false;
+
   config.resolve.fallback.os = false;
   config.resolve.fallback.http = false;
   config.resolve.fallback.https = false;

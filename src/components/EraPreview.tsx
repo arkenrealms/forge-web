@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import styled, { css } from 'styled-components'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import useFetch from '~/hooks/useFetch'
-import { useTranslation } from 'react-i18next'
-import eras from 'rune-backend-sdk/build/data/generated/eras.json'
+import React, { useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import useFetch from '~/hooks/useFetch';
+import { useTranslation } from 'react-i18next';
+import eras from '@arken/node/data/generated/eras.json';
 import {
   Image,
   Heading,
@@ -17,16 +17,16 @@ import {
   LinkExternal,
   ButtonMenu,
   ButtonMenuItem,
-} from '~/ui'
-import { Skeleton } from '~/ui'
+} from '~/ui';
+import { Skeleton } from '~/ui';
 
-const Abc = styled.div``
+const Abc = styled.div``;
 
 const EraPreview = function ({ id }) {
-  const era = eras.find((z) => z.name.toLowerCase().replace(' ', '-') === id)
-  const { t } = useTranslation()
+  const era = eras.find((z) => z.name.toLowerCase().replace(' ', '-') === id);
+  const { t } = useTranslation();
 
-  const { shortDescription } = era
+  const { shortDescription } = era;
 
   return (
     <div
@@ -109,7 +109,7 @@ const EraPreview = function ({ id }) {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default EraPreview
+export default EraPreview;
