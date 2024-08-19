@@ -29,14 +29,6 @@ import { TourProvider } from './hooks/useTour';
 import { SettingsProvider } from './hooks/useSettings';
 import FormPage from './components/FormPage';
 import ModelPage from './components/ModelPage';
-import Dashboard from './views';
-import Users from './views/users';
-import Roles from './views/roles';
-import Settings from './views/settings';
-import Forms from './views/forms';
-import Groups from './views/groups';
-import Templates from './views/templates';
-import PageNotFound from './views/404';
 
 window.queryClient = new QueryClient();
 
