@@ -199,6 +199,13 @@ export default ({ children }) => {
         background: none;
         overflow: hidden;
         padding-bottom: 3px;
+        .ant-layout-sider {
+          top: 40px !important;
+          height: calc(100% - 40px) !important;
+        }
+        .ant-pro-layout-bg-list {
+          display: none !important;
+        }
       `}>
       <ProLayout
         {...defaultProps}
@@ -249,11 +256,11 @@ export default ({ children }) => {
         }}
         {...settings}>
         <GlobalStyles />
-        <Header user={user} permissions={permissions} login={login} logout={logout} />
+        {/* <Header user={user} permissions={permissions} login={login} logout={logout} /> */}
         {children}
         <Footer />
 
-        <div
+        {/* <div
           style={{
             height: '120vh',
             minHeight: 600,
@@ -268,7 +275,7 @@ export default ({ children }) => {
             subTitle="Sorry, you are not authorized to access this page."
             extra={<Button type="primary">Back Home</Button>}
           />
-        </div>
+        </div> */}
       </ProLayout>
       <SettingDrawer
         pathname={pathname}
