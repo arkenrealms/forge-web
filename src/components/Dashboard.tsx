@@ -760,7 +760,7 @@ export default function AdminDashboard() {
           <br />
         </Col>
       </Row>
-      {info ? (
+      {/* {info ? (
         <div
           css={css`
             position: absolute;
@@ -772,11 +772,11 @@ export default function AdminDashboard() {
             height: 65px;
             color: #666;
           `}>
-          cerebro-ui@{packagejson.version} ({process.env.BUILD_NUMBER || 'local.dev.box'})
+          cerebro-ui@{packagejson.version} ({process.env.BUILD_NUMBER || 'local'})
           <br />
           cerebro-backend@{info.version} ({info.build})
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 }
