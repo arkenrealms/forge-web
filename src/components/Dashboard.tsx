@@ -201,7 +201,7 @@ const SpecialButton = ({ icon, title, path, onClick, ...props }: any) => {
         overflow: hidden;
         height: 42px;
         width: 220px;
-        background-color: #ededed;
+        background-color: rgba(255, 255, 255, 0.2);
         cursor: pointer;
         svg {
           margin: auto;
@@ -221,7 +221,7 @@ const SpecialButton = ({ icon, title, path, onClick, ...props }: any) => {
       <div
         css={css`
           display: inline-flex;
-          background-color: #dbdbdb;
+          background-color: rgba(0, 0, 0, 0.2);
           width: 50px;
           height: 42px;
           font-size: 22px;
@@ -236,7 +236,7 @@ const SpecialButton = ({ icon, title, path, onClick, ...props }: any) => {
           display: inline-block;
           padding: 0 0 0 14px;
           vertical-align: middle;
-          color: #035d92;
+          color: #fff;
           font-size: 14px;
         `}>
         {title}
