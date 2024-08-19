@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import routerHistory from '~/routerHistory';
 
 const BrandMap = {
-  localhost: 'rune',
+  localhost: 'w4',
   'arken.localhost': 'rune',
   'raid.localhost': 'raid',
   'isles.localhost': 'evolution',

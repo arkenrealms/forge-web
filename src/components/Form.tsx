@@ -708,7 +708,7 @@ export default function FormDetails({ form, submission, isLoading }: any) {
                           onChange={(text: any) => {
                             if (component.connector) {
                               history(
-                                `${window.location.pathname.replace('/forms', '')}?${qs.stringify({
+                                `${window.location.pathname.replace('/interfaces', '')}?${qs.stringify({
                                   ...localParams,
                                   [`DataSource-${component.connector}-${option.text}`]: text,
                                 })}`

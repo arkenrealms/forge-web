@@ -1,30 +1,30 @@
-import React, { useEffect, useState, useContext, createContext } from 'react'
-import { EllipsisOutlined } from '@ant-design/icons'
-import type { TourProps } from 'antd'
-import styled, { createGlobalStyle, css } from 'styled-components'
-import { Layout, Spin, Button, Modal, Divider, Space, Tour, Tabs } from 'antd'
-import _ from 'lodash'
-import { useNavigate, Link, useLocation } from 'react-router-dom'
-import { QuestionCircleOutlined, SyncOutlined } from '@ant-design/icons'
-import { FloatButton } from 'antd'
+import React, { useEffect, useState, useContext, createContext } from 'react';
+import { EllipsisOutlined } from '@ant-design/icons';
+import type { TourProps } from 'antd';
+import styled, { createGlobalStyle, css } from 'styled-components';
+import { Layout, Spin, Button, Modal, Divider, Space, Tour, Tabs } from 'antd';
+import _ from 'lodash';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { QuestionCircleOutlined, SyncOutlined } from '@ant-design/icons';
+import { FloatButton } from 'antd';
 
-const zzz = styled.div``
+const zzz = styled.div``;
 
 function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 const TourContext = createContext<any>({
   overview: () => {},
   loginAs: () => {},
-})
+});
 
 const TourProvider = ({ children }: any) => {
-  const history = useNavigate()
-  const [isHelpModalVisible, setIsHelpModalVisible] = useState(false)
+  const history = useNavigate();
+  const [isHelpModalVisible, setIsHelpModalVisible] = useState(false);
 
-  const [isTourOverviewOpen, setIsTourOverviewOpen] = useState<boolean>(false)
-  const [isTourLoginOpen, setIsTourLoginOpen] = useState<boolean>(false)
+  const [isTourOverviewOpen, setIsTourOverviewOpen] = useState<boolean>(false);
+  const [isTourLoginOpen, setIsTourLoginOpen] = useState<boolean>(false);
 
   const tourLoginSteps: TourProps['steps'] = [
     {
@@ -35,12 +35,9 @@ const TourProvider = ({ children }: any) => {
     {
       // title: 'Header',
       title: 'You need to expand the Development menu.',
-      target: () =>
-        document.querySelectorAll(
-          '.ant-layout-sider-children .ant-menu-submenu-title'
-        )[2] as HTMLElement,
+      target: () => document.querySelectorAll('.ant-layout-sider-children .ant-menu-submenu-title')[2] as HTMLElement,
     },
-  ]
+  ];
 
   const tourOverviewSteps: TourProps['steps'] = [
     // {
@@ -88,22 +85,17 @@ const TourProvider = ({ children }: any) => {
     {
       // title: 'Table Filters',
       title: 'You can sort or filter by the column here.',
-      target: () =>
-        document.querySelectorAll(
-          '[data-testid="app-table"] .ant-table-filter-column'
-        )[0] as HTMLElement,
+      target: () => document.querySelectorAll('[data-testid="app-table"] .ant-table-filter-column')[0] as HTMLElement,
     },
     {
       // title: 'Select Item',
       title: 'You can select an item to view or edit by clicking a row.',
-      target: () =>
-        document.querySelectorAll('[data-testid="app-table"] .ant-table-row')[0] as HTMLElement,
+      target: () => document.querySelectorAll('[data-testid="app-table"] .ant-table-row')[0] as HTMLElement,
     },
     {
       // title: 'Item Options',
       title: 'You can click one of these options.',
-      target: () =>
-        document.querySelectorAll('[data-testid="app-table-options"]')[0] as HTMLElement,
+      target: () => document.querySelectorAll('[data-testid="app-table-options"]')[0] as HTMLElement,
     },
     {
       // title: 'View Item',
@@ -121,26 +113,22 @@ const TourProvider = ({ children }: any) => {
     {
       // title: 'Form Fields (view mode)',
       title: 'You will view each field of the form (uneditable).',
-      target: () =>
-        document.querySelectorAll('[data-testid="app-content"] .ant-form-item')[0] as HTMLElement,
+      target: () => document.querySelectorAll('[data-testid="app-content"] .ant-form-item')[0] as HTMLElement,
     },
     {
       // title: 'Form Info',
       title: 'You can view and change status of the form here.',
-      target: () =>
-        document.querySelectorAll('[data-testid="app-content-form-info"]')[0] as HTMLElement,
+      target: () => document.querySelectorAll('[data-testid="app-content-form-info"]')[0] as HTMLElement,
     },
     {
       // title: 'Edit Mode',
       title: 'You can click the button here to go into "Edit Mode"',
-      target: () =>
-        document.querySelectorAll('[data-testid="app-content-edit-button"]')[0] as HTMLElement,
+      target: () => document.querySelectorAll('[data-testid="app-content-edit-button"]')[0] as HTMLElement,
     },
     {
       // title: 'Form Fields (edit mode)',
       title: 'You will now see these turn into editable fields.',
-      target: () =>
-        document.querySelectorAll('[data-testid="app-content"] .ant-form-item')[0] as HTMLElement,
+      target: () => document.querySelectorAll('[data-testid="app-content"] .ant-form-item')[0] as HTMLElement,
     },
     {
       // title: 'Designer',
@@ -155,10 +143,9 @@ const TourProvider = ({ children }: any) => {
     {
       // title: 'Save Changes',
       title: 'You can choose to save or discard your changes here.',
-      target: () =>
-        document.querySelectorAll('[data-testid="app-content-options"]')[0] as HTMLElement,
+      target: () => document.querySelectorAll('[data-testid="app-content-options"]')[0] as HTMLElement,
     },
-  ]
+  ];
 
   // Reset viewport
   // $('meta[name=viewport]').remove();
@@ -168,19 +155,19 @@ const TourProvider = ({ children }: any) => {
   // $('head').append('<meta name="viewport" content="width=device-width, initial-scale=yes">' );
 
   function overview() {
-    history('/forms')
+    history('/interfaces');
     setTimeout(() => {
-      setIsHelpModalVisible(false)
-      setIsTourOverviewOpen(true)
-    }, 500)
+      setIsHelpModalVisible(false);
+      setIsTourOverviewOpen(true);
+    }, 500);
   }
 
   function loginAs() {
-    history('/settings')
+    history('/settings');
     setTimeout(() => {
-      setIsHelpModalVisible(false)
-      setIsTourLoginOpen(true)
-    }, 500)
+      setIsHelpModalVisible(false);
+      setIsTourLoginOpen(true);
+    }, 500);
   }
 
   return (
@@ -188,8 +175,7 @@ const TourProvider = ({ children }: any) => {
       value={{
         overview,
         loginAs,
-      }}
-    >
+      }}>
       {children}
       <Modal
         centered
@@ -198,7 +184,7 @@ const TourProvider = ({ children }: any) => {
         // closable={false}
         okText="OK"
         onCancel={() => {
-          setIsHelpModalVisible(false)
+          setIsHelpModalVisible(false);
         }}
         // closeIcon={<></>}
         open={isHelpModalVisible}
@@ -224,121 +210,14 @@ const TourProvider = ({ children }: any) => {
           .ant-modal-body {
             height: calc(100% - 80px);
           }
-        `}
-      >
+        `}>
         <Divider />
         <Tabs
           defaultActiveKey="application-overview"
           tabPosition="left"
           destroyInactiveTabPane
           onChange={(activeKey: string) => {}}
-          items={
-            [
-              // {
-              //   label: 'Application overview',
-              //   key: 'application-overview',
-              //   children: (
-              //     <div style={{ maxWidth: '1280px' }}>
-              //       <div
-              //         style={{
-              //           position: 'relative',
-              //           paddingBottom: '56.25%',
-              //           height: 0,
-              //           overflow: 'hidden',
-              //         }}
-              //       >
-              //       </div>
-              //     </div>
-              //   ),
-              // },
-              // {
-              //   label: 'Using advanced components',
-              //   key: 'advanced-components',
-              //   children: (
-              //     <div style={{ maxWidth: '1280px' }}>
-              //       <div
-              //         style={{
-              //           position: 'relative',
-              //           paddingBottom: '56.25%',
-              //           height: 0,
-              //           overflow: 'hidden',
-              //         }}
-              //       >
-              //       </div>
-              //     </div>
-              //   ),
-              // },
-              // {
-              //   label: 'Guide to users & roles',
-              //   key: 'users-roles',
-              //   children: (
-              //     <div style={{ maxWidth: '1280px' }}>
-              //       <div
-              //         style={{
-              //           position: 'relative',
-              //           paddingBottom: '56.25%',
-              //           height: 0,
-              //           overflow: 'hidden',
-              //         }}
-              //       >
-              //       </div>
-              //     </div>
-              //   ),
-              // },
-              // {
-              //   label: 'How calculated fields work',
-              //   key: 'calculated-fields',
-              //   children: (
-              //     <div style={{ maxWidth: '1280px' }}>
-              //       <div
-              //         style={{
-              //           position: 'relative',
-              //           paddingBottom: '56.25%',
-              //           height: 0,
-              //           overflow: 'hidden',
-              //         }}
-              //       >
-              //       </div>
-              //     </div>
-              //   ),
-              // },
-              // {
-              //   label: 'Project vision',
-              //   key: 'vision',
-              //   children: (
-              //     <div style={{ maxWidth: '1280px' }}>
-              //       <div
-              //         style={{
-              //           position: 'relative',
-              //           paddingBottom: '56.25%',
-              //           height: 0,
-              //           overflow: 'hidden',
-              //         }}
-              //       >
-              //       </div>
-              //     </div>
-              //   ),
-              // },
-              // {
-              //   label: 'Tour: user interface',
-              //   key: 'ui-tour',
-              //   children: (
-              //     <Button type="primary" onClick={overview}>
-              //       Begin Tour
-              //     </Button>
-              //   ),
-              // },
-              // {
-              //   label: 'Tour: login as other users',
-              //   key: 'login-tour',
-              //   children: (
-              //     <Button type="primary" onClick={loginAs}>
-              //       Begin Tour
-              //     </Button>
-              //   ),
-              // },
-            ]
-          }
+          items={[]}
           css={css`
             width: 100%;
             height: 100%;
@@ -348,12 +227,7 @@ const TourProvider = ({ children }: any) => {
       <FloatButton.Group shape="circle" style={{ right: 24 }}>
         <FloatButton
           tooltip={<div>Help</div>}
-          icon={
-            <QuestionCircleOutlined
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            />
-          }
+          icon={<QuestionCircleOutlined onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
           onClick={() => setIsHelpModalVisible(true)}
           data-testid="help-button"
         />
@@ -370,45 +244,38 @@ const TourProvider = ({ children }: any) => {
           if (
             current ===
             tourOverviewSteps.indexOf(
-              tourOverviewSteps.find(
-                (step: any) => step.title === 'You can view and change status of the form here.'
-              )
+              tourOverviewSteps.find((step: any) => step.title === 'You can view and change status of the form here.')
             ) -
               2
           ) {
             // @ts-ignore
-            document.querySelectorAll('[data-node-key="form"]')[0].click()
+            document.querySelectorAll('[data-node-key="form"]')[0].click();
           } else if (
             current ===
             tourOverviewSteps.indexOf(
               tourOverviewSteps.find(
-                (step: any) =>
-                  step.title === 'You can select an item to view or edit by clicking a row.'
+                (step: any) => step.title === 'You can select an item to view or edit by clicking a row.'
               )
             )
           ) {
             // @ts-ignore
-            document.querySelectorAll('[data-testid="app-table"] .ant-table-row')[0].click()
+            document.querySelectorAll('[data-testid="app-table"] .ant-table-row')[0].click();
           } else if (
             current ===
             tourOverviewSteps.indexOf(
-              tourOverviewSteps.find(
-                (step: any) => step.title === 'You can switch to the designer here.'
-              )
+              tourOverviewSteps.find((step: any) => step.title === 'You can switch to the designer here.')
             )
           ) {
             // @ts-ignore
-            document.querySelectorAll('[data-node-key="designer"]')[0].click()
+            document.querySelectorAll('[data-node-key="designer"]')[0].click();
           } else if (
             current ===
             tourOverviewSteps.indexOf(
-              tourOverviewSteps.find(
-                (step: any) => step.title === 'You can click one of these options.'
-              )
+              tourOverviewSteps.find((step: any) => step.title === 'You can click one of these options.')
             )
           ) {
             // @ts-ignore
-            document.querySelectorAll('[data-testid="app-content-discard-button"]')[0]?.click()
+            document.querySelectorAll('[data-testid="app-content-discard-button"]')[0]?.click();
           } else if (
             current ===
             tourOverviewSteps.indexOf(
@@ -419,7 +286,7 @@ const TourProvider = ({ children }: any) => {
               1
           ) {
             // @ts-ignore
-            document.querySelectorAll('[data-testid="app-content-edit-button"]')[0].click()
+            document.querySelectorAll('[data-testid="app-content-edit-button"]')[0].click();
           }
         }}
         data-testid="tour-overview"
@@ -436,28 +303,26 @@ const TourProvider = ({ children }: any) => {
           if (
             current ===
             tourLoginSteps.indexOf(
-              tourLoginSteps.find(
-                (step: any) => step.title === 'You need to expand the Development menu.'
-              )
+              tourLoginSteps.find((step: any) => step.title === 'You need to expand the Development menu.')
             ) -
               1
           ) {
             document
               .querySelectorAll('.ant-layout-sider-children .ant-menu-submenu-title')[2]
               // @ts-ignore
-              .click()
+              .click();
           }
         }}
         data-testid="tour-login"
       />
     </TourContext.Provider>
-  )
-}
+  );
+};
 
 function useTour() {
-  const context = useContext(TourContext)
+  const context = useContext(TourContext);
 
-  return context
+  return context;
 }
 
-export { useTour, TourProvider, TourContext }
+export { useTour, TourProvider, TourContext };

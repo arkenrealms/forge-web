@@ -1,17 +1,17 @@
-import React, { useEffect, useState, FC } from 'react'
-import styled, { css } from 'styled-components'
-import type { MenuProps } from 'antd'
-import useSettings from '@arken/forge-ui/hooks/useSettings'
-import useMatchBreakpoints from '@arken/forge-ui/hooks/useMatchBreakpoints'
-import { useNavigate, Link, useLocation } from 'react-router-dom'
-import { getFirstName, getNameInitials } from '@arken/node/util/string'
-import { Col, Input, Row, Menu } from 'antd'
-import { useSearchModels } from '@arken/forge-ui/hooks'
+import React, { useEffect, useState, FC } from 'react';
+import styled, { css } from 'styled-components';
+import type { MenuProps } from 'antd';
+import useSettings from '@arken/forge-ui/hooks/useSettings';
+import useMatchBreakpoints from '@arken/forge-ui/hooks/useMatchBreakpoints';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { getFirstName, getNameInitials } from '@arken/node/util/string';
+import { Col, Input, Row, Menu } from 'antd';
+import { useSearchModels } from '@arken/forge-ui/hooks';
 
-import Avatar from './Avatar'
+import Avatar from './Avatar';
 
 // @ts-ignore
-import logo from '../assets/logo-dark.png'
+import logo from '../assets/logo-dark.png';
 
 const Stat = styled.div`
   background: #e9ebee;
@@ -42,27 +42,27 @@ const Stat = styled.div`
     display: block;
     margin-bottom: 3px;
   }
-`
+`;
 interface IAdminHeader {
-  user?: any
-  permissions?: any
-  logout: () => void
-  login: () => void
+  user?: any;
+  permissions?: any;
+  logout: () => void;
+  login: () => void;
 }
 
-const oneWeekAgo = new Date()
-oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
+const oneWeekAgo = new Date();
+oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
 const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, logout }) => {
-  const history = useNavigate()
-  const { isMobile } = useMatchBreakpoints()
-  const { settings } = useSettings()
-  const location = useLocation()
-  const navigate = useNavigate()
+  const history = useNavigate();
+  const { isMobile } = useMatchBreakpoints();
+  const { settings } = useSettings();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const isHome = location.pathname === '/'
+  const isHome = location.pathname === '/';
 
-  const [current, setCurrent] = useState(window.location.pathname.split('?')[0].replace('/', ''))
+  const [current, setCurrent] = useState(window.location.pathname.split('?')[0].replace('/', ''));
 
   const { data: contentListSearch }: any = useSearchModels({
     key: 'Stat',
@@ -81,25 +81,25 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
         number: 'desc',
       },
     },
-  })
+  });
 
-  const todayStat = contentListSearch?.[0]
+  const todayStat = contentListSearch?.[0];
 
   const onClick: MenuProps['onClick'] = (e) => {
     if (e.key === 'formDrafts') {
-      history(`/forms?status%5B0%5D=Draft`)
+      history(`/interfaces?status%5B0%5D=Draft`);
     } else if (e.key === 'formManagement') {
-      history(`/forms`)
+      history(`/interfaces`);
     } else if (e.key === 'formPublished') {
-      history(`/forms?status%5B0%5D=Published`)
+      history(`/interfaces?status%5B0%5D=Published`);
     } else if (e.key === 'formSubmissions') {
-      history(`/submissions`)
+      history(`/submissions`);
     } else {
-      history(`/${e.key}`)
+      history(`/${e.key}`);
     }
-  }
+  };
 
-  const menuItems: MenuProps['items'] = []
+  const menuItems: MenuProps['items'] = [];
   // console.log('dfdfdf', permissions)
   if (permissions['View Interfaces']) {
     menuItems.push({
@@ -139,7 +139,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
           key: 'templates',
         },
       ],
-    })
+    });
   }
 
   if (permissions['Manage Users']) {
@@ -157,7 +157,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
           key: 'roles',
         },
       ],
-    })
+    });
   }
 
   if (permissions['Manage Settings']) {
@@ -175,7 +175,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
       //     key: 'groups',
       //   },
       // ]
-    })
+    });
   }
 
   menuItems.push({
@@ -188,7 +188,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
         key: 'game/achievements',
       },
     ],
-  })
+  });
 
   menuItems.push({
     label: 'Crypto',
@@ -200,7 +200,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
         key: 'crypto/tokens',
       },
     ],
-  })
+  });
 
   menuItems.push({
     label: 'Collectible',
@@ -212,7 +212,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
         key: 'collectible/cards',
       },
     ],
-  })
+  });
 
   return (
     <div
@@ -247,15 +247,13 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
         .ant-menu-horizontal {
           line-height: 35px;
         }
-      `}
-    >
+      `}>
       <Header showShadow={!isHome} className="app-admin__header" data-testid="app-header">
         <Col
           className="app-admin__header-logo-wrapper"
           css={css`
             cursor: pointer;
-          `}
-        >
+          `}>
           <Link
             to=""
             style={{
@@ -263,8 +261,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
               fontWeight: 700,
               fontSize: '3rem',
               letterSpacing: 2,
-            }}
-          >
+            }}>
             <img className="app-admin__header-logo" src={logo} />
           </Link>
         </Col>
@@ -278,8 +275,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
               width: 280px;
               cursor: pointer;
             `}
-            onClick={() => history('/')}
-          >
+            onClick={() => history('/')}>
             <div
               data-testid="title"
               css={css`
@@ -288,15 +284,13 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
                 font-weight: bold;
                 color: #00598e; /* #09af42; */
                 margin-top: 3px;
-              `}
-            >
+              `}>
               Forge
             </div>
             <div
               css={css`
                 font-size: 0.8rem;
-              `}
-            >
+              `}>
               Where Realms Are Formed
               {/* Portal to the ASI Network */}
             </div>
@@ -312,8 +306,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
             css={css`
               // min-width: 300px;
             `}
-            data-testid="app-header-menu"
-          >
+            data-testid="app-header-menu">
             {/* {user?.name ? ( */}
             <Menu
               onClick={onClick}
@@ -337,10 +330,9 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
               padding-left: 15px;
               padding-right: 15px;
             `}
-            data-testid="app-header-stats"
-          >
+            data-testid="app-header-stats">
             {permissions['View Interfaces'] ? (
-              <Stat onClick={() => navigate('/forms?status%5B0%5D=Draft')}>
+              <Stat onClick={() => navigate('/interfaces?status%5B0%5D=Draft')}>
                 <span style={{ color: '#e29207' }} data-testid="app-header-stat-drafts">
                   {todayStat?.meta.TotalFormDrafted || 0}
                 </span>
@@ -348,7 +340,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
               </Stat>
             ) : null}
             {permissions['View Interfaces'] ? (
-              <Stat onClick={() => navigate('/forms?status%5B0%5D=Published')}>
+              <Stat onClick={() => navigate('/interfaces?status%5B0%5D=Published')}>
                 <span style={{ color: '#03a61a' }} data-testid="app-header-stat-published">
                   {todayStat?.meta.TotalFormPublished || 0}
                 </span>
@@ -381,16 +373,10 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
               font-size: 0.85rem;
               line-height: 1.1rem;
               text-align: right;
-            `}
-          >
-            <strong data-testid="app-header-user-welcome">
-              Welcome back, {getFirstName(user.name)}
-            </strong>
+            `}>
+            <strong data-testid="app-header-user-welcome">Welcome back, {getFirstName(user.name)}</strong>
             {user.roles?.[0] ? (
-              <Link
-                to={`/roles?tab=role&Name=${escape(user.roles[0])}`}
-                data-testid="app-header-user-role"
-              >
+              <Link to={`/roles?tab=role&Name=${escape(user.roles[0])}`} data-testid="app-header-user-role">
                 {' '}
                 | {user.roles[0]}
               </Link>
@@ -408,16 +394,14 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
             css={css`
               display: flex;
               flex-direction: column;
-            `}
-          >
+            `}>
             <Row justify="end">
               <Col
                 flex="none"
                 css={css`
                   margin-left: 10px;
                   font-size: 14px;
-                `}
-              >
+                `}>
                 <Avatar
                   user={{ name: getNameInitials(user.name), picture: user.picture }}
                   login={login}
@@ -430,10 +414,10 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
         ) : null}
       </Header>
     </div>
-  )
-}
+  );
+};
 
-export default AdminHeader
+export default AdminHeader;
 
 const Header = styled<any>(Row)`
   display: flex;
@@ -441,4 +425,4 @@ const Header = styled<any>(Row)`
   padding: 0px 30px;
   color: rgba(255, 255, 255, 0.85);
   ${({ showShadow }) => (showShadow ? 'box-shadow: 0 0 5px rgba(0, 0, 0, 0.2)' : '')};
-`
+`;

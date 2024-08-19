@@ -727,7 +727,7 @@ export default function AdminDashboard() {
           <SpecialButton
             data-testid="dashboard-form-designer-button"
             icon={<RiSurveyLine />}
-            path="/forms"
+            path="/interfaces"
             title="Interface Designer"
           />
           {/* <br />

@@ -154,7 +154,7 @@ const App = ({ apolloClient }: any) => {
                                   }
                                 />
                                 <Route
-                                  path="/forms"
+                                  path="/interfaces"
                                   element={
                                     <Authorize permissions={[]}>
                                       <Forms themeConfig={themeConfig} />

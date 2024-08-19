@@ -446,7 +446,7 @@ const GameItems = ({ themeConfig }: any) => {
 
   function goto(params: any) {
     const newParams = { ...qs.parse(window.location.search.replace('?', '')), ...params };
-    return history(`/forms?${qs.stringify(newParams)}`);
+    return history(`/interfaces?${qs.stringify(newParams)}`);
   }
 
   async function getColumns({ params }: any) {
@@ -776,19 +776,19 @@ const GameItems = ({ themeConfig }: any) => {
         title: <HomeOutlined onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />,
       },
       {
-        href: `/forms`,
+        href: `/interfaces`,
         title: 'Forms',
       },
     ];
 
     if (contentItem?.__original) {
       breadcrumb.push({
-        href: `/forms?contentMode=view&contentId=${contentItem.id}`,
+        href: `/interfaces?contentMode=view&contentId=${contentItem.id}`,
         title: contentItem[config.secondaryKey],
       });
     } else {
       breadcrumb.push({
-        href: `/forms?contentMode=view`,
+        href: `/interfaces?contentMode=view`,
         title: 'New Form',
       });
     }
@@ -883,7 +883,7 @@ const GameItems = ({ themeConfig }: any) => {
                     });
                   }
 
-                  history('/forms');
+                  history('/interfaces');
                 },
                 onPublish: async () => {
                   const contentItem = getContentItem({ params: localParams });
@@ -898,7 +898,7 @@ const GameItems = ({ themeConfig }: any) => {
                   // await contentListRefetch()
                   await contentItemRefetch();
 
-                  history('/forms?tab=form&contentMode=view&contentId=' + res.id);
+                  history('/interfaces?tab=form&contentMode=view&contentId=' + res.id);
                   // console.log('45454545', contentItemSearch, contentItemTemp)
 
                   // for (const k of Object.keys(contentItemDefault)) {
@@ -932,11 +932,11 @@ const GameItems = ({ themeConfig }: any) => {
                   await contentItemRefetch();
                   rerender();
 
-                  history('/forms?tab=form&contentMode=view&contentId=' + res.id);
+                  history('/interfaces?tab=form&contentMode=view&contentId=' + res.id);
                   window.location.reload();
                 },
                 onEditDraft: async (id: string) => {
-                  history('/forms?tab=form&contentMode=view&contentId=' + id);
+                  history('/interfaces?tab=form&contentMode=view&contentId=' + id);
                   window.location.reload();
                 },
                 onCreateDraft: async () => {
@@ -952,7 +952,7 @@ const GameItems = ({ themeConfig }: any) => {
                   // Change contentId
                   await contentItemRefetch();
                   // rerender?
-                  history('/forms?tab=form&contentMode=view&contentId=' + res.id);
+                  history('/interfaces?tab=form&contentMode=view&contentId=' + res.id);
                   window.location.reload();
                   // console.log(contentItemLoading, contentListLoading, createLoading, updateLoading)
                   // setTimeout(() => {
@@ -1047,7 +1047,7 @@ const GameItems = ({ themeConfig }: any) => {
     isLoading: contentItemLoading || createLoading || updateLoading,
     primaryKey: 'id',
     secondaryKey: 'title',
-    baseUrl: '/forms',
+    baseUrl: '/interfaces',
     extraParams: {
       tab: 'form',
       tableMode: 'view',

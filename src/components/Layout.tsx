@@ -248,59 +248,27 @@ export default ({ children }) => {
           icon: <UserOutlined />,
         }}
         {...settings}>
-        <PageContainer
-          content={content}
-          tabList={[
-            {
-              tab: '基本信息',
-              key: 'base',
-            },
-            {
-              tab: '详细信息',
-              key: 'info',
-            },
-          ]}
-          extraContent={
-            <Space size={24}>
-              <Statistic title="Feedback" value={1128} prefix={<LikeOutlined />} />
-              <Statistic title="Unmerged" value={93} suffix="/ 100" />
-            </Space>
-          }
-          extra={[
-            <Button key="3">操作</Button>,
-            <Button key="2">操作</Button>,
-            <Button key="1" type="primary">
-              主操作
-            </Button>,
-          ]}
-          footer={[
-            <Button key="3">重置</Button>,
-            <Button key="2" type="primary">
-              提交
-            </Button>,
-          ]}>
-          <GlobalStyles />
-          <Header user={user} permissions={permissions} login={login} logout={logout} />
-          {children}
-          <Footer />
+        <GlobalStyles />
+        <Header user={user} permissions={permissions} login={login} logout={logout} />
+        {children}
+        <Footer />
 
-          <div
+        <div
+          style={{
+            height: '120vh',
+            minHeight: 600,
+          }}>
+          <Result
+            status="404"
             style={{
-              height: '120vh',
-              minHeight: 600,
-            }}>
-            <Result
-              status="404"
-              style={{
-                height: '100%',
-                background: '#fff',
-              }}
-              title="Hello World"
-              subTitle="Sorry, you are not authorized to access this page."
-              extra={<Button type="primary">Back Home</Button>}
-            />
-          </div>
-        </PageContainer>
+              height: '100%',
+              background: '#fff',
+            }}
+            title="Hello World"
+            subTitle="Sorry, you are not authorized to access this page."
+            extra={<Button type="primary">Back Home</Button>}
+          />
+        </div>
       </ProLayout>
       <SettingDrawer
         pathname={pathname}
