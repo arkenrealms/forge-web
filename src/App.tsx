@@ -1,4 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { hydrate, render } from 'react-dom';
+// import * as Sentry from '@sentry/react'
+import AppInner from './AppInner';
+import Providers from './Providers';
+import ApplicationUpdater from './state/application/updater';
+import ListsUpdater from './state/lists/updater';
+import MulticallUpdater from './state/multicall/updater';
+import TransactionUpdater from './state/transactions/updater';
+import ToastListener from './components/ToastListener';
+// import reportWebVitals from './reportWebVitals'
 import { ConfigProvider, theme, notification } from 'antd';
 import { ThemeProvider } from 'antd-style';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
@@ -33,6 +43,15 @@ window.queryClient = new QueryClient();
 // TODO: remove?
 // @ts-ignore
 // window.cerebro = cerebro
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// reportWebVitals(console.log)
+
+// if (process.env.NODE_ENV === 'production') {
+//   Sentry.init({ dsn: 'https://55af693ba6974027b6631c72ec9bfb4e@o556734.ingest.sentry.io/5688112' })
+// }
 
 const App = ({ apolloClient }: any) => {
   const { brand } = useBrand();
@@ -84,89 +103,106 @@ const App = ({ apolloClient }: any) => {
                       <NavProvider>
                         <TourProvider>
                           <SettingsProvider>
-                            <Routes>
-                              <Route
-                                path="/"
-                                element={
-                                  <Authorize permissions={[]}>
-                                    <Dashboard themeConfig={themeConfig} />
-                                  </Authorize>
-                                }
-                              />
-                              <Route
-                                path="/settings"
-                                element={
-                                  <Authorize permissions={[]}>
-                                    <Settings themeConfig={themeConfig} />
-                                  </Authorize>
-                                }
-                              />
-                              <Route
-                                path="/users"
-                                element={
-                                  <Authorize permissions={[]}>
-                                    <Users themeConfig={themeConfig} />
-                                  </Authorize>
-                                }
-                              />
-                              <Route
-                                path="/roles"
-                                element={
-                                  <Authorize permissions={[]}>
-                                    <Roles themeConfig={themeConfig} />
-                                  </Authorize>
-                                }
-                              />
-                              <Route
-                                path="/forms"
-                                element={
-                                  <Authorize permissions={[]}>
-                                    <Forms themeConfig={themeConfig} />
-                                  </Authorize>
-                                }
-                              />
-                              <Route
-                                path="/groups"
-                                element={
-                                  <Authorize permissions={[]}>
-                                    <Groups themeConfig={themeConfig} />
-                                  </Authorize>
-                                }
-                              />
-                              <Route
-                                path="/templates"
-                                element={
-                                  <Authorize permissions={[]}>
-                                    <Templates />
-                                  </Authorize>
-                                }
-                              />
-                              <Route
-                                path="/game/achievements"
-                                element={
-                                  <Authorize permissions={[]}>
-                                    <FormPage formKey="game-achievements" />
-                                  </Authorize>
-                                }
-                              />
-                              <Route
-                                path="/crypto/tokens"
-                                element={
-                                  <Authorize permissions={[]}>
-                                    <ModelPage modelKey="CollectibleCard" />
-                                  </Authorize>
-                                }
-                              />
-                              <Route
-                                path="/collectible/cards"
-                                element={
-                                  <Authorize permissions={[]}>
-                                    <ModelPage modelKey="CollectibleCard" />
-                                  </Authorize>
-                                }
-                              />
-                              <Route path="*" element={<PageNotFound defaultNotFoundValue={false} />} />
-                            </Routes>
+                            <Providers>
+                              <>
+                                <ListsUpdater />
+                                <ApplicationUpdater />
+                                <TransactionUpdater />
+                                <MulticallUpdater />
+                                <ToastListener />
+                              </>
+                              <Routes>
+                                <Route
+                                  path="/"
+                                  element={
+                                    <Authorize permissions={[]}>
+                                      <Dashboard themeConfig={themeConfig} />
+                                    </Authorize>
+                                  }
+                                />
+                                <Route
+                                  path="/realms"
+                                  element={
+                                    <Authorize permissions={[]}>
+                                      <AppInner />
+                                    </Authorize>
+                                  }
+                                />
+                                <Route
+                                  path="/settings"
+                                  element={
+                                    <Authorize permissions={[]}>
+                                      <Settings themeConfig={themeConfig} />
+                                    </Authorize>
+                                  }
+                                />
+                                <Route
+                                  path="/users"
+                                  element={
+                                    <Authorize permissions={[]}>
+                                      <Users themeConfig={themeConfig} />
+                                    </Authorize>
+                                  }
+                                />
+                                <Route
+                                  path="/roles"
+                                  element={
+                                    <Authorize permissions={[]}>
+                                      <Roles themeConfig={themeConfig} />
+                                    </Authorize>
+                                  }
+                                />
+                                <Route
+                                  path="/forms"
+                                  element={
+                                    <Authorize permissions={[]}>
+                                      <Forms themeConfig={themeConfig} />
+                                    </Authorize>
+                                  }
+                                />
+                                <Route
+                                  path="/groups"
+                                  element={
+                                    <Authorize permissions={[]}>
+                                      <Groups themeConfig={themeConfig} />
+                                    </Authorize>
+                                  }
+                                />
+                                <Route
+                                  path="/templates"
+                                  element={
+                                    <Authorize permissions={[]}>
+                                      <Templates />
+                                    </Authorize>
+                                  }
+                                />
+                                <Route
+                                  path="/game/achievements"
+                                  element={
+                                    <Authorize permissions={[]}>
+                                      <FormPage formKey="game-achievements" />
+                                    </Authorize>
+                                  }
+                                />
+                                <Route
+                                  path="/crypto/tokens"
+                                  element={
+                                    <Authorize permissions={[]}>
+                                      <ModelPage modelKey="CollectibleCard" />
+                                    </Authorize>
+                                  }
+                                />
+                                <Route
+                                  path="/collectible/cards"
+                                  element={
+                                    <Authorize permissions={[]}>
+                                      <ModelPage modelKey="CollectibleCard" />
+                                    </Authorize>
+                                  }
+                                />
+                                <Route path="*" element={<PageNotFound defaultNotFoundValue={false} />} />
+                              </Routes>
+                            </Providers>
                           </SettingsProvider>
                         </TourProvider>
                       </NavProvider>

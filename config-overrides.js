@@ -91,7 +91,7 @@ module.exports = function (config, env) {
       },
       {
         loader: 'file-loader',
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif|svg|woff|woff2|ttf|otf)$/i,
         exclude: /node_modules/,
       },
     ],

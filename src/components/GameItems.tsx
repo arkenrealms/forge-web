@@ -1,22 +1,29 @@
-import { HomeOutlined } from '@ant-design/icons'
-import _ from 'lodash'
-import qs from 'qs'
-import { Modal, Form as AntForm } from 'antd'
-import React, { useState } from 'react'
-import { BiCommentDetail } from 'react-icons/bi'
-import { useNavigate } from 'react-router-dom'
-import { css } from 'styled-components'
-import App from '@arken/forge-ui/components/App'
-import FormFieldText from '@arken/forge-ui/components/FormFieldText'
-import FormFieldSelect from '@arken/forge-ui/components/FormFieldSelect'
+import { HomeOutlined } from '@ant-design/icons';
+import _ from 'lodash';
+import qs from 'qs';
+import { Modal, Form as AntForm } from 'antd';
+import React, { useState } from 'react';
+import { BiCommentDetail } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
+import { css } from 'styled-components';
+import App from '@arken/forge-ui/components/App';
+import FormFieldText from '@arken/forge-ui/components/FormFieldText';
+import FormFieldSelect from '@arken/forge-ui/components/FormFieldSelect';
 // @ts-ignore
-import { useDataModel } from '@arken/forge-ui/hooks/useDataModel'
-import useSettings from '@arken/forge-ui/hooks/useSettings'
-import * as log from '@arken/node/util/log'
-import { camelize } from '@arken/node/util/string'
-import { usePrompt } from '@arken/forge-ui/hooks/usePrompt'
-import { useAuth } from '@arken/forge-ui/hooks/useAuth'
-import appConfig from '~/config'
+import {
+  useModel,
+  useGetModel,
+  useCreateModel,
+  useDeleteModel,
+  useUpdateModel,
+  useSearchModels,
+} from '@arken/forge-ui/hooks/db';
+import useSettings from '@arken/forge-ui/hooks/useSettings';
+import * as log from '@arken/node/util/log';
+import { camelize } from '@arken/node/util/string';
+import { usePrompt } from '@arken/forge-ui/hooks/usePrompt';
+import { useAuth } from '@arken/forge-ui/hooks/useAuth';
+import appConfig from '~/config';
 
 // const GameItems = ({ themeConfig }: any) => {
 //   const config = {
@@ -128,7 +135,7 @@ import appConfig from '~/config'
 //   return <Editor {...config} />
 // }
 
-const shortId = require('shortid')
+const shortId = require('shortid');
 
 const StatusList = [
   {
@@ -151,17 +158,17 @@ const StatusList = [
     text: 'Archived',
     value: 'Archived',
   },
-]
+];
 
 type NexusModel<T> = T & {
-  __original?: T
-  isLoading?: boolean
-  meta: any
-  draftForm: any
-  publishedForm: any
-}
+  __original?: T;
+  isLoading?: boolean;
+  meta: any;
+  draftForm: any;
+  publishedForm: any;
+};
 
-type FormWithRelations = NexusModel<any>
+type FormWithRelations = NexusModel<any>;
 
 const contentItemDefault: any = {
   id: '',
@@ -173,32 +180,29 @@ const contentItemDefault: any = {
   // commentsOnForms: [] as any,
   // recordUpdatesOnForms: [] as any,
   meta: '',
-}
-const contentItemTemp: FormWithRelations = { ...contentItemDefault }
+};
+const contentItemTemp: FormWithRelations = { ...contentItemDefault };
 
 const GameItems = ({ themeConfig }: any) => {
-  const [cacheKey, setCacheKey] = useState('cache')
-  const { settings } = useSettings()
-  const history = useNavigate()
-  const { prompt } = usePrompt()
-  const { permissions } = useAuth()
-  const [form] = AntForm.useForm()
+  const [cacheKey, setCacheKey] = useState('cache');
+  const { settings } = useSettings();
+  const history = useNavigate();
+  const { prompt } = usePrompt();
+  const { permissions } = useAuth();
+  const [form] = AntForm.useForm();
 
   const extraParams: any = {
     status: ['Draft', 'Published'],
-  }
+  };
   const localParams: any = {
     ...extraParams,
     ...qs.parse(window.location.search.replace('?', '')),
-  }
+  };
 
   const rerender = function () {
-    log.dev('Rerender')
-    setCacheKey('cache' + Math.random())
-  }
-
-  const { useModel, useGetModel, useCreateModel, useDeleteModel, useUpdateModel, useSearchModels } =
-    useDataModel<any, any>()
+    log.dev('Rerender');
+    setCacheKey('cache' + Math.random());
+  };
 
   const { data: formGroups } = useSearchModels({
     key: 'FormGroup',
@@ -211,7 +215,7 @@ const GameItems = ({ themeConfig }: any) => {
       meta
     `,
     variables: { where: {} } as any,
-  })
+  });
 
   const {
     isLoading: contentItemLoading,
@@ -255,7 +259,7 @@ const GameItems = ({ themeConfig }: any) => {
           },
         }
       : null,
-  })
+  });
 
   const {
     isLoading: contentListLoading,
@@ -311,98 +315,98 @@ const GameItems = ({ themeConfig }: any) => {
         ],
       },
     },
-  })
+  });
 
   const {
     isLoading: createLoading,
     error: createContentItemError,
     mutateAsync: createForm,
-  }: any = useCreateModel({ key: 'Form', action: 'createOneForm', query: `id` })
+  }: any = useCreateModel({ key: 'Form', action: 'createOneForm', query: `id` });
 
   const {
     isLoading: updateLoading,
     error: updateContentItemError,
     mutateAsync: updateForm,
-  }: any = useUpdateModel({ key: 'Form', action: 'updateOneForm', query: `id` })
+  }: any = useUpdateModel({ key: 'Form', action: 'updateOneForm', query: `id` });
 
   const { mutateAsync: publishForm }: any = useModel({
     key: 'Form',
     action: 'publishForm',
     query: `id`,
-  })
+  });
 
   const { mutateAsync: deleteOneForm }: any = useDeleteModel({
     key: 'Form',
     action: 'deleteOneForm',
     query: `id`,
-  })
+  });
 
   const { mutateAsync: deactivateForm }: any = useModel({
     key: 'Form',
     action: 'deactivateForm',
     query: `id`,
-  })
+  });
 
   const { mutateAsync: createFormDraft }: any = useModel({
     key: 'Form',
     action: 'createFormDraft',
     query: `id`,
-  })
+  });
 
   const { mutateAsync: resetFormDraft }: any = useModel({
     key: 'Form',
     action: 'resetFormDraft',
     query: `id`,
-  })
+  });
 
   const { mutateAsync: acceptSubmission }: any = useModel({
     key: 'FormSubmission',
     action: 'acceptSubmission',
     query: `id`,
-  })
+  });
 
   const onChangeParams = async (params: any) => {
     // log.dev('Refetching', params.contentId)
     // queryClient.invalidateQueries('search-forms')
     // contentItemRefetch({ id: params.contentId })
-  }
+  };
 
-  const [isDraftWarningAcknowledged, setIsDraftWarningAcknowledged] = useState(false)
-  const [isDraftWarningModalVisible, setIsDraftWarningModalVisible] = useState(false)
+  const [isDraftWarningAcknowledged, setIsDraftWarningAcknowledged] = useState(false);
+  const [isDraftWarningModalVisible, setIsDraftWarningModalVisible] = useState(false);
 
   const onSaveContentItem = async (values: any) => {
     try {
-      const contentItem = JSON.parse(JSON.stringify(getContentItem({ params: localParams })))
+      const contentItem = JSON.parse(JSON.stringify(getContentItem({ params: localParams })));
 
-      log.dev('Saving content item...', values, contentItem)
+      log.dev('Saving content item...', values, contentItem);
 
       if (contentItem.draftForm && !contentItem.__draftWarningAcknowledged) {
-        setIsDraftWarningModalVisible(true)
+        setIsDraftWarningModalVisible(true);
 
-        return
+        return;
       }
 
-      console.log('Copying form values to content item', contentItem, values)
+      console.log('Copying form values to content item', contentItem, values);
       for (const index in values) {
         // @ts-ignore
-        contentItem[index] = values[index]
+        contentItem[index] = values[index];
       }
 
-      delete contentItem.isLoading
-      delete contentItem.formSubmissions
-      delete contentItem.group
-      delete contentItem.draftForm
-      delete contentItem.publishedForm
+      delete contentItem.isLoading;
+      delete contentItem.formSubmissions;
+      delete contentItem.group;
+      delete contentItem.draftForm;
+      delete contentItem.publishedForm;
 
       if (contentItem.__original) {
-        log.dev('Updating form', contentItem, contentItemSearch)
+        log.dev('Updating form', contentItem, contentItemSearch);
         const res = await updateForm({
           before: contentItem.__original,
           after: contentItem,
           where: {
             id: contentItem.id,
           },
-        })
+        });
 
         return {
           message: `Success`,
@@ -410,10 +414,10 @@ const GameItems = ({ themeConfig }: any) => {
           placement: 'topRight' as any,
           duration: 3,
           contentId: res.id,
-        }
+        };
       } else {
-        log.dev('Creating form', contentItem, contentItemSearch)
-        const res = await createForm({ data: contentItem })
+        log.dev('Creating form', contentItem, contentItemSearch);
+        const res = await createForm({ data: contentItem });
 
         return {
           message: `Success`,
@@ -421,10 +425,10 @@ const GameItems = ({ themeConfig }: any) => {
           placement: 'topRight' as any,
           duration: 3,
           contentId: res.id,
-        }
+        };
       }
     } catch (e) {
-      console.log('Error saving form', e)
+      console.log('Error saving form', e);
       // const description = e?.networkError?.result?.errors?.[0].message || e?.message
 
       // if (description) {
@@ -436,13 +440,13 @@ const GameItems = ({ themeConfig }: any) => {
       //   })
       // }
 
-      throw e
+      throw e;
     }
-  }
+  };
 
   function goto(params: any) {
-    const newParams = { ...qs.parse(window.location.search.replace('?', '')), ...params }
-    return history(`/forms?${qs.stringify(newParams)}`)
+    const newParams = { ...qs.parse(window.location.search.replace('?', '')), ...params };
+    return history(`/forms?${qs.stringify(newParams)}`);
   }
 
   async function getColumns({ params }: any) {
@@ -469,7 +473,7 @@ const GameItems = ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
 
         sorter: (a: any, b: any) => a.key.localeCompare(b.key),
@@ -498,7 +502,7 @@ const GameItems = ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
         sorter: (a: any, b: any) => a.title.localeCompare(b.title),
       },
@@ -532,7 +536,7 @@ const GameItems = ({ themeConfig }: any) => {
               }
               {...(props || {})}
             />
-          )
+          );
         },
         sorter: (a: any, b: any) => a.version.localeCompare(b.version),
       },
@@ -568,7 +572,7 @@ const GameItems = ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
       },
       {
@@ -612,7 +616,7 @@ const GameItems = ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
       },
       {
@@ -627,8 +631,7 @@ const GameItems = ({ themeConfig }: any) => {
               css={css`
                 text-align: right;
               `}
-              data-tourid="app-table-options"
-            >
+              data-tourid="app-table-options">
               {permissions['Design Forms'] ? (
                 <a
                   href="#"
@@ -636,11 +639,10 @@ const GameItems = ({ themeConfig }: any) => {
                     padding: 0 10px;
                   `}
                   onClick={function (e) {
-                    goto({ contentId: id, contentMode: 'view', tab: 'designer' })
-                    e.stopPropagation()
-                    e.preventDefault()
-                  }}
-                >
+                    goto({ contentId: id, contentMode: 'view', tab: 'designer' });
+                    e.stopPropagation();
+                    e.preventDefault();
+                  }}>
                   Design
                 </a>
               ) : null}
@@ -651,8 +653,7 @@ const GameItems = ({ themeConfig }: any) => {
                   target="_blank"
                   css={css`
                     padding: 0 10px;
-                  `}
-                >
+                  `}>
                   Data
                 </a>
               ) : null}
@@ -667,80 +668,68 @@ const GameItems = ({ themeConfig }: any) => {
                     // goto({ contentId: id, contentMode: 'edit', tab: 'preview' })
                     // e.stopPropagation()
                     // e.preventDefault()
-                  }}
-                >
+                  }}>
                   Preview
                 </a>
               ) : null}
             </div>
-          )
+          );
         },
       },
-    ]
+    ];
 
-    return columns
+    return columns;
   }
 
   function getContentList({ params }: any) {
-    return contentListSearch || []
+    return contentListSearch || [];
   }
   // console.log('45454545', 'zzz', contentItemSearch)
   function getContentItem({ params }: any) {
     if (contentItemSearch?.id && params?.contentId !== contentItemSearch.id) {
       for (const k of Object.keys(contentItemDefault)) {
         // @ts-ignore
-        contentItemTemp[k] = contentItemDefault[k]
+        contentItemTemp[k] = contentItemDefault[k];
       }
-      contentItemTemp.isLoading = true
-      return contentItemTemp
+      contentItemTemp.isLoading = true;
+      return contentItemTemp;
     }
 
     if (!params?.contentMode && !params?.contentId) {
-      console.log(
-        'Resetting content item object due to params',
-        params,
-        contentItemTemp,
-        ':',
-        contentItemSearch?.id
-      )
+      console.log('Resetting content item object due to params', params, contentItemTemp, ':', contentItemSearch?.id);
       for (const k in contentItemTemp) {
         // @ts-ignore
-        delete contentItemTemp[k]
+        delete contentItemTemp[k];
       }
       for (const k in contentItemDefault) {
         // @ts-ignore
-        contentItemTemp[k] = contentItemDefault[k]
+        contentItemTemp[k] = contentItemDefault[k];
       }
     } else if (!contentItemSearch?.meta) {
       // TODO: kind of a hack to deal with delay of the object keys getting set
-      return contentItemTemp
+      return contentItemTemp;
     }
 
-    contentItemTemp.isLoading = false
+    contentItemTemp.isLoading = false;
 
     if (params?.contentId && contentItemSearch?.id && contentItemTemp.id !== contentItemSearch.id) {
-      console.log(
-        'Resetting content item object due to search',
-        contentItemTemp,
-        ':',
-        contentItemSearch?.id
-      )
+      console.log('Resetting content item object due to search', contentItemTemp, ':', contentItemSearch?.id);
       for (const k of Object.keys(contentItemDefault)) {
         // @ts-ignore
-        contentItemTemp[k] = contentItemDefault[k]
+        contentItemTemp[k] = contentItemDefault[k];
       }
       for (const k of Object.keys(contentItemSearch)) {
         // @ts-ignore
-        contentItemTemp[k] = contentItemSearch[k]
+        contentItemTemp[k] = contentItemSearch[k];
       }
 
       // @ts-ignore
       // if (!contentItemTemp.__original) {
       // @ts-ignore
-      contentItemTemp.__original = _.cloneDeep(contentItemSearch)
+      contentItemTemp.__original = _.cloneDeep(contentItemSearch);
       // }
 
-      rerender()
+      rerender();
     } else if (!params?.contentId) {
       console.log(
         'Resetting content item object due to params',
@@ -751,33 +740,33 @@ const GameItems = ({ themeConfig }: any) => {
         contentItemSearch?.id,
         ':',
         contentItemDefault
-      )
+      );
       for (const k in contentItemTemp) {
         // @ts-ignore
-        delete contentItemTemp[k]
+        delete contentItemTemp[k];
       }
       for (const k in contentItemDefault) {
         // @ts-ignore
-        contentItemTemp[k] = contentItemDefault[k]
+        contentItemTemp[k] = contentItemDefault[k];
       }
     }
 
     if (params?.contentMode === 'edit') {
       if (!contentItemTemp.key) {
         if (contentItemTemp.title) {
-          contentItemTemp.key = camelize(contentItemTemp.title)
+          contentItemTemp.key = camelize(contentItemTemp.title);
         } else {
-          contentItemTemp.key = shortId.generate()
+          contentItemTemp.key = shortId.generate();
         }
       }
     }
 
-    if (!contentItemTemp.meta) contentItemTemp.meta = {}
+    if (!contentItemTemp.meta) contentItemTemp.meta = {};
     // if (!contentItemTemp.meta.Data) contentItemTemp.meta.Data = {}
 
     // console.log('Set temp content item', contentItemTemp)
 
-    return contentItemTemp
+    return contentItemTemp;
   }
 
   function getBreadcrumb({ contentItem, params }: any) {
@@ -790,21 +779,21 @@ const GameItems = ({ themeConfig }: any) => {
         href: `/forms`,
         title: 'Forms',
       },
-    ]
+    ];
 
     if (contentItem?.__original) {
       breadcrumb.push({
         href: `/forms?contentMode=view&contentId=${contentItem.id}`,
         title: contentItem[config.secondaryKey],
-      })
+      });
     } else {
       breadcrumb.push({
         href: `/forms?contentMode=view`,
         title: 'New Form',
-      })
+      });
     }
 
-    return breadcrumb
+    return breadcrumb;
   }
 
   function onRemove({ params }: any) {}
@@ -857,11 +846,11 @@ const GameItems = ({ themeConfig }: any) => {
                     value: group.id,
                   })) || [],
                 onChange: (key: any, value: any) => {
-                  console.log('3333 changed', key, value)
+                  console.log('3333 changed', key, value);
 
-                  const contentItem = getContentItem({ params: localParams })
-                  contentItem.group = formGroups.find((g1: any) => g1.id === value)
-                  contentItem.groupId = contentItem.group.id
+                  const contentItem = getContentItem({ params: localParams });
+                  contentItem.group = formGroups.find((g1: any) => g1.id === value);
+                  contentItem.groupId = contentItem.group.id;
                 },
                 isRequired: true,
               },
@@ -877,13 +866,13 @@ const GameItems = ({ themeConfig }: any) => {
                 name: 'form-info',
                 type: 'form-info',
                 onDelete: async () => {
-                  const contentItem = getContentItem({ params: localParams })
+                  const contentItem = getContentItem({ params: localParams });
 
                   const res = await deleteOneForm({
                     where: {
                       id: contentItem.id,
                     },
-                  })
+                  });
 
                   if (res?.id) {
                     prompt.success({
@@ -891,25 +880,25 @@ const GameItems = ({ themeConfig }: any) => {
                       description: '',
                       placement: 'topRight' as any,
                       duration: 5,
-                    })
+                    });
                   }
 
-                  history('/forms')
+                  history('/forms');
                 },
                 onPublish: async () => {
-                  const contentItem = getContentItem({ params: localParams })
+                  const contentItem = getContentItem({ params: localParams });
 
                   const res = await publishForm({
                     data: {},
                     where: {
                       id: contentItem.id,
                     },
-                  })
+                  });
 
                   // await contentListRefetch()
-                  await contentItemRefetch()
+                  await contentItemRefetch();
 
-                  history('/forms?tab=form&contentMode=view&contentId=' + res.id)
+                  history('/forms?tab=form&contentMode=view&contentId=' + res.id);
                   // console.log('45454545', contentItemSearch, contentItemTemp)
 
                   // for (const k of Object.keys(contentItemDefault)) {
@@ -926,68 +915,68 @@ const GameItems = ({ themeConfig }: any) => {
                   // // @ts-ignore
                   // contentItemTemp.__original = _.cloneDeep(contentItemSearch)
                   // // window.queryClient.invalidateQueries('model')
-                  rerender()
-                  window.location.reload()
+                  rerender();
+                  window.location.reload();
                   // console.log('45454545')
                 },
                 onDeactivate: async () => {
-                  const contentItem = getContentItem({ params: localParams })
+                  const contentItem = getContentItem({ params: localParams });
 
                   const res = await deactivateForm({
                     data: {},
                     where: {
                       id: contentItem.id,
                     },
-                  })
+                  });
 
-                  await contentItemRefetch()
-                  rerender()
+                  await contentItemRefetch();
+                  rerender();
 
-                  history('/forms?tab=form&contentMode=view&contentId=' + res.id)
-                  window.location.reload()
+                  history('/forms?tab=form&contentMode=view&contentId=' + res.id);
+                  window.location.reload();
                 },
                 onEditDraft: async (id: string) => {
-                  history('/forms?tab=form&contentMode=view&contentId=' + id)
-                  window.location.reload()
+                  history('/forms?tab=form&contentMode=view&contentId=' + id);
+                  window.location.reload();
                 },
                 onCreateDraft: async () => {
-                  const contentItem = getContentItem({ params: localParams })
+                  const contentItem = getContentItem({ params: localParams });
 
                   const res = await createFormDraft({
                     data: {},
                     where: {
                       id: contentItem.id,
                     },
-                  })
+                  });
 
                   // Change contentId
-                  await contentItemRefetch()
+                  await contentItemRefetch();
                   // rerender?
-                  history('/forms?tab=form&contentMode=view&contentId=' + res.id)
-                  window.location.reload()
+                  history('/forms?tab=form&contentMode=view&contentId=' + res.id);
+                  window.location.reload();
                   // console.log(contentItemLoading, contentListLoading, createLoading, updateLoading)
                   // setTimeout(() => {
                   //   contentItemTemp.isLoading = false
                   // }, 300)
                 },
                 onResetDraft: async () => {
-                  const contentItem = getContentItem({ params: localParams })
+                  const contentItem = getContentItem({ params: localParams });
 
                   const res = await resetFormDraft({
                     data: {},
                     where: {
                       id: contentItem.id,
                     },
-                  })
+                  });
 
-                  window.location.reload()
+                  window.location.reload();
                 },
               },
             ],
           },
         ],
       },
-    ]
+    ];
 
     if (permissions['Design Forms']) {
       tabs.push({
@@ -1007,7 +996,7 @@ const GameItems = ({ themeConfig }: any) => {
             ],
           },
         ],
-      } as any)
+      } as any);
     }
 
     if (permissions['View Submissions']) {
@@ -1028,14 +1017,14 @@ const GameItems = ({ themeConfig }: any) => {
                 name: 'formSubmissions',
                 type: 'submissions',
                 onRefresh: async function () {
-                  await contentItemRefetch()
+                  await contentItemRefetch();
 
                   for (const k of Object.keys(contentItemSearch)) {
                     // @ts-ignore
-                    contentItemTemp[k] = contentItemSearch[k]
+                    contentItemTemp[k] = contentItemSearch[k];
                   }
 
-                  rerender()
+                  rerender();
                 },
                 onAccept: async function (submissionId: string) {
                   // await acceptSubmission(submissionId)
@@ -1044,10 +1033,10 @@ const GameItems = ({ themeConfig }: any) => {
             ],
           },
         ],
-      } as any)
+      } as any);
     }
 
-    return tabs
+    return tabs;
   }
 
   const config = {
@@ -1075,10 +1064,10 @@ const GameItems = ({ themeConfig }: any) => {
     getContentItem,
     onChangeParams,
     onChange: (selected: any) => {
-      console.log('3333 changed', selected)
+      console.log('3333 changed', selected);
     },
     onSubmit: async (values: any) => {
-      return onSaveContentItem(values)
+      return onSaveContentItem(values);
     },
     // onValidate: (values: any) => {
     //   const contentItem = getContentItem({ params: localParams })
@@ -1098,15 +1087,14 @@ const GameItems = ({ themeConfig }: any) => {
     themeConfig,
     history,
     permissions,
-  }
+  };
 
   return (
     <div
       css={css`
         max-width: 90%;
         margin: 0 auto;
-      `}
-    >
+      `}>
       <Modal
         centered
         title="Warning"
@@ -1114,47 +1102,43 @@ const GameItems = ({ themeConfig }: any) => {
         closable={false}
         okText="Confirm Publish"
         onOk={() => {
-          const contentItem = getContentItem({ params: localParams })
-          contentItem.__draftWarningAcknowledged = true
+          const contentItem = getContentItem({ params: localParams });
+          contentItem.__draftWarningAcknowledged = true;
 
-          setIsDraftWarningAcknowledged(true)
-          setIsDraftWarningModalVisible(false)
+          setIsDraftWarningAcknowledged(true);
+          setIsDraftWarningModalVisible(false);
 
           setTimeout(() => {
             // Doesnt work for some reason
             // form.submit()
             // @ts-ignore
-            document.querySelectorAll('[data-tourid="app-content-edit-button"]')[0].click()
-          }, 500)
+            document.querySelectorAll('[data-tourid="app-content-edit-button"]')[0].click();
+          }, 500);
         }}
         onCancel={() => {
-          setIsDraftWarningModalVisible(false)
+          setIsDraftWarningModalVisible(false);
         }}
         closeIcon={<></>}
         open={isDraftWarningModalVisible}
         css={css`
           max-width: 100vw !important;
-        `}
-      >
-        This form is already published, so it cannot be updated. Instead a draft will be created.
-        However, there already an existing draft. That draft will be replaced with the current
-        changes.
+        `}>
+        This form is already published, so it cannot be updated. Instead a draft will be created. However, there already
+        an existing draft. That draft will be replaced with the current changes.
       </Modal>
       <div
         css={css`
           padding: 20px 0 20px;
           text-align: right;
           font-family: 'Open Sans', sans-serif;
-        `}
-      >
+        `}>
         <h1
           css={css`
             color: #6fa6d4;
             font-size: 28px;
             font-weight: normal;
             font-style: normal;
-          `}
-        >
+          `}>
           Manage Forms
         </h1>
         <p
@@ -1163,20 +1147,18 @@ const GameItems = ({ themeConfig }: any) => {
             font-weight: normal;
             font-style: normal;
             margin-top: 5px;
-          `}
-        >
+          `}>
           Search by Form ID
         </p>
       </div>
       <div
         css={css`
           position: relative;
-        `}
-      >
+        `}>
         <App {...config} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default GameItems
+export default GameItems;
