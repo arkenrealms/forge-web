@@ -223,9 +223,9 @@ window.addEventListener('unhandledrejection', function (promiseRejectionEvent) {
   console.warn(promiseRejectionEvent);
 });
 
-if (typeof process !== 'undefined') {
-  process.on('unhandledRejection', (error) => {});
-}
+// if (typeof process !== 'undefined') {
+//   process.on('unhandledRejection', (error) => {});
+// }
 
 function FallbackComponent() {
   return <div style={{ color: '#fff' }}>An error has occurred. Please report in t.me/runereports</div>;

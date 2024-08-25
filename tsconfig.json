@@ -12,7 +12,6 @@
     "emitDecoratorMetadata": true,
     "removeComments": true,
     "skipLibCheck": true,
-    "suppressImplicitAnyIndexErrors": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "checkJs": true,

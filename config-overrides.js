@@ -18,12 +18,15 @@ module.exports = function (config, env) {
 
   // Setting fallbacks correctly
   config.resolve.fallback = {
-    fs: false, // Disable fs in the browser
+    fs: require.resolve('browserify-fs'), // Disable fs in the browser
     path: require.resolve('path-browserify'),
     stream: require.resolve('stream-browserify'),
-    buffer: require.resolve('buffer/'),
-    url: require.resolve('url/'), // For browser-compatible URL handling
+    buffer: require.resolve('buffer'),
+    assert: require.resolve('assert'),
+    url: require.resolve('url'), // For browser-compatible URL handling
+    process: require.resolve('process/browser'),
     crypto: require.resolve('crypto-browserify'),
+    util: false,
     http: false,
     https: false,
     zlib: false,
@@ -53,14 +56,15 @@ module.exports = function (config, env) {
   // Resolve aliases
   config.resolve.alias = {
     '~': path.resolve(__dirname, './src'),
-    'process/browser': require.resolve('process/browser.js'), // Ensure correct resolution
+    // 'ethereumjs-util': false,
+    'process/browser': false, // require.resolve('process/browser.js'), // Ensure correct resolution
     fs: false,
     path: false,
     net: false,
     tls: false,
     child_process: false,
     process: false,
-    util: false,
+    // util: false,
     crypto: false,
     stream: false,
     http: false,
@@ -120,6 +124,12 @@ module.exports = function (config, env) {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
     })
   );
+  // config.plugins.push(
+  //   new webpack.IgnorePlugin({
+  //     resourceRegExp: /assert|util|other-node-specific-modules/,
+  //     contextRegExp: /ethereumjs-util|some-other-module/,
+  //   })
+  // );
 
   config.plugins.push(
     new Dotenv({
