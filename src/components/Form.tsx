@@ -468,7 +468,7 @@ export default function FormDetails({ form, submission, isLoading }: any) {
     }
   }
 
-  console.log(33333, initialFormValues, root);
+  // console.log(33333, initialFormValues, root);
 
   if (!root) return <Loading />;
 

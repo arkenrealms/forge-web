@@ -1,29 +1,29 @@
-import React, { Component, useEffect, useState, useRef } from 'react'
-import echarts from '~/lib/echarts'
-import debounce from '@arken/node/util/debounce'
+import React, { Component, useEffect, useState, useRef } from 'react';
+import echarts from '~/lib/echarts';
+import { debounce } from '@arken/node/util/time';
 
 export default function () {
-  const [chart, setChart] = useState(null)
-  const chartRef = useRef(null)
+  const [chart, setChart] = useState(null);
+  const chartRef = useRef(null);
 
   function resize() {
-    if (!chartRef?.current) return
-    debounce(chartRef.current.resize, 300)()
+    if (!chartRef?.current) return;
+    debounce(chartRef.current.resize, 300)();
   }
 
   function initChart() {
-    if (!chartRef?.current) return
+    if (!chartRef?.current) return;
 
-    const chart2 = echarts.init(chartRef.current, 'macarons')
-    setChart(chart2)
+    const chart2 = echarts.init(chartRef.current, 'macarons');
+    setChart(chart2);
 
     const xData = (function () {
-      const data = []
+      const data = [];
       for (let i = 1; i < 13; i++) {
-        data.push(i + 'month')
+        data.push(i + 'month');
       }
-      return data
-    })()
+      return data;
+    })();
 
     chart2.setOption({
       backgroundColor: '#344b58',
@@ -156,7 +156,7 @@ export default function () {
                 },
                 position: 'insideTop',
                 formatter(p: any) {
-                  return p.value > 0 ? p.value : ''
+                  return p.value > 0 ? p.value : '';
                 },
               },
             },
@@ -176,7 +176,7 @@ export default function () {
                 show: true,
                 position: 'top',
                 formatter(p: any) {
-                  return p.value > 0 ? p.value : ''
+                  return p.value > 0 ? p.value : '';
                 },
               },
             },
@@ -197,7 +197,7 @@ export default function () {
                 show: true,
                 position: 'top',
                 formatter(p: any) {
-                  return p.value > 0 ? p.value : ''
+                  return p.value > 0 ? p.value : '';
                 },
               },
             },
@@ -205,18 +205,18 @@ export default function () {
           data: [1036, 3693, 2962, 3810, 2519, 1915, 1748, 4675, 6209, 4323, 2865, 4298],
         },
       ],
-    })
+    });
   }
 
   useEffect(function () {
-    debounce(initChart, 300)()
+    debounce(initChart, 300)();
 
-    window.addEventListener('resize', resize)
+    window.addEventListener('resize', resize);
 
     return function () {
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
 
   // useEffect(function() {
   //     if (sidebarCollapsed !== props.sidebarCollapsed) {
@@ -228,5 +228,5 @@ export default function () {
     <div style={{ width: '100%', height: 'calc(100vh - 100px)' }}>
       <div style={{ width: '100%', height: '100%' }} ref={chartRef}></div>
     </div>
-  )
+  );
 }

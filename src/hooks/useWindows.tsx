@@ -140,6 +140,7 @@ const ServicePayments = lazy(() => import('../views/service/payments'));
 const ServiceAccounts = lazy(() => import('../views/service/accounts'));
 const ServiceProfiles = lazy(() => import('../views/service/profiles'));
 const ServiceGames = lazy(() => import('../views/service/games'));
+const CryptoTransactions = lazy(() => import('../views/crypto/transactions'));
 
 const AirdropCmc1Rules = lazy(() => import('../views/airdrop/cmc1/rules'));
 const AirdropCmc1Winners = lazy(() => import('../views/airdrop/cmc1/winners'));
@@ -834,6 +835,28 @@ const useWindows = () => {
       },
       navPosition: undefined, //500,
       component: Services,
+      showable: false,
+    },
+    {
+      path: '/crypto/transactions',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'Transactions',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined, //500,
+      component: CryptoTransactions,
       showable: false,
     },
     {

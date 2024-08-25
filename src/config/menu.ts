@@ -1198,27 +1198,27 @@ const w4Config: MenuEntry[] = [
     items: [
       {
         label: 'DAOs', // -> Proposals
-        href: '/service/daos',
+        href: '/crypto/daos',
       },
       {
         label: 'NFTs', // -> Linked to GameItem
-        href: '/service/nfts',
+        href: '/crypto/nfts',
       },
       {
         label: 'Tokens', // -> linked to Currency
-        href: '/service/tokens',
+        href: '/crypto/tokens',
       },
       {
         label: 'Transactions', // -> linked to Trade
-        href: '/service/transactions',
+        href: '/crypto/transactions',
       },
       {
         label: 'Exchanges', // hasMany Transactions
-        href: '/service/exchanges',
+        href: '/crypto/exchanges',
       },
       {
         label: 'Validators',
-        href: '/service/validators',
+        href: '/crypto/validators',
       },
     ],
   },

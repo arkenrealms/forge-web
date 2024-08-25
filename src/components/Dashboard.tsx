@@ -10,7 +10,7 @@ import { useCreateModel, useSearchModels, useGetModel } from '@arken/forge-ui/ho
 import useSettings from '@arken/forge-ui/hooks/useSettings';
 import useDocumentTitle from '@arken/forge-ui/hooks/useDocumentTitle';
 import { average } from '@arken/node/util/math';
-import debounce from '@arken/node/util/debounce';
+import { debounce } from '@arken/node/util/time';
 import { useInterval } from '@arken/forge-ui/hooks/useInterval';
 import echarts from '~/lib/echarts';
 import { useAuth } from '@arken/forge-ui/hooks/useAuth';
