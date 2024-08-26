@@ -1,4 +1,4 @@
-import { HomeOutlined } from '@ant-design/icons';
+import { IoHomeOutline as HomeOutlined } from 'react-icons/io5';
 import _ from 'lodash';
 import qs from 'qs';
 import { Modal, Form as AntForm, Button, Tooltip } from 'antd';
@@ -7,6 +7,7 @@ import { FaPaintbrush, FaFileLines } from 'react-icons/fa6';
 import { FaEye } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { css } from 'styled-components';
+import shortId from 'shortId';
 import App from '@arken/forge-ui/components/App';
 import FormFieldText from '@arken/forge-ui/components/FormFieldText';
 import FormFieldNumber from '@arken/forge-ui/components/FormFieldNumber';
@@ -30,8 +31,6 @@ import { camelize } from '@arken/node/util/string';
 import { usePrompt } from '@arken/forge-ui/hooks/usePrompt';
 import { useAuth } from '@arken/forge-ui/hooks/useAuth';
 import appConfig from '~/config';
-
-const shortId = require('shortid');
 
 const StatusList = [
   {
@@ -895,7 +894,7 @@ const Forms = ({ themeConfig }: any) => {
     const breadcrumb: any = [
       {
         href: ``,
-        title: <HomeOutlined onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />,
+        title: <HomeOutlined />,
       },
       {
         href: `/interfaces`,

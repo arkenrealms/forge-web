@@ -119,11 +119,11 @@ module.exports = function (config, env) {
       process: 'process/browser',
     })
   );
-  config.plugins.push(
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-    })
-  );
+  // config.plugins.push(
+  //   new webpack.DefinePlugin({
+  //     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+  //   })
+  // );
   // config.plugins.push(
   //   new webpack.IgnorePlugin({
   //     resourceRegExp: /assert|util|other-node-specific-modules/,

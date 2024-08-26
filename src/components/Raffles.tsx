@@ -1,4 +1,4 @@
-import { HomeOutlined } from '@ant-design/icons';
+import { IoHomeOutline as HomeOutlined } from 'react-icons/io5';
 import _ from 'lodash';
 import qs from 'qs';
 import { Modal, Form as AntForm } from 'antd';
@@ -773,7 +773,7 @@ const Raffles = ({ themeConfig }: any) => {
     const breadcrumb: any = [
       {
         href: ``,
-        title: <HomeOutlined onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />,
+        title: <HomeOutlined />,
       },
       {
         href: `/interfaces`,

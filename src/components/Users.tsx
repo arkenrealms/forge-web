@@ -1,16 +1,16 @@
-import qs from 'qs'
-import styled, { css } from 'styled-components'
-import { Button, List } from 'antd'
-import { HomeOutlined, DownOutlined } from '@ant-design/icons'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
-import React, { useEffect, useState, JSX } from 'react'
-import { BiCommentDetail } from 'react-icons/bi'
-import _ from 'lodash'
-import App from '@arken/forge-ui/components/App'
-import FormFieldText from '@arken/forge-ui/components/FormFieldText'
-import FormFieldSelect from '@arken/forge-ui/components/FormFieldSelect'
-import useSettings from '@arken/forge-ui/hooks/useSettings'
-import * as log from '@arken/node/util/log'
+import qs from 'qs';
+import styled, { css } from 'styled-components';
+import { Button, List } from 'antd';
+import { IoHomeOutline as HomeOutlined } from 'react-icons/io5';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect, useState, JSX } from 'react';
+import { BiCommentDetail } from 'react-icons/bi';
+import _ from 'lodash';
+import App from '@arken/forge-ui/components/App';
+import FormFieldText from '@arken/forge-ui/components/FormFieldText';
+import FormFieldSelect from '@arken/forge-ui/components/FormFieldSelect';
+import useSettings from '@arken/forge-ui/hooks/useSettings';
+import * as log from '@arken/node/util/log';
 import {
   useModel,
   useGetModelCall,
@@ -21,11 +21,11 @@ import {
   useUpdateModel,
   useUpsertModel,
   useDeleteModel,
-} from '@arken/forge-ui/hooks'
-import useDocumentTitle from '@arken/forge-ui/hooks/useDocumentTitle'
-import { generateLongId } from '@arken/node/util/db'
+} from '@arken/forge-ui/hooks';
+import useDocumentTitle from '@arken/forge-ui/hooks/useDocumentTitle';
+import { generateLongId } from '@arken/node/util/db';
 
-const zzz = styled.div``
+const zzz = styled.div``;
 
 // type commentsOnUsersWithRelations = commentsOnUsers & {
 //   User: User
@@ -33,18 +33,18 @@ const zzz = styled.div``
 // }
 
 type NexusModel<T> = Omit<T, 'meta'> & {
-  __original?: T
-  meta: any
-}
+  __original?: T;
+  meta: any;
+};
 
-type UserWithRelations = NexusModel<any>
+type UserWithRelations = NexusModel<any>;
 
 function getDocumentTitle(params: any, contentItem: UserWithRelations = undefined) {
   if (contentItem?.name) {
-    return `ASI Cerebro - User - ${contentItem.name}`
+    return `ASI Cerebro - User - ${contentItem.name}`;
   }
 
-  return 'ASI Cerebro - Users'
+  return 'ASI Cerebro - Users';
 }
 
 const statusList = [
@@ -60,7 +60,7 @@ const statusList = [
     text: 'Archived',
     value: 'Archived',
   },
-]
+];
 
 const contentItemDefault: any = {
   id: '',
@@ -82,11 +82,11 @@ const contentItemDefault: any = {
   // comments: [],
   // forms: [],
   meta: {},
-}
+};
 
-const contentItemTemp: UserWithRelations = { ...contentItemDefault }
+const contentItemTemp: UserWithRelations = { ...contentItemDefault };
 
-const buildRolePath = (role: any): string => `/roles?contentMode=view&contentId=${role.id}`
+const buildRolePath = (role: any): string => `/roles?contentMode=view&contentId=${role.id}`;
 
 const RoleRenderer = (role: any, onClick: React.MouseEventHandler): JSX.Element => {
   return (
@@ -98,8 +98,8 @@ const RoleRenderer = (role: any, onClick: React.MouseEventHandler): JSX.Element 
         </a>
       }
     />
-  )
-}
+  );
+};
 
 const query = `
   id
@@ -123,7 +123,7 @@ const query = `
       description
     }
   }
-`
+`;
 
 // interface RolesWrapperProps {
 //   setRoles: (roles: Role[]) => void
@@ -155,10 +155,10 @@ const query = `
 // }
 
 const AdminUsers = ({ themeConfig }: any) => {
-  const [cacheKey, setCacheKey] = useState('0')
-  const { settings } = useSettings()
-  const history = useNavigate()
-  const location = useLocation()
+  const [cacheKey, setCacheKey] = useState('0');
+  const { settings } = useSettings();
+  const history = useNavigate();
+  const location = useLocation();
 
   const { data: roles }: any = useSearchModels({
     key: 'Role',
@@ -174,12 +174,12 @@ const AdminUsers = ({ themeConfig }: any) => {
         name: 'asc',
       },
     },
-  })
+  });
 
   const localParams: any = {
     status: ['Unclaimed', 'Active'],
     ...qs.parse(window.location.search.replace('?', '')),
-  }
+  };
 
   const { isLoading: contentItemLoading, data: contentItemSearch }: any = useGetModel({
     key: 'User',
@@ -192,9 +192,9 @@ const AdminUsers = ({ themeConfig }: any) => {
           },
         }
       : null,
-  })
+  });
 
-  const contentItem = getContentItem({ params: localParams })
+  const contentItem = getContentItem({ params: localParams });
 
   const { isLoading: contentListLoading, data: contentListSearch }: any = useSearchModels({
     key: 'User',
@@ -206,7 +206,7 @@ const AdminUsers = ({ themeConfig }: any) => {
         status: { in: localParams.status },
       },
     },
-  })
+  });
 
   const { isPending: createLoading, mutateAsync: createUser } = useCreateModel({
     key: 'User',
@@ -214,7 +214,7 @@ const AdminUsers = ({ themeConfig }: any) => {
     query: `
       id
     `,
-  })
+  });
 
   const { isPending: updateLoading, mutateAsync: updateUser } = useUpdateModel({
     key: 'User',
@@ -222,34 +222,34 @@ const AdminUsers = ({ themeConfig }: any) => {
     query: `
       id
     `,
-  })
+  });
 
   const rerender = function () {
-    log.dev('Rerender')
-    setCacheKey('cache' + Math.random())
-  }
+    log.dev('Rerender');
+    setCacheKey('cache' + Math.random());
+  };
 
   const onSaveContentItem = async (values: Partial<UserWithRelations>) => {
-    log.dev('Saving content item...', values)
+    log.dev('Saving content item...', values);
 
     try {
-      const contentItem = getContentItem({ params: localParams })
+      const contentItem = getContentItem({ params: localParams });
 
-      console.log('Copying user values to content item', contentItem, values)
+      console.log('Copying user values to content item', contentItem, values);
       for (const index in values) {
         // @ts-ignore
-        contentItem[index] = values[index]
+        contentItem[index] = values[index];
       }
 
       if (contentItem.__original) {
-        log.dev('Updating user', contentItem, contentItemSearch)
+        log.dev('Updating user', contentItem, contentItemSearch);
         const res = await updateUser({
           before: contentItem.__original,
           after: contentItem,
           where: {
             id: contentItem.id,
           },
-        })
+        });
 
         return {
           message: `Success`,
@@ -257,9 +257,9 @@ const AdminUsers = ({ themeConfig }: any) => {
           placement: 'topRight' as any,
           duration: 3,
           contentId: res.id,
-        }
+        };
       } else {
-        log.dev('Creating user', contentItem, contentItemSearch)
+        log.dev('Creating user', contentItem, contentItemSearch);
         const res = await createUser({
           data: {
             ...contentItem,
@@ -270,7 +270,7 @@ const AdminUsers = ({ themeConfig }: any) => {
             // comments: undefined,
             // forms: undefined,
           },
-        })
+        });
 
         return {
           message: `Success`,
@@ -278,13 +278,13 @@ const AdminUsers = ({ themeConfig }: any) => {
           placement: 'topRight' as any,
           duration: 3,
           contentId: res.id,
-        }
+        };
       }
     } catch (e) {
-      console.log('Error saving user', e)
-      throw e
+      console.log('Error saving user', e);
+      throw e;
     }
-  }
+  };
 
   async function getColumns({ params }: any) {
     const columns = [
@@ -310,7 +310,7 @@ const AdminUsers = ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
 
         sorter: (a: any, b: any) => a.name.localeCompare(b.name),
@@ -337,7 +337,7 @@ const AdminUsers = ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
 
         sorter: (a: any, b: any) => a.email.localeCompare(b.email),
@@ -369,7 +369,7 @@ const AdminUsers = ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
       },
       {
@@ -396,7 +396,7 @@ const AdminUsers = ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
         sorter: (a: any, b: any) => a.companyName.localeCompare(b.companyName),
       },
@@ -422,7 +422,7 @@ const AdminUsers = ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
       },
       // {
@@ -443,9 +443,9 @@ const AdminUsers = ({ themeConfig }: any) => {
       //     ) : null
       //   },
       // },
-    ]
+    ];
 
-    return columns
+    return columns;
   }
 
   function getContentList({ params }: any) {
@@ -462,11 +462,11 @@ const AdminUsers = ({ themeConfig }: any) => {
     //   return mockUsers.filter((item: any) => item.status !== 'Archived')
     // }
 
-    if (!contentListSearch) return []
+    if (!contentListSearch) return [];
 
-    const result = contentListSearch
+    const result = contentListSearch;
 
-    return result
+    return result;
   }
 
   function getContentItem({ params }: any) {
@@ -476,33 +476,28 @@ const AdminUsers = ({ themeConfig }: any) => {
     // }
 
     if (params?.contentId && contentItemSearch?.id && contentItemTemp.id !== contentItemSearch.id) {
-      console.log(
-        'Resetting content item object due to search',
-        contentItemTemp,
-        ':',
-        contentItemSearch?.id
-      )
+      console.log('Resetting content item object due to search', contentItemTemp, ':', contentItemSearch?.id);
       for (const k of Object.keys(contentItemDefault)) {
         // @ts-ignore
-        contentItemTemp[k] = contentItemDefault[k]
+        contentItemTemp[k] = contentItemDefault[k];
       }
       for (const k of Object.keys(contentItemSearch)) {
         // @ts-ignore
-        contentItemTemp[k] = contentItemSearch[k]
+        contentItemTemp[k] = contentItemSearch[k];
       }
 
       // @ts-ignore
       if (!contentItemTemp.__original) {
         // @ts-ignore
-        contentItemTemp.__original = _.cloneDeep(contentItemSearch)
+        contentItemTemp.__original = _.cloneDeep(contentItemSearch);
       }
 
-      setCacheKey('cache' + Math.random())
+      setCacheKey('cache' + Math.random());
     }
 
     if (params?.contentMode === 'edit') {
       if (!contentItemTemp.name) {
-        contentItemTemp.name = 'name'
+        contentItemTemp.name = 'name';
       }
       // if (params?.tab === 'roles') {
       //   // fix Roles if required
@@ -542,41 +537,41 @@ const AdminUsers = ({ themeConfig }: any) => {
 
     // console.log('Set temp content item', contentItemTemp)
 
-    return contentItemTemp
+    return contentItemTemp;
   }
 
   function getBreadcrumb({ contentItem, params }: any) {
     const breadcrumb: any = [
       {
         href: ``,
-        title: <HomeOutlined onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />,
+        title: <HomeOutlined />,
       },
       {
         href: `/users`,
         title: 'Users',
       },
-    ]
+    ];
 
     if (contentItem?.__original) {
       breadcrumb.push({
         href: `/users?contentMode=view&contentId=${contentItem.id}`,
         title: contentItem[config.secondaryKey],
-      })
+      });
     } else {
       breadcrumb.push({
         href: `/users?contentMode=view`,
         title: 'New User',
-      })
+      });
     }
 
-    return breadcrumb
+    return breadcrumb;
   }
 
   function onRemove({ params }: any) {
     onSaveContentItem({
       id: params.contentId,
       status: 'Archived',
-    })
+    });
   }
 
   function getTabs({ params }: any) {
@@ -664,7 +659,7 @@ const AdminUsers = ({ themeConfig }: any) => {
           },
         ],
       },
-    ]
+    ];
 
     // tabs.push({
     //   label: (
@@ -754,29 +749,29 @@ const AdminUsers = ({ themeConfig }: any) => {
               name: 'rolesOnUsers',
               type: 'related-list',
               filter: (item: any, items: any) => {
-                return item.status !== 'Archived'
+                return item.status !== 'Archived';
               },
               onAdd: (item: any, items: any) => {
                 let listedItem: any = contentItem.rolesOnUsers.find(
                   (rolesOnUsers: any) => rolesOnUsers.role.id === item.role.id
-                )
+                );
                 if (!listedItem) {
                   listedItem = {
                     id: generateLongId(),
                     status: 'Active',
                     // roleId: roles.find((role: any) => role.id === item.role.id).id,
                     role: roles.find((role: any) => role.id === item.role.id),
-                  }
+                  };
                 }
-                listedItem.status = 'Active'
+                listedItem.status = 'Active';
 
-                return listedItem
+                return listedItem;
               },
               onRemove: (item: any) => {
                 const listedItem: any = contentItem.rolesOnUsers.find(
                   (rolesOnUsers: any) => rolesOnUsers.role.id === item.role.id
-                )
-                listedItem.status = 'Archived'
+                );
+                listedItem.status = 'Archived';
               },
               showAdd: true,
               showEdit: false,
@@ -791,8 +786,8 @@ const AdminUsers = ({ themeConfig }: any) => {
               },
               content: (role: any) =>
                 RoleRenderer(role, (e: React.MouseEvent) => {
-                  e.preventDefault()
-                  history(buildRolePath(role))
+                  e.preventDefault();
+                  history(buildRolePath(role));
                 }),
               fieldsets: [
                 {
@@ -817,12 +812,11 @@ const AdminUsers = ({ themeConfig }: any) => {
                             (role: any) =>
                               !contentItem.rolesOnUsers.find(
                                 (rolesOnUsers: any) =>
-                                  rolesOnUsers.status !== 'Archived' &&
-                                  rolesOnUsers.role.id === role.id
+                                  rolesOnUsers.status !== 'Archived' && rolesOnUsers.role.id === role.id
                               )
                           )
                           .map((role: any) => {
-                            return { text: role.name, value: role.id }
+                            return { text: role.name, value: role.id };
                           }) || [],
                       value: '',
                     },
@@ -833,9 +827,9 @@ const AdminUsers = ({ themeConfig }: any) => {
           ],
         },
       ],
-    } as any)
+    } as any);
 
-    return tabs
+    return tabs;
   }
 
   const config: any = {
@@ -862,21 +856,20 @@ const AdminUsers = ({ themeConfig }: any) => {
     onRemove,
     getTabs,
     themeConfig,
-  }
+  };
 
-  useDocumentTitle(getDocumentTitle(localParams, contentItem))
+  useDocumentTitle(getDocumentTitle(localParams, contentItem));
 
   return (
     <div
       css={css`
         width: 90%;
         margin: 20px auto;
-      `}
-    >
+      `}>
       <App {...config} />
       {/* {isRolesTab && <RolesWrapper setRoles={setRoles} />} */}
     </div>
-  )
-}
+  );
+};
 
-export default AdminUsers
+export default AdminUsers;

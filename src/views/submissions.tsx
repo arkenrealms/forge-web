@@ -1,7 +1,11 @@
-import React from 'react'
-import Layout from '~/components/Layout'
+import React from 'react';
+import Layout from '~/components/Layout';
 // import AdminSubmissions from '~/components/AdminSubmissions'
 
 export default () => {
-  return <Layout>{/* <AdminSubmissions /> */}</Layout>
-}
+  return (
+    <Layout>
+      <div></div>
+    </Layout>
+  );
+};

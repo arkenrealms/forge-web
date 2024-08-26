@@ -192,16 +192,16 @@ const Item: React.FC<Props> = ({
     if (showDropdown) {
       if (!isDisabled) {
         //  && itemSelected === itemIndex
-        setIsModalOpened && setIsModalOpened(!isModalOpened);
+        if(setIsModalOpened) setIsModalOpened(!isModalOpened);
       } else {
-        setIsModalOpened && setIsModalOpened(false);
+        if(setIsModalOpened) setIsModalOpened(false);
       }
     }
 
     if (selectMode && category !== ItemCategoriesType.RUNE) {
-      setItemMultiSelected && setItemMultiSelected(item.tokenId);
+      if(setItemMultiSelected) setItemMultiSelected(item.tokenId);
     } else {
-      setItemSelected && setItemSelected(itemIndex);
+      if(setItemSelected) setItemSelected(itemIndex);
     }
   };
   // console.log(itemSelected, itemIndex)

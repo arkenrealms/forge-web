@@ -80,7 +80,7 @@ interface TableParams {
   filters?: Record<string, FilterValue>;
 }
 
-export default function ({ primaryKey, getBreadcrumb, getColumns, contentModel, getContentList, getContentItem }) {
+export default function ({ primaryKey, getBreadcrumb, getColumns, contentModel, getContentList, getContentItem }: any) {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [loading, setLoading] = useState(false);
   const history2 = useNavigate();

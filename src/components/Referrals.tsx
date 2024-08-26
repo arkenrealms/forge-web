@@ -1,6 +1,7 @@
-import { HomeOutlined } from '@ant-design/icons';
+import { IoHomeOutline as HomeOutlined } from 'react-icons/io5';
 import _ from 'lodash';
 import qs from 'qs';
+import shortId from 'shortId';
 import { Modal, Form as AntForm } from 'antd';
 import React, { useState } from 'react';
 import { BiCommentDetail } from 'react-icons/bi';
@@ -134,8 +135,6 @@ import appConfig from '~/config';
 
 //   return <Editor {...config} />
 // }
-
-const shortId = require('shortid');
 
 const StatusList = [
   {
@@ -773,7 +772,7 @@ const Referrals = ({ themeConfig }: any) => {
     const breadcrumb: any = [
       {
         href: ``,
-        title: <HomeOutlined onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />,
+        title: <HomeOutlined />,
       },
       {
         href: `/interfaces`,

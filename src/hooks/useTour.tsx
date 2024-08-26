@@ -5,7 +5,7 @@ import styled, { createGlobalStyle, css } from 'styled-components';
 import { Layout, Spin, Button, Modal, Divider, Space, Tour, Tabs } from 'antd';
 import _ from 'lodash';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { QuestionCircleOutlined, SyncOutlined } from '@ant-design/icons';
+import { FaRegQuestionCircle as QuestionCircleOutlined } from 'react-icons/fa';
 import { FloatButton } from 'antd';
 
 const zzz = styled.div``;
@@ -227,7 +227,7 @@ const TourProvider = ({ children }: any) => {
       <FloatButton.Group shape="circle" style={{ right: 24 }}>
         <FloatButton
           tooltip={<div>Help</div>}
-          icon={<QuestionCircleOutlined onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />}
+          icon={<QuestionCircleOutlined />}
           onClick={() => setIsHelpModalVisible(true)}
           data-testid="help-button"
         />

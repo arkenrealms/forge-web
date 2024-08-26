@@ -6,6 +6,7 @@ import CountUp from 'react-countup';
 import styled, { css, createGlobalStyle } from 'styled-components';
 import { RiSurveyLine } from 'react-icons/ri';
 import { SlRefresh } from 'react-icons/sl';
+import { useQuery, useMutation, UseQueryResult, QueryClient } from '@tanstack/react-query';
 import { useCreateModel, useSearchModels, useGetModel } from '@arken/forge-ui/hooks';
 import useSettings from '@arken/forge-ui/hooks/useSettings';
 import useDocumentTitle from '@arken/forge-ui/hooks/useDocumentTitle';
@@ -15,6 +16,8 @@ import { useInterval } from '@arken/forge-ui/hooks/useInterval';
 import echarts from '~/lib/echarts';
 import { useAuth } from '@arken/forge-ui/hooks/useAuth';
 import packagejson from '../../package.json';
+import { trpc } from '~/utils/trpc';
+
 // @ts-ignore
 import DashboardLandingImage from '../assets/dashboard.png';
 
@@ -248,57 +251,31 @@ const SpecialButton = ({ icon, title, path, onClick, ...props }: any) => {
 const oneWeekAgo = new Date();
 oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
+const useUpdateMetricsMutation = () => {
+  return useMutation(() => trpc.updateMetrics.mutate());
+};
+
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const { settings } = useSettings();
   const { user } = useAuth();
   const [refreshCountdown, setRefreshCountdown] = useState(15);
-  const [info, setInfo] = useState(undefined);
 
-  const { mutateAsync: createStat }: any = useCreateModel({
-    key: 'Stat',
-    action: 'createOneStat',
-    query,
-  });
+  const { data: info } = trpc.core.info.useQuery({});
 
-  useEffect(function () {
-    async function run() {
-      const res = await (
-        await fetch(`${process.env.REACT_APP_SERVICE_URI}/info`, {
-          method: 'GET',
-        })
-      ).json();
+  const { mutate: updateMetrics } = trpc.core.updateMetrics.useMutation();
 
-      setInfo(res);
-    }
-
-    run();
-  }, []);
-
-  // TODO: this is a workaround to get a daily metric, remove when we have an azure cronjob
-  useGetModel({
-    key: 'Jobs',
-    action: 'updateMetrics',
-    variables: {},
-    gql: `
-      query Jobs {
-        updateMetrics {
-          success
-        }
-      }
-    `,
-  });
+  useEffect(() => {
+    updateMetrics();
+  }, [updateMetrics]);
 
   const {
-    data: contentListSearch,
+    data: metrics,
     refetch: refreshStats,
     isLoading: isLoadingStats,
     isFetching: isRefreshingStats,
-  }: any = useSearchModels({
-    key: 'Stat',
-    action: 'stats',
-    query,
-    variables: {
+  } = trpc.core.stats.useQuery(
+    {
       where: {
         createdDate: { gte: oneWeekAgo },
       },
@@ -306,7 +283,12 @@ export default function AdminDashboard() {
         number: 'desc',
       },
     },
-  });
+    {
+      enabled: true, // Automatically fetch data on mount
+      staleTime: 1000 * 60 * 5, // Data is considered fresh for 5 minutes
+      refetchOnWindowFocus: false, // Do not refetch on window focus
+    }
+  );
 
   useInterval(function () {
     if (refreshCountdown === 1) {
@@ -316,259 +298,9 @@ export default function AdminDashboard() {
     setRefreshCountdown(refreshCountdown > 0 ? refreshCountdown - 1 : 15);
   }, 1000);
 
-  const todayStat = contentListSearch?.[0];
+  const todayStat = metrics?.[0];
 
-  const colorMap: any = {
-    New: '#ff9080',
-    Open: '#00bfb7',
-    Complete: '#80ffb0',
-    Cancelled: '#ff9080',
-    Pending: '#eb80ff',
-  };
-
-  function OrderChart() {
-    const [chart, setChart] = useState(null);
-    const chartRef = useRef(null);
-
-    function resize() {
-      if (!chartRef?.current) return;
-      debounce(chartRef.current.resize, 300)();
-    }
-
-    function initChart() {
-      if (!chartRef?.current) return;
-
-      const chart2 = echarts.init(chartRef.current, 'macarons');
-      setChart(chart2);
-
-      const xData = (function () {
-        // const data = []
-        // for (let i = 1; i < 13; i++) {
-        //   data.push(i + 'month')
-        // }
-        // return data
-        return ['02/2023', '03/2023', '04/2023'];
-      })();
-
-      const series = [];
-
-      for (const status of StatusList) {
-        series.push({
-          name: status.type,
-          type: 'bar',
-          stack: 'total',
-          barMaxWidth: 35,
-          barGap: '10%',
-          itemStyle: {
-            normal: {
-              color: colorMap[status.type],
-              label: {
-                show: true,
-                textStyle: {
-                  color: '#fff',
-                },
-                position: 'insideTop',
-                formatter(p: any) {
-                  return p.Total > 0 ? p.Total : '';
-                },
-              },
-            },
-          },
-          data: contentListSearch.map((item: any) => item.meta[`Total${status.type}Forms`]),
-        });
-      }
-
-      const averageData = [];
-      for (const item of contentListSearch) {
-        averageData.push(average(StatusList.map((status: any) => item.meta[`Total${status.type}Forms`])));
-      }
-
-      // average
-
-      series.push({
-        name: 'average',
-        type: 'line',
-        stack: 'total',
-        symbolSize: 10,
-        symbol: 'circle',
-        itemStyle: {
-          normal: {
-            color: 'rgba(252,230,48,1)',
-            barBorderRadius: 0,
-            label: {
-              show: true,
-              position: 'top',
-              formatter(p: any) {
-                return p.Total > 0 ? p.Total : '';
-              },
-            },
-          },
-        },
-        data: averageData,
-      });
-
-      // {
-      //   name: 'male',
-      //   type: 'bar',
-      //   stack: 'total',
-      //   itemStyle: {
-      //     normal: {
-      //       color: 'rgba(0,191,183,1)',
-      //       barBorderRadius: 0,
-      //       label: {
-      //         show: true,
-      //         position: 'top',
-      //         formatter(p: any) {
-      //           return p.value > 0 ? p.value : ''
-      //         },
-      //       },
-      //     },
-      //   },
-      //   data: [327, 1776, 507, 1200, 800, 482, 204, 1390, 1001, 951, 381, 220],
-      // },
-
-      chart2.setOption({
-        backgroundColor: '#fff',
-        title: {
-          text: 'Orders',
-          x: '20',
-          top: '20',
-          textStyle: {
-            color: '#fff',
-            fontSize: '22',
-          },
-          subtextStyle: {
-            color: '#90979c',
-            fontSize: '16',
-          },
-        },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            textStyle: {
-              color: '#fff',
-            },
-          },
-        },
-        grid: {
-          left: '5%',
-          right: '5%',
-          borderWidth: 0,
-          top: 150,
-          bottom: 95,
-          textStyle: {
-            color: '#fff',
-          },
-        },
-        legend: {
-          x: '5%',
-          top: '10%',
-          textStyle: {
-            color: '#90979c',
-          },
-          data: [...StatusList.map((s) => s.type), 'Average'],
-        },
-        calculable: true,
-        xAxis: [
-          {
-            type: 'category',
-            axisLine: {
-              lineStyle: {
-                color: '#90979c',
-              },
-            },
-            splitLine: {
-              show: false,
-            },
-            axisTick: {
-              show: false,
-            },
-            splitArea: {
-              show: false,
-            },
-            axisLabel: {
-              interval: 0,
-            },
-            data: xData,
-          },
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            splitLine: {
-              show: false,
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#90979c',
-              },
-            },
-            axisTick: {
-              show: false,
-            },
-            axisLabel: {
-              interval: 0,
-            },
-            splitArea: {
-              show: false,
-            },
-          },
-        ],
-        dataZoom: [
-          {
-            show: true,
-            height: 30,
-            xAxisIndex: [0],
-            bottom: 30,
-            start: 10,
-            end: 80,
-            handleIcon:
-              'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
-            handleSize: '110%',
-            handleStyle: {
-              color: '#d3dee5',
-            },
-            textStyle: {
-              color: '#fff',
-            },
-            borderColor: '#90979c',
-          },
-          {
-            type: 'inside',
-            show: true,
-            height: 15,
-            start: 1,
-            end: 35,
-          },
-        ],
-        series,
-      });
-    }
-
-    useEffect(function () {
-      debounce(initChart, 300)();
-
-      window.addEventListener('resize', resize);
-
-      return function () {
-        window.removeEventListener('resize', resize);
-      };
-    }, []);
-
-    // useEffect(function() {
-    //     if (sidebarCollapsed !== props.sidebarCollapsed) {
-    //         resize()
-    //       }
-    // }, [sidebarCollapsed]
-
-    return (
-      <div style={{ width: '100%', height: 'calc(100vh - 100px)' }}>
-        <div style={{ width: '100%', height: '100%' }} ref={chartRef}></div>
-      </div>
-    );
-  }
-
-  useDocumentTitle('ASI Nexus');
+  useDocumentTitle('Arken');
 
   return (
     <div
@@ -577,23 +309,7 @@ export default function AdminDashboard() {
         text-align: center;
       `}>
       <GlobalStyles />
-      {settings.DeveloperMode && user?.permissions['Developer Tools'] ? <OrderChart /> : null}
-      {/* <h1
-        css={css`
-          font-family: 'Open Sans', sans-serif;
-          font-size: 35px;
-          color: rgb(127, 178, 57);
-          font-weight: 300;
-          font-style: normal;
-          text-align: center;
-          line-height: 1.5;
-          border-bottom: 2px solid rgb(127, 178, 57);
-          display: inline-block;
-          margin: 20px auto 20px;
-        `}
-      >
-        NEXUS
-      </h1> */}
+      {settings.DeveloperMode && user?.permissions['Developer Tools'] ? <div /> : null}
       <Row
         justify="space-between"
         css={css`
@@ -760,7 +476,7 @@ export default function AdminDashboard() {
           <br />
         </Col>
       </Row>
-      {/* {info ? (
+      {info ? (
         <div
           css={css`
             position: absolute;
@@ -772,11 +488,11 @@ export default function AdminDashboard() {
             height: 65px;
             color: #666;
           `}>
-          cerebro-ui@{packagejson.version} ({process.env.BUILD_NUMBER || 'local'})
+          cerebro-web@{packagejson.version} ({process.env.BUILD_NUMBER || 'local'})
           <br />
           cerebro-backend@{info.version} ({info.build})
         </div>
-      ) : null} */}
+      ) : null}
     </div>
   );
 }
