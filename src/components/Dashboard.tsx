@@ -251,21 +251,18 @@ const SpecialButton = ({ icon, title, path, onClick, ...props }: any) => {
 const oneWeekAgo = new Date();
 oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
-const useUpdateMetricsMutation = () => {
-  return useMutation(() => trpc.updateMetrics.mutate());
-};
-
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const { settings } = useSettings();
   const { user } = useAuth();
   const [refreshCountdown, setRefreshCountdown] = useState(15);
 
-  const { data: info } = trpc.core.info.useQuery({});
+  const { data: info } = trpc.core.info.useQuery();
 
   const { mutate: updateMetrics } = trpc.core.updateMetrics.useMutation();
 
   useEffect(() => {
+    console.log('Updating metrics');
     updateMetrics();
   }, [updateMetrics]);
 
@@ -284,6 +281,7 @@ export default function AdminDashboard() {
       },
     },
     {
+      // queryKey: 'metrics',
       enabled: true, // Automatically fetch data on mount
       staleTime: 1000 * 60 * 5, // Data is considered fresh for 5 minutes
       refetchOnWindowFocus: false, // Do not refetch on window focus
@@ -292,12 +290,12 @@ export default function AdminDashboard() {
 
   useInterval(function () {
     if (refreshCountdown === 1) {
-      refreshStats();
+      // refreshStats();
     }
 
     setRefreshCountdown(refreshCountdown > 0 ? refreshCountdown - 1 : 15);
   }, 1000);
-
+  console.log('metrics', metrics);
   const todayStat = metrics?.[0];
 
   useDocumentTitle('Arken');
@@ -369,7 +367,7 @@ export default function AdminDashboard() {
           </Row>
           <StatusTile
             data-testid="dashboard-stat-drafts"
-            number={todayStat?.meta.TotalFormDrafted || 0}
+            number={todayStat?.TotalInterfaceDrafted || 0}
             title="Draft"
             description="Draft interfaces"
             color="#808080"
@@ -377,7 +375,7 @@ export default function AdminDashboard() {
           />
           <StatusTile
             data-testid="dashboard-stat-published"
-            number={todayStat?.meta.TotalFormPublished || 0}
+            number={todayStat?.TotalInterfacePublished || 0}
             title="Published"
             description="Published interfaces"
             color="#005e92"
@@ -385,7 +383,7 @@ export default function AdminDashboard() {
           />
           {/* <StatusTile
             data-testid="dashboard-stat-finished"
-            number={todayStat?.meta.TotalFormFinished || 0}
+            number={todayStat?.TotalInterfaceFinished || 0}
             title="Finished"
             description="Finished interfaces"
             color="#7fb239"
@@ -393,7 +391,7 @@ export default function AdminDashboard() {
           /> */}
           {/* <StatusTile
             data-testid="dashboard-stat-paused"
-            number={todayStat?.meta.TotalFormPaused || 0}
+            number={todayStat?.TotalInterfacePaused || 0}
             title="Disabled"
             description="Disabled interfaces"
             color="#333333"
@@ -401,7 +399,7 @@ export default function AdminDashboard() {
           /> */}
           <StatusTile
             data-testid="dashboard-stat-removed"
-            number={todayStat?.meta.TotalFormArchived || 0}
+            number={todayStat?.TotalInterfaceArchived || 0}
             title="Removed"
             description="Removed interfaces"
             color="#f65810"

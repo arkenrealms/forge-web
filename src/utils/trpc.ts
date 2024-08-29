@@ -23,7 +23,7 @@ const client = {
   socket: ioClient('http://localhost:8020', {
     transports: ['websocket'],
     upgrade: false,
-    autoConnect: false,
+    autoConnect: true,
     // pingInterval: 5000,
     // pingTimeout: 20000
     // extraHeaders: {
@@ -31,6 +31,8 @@ const client = {
     // }
   }),
 };
+
+// client.socket.connect();
 
 const customLink: TRPCLink<any> =
   () =>
@@ -49,7 +51,7 @@ const customLink: TRPCLink<any> =
         observer.complete();
         return;
       }
-      console.log('Emit Direct', op);
+      console.log('Emit Direct', op, client.socket);
 
       client.socket.emit('trpc', { id: op.id, method: op.path, type: op.type, params: input });
 
@@ -69,7 +71,7 @@ const customLink: TRPCLink<any> =
 export const trpc = createTRPCReact<ForgeRouter>();
 
 export const trpcClient = trpc.createClient({
-  transformer: superjson, // for data serialization
+  //   transformer: superjson, // for data serialization
   links: [
     splitLink({
       // condition to decide which link to use
