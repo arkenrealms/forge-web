@@ -229,7 +229,7 @@ const Rules = () => {
 
     async function init() {
       const data = (await (
-        await fetch((isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg') + '/oracle.json?' + rand)
+        await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/oracle.json?' + rand)
       ).json()) as any;
 
       setOracle(data);

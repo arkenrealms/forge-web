@@ -59,10 +59,10 @@ const query = `
 `;
 
 const permissions = [
-  { name: 'Process Forms', id: 'Process Forms' },
-  { name: 'Manage Forms', id: 'Manage Forms' },
+  { name: 'Process Interfaces', id: 'Process Interfaces' },
+  { name: 'Manage Interfaces', id: 'Manage Interfaces' },
   { name: 'View Interfaces', id: 'View Interfaces' },
-  { name: 'Design Forms', id: 'Design Forms' },
+  { name: 'Design Interfaces', id: 'Design Interfaces' },
   { name: 'Manage Users', id: 'Manage Users' },
   { name: 'View Users', id: 'View Users' },
   { name: 'Manage Submissions', id: 'Manage Submissions' },

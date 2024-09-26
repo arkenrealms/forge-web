@@ -172,11 +172,11 @@ const log = (...args) => {
 
 const isLocal = process.env.REACT_APP_RUNE_ENV === 'local';
 const endpoints = {
-  // cache: 'https://envoy.arken.gg',
-  // coordinator: 'https://coordinator.arken.gg',
-  databaser: isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg',
-  cache: isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg',
-  coordinator: isLocal ? 'http://localhost:5001' : 'https://coordinator.arken.gg',
+  // cache: 'https://s1.envoy.arken.asi.sh',
+  // coordinator: 'https://s1.relay.arken.asi.sh',
+  databaser: isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh',
+  cache: isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh',
+  coordinator: isLocal ? 'http://localhost:5001' : 'https://s1.relay.arken.asi.sh',
 };
 
 const config = {
@@ -387,7 +387,7 @@ const Evolution: React.FC<any> = () => {
         const date = new Date(); //or use any other date
         const rand = new Date(Math.round(date.getTime() / coeff) * coeff).getTime();
         // const rand1 = Math.floor(Math.random() * Math.floor(999999))
-        const response1 = await fetch(`https://envoy.arken.gg/evolution/realms2.json?${rand}`);
+        const response1 = await fetch(`https://s1.envoy.arken.asi.sh/evolution/realms2.json?${rand}`);
         const servers = await response1.json();
 
         const filteredServers = servers; //.filter((s) => s.status === 'online')
@@ -453,7 +453,7 @@ const Evolution: React.FC<any> = () => {
       const date = new Date(); //or use any other date
       const rand = new Date(Math.round(date.getTime() / coeff) * coeff).getTime();
       // const rand1 = Math.floor(Math.random() * Math.floor(999999))
-      const response1 = await fetch(`https://envoy.arken.gg/evolution/banList.json?${rand}`);
+      const response1 = await fetch(`https://s1.envoy.arken.asi.sh/evolution/banList.json?${rand}`);
       const response2 = await response1.json();
 
       setBanList(response2);

@@ -7,7 +7,7 @@
     "start": "react-app-rewired start",
     "build": "npm-run-all clean build:*",
     "build:react": "react-app-rewired build",
-    "dev": "dotenv -e .env.development react-app-rewired start",
+    "dev": "dotenv -e .env.development react-app-rewired start  --trace-gc",
     "serve": "serve build -p 3004",
     "clean": "del-cli ./dist && make-dir ./dist",
     "compile": "tsc",
@@ -37,8 +37,8 @@
     "@ethersproject/units": "^5",
     "@ethersproject/abstract-provider": "^5",
     "@ethersproject/bytes": "^5",
-    "@arken/forge-protocol": "workspace:*",
     "@arken/forge-ui": "workspace:*",
+    "@arken/forge-backend": "workspace:*",
     "@arken/node": "workspace:*",
     "@popperjs/core": "^2",
     "@reach/dialog": "^0",
@@ -142,7 +142,8 @@
     "web3-utils": "^4",
     "webpack": "^5",
     "webpack-dev-server": "^5",
-    "windups": "^1"
+    "windups": "^1",
+    "@tanstack/react-query-devtools": "~5.52.2"
   },
   "devDependencies": {
     "@babel/core": "^7",
@@ -201,7 +202,10 @@
     "ts-loader": "^9",
     "typescript": "^5",
     "webpack-bundle-analyzer": "^4",
-    "webpack-cli": "^5"
+    "webpack-cli": "^5",
+    "fork-ts-checker-webpack-plugin": "~9.0.2",
+    "@types/redux": "~3.6.0",
+    "redux": "~5.0.1"
   },
   "eslintConfig": {
     "overrides": [

@@ -88,10 +88,10 @@ const CardMidContent = styled(Heading).attrs({ size: 'xl' })`
 `;
 
 const endpoints = {
-  cache: 'https://envoy.arken.gg',
-  coordinator: 'https://coordinator.arken.gg',
-  // cache: 'http://localhost:6001', // 'https://envoy.arken.gg'
-  // coordinator: 'http://localhost:5001' // 'https://coordinator.arken.gg'
+  cache: 'https://s1.envoy.arken.asi.sh',
+  coordinator: 'https://s1.relay.arken.asi.sh',
+  // cache: 'http://localhost:6001', // 'https://s1.envoy.arken.asi.sh'
+  // coordinator: 'http://localhost:5001' // 'https://s1.relay.arken.asi.sh'
 };
 
 const EarnAPYCard = () => {
@@ -134,7 +134,7 @@ const EarnAPYCard = () => {
       setPlayerCount(pp);
 
       // const rand = Math.floor(Math.random() * Math.floor(999999))
-      // const response = await fetch(`https://envoy.arken.gg/evolution/rewardHistory.json?${rand}`)
+      // const response = await fetch(`https://s1.envoy.arken.asi.sh/evolution/rewardHistory.json?${rand}`)
       // const responseData = await response.json()
 
       // const rewardsData = responseData.filter((r) => r.winner.address === account)

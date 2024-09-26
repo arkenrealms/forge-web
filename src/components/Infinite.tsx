@@ -48,10 +48,10 @@ const Img = styled.img`
 `;
 
 const endpoints = {
-  cache: 'https://envoy.arken.gg',
-  coordinator: 'https://coordinator.arken.gg',
-  // cache: 'http://localhost:6001', // 'https://envoy.arken.gg'
-  // coordinator: 'http://localhost:5001' // 'https://coordinator.arken.gg'
+  cache: 'https://s1.envoy.arken.asi.sh',
+  coordinator: 'https://s1.relay.arken.asi.sh',
+  // cache: 'http://localhost:6001', // 'https://s1.envoy.arken.asi.sh'
+  // coordinator: 'http://localhost:5001' // 'https://s1.relay.arken.asi.sh'
 };
 
 const LogoImg = styled.img``;
@@ -111,7 +111,10 @@ const BigCard = styled.div<{ align?: string }>`
   background-color: rgba(0, 0, 0, 0.4);
 
   background-size: 400px;
-  box-shadow: 0 2px 0 0 rgb(0 0 0 / 80%), inset 0 -1px 0 0 rgb(0 0 0 / 10%), 0 0 66px 66px rgb(0 0 0 / 10%);
+  box-shadow:
+    0 2px 0 0 rgb(0 0 0 / 80%),
+    inset 0 -1px 0 0 rgb(0 0 0 / 10%),
+    0 0 66px 66px rgb(0 0 0 / 10%);
   // background-color: rgba(0,0,0,0.4);
   line-height: 1.6rem;
   font-size: 1rem;

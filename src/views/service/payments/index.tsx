@@ -1,13 +1,13 @@
-import React from 'react'
-import { Tag } from 'antd'
-import { formatDistance, parseISO } from 'date-fns'
-import qs from 'qs'
-import { BsArrowRightSquareFill } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
-import DataTable from '~/components/DataTable'
+import React from 'react';
+import { Tag } from 'antd';
+import { formatDistance, parseISO } from 'date-fns';
+import qs from 'qs';
+import { BsArrowRightSquareFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import DataTable from '~/components/DataTable';
 
 export default function () {
-  const primaryKey = 'id'
+  const primaryKey = 'id';
 
   const contentModel = {
     fieldsets: [
@@ -92,7 +92,7 @@ export default function () {
         ],
       },
     ],
-  }
+  };
 
   async function getColumns({ params }) {
     const columns = [
@@ -105,7 +105,7 @@ export default function () {
         title: 'Username',
         key: 'username',
         render: ({ username, address }) => {
-          return <Link to={`/service/profiles?${qs.stringify({ contentId: address })}`}>{username}</Link>
+          return <Link to={`/service/profiles?${qs.stringify({ contentId: address })}`}>{username}</Link>;
         },
       },
       {
@@ -171,30 +171,30 @@ export default function () {
             <Link to={`/service/payments?${qs.stringify({ ...params, contentId: id })}`}>
               <BsArrowRightSquareFill />
             </Link>
-          )
+          );
         },
       },
-    ]
+    ];
 
-    return params.contentId ? [...columns.slice(1, 2), ...columns.slice(-2)] : columns
+    return params.contentId ? [...columns.slice(1, 2), ...columns.slice(-2)] : columns;
   }
 
   async function getContentList() {
-    const response = await fetch(`https://coordinator.arken.gg/data/claimRequests.json`)
-    const responseData = await response.json()
+    const response = await fetch(`https://s1.relay.arken.asi.sh/data/claimRequests.json`);
+    const responseData = await response.json();
 
-    return responseData
+    return responseData;
   }
 
   async function getContentItem({ params, contentList }) {
-    return contentList?.find((item) => item[primaryKey] === params.contentId)
+    return contentList?.find((item) => item[primaryKey] === params.contentId);
   }
 
   function getBreadcrumb({ params }) {
     return [
       { path: '/services', label: 'Services' },
       { path: '/service/payments', label: 'Payments' },
-    ]
+    ];
   }
 
   return (
@@ -208,5 +208,5 @@ export default function () {
         contentModel={contentModel}
       />
     </>
-  )
+  );
 }

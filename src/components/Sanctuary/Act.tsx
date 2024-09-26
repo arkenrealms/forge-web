@@ -5,7 +5,7 @@ import useFetch from '~/hooks/useFetch';
 import { Skeleton } from '~/ui';
 
 const Act = function ({ id }) {
-  const url = `https://envoy.arken.gg/acts.json`;
+  const url = `https://s1.envoy.arken.asi.sh/acts.json`;
   const { data } = useFetch(url);
 
   const acts = data?.[url] || [];

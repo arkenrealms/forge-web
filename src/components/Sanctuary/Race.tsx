@@ -10,7 +10,7 @@ import { Flex, Skeleton } from '~/ui';
 const Abc = styled.div``;
 
 const Race = function ({ id }) {
-  const url = `https://envoy.arken.gg/characterRaces.json`;
+  const url = `https://s1.envoy.arken.asi.sh/characterRaces.json`;
   const { data } = useFetch(url);
 
   const races = data?.[url] || [];

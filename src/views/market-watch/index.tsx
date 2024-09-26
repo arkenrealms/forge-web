@@ -82,7 +82,7 @@ const Stats = () => {
 
     async function init() {
       const data = (await (
-        await fetch((isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg') + '/historical.json?' + rand)
+        await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/historical.json?' + rand)
       ).json()) as any;
 
       setHistorical(data);

@@ -318,7 +318,7 @@ const MarketTradeInner = ({ trade }) => {
                     <>
                       <strong>Token ID:</strong>{' '}
                       <a
-                        href={`https://envoy.arken.gg/token/${trade.tokenId}`}
+                        href={`https://s1.envoy.arken.asi.sh/token/${trade.tokenId}`}
                         rel="noreferrer noopener"
                         target="_blank">{`${trade.tokenId.slice(0, 23)}...${trade.tokenId.slice(-3)}`}</a>
                     </>

@@ -219,7 +219,7 @@ const ServerBox = styled.div`
   border: 1px solid #fff;
 `;
 
-const endpoint = 'https://coordinator.arken.gg';
+const endpoint = 'https://s1.relay.arken.asi.sh';
 
 const contractAddressToKey = {};
 

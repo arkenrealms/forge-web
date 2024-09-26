@@ -6,14 +6,12 @@ import { Card, CardBody, CardHeader, Flex, Heading, Text } from '~/ui';
 import Page from '~/components/layout/Page';
 import { Skeleton } from '~/ui';
 import * as relay from '~/utils/relay';
-import type { Types } from '@arken/node/modules/game';
-
-const { Header, Content, Footer, Sider } = Layout;
+import type { Types } from '@arken/node/modules/core';
 
 export default function () {
-  const { data: games } = relay.trpc.game.getGames.useQuery<Types.Game[]>();
+  const { data: realms } = relay.trpc.core.getRealms.useQuery<Types.Realm[]>();
 
-  if (!games?.length)
+  if (!realms?.length)
     return (
       <div style={{ padding: 10 }}>
         <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" />
@@ -22,10 +20,10 @@ export default function () {
 
   return (
     <Page>
-      {games.map((game: Types.Game) => {
+      {realms.map((realm: Types.Realm) => {
         return (
           <>
-            <Link to={'/service/game/' + game.id}>{game.name}</Link>
+            <Link to={'/service/realm/' + realm.id}>{realm.name}</Link>
           </>
         );
       })}

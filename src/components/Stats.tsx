@@ -78,7 +78,7 @@ const Stats = () => {
     async function init() {
       const data = (await (
         await fetch(
-          (isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg') + '/evolution/historical.json?' + rand
+          (isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/evolution/historical.json?' + rand
         )
       ).json()) as any;
 

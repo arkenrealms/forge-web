@@ -133,9 +133,9 @@ const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
     async function init() {
       try {
         const rand = Math.floor(Math.random() * Math.floor(999999));
-        const response = await fetch(`https://envoy.arken.gg/guilds/${team.id}/memberDetails.json?${rand}`).catch(
-          () => {}
-        );
+        const response = await fetch(
+          `https://s1.envoy.arken.asi.sh/guilds/${team.id}/memberDetails.json?${rand}`
+        ).catch(() => {});
 
         if (response) {
           const responseData = await response.json();

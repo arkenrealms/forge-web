@@ -22,14 +22,10 @@ import { NavProvider } from '@arken/forge-ui/hooks/useNav';
 import { NoticeProvider } from '@arken/forge-ui/hooks/useNotice';
 // import cerebro from '@arken/forge-ui'
 import { lightTheme, darkTheme } from '~/themes';
+import * as relay from '~/utils/relay';
 import ResetStyles from '~/reset-styles';
 import GlobalStyles from '~/global-styles';
-import Authorize from './components/Authorize';
-import { TourProvider } from './hooks/useTour';
-import { SettingsProvider } from './hooks/useSettings';
-import FormPage from './components/FormPage';
-import ModelPage from './components/ModelPage';
-import { trpc, trpcClient } from './utils/trpc'; // Adjust path as needed
+// import { trpc, trpcClient } from '~/utils/relay'; // Adjust path as needed
 
 window.queryClient = new QueryClient();
 
@@ -84,7 +80,7 @@ const App = ({ apolloClient }: any) => {
     <ConfigProvider theme={themeConfig}>
       <StyledThemeProvider theme={themeSettings}>
         {/* <ThemeProvider2 theme={themeConfig}> */}
-        <trpc.Provider client={trpcClient} queryClient={window.queryClient}>
+        <relay.trpc.Provider client={relay.trpcClient} queryClient={window.queryClient}>
           <QueryClientProvider client={window.queryClient}>
             <PromptProvider>
               <NoticeProvider>
@@ -215,7 +211,7 @@ const App = ({ apolloClient }: any) => {
               </NoticeProvider>
             </PromptProvider>
           </QueryClientProvider>
-        </trpc.Provider>
+        </relay.trpc.Provider>
         {/* </ThemeProvider2> */}
       </StyledThemeProvider>
     </ConfigProvider>

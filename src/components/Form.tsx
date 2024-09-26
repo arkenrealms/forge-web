@@ -122,7 +122,7 @@ function Loading() {
         <Spin size="large" />
         <br />
         <br />
-        Loading form...
+        Loading...
       </h1>
     </>
   );
@@ -178,7 +178,7 @@ export default function FormDetails({ form, submission, isLoading }: any) {
     function cleanData(d: any) {
       for (const key in d) {
         // TODO: fix
-        const primaryKey = 'Well License Number'; // d.dataPrimaryKey
+        const primaryKey = 'ID'; // d.dataPrimaryKey
 
         if (!['key', 'value', 'data', 'components'].includes(key)) {
           delete d[key];
@@ -295,7 +295,7 @@ export default function FormDetails({ form, submission, isLoading }: any) {
     [form, submission]
   );
 
-  useDocumentTitle(form?.title || 'HR');
+  useDocumentTitle(form?.title || 'Arken');
 
   if (!form) {
     return <Loading />;

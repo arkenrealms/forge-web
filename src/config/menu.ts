@@ -1127,67 +1127,67 @@ const w4Config: MenuEntry[] = [
     items: [
       {
         label: 'Universes',
-        href: '/service/game-world/universes',
+        href: '/service/game/universes',
       },
       {
         label: 'Galaxies',
-        href: '/service/game-world/galaxies',
+        href: '/service/game/galaxies',
       },
       {
         label: 'Planets',
-        href: '/service/game-world/planets',
+        href: '/service/game/planets',
       },
       {
         label: 'Stars',
-        href: '/service/game-world/stars',
+        href: '/service/game/stars',
       },
       {
         label: 'Areas',
-        href: '/service/game-world/areas',
+        href: '/service/game/areas',
       },
       {
         label: 'Cities',
-        href: '/service/game-world/cities',
+        href: '/service/game/cities',
       },
       {
         label: 'Factions',
-        href: '/service/game-world/factions',
+        href: '/service/game/factions',
       },
       {
         label: 'Eras',
-        href: '/service/game-world/eras',
+        href: '/service/game/eras',
       },
       {
         label: 'NPCs', // is a Character
-        href: '/service/game-world/npcs',
+        href: '/service/game/npcs',
       },
       {
         label: 'Characters',
-        href: '/service/game-world/characters',
+        href: '/service/game/characters',
       },
       {
         label: 'Lore',
-        href: '/service/game-world/lore',
+        href: '/service/game/lore',
       },
       {
         label: 'Quests',
-        href: '/service/game-world/quests',
+        href: '/service/game/quests',
       },
       {
         label: 'Achievements',
-        href: '/service/achievements',
+        href: '/service/game/achievements',
       },
       {
         label: 'Classes',
-        href: '/service/game-world/classes',
+        href: '/service/game/classes',
       },
       {
         label: 'Skills',
-        href: '/service/game-world/skills',
+        href: '/service/game/skills',
       },
       {
         label: 'Items', // Skin |
-        href: '/service/game-world/items',
+        href: '/service/game/items',
       },
     ],
   },

@@ -108,7 +108,8 @@ const HeadingFire = styled.h1<{
 
   @keyframes fire {
     0% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         0 ${(props) => props.fireStrength * -5}px ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 2}px ${(props) => props.fireStrength * -10}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color1},
@@ -118,7 +119,8 @@ const HeadingFire = styled.h1<{
           ${(props) => props.fireStrength * 18}px ${(props) => props.color4};
     }
     25% {
-      text-shadow: 0 0 3px ${(props) => props.color1},
+      text-shadow:
+        0 0 3px ${(props) => props.color1},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -6}px
           ${(props) => props.fireStrength * 5}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -11}px
@@ -129,7 +131,8 @@ const HeadingFire = styled.h1<{
           ${(props) => props.fireStrength * 20}px ${(props) => props.color4};
     }
     50% {
-      text-shadow: 0 0 3px ${(props) => props.color1},
+      text-shadow:
+        0 0 3px ${(props) => props.color1},
         ${(props) => props.fireStrength * -1}px ${(props) => props.fireStrength * -4}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 0}px ${(props) => props.fireStrength * -12}px
@@ -140,7 +143,8 @@ const HeadingFire = styled.h1<{
           ${(props) => props.fireStrength * 22}px ${(props) => props.color4};
     }
     75% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -7}px
           ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -11}px
@@ -151,7 +155,8 @@ const HeadingFire = styled.h1<{
           ${(props) => props.fireStrength * 21}px ${(props) => props.color4};
     }
     100% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         0 ${(props) => props.fireStrength * -5}px ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 2}px ${(props) => props.fireStrength * -10}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color1},
@@ -164,10 +169,10 @@ const HeadingFire = styled.h1<{
 `;
 
 const endpoints = {
-  // cache: 'https://envoy.arken.gg',
-  // coordinator: 'https://coordinator.arken.gg',
-  cache: isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg',
-  coordinator: isLocal ? 'http://localhost:5001' : 'https://coordinator.arken.gg',
+  // cache: 'https://s1.envoy.arken.asi.sh',
+  // coordinator: 'https://s1.relay.arken.asi.sh',
+  cache: isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh',
+  coordinator: isLocal ? 'http://localhost:5001' : 'https://s1.relay.arken.asi.sh',
 };
 
 const aaa = styled.div``;
@@ -204,7 +209,7 @@ const Skills = () => {
       try {
         // const rand2 = Math.floor(Math.random() * Math.floor(999999))
         const response2 = await fetch(
-          `https://envoy.arken.gg/evolution/global/season${currentSeason}/leaderboard.json?${rand}`
+          `https://s1.envoy.arken.asi.sh/evolution/global/season${currentSeason}/leaderboard.json?${rand}`
         );
         const leaderboardData = await response2.json();
 

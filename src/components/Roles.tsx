@@ -1,14 +1,14 @@
-import FormFieldText from '@arken/forge-ui/components/FormFieldText'
-import useDocumentTitle from '@arken/forge-ui/hooks/useDocumentTitle'
+import FormFieldText from '@arken/forge-ui/components/FormFieldText';
+import useDocumentTitle from '@arken/forge-ui/hooks/useDocumentTitle';
 
-import * as log from '@arken/node/util/log'
-import { Avatar, List } from 'antd'
-import _ from 'lodash'
-import qs from 'qs'
-import React, { JSX, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { css } from 'styled-components'
-import App from '@arken/forge-ui/components/App'
+import * as log from '@arken/node/util/log';
+import { Avatar, List } from 'antd';
+import _ from 'lodash';
+import qs from 'qs';
+import React, { JSX, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { css } from 'styled-components';
+import App from '@arken/forge-ui/components/App';
 import {
   useModel,
   useGetModelCall,
@@ -19,22 +19,22 @@ import {
   useUpdateModel,
   useUpsertModel,
   useDeleteModel,
-} from '@arken/forge-ui/hooks'
-import { generateLongId } from '@arken/node/util/db'
+} from '@arken/forge-ui/hooks';
+import { generateLongId } from '@arken/node/util/db';
 
 type NexusModel<T> = T & {
-  __original?: T
-  meta: any
-}
+  __original?: T;
+  meta: any;
+};
 
-type RoleWithRelations = NexusModel<any>
+type RoleWithRelations = NexusModel<any>;
 
 function getDocumentTitle(params: any, contentItem: RoleWithRelations = undefined) {
   if (contentItem?.name) {
-    return `ASI Cerebro - Role - ${contentItem.name}`
+    return `ASI Cerebro - Role - ${contentItem.name}`;
   }
 
-  return 'ASI Cerebro - Roles'
+  return 'ASI Cerebro - Roles';
 }
 
 const contentItemDefault: RoleWithRelations = {
@@ -47,11 +47,11 @@ const contentItemDefault: RoleWithRelations = {
   permissionsOnRoles: [],
   rolesOnUsers: [],
   meta: {},
-}
+};
 
-const contentItemTemp: RoleWithRelations = { ...contentItemDefault }
+const contentItemTemp: RoleWithRelations = { ...contentItemDefault };
 
-const buildUserPath = (user: any): string => `/users?contentMode=view&contentId=${user.id}`
+const buildUserPath = (user: any): string => `/users?contentMode=view&contentId=${user.id}`;
 
 const UserRenderer = (user: any, onClick: React.MouseEventHandler): JSX.Element => {
   return (
@@ -64,11 +64,10 @@ const UserRenderer = (user: any, onClick: React.MouseEventHandler): JSX.Element 
         </a>
       }
     />
-  )
-}
+  );
+};
 
-const buildPermissionPath = (permission: any): string =>
-  `/permissions?contentMode=view&contentId=${permission.id}`
+const buildPermissionPath = (permission: any): string => `/permissions?contentMode=view&contentId=${permission.id}`;
 
 const PermissionRenderer = (permission: any, onClick: React.MouseEventHandler): JSX.Element => {
   return (
@@ -80,8 +79,8 @@ const PermissionRenderer = (permission: any, onClick: React.MouseEventHandler): 
         </a>
       }
     />
-  )
-}
+  );
+};
 
 const query = `
   id
@@ -108,13 +107,13 @@ const query = `
       name
     }
   }
-`
+`;
 
 const permissions = [
-  { name: 'Process Forms', id: 'Process Forms' },
-  { name: 'Manage Forms', id: 'Manage Forms' },
+  { name: 'Process Interfaces', id: 'Process Interfaces' },
+  { name: 'Manage Interfaces', id: 'Manage Interfaces' },
   { name: 'View Interfaces', id: 'View Interfaces' },
-  { name: 'Design Forms', id: 'Design Forms' },
+  { name: 'Design Interfaces', id: 'Design Interfaces' },
   { name: 'Manage Users', id: 'Manage Users' },
   { name: 'View Users', id: 'View Users' },
   { name: 'Manage Submissions', id: 'Manage Submissions' },
@@ -123,15 +122,15 @@ const permissions = [
   { name: 'View Workflows', id: 'View Workflows' },
   { name: 'Manage Settings', id: 'Manage Settings' },
   { name: 'Deletion', id: 'Deletion' },
-]
+];
 
 const AdminRoles = ({ themeConfig }: any) => {
-  const [cacheKey, setCacheKey] = useState('0')
-  const history = useNavigate()
+  const [cacheKey, setCacheKey] = useState('0');
+  const history = useNavigate();
 
   const localParams: any = {
     ...qs.parse(window.location.search.replace('?', '')),
-  }
+  };
 
   const { isLoading: contentItemLoading, data: contentItemSearch }: any = useGetModel({
     key: 'Role',
@@ -144,9 +143,9 @@ const AdminRoles = ({ themeConfig }: any) => {
           },
         }
       : null,
-  })
+  });
 
-  const contentItem = getContentItem({ params: localParams })
+  const contentItem = getContentItem({ params: localParams });
 
   const { isLoading: contentListLoading, data: contentListSearch }: any = useSearchModels({
     key: 'Role',
@@ -158,7 +157,7 @@ const AdminRoles = ({ themeConfig }: any) => {
         name: 'asc',
       },
     },
-  })
+  });
 
   const { isPending: createLoading, mutateAsync: createRole } = useCreateModel({
     key: 'Role',
@@ -166,7 +165,7 @@ const AdminRoles = ({ themeConfig }: any) => {
     query: `
       id
     `,
-  })
+  });
 
   const { isPending: updateLoading, mutateAsync: updateRole } = useUpdateModel({
     key: 'Role',
@@ -174,29 +173,29 @@ const AdminRoles = ({ themeConfig }: any) => {
     query: `
       id
     `,
-  })
+  });
 
   const rerender = function () {
-    setCacheKey('cache' + Math.random())
-  }
+    setCacheKey('cache' + Math.random());
+  };
 
   const onSaveContentItem = async (values: Partial<RoleWithRelations>) => {
     try {
-      const contentItem = getContentItem({ params: localParams })
+      const contentItem = getContentItem({ params: localParams });
       for (const index in values) {
         // @ts-ignore
-        contentItem[index] = values[index]
+        contentItem[index] = values[index];
       }
 
       if (contentItem.__original) {
-        log.dev('Updating Role', contentItem, contentItemSearch)
+        log.dev('Updating Role', contentItem, contentItemSearch);
         const res = await updateRole({
           before: contentItem.__original,
           after: contentItem,
           where: {
             id: contentItem.id,
           },
-        })
+        });
 
         return {
           message: `Success`,
@@ -204,10 +203,10 @@ const AdminRoles = ({ themeConfig }: any) => {
           placement: 'topRight' as any,
           duration: 3,
           contentId: res.id,
-        }
+        };
       } else {
-        log.dev('Creating Role', contentItem, contentItemSearch)
-        const res = await createRole({ data: contentItem })
+        log.dev('Creating Role', contentItem, contentItemSearch);
+        const res = await createRole({ data: contentItem });
 
         return {
           message: `Success`,
@@ -215,13 +214,13 @@ const AdminRoles = ({ themeConfig }: any) => {
           placement: 'topRight' as any,
           duration: 3,
           contentId: res.id,
-        }
+        };
       }
     } catch (e) {
-      console.log('Error saving role', e)
-      throw e
+      console.log('Error saving role', e);
+      throw e;
     }
-  }
+  };
 
   async function getColumns({ params }: any) {
     const columns = [
@@ -246,7 +245,7 @@ const AdminRoles = ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
         sorter: (a: any, b: any) => a.name.localeCompare(b.name),
       },
@@ -271,47 +270,42 @@ const AdminRoles = ({ themeConfig }: any) => {
               `}
               {...props}
             />
-          )
+          );
         },
         sorter: (a: any, b: any) => a.description.localeCompare(b.description),
       },
-    ]
+    ];
 
-    return columns
+    return columns;
   }
 
   function getContentList({ params }: any) {
-    if (!contentListSearch) return []
+    if (!contentListSearch) return [];
 
-    const result = contentListSearch
+    const result = contentListSearch;
 
-    return result
+    return result;
   }
 
   function getContentItem({ params }: any) {
     if (params?.contentId && contentItemSearch?.id && contentItemTemp.id !== contentItemSearch.id) {
-      console.log(
-        'Resetting content item object due to search',
-        contentItemTemp,
-        ':',
-        contentItemSearch?.id
-      )
+      console.log('Resetting content item object due to search', contentItemTemp, ':', contentItemSearch?.id);
       for (const k of Object.keys(contentItemDefault)) {
         // @ts-ignore
-        contentItemTemp[k] = contentItemDefault[k]
+        contentItemTemp[k] = contentItemDefault[k];
       }
       for (const k of Object.keys(contentItemSearch)) {
         // @ts-ignore
-        contentItemTemp[k] = contentItemSearch[k]
+        contentItemTemp[k] = contentItemSearch[k];
       }
 
       // @ts-ignore
       if (!contentItemTemp.__original) {
         // @ts-ignore
-        contentItemTemp.__original = _.cloneDeep(contentItemSearch)
+        contentItemTemp.__original = _.cloneDeep(contentItemSearch);
       }
 
-      setCacheKey('cache' + Math.random())
+      setCacheKey('cache' + Math.random());
     }
     //  else if (!params?.contentMode && !params?.contentId) {
     //   console.log(
@@ -339,11 +333,11 @@ const AdminRoles = ({ themeConfig }: any) => {
 
     // console.log('Set temp content item', contentItemTemp)
 
-    return contentItemTemp
+    return contentItemTemp;
   }
 
   function getBreadcrumb({ contentItem, params }: any) {
-    return [] as any
+    return [] as any;
   }
 
   function onRemove({ params }: any) {
@@ -351,11 +345,11 @@ const AdminRoles = ({ themeConfig }: any) => {
     onSaveContentItem({
       id: params.contentId,
       // Status: 'Archived',
-    })
+    });
   }
 
   function getTabs({ params }: any) {
-    const tabs: any[] = []
+    const tabs: any[] = [];
 
     tabs.push({
       label: 'Information',
@@ -397,7 +391,7 @@ const AdminRoles = ({ themeConfig }: any) => {
           ],
         },
       ],
-    })
+    });
 
     // Users belonging to this Role
     tabs.push({
@@ -419,14 +413,14 @@ const AdminRoles = ({ themeConfig }: any) => {
               displayKey: 'name',
               content: (user: any) =>
                 UserRenderer(user, (e: React.MouseEvent) => {
-                  e.preventDefault()
-                  history(buildUserPath(user))
+                  e.preventDefault();
+                  history(buildUserPath(user));
                 }),
             },
           ],
         },
       ],
-    })
+    });
 
     // Permissions belonging to this Role
     tabs.push({
@@ -444,33 +438,29 @@ const AdminRoles = ({ themeConfig }: any) => {
               name: 'permissionsOnRoles',
               type: 'related-list',
               filter: (item: any, items: any) => {
-                return item.status !== 'Archived'
+                return item.status !== 'Archived';
               },
               onAdd: (item: any, items: any) => {
                 let listedItem: any = contentItem.permissionsOnRoles.find(
-                  (permissionsOnRoles: any) =>
-                    permissionsOnRoles.permission.id === item.permission.id
-                )
+                  (permissionsOnRoles: any) => permissionsOnRoles.permission.id === item.permission.id
+                );
                 if (!listedItem) {
                   listedItem = {
                     id: generateLongId(),
                     status: 'Active',
                     // permissionId: permissions.find((permission: any) => permission.id === item.permission.id).id,
-                    permission: permissions.find(
-                      (permission: any) => permission.id === item.permission.id
-                    ),
-                  }
+                    permission: permissions.find((permission: any) => permission.id === item.permission.id),
+                  };
                 }
-                listedItem.status = 'Active'
+                listedItem.status = 'Active';
 
-                return listedItem
+                return listedItem;
               },
               onRemove: (item: any) => {
                 const listedItem: any = contentItem.permissionsOnRoles.find(
-                  (permissionsOnRoles: any) =>
-                    permissionsOnRoles.permission.id === item.permission.id
-                )
-                listedItem.status = 'Archived'
+                  (permissionsOnRoles: any) => permissionsOnRoles.permission.id === item.permission.id
+                );
+                listedItem.status = 'Archived';
               },
               showAdd: true,
               showEdit: false,
@@ -485,8 +475,8 @@ const AdminRoles = ({ themeConfig }: any) => {
               },
               content: (permission: any) =>
                 PermissionRenderer(permission, (e: React.MouseEvent) => {
-                  e.preventDefault()
-                  history(buildPermissionPath(permission))
+                  e.preventDefault();
+                  history(buildPermissionPath(permission));
                 }),
               fieldsets: [
                 {
@@ -516,7 +506,7 @@ const AdminRoles = ({ themeConfig }: any) => {
                               )
                           )
                           .map((permission: any) => {
-                            return { text: permission.name, value: permission.id }
+                            return { text: permission.name, value: permission.id };
                           }) || [],
                       value: '',
                     },
@@ -527,9 +517,9 @@ const AdminRoles = ({ themeConfig }: any) => {
           ],
         },
       ],
-    })
+    });
 
-    return tabs
+    return tabs;
   }
 
   const config: any = {
@@ -556,20 +546,19 @@ const AdminRoles = ({ themeConfig }: any) => {
     onRemove,
     getTabs,
     themeConfig,
-  }
+  };
 
-  useDocumentTitle(getDocumentTitle(localParams, contentItem))
+  useDocumentTitle(getDocumentTitle(localParams, contentItem));
 
   return (
     <div
       css={css`
         width: 90%;
         margin: 20px auto;
-      `}
-    >
+      `}>
       <App {...config} />
     </div>
-  )
-}
+  );
+};
 
-export default AdminRoles
+export default AdminRoles;

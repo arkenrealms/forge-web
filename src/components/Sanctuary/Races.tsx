@@ -11,7 +11,7 @@ import races from '@arken/node/data/generated/characterRaces.json';
 const Abc = styled.div``;
 
 const Races = function () {
-  // const url = `https://envoy.arken.gg/characterRaces.json`
+  // const url = `https://s1.envoy.arken.asi.sh/characterRaces.json`
   // const { data } = useFetch(url)
 
   // const races = data?.[url] || []

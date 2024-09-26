@@ -7,7 +7,7 @@ import Linker from '~/components/Linker';
 import eras from '@arken/node/data/generated/eras.json';
 
 const Era = function ({ id }) {
-  // const url = `https://envoy.arken.gg/eras.json`
+  // const url = `https://s1.envoy.arken.asi.sh/eras.json`
   // const { data } = useFetch(url)
 
   // const eras = data?.[url] || []

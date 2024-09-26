@@ -53,9 +53,9 @@ const disconnectTime = 5 * 60 * 1000;
 let connectionTimeout;
 // console.log(9999, process.env, process.env.REACT_APP_GTAG)
 const isLocalTest = process.env.REACT_APP_LOCAL_TEST === 'true';
-const databaserEndpoint = isLocalTest ? 'localhost:8443' : 'envoy.arken.gg:8443'; // 'localhost:8443' //
+const databaserEndpoint = isLocalTest ? 'localhost:8443' : 's1.envoy.arken.asi.sh:8443'; // 'localhost:8443' //
 
-const url = `https://envoy.arken.gg/notices.json`;
+const url = `https://s1.envoy.arken.asi.sh/notices.json`;
 let timeout;
 let reloadTimeout;
 let socket;

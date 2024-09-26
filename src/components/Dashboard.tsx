@@ -6,17 +6,12 @@ import CountUp from 'react-countup';
 import styled, { css, createGlobalStyle } from 'styled-components';
 import { RiSurveyLine } from 'react-icons/ri';
 import { SlRefresh } from 'react-icons/sl';
-import { useQuery, useMutation, UseQueryResult, QueryClient } from '@tanstack/react-query';
-import { useCreateModel, useSearchModels, useGetModel } from '@arken/forge-ui/hooks';
 import useSettings from '@arken/forge-ui/hooks/useSettings';
 import useDocumentTitle from '@arken/forge-ui/hooks/useDocumentTitle';
-import { average } from '@arken/node/util/math';
-import { debounce } from '@arken/node/util/time';
 import { useInterval } from '@arken/forge-ui/hooks/useInterval';
-import echarts from '~/lib/echarts';
 import { useAuth } from '@arken/forge-ui/hooks/useAuth';
 import packagejson from '../../package.json';
-import { trpc } from '~/utils/trpc';
+import * as relay from '~/utils/relay';
 
 // @ts-ignore
 import DashboardLandingImage from '../assets/dashboard.png';
@@ -254,12 +249,17 @@ oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const { settings } = useSettings();
-  const { user } = useAuth();
+  const { profile } = useAuth();
   const [refreshCountdown, setRefreshCountdown] = useState(15);
 
-  const { data: info } = trpc.core.info.useQuery();
+  const { data: info } = relay.trpc.core.info.useQuery(null, {
+    // queryKey: 'metrics',
+    enabled: true, // Automatically fetch data on mount
+    staleTime: 1000 * 60 * 5, // Data is considered fresh for 5 minutes
+    refetchOnWindowFocus: false, // Do not refetch on window focus
+  });
 
-  const { mutate: updateMetrics } = trpc.core.updateMetrics.useMutation();
+  const { mutate: updateMetrics } = relay.trpc.job.updateMetrics.useMutation();
 
   useEffect(() => {
     console.log('Updating metrics');
@@ -271,7 +271,8 @@ export default function AdminDashboard() {
     refetch: refreshStats,
     isLoading: isLoadingStats,
     isFetching: isRefreshingStats,
-  } = trpc.core.stats.useQuery(
+    error,
+  } = relay.trpc.core.stats.useQuery(
     {
       where: {
         createdDate: { gte: oneWeekAgo },
@@ -288,14 +289,43 @@ export default function AdminDashboard() {
     }
   );
 
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const result = await trpcClient.query('core.stats', {
+  //         where: {
+  //           createdDate: { gte: oneWeekAgo },
+  //         },
+  //         orderBy: {
+  //           number: 'desc',
+  //         },
+  //       });
+  //       console.log('Manual fetch result:', result);
+  //     } catch (err) {
+  //       console.error('Manual fetch error:', err);
+  //     }
+  //   }
+
+  //   fetchData();
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log('Metrics:', metrics);
+  //   console.log('Is Loading:', isLoadingStats);
+  //   console.log('Is Fetching:', isRefreshingStats);
+  //   if (error) {
+  //     console.error('Error fetching metrics:', error);
+  //   }
+  // }, [metrics, isLoadingStats, isRefreshingStats, error]);
+
   useInterval(function () {
     if (refreshCountdown === 1) {
-      // refreshStats();
+      refreshStats();
     }
 
     setRefreshCountdown(refreshCountdown > 0 ? refreshCountdown - 1 : 15);
   }, 1000);
-  console.log('metrics', metrics);
+
   const todayStat = metrics?.[0];
 
   useDocumentTitle('Arken');
@@ -307,7 +337,7 @@ export default function AdminDashboard() {
         text-align: center;
       `}>
       <GlobalStyles />
-      {settings.DeveloperMode && user?.permissions['Developer Tools'] ? <div /> : null}
+      {settings.DeveloperMode && profile?.permissions['Developer Tools'] ? <div /> : null}
       <Row
         justify="space-between"
         css={css`
@@ -367,7 +397,7 @@ export default function AdminDashboard() {
           </Row>
           <StatusTile
             data-testid="dashboard-stat-drafts"
-            number={todayStat?.TotalInterfaceDrafted || 0}
+            number={todayStat?.meta?.TotalInterfaceDrafted || 0}
             title="Draft"
             description="Draft interfaces"
             color="#808080"
@@ -375,7 +405,7 @@ export default function AdminDashboard() {
           />
           <StatusTile
             data-testid="dashboard-stat-published"
-            number={todayStat?.TotalInterfacePublished || 0}
+            number={todayStat?.meta?.TotalInterfacePublished || 0}
             title="Published"
             description="Published interfaces"
             color="#005e92"
@@ -399,7 +429,7 @@ export default function AdminDashboard() {
           /> */}
           <StatusTile
             data-testid="dashboard-stat-removed"
-            number={todayStat?.TotalInterfaceArchived || 0}
+            number={todayStat?.meta?.TotalInterfaceArchived || 0}
             title="Removed"
             description="Removed interfaces"
             color="#f65810"
@@ -412,15 +442,7 @@ export default function AdminDashboard() {
           xl={8}
           css={css`
             margin-top: 30px;
-          `}>
-          {/* <img
-            src={DashboardLandingImage}
-            css={css`
-              zoom: 1.3;
-              width: 100%;
-            `}
-          /> */}
-        </Col>
+          `}></Col>
         <Col xs={4} md={8} css={css``}>
           <div
             css={css`
@@ -444,14 +466,6 @@ export default function AdminDashboard() {
             path="/interfaces"
             title="Interface Designer"
           />
-          {/* <br />
-          <SpecialButton
-            data-testid="dashboard-forms-nc"
-            icon={<LuFileType />}
-            path="/"
-            title="Interfaces"
-            onClick={() => (window.location.href = process.env.REACT_APP_PUBLIC_VIEWER_URI)}
-          /> */}
         </Col>
       </Row>
       <Row

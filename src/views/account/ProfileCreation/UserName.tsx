@@ -141,7 +141,7 @@ const UserName: React.FC<any> = () => {
         if (referer) {
           try {
             fetch(
-              `https://coordinator.arken.gg/refer/${referer.replace('%2520', ' ')}/${account}/${userName}/${signature}`
+              `https://s1.relay.arken.asi.sh/refer/${referer.replace('%2520', ' ')}/${account}/${userName}/${signature}`
             ).catch(() => {
               alert('Referral error. Please report in Telegram or Discord.');
             });

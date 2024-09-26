@@ -76,9 +76,9 @@ const contentItemDefault: any = {
   billAccount: '',
   photoUrl: '',
   // commentsOnUsers: [],
-  // recordUpdatesOnUsers: [],
+  // revisionsOnUsers: [],
   rolesOnUsers: [],
-  // recordUpdates: [],
+  // revisions: [],
   // comments: [],
   // forms: [],
   meta: {},
@@ -264,9 +264,9 @@ const AdminUsers = ({ themeConfig }: any) => {
           data: {
             ...contentItem,
             // commentsOnUsers: undefined,
-            // recordUpdatesOnUsers: undefined,
+            // revisionsOnUsers: undefined,
             // rolesOnUsers: undefined,
-            // recordUpdates: undefined,
+            // revisions: undefined,
             // comments: undefined,
             // forms: undefined,
           },
@@ -725,7 +725,7 @@ const AdminUsers = ({ themeConfig }: any) => {
     //       fields: [
     //         {
     //           label: '',
-    //           name: 'recordUpdatesOnUsers[].recordUpdate',
+    //           name: 'revisionsOnUsers[].revision',
     //           type: 'history',
     //         },
     //       ],

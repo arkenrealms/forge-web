@@ -15,7 +15,7 @@ export default () => {
   const traderContract = useArcaneTrader();
 
   const delistOldMarketTrades = async () => {
-    const endpoint = 'https://envoy.arken.gg';
+    const endpoint = 'https://s1.envoy.arken.asi.sh';
     const response = await fetch(endpoint + `/trades-v1.json`);
     const trades = await response.json();
 

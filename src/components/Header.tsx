@@ -167,7 +167,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
       // icon: <SettingOutlined />,
       // children: [
       //   {
-      //     label: 'Manage Forms',
+      //     label: 'Manage Interfaces',
       //     key: 'forms',
       //   },
       //   {
@@ -353,7 +353,7 @@ const AdminHeader: FC<IAdminHeader> = ({ user = {}, permissions = {}, login, log
               Submissions
             </Stat>
           ) : null} */}
-            {permissions['Manage Forms'] ? (
+            {permissions['Manage Interfaces'] ? (
               <Stat onClick={() => navigate('/templates')}>
                 <span style={{ color: '#00598e' }} data-testid="app-header-stat-templates">
                   {todayStat?.meta.TotalFormTemplates || 0}

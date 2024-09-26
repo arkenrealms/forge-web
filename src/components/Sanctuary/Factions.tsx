@@ -6,14 +6,15 @@ import useFetch from '~/hooks/useFetch';
 import history from '~/routerHistory';
 import LoreBlock1 from '~/components/LoreBlock1';
 import { Flex, Skeleton } from '~/ui';
+import * as relay from '~/utils/relay';
+import type { CharacterFaction } from '@arken/node/modules/character/character.types';
 
 const Abc = styled.div``;
 
 const Factions = function () {
-  const url = `https://envoy.arken.gg/characterFactions.json`;
-  const { data } = useFetch(url);
-
-  const factions = data?.[url] || [];
+  const { data: factions } = relay.trpc.character.getCharacterFaction.useQuery<CharacterFaction[]>({
+    where: { name: { contains: 'A' } },
+  });
 
   if (!factions.length)
     return (
@@ -71,7 +72,7 @@ const Factions = function () {
                       css={css`
                         margin-top: 20px;
                       `}>
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.lore1}</ReactMarkdown>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.data.lore1}</ReactMarkdown>
                     </div>
                   </Flex>
                 </LoreBlock1>

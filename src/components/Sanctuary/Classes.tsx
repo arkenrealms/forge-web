@@ -11,7 +11,7 @@ import classes from '@arken/node/data/generated/characterClasses.json';
 const Abc = styled.div``;
 
 const Classes = function () {
-  // const url = `https://envoy.arken.gg/characterClasses.json`
+  // const url = `https://s1.envoy.arken.asi.sh/characterClasses.json`
   // const { data } = useFetch(url)
 
   // const classes = data?.[url] || []

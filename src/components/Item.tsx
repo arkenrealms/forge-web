@@ -160,7 +160,7 @@ const Item: React.FC<Props> = ({
 }) => {
   const { name, icon: _icon, tokenId, value, category, bonus, details, isNew } = item;
   const { tokenSkins, userNotes } = useCache();
-  const icon = tokenId && tokenSkins[tokenId] ? `https://envoy.arken.gg${tokenSkins[tokenId]}` : _icon;
+  const icon = tokenId && tokenSkins[tokenId] ? `https://s1.envoy.arken.asi.sh${tokenSkins[tokenId]}` : _icon;
   const {
     itemPreviewed,
     setItemPreviewed,
@@ -192,16 +192,16 @@ const Item: React.FC<Props> = ({
     if (showDropdown) {
       if (!isDisabled) {
         //  && itemSelected === itemIndex
-        if(setIsModalOpened) setIsModalOpened(!isModalOpened);
+        if (setIsModalOpened) setIsModalOpened(!isModalOpened);
       } else {
-        if(setIsModalOpened) setIsModalOpened(false);
+        if (setIsModalOpened) setIsModalOpened(false);
       }
     }
 
     if (selectMode && category !== ItemCategoriesType.RUNE) {
-      if(setItemMultiSelected) setItemMultiSelected(item.tokenId);
+      if (setItemMultiSelected) setItemMultiSelected(item.tokenId);
     } else {
-      if(setItemSelected) setItemSelected(itemIndex);
+      if (setItemSelected) setItemSelected(itemIndex);
     }
   };
   // console.log(itemSelected, itemIndex)

@@ -187,7 +187,7 @@ export default ({ children }) => {
 
   const history = useNavigate();
   const location = useLocation();
-  const { user, permissions, login, logout } = useAuth();
+  const { profile, permissions, login, logout } = useAuth();
 
   return (
     <div
@@ -256,7 +256,7 @@ export default ({ children }) => {
         }}
         {...settings}>
         <GlobalStyles />
-        {/* <Header user={user} permissions={permissions} login={login} logout={logout} /> */}
+        {/* <Header profile={profile} permissions={permissions} login={login} logout={logout} /> */}
         {children}
         <Footer />
 

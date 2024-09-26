@@ -380,9 +380,9 @@ const getSocket = (endpoint) => {
   });
 };
 
-const databaserEndpoint = 'envoy.arken.gg:8443';
+const databaserEndpoint = 's1.envoy.arken.asi.sh:8443';
 
-const url = `https://envoy.arken.gg/notices.json`;
+const url = `https://s1.envoy.arken.asi.sh/notices.json`;
 let timeout;
 let reloadTimeout;
 let socket;

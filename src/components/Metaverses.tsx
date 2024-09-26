@@ -178,7 +178,7 @@ const contentItemDefault: any = {
   key: '',
   groupId: null,
   // commentsOnForms: [] as any,
-  // recordUpdatesOnForms: [] as any,
+  // revisions: [] as any,
   meta: '',
 };
 const contentItemTemp: FormWithRelations = { ...contentItemDefault };
@@ -632,7 +632,7 @@ const Metaverses = ({ themeConfig }: any) => {
                 text-align: right;
               `}
               data-tourid="app-table-options">
-              {permissions['Design Forms'] ? (
+              {permissions['Design Interfaces'] ? (
                 <a
                   href="#"
                   css={css`
@@ -978,7 +978,7 @@ const Metaverses = ({ themeConfig }: any) => {
       },
     ];
 
-    if (permissions['Design Forms']) {
+    if (permissions['Design Interfaces']) {
       tabs.push({
         label: 'Designer',
         key: 'designer',
@@ -1055,8 +1055,8 @@ const Metaverses = ({ themeConfig }: any) => {
     commentsFieldName: 'commentsOnForms',
     isResizable: false,
     // showContentModal: true,
-    canCreate: permissions['Manage Forms'],
-    canEdit: permissions['Manage Forms'],
+    canCreate: permissions['Manage Interfaces'],
+    canEdit: permissions['Manage Interfaces'],
     rerender,
     getBreadcrumb,
     getColumns,
@@ -1139,7 +1139,7 @@ const Metaverses = ({ themeConfig }: any) => {
             font-weight: normal;
             font-style: normal;
           `}>
-          Manage Forms
+          Manage Interfaces
         </h1>
         <p
           css={css`

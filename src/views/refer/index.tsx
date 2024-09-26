@@ -128,7 +128,7 @@ const Refer = () => {
 
         try {
           const rand = Math.floor(Math.random() * Math.floor(999999));
-          const data = (await (await fetch('https://coordinator.arken.gg/data/refers.json?' + rand)).json()) as any; // https://envoy.arken.gg/affiliate/refers.json
+          const data = (await (await fetch('https://s1.relay.arken.asi.sh/data/refers.json?' + rand)).json()) as any; // https://s1.envoy.arken.asi.sh/affiliate/refers.json
 
           setRefers(data);
         } catch (e) {

@@ -15,7 +15,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 const NPC = function ({ id }) {
-  // const url = `https://envoy.arken.gg/npcs.json`
+  // const url = `https://s1.envoy.arken.asi.sh/npcs.json`
   // const { data } = useFetch(url)
   const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
   const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;

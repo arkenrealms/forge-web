@@ -71,7 +71,7 @@ export default function () {
 
   async function getContentList({ params }) {
     const address = params.contentId || '0xa987f487639920A3c2eFe58C8FBDedB96253ed9B';
-    const response = await fetch(`https://envoy.arken.gg/users/${address}/overview.json`);
+    const response = await fetch(`https://s1.envoy.arken.asi.sh/users/${address}/overview.json`);
     const responseData = await response.json();
 
     return [responseData];

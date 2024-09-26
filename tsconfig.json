@@ -20,7 +20,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["jest", "node"],
+    "types": ["jest", "node", "redux"],
     "paths": {
       "react": ["./node_modules/react"],
       "react-dom": ["./node_modules/react-dom"],

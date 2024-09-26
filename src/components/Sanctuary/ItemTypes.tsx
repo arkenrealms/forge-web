@@ -10,7 +10,7 @@ import { Flex, Skeleton } from '~/ui';
 const Abc = styled.div``;
 
 const ItemTypes = function () {
-  const url = `https://envoy.arken.gg/itemTypes.json`;
+  const url = `https://s1.envoy.arken.asi.sh/itemTypes.json`;
   const { data } = useFetch(url);
 
   const itemTypes = data?.[url] || [];

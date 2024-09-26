@@ -61,7 +61,8 @@ const SkinModal: React.FC<SkinModalProps> = ({ tokenId, onSuccess, onDismiss }) 
     fetchUserData(account);
   };
 
-  const icon = item.tokenId && tokenSkins[item.tokenId] ? `https://envoy.arken.gg${tokenSkins[item.tokenId]}` : null;
+  const icon =
+    item.tokenId && tokenSkins[item.tokenId] ? `https://s1.envoy.arken.asi.sh${tokenSkins[item.tokenId]}` : null;
 
   return (
     <Modal title={t('Skin')} onDismiss={onDismiss}>
@@ -99,7 +100,7 @@ const SkinModal: React.FC<SkinModalProps> = ({ tokenId, onSuccess, onDismiss }) 
                     css={css`
                       width: 100px;
                       height: 100px;
-                      background: url(${`https://envoy.arken.gg${s}`}) no-repeat 0 0;
+                      background: url(${`https://s1.envoy.arken.asi.sh${s}`}) no-repeat 0 0;
                       background-size: 100%;
                       cursor: url('/images/cursor3.png'), pointer;
                       border: 1px solid #666;
@@ -123,7 +124,7 @@ const SkinModal: React.FC<SkinModalProps> = ({ tokenId, onSuccess, onDismiss }) 
           `}>
           <TransformWrapper>
             <TransformComponent>
-              <img src={selectedSkin ? `https://envoy.arken.gg${selectedSkin}` : icon} />
+              <img src={selectedSkin ? `https://s1.envoy.arken.asi.sh${selectedSkin}` : icon} />
             </TransformComponent>
           </TransformWrapper>
 

@@ -19,14 +19,14 @@ const multicall = async (abi: any[], calls: Call[]) => {
   const calldata = calls.map((call) => [call.address.toLowerCase(), itf.encodeFunctionData(call.name, call.params)]);
 
   try {
-    const res = await multi.methods
-      .aggregate(calldata)
-      .call()
-      .catch((e) => console.error('Multicall error: ', e, calls));
-    if (res) {
-      // @ts-ignore
-      return res.returnData.map((call, i) => itf.decodeFunctionResult(calls[i].name, call));
-    }
+    // const res = await multi.methods
+    //   .aggregate(calldata)
+    //   .call()
+    //   .catch((e) => console.error('Multicall error: ', e, calls));
+    // if (res) {
+    //   // @ts-ignore
+    //   return res.returnData.map((call, i) => itf.decodeFunctionResult(calls[i].name, call));
+    // }
   } catch (e) {
     console.error('Multicall error: ', e, calls);
   }

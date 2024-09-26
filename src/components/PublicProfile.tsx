@@ -179,7 +179,7 @@ const PublicProfile = ({ match }) => {
 
   //     async function init() {
   //       const rand = Math.floor(Math.random() * Math.floor(999999))
-  //       const response = await fetch(`https://envoy.arken.gg/users/${address}/evolution.json?${rand}`)
+  //       const response = await fetch(`https://s1.envoy.arken.asi.sh/users/${address}/evolution.json?${rand}`)
   //       const responseData = await response.json()
 
   //       setEvolution(responseData)

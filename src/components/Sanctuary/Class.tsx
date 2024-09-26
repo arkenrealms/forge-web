@@ -8,7 +8,7 @@ import { ButtonMenu, ButtonMenuItem, Flex, Skeleton } from '~/ui';
 const Abc = styled.div``;
 
 const Classes = function ({ id }) {
-  // const url = `https://envoy.arken.gg/characterClasses.json`
+  // const url = `https://s1.envoy.arken.asi.sh/characterClasses.json`
   // const { data } = useFetch(url)
 
   // const classes = data?.[url] || []
@@ -51,10 +51,10 @@ const Classes = function ({ id }) {
                     gameTabIndex === 0
                       ? classs.raidImage
                       : gameTabIndex === 1
-                      ? classs.infiniteImage
-                      : gameTabIndex === 2
-                      ? classs.raidImage
-                      : ''
+                        ? classs.infiniteImage
+                        : gameTabIndex === 2
+                          ? classs.raidImage
+                          : ''
                   }
                   alt=""
                   className="image-18"
@@ -65,10 +65,10 @@ const Classes = function ({ id }) {
                     image-rendering: ${gameTabIndex === 0
                       ? 'auto'
                       : gameTabIndex === 1
-                      ? 'pixelated'
-                      : gameTabIndex === 2
-                      ? 'auto'
-                      : 'auto'};
+                        ? 'pixelated'
+                        : gameTabIndex === 2
+                          ? 'auto'
+                          : 'auto'};
                   `}
                 />
                 <ButtonMenu activeIndex={gameTabIndex} scale="xs" onItemClick={(index) => setGameTabIndex(index)}>

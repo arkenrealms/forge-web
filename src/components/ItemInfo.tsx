@@ -346,15 +346,15 @@ export const ItemInfo: React.FC<any> = ({
   const cache = useCache();
   const { tokenSkins, userNotes } = useCache();
   const icon =
-    item.tokenId && tokenSkins[item.tokenId] ? `https://envoy.arken.gg${tokenSkins[item.tokenId]}` : item.icon;
+    item.tokenId && tokenSkins[item.tokenId] ? `https://s1.envoy.arken.asi.sh${tokenSkins[item.tokenId]}` : item.icon;
   const totalMinted = cache.stats.items[item.id]?.total || 0;
   const attributes =
     gameTabIndex === 0
       ? item.attributes.length
         ? item.attributes
         : branch?.attributes.length
-        ? branch?.attributes
-        : branch?.attributes || []
+          ? branch?.attributes
+          : branch?.attributes || []
       : branch?.attributes || [];
   let description = isRune ? item.description : branch?.description || item.description || 'To Be Announced';
 
@@ -432,10 +432,10 @@ export const ItemInfo: React.FC<any> = ({
                     )
                     .join(' or ')
               : parent1.value !== undefined
-              ? parent1.value
-              : parent1.min === parent1.max
-              ? parent1.min
-              : `${parent1.min}-${parent1.max}`;
+                ? parent1.value
+                : parent1.min === parent1.max
+                  ? parent1.min
+                  : `${parent1.min}-${parent1.max}`;
 
             if (typeof value1 === 'string') value1 = value1.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
 
@@ -451,10 +451,10 @@ export const ItemInfo: React.FC<any> = ({
                     )
                     .join(' or ')
               : parent2.value !== undefined
-              ? parent2.value
-              : parent2.min === parent2.max
-              ? parent2.min
-              : `${parent2.min}-${parent2.max}`;
+                ? parent2.value
+                : parent2.min === parent2.max
+                  ? parent2.min
+                  : `${parent2.min}-${parent2.max}`;
 
             if (typeof value2 === 'string') value2 = value2.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
 
@@ -470,10 +470,10 @@ export const ItemInfo: React.FC<any> = ({
                     )
                     .join(' or ')
               : parent3.value !== undefined
-              ? parent3.value
-              : parent3.min === parent3.max
-              ? parent3.min
-              : `${parent3.min}-${parent3.max}`;
+                ? parent3.value
+                : parent3.min === parent3.max
+                  ? parent3.min
+                  : `${parent3.min}-${parent3.max}`;
 
             if (typeof value3 === 'string') value3 = value3.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
 

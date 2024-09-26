@@ -122,7 +122,9 @@ const MarketContextProvider = ({ children }) => {
           searchParams.append('query', q);
         }
 
-        const data = (await (await fetch('https://envoy.arken.gg/trades?' + searchParams.toString())).json()) as any;
+        const data = (await (
+          await fetch('https://s1.envoy.arken.asi.sh/trades?' + searchParams.toString())
+        ).json()) as any;
 
         setTrades((t) => ({
           ...t,

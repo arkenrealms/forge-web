@@ -35,7 +35,7 @@ const ItemCatalogContextProvider = ({ children }) => {
     console.log('Fetching items for', itemId);
 
     try {
-      nfts[itemId] = (await (await fetch(`https://envoy.arken.gg/items/${itemId}/tokens.json`)).json()) as any;
+      nfts[itemId] = (await (await fetch(`https://s1.envoy.arken.asi.sh/items/${itemId}/tokens.json`)).json()) as any;
 
       setNfts(nfts);
     } catch (e) {

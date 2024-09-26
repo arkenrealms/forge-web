@@ -7,7 +7,7 @@ import Linker from '~/components/Linker';
 import areas from '@arken/node/data/generated/areas.json';
 
 const Area = function ({ id }) {
-  // const url = `https://envoy.arken.gg/areas.json`
+  // const url = `https://s1.envoy.arken.asi.sh/areas.json`
   // const { data } = useFetch(url)
 
   // const areas = data?.[url] || []

@@ -43,6 +43,7 @@ const Polls = lazy(() => import('../views/polls'));
 const Risks = lazy(() => import('../views/risks'));
 const Terms = lazy(() => import('../views/terms'));
 const Guides = lazy(() => import('../views/guides'));
+const InterfaceDesigner = lazy(() => import('../components/InterfaceDesigner'));
 const Features = lazy(() => import('../views/features'));
 const Tokenomics = lazy(() => import('../views/tokenomics'));
 const Faq = lazy(() => import('../views/faq'));
@@ -137,9 +138,12 @@ const Services = lazy(() => import('../views/services'));
 const ServiceMetaverses = lazy(() => import('../views/service/metaverses'));
 const ServiceReferrals = lazy(() => import('../views/service/referrals'));
 const ServicePayments = lazy(() => import('../views/service/payments'));
+const ServiceRealms = lazy(() => import('../views/service/realms'));
+const ServiceRealm = lazy(() => import('../views/service/realm'));
+const ServiceGames = lazy(() => import('../views/service/games'));
+const ServiceGame = lazy(() => import('../views/service/game'));
 const ServiceAccounts = lazy(() => import('../views/service/accounts'));
 const ServiceProfiles = lazy(() => import('../views/service/profiles'));
-const ServiceGames = lazy(() => import('../views/service/games'));
 const CryptoTransactions = lazy(() => import('../views/crypto/transactions'));
 
 const AirdropCmc1Rules = lazy(() => import('../views/airdrop/cmc1/rules'));
@@ -860,6 +864,50 @@ const useWindows = () => {
       showable: false,
     },
     {
+      path: '/service/realms',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'Realms',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined, //500,
+      component: ServiceRealms,
+      showable: false,
+    },
+    {
+      path: '/service/realm/:id',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'Realm',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined, //500,
+      component: ServiceRealm,
+      showable: false,
+    },
+    {
       path: '/service/games',
       icon: AboutIcon,
       exact: true,
@@ -879,6 +927,51 @@ const useWindows = () => {
       },
       navPosition: undefined, //500,
       component: ServiceGames,
+      showable: false,
+    },
+    {
+      path: '/service/game/:id',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'Game',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined, //500,
+      component: ServiceGame,
+      showable: false,
+    },
+    {
+      path: '/service/game/eras',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'Game Eras',
+        interfaceKey: 'game-eras',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined, //500,
+      component: InterfaceDesigner,
       showable: false,
     },
     {

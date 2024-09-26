@@ -10,7 +10,7 @@ import { Skeleton } from '~/ui';
 const Abc = styled.div``;
 
 const Faction = function ({ id }) {
-  // const url = `https://envoy.arken.gg/characterFactions.json`
+  // const url = `https://s1.envoy.arken.asi.sh/characterFactions.json`
   // const { data } = useFetch(url)
 
   // const factions = data?.[url] || []

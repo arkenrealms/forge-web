@@ -7,7 +7,7 @@ import { Skeleton } from '~/ui';
 import acts from '@arken/node/data/generated/acts.json';
 
 const Acts = function () {
-  // const url = `https://envoy.arken.gg/acts.json`
+  // const url = `https://s1.envoy.arken.asi.sh/acts.json`
   // const { data } = useFetch(url)
 
   // const acts = data?.[url] || []

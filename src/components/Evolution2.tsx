@@ -230,7 +230,7 @@ const startGame = async (account, setProgression) => {
           socket = null;
         }
 
-        socket = getSocket('https://gs1.secondwind.game.asi.sh');
+        socket = getSocket('https://gs1.evolution.arken.asi.sh');
 
         const OnLoaded = () => {
           log('Loaded');

@@ -292,7 +292,7 @@ const Evolution: React.FC<any> = () => {
         const date = new Date(); //or use any other date
         const rand = new Date(Math.round(date.getTime() / coeff) * coeff).getTime();
         // const rand1 = Math.floor(Math.random() * Math.floor(999999))
-        const response1 = await fetch(`https://envoy.arken.gg/evolution/servers.json?${rand}`);
+        const response1 = await fetch(`https://s1.envoy.arken.asi.sh/evolution/servers.json?${rand}`);
         const servers = await response1.json();
 
         setRealms(servers);

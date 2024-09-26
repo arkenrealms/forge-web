@@ -41,6 +41,7 @@ import ToastListener from '~/components/ToastListener';
 import { useEnv } from '~/hooks/useEnv';
 import config from '~/config/menu';
 import { useFetchProfile, useFetchPublicData } from './state/hooks';
+import * as relay from '~/utils/relay';
 
 import history from '~/routerHistory';
 
@@ -256,7 +257,10 @@ const BigCard = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   background-image: url(/images/background.jpeg);
   background-size: 400px;
-  box-shadow: 0 2px 0 0 rgb(0 0 0 / 80%), inset 0 -1px 0 0 rgb(0 0 0 / 10%), 0 0 66px 66px rgb(0 0 0 / 10%);
+  box-shadow:
+    0 2px 0 0 rgb(0 0 0 / 80%),
+    inset 0 -1px 0 0 rgb(0 0 0 / 10%),
+    0 0 66px 66px rgb(0 0 0 / 10%);
   // background-color: rgba(0,0,0,0.4);
   line-height: 1.8rem;
   // font-size: 1rem;
@@ -385,7 +389,10 @@ const TopBanner3 = styled.div`
   line-height: 20px;
 
   filter: drop-shadow(rgba(0, 0, 0, 0.6) 1px 1px 1px) drop-shadow(rgba(0, 0, 0, 0.6) 0px 0px 4px);
-  box-shadow: 0 2px 0 0 rgb(0 0 0 / 80%), inset 0 -1px 0 0 rgb(0 0 0 / 10%), 0 0 66px 66px rgb(0 0 0 / 10%);
+  box-shadow:
+    0 2px 0 0 rgb(0 0 0 / 80%),
+    inset 0 -1px 0 0 rgb(0 0 0 / 10%),
+    0 0 66px 66px rgb(0 0 0 / 10%);
 
   ${({ theme }) => theme.mediaQueries.md} {
     font-size: 24px;
@@ -454,7 +461,11 @@ const NavItem = styled(RouterLink)<{ isFocused?: boolean }>`
   // background-color: #222;
   // background-image: linear-gradient(180deg,transparent 0,rgba(0,0,0,1) 50%,transparent);
   height: 65px;
-  text-shadow: 0 0 5px #000, 00 0 10px #000, 0 0 15px #000000, 0 0 20px #000000;
+  text-shadow:
+    0 0 5px #000,
+    00 0 10px #000,
+    0 0 15px #000000,
+    0 0 20px #000000;
 
   ${({ isFocused }) =>
     isFocused
@@ -2406,7 +2417,7 @@ const AppContent = ({
 
   //   async function init() {
   //     try {
-  //       const endpoint = 'https://envoy.arken.gg'
+  //       const endpoint = 'https://s1.envoy.arken.asi.sh'
   //       const response = await fetch(endpoint + `/notices.json`)
   //       const notices = await response.json()
 
@@ -2758,7 +2769,7 @@ const App: React.FC<any> = (props) => {
         {/* <GlobalStyle useExocetFont={i18n.language === 'en'} /> */}
         {/* @ts-ignore */}
         <BrowserRouter>
-          <AuthProvider>
+          <AuthProvider relay={relay}>
             <NavProvider>
               <TourProvider>
                 <SettingsProvider>

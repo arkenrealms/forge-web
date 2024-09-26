@@ -200,7 +200,7 @@ const Leaderboard = () => {
         const leaderboard = {} as any;
 
         // const rand1 = Math.floor(Math.random() * Math.floor(999999))
-        const response1 = await fetch(`https://envoy.arken.gg/evolution/realms.json?${rand}`);
+        const response1 = await fetch(`https://s1.envoy.arken.asi.sh/evolution/realms.json?${rand}`);
         let _realms = await response1.json();
 
         _realms = [
@@ -226,7 +226,7 @@ const Leaderboard = () => {
             try {
               // const rand2 = Math.floor(Math.random() * Math.floor(999999))
               const response2 = await fetch(
-                `https://envoy.arken.gg/evolution/${realm.key}/season${season}/leaderboard.json?${rand}`
+                `https://s1.envoy.arken.asi.sh/evolution/${realm.key}/season${season}/leaderboard.json?${rand}`
               );
               const leaderboardData = await response2.json();
 
@@ -241,7 +241,7 @@ const Leaderboard = () => {
           try {
             // const rand2 = Math.floor(Math.random() * Math.floor(999999))
             const response2 = await fetch(
-              `https://envoy.arken.gg/evolution/global/season${season}/leaderboard.json?${rand}`
+              `https://s1.envoy.arken.asi.sh/evolution/global/season${season}/leaderboard.json?${rand}`
             );
             const leaderboardData = await response2.json();
 
@@ -256,7 +256,7 @@ const Leaderboard = () => {
 
       {
         // const rand = Math.floor(Math.random() * Math.floor(999999))
-        const response = await fetch(`https://envoy.arken.gg/crafting/leaderboard.json?${rand}`);
+        const response = await fetch(`https://s1.envoy.arken.asi.sh/crafting/leaderboard.json?${rand}`);
         const responseData = await response.json();
 
         setCraftingLeaderboard(responseData);

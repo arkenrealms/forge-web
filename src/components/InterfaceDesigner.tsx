@@ -3,29 +3,20 @@ import _ from 'lodash';
 import qs from 'qs';
 import { Modal, Form as AntForm } from 'antd';
 import React, { useState } from 'react';
-import { BiCommentDetail } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { css } from 'styled-components';
 import App from '@arken/forge-ui/components/App';
 import FormFieldText from '@arken/forge-ui/components/FormFieldText';
 import FormFieldSelect from '@arken/forge-ui/components/FormFieldSelect';
-// @ts-ignore
-import {
-  useModel,
-  useGetModel,
-  useCreateModel,
-  useDeleteModel,
-  useUpdateModel,
-  useSearchModels,
-} from '@arken/forge-ui/hooks/db';
 import useSettings from '@arken/forge-ui/hooks/useSettings';
 import * as log from '@arken/node/util/log';
 import { camelize } from '@arken/node/util/string';
 import { usePrompt } from '@arken/forge-ui/hooks/usePrompt';
 import { useAuth } from '@arken/forge-ui/hooks/useAuth';
 import appConfig from '~/config';
-
-const shortId = require('shortid');
+import * as relay from '~/utils/relay';
+import shortId from 'shortid';
+import type { Interface, InterfaceGroup } from '@arken/node/modules/interface/interface.types';
 
 const StatusList = [
   {
@@ -73,7 +64,7 @@ const contentItemDefault: any = {
 };
 const contentItemTemp: FormWithRelations = { ...contentItemDefault };
 
-const GamePlanets = ({ themeConfig }: any) => {
+const InterfaceDesigner = ({ interfaceKey }: any) => {
   const [cacheKey, setCacheKey] = useState('cache');
   const { settings } = useSettings();
   const history = useNavigate();
@@ -94,166 +85,89 @@ const GamePlanets = ({ themeConfig }: any) => {
     setCacheKey('cache' + Math.random());
   };
 
-  const { data: games } = useSearchModels({
-    key: 'Game',
-    action: 'games',
-    query: `
-      id
-      name
-      key
-      status
-      meta
-    `,
-    variables: { where: {} } as any,
+  const { data: formGroups }: any = relay.trpc.interface.getInterfaceGroups.useQuery<InterfaceGroup[]>({
+    where: {},
   });
 
+  localParams.contentId = interfaceKey;
+
   const {
-    isLoading: contentItemLoading,
     data: contentItemSearch,
     refetch: contentItemRefetch,
-  }: any = useGetModel({
-    key: 'Form',
-    action: 'findFirstForm',
-    query: `
-    id
-    key
-    title
-    description
-    meta
-    status
-    version
-    formSubmissions {
-      id
-      createdDate
-      status
-      formId
-      formKey
-      formVersion
-      components {
-        key
-        value
-      }
-    }
-    groupId
-    group {
-      id
-      title
-    }
-    publishedForm
-    draftForm
-  `,
-    variables: localParams.contentId
+    isLoading: contentItemLoading,
+  }: any = relay.trpc.interface.getInterface.useQuery<Interface>(
+    localParams.contentId
       ? {
           where: {
             id: { equals: localParams.contentId },
           },
         }
-      : null,
-  });
+      : undefined
+  );
 
   const {
-    isLoading: contentListLoading,
     data: contentListSearch,
     refetch: contentListRefetch,
-  }: any = useSearchModels({
-    key: 'Form',
-    action: 'forms',
-    query: `
-    id
-    key
-    title
-    status
-    version
-    groupId
-    group {
-      id
-      title
-    }
-  `,
-    variables: {
-      where: {
-        OR: [
-          {
-            title: { contains: localParams.value },
-          },
-          {
-            key: { contains: localParams.value },
-          },
-          {
-            version: { contains: localParams.value },
-          },
-          localParams.value
-            ? {
-                title: { contains: localParams.value },
-              }
-            : {
-                title: { contains: '' }, // Get all when not searching by a term
-              },
-        ],
-        AND: [
-          {
-            title: { contains: localParams.title },
-          },
-          {
-            key: { contains: localParams.key },
-          },
-          {
-            version: { contains: localParams.version },
-          },
-          { status: { in: localParams.status } },
-          { groupId: { in: localParams.groupId } },
-        ],
-      },
+    isLoading: contentListLoading,
+  } = relay.trpc.interface.getInterfaces.useQuery<Interface[]>({
+    where: {
+      OR: [
+        {
+          name: { contains: localParams.value },
+        },
+        {
+          key: { contains: localParams.value },
+        },
+        {
+          version: { contains: localParams.value },
+        },
+        localParams.value
+          ? {
+              name: { contains: localParams.value },
+            }
+          : {
+              name: { contains: '' }, // Get all when not searching by a term
+            },
+      ],
+      AND: [
+        {
+          name: { contains: localParams.name },
+        },
+        {
+          key: { contains: localParams.key },
+        },
+        {
+          version: { contains: localParams.version },
+        },
+        { status: { in: localParams.status } },
+        { groupId: { in: localParams.groupId } },
+      ],
     },
   });
 
   const {
-    isLoading: createLoading,
+    mutate: createInterface,
+    isPending: createLoading,
     error: createContentItemError,
-    mutateAsync: createForm,
-  }: any = useCreateModel({ key: 'Form', action: 'createOneForm', query: `id` });
+  } = relay.trpc.interface.createInterface.useMutation();
 
   const {
-    isLoading: updateLoading,
+    mutate: updateInterface,
+    isPending: updateLoading,
     error: updateContentItemError,
-    mutateAsync: updateForm,
-  }: any = useUpdateModel({ key: 'Form', action: 'updateOneForm', query: `id` });
+  } = relay.trpc.interface.updateInterface.useMutation();
 
-  const { mutateAsync: publishForm }: any = useModel({
-    key: 'Form',
-    action: 'publishForm',
-    query: `id`,
-  });
+  const { mutate: publishInterface } = relay.trpc.interface.publishInterface.useMutation();
 
-  const { mutateAsync: deleteOneForm }: any = useDeleteModel({
-    key: 'Form',
-    action: 'deleteOneForm',
-    query: `id`,
-  });
+  const { mutate: deleteInterface } = relay.trpc.interface.deleteInterface.useMutation();
 
-  const { mutateAsync: deactivateForm }: any = useModel({
-    key: 'Form',
-    action: 'deactivateForm',
-    query: `id`,
-  });
+  const { mutate: deactivateInterface } = relay.trpc.interface.deactivateInterface.useMutation();
 
-  const { mutateAsync: createFormDraft }: any = useModel({
-    key: 'Form',
-    action: 'createFormDraft',
-    query: `id`,
-  });
+  const { mutate: createInterfaceDraft } = relay.trpc.interface.createInterfaceDraft.useMutation();
 
-  const { mutateAsync: resetFormDraft }: any = useModel({
-    key: 'Form',
-    action: 'resetFormDraft',
-    query: `id`,
-  });
+  const { mutate: resetInterface } = relay.trpc.interface.resetInterface.useMutation();
 
-  const { mutateAsync: acceptSubmission }: any = useModel({
-    key: 'FormSubmission',
-    action: 'acceptSubmission',
-    query: `id`,
-  });
+  const { mutate: acceptInterfaceSubmission } = relay.trpc.interface.acceptInterfaceSubmission.useMutation();
 
   const onChangeParams = async (params: any) => {
     // log.dev('Refetching', params.contentId)
@@ -290,9 +204,8 @@ const GamePlanets = ({ themeConfig }: any) => {
 
       if (contentItem.__original) {
         log.dev('Updating form', contentItem, contentItemSearch);
-        const res = await updateForm({
-          before: contentItem.__original,
-          after: contentItem,
+        const res: any = await updateInterface({
+          data: contentItem,
           where: {
             id: contentItem.id,
           },
@@ -307,7 +220,7 @@ const GamePlanets = ({ themeConfig }: any) => {
         };
       } else {
         log.dev('Creating form', contentItem, contentItemSearch);
-        const res = await createForm({ data: contentItem });
+        const res: any = await createInterface({ data: contentItem });
 
         return {
           message: `Success`,
@@ -342,7 +255,7 @@ const GamePlanets = ({ themeConfig }: any) => {
   async function getColumns({ params }: any) {
     const columns = [
       {
-        title: 'Form ID',
+        title: 'Interface ID',
         dataIndex: 'key',
         key: 'key',
         // align: 'center',
@@ -369,7 +282,7 @@ const GamePlanets = ({ themeConfig }: any) => {
         sorter: (a: any, b: any) => a.key.localeCompare(b.key),
       },
       {
-        title: 'Form Name',
+        title: 'Interface Name',
         dataIndex: 'title',
         key: 'title',
         ellipsize: false,
@@ -472,7 +385,7 @@ const GamePlanets = ({ themeConfig }: any) => {
         align: 'center',
         width: 150,
         filters:
-          games?.map((group: any) => ({
+          formGroups?.map((group: any) => ({
             text: group.title,
             value: group.id,
           })) || [],
@@ -487,7 +400,7 @@ const GamePlanets = ({ themeConfig }: any) => {
               name={`group-${record.id}`}
               defaultValue={record.groupId}
               options={() =>
-                games?.map((group: any) => ({
+                formGroups?.map((group: any) => ({
                   text: group.title,
                   value: group.id,
                 })) || []
@@ -515,7 +428,7 @@ const GamePlanets = ({ themeConfig }: any) => {
         fixed: 'right',
         width: 20,
         render: ({ id, key }: any, record: any) => {
-          // console.log('vvvvv', record)
+          console.log('vvvvv22', permissions);
           return (
             <div
               css={css`
@@ -574,7 +487,7 @@ const GamePlanets = ({ themeConfig }: any) => {
   function getContentList({ params }: any) {
     return contentListSearch || [];
   }
-  // console.log('45454545', 'zzz', contentItemSearch)
+
   function getContentItem({ params }: any) {
     if (contentItemSearch?.id && params?.contentId !== contentItemSearch.id) {
       for (const k of Object.keys(contentItemDefault)) {
@@ -673,13 +586,13 @@ const GamePlanets = ({ themeConfig }: any) => {
 
     if (contentItem?.__original) {
       breadcrumb.push({
-        href: `/interfaces?contentMode=view&contentId=${contentItem.id}`,
+        href: `/service/core/interfaces?contentMode=view&contentId=${contentItem.id}`,
         title: contentItem[config.secondaryKey],
       });
     } else {
       breadcrumb.push({
-        href: `/interfaces?contentMode=view`,
-        title: 'New Form',
+        href: `/service/core/interfaces?contentMode=view`,
+        title: 'New Interface',
       });
     }
 
@@ -731,7 +644,7 @@ const GamePlanets = ({ themeConfig }: any) => {
                 name: 'groupId',
                 type: 'select',
                 options: () =>
-                  games?.map((group: any) => ({
+                  formGroups?.map((group: any) => ({
                     text: group.title,
                     value: group.id,
                   })) || [],
@@ -739,7 +652,7 @@ const GamePlanets = ({ themeConfig }: any) => {
                   console.log('3333 changed', key, value);
 
                   const contentItem = getContentItem({ params: localParams });
-                  contentItem.group = games.find((g1: any) => g1.id === value);
+                  contentItem.group = formGroups.find((g1: any) => g1.id === value);
                   contentItem.groupId = contentItem.group.id;
                 },
                 isRequired: true,
@@ -755,10 +668,11 @@ const GamePlanets = ({ themeConfig }: any) => {
                 label: '',
                 name: 'form-info',
                 type: 'form-info',
+                previewEndpoints: { Public: 'http://' },
                 onDelete: async () => {
                   const contentItem = getContentItem({ params: localParams });
 
-                  const res = await deleteOneForm({
+                  const res: any = await deleteInterface({
                     where: {
                       id: contentItem.id,
                     },
@@ -778,7 +692,7 @@ const GamePlanets = ({ themeConfig }: any) => {
                 onPublish: async () => {
                   const contentItem = getContentItem({ params: localParams });
 
-                  const res = await publishForm({
+                  const res: any = await publishInterface({
                     data: {},
                     where: {
                       id: contentItem.id,
@@ -812,7 +726,7 @@ const GamePlanets = ({ themeConfig }: any) => {
                 onDeactivate: async () => {
                   const contentItem = getContentItem({ params: localParams });
 
-                  const res = await deactivateForm({
+                  const res: any = await deactivateInterface({
                     data: {},
                     where: {
                       id: contentItem.id,
@@ -832,8 +746,7 @@ const GamePlanets = ({ themeConfig }: any) => {
                 onCreateDraft: async () => {
                   const contentItem = getContentItem({ params: localParams });
 
-                  const res = await createFormDraft({
-                    data: {},
+                  const res: any = await createInterfaceDraft({
                     where: {
                       id: contentItem.id,
                     },
@@ -852,7 +765,7 @@ const GamePlanets = ({ themeConfig }: any) => {
                 onResetDraft: async () => {
                   const contentItem = getContentItem({ params: localParams });
 
-                  const res = await resetFormDraft({
+                  const res: any = await resetInterface({
                     data: {},
                     where: {
                       id: contentItem.id,
@@ -877,11 +790,15 @@ const GamePlanets = ({ themeConfig }: any) => {
           {
             key: 'main',
             type: 'full',
+            padding: 0,
+            columns: 24,
+            rows: 1,
             fields: [
               {
                 label: '',
-                name: 'meta.data',
+                name: '',
                 type: 'designer',
+                previewEndpoints: { Public: 'http://' },
               },
             ],
           },
@@ -917,7 +834,7 @@ const GamePlanets = ({ themeConfig }: any) => {
                   rerender();
                 },
                 onAccept: async function (submissionId: string) {
-                  // await acceptSubmission(submissionId)
+                  // await acceptInterfaceSubmission(submissionId)
                 },
               },
             ],
@@ -932,7 +849,7 @@ const GamePlanets = ({ themeConfig }: any) => {
   const config = {
     form,
     cacheKey,
-    createText: 'Create New Form',
+    createText: 'Create New Interface',
     isListLoading: contentListLoading,
     isLoading: contentItemLoading || createLoading || updateLoading,
     primaryKey: 'id',
@@ -974,7 +891,6 @@ const GamePlanets = ({ themeConfig }: any) => {
     // },
     onRemove,
     getTabs,
-    themeConfig,
     history,
     permissions,
   };
@@ -1051,4 +967,4 @@ const GamePlanets = ({ themeConfig }: any) => {
   );
 };
 
-export default GamePlanets;
+export default InterfaceDesigner;

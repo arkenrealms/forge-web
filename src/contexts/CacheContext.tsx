@@ -76,7 +76,7 @@ const CacheContextProvider = ({ children }) => {
       try {
         {
           const data = (await (
-            await fetch((isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg') + '/app.json?' + rand)
+            await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/app.json?' + rand)
           ).json()) as any;
 
           setApp(data);
@@ -84,7 +84,7 @@ const CacheContextProvider = ({ children }) => {
 
         {
           const data = (await (
-            await fetch((isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg') + '/stats.json?' + rand)
+            await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/stats.json?' + rand)
           ).json()) as any;
 
           setStats(data);
@@ -92,7 +92,7 @@ const CacheContextProvider = ({ children }) => {
 
         {
           const data = (await (
-            await fetch((isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg') + '/runes.json?' + rand)
+            await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/runes.json?' + rand)
           ).json()) as any;
 
           setRunes(data);
@@ -100,7 +100,7 @@ const CacheContextProvider = ({ children }) => {
 
         // {
         //   const data = (await (
-        //     await fetch((isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg') + '/historical.json?' + rand)
+        //     await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/historical.json?' + rand)
         //   ).json()) as any
 
         //   setHistorical(data)
@@ -108,7 +108,9 @@ const CacheContextProvider = ({ children }) => {
 
         {
           const data = (await (
-            await fetch((isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg') + '/activeUsers.json?' + rand)
+            await fetch(
+              (isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/activeUsers.json?' + rand
+            )
           ).json()) as any;
 
           const now = new Date().getTime() / 1000;
@@ -118,7 +120,7 @@ const CacheContextProvider = ({ children }) => {
         {
           const data = (await (
             await fetch(
-              (isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg') + '/evolution/config.json?' + rand
+              (isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/evolution/config.json?' + rand
             )
           ).json()) as any;
 
@@ -167,7 +169,7 @@ const CacheContextProvider = ({ children }) => {
         {
           const data = (await (
             await fetch(
-              (isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg') +
+              (isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') +
                 '/users/' +
                 accountAddress +
                 '/overview.json?' +
@@ -186,7 +188,7 @@ const CacheContextProvider = ({ children }) => {
         {
           const data = (await (
             await fetch(
-              (isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg') +
+              (isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') +
                 '/users/' +
                 accountAddress +
                 '/achievements.json?' +

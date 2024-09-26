@@ -59,7 +59,9 @@ export const fetchTeam = (teamId: number) => async (dispatch) => {
       const date = new Date(); //or use any other date
       const rand = new Date(Math.round(date.getTime() / coeff) * coeff).getTime();
       // const rand = Math.floor(Math.random() * Math.floor(999999))
-      const response = await fetch(`https://envoy.arken.gg/guilds/${teamId}/overview.json?${rand}`).catch(() => {});
+      const response = await fetch(`https://s1.envoy.arken.asi.sh/guilds/${teamId}/overview.json?${rand}`).catch(
+        () => {}
+      );
 
       if (response) {
         const responseData = await response.json();
@@ -92,7 +94,9 @@ export const fetchTeams = () => async (dispatch) => {
 
       try {
         const rand = Math.floor(Math.random() * Math.floor(999999));
-        const response = await fetch(`https://envoy.arken.gg/guilds/${teamId}/overview.json?${rand}`).catch(() => {});
+        const response = await fetch(`https://s1.envoy.arken.asi.sh/guilds/${teamId}/overview.json?${rand}`).catch(
+          () => {}
+        );
 
         if (response) {
           const responseData = await response.json();

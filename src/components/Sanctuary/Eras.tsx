@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import useFetch from '~/hooks/useFetch';
 import history from '~/routerHistory';
 import LoreBlock1 from '~/components/LoreBlock1';
 import { Skeleton } from '~/ui';
-import eras from '@arken/node/data/generated/eras.json';
+import * as relay from '~/utils/relay';
+import type { Types } from '@arken/node/modules/game';
 
 const Eras = function () {
-  // const url = `https://envoy.arken.gg/eras.json`
-  // const { data } = useFetch(url)
-
-  // const eras = data?.[url] || []
+  const { data: eras } = relay.trpc.game.getEras.useQuery<Types.Era[]>();
 
   if (!eras?.length)
     return (

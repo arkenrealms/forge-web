@@ -8,10 +8,10 @@ import { Flex } from '~/ui';
 const isLocal = process.env.REACT_APP_RUNE_ENV === 'local';
 
 const endpoints = {
-  // cache: 'https://envoy.arken.gg',
-  // coordinator: 'https://coordinator.arken.gg',
-  cache: isLocal ? 'http://localhost:6001' : 'https://envoy.arken.gg',
-  coordinator: isLocal ? 'http://localhost:5001' : 'https://coordinator.arken.gg',
+  // cache: 'https://s1.envoy.arken.asi.sh',
+  // coordinator: 'https://s1.relay.arken.asi.sh',
+  cache: isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh',
+  coordinator: isLocal ? 'http://localhost:5001' : 'https://s1.relay.arken.asi.sh',
 };
 
 const Nothing = styled.div``;

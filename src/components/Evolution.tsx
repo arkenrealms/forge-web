@@ -314,7 +314,8 @@ const HeadingFire = styled.div<{
 
   @keyframes fire {
     0% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         0 ${(props) => props.fireStrength * -5}px ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 2}px ${(props) => props.fireStrength * -10}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color1},
@@ -324,7 +325,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 18}px ${(props) => props.color4};
     }
     25% {
-      text-shadow: 0 0 3px ${(props) => props.color1},
+      text-shadow:
+        0 0 3px ${(props) => props.color1},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -6}px
           ${(props) => props.fireStrength * 5}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -11}px
@@ -335,7 +337,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 20}px ${(props) => props.color4};
     }
     50% {
-      text-shadow: 0 0 3px ${(props) => props.color1},
+      text-shadow:
+        0 0 3px ${(props) => props.color1},
         ${(props) => props.fireStrength * -1}px ${(props) => props.fireStrength * -4}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 0}px ${(props) => props.fireStrength * -12}px
@@ -346,7 +349,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 22}px ${(props) => props.color4};
     }
     75% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -7}px
           ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -11}px
@@ -357,7 +361,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 21}px ${(props) => props.color4};
     }
     100% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         0 ${(props) => props.fireStrength * -5}px ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 2}px ${(props) => props.fireStrength * -10}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color1},
@@ -648,10 +653,10 @@ const claimRewardMessages = {
 };
 
 const endpoints = {
-  cache: 'https://envoy.arken.gg',
-  coordinator: 'https://coordinator.arken.gg',
-  // cache: 'http://localhost:6001', // 'https://envoy.arken.gg'
-  // coordinator: 'http://localhost:5001' // 'https://coordinator.arken.gg'
+  cache: 'https://s1.envoy.arken.asi.sh',
+  coordinator: 'https://s1.relay.arken.asi.sh',
+  // cache: 'http://localhost:6001', // 'https://s1.envoy.arken.asi.sh'
+  // coordinator: 'http://localhost:5001' // 'https://s1.relay.arken.asi.sh'
 };
 
 // let isServersInit = false
@@ -786,7 +791,7 @@ const Evolution: any = ({ open }) => {
     [account, setUsername, setAddress]
   );
 
-  const url = `https://envoy.arken.gg/evolution/servers.json`;
+  const url = `https://s1.envoy.arken.asi.sh/evolution/servers.json`;
   let servers = useFetch(url).data[url] || [];
 
   if (brand.host === 'evo2.io') {
@@ -972,7 +977,7 @@ const Evolution: any = ({ open }) => {
   //       setRealm(servers[tab])
 
   //       // const rand = Math.floor(Math.random() * Math.floor(999999))
-  //       // const response = await fetch(`https://envoy.arken.gg/evolution/rewardHistory.json?${rand}`)
+  //       // const response = await fetch(`https://s1.envoy.arken.asi.sh/evolution/rewardHistory.json?${rand}`)
   //       // const responseData = await response.json()
 
   //       // const rewardsData = responseData.filter((r) => r.winner.address === account)
