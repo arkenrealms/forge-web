@@ -1,7 +1,8 @@
 import { createTRPCReact } from '@trpc/react-query';
 import { createTRPCProxyClient, loggerLink, splitLink, TRPCLink, TRPCClientError } from '@trpc/client';
 import superjson from 'superjson';
-import type { Router } from '@arken/node/types';
+// import type { Router } from '@arken/node/types';
+import type * as Evolution from '@arken/evolution-protocol/types';
 import { QueryClient } from '@tanstack/react-query';
 import { observable } from '@trpc/server/observable';
 import { io as ioClient } from 'socket.io-client';
@@ -20,7 +21,7 @@ export const queryClient = new QueryClient({
 
 const client = {
   ioCallbacks: {},
-  socket: ioClient('http://localhost:4444', {
+  socket: ioClient('http://localhost:4010', {
     transports: ['websocket'],
     upgrade: false,
     autoConnect: true, // TODO: should delay this
@@ -107,7 +108,7 @@ const customLink: TRPCLink<any> =
         observer.complete();
         return;
       }
-      console.log('Emit Direct', op, client.socket);
+      console.log('[evolution] Emit Direct', op, client.socket);
 
       client.socket.emit('trpc', { id: uuid, method: op.path, type: op.type, params: input });
 
@@ -146,7 +147,7 @@ const customLink: TRPCLink<any> =
 //   };
 // };
 
-export const trpc = createTRPCReact<Router>();
+export const trpc = createTRPCReact<Evolution.Realm.Router>();
 
 export const trpcClient = trpc.createClient({
   //   transformer: superjson, // for data serialization

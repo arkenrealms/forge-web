@@ -8,6 +8,9 @@ import ListsUpdater from './state/lists/updater';
 import MulticallUpdater from './state/multicall/updater';
 import TransactionUpdater from './state/transactions/updater';
 import ToastListener from './components/ToastListener';
+import enUS from 'antd/lib/locale/en_US';
+import { ProProvider } from '@ant-design/pro-provider';
+import proEnUS from '@ant-design/pro-provider/es/locale/en_US';
 // import reportWebVitals from './reportWebVitals'
 import { ConfigProvider, theme, notification } from 'antd';
 import { ThemeProvider } from 'antd-style';
@@ -23,11 +26,13 @@ import { NoticeProvider } from '@arken/forge-ui/hooks/useNotice';
 // import cerebro from '@arken/forge-ui'
 import { lightTheme, darkTheme } from '~/themes';
 import * as relay from '~/utils/relay';
+import * as evolution from '~/utils/evolution';
 import ResetStyles from '~/reset-styles';
 import GlobalStyles from '~/global-styles';
 // import { trpc, trpcClient } from '~/utils/relay'; // Adjust path as needed
 
 window.queryClient = new QueryClient();
+window.queryClientEvolution = new QueryClient();
 
 // TODO: remove?
 // @ts-ignore
@@ -77,28 +82,31 @@ const App = ({ apolloClient }: any) => {
   // const ThemeProvider2 = ThemeProvider as any
 
   return (
-    <ConfigProvider theme={themeConfig}>
+    <ConfigProvider theme={themeConfig} locale={enUS}>
+      {/* <ProProvider value={{ locale: proEnUS }}> */}
       <StyledThemeProvider theme={themeSettings}>
         {/* <ThemeProvider2 theme={themeConfig}> */}
         <relay.trpc.Provider client={relay.trpcClient} queryClient={window.queryClient}>
-          <QueryClientProvider client={window.queryClient}>
-            <PromptProvider>
-              <NoticeProvider>
-                <ApolloProvider client={apolloClient}>
-                  <>
-                    <ResetStyles />
-                    <GlobalStyles />
-                    <Providers>
+          <evolution.trpc.Provider client={evolution.trpcClient} queryClient={window.queryClientEvolution}>
+            <QueryClientProvider client={window.queryClient}>
+              <QueryClientProvider client={window.queryClientEvolution}>
+                <PromptProvider>
+                  <NoticeProvider>
+                    <ApolloProvider client={apolloClient}>
                       <>
-                        <ListsUpdater />
-                        <ApplicationUpdater />
-                        <TransactionUpdater />
-                        <MulticallUpdater />
-                        <ToastListener />
-                      </>
-                      <AppInner />
-                    </Providers>
-                    {/* <BrowserRouter basename="/">
+                        <ResetStyles />
+                        <GlobalStyles />
+                        <Providers>
+                          <>
+                            <ListsUpdater />
+                            <ApplicationUpdater />
+                            <TransactionUpdater />
+                            <MulticallUpdater />
+                            <ToastListener />
+                          </>
+                          <AppInner />
+                        </Providers>
+                        {/* <BrowserRouter basename="/">
                       <NavProvider>
                         <TourProvider>
                           <SettingsProvider>
@@ -206,14 +214,17 @@ const App = ({ apolloClient }: any) => {
                         </TourProvider>
                       </NavProvider>
                     </BrowserRouter> */}
-                  </>
-                </ApolloProvider>
-              </NoticeProvider>
-            </PromptProvider>
-          </QueryClientProvider>
+                      </>
+                    </ApolloProvider>
+                  </NoticeProvider>
+                </PromptProvider>
+              </QueryClientProvider>
+            </QueryClientProvider>
+          </evolution.trpc.Provider>
         </relay.trpc.Provider>
         {/* </ThemeProvider2> */}
       </StyledThemeProvider>
+      {/* </ProProvider> */}
     </ConfigProvider>
   );
 };

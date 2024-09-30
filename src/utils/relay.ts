@@ -126,7 +126,7 @@ const customLink: TRPCLink<any> =
           observer.error(new TRPCClientError(error.message));
         }
 
-        console.log('Emit Direct', op, client.socket);
+        console.log('[relay] Emit Direct', op, client.socket);
 
         client.socket.emit('trpc', { id: uuid, method: op.path, type: op.type, params: input });
 

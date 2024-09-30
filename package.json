@@ -40,6 +40,7 @@
     "@arken/forge-ui": "workspace:*",
     "@arken/forge-backend": "workspace:*",
     "@arken/node": "workspace:*",
+    "@arken/evolution-protocol": "workspace:*",
     "@popperjs/core": "^2",
     "@reach/dialog": "^0",
     "@reach/portal": "0.10.5",
@@ -143,7 +144,8 @@
     "webpack": "^5",
     "webpack-dev-server": "^5",
     "windups": "^1",
-    "@tanstack/react-query-devtools": "~5.52.2"
+    "@tanstack/react-query-devtools": "~5.52.2",
+    "@ant-design/pro-provider": "~2.14.9"
   },
   "devDependencies": {
     "@babel/core": "^7",

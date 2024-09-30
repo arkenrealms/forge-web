@@ -54,7 +54,7 @@ type FormWithRelations = NexusModel<any>;
 const contentItemDefault: any = {
   id: '',
   status: 'Draft',
-  title: '',
+  name: '',
   description: '',
   key: '',
   groupId: null,
@@ -85,9 +85,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     setCacheKey('cache' + Math.random());
   };
 
-  const { data: formGroups }: any = relay.trpc.interface.getInterfaceGroups.useQuery<InterfaceGroup[]>({
-    where: {},
-  });
+  const { data: formGroups }: any = relay.trpc.interface.getInterfaceGroups.useQuery<InterfaceGroup[]>();
 
   localParams.contentId = interfaceKey;
 
@@ -102,7 +100,10 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
             id: { equals: localParams.contentId },
           },
         }
-      : undefined
+      : {}, // Pass an empty object instead of undefined
+    {
+      enabled: Boolean(localParams.contentId), // Control execution with 'enabled'
+    }
   );
 
   const {
@@ -146,28 +147,28 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
   });
 
   const {
-    mutate: createInterface,
+    mutateAsync: createInterface,
     isPending: createLoading,
     error: createContentItemError,
   } = relay.trpc.interface.createInterface.useMutation();
 
   const {
-    mutate: updateInterface,
+    mutateAsync: updateInterface,
     isPending: updateLoading,
     error: updateContentItemError,
   } = relay.trpc.interface.updateInterface.useMutation();
 
-  const { mutate: publishInterface } = relay.trpc.interface.publishInterface.useMutation();
+  const { mutateAsync: publishInterface } = relay.trpc.interface.publishInterface.useMutation();
 
-  const { mutate: deleteInterface } = relay.trpc.interface.deleteInterface.useMutation();
+  const { mutateAsync: deleteInterface } = relay.trpc.interface.deleteInterface.useMutation();
 
-  const { mutate: deactivateInterface } = relay.trpc.interface.deactivateInterface.useMutation();
+  const { mutateAsync: deactivateInterface } = relay.trpc.interface.deactivateInterface.useMutation();
 
-  const { mutate: createInterfaceDraft } = relay.trpc.interface.createInterfaceDraft.useMutation();
+  const { mutateAsync: createInterfaceDraft } = relay.trpc.interface.createInterfaceDraft.useMutation();
 
-  const { mutate: resetInterface } = relay.trpc.interface.resetInterface.useMutation();
+  const { mutateAsync: resetInterface } = relay.trpc.interface.resetInterface.useMutation();
 
-  const { mutate: acceptInterfaceSubmission } = relay.trpc.interface.acceptInterfaceSubmission.useMutation();
+  const { mutateAsync: acceptInterfaceSubmission } = relay.trpc.interface.acceptInterfaceSubmission.useMutation();
 
   const onChangeParams = async (params: any) => {
     // log.dev('Refetching', params.contentId)
@@ -255,7 +256,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
   async function getColumns({ params }: any) {
     const columns = [
       {
-        title: 'Interface ID',
+        title: 'ID',
         dataIndex: 'key',
         key: 'key',
         // align: 'center',
@@ -282,9 +283,9 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
         sorter: (a: any, b: any) => a.key.localeCompare(b.key),
       },
       {
-        title: 'Interface Name',
-        dataIndex: 'title',
-        key: 'title',
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
         ellipsize: false,
         // align: 'center',
         // width: 150,
@@ -297,7 +298,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
               isEditing={params.tableMode === 'edit'}
               onChange={(text: any) =>
                 onSaveContentItem({
-                  title: text,
+                  name: text,
                 })
               }
               css={css`
@@ -307,7 +308,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
             />
           );
         },
-        sorter: (a: any, b: any) => a.title.localeCompare(b.title),
+        sorter: (a: any, b: any) => a.name.localeCompare(b.name),
       },
       {
         title: 'Version',
@@ -386,7 +387,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
         width: 150,
         filters:
           formGroups?.map((group: any) => ({
-            text: group.title,
+            text: group.name,
             value: group.id,
           })) || [],
         filteredValue: params.groupId || [],
@@ -401,7 +402,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
               defaultValue={record.groupId}
               options={() =>
                 formGroups?.map((group: any) => ({
-                  text: group.title,
+                  text: group.name,
                   value: group.id,
                 })) || []
               }
@@ -556,8 +557,8 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
 
     if (params?.contentMode === 'edit') {
       if (!contentItemTemp.key) {
-        if (contentItemTemp.title) {
-          contentItemTemp.key = camelize(contentItemTemp.title);
+        if (contentItemTemp.name) {
+          contentItemTemp.key = camelize(contentItemTemp.name);
         } else {
           contentItemTemp.key = shortId.generate();
         }
@@ -580,7 +581,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
       },
       {
         href: `/interfaces`,
-        title: 'Forms',
+        title: 'Interfaces',
       },
     ];
 
@@ -614,8 +615,8 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
             align: 'left',
             fields: [
               {
-                label: 'Form Name',
-                name: 'title',
+                label: 'Name',
+                name: 'name',
                 type: 'text',
                 isRequired: true,
                 onChange: (key: any, value: any) => {
@@ -624,7 +625,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
                 },
               },
               {
-                label: 'Form Description',
+                label: 'Description',
                 name: 'description',
                 type: 'content',
                 isRequired: false,
@@ -634,18 +635,18 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
                 },
               },
               {
-                label: 'Form ID',
+                label: 'ID',
                 name: 'key',
                 type: 'text',
                 isRequired: true,
               },
               {
-                label: 'Form Group',
+                label: 'Group',
                 name: 'groupId',
                 type: 'select',
                 options: () =>
                   formGroups?.map((group: any) => ({
-                    text: group.title,
+                    text: group.name,
                     value: group.id,
                   })) || [],
                 onChange: (key: any, value: any) => {
@@ -853,7 +854,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     isListLoading: contentListLoading,
     isLoading: contentItemLoading || createLoading || updateLoading,
     primaryKey: 'id',
-    secondaryKey: 'title',
+    secondaryKey: 'name',
     baseUrl: '/interfaces',
     extraParams: {
       tab: 'form',
@@ -898,7 +899,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
   return (
     <div
       css={css`
-        max-width: 90%;
+        width: 100%;
         margin: 0 auto;
       `}>
       <Modal
@@ -932,7 +933,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
         This form is already published, so it cannot be updated. Instead a draft will be created. However, there already
         an existing draft. That draft will be replaced with the current changes.
       </Modal>
-      <div
+      {/* <div
         css={css`
           padding: 20px 0 20px;
           text-align: right;
@@ -954,9 +955,9 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
             font-style: normal;
             margin-top: 5px;
           `}>
-          Search by Form ID
+          Search by ID
         </p>
-      </div>
+      </div> */}
       <div
         css={css`
           position: relative;
