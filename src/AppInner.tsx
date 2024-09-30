@@ -41,7 +41,7 @@ import ToastListener from '~/components/ToastListener';
 import { useEnv } from '~/hooks/useEnv';
 import config from '~/config/menu';
 import { useFetchProfile, useFetchPublicData } from './state/hooks';
-import * as relay from '~/utils/relay';
+import { trpc } from '~/utils/trpc';
 
 import history from '~/routerHistory';
 
@@ -2769,7 +2769,7 @@ const App: React.FC<any> = (props) => {
         {/* <GlobalStyle useExocetFont={i18n.language === 'en'} /> */}
         {/* @ts-ignore */}
         <BrowserRouter>
-          <AuthProvider relay={relay}>
+          <AuthProvider trpc={trpc}>
             <NavProvider>
               <TourProvider>
                 <SettingsProvider>

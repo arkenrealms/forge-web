@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '~/components/Button';
 import { Skeleton } from '~/ui';
-import * as evolution from '~/utils/evolution';
+import { trpc } from '~/utils/trpc';
 import type * as Evolution from '@arken/evolution-protocol/types';
 
 export default function (props) {
   // const { data: shards }: any = evolution.trpc.game.getEras.useQuery();
-  const { data: shards } = evolution.trpc.getShards.useQuery<Evolution.Shard.Shard[]>({
+  const { data: shards } = trpc.evolution.getShards.useQuery<Evolution.Shard.Shard[]>({
     where: { realmId: { equals: props.match.params.id } },
   });
-  const { data: info }: any = evolution.trpc.info.useQuery();
+  const { data: info }: any = trpc.evolution.info.useQuery();
 
-  const { mutate: connectSeer } = evolution.trpc.connectSeer.useMutation(); // evolution.trpc.realm.connectSeer.useMutation();
-  const { mutate: createShard } = evolution.trpc.createShard.useMutation(); //evolution.trpc.realm.createShard.useMutation();
+  const { mutate: connectSeer } = trpc.evolution.connectSeer.useMutation(); // evolution.trpc.realm.connectSeer.useMutation();
+  const { mutate: createShard } = trpc.evolution.createShard.useMutation(); //evolution.trpc.realm.createShard.useMutation();
 
   return (
     <>

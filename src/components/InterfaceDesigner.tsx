@@ -14,7 +14,7 @@ import { camelize } from '@arken/node/util/string';
 import { usePrompt } from '@arken/forge-ui/hooks/usePrompt';
 import { useAuth } from '@arken/forge-ui/hooks/useAuth';
 import appConfig from '~/config';
-import * as relay from '~/utils/relay';
+import { trpc } from '~/utils/trpc';
 import shortId from 'shortid';
 import type { Interface, InterfaceGroup } from '@arken/node/modules/interface/interface.types';
 
@@ -85,7 +85,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     setCacheKey('cache' + Math.random());
   };
 
-  const { data: formGroups }: any = relay.trpc.interface.getInterfaceGroups.useQuery<InterfaceGroup[]>();
+  const { data: formGroups }: any = trpc.interface.getInterfaceGroups.useQuery<InterfaceGroup[]>();
 
   localParams.contentId = interfaceKey;
 
@@ -93,7 +93,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     data: contentItemSearch,
     refetch: contentItemRefetch,
     isLoading: contentItemLoading,
-  }: any = relay.trpc.interface.getInterface.useQuery<Interface>(
+  }: any = trpc.interface.getInterface.useQuery<Interface>(
     localParams.contentId
       ? {
           where: {
@@ -110,7 +110,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     data: contentListSearch,
     refetch: contentListRefetch,
     isLoading: contentListLoading,
-  } = relay.trpc.interface.getInterfaces.useQuery<Interface[]>({
+  } = trpc.relay.interface.getInterfaces.useQuery<Interface[]>({
     where: {
       OR: [
         {
@@ -150,25 +150,25 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     mutateAsync: createInterface,
     isPending: createLoading,
     error: createContentItemError,
-  } = relay.trpc.interface.createInterface.useMutation();
+  } = trpc.relay.interface.createInterface.useMutation();
 
   const {
     mutateAsync: updateInterface,
     isPending: updateLoading,
     error: updateContentItemError,
-  } = relay.trpc.interface.updateInterface.useMutation();
+  } = trpc.relay.interface.updateInterface.useMutation();
 
-  const { mutateAsync: publishInterface } = relay.trpc.interface.publishInterface.useMutation();
+  const { mutateAsync: publishInterface } = trpc.relay.interface.publishInterface.useMutation();
 
-  const { mutateAsync: deleteInterface } = relay.trpc.interface.deleteInterface.useMutation();
+  const { mutateAsync: deleteInterface } = trpc.relay.interface.deleteInterface.useMutation();
 
-  const { mutateAsync: deactivateInterface } = relay.trpc.interface.deactivateInterface.useMutation();
+  const { mutateAsync: deactivateInterface } = trpc.relay.interface.deactivateInterface.useMutation();
 
-  const { mutateAsync: createInterfaceDraft } = relay.trpc.interface.createInterfaceDraft.useMutation();
+  const { mutateAsync: createInterfaceDraft } = trpc.relay.interface.createInterfaceDraft.useMutation();
 
-  const { mutateAsync: resetInterface } = relay.trpc.interface.resetInterface.useMutation();
+  const { mutateAsync: resetInterface } = trpc.relay.interface.resetInterface.useMutation();
 
-  const { mutateAsync: acceptInterfaceSubmission } = relay.trpc.interface.acceptInterfaceSubmission.useMutation();
+  const { mutateAsync: acceptInterfaceSubmission } = trpc.relay.interface.acceptInterfaceSubmission.useMutation();
 
   const onChangeParams = async (params: any) => {
     // log.dev('Refetching', params.contentId)

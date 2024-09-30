@@ -4,11 +4,11 @@ import remarkGfm from 'remark-gfm';
 import history from '~/routerHistory';
 import LoreBlock1 from '~/components/LoreBlock1';
 import { Skeleton } from '~/ui';
-import * as relay from '~/utils/relay';
+import { trpc } from '~/utils/trpc';
 import type { Types } from '@arken/node/modules/game';
 
 const Eras = function () {
-  const { data: eras } = relay.trpc.game.getEras.useQuery<Types.Era[]>();
+  const { data: eras } = trpc.relay.game.getEras.useQuery<Types.Era[]>();
 
   if (!eras?.length)
     return (

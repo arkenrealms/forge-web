@@ -5,11 +5,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Card, CardBody, CardHeader, Flex, Heading, Text } from '~/ui';
 import Page from '~/components/layout/Page';
 import { Skeleton } from '~/ui';
-import * as relay from '~/utils/relay';
+import { trpc } from '~/utils/trpc';
 import type { Types } from '@arken/node/modules/core';
 
 export default function () {
-  const { data: realms } = relay.trpc.core.getRealms.useQuery<Types.Realm[]>();
+  const { data: realms } = trpc.core.core.getRealms.useQuery<Types.Realm[]>();
 
   if (!realms?.length)
     return (

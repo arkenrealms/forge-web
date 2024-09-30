@@ -1,3 +1,5 @@
+// App.tsx
+
 import React from 'react';
 import { hydrate, render } from 'react-dom';
 // import * as Sentry from '@sentry/react'
@@ -12,7 +14,7 @@ import enUS from 'antd/lib/locale/en_US';
 import { ProProvider } from '@ant-design/pro-provider';
 import proEnUS from '@ant-design/pro-provider/es/locale/en_US';
 // import reportWebVitals from './reportWebVitals'
-import { ConfigProvider, theme, notification } from 'antd';
+import { ConfigProvider, theme } from 'antd';
 import { ThemeProvider } from 'antd-style';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -23,16 +25,17 @@ import { PromptProvider } from '@arken/forge-ui/hooks/usePrompt';
 import { AuthProvider } from '@arken/forge-ui/hooks/useAuth';
 import { NavProvider } from '@arken/forge-ui/hooks/useNav';
 import { NoticeProvider } from '@arken/forge-ui/hooks/useNotice';
-// import cerebro from '@arken/forge-ui'
 import { lightTheme, darkTheme } from '~/themes';
-import * as relay from '~/utils/relay';
-import * as evolution from '~/utils/evolution';
+import { trpc, trpcClient, queryClient } from '~/utils/trpc';
 import ResetStyles from '~/reset-styles';
 import GlobalStyles from '~/global-styles';
-// import { trpc, trpcClient } from '~/utils/relay'; // Adjust path as needed
+// import { trpc, trpcClient } from '~/utils/trpc'; // Adjust path as needed
+
+// Initialize QueryClients for both core and evolution backends
+// Assuming ts exports queryClients
+// If not, we can use queryClient.core and queryClient.evolution
 
 window.queryClient = new QueryClient();
-window.queryClientEvolution = new QueryClient();
 
 // TODO: remove?
 // @ts-ignore
@@ -79,149 +82,67 @@ const App = ({ apolloClient }: any) => {
     isMobile,
   };
 
-  // const ThemeProvider2 = ThemeProvider as any
-
   return (
     <ConfigProvider theme={themeConfig} locale={enUS}>
       {/* <ProProvider value={{ locale: proEnUS }}> */}
       <StyledThemeProvider theme={themeSettings}>
         {/* <ThemeProvider2 theme={themeConfig}> */}
-        <relay.trpc.Provider client={relay.trpcClient} queryClient={window.queryClient}>
-          <evolution.trpc.Provider client={evolution.trpcClient} queryClient={window.queryClientEvolution}>
-            <QueryClientProvider client={window.queryClient}>
-              <QueryClientProvider client={window.queryClientEvolution}>
-                <PromptProvider>
-                  <NoticeProvider>
-                    <ApolloProvider client={apolloClient}>
+        <trpc.Provider client={trpcClient} queryClient={queryClient}>
+          <QueryClientProvider client={queryClient}>
+            <PromptProvider>
+              <NoticeProvider>
+                <ApolloProvider client={apolloClient}>
+                  <>
+                    <ResetStyles />
+                    <GlobalStyles />
+                    <Providers>
                       <>
-                        <ResetStyles />
-                        <GlobalStyles />
-                        <Providers>
-                          <>
-                            <ListsUpdater />
-                            <ApplicationUpdater />
-                            <TransactionUpdater />
-                            <MulticallUpdater />
-                            <ToastListener />
-                          </>
-                          <AppInner />
-                        </Providers>
-                        {/* <BrowserRouter basename="/">
-                      <NavProvider>
-                        <TourProvider>
-                          <SettingsProvider>
-                            <Providers>
-                              <>
-                                <ListsUpdater />
-                                <ApplicationUpdater />
-                                <TransactionUpdater />
-                                <MulticallUpdater />
-                                <ToastListener />
-                              </>
-                              <Routes>
-                                <Route
-                                  path="/"
-                                  element={
-                                    <Authorize permissions={[]}>
-                                      <Dashboard themeConfig={themeConfig} />
-                                    </Authorize>
-                                  }
-                                />
-                                <Route
-                                  path="/realms"
-                                  element={
-                                    <Authorize permissions={[]}>
-                                      <AppInner />
-                                    </Authorize>
-                                  }
-                                />
-                                <Route
-                                  path="/settings"
-                                  element={
-                                    <Authorize permissions={[]}>
-                                      <Settings themeConfig={themeConfig} />
-                                    </Authorize>
-                                  }
-                                />
-                                <Route
-                                  path="/users"
-                                  element={
-                                    <Authorize permissions={[]}>
-                                      <Users themeConfig={themeConfig} />
-                                    </Authorize>
-                                  }
-                                />
-                                <Route
-                                  path="/roles"
-                                  element={
-                                    <Authorize permissions={[]}>
-                                      <Roles themeConfig={themeConfig} />
-                                    </Authorize>
-                                  }
-                                />
-                                <Route
-                                  path="/interfaces"
-                                  element={
-                                    <Authorize permissions={[]}>
-                                      <Forms themeConfig={themeConfig} />
-                                    </Authorize>
-                                  }
-                                />
-                                <Route
-                                  path="/groups"
-                                  element={
-                                    <Authorize permissions={[]}>
-                                      <Groups themeConfig={themeConfig} />
-                                    </Authorize>
-                                  }
-                                />
-                                <Route
-                                  path="/templates"
-                                  element={
-                                    <Authorize permissions={[]}>
-                                      <Templates />
-                                    </Authorize>
-                                  }
-                                />
-                                <Route
-                                  path="/game/achievements"
-                                  element={
-                                    <Authorize permissions={[]}>
-                                      <FormPage formKey="game-achievements" />
-                                    </Authorize>
-                                  }
-                                />
-                                <Route
-                                  path="/crypto/tokens"
-                                  element={
-                                    <Authorize permissions={[]}>
-                                      <ModelPage modelKey="CollectibleCard" />
-                                    </Authorize>
-                                  }
-                                />
-                                <Route
-                                  path="/collectible/cards"
-                                  element={
-                                    <Authorize permissions={[]}>
-                                      <ModelPage modelKey="CollectibleCard" />
-                                    </Authorize>
-                                  }
-                                />
-                                <Route path="*" element={<PageNotFound defaultNotFoundValue={false} />} />
-                              </Routes>
-                            </Providers>
-                          </SettingsProvider>
-                        </TourProvider>
-                      </NavProvider>
-                    </BrowserRouter> */}
+                        <ListsUpdater />
+                        <ApplicationUpdater />
+                        <TransactionUpdater />
+                        <MulticallUpdater />
+                        <ToastListener />
                       </>
-                    </ApolloProvider>
-                  </NoticeProvider>
-                </PromptProvider>
-              </QueryClientProvider>
-            </QueryClientProvider>
-          </evolution.trpc.Provider>
-        </relay.trpc.Provider>
+                      <AppInner />
+                    </Providers>
+                    {/* 
+                        Uncomment and adjust your routing as needed:
+                        <BrowserRouter basename="/">
+                          <NavProvider>
+                            <TourProvider>
+                              <SettingsProvider>
+                                <Providers>
+                                  <>
+                                    <ListsUpdater />
+                                    <ApplicationUpdater />
+                                    <TransactionUpdater />
+                                    <MulticallUpdater />
+                                    <ToastListener />
+                                  </>
+                                  <Routes>
+                                    <Route
+                                      path="/"
+                                      element={
+                                        <Authorize permissions={[]}>
+                                          <Dashboard themeConfig={themeConfig} />
+                                        </Authorize>
+                                      }
+                                    />
+                                    {/* Add other routes here */}
+                    {/* </Routes>
+                                </Providers>
+                              </SettingsProvider>
+                            </TourProvider>
+                          </NavProvider>
+                        </BrowserRouter> 
+                        */}
+                  </>
+                </ApolloProvider>
+              </NoticeProvider>
+            </PromptProvider>
+          </QueryClientProvider>
+        </trpc.Provider>
+
         {/* </ThemeProvider2> */}
       </StyledThemeProvider>
       {/* </ProProvider> */}

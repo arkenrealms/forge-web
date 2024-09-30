@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import LoreBlock1 from '~/components/LoreBlock1';
 import { Skeleton } from '~/ui';
-import * as relay from '~/utils/relay';
+import { trpc } from '~/utils/trpc';
 import type { Types } from '@arken/node/modules/core';
 
 export default function (props) {
-  const { data: realms } = relay.trpc.core.getRealms.useQuery<Types.Realm[]>({
+  const { data: realms } = trpc.core.getRealms.useQuery<Types.Realm[]>({
     where: { gameId: { equals: props.match.params.id } },
   });
 

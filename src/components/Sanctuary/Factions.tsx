@@ -6,13 +6,13 @@ import useFetch from '~/hooks/useFetch';
 import history from '~/routerHistory';
 import LoreBlock1 from '~/components/LoreBlock1';
 import { Flex, Skeleton } from '~/ui';
-import * as relay from '~/utils/relay';
+import { trpc } from '~/utils/trpc';
 import type { CharacterFaction } from '@arken/node/modules/character/character.types';
 
 const Abc = styled.div``;
 
 const Factions = function () {
-  const { data: factions } = relay.trpc.character.getCharacterFaction.useQuery<CharacterFaction[]>({
+  const { data: factions } = trpc.relay.character.getCharacterFaction.useQuery<CharacterFaction[]>({
     where: { name: { contains: 'A' } },
   });
 

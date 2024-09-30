@@ -5,13 +5,13 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Card, CardBody, CardHeader, Flex, Heading, Text } from '~/ui';
 import Page from '~/components/layout/Page';
 import { Skeleton } from '~/ui';
-import * as relay from '~/utils/relay';
+import { trpc } from '~/utils/trpc';
 import type { Types } from '@arken/node/modules/game';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function () {
-  const { data: games } = relay.trpc.game.getGames.useQuery<Types.Game[]>();
+  const { data: games } = trpc.game.getGames.useQuery<Types.Game[]>();
 
   if (!games?.length)
     return (
