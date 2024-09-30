@@ -252,14 +252,14 @@ export default function AdminDashboard() {
   const { profile } = useAuth();
   const [refreshCountdown, setRefreshCountdown] = useState(15);
 
-  const { data: info } = trpc.core.info.useQuery(null, {
+  const { data: info } = trpc.relay.info.useQuery(null, {
     // queryKey: 'metrics',
     enabled: true, // Automatically fetch data on mount
     staleTime: 1000 * 60 * 5, // Data is considered fresh for 5 minutes
     refetchOnWindowFocus: false, // Do not refetch on window focus
   });
 
-  const { mutate: updateMetrics } = trpc.job.updateMetrics.useMutation();
+  const { mutate: updateMetrics } = trpc.relay.updateMetrics.useMutation();
 
   useEffect(() => {
     console.log('Updating metrics');
@@ -272,7 +272,7 @@ export default function AdminDashboard() {
     isLoading: isLoadingStats,
     isFetching: isRefreshingStats,
     error,
-  } = trpc.core.stats.useQuery(
+  } = trpc.relay.stats.useQuery(
     {
       where: {
         createdDate: { gte: oneWeekAgo },

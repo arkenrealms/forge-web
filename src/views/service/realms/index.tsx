@@ -9,7 +9,7 @@ import { trpc } from '~/utils/trpc';
 import type { Types } from '@arken/node/modules/core';
 
 export default function () {
-  const { data: realms } = trpc.core.core.getRealms.useQuery<Types.Realm[]>();
+  const { data: realms } = trpc.relay.core.getRealms.useQuery<Types.Realm[]>();
 
   if (!realms?.length)
     return (
