@@ -1,7 +1,6 @@
 // app.router.ts
 
 import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
 import { createRouter as createRelayRouter, Router as RelayRouter } from '@arken/node/router';
 import {
   createRouter as createEvolutionRouter,

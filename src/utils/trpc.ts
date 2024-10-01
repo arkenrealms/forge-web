@@ -136,7 +136,7 @@ backends.forEach((backend) => {
 
           client.socket.emit('trpcResponse', { id, result });
         } catch (e) {
-          client.socket.emit('trpcResponse', { id, error: e.message });
+          client.socket.emit('trpcResponse', { id, result: {}, error: e.message });
         }
       }
     } catch (e) {
@@ -205,8 +205,12 @@ const combinedLink: TRPCLink<any> =
           resolve: (response) => {
             console.log(`[${routerName} Link] Callback resolved:`, uuid, response);
             clearTimeout(timeout);
-            observer.next(response);
-            observer.complete();
+            if (response.error) {
+              observer.error(response.error);
+            } else {
+              observer.next(response);
+              observer.complete();
+            }
             delete client.ioCallbacks[uuid];
           },
           reject: (error) => {

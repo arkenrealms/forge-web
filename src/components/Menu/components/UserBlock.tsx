@@ -26,8 +26,8 @@ const UserBlock: React.FC<Props> = ({ username, account, login, logout }) => {
   const accountEllipsis = username
     ? username
     : account
-    ? `${account.substring(0, 2)}...${account.substring(account.length - 4)}`
-    : null;
+      ? `${account.substring(0, 2)}...${account.substring(account.length - 4)}`
+      : null;
   // console.log(9999, username)
   return (
     <div>
@@ -52,6 +52,7 @@ const UserBlock: React.FC<Props> = ({ username, account, login, logout }) => {
         <Button
           scale="sm"
           onClick={() => {
+            onPresentConnectModal();
             // onPresentLoginModal()
           }}>
           Login

@@ -85,7 +85,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     setCacheKey('cache' + Math.random());
   };
 
-  const { data: formGroups }: any = trpc.interface.getInterfaceGroups.useQuery<InterfaceGroup[]>();
+  const { data: formGroups }: any = trpc.relay.interface.getInterfaceGroups.useQuery<InterfaceGroup[]>();
 
   localParams.contentId = interfaceKey;
 
@@ -93,7 +93,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     data: contentItemSearch,
     refetch: contentItemRefetch,
     isLoading: contentItemLoading,
-  }: any = trpc.interface.getInterface.useQuery<Interface>(
+  }: any = trpc.relay.interface.getInterface.useQuery<Interface>(
     localParams.contentId
       ? {
           where: {
