@@ -1,11 +1,11 @@
+import React from 'react';
 import { createTRPCReact, TRPCLink } from '@trpc/react-query';
 import { TRPCClientError } from '@trpc/client';
-import superjson from 'superjson';
 import { QueryClient } from '@tanstack/react-query';
 import { observable } from '@trpc/server/observable';
 import { io as ioClient } from 'socket.io-client';
 import { generateShortId } from '@arken/node/util/db';
-import React from 'react';
+import { serialize, deserialize } from '@arken/node/util/rpc';
 import type { AppRouter } from './app.router';
 
 // ======================
@@ -54,13 +54,14 @@ export const handleTRPCError = (error: any, message = 'There was an error while 
 // ======================
 
 type BackendConfig = {
-  name: 'relay' | 'evolution';
+  name: 'relay' | 'evolution' | 'seer';
   url: string;
 };
 
 const backends: BackendConfig[] = [
   { name: 'relay', url: 'http://localhost:8020' },
   { name: 'evolution', url: 'http://localhost:4010' },
+  { name: 'seer', url: 'http://localhost:7060' },
 ];
 
 // Initialize a single QueryClient shared across all backends
@@ -134,7 +135,7 @@ backends.forEach((backend) => {
           // Implement your method handling logic here
           const result = {}; // Replace with actual result
 
-          client.socket.emit('trpcResponse', { id, result });
+          client.socket.emit('trpcResponse', { id, result: serialize(result) });
         } catch (e) {
           client.socket.emit('trpcResponse', { id, result: {}, error: e.message });
         }
@@ -190,14 +191,14 @@ const combinedLink: TRPCLink<any> =
           id: uuid,
           method: op.path.replace(routerName + '.', ''),
           type: op.type,
-          params: input,
+          params: serialize(input),
         });
 
         // Save the ID and callback
         const timeout = setTimeout(() => {
           console.log(`[${routerName} Link] Request timed out:`, op);
           delete client.ioCallbacks[uuid];
-          observer.error(new TRPCClientError('Request timeout'));
+          // observer.error(new TRPCClientError('Request timeout'));
         }, 15000); // 15 seconds timeout
 
         client.ioCallbacks[uuid] = {
@@ -208,7 +209,9 @@ const combinedLink: TRPCLink<any> =
             if (response.error) {
               observer.error(response.error);
             } else {
-              observer.next(response);
+              observer.next({
+                result: typeof response.result === 'string' ? deserialize(response.result) : response.result,
+              });
               observer.complete();
             }
             delete client.ioCallbacks[uuid];
@@ -235,7 +238,6 @@ export const trpc = createTRPCReact<AppRouter>();
 
 // Create the tRPC client with the combined link
 export const trpcClient = trpc.createClient({
-  transformer: superjson, // Enable data serialization
   links: [combinedLink],
 });
 

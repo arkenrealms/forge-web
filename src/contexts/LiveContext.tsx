@@ -12,22 +12,27 @@ import { log, logError } from '@arken/node/util';
 
 const getSocket = (endpoint) => {
   console.log('Connecting to', endpoint);
-  return io(endpoint, {
-    transports: ['websocket'],
-    upgrade: false,
-    reconnection: false,
-    reconnectionAttempts: 20,
-    autoConnect: false,
-    auth: (cb) => {
-      cb({ token: window?.localStorage?.token });
-    },
-    // io.on("connection", (socket) => {
-    //   console.log(socket.handshake.auth); // prints { token: "abcd" }
-    // });
-    // extraHeaders: {
-    //   "my-custom-header": "1234"
-    // }
-  });
+  return {
+    on: function () {},
+    emit: function () {},
+    connect: function () {},
+  };
+  // io(endpoint, {
+  //   transports: ['websocket'],
+  //   upgrade: false,
+  //   reconnection: false,
+  //   reconnectionAttempts: 20,
+  //   autoConnect: false,
+  //   auth: (cb) => {
+  //     cb({ token: window?.localStorage?.token });
+  //   },
+  //   // io.on("connection", (socket) => {
+  //   //   console.log(socket.handshake.auth); // prints { token: "abcd" }
+  //   // });
+  //   // extraHeaders: {
+  //   //   "my-custom-header": "1234"
+  //   // }
+  // });
 };
 
 async function getSignedRequest(web3, library, address, data = null) {

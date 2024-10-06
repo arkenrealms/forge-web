@@ -18,7 +18,6 @@ import { ConfigProvider, theme } from 'antd';
 import { ThemeProvider } from 'antd-style';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ApolloProvider } from '@apollo/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useBrand, useMatchBreakpoints, useSettings } from '@arken/forge-ui/hooks';
 import { PromptProvider } from '@arken/forge-ui/hooks/usePrompt';
@@ -91,21 +90,20 @@ const App = ({ apolloClient }: any) => {
           <QueryClientProvider client={queryClient}>
             <PromptProvider>
               <NoticeProvider>
-                <ApolloProvider client={apolloClient}>
-                  <>
-                    <ResetStyles />
-                    <GlobalStyles />
-                    <Providers>
-                      <>
-                        <ListsUpdater />
-                        <ApplicationUpdater />
-                        <TransactionUpdater />
-                        <MulticallUpdater />
-                        <ToastListener />
-                      </>
-                      <AppInner />
-                    </Providers>
-                    {/* 
+                <>
+                  <ResetStyles />
+                  <GlobalStyles />
+                  <Providers>
+                    <>
+                      <ListsUpdater />
+                      <ApplicationUpdater />
+                      <TransactionUpdater />
+                      <MulticallUpdater />
+                      <ToastListener />
+                    </>
+                    <AppInner />
+                  </Providers>
+                  {/* 
                         Uncomment and adjust your routing as needed:
                         <BrowserRouter basename="/">
                           <NavProvider>
@@ -129,15 +127,14 @@ const App = ({ apolloClient }: any) => {
                                       }
                                     />
                                     {/* Add other routes here */}
-                    {/* </Routes>
+                  {/* </Routes>
                                 </Providers>
                               </SettingsProvider>
                             </TourProvider>
                           </NavProvider>
                         </BrowserRouter> 
                         */}
-                  </>
-                </ApolloProvider>
+                </>
               </NoticeProvider>
             </PromptProvider>
           </QueryClientProvider>

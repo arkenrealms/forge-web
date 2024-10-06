@@ -6,7 +6,7 @@ import { trpc } from '~/utils/trpc';
 import type { Types } from '@arken/node/modules/core';
 
 export default function (props) {
-  const { data: realms } = trpc.relay.getRealms.useQuery<Types.Realm[]>({
+  const { data: realms } = trpc.relay.core.getRealms.useQuery<Types.Realm[]>({
     where: { gameId: { equals: props.match.params.id } },
   });
 

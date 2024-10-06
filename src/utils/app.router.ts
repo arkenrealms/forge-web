@@ -6,11 +6,13 @@ import {
   createRouter as createEvolutionRouter,
   Router as EvolutionRouter,
 } from '@arken/evolution-protocol/realm/realm.router';
+import { createRouter as createSeerRouter, Router as SeerRouter } from '@arken/seer-protocol';
 
 // Define the merged router type
 type MergedRouter = {
   relay: RelayRouter;
   evolution: EvolutionRouter;
+  seer: SeerRouter;
 };
 
 // Initialize tRPC with the merged context if needed
@@ -25,6 +27,7 @@ export const createRouter = () =>
   t.router<MergedRouter>({
     relay: createRelayRouter(),
     evolution: createEvolutionRouter(),
+    seer: createSeerRouter(),
   });
 
 // Export the type of the router

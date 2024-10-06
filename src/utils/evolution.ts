@@ -1,6 +1,5 @@
 import { createTRPCReact } from '@trpc/react-query';
 import { createTRPCProxyClient, loggerLink, splitLink, TRPCLink, TRPCClientError } from '@trpc/client';
-import superjson from 'superjson';
 // import type { Router } from '@arken/node/types';
 import type * as Evolution from '@arken/evolution-protocol/types';
 import { QueryClient } from '@tanstack/react-query';
@@ -124,8 +123,12 @@ const customLink: TRPCLink<any> =
         resolve: (response) => {
           console.log('ioCallbacks.resolve', uuid, response);
           clearTimeout(timeout);
-          observer.next(response);
-          observer.complete();
+          if (response.error) {
+            observer.error(response.error);
+          } else {
+            observer.next(response);
+            observer.complete();
+          }
           delete client.ioCallbacks[uuid]; // Cleanup after completion
         },
         reject: (error) => {
