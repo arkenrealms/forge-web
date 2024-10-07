@@ -91,61 +91,65 @@ type Client = {
 const clients: Record<string, Client> = {};
 
 backends.forEach((backend) => {
-  const client: Client = {
-    ioCallbacks: {},
-    socket: ioClient(backend.url, {
-      transports: ['websocket'],
-      upgrade: false,
-      autoConnect: true, // Consider setting to false and connecting manually if needed
-    }),
-  };
+  try {
+    const client: Client = {
+      ioCallbacks: {},
+      socket: ioClient(backend.url, {
+        transports: ['websocket'],
+        upgrade: false,
+        autoConnect: true, // Consider setting to false and connecting manually if needed
+      }),
+    };
 
-  // Handle incoming socket events
-  client.socket.onAny((eventName, res) => {
-    try {
-      console.log(`[${backend.name} Socket] Event:`, eventName, res);
+    // Handle incoming socket events
+    client.socket.onAny((eventName, res) => {
+      try {
+        console.log(`[${backend.name} Socket] Event:`, eventName, res);
 
-      if (eventName === 'Events') return;
+        if (eventName === 'Events') return;
 
-      const { id } = res;
+        const { id } = res;
 
-      if (id) {
-        if (client.ioCallbacks[id]) {
-          console.log(`[${backend.name} Socket] Callback exists for ID:`, id);
+        if (id) {
+          if (client.ioCallbacks[id]) {
+            console.log(`[${backend.name} Socket] Callback exists for ID:`, id);
 
-          clearTimeout(client.ioCallbacks[id].timeout);
+            clearTimeout(client.ioCallbacks[id].timeout);
+
+            try {
+              client.ioCallbacks[id].resolve(res);
+            } catch (e) {
+              console.log(`[${backend.name} Socket] Callback error:`, e);
+              client.ioCallbacks[id].reject(e);
+            }
+
+            delete client.ioCallbacks[id];
+          } else {
+            console.warn(`[${backend.name} Socket] No callback found for ID: ${id}`);
+          }
+        } else {
+          const { method, params } = res;
+
+          console.log(`[${backend.name} Socket] TRPC method called:`, method, params);
 
           try {
-            client.ioCallbacks[id].resolve(res);
+            // Implement your method handling logic here
+            const result = {}; // Replace with actual result
+
+            client.socket.emit('trpcResponse', { id, result: serialize(result) });
           } catch (e) {
-            console.log(`[${backend.name} Socket] Callback error:`, e);
-            client.ioCallbacks[id].reject(e);
+            client.socket.emit('trpcResponse', { id, result: {}, error: e.message });
           }
-
-          delete client.ioCallbacks[id];
-        } else {
-          console.warn(`[${backend.name} Socket] No callback found for ID: ${id}`);
         }
-      } else {
-        const { method, params } = res;
-
-        console.log(`[${backend.name} Socket] TRPC method called:`, method, params);
-
-        try {
-          // Implement your method handling logic here
-          const result = {}; // Replace with actual result
-
-          client.socket.emit('trpcResponse', { id, result: serialize(result) });
-        } catch (e) {
-          client.socket.emit('trpcResponse', { id, result: {}, error: e.message });
-        }
+      } catch (e) {
+        console.error(`[${backend.name} Socket] Error in handler:`, e);
       }
-    } catch (e) {
-      console.error(`[${backend.name} Socket] Error in handler:`, e);
-    }
-  });
+    });
 
-  clients[backend.name] = client;
+    clients[backend.name] = client;
+  } catch (e) {
+    console.log('Failed to setup trpc backend', backend.url);
+  }
 });
 
 // ======================

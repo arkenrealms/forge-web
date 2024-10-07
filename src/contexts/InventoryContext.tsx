@@ -293,7 +293,7 @@ const InventoryContextProvider = ({ children }) => {
 
       if (!item) return;
 
-      console.log(555, item);
+      // console.log(555, item);
 
       const meta = {
         slotId,

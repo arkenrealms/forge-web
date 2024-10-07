@@ -36,6 +36,8 @@ export default function (props) {
       <br />
       {info ? (
         <>
+          authorized profile: {info.profile?.id}
+          <br />
           version: {info.version}
           <br />
           Seer Connected: {info.isSeerConnected ? 'yes' : 'no'}
@@ -57,21 +59,43 @@ export default function (props) {
           level2open: {info.level2open ? 'yes' : 'no'}
           <br />
           Games: {info.games.length}
+          <br />
+          {info.games
+            ? info.games.map((game: any) => {
+                return (
+                  <>
+                    ID: {game.id}
+                    <br />
+                    Paused: {game.isPaused ? 'yes' : 'no'}
+                  </>
+                );
+              })
+            : null}
         </>
       ) : null}
-      <Button
-        onClick={async () => {
-          const data = 'Authorizing';
-          auth({ data, signature: await getSignature(library, web3, account, data) });
-        }}>
-        Authorize
-      </Button>
+      {!info?.authorizedProfile ? (
+        <Button
+          onClick={async () => {
+            const data = 'Authorizing';
+            auth({ data, signature: await getSignature(library, web3, account, data) });
+          }}>
+          Authorize
+        </Button>
+      ) : null}
+      {!info?.isSeerConnected ? (
+        <Button
+          onClick={() => {
+            connectSeer();
+            refetch();
+          }}>
+          Connect Seer
+        </Button>
+      ) : null}
       <Button
         onClick={() => {
-          connectSeer();
           refetch();
         }}>
-        Connect Seer
+        Refetch Info
       </Button>
       <Button
         onClick={() => {
@@ -104,9 +128,7 @@ export default function (props) {
         shards.map((shard) => {
           return (
             <div>
-              <h3>
-                {shard.name} ({shard.endpoint})
-              </h3>
+              <h3>{shard.name}</h3>
               <Button onClick={() => {}}>Shutdown</Button>
             </div>
           );
