@@ -224,9 +224,7 @@ const SelectedTeamMember = ({ member }) => {
                 text-align: left;
                 margin-top: 40px;
               `}>
-              {member.bio?.map((bioItem, index) => (
-                <li key={index}>{bioItem}</li>
-              ))}
+              {member.bio?.map((bioItem, index) => <li key={index}>{bioItem}</li>)}
             </ul>
           </>
         ) : (
@@ -244,45 +242,45 @@ const Team = ({ showAll = true, match }) => {
     {
       name: '',
     },
-    // {
-    //   name: 'Binzy',
-    //   handle: 'Binzy',
-    //   title: 'Principal Advisor',
-    //   image: '/images/team/binzy-anime.png',
-    //   imageBig: '/images/team/binzy-anime-big.png',
-    //   isDoxxed: false,
-    //   socials: {},
-    //   bio: [
-    //     `20 years’ experience programming (C++/C#/Python/Go/Node/etc).`,
-    //     `9 years’ experience of research, development and investment within the crypto space.`,
-    //     `4 years’ experience advising crypto startups and mentoring best software industry practices.`,
-    //     `10 years’ experience developing games.`,
-    //     `3 years’ experience with Solidity.`,
-    //     `6 years’ experience with Unity.`,
-    //     `2 years’ experience in graphic design, UI and UX.`,
-    //     `Contract work for various SF startups and Fortune 500 corporations.`,
-    //   ],
-    // },
+    {
+      name: 'Memefella',
+      handle: 'Memefella',
+      title: 'CEO',
+      image: '/images/team/jake-anime.png',
+      imageBig: '/images/team/jake-anime-big.png',
+      isDoxxed: false,
+      socials: {},
+      bio: [
+        `20 years’ experience programming (C++/C#/Python/Go/Node/etc).`,
+        `9 years’ experience of research, development and investment within the crypto space.`,
+        `4 years’ experience advising crypto startups and mentoring best software industry practices.`,
+        `10 years’ experience developing games.`,
+        `3 years’ experience with Solidity.`,
+        `6 years’ experience with Unity.`,
+        `2 years’ experience in graphic design, UI and UX.`,
+        `Contract work for various SF startups and Fortune 500 corporations.`,
+      ],
+    },
     {
       name: '',
     },
-    {
-      name: 'Kevin L.',
-      handle: 'Zaranero',
-      title: 'Director of Business',
-      image: '/images/team/kevin-anime.png',
-      imageBig: '/images/team/kevin-anime-big.png',
-      isDoxxed: true,
-      socials: {
-        linkedin: `https://www.linkedin.com/in/kevin-lamela-aa51665b/`,
-      },
-      bio: [
-        `10 years’ experience specializing in Sales, Turnkey Services, and Leadership roles.`,
-        `2 years’ experience in the legal publishing industry, 8 years’ experience in the energy sector.`,
-        `Current GM/COO of a publicly traded energy company in the Philippines.`,
-        `Current Director for an Energy Solutions provider that caters to commercial and industrial customers in Southeast Asia, powering data centers, cryptocurrency mining facility, manufacturing and optoelectronic industry.`,
-      ],
-    },
+    // {
+    //   name: 'Kevin L.',
+    //   handle: 'Zaranero',
+    //   title: 'Director of Business',
+    //   image: '/images/team/kevin-anime.png',
+    //   imageBig: '/images/team/kevin-anime-big.png',
+    //   isDoxxed: true,
+    //   socials: {
+    //     linkedin: `https://www.linkedin.com/in/kevin-lamela-aa51665b/`,
+    //   },
+    //   bio: [
+    //     `10 years’ experience specializing in Sales, Turnkey Services, and Leadership roles.`,
+    //     `2 years’ experience in the legal publishing industry, 8 years’ experience in the energy sector.`,
+    //     `Current GM/COO of a publicly traded energy company in the Philippines.`,
+    //     `Current Director for an Energy Solutions provider that caters to commercial and industrial customers in Southeast Asia, powering data centers, cryptocurrency mining facility, manufacturing and optoelectronic industry.`,
+    //   ],
+    // },
     // {
     //   name: 'Matt D.',
     //   handle: 'Duffles',
@@ -401,25 +399,25 @@ const Team = ({ showAll = true, match }) => {
     //     `BSc in Honours Philosophy.`,
     //   ],
     // },
-    {
-      name: 'Jake G.',
-      handle: 'Blackbeard',
-      title: 'Director of Social Media',
-      image: '/images/team/jake-anime.png',
-      imageBig: '/images/team/jake-anime-big.png',
-      isDoxxed: false,
-      socials: {
-        linkedin: 'https://www.linkedin.com/in/jakegriffus/',
-        twitter: 'https://twitter.com/BlackBeardxRUNE/',
-      },
-      bio: [
-        `10 years' experience in marketing & advertising.`,
-        `7 years' experience in social media marketing.`,
-        `5 years' experience in business management.`,
-        `2 years' experience as a business owner.`,
-        `Associates Degree in Marketing.`,
-      ],
-    },
+    // {
+    //   name: 'Jake G.',
+    //   handle: 'Blackbeard',
+    //   title: 'Director of Social Media',
+    //   image: '/images/team/jake-anime.png',
+    //   imageBig: '/images/team/jake-anime-big.png',
+    //   isDoxxed: false,
+    //   socials: {
+    //     linkedin: 'https://www.linkedin.com/in/jakegriffus/',
+    //     twitter: 'https://twitter.com/BlackBeardxRUNE/',
+    //   },
+    //   bio: [
+    //     `10 years' experience in marketing & advertising.`,
+    //     `7 years' experience in social media marketing.`,
+    //     `5 years' experience in business management.`,
+    //     `2 years' experience as a business owner.`,
+    //     `Associates Degree in Marketing.`,
+    //   ],
+    // },
     ...(showAll
       ? [
           {
@@ -454,26 +452,26 @@ const Team = ({ showAll = true, match }) => {
               `Licenciate in Music (Orchestral Conducting orientation)`,
             ],
           },
-          {
-            name: 'Maxwell V.',
-            handle: 'Max',
-            title: 'Lead Marketing Developer',
-            image: '/images/team/max-anime.png',
-            imageBig: '/images/team/max-anime-big.png',
-            isDoxxed: false,
-            socials: {},
-            bio: [],
-          },
-          {
-            name: 'Omar Panduro',
-            handle: 'PanzJr',
-            title: 'Lead Graphic Designer',
-            image: '/images/team/omar-anime.png',
-            imageBig: '/images/team/omar-anime-big.png',
-            isDoxxed: false,
-            socials: {},
-            bio: [],
-          },
+          // {
+          //   name: 'Maxwell V.',
+          //   handle: 'Max',
+          //   title: 'Lead Marketing Developer',
+          //   image: '/images/team/max-anime.png',
+          //   imageBig: '/images/team/max-anime-big.png',
+          //   isDoxxed: false,
+          //   socials: {},
+          //   bio: [],
+          // },
+          // {
+          //   name: 'Omar Panduro',
+          //   handle: 'PanzJr',
+          //   title: 'Lead Graphic Designer',
+          //   image: '/images/team/omar-anime.png',
+          //   imageBig: '/images/team/omar-anime-big.png',
+          //   isDoxxed: false,
+          //   socials: {},
+          //   bio: [],
+          // },
           // {
           //   name: 'Angel',
           //   handle: 'Angel',
@@ -620,7 +618,7 @@ const Team = ({ showAll = true, match }) => {
         ]
       : []),
   ];
-  const [selectedTeamMember, setSelectedTeamMember] = useState(team.find((t) => t.name === 'Binzy'));
+  const [selectedTeamMember, setSelectedTeamMember] = useState(team.find((t) => t.name === 'Memefella'));
 
   const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
   const isSmall = !isXxxl;

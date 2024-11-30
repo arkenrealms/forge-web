@@ -1,10 +1,11 @@
-import React from 'react'
-import { NoProfileAvatarIcon } from '~/ui'
-import { Profile } from '~/state/types'
-import styled from 'styled-components'
+import React from 'react';
+import { NoProfileAvatarIcon } from '~/ui';
+import { Profile } from '~/state/types';
+import styled from 'styled-components';
+import type * as Arken from '@arken/node';
 
 export interface ProfileAvatarProps {
-  profile: Profile
+  profile: Arken.Profile.Types.Profile;
 }
 
 const AvatarWrapper = styled.div<{ bg: string }>`
@@ -26,7 +27,7 @@ const AvatarWrapper = styled.div<{ bg: string }>`
     height: 128px;
     width: 128px;
   }
-`
+`;
 // TODO: replace with no provile avatar icon
 const AvatarInactive = styled(NoProfileAvatarIcon)`
   height: 64px;
@@ -36,14 +37,14 @@ const AvatarInactive = styled(NoProfileAvatarIcon)`
     height: 128px;
     width: 128px;
   }
-`
+`;
 
 const ProfileAvatar: React.FC<ProfileAvatarProps> = ({ profile }) => {
   return (
-    <AvatarWrapper bg={`/images/nfts/${profile.nft.images.md}`}>
-      {!profile.isActive ? <AvatarInactive /> : null}
+    <AvatarWrapper bg={`/images/nfts/${profile.character.meta.images.md}`}>
+      {profile.status === 'Active' ? <AvatarInactive /> : null}
     </AvatarWrapper>
-  )
-}
+  );
+};
 
-export default ProfileAvatar
+export default ProfileAvatar;

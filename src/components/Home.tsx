@@ -691,22 +691,22 @@ const Home: React.FC<any> = ({ match }) => {
 
   const roadmapItems = [
     {
-      title: 'Arken: Runic Raids Launched',
+      title: 'Runic Raids Launched',
       image: 'https://pbs.twimg.com/media/FMkoMBAVcAIGXC3?format=jpg&name=large',
       date: 'Q1 2021',
-      description: `Arken: Runic Raids launched March 30, 2021`,
+      description: `Runic Raids launched March 30, 2021`,
     },
     {
-      title: 'Arken: Evolution Isles Launched',
+      title: 'Evolution Isles Launched',
       image: 'https://i.imgur.com/ba1Jc3E.png',
       date: 'Q3 2021',
-      description: `Arken: Evolution Isles launched July 3, 2021`,
+      description: `Evolution Isles launched July 3, 2021`,
     },
     {
-      title: 'Arken: Infinite Arena Earliest Access',
+      title: 'Infinite Arena Earliest Access',
       image: 'https://i.imgur.com/ba1Jc3E.png',
       date: 'Q1 2022',
-      description: `Arken: Infinite Arena EA launched April 6, 2022`,
+      description: `Infinite Arena EA launched April 6, 2022`,
     },
     {
       title: 'Arken Realms',
@@ -715,10 +715,10 @@ const Home: React.FC<any> = ({ match }) => {
       description: `Arken Realms will connect everything we've built into connected metaverses/subverses.`,
     },
     {
-      title: 'Arken: Heart of the Oasis',
+      title: 'Heart of the Oasis',
       image: 'https://pbs.twimg.com/media/FKtrPCdVIAEmZL7?format=jpg&name=large',
       date: 'Future',
-      description: `Arken: Heart of the Oasis will be a dark fantasy MMORPG set within the Arken Realms.`,
+      description: `Heart of the Oasis will be a dark fantasy MMORPG set within the Arken Realms.`,
     },
   ];
 
@@ -1056,8 +1056,8 @@ z-index: 999;
                     <RouterLink to="/craft" style={{ borderBottom: '1px solid #fff' }}>
                       craft Runeforms
                     </RouterLink>{' '}
-                    (NFTs), unique and powerful weapons and armor used to enhance your Arken: Runic Raids farm rewards,
-                    or buff your Arken: Infinite Arena hero. <br />
+                    (NFTs), unique and powerful weapons and armor used to enhance your Runic Raids farm rewards, or buff
+                    your Infinite Arena hero. <br />
                     <br />
                     The item attributes that power the mechanics are built directly into the NFTs themselves. These
                     items can be used in all Arken games, or even games not published by us. We call these Evolving
@@ -1931,12 +1931,12 @@ z-index: 999;
                     rel="noreferrer noopener"
                     target="_blank"
                   >
-                    Arken: Infinite Arena (P2E)
+                    Infinite Arena (P2E)
                   </a>
                 </BulletPoint>
                 <BulletPoint>
                   <a href="/roadmap" rel="noreferrer noopener" target="_blank">
-                    Arken: Heart of the Oasis (MMO)
+                    Heart of the Oasis (MMO)
                   </a>
                 </BulletPoint>
                 <BulletPoint>

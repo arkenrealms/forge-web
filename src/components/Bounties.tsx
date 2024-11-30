@@ -196,7 +196,7 @@ const BountiesView = () => {
               margin-bottom: 20px;
               font-size: 0.9rem;
             `}>
-            <h3 style={{ fontSize: '1.2rem' }}>List Arken: Evolution Isles on various game listing sites</h3>
+            <h3 style={{ fontSize: '1.2rem' }}>List Evolution Isles on various game listing sites</h3>
             <br />
             <p>
               <strong>Reward:</strong> Make a suggestion
@@ -206,8 +206,8 @@ const BountiesView = () => {
               <strong>Claimed By:</strong> Nobody yet.
               <br />
               <br />
-              We would like Arken: Evolution Isles listed across as many gaming sites as possible. A minimum of 20 high
-              quality sites would be best.
+              We would like Evolution Isles listed across as many gaming sites as possible. A minimum of 20 high quality
+              sites would be best.
             </p>
           </div>
           <div

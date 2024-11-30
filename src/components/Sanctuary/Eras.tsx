@@ -8,7 +8,7 @@ import { trpc } from '~/utils/trpc';
 import type { Types } from '@arken/node/modules/game';
 
 const Eras = function () {
-  const { data: eras } = trpc.relay.game.getEras.useQuery<Types.Era[]>();
+  const { data: eras } = trpc.seer.game.getEras.useQuery<Types.Era[]>();
 
   if (!eras?.length)
     return (

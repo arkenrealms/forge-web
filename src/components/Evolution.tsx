@@ -1465,7 +1465,7 @@ const Evolution: any = ({ open }) => {
               </Heading>
               <br />
               <br />
-              {settings.isCrypto ? (
+              {/* {settings.isCrypto ? (
                 <>
                   <Button
                     as={RouterLink}
@@ -1489,7 +1489,7 @@ const Evolution: any = ({ open }) => {
                     </Button>
                   </Flex>
                 </>
-              ) : null}
+              ) : null} */}
             </Flex>
           ) : (
             <div
@@ -1557,7 +1557,7 @@ const Evolution: any = ({ open }) => {
                       }}
                     >
                       <LogoImg src="/images/rune-500x500.png" style={{ width: 65, height: 65, marginRight: '15px' }} />{' '}
-                      {t('Arken: Evolution Isles')}
+                      {t('Evolution Isles')}
                     </Heading> */}
                     <br />
                     <br />
@@ -1925,8 +1925,8 @@ const Evolution: any = ({ open }) => {
                 <br />
                 {settings.isCrypto ? (
                   <Paragraph>
-                    Using your hero's magical abilities, you can buff your dragon while you play Arken: Evolution Isles.
-                    Equip NFTs to see the effects in-game. Currently supported item mechanics:
+                    Using your hero's magical abilities, you can buff your dragon while you play Evolution Isles. Equip
+                    NFTs to see the effects in-game. Currently supported item mechanics:
                     <br />
                     <ul>
                       <li>

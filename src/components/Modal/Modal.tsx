@@ -5,6 +5,7 @@ import Flex from '../Box/Flex';
 import { ArrowBackIcon, CloseIcon } from '../Svg';
 import { IconButton } from '../Button';
 import { InjectedProps } from './types';
+import { Card2 } from '../Card/Card2';
 
 interface Props extends InjectedProps {
   title: string;
@@ -13,11 +14,8 @@ interface Props extends InjectedProps {
   bodyPadding?: string;
 }
 
-const StyledModal = styled.div`
+const StyledModal = styled(Card2)`
   background: ${({ theme }) => theme.modal.background};
-  box-shadow: 0px 20px 36px -8px rgba(14, 14, 44, 0.1), 0px 1px 1px rgba(0, 0, 0, 0.05);
-  border: 1px solid ${({ theme }) => theme.colors.borderColor};
-  border-radius: 32px;
   width: 100%;
   z-index: ${({ theme }) => theme.zIndices.modal};
   overflow-y: auto;
@@ -26,12 +24,6 @@ const StyledModal = styled.div`
     min-width: 360px;
     max-width: 100%;
   }
-
-  border-style: solid;
-  border-color: transparent;
-  border-image: url('/images/frame.png') 80 repeat;
-  border-image-width: 80px;
-  // background-color: rgba(0, 0, 0);
 `;
 
 const ModalHeader = styled.div`
@@ -55,7 +47,7 @@ const Modal: React.FC<any> = ({
   bodyPadding = '24px',
   ...props
 }) => (
-  <StyledModal {...props}>
+  <StyledModal className="app__styled-card2" {...props}>
     <ModalHeader>
       <ModalTitle>
         {onBack && (

@@ -42,23 +42,23 @@ const Rules = () => {
         </Heading>
         <hr />
         <CardBody>
-          <p>Rune was launched March 28, 2021.</p>
+          <p>Arken was launched March 28, 2021.</p>
           <br />
           <br />
 
           <PitchCard>
             <div style={{ width: '280px', marginTop: '-20px' }}>
-              <img src="/images/nfts/sorceress.png" alt="Metaverse"></img>
+              <img src="/images/nfts/sorceress.png" alt="Omniverse"></img>
             </div>
             <div>
               <BoxHeading as="h2" size="xl">
-                {t('Metaverse')}
+                {t('Omniverse')}
               </BoxHeading>
               <br />
               <p>
                 <Linker id="about-1">
-                  Explore the depths of the Arken Realms. Immerse yourself in our Play4Rewards fantasy games, winning
-                  Rune tokens and NFTs, trade them on our NFT Marketplace and participate in NFT farms and pools.
+                  Explore the depths of the Arken Realms. Immerse yourself in our fantasy games, winning tokens and
+                  NFTs, trade them on our NFT Marketplace and participate in NFT farms and pools.
                   <br />
                   <br />
                   We build fun games, and incorporate blockchain gaming so you own your character and items for life,
@@ -71,7 +71,7 @@ const Rules = () => {
                   high integrity for fun factor.
                   <br />
                   <br />
-                  Components of Rune architecture include:
+                  Components of Arken architecture include:
                   <br />
                   <ul>
                     <li>NFT Service (token IDs + metadata)</li>
@@ -134,9 +134,8 @@ const Rules = () => {
               <br />
               <p>
                 <Linker id="about-3">
-                  Rune tokens are needed to craft <strong>Runeform Items</strong> (NFTs), unique and powerful weapons
-                  and armor used to enhance your Arken: Runic Raids farm rewards, or buff your Arken: Infinite Arena
-                  hero. <br />
+                  Arken tokens are needed to craft <strong>Runeform Items</strong> (NFTs), unique and powerful weapons
+                  and armor used to enhance your Runic Raids farm rewards, or buff your Infinite Arena hero. <br />
                   <br />
                   The mechanics of these NFTs are built directly into the Token ID itself, and come with advanced meta
                   data to be used in multiple games (even games not published by us). We call these Evolving NFTs.
@@ -146,8 +145,8 @@ const Rules = () => {
                   can build extensions of the game and receive/pay royalties legally.
                   <br />
                   <br />
-                  These developers can buy land within Arken: Heart of the Oasis and build their world/quests there.
-                  Players will be able to access their world from a portal in The End of Time.
+                  These developers can buy land within Heart of the Oasis and build their world/quests there. Players
+                  will be able to access their world from a portal in The End of Time.
                   <br />
                   <br />
                   Our eventual goal is to build unstoppable distributed &amp; modular games. Arken Realms, the games
@@ -182,8 +181,8 @@ const Rules = () => {
                   participate in the Sunday quiz.
                 </li>
                 <li>
-                  Rune Ultimate Tournament - Rune may host a few competitions where they give away runes to the winning
-                  teams
+                  Arken Ultimate Tournament - Arken may host a few competitions where they give away runes to the
+                  winning teams
                 </li>
               </ol>
               <br />
@@ -195,9 +194,9 @@ const Rules = () => {
               </BoxHeading>
               <ol>
                 <li>
-                  Fundraisers - The Rune team will have multiple fundraisers to raise money for marketing and eventually
-                  a studio. 1) Pets 2) Guild Tokens 3) Nostalgic Items 4) NPCs. Most will be used toward high quality
-                  marketing efforts.
+                  Fundraisers - The Arken team will have multiple fundraisers to raise money for marketing and
+                  eventually a studio. 1) Pets 2) Guild Tokens 3) Nostalgic Items 4) NPCs. Most will be used toward high
+                  quality marketing efforts.
                 </li>
                 <li>
                   Community Driven Development - The team loves to get constant feedback from the community, so they are
@@ -205,7 +204,7 @@ const Rules = () => {
                   private group discussions.
                 </li>
                 <li>
-                  Community Management - Each region has their own community where they can discuss Rune in their own
+                  Community Management - Each region has their own community where they can discuss Arken in their own
                   language, and meet fellow local raiders. Region Community Managers are rewarded with a unique trinket
                   for their contribution. CMs also receive a portion of the vault earnings each month.
                 </li>
@@ -228,7 +227,7 @@ const Rules = () => {
                   retired frequently.
                 </li>
                 <li>
-                  Guild Scrolls - The Rune team is working on tokenizing the guild membership into guild scrolls, so it
+                  Guild Scrolls - The Arken team is working on tokenizing the guild membership into guild scrolls, so it
                   won't be open per se, but can be transferred, so maybe some of us have honorary ones to give away.
                 </li>
                 <li>
@@ -249,10 +248,10 @@ const Rules = () => {
               </BoxHeading>
               <ol>
                 <li>
-                  Immortalize Winners - The Rune Team is going to try to immortalize competition winners by integrating
+                  Immortalize Winners - The Arken Team is going to try to immortalize competition winners by integrating
                   them into the Arcane game lore, items, or NPCs{' '}
-                  <a rel="nofollow" className="external free" href="https://t.me/rune_trade/5252">
-                    https://t.me/rune_trade/5252
+                  <a rel="nofollow" className="external free" href="https://t.me/Arken_Council/5252">
+                    https://t.me/Arken_Council/5252
                   </a>
                 </li>
                 <li>
@@ -264,10 +263,9 @@ const Rules = () => {
                   around, and the best way is probably though items + runewords.
                 </li>
                 <li>
-                  Congruency - The Rune team want to build the best game that can be built for the ARPG genre. For that
-                  reason, Arken will not have bunny skins or snowman pets. Arken is inspired by many games, Chrono
-                  Trigger, Diablo, RuneScape, Zelda, Yu-Gi-Oh, etc. The team wants to take that genre to the next level,
-                  not be everything to everybody.
+                  Congruency - The Arken team want to build the best game that can be built for the ARPG genre. For that
+                  reason, Arken will not have bunny skins or snowman pets. The team wants to take that genre to the next
+                  level, not be everything to everybody.
                 </li>
                 <li>
                   Whats Done Is Done - Our goal is to catch and stop minting overpowered items as soon as possible, but

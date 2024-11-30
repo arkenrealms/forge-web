@@ -159,17 +159,20 @@ const Menu: React.FC<NavProps> = ({
 
   const brandHeading = {
     rune: 'ARKEN',
-    w4: 'ARKEN',
+    arken: 'ARKEN',
+    return: 'RETURN.GG',
   };
 
   const brandSubheading = {
     rune: 'REALMS',
-    raid: 'RAID',
+    raids: 'RUNIC RAIDS',
     evolution: 'EVOLUTION',
-    infinite: 'INFINITE',
-    sanctuary: 'SANCTUARY',
-    guardians: 'GUARDIANS',
-    w4: 'GAME SERVICES',
+    infinite: 'INFINITE ARENA',
+    oasis: 'HEART OF THE OASIS',
+    guardians: 'GUARDIANS UNLEASHED',
+    isles: 'MEME ISLES',
+    arken: 'GAME SERVICES',
+    return: '',
   };
 
   const headingText = brandHeading[brand] || brandHeading.rune;

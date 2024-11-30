@@ -689,8 +689,8 @@ const Market = () => {
     const newQuery = Array.isArray(match.params.query)
       ? match.params.query
       : match.params.query
-      ? [match.params.query]
-      : [];
+        ? [match.params.query]
+        : [];
     // console.log(match.params.query !== undefined && newQuery !== undefined && JSON.stringify(newQuery) !== JSON.stringify(query))
 
     if (match.params.advanced !== undefined && match.params.advanced !== advanced)
@@ -1181,7 +1181,7 @@ const Market = () => {
                 <span style={{ borderBottom: '1px solid transparent' }}>Founder's Cube</span>
               </Item>
             </RouterLink>{' '}
-            if you want earliest access to Rune releases and much more!
+            if you want earliest access to Arken releases and much more!
           </p>
           <br />
           <Button as={RouterLink} to="/craft" style={{ marginRight: 10 }}>

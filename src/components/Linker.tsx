@@ -31,22 +31,22 @@ const zzz = styled.div``;
 
 const gameInfo = {
   Raid: {
-    ...games.find((g) => g.name === 'Arken: Runic Raids'),
+    ...games.find((g) => g.name === 'Runic Raids'),
     icon: RaidIcon,
     color: '#b59494', //'#c4504c'
   },
   Infinite: {
-    ...games.find((g) => g.name === 'Arken: Infinite Arena'),
+    ...games.find((g) => g.name === 'Infinite Arena'),
     icon: InfiniteIcon,
     color: '#b59494', //'#32b2df'
   },
   Evolution: {
-    ...games.find((g) => g.name === 'Arken: Evolution Isles'),
+    ...games.find((g) => g.name === 'Evolution Isles'),
     icon: EvolutionIcon,
     color: '#b59494', //'#0fc1ff'
   },
   Sanctuary: {
-    ...games.find((g) => g.name === 'Arken: Heart of the Oasis'),
+    ...games.find((g) => g.name === 'Heart of the Oasis'),
     icon: SanctuaryIcon,
     color: '#b59494', //'#d6a542'
   },
@@ -58,11 +58,11 @@ const gameInfo = {
 };
 
 const gameNames = [
-  'Arken: Evolution Isles',
-  'Arken: Infinite Arena',
-  'Arken: Heart of the Oasis',
+  'Evolution Isles',
+  'Infinite Arena',
+  'Heart of the Oasis',
   'Arken: Guardians Unleashed',
-  'Arken: Runic Raids',
+  'Runic Raids',
   'Evolution',
   'Infinite',
   'Sanctuary',

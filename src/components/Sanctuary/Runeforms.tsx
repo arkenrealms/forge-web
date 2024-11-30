@@ -70,9 +70,9 @@ const Runeforms = function () {
                 Poor Bob.
               </li>
               <li>
-                <strong>Runeforms</strong> in <strong>Arken: Runic Raids</strong> have farming related attributes. The
-                same <strong>Runeform</strong> would have battle related attributes in{' '}
-                <strong>Arken: Infinite Arena</strong> or <strong>Arken: Heart of the Oasis</strong>.
+                <strong>Runeforms</strong> in <strong>Runic Raids</strong> have farming related attributes. The same{' '}
+                <strong>Runeform</strong> would have battle related attributes in <strong>Infinite Arena</strong> or{' '}
+                <strong>Heart of the Oasis</strong>.
               </li>
               <li>
                 You will get different attributes every time you craft a <strong>Runeform</strong>, making every{' '}

@@ -14,7 +14,7 @@ import packagejson from '../../package.json';
 import { trpc } from '~/utils/trpc';
 
 // @ts-ignore
-import DashboardLandingImage from '../assets/dashboard.png';
+// import DashboardLandingImage from '../assets/dashboard.png';
 
 const zzz = styled.div``;
 
@@ -252,14 +252,14 @@ export default function AdminDashboard() {
   const { profile } = useAuth();
   const [refreshCountdown, setRefreshCountdown] = useState(15);
 
-  const { data: info } = trpc.relay.core.info.useQuery(null, {
+  const { data: info } = trpc.seer.core.info.useQuery(null, {
     // queryKey: 'metrics',
     enabled: true, // Automatically fetch data on mount
     staleTime: 1000 * 60 * 5, // Data is considered fresh for 5 minutes
     refetchOnWindowFocus: false, // Do not refetch on window focus
   });
 
-  const { mutate: updateMetrics } = trpc.relay.job.updateMetrics.useMutation();
+  const { mutate: updateMetrics } = trpc.seer.job.updateMetrics.useMutation();
 
   useEffect(() => {
     console.log('Updating metrics');
@@ -272,7 +272,7 @@ export default function AdminDashboard() {
     isLoading: isLoadingStats,
     isFetching: isRefreshingStats,
     error,
-  } = trpc.relay.core.stats.useQuery(
+  } = trpc.seer.core.stats.useQuery(
     {
       where: {
         createdDate: { gte: oneWeekAgo },

@@ -44,8 +44,8 @@ const Races = function () {
           <div className="locationdescription w-richtext">
             {/* <h1>Introduction</h1> */}
             <p>
-              Arken: Heart of the Oasis will have playable races (how many is still to be determined), and various
-              others to encounter within the universe.
+              Heart of the Oasis will have playable races (how many is still to be determined), and various others to
+              encounter within the universe.
             </p>
             <p>‍</p>
             {races.map((race) => (

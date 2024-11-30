@@ -5,6 +5,7 @@ import ReactJson from 'react18-json-view';
 import addresses from '@arken/node/contractInfo';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import { Card, CardBody, CardHeader, Flex, Heading, Text } from '~/ui';
+import _ from 'lodash';
 import { HomeOutlined, UserOutlined, InboxOutlined, UploadOutlined } from '@ant-design/icons';
 import {
   Button,
@@ -151,12 +152,14 @@ export default function ({ primaryKey, getBreadcrumb, getColumns, contentModel, 
   useEffect(
     function () {
       async function run() {
-        setColumns(await getColumns({ params }));
+        // TODO: fix
+        // const cols = await getColumns({ params });
+        // if (!_.isEqual(columns, cols)) setColumns(cols);
       }
 
       run();
     },
-    [params, getColumns]
+    [params, columns, getColumns]
   );
 
   const breadcrumb = getBreadcrumb({ params });

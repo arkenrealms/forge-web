@@ -544,7 +544,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Evolution Isles launch</strong> <Bonus />
+                <strong>Evolution Isles launch</strong> <Bonus />
               </>
             ),
             status: 'done',
@@ -645,7 +645,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Evolution Isles</strong> desktop app <Core />
+                <strong>Evolution Isles</strong> desktop app <Core />
               </>
             ),
             status: 'done',
@@ -658,7 +658,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                Development of Arken: Infinite Arena begins <Core />
+                Development of Infinite Arena begins <Core />
               </>
             ),
             status: 'done',
@@ -712,7 +712,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Evolution Isles v1.6:</strong> <Core />
+                <strong>Evolution Isles v1.6:</strong> <Core />
               </>
             ),
             status: 'done',
@@ -729,7 +729,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Evolution Isles v1.7:</strong> <Core />
+                <strong>Evolution Isles v1.7:</strong> <Core />
               </>
             ),
             status: 'done',
@@ -746,7 +746,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                Arken: Infinite Arena previews <Bonus />
+                Infinite Arena previews <Bonus />
               </>
             ),
             status: 'done',
@@ -768,7 +768,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Evolution Isles Mobile</strong> <Bonus />
+                <strong>Evolution Isles Mobile</strong> <Bonus />
               </>
             ),
             status: 'done',
@@ -809,7 +809,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Infinite Arena Private Beta</strong> <Core />
+                <strong>Infinite Arena Private Beta</strong> <Core />
               </>
             ),
             status: 'done',
@@ -832,7 +832,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Heart of the Oasis</strong> development started <Core />
+                <strong>Heart of the Oasis</strong> development started <Core />
               </>
             ),
             status: 'done',
@@ -974,7 +974,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Infinite Arena Earliest Access</strong> <Core />
+                <strong>Infinite Arena Earliest Access</strong> <Core />
               </>
             ),
             status: 'done',
@@ -1006,7 +1006,7 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>Art contests, partnerships, etc</>,
-              <>Arken: Heart of the Oasis music videos</>,
+              <>Heart of the Oasis music videos</>,
               <>
                 Link to{' '}
                 <a href="https://www.youtube.com/watch?v=e0w60rW6xqM&list=PLtQV3vQDJxarq_X0WsAT4goj9mf-3wmGg&ab_channel=ArkenRealms">
@@ -1027,7 +1027,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Infinite Arena</strong> v0.6 <Core />
+                <strong>Infinite Arena</strong> v0.6 <Core />
               </>
             ),
             status: 'done',
@@ -1043,7 +1043,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Evolution Isles</strong> v1.8 <Bonus />
+                <strong>Evolution Isles</strong> v1.8 <Bonus />
               </>
             ),
             status: 'done',
@@ -1085,7 +1085,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Evolution Isles Season 1</strong> <Bonus />
+                <strong>Evolution Isles Season 1</strong> <Bonus />
               </>
             ),
             status: 'done',
@@ -1192,7 +1192,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Infinite Arena</strong> <Core />
+                <strong>Infinite Arena</strong> <Core />
               </>
             ),
             status: 'pending',
@@ -1267,7 +1267,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Arken: Runic Raids 2.0:</strong>
+                <strong>Runic Raids 2.0:</strong>
                 <Core />
               </>
             ),
@@ -1275,14 +1275,14 @@ const Roadmap = () => {
             notes: [
               <>Deeper gameplay + item mechanics</>,
               <>
-                Link to <RouterLink to="/raid">Arken: Runic Raids</RouterLink>
+                Link to <RouterLink to="/raid">Runic Raids</RouterLink>
               </>,
             ],
           },
           {
             content: (
               <>
-                <strong>Arken: Evolution Isles 2.0:</strong>
+                <strong>Evolution Isles 2.0:</strong>
                 <Core />
               </>
             ),
@@ -1290,7 +1290,7 @@ const Roadmap = () => {
             notes: [
               <>Guardian integration + Gear-enabled servers</>,
               <>
-                Link to <RouterLink to="/evolution">Arken: Evolution Isles</RouterLink>
+                Link to <RouterLink to="/evolution">Evolution Isles</RouterLink>
               </>,
             ],
           },
@@ -1305,7 +1305,7 @@ const Roadmap = () => {
             notes: [
               <>Release of Evolution + Infinite</>,
               <>
-                Link to <RouterLink to="/evolution">Arken: Evolution Isles</RouterLink>
+                Link to <RouterLink to="/evolution">Evolution Isles</RouterLink>
               </>,
               <>
                 Link to <RouterLink to="/infinite">Infinite</RouterLink>
@@ -1323,7 +1323,7 @@ const Roadmap = () => {
             notes: [
               <>Release of Evolution + Infinite</>,
               <>
-                Link to <RouterLink to="/evolution">Arken: Evolution Isles</RouterLink>
+                Link to <RouterLink to="/evolution">Evolution Isles</RouterLink>
               </>,
               <>
                 Link to <RouterLink to="/infinite">Infinite</RouterLink>
@@ -1340,7 +1340,7 @@ const Roadmap = () => {
             notes: [
               <>Advanced filters + navigation</>,
               <>
-                Link to <RouterLink to="/evolution">Arken: Evolution Isles</RouterLink>
+                Link to <RouterLink to="/evolution">Evolution Isles</RouterLink>
               </>,
             ],
           },
@@ -1405,13 +1405,13 @@ const Roadmap = () => {
           {
             content: (
               <>
-                Launch <strong>Arken: Heart of the Oasis</strong> <Core />
+                Launch <strong>Heart of the Oasis</strong> <Core />
               </>
             ),
             status: 'pending',
             notes: [
               <>
-                Link to <RouterLink to="/sanctuary">Arken: Heart of the Oasis</RouterLink>
+                Link to <RouterLink to="/sanctuary">Heart of the Oasis</RouterLink>
               </>,
             ],
           },

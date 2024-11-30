@@ -52,8 +52,8 @@ const Collectibles = () => {
             Choose from seven classes of heroes. Each class has its own unique weapons and power.
             <br />
             <br />
-            In Arken: Runic Raids, develop your raiding strategy by equipping your character with Runeforms that give
-            unique raiding yield bonuses.
+            In Runic Raids, develop your raiding strategy by equipping your character with Runeforms that give unique
+            raiding yield bonuses.
           </p>
           <div
             css={css`

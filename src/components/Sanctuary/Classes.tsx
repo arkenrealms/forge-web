@@ -43,8 +43,8 @@ const Classes = function () {
           </div>
           <div className="locationdescription w-richtext">
             <p>
-              Throughout the land of Arken: Heart of the Oasis, your class will adapt to your playstyle but here are
-              some of the main archetypes.
+              Throughout the land of Heart of the Oasis, your class will adapt to your playstyle but here are some of
+              the main archetypes.
             </p>
             <p>‍</p>
             {classes

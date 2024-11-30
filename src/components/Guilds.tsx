@@ -1,18 +1,31 @@
-import React from 'react'
-import orderBy from 'lodash/orderBy'
-import { useTranslation } from 'react-i18next'
-import styled, { css } from 'styled-components'
-import TeamHeader from '~/components/guilds/TeamHeader'
-import TeamListCard from '~/components/guilds/TeamListCard'
-import { useTeams } from '~/state/hooks'
-import { Card, CardBody, Heading, Skeleton } from '~/ui'
+import React from 'react';
+import orderBy from 'lodash/orderBy';
+import { useTranslation } from 'react-i18next';
+import styled, { css } from 'styled-components';
+import TeamHeader from '~/components/guilds/TeamHeader';
+import TeamListCard from '~/components/guilds/TeamListCard';
+import { useTeams } from '~/state/hooks';
+import { Card, CardBody, Heading, Skeleton } from '~/ui';
+import { trpc } from '~/utils/trpc';
+import type * as Arken from '@arken/node';
 
-const aaa = styled.div``
+const aaa = styled.div``;
+
 const Guilds = () => {
-  const { t } = useTranslation()
-  const { teams, isLoading } = useTeams()
-  const teamList = Object.values(teams)
-  const topTeams = orderBy(teamList, ['id', 'name'], ['desc', 'asc', 'asc'])
+  const { t } = useTranslation();
+
+  const { data: teams, error } = trpc.seer.core.getTeams.useQuery<Arken.Core.Types.Team[]>({});
+  console.log(23432423, teams);
+  if (error) return <div style={{ padding: 10 }}>Error: {error.message}</div>;
+  if (!teams)
+    return (
+      <div style={{ padding: 10 }}>
+        <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" />
+      </div>
+    );
+
+  const teamList = Object.values(teams);
+  const topTeams = orderBy(teamList, ['id', 'name'], ['desc', 'asc', 'asc']);
 
   return (
     <>
@@ -33,8 +46,7 @@ const Guilds = () => {
               height: 200px;
               background-size: contain;
               margin-right: 20px;
-            `}
-          ></div>
+            `}></div>
           Haerra needs a hero... Who will you be?
           <br />
           <br />
@@ -45,13 +57,11 @@ const Guilds = () => {
         </CardBody>
       </Card>
       <br />
-      {topTeams.length ? (
-        topTeams.map((team, index) => <TeamListCard key={team.id} rank={index + 1} team={team} />)
-      ) : (
-        <Skeleton height="80px" mb="16px" />
-      )}
+      {topTeams.map((team: any, index: number) => (
+        <TeamListCard key={team.id + ''} rank={index + 1} team={team} />
+      ))}
     </>
-  )
-}
+  );
+};
 
-export default Guilds
+export default Guilds;

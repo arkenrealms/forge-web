@@ -146,7 +146,9 @@ const BottomCTA = () => {
           max-width: 1200px;
           margin: 0 auto;
           // background: #000;
-          box-shadow: rgb(0 0 0 / 50%) 0px 2px 25px 10px, rgb(0 0 0 / 10%) 0px -1px 0px 0px inset,
+          box-shadow:
+            rgb(0 0 0 / 50%) 0px 2px 25px 10px,
+            rgb(0 0 0 / 10%) 0px -1px 0px 0px inset,
             rgb(0 0 0 / 10%) 0px 0px 66px 66px;
           border-radius: 7px 7px 0 0;
           position: relative;
@@ -180,8 +182,8 @@ const BottomCTA = () => {
                 `}
               /> */}
               <p style={{ marginTop: 20 }}>
-                The world’s first and most comprehensive fantasy omniverse driven by crypto and non-fungible tokens
-                (NFTs). Battle, win &amp; collect items.
+                Arken Realms is an AI-driven omniverse. Battle, win &amp; claim glory. <br />
+                Or chill, it's up to you.
               </p>
               {/* <p style={{ marginTop: 20 }}>
                 Crypto's premiere fantasy omniverse driven by innovative solutions using non-fungible tokens
@@ -198,7 +200,7 @@ const BottomCTA = () => {
                 className="discord-widget"
                 title="Discord"></iframe>
               <Heading style={{ color: '#fff', marginTop: 40 }}>
-                {t(`ARKEN REALMS © ${new Date().getFullYear()}`)}
+                {t(`© ${new Date().getFullYear()} Arken Technologies, Inc.`)}
               </Heading>
             </Column>
             <Column style={{ minWidth: 200 }}>

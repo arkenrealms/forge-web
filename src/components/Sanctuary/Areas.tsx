@@ -21,7 +21,7 @@ const Areas = function () {
             <h1 className="locationtitle">Areas</h1>
           </div>
           <div className="locationdescription w-richtext">
-            <p>Areas within Arken: Heart of the Oasis are built as biomes, each with different features.</p>
+            <p>Areas within Heart of the Oasis are built as biomes, each with different features.</p>
             <p>‍</p>
           </div>
           <div className="locationdescription w-richtext">

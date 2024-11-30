@@ -102,7 +102,10 @@ const BigCard = styled.div<{ align?: string }>`
   background-color: rgba(0, 0, 0, 0.4);
 
   background-size: 400px;
-  box-shadow: 0 2px 0 0 rgb(0 0 0 / 80%), inset 0 -1px 0 0 rgb(0 0 0 / 10%), 0 0 66px 66px rgb(0 0 0 / 10%);
+  box-shadow:
+    0 2px 0 0 rgb(0 0 0 / 80%),
+    inset 0 -1px 0 0 rgb(0 0 0 / 10%),
+    0 0 66px 66px rgb(0 0 0 / 10%);
   // background-color: rgba(0,0,0,0.4);
   line-height: 1.6rem;
   font-size: 1rem;
@@ -574,7 +577,7 @@ const Home: React.FC<any> = () => {
           {/* <Swiper direction="vertical" slidesPerView={3} spaceBetween={0}>
           <SwiperSlide style={{height: '1000px !important'}}>{({ isActive }) =>  */}
           <ChampionWelcome
-            title="Arken: Heart of the Oasis"
+            title="Heart of the Oasis"
             description={`With the power of the Arkenverse Cube in your hands, you are tasked with saving Haerra from inevitable destruction. Immerse yourself in Arken's groundbreaking fantasy RPG as you customize your unique character and class, craft unique NFTs, and rise against the forces which seek to overwhelm Haerra. In Sanctuary, every choice you make has consequences. Do you have what it takes to save your world, or will you fall to ruin at the feet of the gods?`}>
             <div>
               {account && holders.find((p) => p.address.toLowerCase() === account.toLowerCase()) ? (
@@ -824,7 +827,7 @@ const Home: React.FC<any> = () => {
             mb="20px"
             style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)' }}
           >
-            {t('Arken: Heart of the Oasis')}
+            {t('Heart of the Oasis')}
           </Heading>
           <Img src="/images/chars.png" />
           <br />
@@ -937,7 +940,7 @@ const Home: React.FC<any> = () => {
                         <div style={{ textAlign: 'left', paddingLeft: '8px' }}>
                           <div>
                             <Text mr="10px" bold>
-                              Arken: Runic Raids:
+                              Runic Raids:
                             </Text>{' '}
                             <Text>Crafting.</Text>
                             <br />
@@ -1101,9 +1104,8 @@ const Home: React.FC<any> = () => {
               <br />
               <p>
                 We're expanding the Arken Realms with new games, storylines and lore, through the distribution of runes
-                and Runeforms. Arken: Runic Raids was the first Rune game, and the first NFT hyperfarm in blockchain.
-                Arken: Evolution Isles is the second Rune game, and one of the first to be NFT integrated, with more to
-                follow!
+                and Runeforms. Runic Raids was the first Rune game, and the first NFT hyperfarm in blockchain. Evolution
+                Isles is the second Rune game, and one of the first to be NFT integrated, with more to follow!
               </p>
 
               {/* <p>

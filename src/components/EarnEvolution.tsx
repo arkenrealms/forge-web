@@ -168,7 +168,7 @@ const EarnAPYCard = () => {
         )}
       </CardMidContent>
       <Heading color="contrast" size="lg">
-        in Arken: Evolution Isles
+        in Evolution Isles
       </Heading>
     </>
   );

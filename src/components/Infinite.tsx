@@ -507,7 +507,7 @@ const Home: React.FC<any> = () => {
             {({ isActive }) => (
               <ChampionWelcome
                 isActive={isActive}
-                title="Arken: Infinite Arena"
+                title="Infinite Arena"
                 description={`Crush opponents while earning unique prizes in this fast-paced fantasy PvP brawler from Rune: an innovative
             crypto gaming company pushing GameFi to new horizons. Choose your class, customize your avatar, and collect
             unique NFTs playing the third game in Arken's ever-expanding metaverse. Test your mettle against players
@@ -687,7 +687,7 @@ const Home: React.FC<any> = () => {
             mb="20px"
             style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)' }}
           >
-            {t('Arken: Infinite Arena')}
+            {t('Infinite Arena')}
           </Heading>
           <Img src="/images/chars.png" />
           <br />
@@ -773,7 +773,7 @@ const Home: React.FC<any> = () => {
                         <div style={{ textAlign: 'left', paddingLeft: '8px' }}>
                           <div>
                             <Text mr="10px" bold>
-                              Arken: Runic Raids:
+                              Runic Raids:
                             </Text>{' '}
                             <Text>Crafting.</Text>
                             <br />
@@ -901,8 +901,8 @@ const Home: React.FC<any> = () => {
               <br />
               <p>
                 We have incorporated blockchain gaming so your hero is a unique NFT, and you control their destiny.
-                Battle for rewards in Arken: Infinite Arena arenas, find random loot, take a break and go destroy some
-                dragons in Arken: Evolution Isles.
+                Battle for rewards in Infinite Arena arenas, find random loot, take a break and go destroy some dragons
+                in Evolution Isles.
                 <br />
                 <br />
                 Claim any amount, any time, with our smooth reward system.

@@ -52,7 +52,9 @@ const Trailer = (props) => {
           position: relative;
           width: 50%;
           height: 100%;
-          transition: transform 0.5s ease, opacity 0.5s ease;
+          transition:
+            transform 0.5s ease,
+            opacity 0.5s ease;
           opacity: 0;
           transition-delay: 0s;
         }
@@ -160,7 +162,8 @@ const HeadingFire = styled.div<{
 
   @keyframes fire {
     0% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         0 ${(props) => props.fireStrength * -5}px ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 2}px ${(props) => props.fireStrength * -10}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color1},
@@ -170,7 +173,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 18}px ${(props) => props.color4};
     }
     25% {
-      text-shadow: 0 0 3px ${(props) => props.color1},
+      text-shadow:
+        0 0 3px ${(props) => props.color1},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -6}px
           ${(props) => props.fireStrength * 5}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -11}px
@@ -181,7 +185,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 20}px ${(props) => props.color4};
     }
     50% {
-      text-shadow: 0 0 3px ${(props) => props.color1},
+      text-shadow:
+        0 0 3px ${(props) => props.color1},
         ${(props) => props.fireStrength * -1}px ${(props) => props.fireStrength * -4}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 0}px ${(props) => props.fireStrength * -12}px
@@ -192,7 +197,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 22}px ${(props) => props.color4};
     }
     75% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -7}px
           ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -11}px
@@ -203,7 +209,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 21}px ${(props) => props.color4};
     }
     100% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         0 ${(props) => props.fireStrength * -5}px ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 2}px ${(props) => props.fireStrength * -10}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color1},
@@ -486,8 +493,8 @@ const Raid: React.FC<any> = () => {
             }
           `}>
           <ChampionWelcome
-            title="Arken: Runic Raids"
-            description={`Arken: Runic Raids is the first game with onchain NFT item mechanics. Use runes to craft gear (NFTs) to make your character more powerful. `}>
+            title="Runic Raids"
+            description={`Runic Raids is the first game with onchain NFT item mechanics. Use runes to craft gear (NFTs) to make your character more powerful. `}>
             <div>
               {account && holders.find((p) => p.address.toLowerCase() === account.toLowerCase()) ? (
                 <Button as={RouterLink} scale="md" to="/download/raid" style={{ zoom: 1.5 }}>
@@ -535,7 +542,7 @@ const Raid: React.FC<any> = () => {
           mb="20px"
           style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)' }}
         >
-          {t('Arken: Runic Raids')}
+          {t('Runic Raids')}
         </Heading>
         <Img src="/images/chars.png" />
         <br />

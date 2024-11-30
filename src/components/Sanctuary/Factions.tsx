@@ -12,7 +12,7 @@ import type { CharacterFaction } from '@arken/node/modules/character/character.t
 const Abc = styled.div``;
 
 const Factions = function () {
-  const { data: factions } = trpc.relay.character.getCharacterFaction.useQuery<CharacterFaction[]>({
+  const { data: factions } = trpc.seer.character.getCharacterFaction.useQuery<CharacterFaction[]>({
     where: { name: { contains: 'A' } },
   });
 
@@ -43,8 +43,8 @@ const Factions = function () {
           </div>
           <div className="locationdescription w-richtext">
             <p>
-              Throughout the land of Arken: Heart of the Oasis and beyond, various factions exist. Some you will meet,
-              some you will not.
+              Throughout the land of Heart of the Oasis and beyond, various factions exist. Some you will meet, some you
+              will not.
             </p>
             <p>‍</p>
             {factions.map((faction) => (

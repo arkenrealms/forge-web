@@ -11,7 +11,7 @@ const AI = () => {
     <Page>
       <Card style={{ width: '100%' }}>
         <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-          {t('Rune AI')}
+          {t('Arken AI')}
         </Heading>
         <hr />
         <CardBody>

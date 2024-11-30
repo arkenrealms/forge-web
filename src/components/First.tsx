@@ -1,10 +1,10 @@
-import React from 'react'
-import styled, { css } from 'styled-components'
-import { createGlobalStyle } from 'styled-components'
-import Page from '~/components/layout/Page'
-import { Card, CardBody, Heading } from '~/ui'
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
+import Page from '~/components/layout/Page';
+import { Card, CardBody, Heading } from '~/ui';
 
-const zzz = styled.div``
+const zzz = styled.div``;
 
 const FirstView = () => {
   return (
@@ -35,9 +35,8 @@ const FirstView = () => {
               <strong>Status:</strong> Complete
               <br />
               <br />
-              Arken: Runic Raids was the first to support generating NFT items with the game mechanics encoded directly
-              into the Token ID, ensuring attributes cannot be changed and simplifying cross-chain and third-party
-              support.
+              Runic Raids was the first to support generating NFT items with the game mechanics encoded directly into
+              the Token ID, ensuring attributes cannot be changed and simplifying cross-chain and third-party support.
             </p>
           </div>
           <div
@@ -55,7 +54,7 @@ const FirstView = () => {
               <strong>Status:</strong> Complete
               <br />
               <br />
-              Arken: Runic Raids was the first farm to support on-chain NFT mechanics.
+              Runic Raids was the first farm to support on-chain NFT mechanics.
             </p>
           </div>
           <div
@@ -73,8 +72,8 @@ const FirstView = () => {
               <strong>Status:</strong> Complete
               <br />
               <br />
-              Arken: Runic Raids used to switch MasterChef contracts every week, but in June 2021 switched to "fluid
-              farming" which changes the reward each week (retaining previous rewards).
+              Runic Raids used to switch MasterChef contracts every week, but in June 2021 switched to "fluid farming"
+              which changes the reward each week (retaining previous rewards).
             </p>
           </div>
           <div
@@ -92,7 +91,7 @@ const FirstView = () => {
               <strong>Status:</strong> Complete
               <br />
               <br />
-              Arken: Evolution Isles starts dropping random NFT items that were transfered to players immediately.
+              Evolution Isles starts dropping random NFT items that were transfered to players immediately.
             </p>
           </div>
           <div
@@ -110,8 +109,8 @@ const FirstView = () => {
               <strong>Status:</strong> Complete
               <br />
               <br />
-              Arken: Runic Raids and Arken: Evolution Isles share the same NFT items and both use those mechanics as
-              part of their game design.
+              Runic Raids and Evolution Isles share the same NFT items and both use those mechanics as part of their
+              game design.
             </p>
           </div>
           <div
@@ -129,13 +128,13 @@ const FirstView = () => {
               <strong>Status:</strong> Pending
               <br />
               <br />
-              Arken: Infinite Arena will be the first RPG to drop randomly generated items with random generative art.
+              Infinite Arena will be the first RPG to drop randomly generated items with random generative art.
             </p>
           </div>
         </CardBody>
       </Card>
     </Page>
-  )
-}
+  );
+};
 
-export default FirstView
+export default FirstView;

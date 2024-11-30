@@ -1,22 +1,22 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { useTranslation } from 'react-i18next'
-import { GiCog } from 'react-icons/gi'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
-import styled, { css } from 'styled-components'
-import Page from '~/components/layout/Page'
-import Loader from '~/components/Loader'
-import PlayerAction from '~/components/PlayerAction'
-import useLive from '~/hooks/useLive'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { GiCog } from 'react-icons/gi';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import styled, { css } from 'styled-components';
+import Page from '~/components/layout/Page';
+import Loader from '~/components/Loader';
+import PlayerAction from '~/components/PlayerAction';
+import useLive from '~/hooks/useLive';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 //import '~swiper/swiper.min.css'
 //import '~swiper/modules/navigation/navigation.min.css' // Navigation module
 //import '~swiper/modules/pagination/pagination.min.css' // Pagination module
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints'
-import { BaseLayout, Button, Card, CardBody, Heading, Skeleton, Text, Toggle } from '~/ui'
+import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
+import { BaseLayout, Button, Card, CardBody, Heading, Skeleton, Text, Toggle } from '~/ui';
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -37,7 +37,7 @@ const Cards = styled(BaseLayout)`
       // zoom: 0.8;
     }
   }
-`
+`;
 
 const ViewControls = styled.div`
   display: flex;
@@ -56,7 +56,7 @@ const ViewControls = styled.div`
     justify-content: flex-start;
     width: auto;
   }
-`
+`;
 
 const ToggleWrapper = styled.div`
   display: flex;
@@ -66,10 +66,10 @@ const ToggleWrapper = styled.div`
   ${Text} {
     margin-left: 8px;
   }
-`
+`;
 
 const LiveInner = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const {
     filters,
     toggleFilter,
@@ -80,9 +80,9 @@ const LiveInner = () => {
     isRuneRoyale,
     isRuneRoyalePaused,
     runeRoyaleStandings,
-  } = useLive()
-  const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints()
-  const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl
+  } = useLive();
+  const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
+  const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
 
   return (
     <>
@@ -106,7 +106,7 @@ const LiveInner = () => {
           <iframe
             key="twitch2"
             title="Twitch Streams"
-            src="https://player.twitch.tv/?channel=binzymon&parent=arken.gg&parent=beta.arken.gg&parent=localhost"
+            src="https://player.twitch.tv/?channel=arkenrealms&parent=arken.gg&parent=beta.arken.gg&parent=localhost"
             height="<height>"
             width="<width>"
             allowFullScreen
@@ -116,7 +116,7 @@ const LiveInner = () => {
           <iframe
             key="twitch1"
             title="Twitch Streams"
-            src="https://player.twitch.tv/?channel=runeevolution&parent=arken.gg&parent=beta.arken.gg&parent=localhost"
+            src="https://player.twitch.tv/?channel=evolutionisles&parent=arken.gg&parent=beta.arken.gg&parent=localhost"
             height="<height>"
             width="<width>"
             allowFullScreen
@@ -153,7 +153,7 @@ const LiveInner = () => {
           ) : null}
           <Card style={{ width: '100%', overflow: 'visible' }}>
             <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-              {t('Rune Live')} <Loader size="24px" />
+              {t('Arken Live')} <Loader size="24px" />
               <Button
                 variant="text"
                 scale="md"
@@ -293,7 +293,7 @@ const LiveInner = () => {
                     </ToggleWrapper>
                   </ViewControls>
                   <Heading as="h3" size="md" style={{ marginTop: 15 }}>
-                    {t('Arken: Evolution Isles')}
+                    {t('Evolution Isles')}
                   </Heading>
                   <ViewControls>
                     <ToggleWrapper>
@@ -322,7 +322,7 @@ const LiveInner = () => {
                     </ToggleWrapper>
                   </ViewControls>
                   <Heading as="h3" size="md" style={{ marginTop: 15 }}>
-                    {t('Arken: Runic Raids')}
+                    {t('Runic Raids')}
                   </Heading>
                   <ViewControls>
                     <ToggleWrapper>
@@ -387,7 +387,7 @@ const LiveInner = () => {
                     </ToggleWrapper>
                   </ViewControls>
                   <Heading as="h3" size="md" style={{ marginTop: 15 }}>
-                    {t('Arken: Infinite Arena')}
+                    {t('Infinite Arena')}
                   </Heading>
                   <ViewControls>
                     <ToggleWrapper>
@@ -413,7 +413,7 @@ const LiveInner = () => {
                     </ToggleWrapper>
                   </ViewControls>
                   <Heading as="h3" size="md" style={{ marginTop: 15 }}>
-                    {t('Arken: Heart of the Oasis')}
+                    {t('Heart of the Oasis')}
                   </Heading>
                   <ViewControls>
                     <ToggleWrapper>
@@ -508,7 +508,7 @@ const LiveInner = () => {
         </Cards>
       </Page>
     </>
-  )
-}
+  );
+};
 
-export default LiveInner
+export default LiveInner;

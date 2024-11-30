@@ -925,10 +925,10 @@ const Items = function () {
                   skill only available with this pet.
                 </li>
                 <li>
-                  Founder Cubes - There is a max of 1000 cubes. Each comes with benefits:&nbsp;Arken: Heart of the Oasis
+                  Founder Cubes - There is a max of 1000 cubes. Each comes with benefits:&nbsp;Heart of the Oasis
                   Collector's Edition, Early Access to Arken games, Access to Founder's Tavern in the End of Time, Every
-                  Rune in Arken: Heart of the Oasis (1 EL-ZOD), Golden Cube Skin - Angel Skin + Wings, Discord Badge +
-                  Private Channel, Exclusive T-shirt
+                  Rune in Heart of the Oasis (1 EL-ZOD), Golden Cube Skin - Angel Skin + Wings, Discord Badge + Private
+                  Channel, Exclusive T-shirt
                 </li>
               </ul>
               <p>‍</p>
@@ -940,11 +940,11 @@ const Items = function () {
                 </li>
                 <li>
                   NPC NFTs- 5 NPCs per act (30 total). These will grant you the power to become the NPC, receiving a
-                  percentage of the in-game currency when Arken: Heart of the Oasis releases.
+                  percentage of the in-game currency when Heart of the Oasis releases.
                 </li>
                 <li>
                   Land Title NFTs - TBD. Land titles will give you an open area to build your own city, arena, or even a
-                  modded story arc within Arken: Heart of the Oasis (limitations).
+                  modded story arc within Heart of the Oasis (limitations).
                 </li>
                 <li>
                   Guild Token NFTs- TBD. Guild tokens will give you the ability to form your own guilds, each token

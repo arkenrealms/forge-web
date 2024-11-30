@@ -38,9 +38,7 @@ const Acts = function () {
             <h1 className="locationtitle">Acts</h1>
           </div>
           <div className="locationdescription w-richtext">
-            <p>
-              Arken: Heart of the Oasis is composed of 8 acts, each with branches that will be improved in DLC content.
-            </p>
+            <p>Heart of the Oasis is composed of 8 acts, each with branches that will be improved in DLC content.</p>
           </div>
           <div className="w-layout-grid page-layout" onClick={() => history.push('/act/1')}>
             <article className="section-right">

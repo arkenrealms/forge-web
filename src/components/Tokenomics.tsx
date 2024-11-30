@@ -405,8 +405,7 @@ const Rules = () => {
                   <strong>$RXS</strong> is required as the character fee (required to earn rewards in Arken games).
                 </li>
                 <li>
-                  <strong>$RXS</strong> is one of the primary pools &amp; liquidity farms in the Arken: Runic Raids
-                  game.
+                  <strong>$RXS</strong> is one of the primary pools &amp; liquidity farms in the Runic Raids game.
                 </li>
                 <li>
                   <strong>$RXS</strong> is integrated into the protocol as a fee token for Marketplace trades,
@@ -710,7 +709,7 @@ const Rules = () => {
               <Linker id="tokenomics-2">
                 Within the Arken ecosystem are also the 33 runes from EL as #1 to ZOD as #33. There will never be more
                 runes minted. Each of these has a 1% transfer fee going to the Rune Vault. Most of them are minted as
-                rewards for liquidity staking in the Arken: Runic Raids farms. Some are special and have been minted for
+                rewards for liquidity staking in the Runic Raids farms. Some are special and have been minted for
                 specific purposes, for example:
                 <br />
                 <br />
@@ -730,8 +729,7 @@ const Rules = () => {
               <ul>
                 <li>Required to create NFTs with crafting recipes.</li>
                 <li>
-                  Required in Arken: Runic Raids based on equiped items during harvesting and other mechanics (such as
-                  burn).
+                  Required in Runic Raids based on equiped items during harvesting and other mechanics (such as burn).
                 </li>
                 <li>Unlock specific purposes in each game, such as more characters or inventory spaces.</li>
                 <li>Required for specific mechanics such as item upgrading.</li>

@@ -21,7 +21,7 @@ const Zones = function () {
             <h1 className="locationtitle">Zones</h1>
           </div>
           <div className="locationdescription w-richtext">
-            <p>The majority of NPCs in Arken: Heart of the Oasis are native to Haerra, but some are not.</p>
+            <p>The majority of NPCs in Heart of the Oasis are native to Haerra, but some are not.</p>
           </div>
           <div className="locationdescription w-richtext">
             <h2>Primary NPCs</h2>

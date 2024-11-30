@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import styled, { css } from 'styled-components'
-import random from 'lodash/random'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { Button, Tag, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui'
-import Page from '~/components/layout/Page'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import styled, { css } from 'styled-components';
+import random from 'lodash/random';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Button, Tag, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui';
+import Page from '~/components/layout/Page';
 
-const dummy = styled.div``
+const dummy = styled.div``;
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -29,7 +29,7 @@ const Cards = styled(BaseLayout)`
       grid-column: span 6;
     }
   }
-`
+`;
 
 const VerticalCards = styled(BaseLayout)`
   align-items: stretch;
@@ -40,7 +40,7 @@ const VerticalCards = styled(BaseLayout)`
     grid-column: span 12;
     width: 100%;
   }
-`
+`;
 
 const palette = [
   '#ffb3ba',
@@ -57,7 +57,7 @@ const palette = [
   '#00faff',
   '#643b45',
   '#8e8e8e',
-]
+];
 
 const placements = {
   10: 1,
@@ -65,43 +65,43 @@ const placements = {
   5: 3,
   3: 4,
   1: 5,
-}
+};
 
-const playerColors = {}
-const takenColors = {}
+const playerColors = {};
+const takenColors = {};
 
 const TournamentResult = ({ result }) => {
-  const standingsMap = {}
+  const standingsMap = {};
 
   for (const round of result.rounds) {
     for (const player of round.players) {
       while (!playerColors[player.name]) {
-        const randomColor = palette[random(0, palette.length - 1)]
+        const randomColor = palette[random(0, palette.length - 1)];
 
-        if (takenColors[randomColor] && Object.keys(takenColors).length !== palette.length) continue
+        if (takenColors[randomColor] && Object.keys(takenColors).length !== palette.length) continue;
 
-        if (takenColors[randomColor] === undefined) takenColors[randomColor] = 0
+        if (takenColors[randomColor] === undefined) takenColors[randomColor] = 0;
 
-        takenColors[randomColor] += 1
-        playerColors[player.name] = randomColor
+        takenColors[randomColor] += 1;
+        playerColors[player.name] = randomColor;
       }
 
-      if (!standingsMap[player.name]) standingsMap[player.name] = 0
+      if (!standingsMap[player.name]) standingsMap[player.name] = 0;
 
-      standingsMap[player.name] += player.points
+      standingsMap[player.name] += player.points;
     }
   }
 
-  let standings = []
+  let standings = [];
 
   for (const name of Object.keys(standingsMap)) {
     standings.push({
       name,
       points: standingsMap[name],
-    })
+    });
   }
 
-  standings = standings.sort((a, b) => b.points - a.points).slice(0, 10)
+  standings = standings.sort((a, b) => b.points - a.points).slice(0, 10);
 
   const standingsEle = (
     <>
@@ -113,7 +113,7 @@ const TournamentResult = ({ result }) => {
         </>
       ))}
     </>
-  )
+  );
 
   return (
     <div
@@ -149,13 +149,13 @@ const TournamentResult = ({ result }) => {
         </ul>
       </p>
     </div>
-  )
-}
+  );
+};
 
-const average = (arr) => arr.reduce((p, c) => p + c, 0) / arr.length
+const average = (arr) => arr.reduce((p, c) => p + c, 0) / arr.length;
 
 const Tournament = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const tournaments = [
     {
@@ -2778,144 +2778,144 @@ const Tournament = () => {
         },
       ],
     },
-  ]
+  ];
 
-  const winnerStandings = {}
+  const winnerStandings = {};
 
   for (const tournament of tournaments) {
-    if (!winnerStandings[tournament.winner]) winnerStandings[tournament.winner] = []
+    if (!winnerStandings[tournament.winner]) winnerStandings[tournament.winner] = [];
 
     winnerStandings[tournament.winner].push({
       name: tournament.name,
-    })
+    });
   }
 
-  const gameModeStandings = {}
-  const gameModeTotals = {}
+  const gameModeStandings = {};
+  const gameModeTotals = {};
 
   for (const tournament of tournaments) {
-    const allPlayers = {}
+    const allPlayers = {};
 
     for (const round of tournament.rounds) {
       for (const player of round.players) {
-        allPlayers[player.name] = true
+        allPlayers[player.name] = true;
       }
     }
 
     for (const round of tournament.rounds) {
-      if (!gameModeStandings[round.mode]) gameModeStandings[round.mode] = []
-      if (!gameModeTotals[round.mode]) gameModeTotals[round.mode] = 0
+      if (!gameModeStandings[round.mode]) gameModeStandings[round.mode] = [];
+      if (!gameModeTotals[round.mode]) gameModeTotals[round.mode] = 0;
 
-      gameModeTotals[round.mode]++
+      gameModeTotals[round.mode]++;
 
-      const roundPlayers = {}
+      const roundPlayers = {};
 
       for (const player of round.players) {
-        roundPlayers[player.name] = true
+        roundPlayers[player.name] = true;
       }
 
       for (const playerName of Object.keys(allPlayers)) {
         if (!roundPlayers[playerName]) {
-          const p2 = gameModeStandings[round.mode].find((p) => p.name === playerName)
+          const p2 = gameModeStandings[round.mode].find((p) => p.name === playerName);
 
           if (!p2) {
             gameModeStandings[round.mode].push({
               name: playerName,
               average: 10,
               placements: [10],
-            })
+            });
           } else {
-            p2.placements.push(10)
-            p2.average = parseFloat(average(p2.placements).toFixed(2))
+            p2.placements.push(10);
+            p2.average = parseFloat(average(p2.placements).toFixed(2));
           }
         }
       }
 
       for (const player of round.players) {
-        const p2 = gameModeStandings[round.mode].find((p) => p.name === player.name)
+        const p2 = gameModeStandings[round.mode].find((p) => p.name === player.name);
 
         if (!p2) {
           gameModeStandings[round.mode].push({
             name: player.name,
             average: placements[player.points],
             placements: [placements[player.points]],
-          })
+          });
         } else {
-          p2.placements.push(placements[player.points])
-          p2.average = parseFloat(average(p2.placements).toFixed(2))
+          p2.placements.push(placements[player.points]);
+          p2.average = parseFloat(average(p2.placements).toFixed(2));
         }
 
-        gameModeStandings[round.mode] = gameModeStandings[round.mode].sort((a, b) => a.average - b.average)
+        gameModeStandings[round.mode] = gameModeStandings[round.mode].sort((a, b) => a.average - b.average);
       }
     }
   }
 
   for (const mode of Object.keys(gameModeStandings)) {
-    gameModeStandings[mode] = gameModeStandings[mode].filter((p) => p.placements.length >= 2 && p.average <= 8)
+    gameModeStandings[mode] = gameModeStandings[mode].filter((p) => p.placements.length >= 2 && p.average <= 8);
   }
 
-  const serverStandings = {}
-  const serverTotals = {}
+  const serverStandings = {};
+  const serverTotals = {};
 
   for (const tournament of tournaments) {
-    if (!serverStandings[tournament.server]) serverStandings[tournament.server] = []
-    if (!serverTotals[tournament.server]) serverTotals[tournament.server] = 0
+    if (!serverStandings[tournament.server]) serverStandings[tournament.server] = [];
+    if (!serverTotals[tournament.server]) serverTotals[tournament.server] = 0;
 
-    const allPlayers = {}
+    const allPlayers = {};
 
     for (const round of tournament.rounds) {
       for (const player of round.players) {
-        allPlayers[player.name] = true
+        allPlayers[player.name] = true;
       }
     }
 
     for (const round of tournament.rounds) {
-      serverTotals[tournament.server]++
+      serverTotals[tournament.server]++;
 
-      const roundPlayers = {}
+      const roundPlayers = {};
 
       for (const player of round.players) {
-        roundPlayers[player.name] = true
+        roundPlayers[player.name] = true;
       }
 
       for (const playerName of Object.keys(allPlayers)) {
         if (!roundPlayers[playerName]) {
-          const p2 = serverStandings[tournament.server].find((p) => p.name === playerName)
+          const p2 = serverStandings[tournament.server].find((p) => p.name === playerName);
 
           if (!p2) {
             serverStandings[tournament.server].push({
               name: playerName,
               average: 10,
               placements: [10],
-            })
+            });
           } else {
-            p2.placements.push(10)
-            p2.average = parseFloat(average(p2.placements).toFixed(2))
+            p2.placements.push(10);
+            p2.average = parseFloat(average(p2.placements).toFixed(2));
           }
         }
       }
 
       for (const player of round.players) {
-        const p2 = serverStandings[tournament.server].find((p) => p.name === player.name)
+        const p2 = serverStandings[tournament.server].find((p) => p.name === player.name);
 
         if (!p2) {
           serverStandings[tournament.server].push({
             name: player.name,
             average: placements[player.points],
             placements: [placements[player.points]],
-          })
+          });
         } else {
-          p2.placements.push(placements[player.points])
-          p2.average = parseFloat(average(p2.placements).toFixed(2))
+          p2.placements.push(placements[player.points]);
+          p2.average = parseFloat(average(p2.placements).toFixed(2));
         }
 
-        serverStandings[tournament.server] = serverStandings[tournament.server].sort((a, b) => a.average - b.average)
+        serverStandings[tournament.server] = serverStandings[tournament.server].sort((a, b) => a.average - b.average);
       }
     }
   }
 
   for (const server of Object.keys(serverStandings)) {
-    serverStandings[server] = serverStandings[server].filter((p) => p.placements.length >= 5 && p.average <= 8)
+    serverStandings[server] = serverStandings[server].filter((p) => p.placements.length >= 5 && p.average <= 8);
   }
 
   return (
@@ -2961,7 +2961,7 @@ const Tournament = () => {
               they will earn.
               <br />
               <br />
-              No cheating - standard Arken: Evolution Isles rules apply.
+              No cheating - standard Evolution Isles rules apply.
               <br />
               <br />
               In the event of any bugs and/or issues please tune into{' '}
@@ -2982,8 +2982,7 @@ const Tournament = () => {
               <h3 style={{ fontSize: '1.2rem' }}>Standard Format</h3>
               <br />
               <p>
-                6 games of Arken: Evolution Isles, 10 minute break, 6 more games of Arken: Evolution Isles (12 games
-                total)
+                6 games of Evolution Isles, 10 minute break, 6 more games of Evolution Isles (12 games total)
                 <br />
                 <br />
                 The FIRST and SEVENTH games will be the same (to be announced with the tournament). All others will be
@@ -3109,7 +3108,7 @@ const Tournament = () => {
         </CardBody>
       </Card>
     </>
-  )
-}
+  );
+};
 
-export default Tournament
+export default Tournament;
