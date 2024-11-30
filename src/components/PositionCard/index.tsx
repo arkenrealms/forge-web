@@ -205,7 +205,7 @@ export default function FullPositionCard({ pair }: PositionCardProps) {
               <Text>{poolTokenPercentage ? `${poolTokenPercentage.toFixed(2)}%` : '-'}</Text>
             </FixedHeightRow>
 
-            <RowBetween marginTop="10px">
+            <RowBetween>
               <Button
                 as={Link}
                 to={`/swap/add/${currencyId(currency0)}/${currencyId(currency1)}`}

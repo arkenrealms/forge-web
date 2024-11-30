@@ -101,6 +101,22 @@ backends.forEach((backend) => {
       }),
     };
 
+    // TODO: show the status of these in the bottom left
+    client.socket.on('welcome', (message) => {
+      // console.log(message);
+    });
+    client.socket.on('connect_error', (err) => {
+      // console.error('Connection Error:', err.message);
+      client.socket.close();
+    });
+    client.socket.on('reconnect_attempt', () => {
+      // console.info(`[${backend.name}] Reconnecting...`);
+    });
+
+    client.socket.on('disconnect', () => {
+      // console.log('Disconnected from server');
+    });
+
     // Handle incoming socket events
     client.socket.onAny((eventName, res) => {
       try {

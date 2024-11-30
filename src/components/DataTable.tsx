@@ -433,11 +433,11 @@ export default function ({ primaryKey, getBreadcrumb, getColumns, contentModel, 
                               </div>
                             );
                           }
-                          if (field.type === 'rune-user-info') {
+                          if (field.type === 'arken-profile-info') {
                             return (
                               <Form.Item key={field.key} label={field.label}>
-                                <Button href={`https://arken.gg/user/${contentItem[field.key]}`} target="_blank">
-                                  Open arken.gg Profile
+                                <Button href={`https://arken.gg/profile/${contentItem[field.key]}`} target="_blank">
+                                  Open Profile
                                 </Button>
                               </Form.Item>
                             );

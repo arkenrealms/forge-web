@@ -78,7 +78,7 @@ export default function () {
           {
             label: '',
             key: 'address',
-            type: 'rune-user-info',
+            type: 'arken-profile-info',
           },
         ],
       },

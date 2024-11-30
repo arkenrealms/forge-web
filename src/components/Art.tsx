@@ -8,8 +8,8 @@ import runeItems from '@arken/node/data/generated/items.json';
 import npcs from '@arken/node/data/generated/npcs.json';
 import planets from '@arken/node/data/generated/planets.json';
 import solarSystems from '@arken/node/data/generated/solarSystems.json';
-import { ProGallery } from 'pro-gallery';
-import 'pro-gallery/dist/statics/main.css';
+// import { ProGallery } from 'pro-gallery';
+// import 'pro-gallery/dist/statics/main.css';
 import React, { useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createGlobalStyle } from 'styled-components';
@@ -287,13 +287,13 @@ const ArtInner = () => {
       {galleryItems.length ? (
         <>
           {/* @ts-ignore */}
-          <ProGallery
+          {/* <ProGallery
             items={galleryItems}
             options={options}
             container={container}
             eventsListener={eventsListener}
             scrollingElement={scrollingElement}
-          />
+          /> */}
         </>
       ) : null}
     </>

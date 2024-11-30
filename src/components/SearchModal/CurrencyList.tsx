@@ -112,12 +112,7 @@ function CurrencyRow({
 
   // only show add or remove buttons if not on selected list
   return (
-    <MenuItem
-      style={style}
-      className={`token-item-${key}`}
-      onClick={() => (isSelected ? null : onSelect())}
-      disabled={isSelected}
-      selected={otherSelected}>
+    <MenuItem style={style} className={`token-item-${key}`} onClick={() => (isSelected ? null : onSelect())}>
       <CurrencyLogo currency={currency} size="24px" />
       <Column>
         <Text title={currency.name}>{symbolMap(currency.symbol)}</Text>

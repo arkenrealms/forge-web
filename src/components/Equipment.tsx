@@ -342,10 +342,10 @@ const EquipmentInner = ({ address, hidePreview, children }) => {
               )
               .join(' or ')
         : parent1.value !== undefined
-        ? parent1.value
-        : parent1.min === parent1.max
-        ? parent1.min
-        : `${parent1.min}-${parent1.max}`;
+          ? parent1.value
+          : parent1.min === parent1.max
+            ? parent1.min
+            : `${parent1.min}-${parent1.max}`;
 
       if (typeof value1 === 'string') value1 = value1.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
 
@@ -361,10 +361,10 @@ const EquipmentInner = ({ address, hidePreview, children }) => {
               )
               .join(' or ')
         : parent2.value !== undefined
-        ? parent2.value
-        : parent2.min === parent2.max
-        ? parent2.min
-        : `${parent2.min}-${parent2.max}`;
+          ? parent2.value
+          : parent2.min === parent2.max
+            ? parent2.min
+            : `${parent2.min}-${parent2.max}`;
 
       if (typeof value2 === 'string') value2 = value2.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
 
@@ -380,10 +380,10 @@ const EquipmentInner = ({ address, hidePreview, children }) => {
               )
               .join(' or ')
         : parent3.value !== undefined
-        ? parent3.value
-        : parent3.min === parent3.max
-        ? parent3.min
-        : `${parent3.min}-${parent3.max}`;
+          ? parent3.value
+          : parent3.min === parent3.max
+            ? parent3.min
+            : `${parent3.min}-${parent3.max}`;
 
       if (typeof value3 === 'string') value3 = value3.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
 
@@ -682,7 +682,5 @@ const Equipment = (props) => {
     </SoundContext.Provider>
   );
 };
-
-Equipment.defaultProps = {};
 
 export default Equipment;

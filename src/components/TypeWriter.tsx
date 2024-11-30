@@ -1,6 +1,6 @@
 import useSettings from '~/hooks/useSettings2';
 import React from 'react';
-import { useWindupString } from 'windups';
+// import { useWindupString } from 'windups';
 
 type Props = {
   text: string;
@@ -9,13 +9,15 @@ type Props = {
 const TypeWriter: React.FC<Props> = ({ text }) => {
   const { quality } = useSettings();
 
-  const [itemSelectedDescription] = useWindupString((Array.isArray(text) ? text.join(' ') : text) || '', {
-    pace: () => 5,
-  });
+  return <>{text}</>;
 
-  if (quality === 'bad') return <>{text}</>;
+  // const [itemSelectedDescription] = useWindupString((Array.isArray(text) ? text.join(' ') : text) || '', {
+  //   pace: () => 5,
+  // });
 
-  return <>{itemSelectedDescription}</>;
+  // if (quality === 'bad') return <>{text}</>;
+
+  // return <>{itemSelectedDescription}</>;
 };
 
 export default TypeWriter;
