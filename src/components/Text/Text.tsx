@@ -1,19 +1,19 @@
-import styled, { DefaultTheme } from 'styled-components'
-import { space, typography } from 'styled-system'
-import getThemeValue from '~/utils/getThemeValue'
-import { TextProps } from './types'
+import styled, { DefaultTheme } from 'styled-components';
+import { space, typography } from 'styled-system';
+import getThemeValue from '~/utils/getThemeValue';
+import { TextProps } from './types';
 
 interface ThemedProps extends TextProps {
-  theme: DefaultTheme
+  theme: DefaultTheme;
 }
 
-const getColor = ({ color, theme }: ThemedProps) => {
-  return getThemeValue(`colors.${color}`, color)(theme)
-}
+const getColor = ({ color = 'text', theme }: ThemedProps) => {
+  return getThemeValue(`colors.${color}`, color)(theme);
+};
 
-const getFontSize = ({ fontSize, small }: TextProps) => {
-  return small ? '0.8rem' : fontSize || '1rem'
-}
+const getFontSize = ({ fontSize, small = false }: TextProps) => {
+  return small ? '0.8rem' : fontSize || '1rem';
+};
 
 const Text = styled.div<TextProps>`
   color: ${getColor};
@@ -23,11 +23,6 @@ const Text = styled.div<TextProps>`
   ${({ textTransform }) => textTransform && `text-transform: ${textTransform};`}
   ${space}
   ${typography}
-`
+`;
 
-Text.defaultProps = {
-  color: 'text',
-  small: false,
-}
-
-export default Text
+export default Text;

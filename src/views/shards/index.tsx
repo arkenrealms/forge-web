@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState, useContext, useCallback } from 'react'
-import useSound from 'use-sound'
+import React, { useEffect, useMemo, useRef, useState, useContext, useCallback } from 'react';
+import useSound from 'use-sound';
 import {
   Button,
   Heading,
@@ -13,32 +13,32 @@ import {
   Flex,
   ButtonMenu,
   ButtonMenuItem,
-} from '~/ui'
-import Input from '~/components/Input/Input'
-import styled from 'styled-components'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import Page from '~/components/layout/Page'
-import { ConnectNetwork } from '~/components/ConnectNetwork'
-import BigNumber from 'bignumber.js'
-import useRuneBalance from '~/hooks/useRuneBalance'
-import SoundContext from '~/contexts/SoundContext'
-import { getBalanceNumber } from '~/utils/formatBalance'
-import { useNative, useRxs } from '~/hooks/useContract'
-import { getContractAddress, getNativeAddress, getRuneAddress } from '~/utils/addressHelpers'
-import { ethers } from 'ethers'
-import { useToast } from '~/state/hooks'
-import useWeb3 from '~/hooks/useWeb3'
-import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction'
-import ApproveConfirmButtons from '~/components/account/ApproveConfirmButtons'
-import NumericalInput from '~/components/NumericalInput'
+} from '~/ui';
+import Input from '~/components/Input/Input';
+import styled from 'styled-components';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import Page from '~/components/layout/Page';
+import { ConnectNetwork } from '~/components/ConnectNetwork';
+import BigNumber from 'bignumber.js';
+import useRuneBalance from '~/hooks/useRuneBalance';
+import SoundContext from '~/contexts/SoundContext';
+import { getBalanceNumber } from '~/utils/formatBalance';
+import { useNative, useRxs } from '~/hooks/useContract';
+import { getContractAddress, getNativeAddress, getRuneAddress } from '~/utils/addressHelpers';
+import { ethers } from 'ethers';
+import { useToast } from '~/state/hooks';
+import useWeb3 from '~/hooks/useWeb3';
+import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction';
+import ApproveConfirmButtons from '~/components/account/ApproveConfirmButtons';
+import NumericalInput from '~/components/NumericalInput';
 
 const Container = styled.div`
   // margin-bottom: 30px;
   width: 100%;
   height: 100%;
   position: relative;
-`
+`;
 
 const ItemCard = styled(Card)`
   position: relative;
@@ -55,7 +55,7 @@ const ItemCard = styled(Card)`
     position: relative;
     z-index: 2;
   }
-`
+`;
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -78,7 +78,7 @@ const Cards = styled(BaseLayout)`
       grid-column: span 6;
     }
   }
-`
+`;
 
 const InputPanel = styled.div`
   display: flex;
@@ -88,12 +88,12 @@ const InputPanel = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   z-index: 1;
   width: 100%;
-`
+`;
 const InputContainer = styled.div`
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.input};
   box-shadow: ${({ theme }) => theme.shadows.inset};
-`
+`;
 
 const VerticalCards = styled(BaseLayout)`
   align-items: stretch;
@@ -104,72 +104,72 @@ const VerticalCards = styled(BaseLayout)`
     grid-column: span 12;
     width: 100%;
   }
-`
+`;
 
 const Actions = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 8px;
-`
+`;
 
 const InputRow = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   padding: 0.75rem 0.75rem 0.75rem 1rem;
-`
+`;
 
 // let initialized = false
 
 const MarketTrade = (props) => {
-  const { t } = useTranslation()
-  const { address: account } = useWeb3()
-  const { web3 } = useWeb3()
-  const rxsContract = useRxs()
-  const runeContract = useNative()
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const { toastError, toastSuccess } = useToast()
-  const [amount, setAmount] = useState('')
-  const [rune1Allowance, setRune1Allowance] = useState(new BigNumber(0))
+  const { t } = useTranslation();
+  const { address: account } = useWeb3();
+  const { web3 } = useWeb3();
+  const rxsContract = useRxs();
+  const runeContract = useNative();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const { toastError, toastSuccess } = useToast();
+  const [amount, setAmount] = useState('');
+  const [rune1Allowance, setRune1Allowance] = useState(new BigNumber(0));
 
-  const runeBalance = useRuneBalance('RUNE')
+  const runeBalance = useRuneBalance('RUNE');
 
   const onMax = () => {
-    setAmount(getBalanceNumber(runeBalance) + '')
-  }
+    setAmount(getBalanceNumber(runeBalance) + '');
+  };
 
   useEffect(() => {
     async function init() {
-      if (!account) return
-      const response = await runeContract.methods.allowance(account, getContractAddress('rxs')).call()
-      const currentAllowance1 = new BigNumber(response)
-      setRune1Allowance(currentAllowance1)
+      if (!account) return;
+      const response = await runeContract.methods.allowance(account, getContractAddress('rxs')).call();
+      const currentAllowance1 = new BigNumber(response);
+      setRune1Allowance(currentAllowance1);
     }
 
-    init()
-  }, [account, amount, runeContract])
+    init();
+  }, [account, amount, runeContract]);
 
   const { isApproving, isApproved, isConfirmed, isConfirming, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
       stateOverride: { approvalState: getBalanceNumber(rune1Allowance) > parseFloat(amount) ? 'success' : 'idle' },
       onRequiresApproval: async () => {
-        return getBalanceNumber(rune1Allowance) > parseFloat(amount)
+        return getBalanceNumber(rune1Allowance) > parseFloat(amount);
       },
       onApprove: () => {
         return runeContract.methods
           .approve(getContractAddress('rxs'), ethers.constants.MaxUint256)
-          .send({ from: account })
+          .send({ from: account });
       },
       onConfirm: () => {
         return rxsContract.methods
           .swap(ethers.utils.parseEther(parseFloat(amount) * 0.99999 + ''))
-          .send({ from: account })
+          .send({ from: account });
       },
       onSuccess: () => {
-        toastSuccess(`Sharded!`)
+        toastSuccess(`Sharded!`);
       },
-    })
+    });
 
   return (
     <Page>
@@ -216,7 +216,7 @@ const MarketTrade = (props) => {
                         <NumericalInput
                           value={amount}
                           onUserInput={(val) => {
-                            setAmount(val)
+                            setAmount(val);
                           }}
                         />
                         <Button onClick={onMax} scale="sm" variant="text">
@@ -260,12 +260,10 @@ const MarketTrade = (props) => {
         </VerticalCards>
       </Cards>
     </Page>
-  )
-}
+  );
+};
 
-MarketTrade.defaultProps = {}
-
-export default MarketTrade
+export default MarketTrade;
 
 const Final = styled.div`
   margin-top: 1em;
@@ -273,9 +271,9 @@ const Final = styled.div`
   font-size: 20px;
   font-weight: 600;
   color: ${(props) => props.theme.colors.primary};
-`
+`;
 const Announce = styled.div`
   margin-top: 1em;
   margin-left: 0.4em;
   color: #ed4b9e;
-`
+`;

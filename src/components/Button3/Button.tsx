@@ -1,10 +1,26 @@
-import React, { cloneElement, ElementType, isValidElement } from 'react';
+import React, { cloneElement, isValidElement } from 'react';
 import getExternalLinkProps from '~/utils/getExternalLinkProps';
 import StyledButton from './StyledButton';
 import { ButtonProps, scales, variants } from './types';
 
-const Button = (props: any): any => {
-  const { startIcon, endIcon, external, className, isLoading, disabled, children, ...rest } = props;
+// Ensure StyledButton supports the $isLoading prop
+interface StyledButtonProps {
+  $isLoading?: boolean;
+  disabled?: boolean;
+}
+
+const Button = ({
+  startIcon,
+  endIcon,
+  external = false,
+  className,
+  isLoading = false,
+  disabled = false,
+  variant = variants.PRIMARY,
+  scale = scales.MD,
+  children,
+  ...rest
+}: any): any => {
   const internalProps = external ? getExternalLinkProps() : {};
   const isDisabled = isLoading || disabled;
   const classNames = className ? [className] : [];
@@ -19,9 +35,11 @@ const Button = (props: any): any => {
 
   return (
     <StyledButton
-      $isLoading={isLoading}
+      isLoading={isLoading}
       className={classNames.join(' ')}
       disabled={isDisabled}
+      variant={variant}
+      scale={scale}
       {...internalProps}
       {...rest}>
       <>
@@ -31,14 +49,6 @@ const Button = (props: any): any => {
       </>
     </StyledButton>
   );
-};
-
-Button.defaultProps = {
-  isLoading: false,
-  external: false,
-  variant: variants.PRIMARY,
-  scale: scales.MD,
-  disabled: false,
 };
 
 export default Button;

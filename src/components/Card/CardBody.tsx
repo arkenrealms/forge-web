@@ -1,7 +1,7 @@
-import styled from 'styled-components'
-import { space, SpaceProps } from 'styled-system'
+import styled from 'styled-components';
+import { space, SpaceProps } from 'styled-system';
 
-export type CardBodyProps = SpaceProps
+export type CardBodyProps = SpaceProps;
 
 const CardBody = styled.div<CardBodyProps>`
   ${space}
@@ -15,10 +15,6 @@ const CardBody = styled.div<CardBodyProps>`
       : `
       padding: 24px;
       `}
-`
+`;
 
-CardBody.defaultProps = {
-  p: '24px',
-}
-
-export default CardBody
+export default CardBody;

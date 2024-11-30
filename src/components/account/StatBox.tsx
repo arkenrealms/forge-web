@@ -1,20 +1,20 @@
-import React, { ElementType, ReactNode } from 'react'
-import { Flex, Heading, Text, TextProps } from '~/ui'
-import SecondaryCard from './SecondaryCard'
+import React, { ElementType, ReactNode } from 'react';
+import { Flex, Heading, Text, TextProps } from '~/ui';
+import SecondaryCard from './SecondaryCard';
 
 interface StatBoxProps extends TextProps {
-  icon?: any
-  title: ReactNode
-  subtitle: ReactNode
-  isDisabled?: boolean
-  mb?: string
-  style?: any
-  css?: any
+  icon?: any;
+  title: ReactNode;
+  subtitle: ReactNode;
+  isDisabled?: boolean;
+  mb?: string;
+  style?: any;
+  css?: any;
 }
 
 const StatBox: React.FC<StatBoxProps> = ({ icon: Icon, title, subtitle, isDisabled = false, ...props }) => {
   return (
-    <SecondaryCard {...props}>
+    <SecondaryCard>
       <Flex alignItems="start">
         {Icon ? <Icon width="44px" mr="24px" color={isDisabled ? 'textDisabled' : 'currentColor'} /> : null}
         <div>
@@ -27,7 +27,7 @@ const StatBox: React.FC<StatBoxProps> = ({ icon: Icon, title, subtitle, isDisabl
         </div>
       </Flex>
     </SecondaryCard>
-  )
-}
+  );
+};
 
-export default StatBox
+export default StatBox;

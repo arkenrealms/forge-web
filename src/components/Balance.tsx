@@ -19,7 +19,14 @@ const StyledText = styled(Text)<TextProps>`
   color: ${({ isDisabled, color, theme }) => (isDisabled ? theme.colors.textDisabled : color)};
 `;
 
-const Balance: React.FC<BalanceProps> = ({ value, fontSize, color, decimals, isDisabled, unit }) => {
+const Balance: React.FC<BalanceProps> = ({
+  value = 0,
+  fontSize = '32px',
+  color = 'text',
+  decimals = 3,
+  isDisabled = false,
+  unit,
+}) => {
   const previousValue = useRef(0);
 
   useEffect(() => {
@@ -33,13 +40,6 @@ const Balance: React.FC<BalanceProps> = ({ value, fontSize, color, decimals, isD
       {value && unit && <span>{unit}</span>}
     </StyledText>
   );
-};
-
-Balance.defaultProps = {
-  fontSize: '32px',
-  isDisabled: false,
-  color: 'text',
-  decimals: 3,
 };
 
 export default Balance;

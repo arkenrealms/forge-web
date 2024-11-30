@@ -86,12 +86,8 @@ const InventoryInner = ({ showFull }) => {
   );
 };
 
-const Inventory = ({ showFull }) => {
+const Inventory = ({ showFull = false }) => {
   return <InventoryInner showFull={showFull} />;
-};
-
-Inventory.defaultProps = {
-  showFull: false,
 };
 
 export default Inventory;

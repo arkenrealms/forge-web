@@ -4,13 +4,17 @@ import { space } from 'styled-system';
 import { CardProps } from './types';
 
 interface StyledCardProps extends CardProps {
-  theme: DefaultTheme;
+  theme?: DefaultTheme;
+  isActive?: boolean;
+  isSuccess?: boolean;
+  isWarning?: boolean;
+  isDisabled?: boolean;
 }
 
 /**
  * Priority: Warning --> Success --> Active
  */
-const getBoxShadow = ({ isActive, isSuccess, isWarning, theme }: StyledCardProps) => {
+const getBoxShadow = ({ isActive = false, isSuccess = false, isWarning = false, theme }: StyledCardProps) => {
   if (isWarning) {
     return theme.card.boxShadowWarning;
   }
@@ -29,26 +33,12 @@ const getBoxShadow = ({ isActive, isSuccess, isWarning, theme }: StyledCardProps
 const StyledCard = styled.div<StyledCardProps>`
   overflow: hidden;
   position: relative;
-
-  // border-style: solid;
-  // border-color: transparent;
-  // border-image: url('/images/frame.png') 120 repeat;
-  // border-image-width: 80px;
-  // background-color: rgba(0, 0, 0, 1);
-
-  // border-radius: 0;
+  box-shadow: ${getBoxShadow};
 
   ${space}
 `;
 
-StyledCard.defaultProps = {
-  isActive: false,
-  isSuccess: false,
-  isWarning: false,
-  isDisabled: false,
-};
-
-const StyledCard4 = function (props) {
+const StyledCard4: React.FC<CardProps> = (props) => {
   return (
     <StyledCard className="app__styled-card4" {...props}>
       <div

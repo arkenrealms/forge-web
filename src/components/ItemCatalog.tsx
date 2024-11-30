@@ -624,7 +624,7 @@ const ItemCatalogInner = ({
 };
 
 const ItemCatalog = ({
-  showFull,
+  showFull = false,
   nfts,
   defaultBranch = undefined,
   address = null,
@@ -711,10 +711,6 @@ const ItemCatalog = ({
       </div>
     </SoundContext.Provider>
   );
-};
-
-ItemCatalog.defaultProps = {
-  showFull: false,
 };
 
 export default ItemCatalog;

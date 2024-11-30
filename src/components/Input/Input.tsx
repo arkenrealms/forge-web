@@ -1,42 +1,26 @@
-import styled, { DefaultTheme } from 'styled-components'
-import { InputProps, scales } from './types'
+import styled, { DefaultTheme } from 'styled-components';
+import { InputProps, scales } from './types';
 
 interface StyledInputProps extends InputProps {
-  theme: DefaultTheme
-}
-
-/**
- * Priority: Warning --> Success
- */
-const getBoxShadow = ({ isSuccess = false, isWarning = false, theme }: StyledInputProps) => {
-  if (isWarning) {
-    return theme.shadows.warning
-  }
-
-  if (isSuccess) {
-    return theme.shadows.success
-  }
-
-  return theme.shadows.inset
+  theme: DefaultTheme;
 }
 
 const getHeight = ({ scale = scales.MD }: StyledInputProps) => {
   switch (scale) {
     case scales.SM:
-      return '32px'
+      return '32px';
     case scales.LG:
-      return '48px'
+      return '48px';
     case scales.MD:
     default:
-      return '32px'
+      return '32px';
   }
-}
+};
 
 const Input = styled.input<InputProps>`
   background-color: rgba(255, 255, 255, 0.1);
   border: 0;
   border-radius: 6px;
-  // box-shadow: ${getBoxShadow};
   color: ${({ theme }) => theme.colors.text};
   display: block;
   font-size: 16px;
@@ -59,12 +43,6 @@ const Input = styled.input<InputProps>`
   &:focus:not(:disabled) {
     box-shadow: ${({ theme }) => theme.shadows.focus};
   }
-`
+`;
 
-Input.defaultProps = {
-  scale: scales.MD,
-  isSuccess: false,
-  isWarning: false,
-}
-
-export default Input
+export default Input;

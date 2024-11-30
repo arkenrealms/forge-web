@@ -1,17 +1,17 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import useSound from 'use-sound'
-import { Button, Flex } from '~/ui'
-import styled from 'styled-components'
-import SoundContext from '~/contexts/SoundContext'
-import Page from '~/components/layout/Page'
-import PageWindow from '~/components/PageWindow'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import useSound from 'use-sound';
+import { Button, Flex } from '~/ui';
+import styled from 'styled-components';
+import SoundContext from '~/contexts/SoundContext';
+import Page from '~/components/layout/Page';
+import PageWindow from '~/components/PageWindow';
 
 const NoItems = styled.div`
   margin: 0 auto;
-`
+`;
 const Container = styled.div`
   margin-bottom: 30px;
-`
+`;
 
 const InventoryInner = ({ showFull }) => {
   return (
@@ -22,15 +22,11 @@ const InventoryInner = ({ showFull }) => {
         </Flex>
       </PageWindow>
     </Page>
-  )
-}
+  );
+};
 
-const Inventory = ({ showFull }) => {
-  return <InventoryInner showFull={showFull} />
-}
+const Inventory = ({ showFull = false }) => {
+  return <InventoryInner showFull={showFull} />;
+};
 
-Inventory.defaultProps = {
-  showFull: false,
-}
-
-export default Inventory
+export default Inventory;

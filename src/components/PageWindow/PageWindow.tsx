@@ -1,16 +1,16 @@
-import React from 'react'
-import styled, { DefaultTheme } from 'styled-components'
+import React from 'react';
+import styled, { DefaultTheme } from 'styled-components';
 
 interface PageWindowProps {
-  theme: DefaultTheme
+  theme: DefaultTheme;
 }
 
 /**
  * Priority: Warning --> Success --> Active
  */
 const getBoxShadow = ({ theme }: PageWindowProps) => {
-  return theme.card.boxShadow
-}
+  return theme.card.boxShadow;
+};
 
 // const Container = styled.div<PageWindowProps>`
 //   box-shadow: ${getBoxShadow};
@@ -37,12 +37,10 @@ const Container = styled.div<PageWindowProps>`
 
   margin: 0px;
   width: 100%;
-`
+`;
 
 const PageWindow = ({ children }) => {
-  return <Container>{children}</Container>
-}
+  return <Container>{children}</Container>;
+};
 
-PageWindow.defaultProps = {}
-
-export default PageWindow
+export default PageWindow;

@@ -1,30 +1,34 @@
-import React from 'react'
-import styled, { css, DefaultTheme } from 'styled-components'
-import { space } from 'styled-system'
-import { CardProps } from './types'
+import React from 'react';
+import styled, { css, DefaultTheme } from 'styled-components';
+import { space } from 'styled-system';
+import { CardProps } from './types';
 
 interface StyledCardProps extends CardProps {
-  theme: DefaultTheme
+  theme?: DefaultTheme;
+  isActive?: boolean;
+  isSuccess?: boolean;
+  isWarning?: boolean;
+  isDisabled?: boolean;
 }
 
 /**
  * Priority: Warning --> Success --> Active
  */
-const getBoxShadow = ({ isActive, isSuccess, isWarning, theme }: StyledCardProps) => {
+const getBoxShadow = ({ isActive = false, isSuccess = false, isWarning = false, theme }: StyledCardProps) => {
   if (isWarning) {
-    return theme.card.boxShadowWarning
+    return theme.card.boxShadowWarning;
   }
 
   if (isSuccess) {
-    return theme.card.boxShadowSuccess
+    return theme.card.boxShadowSuccess;
   }
 
   if (isActive) {
-    return theme.card.boxShadowActive
+    return theme.card.boxShadowActive;
   }
 
-  return theme.card.boxShadow
-}
+  return theme.card.boxShadow;
+};
 
 const StyledCard = styled.div<StyledCardProps>`
   overflow: hidden;
@@ -39,18 +43,20 @@ const StyledCard = styled.div<StyledCardProps>`
   // border-radius: 0;
 
   ${space}
-`
+  box-shadow: ${(props) => getBoxShadow(props)};
+`;
 
-StyledCard.defaultProps = {
-  isActive: false,
-  isSuccess: false,
-  isWarning: false,
-  isDisabled: false,
-}
+export default function Card(props: StyledCardProps) {
+  const { isActive = false, isSuccess = false, isWarning = false, isDisabled = false, children, ...restProps } = props;
 
-export default function (props) {
   return (
-    <StyledCard className="app__styled-card" {...props}>
+    <StyledCard
+      className="app__styled-card"
+      isActive={isActive}
+      isSuccess={isSuccess}
+      isWarning={isWarning}
+      isDisabled={isDisabled}
+      {...restProps}>
       <div
         className="app__styled-card--bg"
         css={css`
@@ -63,7 +69,7 @@ export default function (props) {
           pointer-events: none;
         `}
       />
-      {props.children}
+      {children}
     </StyledCard>
-  )
+  );
 }

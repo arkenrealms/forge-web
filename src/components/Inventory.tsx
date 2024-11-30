@@ -668,7 +668,7 @@ const InventoryInner = ({
 };
 
 const Inventory = ({
-  showFull,
+  showFull = false,
   address = null,
   filterPerfectOnly = null,
   filterSort = null,
@@ -730,10 +730,6 @@ const Inventory = ({
       </InventoryInner>
     </SoundContext.Provider>
   );
-};
-
-Inventory.defaultProps = {
-  showFull: false,
 };
 
 export default Inventory;

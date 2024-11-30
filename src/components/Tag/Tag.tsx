@@ -1,6 +1,6 @@
-import React from 'react'
-import { TagProps } from './types'
-import { StyledTag } from './StyledTag'
+import React from 'react';
+import { TagProps } from './types';
+import { StyledTag } from './StyledTag';
 
 const Tag: React.FC<TagProps> = ({ startIcon, endIcon, children, ...props }) => (
   <StyledTag {...props}>
@@ -14,11 +14,6 @@ const Tag: React.FC<TagProps> = ({ startIcon, endIcon, children, ...props }) => 
         // ml: '0.5rem',
       })}
   </StyledTag>
-)
+);
 
-// Tag.defaultProps = {
-//   variant: "primary",
-//   outline: false,
-// };
-
-export default Tag
+export default Tag;

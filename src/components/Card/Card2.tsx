@@ -4,7 +4,11 @@ import { space } from 'styled-system';
 import { CardProps } from './types';
 
 interface StyledCardProps extends CardProps {
-  theme: DefaultTheme;
+  theme?: DefaultTheme;
+  isActive?: boolean;
+  isSuccess?: boolean;
+  isWarning?: boolean;
+  isDisabled?: boolean;
 }
 
 /**
@@ -38,19 +42,26 @@ const StyledCard = styled.div<StyledCardProps>`
 
   // border-radius: 0;
 
+  box-shadow: ${(props) => getBoxShadow(props)};
   ${space}
 `;
 
-StyledCard.defaultProps = {
-  isActive: false,
-  isSuccess: false,
-  isWarning: false,
-  isDisabled: false,
-};
-
-const StyledCard2 = function (props) {
+const StyledCard2: React.FC<StyledCardProps> = ({
+  isActive = false,
+  isSuccess = false,
+  isWarning = false,
+  isDisabled = false,
+  children,
+  ...props
+}) => {
   return (
-    <StyledCard className="app__styled-card2" {...props}>
+    <StyledCard
+      className="app__styled-card2"
+      isActive={isActive}
+      isSuccess={isSuccess}
+      isWarning={isWarning}
+      isDisabled={isDisabled}
+      {...props}>
       <div
         className="app__styled-card2--bg"
         css={css`
@@ -63,7 +74,7 @@ const StyledCard2 = function (props) {
           pointer-events: none;
         `}
       />
-      {props.children}
+      {children}
     </StyledCard>
   );
 };

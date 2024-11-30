@@ -1,26 +1,26 @@
-import styled from 'styled-components'
-import { space } from 'styled-system'
-import { RadioProps, scales } from './types'
+import styled from 'styled-components';
+import { space } from 'styled-system';
+import { RadioProps, scales } from './types';
 
-const getScale = ({ scale }: RadioProps) => {
+const getScale = ({ scale = scales.MD }: RadioProps) => {
   switch (scale) {
     case scales.SM:
-      return '24px'
+      return '24px';
     case scales.MD:
     default:
-      return '32px'
+      return '32px';
   }
-}
+};
 
-const getCheckedScale = ({ scale }: RadioProps) => {
+const getCheckedScale = ({ scale = scales.MD }: RadioProps) => {
   switch (scale) {
     case scales.SM:
-      return '12px'
+      return '12px';
     case scales.MD:
     default:
-      return '20px'
+      return '20px';
   }
-}
+};
 
 const Radio = styled.input.attrs({ type: 'radio' })<RadioProps>`
   appearance: none;
@@ -69,11 +69,6 @@ const Radio = styled.input.attrs({ type: 'radio' })<RadioProps>`
     opacity: 0.6;
   }
   ${space}
-`
+`;
 
-Radio.defaultProps = {
-  scale: scales.MD,
-  m: 0,
-}
-
-export default Radio
+export default Radio;

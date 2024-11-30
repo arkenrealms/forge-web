@@ -860,8 +860,6 @@ const Market = () => {
   );
 };
 
-Market.defaultProps = {};
-
 export default Market;
 
 const Final = styled.div`

@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { OverlayProps } from './types'
+import styled from 'styled-components';
+import { OverlayProps } from './types';
 
 const Overlay = styled.div.attrs({ role: 'presentation' })<OverlayProps>`
   position: fixed;
@@ -8,16 +8,11 @@ const Overlay = styled.div.attrs({ role: 'presentation' })<OverlayProps>`
   width: 100%;
   height: 100%;
   background-color: #000;
-  display: ${({ show }) => (show ? 'block' : 'none')};
+  display: ${({ show = false }) => (show ? 'block' : 'none')};
   transition: opacity 0.4s;
-  opacity: ${({ show }) => (show ? 0.6 : 0)};
-  z-index: ${({ zIndex }) => zIndex};
-  pointer-events: ${({ show }) => (show ? 'initial' : 'none')};
-`
+  opacity: ${({ show = false }) => (show ? 0.6 : 0)};
+  z-index: ${({ zIndex = 10 }) => zIndex};
+  pointer-events: ${({ show = false }) => (show ? 'initial' : 'none')};
+`;
 
-Overlay.defaultProps = {
-  show: false,
-  zIndex: 10,
-}
-
-export default Overlay
+export default Overlay;

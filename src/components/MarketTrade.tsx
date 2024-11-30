@@ -503,8 +503,6 @@ const MarketTrade = (props) => {
   );
 };
 
-MarketTrade.defaultProps = {};
-
 export default MarketTrade;
 
 const Final = styled.div`
