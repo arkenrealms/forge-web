@@ -2,6 +2,8 @@ import React, { useLayoutEffect, useMemo, useRef, useState, useContext, useCallb
 import useWeb3 from '~/hooks/useWeb3';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import history from '~/routerHistory';
+import { trpc, trpcClient } from '~/utils/trpc';
+import type * as Arken from '@arken/node/types';
 
 export const ItemType = {
   Skins: 0,
@@ -122,19 +124,39 @@ const MarketContextProvider = ({ children }) => {
           searchParams.append('query', q);
         }
 
-        const data = (await (
-          await fetch('https://s1.envoy.arken.asi.sh/trades?' + searchParams.toString())
-        ).json()) as any;
+        // const data = (await (
+        //   await fetch('https://s1.envoy.arken.asi.sh/trades?' + searchParams.toString())
+        // ).json()) as any;
+        // @ts-ignore
+        const res: Arken.Core.Types.Trade[] = await trpcClient.query('seer.core.getTrades', {
+          account: account || '',
+          seller,
+          buyer,
+          sort,
+          status,
+          rarity,
+          perfectOnly: perfectOnly ? 'true' : '',
+          meOnly: meOnly ? 'true' : '',
+          myListingsOnly: myListingsOnly ? 'true' : '',
+          advanced: advanced ? 'true' : '',
+          tab: tab.toString(),
+          count: count.toString(),
+          page: '1', //page.toString(),
+          branch,
+          rand: rand.toString(),
+        });
+
+        console.log('vnvnvnv', res);
 
         setTrades((t) => ({
           ...t,
-          [tab]: data.result,
+          [tab]: res,
         }));
 
         const _tradesByToken = {};
 
-        for (const trade of data.result) {
-          _tradesByToken[trade.tokenId] = trade;
+        for (const trade of res) {
+          _tradesByToken[trade.meta.tokenId] = trade;
         }
 
         setTradesByToken(_tradesByToken);
