@@ -143,7 +143,9 @@
     "webpack-dev-server": "^5",
     "windups": "^1",
     "@tanstack/react-query-devtools": "~5.52.2",
-    "@ant-design/pro-provider": "~2.14.9"
+    "@ant-design/pro-provider": "~2.14.9",
+    "lightweight-charts": "~4.2.1",
+    "@ant-design/pro-flow": "^1"
   },
   "devDependencies": {
     "@babel/core": "^7",
