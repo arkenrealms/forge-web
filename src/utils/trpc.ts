@@ -213,8 +213,10 @@ const combinedLink: TRPCLink<any> =
             if (response.error) {
               observer.error(response.error);
             } else {
+              const result = deserialize(response.result);
+              console.log(443332, result);
               observer.next({
-                result: typeof response.result === 'string' ? deserialize(response.result) : response.result,
+                result,
               });
               observer.complete();
             }

@@ -236,7 +236,7 @@ const Guide: React.FC<any> = () => {
       <BigCard>
         <CardBody>
           <BoxHeading as="h2" size="xl">
-            {t('What is Arken: Runic Raids?')}
+            {t('What is Runic Raids?')}
           </BoxHeading>
           <p>
             <strong>RUNIC RAIDS</strong> is the first game launched in the Arken Realms, consider it our Big Bang.
@@ -257,7 +257,7 @@ const Guide: React.FC<any> = () => {
           <br />
           <p>
             We have implemented fluid farming, so you do not need to unstakes and retake for new farms. The unique
-            mechanics introduced by Rune make Arken: Runic Raids the first ever NFT Hyperfarm!
+            mechanics introduced by Rune make Runic Raids the first ever NFT Hyperfarm!
           </p>
           <br />
           <p>
@@ -310,9 +310,9 @@ const Guide: React.FC<any> = () => {
                 <br />
                 <br />
                 To raid, you must acquire the $RXS token or any of the runes. You can acquire the runes through games
-                such as Arken: Evolution Isles or buy them from Rune Swap. You can either stake the tokens in a Pool or
-                provide liquidity to acquire Liquidity Pool (LP) tokens. Stake the LP token into a Farm, and start
-                watching your yield grow. Collect the harvest by raiding the farm and pool.
+                such as Evolution Isles or buy them from Rune Swap. You can either stake the tokens in a Pool or provide
+                liquidity to acquire Liquidity Pool (LP) tokens. Stake the LP token into a Farm, and start watching your
+                yield grow. Collect the harvest by raiding the farm and pool.
               </HelpText>
               <HelpLinks>
                 &bull;{' '}
@@ -477,7 +477,7 @@ const Guide: React.FC<any> = () => {
             collectibles that make your heroes stronger. Players can earn runes in games by competing against other
             players, guilds, and AI, raiding yield farms, and community participation.
           </p>
-          {/* <p className="paragraph-2">Attribute mechanics in Arken: Runic Raids are executed on the blockchain within the farms. Attributes from your equipped items are added together, and then processed. <br />‍ <br />Final Harvest is computed based on the following steps: <br />*&nbsp;Fee - Calc fee based on harvest <br />*&nbsp;Early Unstake No Reward - Check, if so then set harvest to <br />*&nbsp;Burn - Apply burn to harvest <br />*&nbsp;Swap - Swap % of harvest <br />*&nbsp;Fee - Take fee *if theres any harvest left* <br />*&nbsp;Hidden Pool - Check if sending to hidden pool, if so then set harvest to <br />*&nbsp;Bonus Yield - Give bonus based on harvest if anything left <br />
+          {/* <p className="paragraph-2">Attribute mechanics in Runic Raids are executed on the blockchain within the farms. Attributes from your equipped items are added together, and then processed. <br />‍ <br />Final Harvest is computed based on the following steps: <br />*&nbsp;Fee - Calc fee based on harvest <br />*&nbsp;Early Unstake No Reward - Check, if so then set harvest to <br />*&nbsp;Burn - Apply burn to harvest <br />*&nbsp;Swap - Swap % of harvest <br />*&nbsp;Fee - Take fee *if theres any harvest left* <br />*&nbsp;Hidden Pool - Check if sending to hidden pool, if so then set harvest to <br />*&nbsp;Bonus Yield - Give bonus based on harvest if anything left <br />
             <br />
             <strong>Note:&nbsp;these are under development &amp;&nbsp;more are coming soon.</strong>
             <br />

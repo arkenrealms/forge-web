@@ -2,42 +2,54 @@ import { useState, useEffect } from 'react';
 import routerHistory from '~/routerHistory';
 
 const BrandMap = {
-  localhost: 'w4',
-  'arken.localhost': 'rune',
-  'raid.localhost': 'raid',
-  'isles.localhost': 'evolution',
+  localhost: 'arken',
+  'arken.localhost': 'arken',
+  'raids.localhost': 'raids',
+  'evolution.localhost': 'evolution',
   'guardians.localhost': 'guardians',
   'infinite.localhost': 'infinite',
-  'oasis.localhost': 'sanctuary',
+  'oasis.localhost': 'oasis',
+  'isles.localhost': 'isles',
+  'binzy.localhost': 'binzy',
 
-  'arken.gg': 'w4',
+  'arken.gg': 'arken',
   'swap.arken.gg': 'rune',
-  'dev.arken.gg': 'w4',
-  'beta.arken.gg': 'w4',
-  'isles.arken.gg': 'evolution',
-  'arena.arken.gg': 'infinite',
-  'oasis.arken.gg': 'sanctuary',
-  'raids.arken.gg': 'raid',
+  'dev.arken.gg': 'arken',
+  'beta.arken.gg': 'arken',
+  'evolution.arken.gg': 'evolution',
+  'infinite.arken.gg': 'infinite',
+  'oasis.arken.gg': 'oasis',
+  'raids.arken.gg': 'raids',
   'strike.arken.gg': 'strike',
+  'isles.arken.gg': 'isles',
 
-  'playarken.com': 'w4',
-  'arken.games': 'w4',
-  'arkenrealm.com': 'w4',
-  'arkenrealms.com': 'w4',
-  'arkenmetaverse.com': 'w4',
-  'arkenverse.com': 'w4',
+  'playarken.com': 'arken',
+  'arken.games': 'arken',
+  'arkenrealm.com': 'arken',
+  'arkenrealms.com': 'arken',
+  'arkenmetaverse.com': 'arken',
+  'arkenverse.com': 'arken',
   'arkenisles.com': 'evolution',
   'arkenarena.com': 'infinite',
-  'arkenoasis.com': 'sanctuary',
-  'arkenraids.com': 'raid',
+  'arkenoasis.com': 'oasis',
+  'arkenraids.com': 'raids',
   'arkenstrike.com': 'strike',
   'arkenguardians.com': 'guardians',
 
-  'runicraids.com': 'raid',
+  'runicraids.com': 'raids',
   'evolutionisles.com': 'evolution',
   'infinitearena.com': 'infinite',
-  'heartoftheoasis.com': 'sanctuary',
+  'heartoftheoasis.com': 'oasis',
   'guardiansunleashed.com': 'guardians',
+
+  'return.gg': 'return',
+  'portal.return.gg': 'return',
+  'returntotheoasis.com': 'return',
+
+  'meme.now': 'return',
+  'isles.meme.now': 'return',
+
+  'binzy.ai': 'binzy',
 };
 
 export const useBrand = () => {
@@ -47,16 +59,17 @@ export const useBrand = () => {
   useEffect(
     function () {
       const listener = routerHistory.listen(function () {
-        if (
-          brand !== 'arken' &&
-          ['/evolution', '/raid', '/infinite', '/sanctuary'].includes(window?.location?.pathname)
-        ) {
+        if (brand !== 'arken' && ['/evolution', '/raids', '/infinite', '/oasis'].includes(window?.location?.pathname)) {
           setBrand('arken');
           console.log(5555, 'Set brand: arken');
         }
-        if (brand !== 'w4' && window?.location?.pathname.startsWith('/service')) {
-          setBrand('w4');
-          console.log(5555, 'Set brand: w4');
+        if (brand !== 'return' && ['/isles'].includes(window?.location?.pathname)) {
+          setBrand('return');
+          console.log(5555, 'Set brand: return');
+        }
+        if (brand !== 'return' && window?.location?.pathname.startsWith('/service')) {
+          setBrand('return');
+          console.log(5555, 'Set brand: return');
         }
       });
 

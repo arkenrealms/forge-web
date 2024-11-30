@@ -85,7 +85,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     setCacheKey('cache' + Math.random());
   };
 
-  const { data: formGroups }: any = trpc.relay.interface.getInterfaceGroups.useQuery<InterfaceGroup[]>();
+  const { data: formGroups }: any = trpc.seer.interface.getInterfaceGroups.useQuery<InterfaceGroup[]>();
 
   localParams.contentId = interfaceKey;
 
@@ -93,7 +93,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     data: contentItemSearch,
     refetch: contentItemRefetch,
     isLoading: contentItemLoading,
-  }: any = trpc.relay.interface.getInterface.useQuery<Interface>(
+  }: any = trpc.seer.interface.getInterface.useQuery<Interface>(
     localParams.contentId
       ? {
           where: {
@@ -110,7 +110,7 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     data: contentListSearch,
     refetch: contentListRefetch,
     isLoading: contentListLoading,
-  } = trpc.relay.interface.getInterfaces.useQuery<Interface[]>({
+  } = trpc.seer.interface.getInterfaces.useQuery<Interface[]>({
     where: {
       OR: [
         {
@@ -150,25 +150,25 @@ const InterfaceDesigner = ({ interfaceKey }: any) => {
     mutateAsync: createInterface,
     isPending: createLoading,
     error: createContentItemError,
-  } = trpc.relay.interface.createInterface.useMutation();
+  } = trpc.seer.interface.createInterface.useMutation();
 
   const {
     mutateAsync: updateInterface,
     isPending: updateLoading,
     error: updateContentItemError,
-  } = trpc.relay.interface.updateInterface.useMutation();
+  } = trpc.seer.interface.updateInterface.useMutation();
 
-  const { mutateAsync: publishInterface } = trpc.relay.interface.publishInterface.useMutation();
+  const { mutateAsync: publishInterface } = trpc.seer.interface.publishInterface.useMutation();
 
-  const { mutateAsync: deleteInterface } = trpc.relay.interface.deleteInterface.useMutation();
+  const { mutateAsync: deleteInterface } = trpc.seer.interface.deleteInterface.useMutation();
 
-  const { mutateAsync: deactivateInterface } = trpc.relay.interface.deactivateInterface.useMutation();
+  const { mutateAsync: deactivateInterface } = trpc.seer.interface.deactivateInterface.useMutation();
 
-  const { mutateAsync: createInterfaceDraft } = trpc.relay.interface.createInterfaceDraft.useMutation();
+  const { mutateAsync: createInterfaceDraft } = trpc.seer.interface.createInterfaceDraft.useMutation();
 
-  const { mutateAsync: resetInterface } = trpc.relay.interface.resetInterface.useMutation();
+  const { mutateAsync: resetInterface } = trpc.seer.interface.resetInterface.useMutation();
 
-  const { mutateAsync: acceptInterfaceSubmission } = trpc.relay.interface.acceptInterfaceSubmission.useMutation();
+  const { mutateAsync: acceptInterfaceSubmission } = trpc.seer.interface.acceptInterfaceSubmission.useMutation();
 
   const onChangeParams = async (params: any) => {
     // log.dev('Refetching', params.contentId)
