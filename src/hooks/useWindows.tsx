@@ -90,6 +90,7 @@ const Infinite = lazy(() => import('../views/infinite'));
 const InfiniteTutorial = lazy(() => import('../views/infinite/tutorial'));
 const Evolution = lazy(() => import('../views/evolution'));
 const EvolutionTutorial = lazy(() => import('../views/evolution/tutorial'));
+const MemeIsles = lazy(() => import('../views/isles'));
 const Raid = lazy(() => import('../views/raid'));
 const RaidTutorial = lazy(() => import('../views/raid'));
 const Sanctuary = lazy(() => import('../views/sanctuary'));
@@ -795,6 +796,28 @@ const useWindows = () => {
       },
       navPosition: undefined, //401,
       component: Raid,
+      showable: true,
+    },
+    {
+      path: '/isles',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'Meme Isles',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined, //500,
+      component: MemeIsles,
       showable: true,
     },
     {
