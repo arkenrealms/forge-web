@@ -357,10 +357,13 @@ const Evolution: React.FC<any> = ({ match }) => {
                 // toastInfo('Game mode is now ' + event[1].split(':')[22])
               }
 
-              setTimeout(() => {
-                // @ts-ignore
-                unityInstance.send('NetworkManager', ...event);
-              }, (timeout += 5));
+              setTimeout(
+                () => {
+                  // @ts-ignore
+                  unityInstance.send('NetworkManager', ...event);
+                },
+                (timeout += 5)
+              );
 
               // await sleep(0)
             }
@@ -444,7 +447,7 @@ const Evolution: React.FC<any> = ({ match }) => {
           flexDirection={['column', null, 'row']}>
           <Flex justifyContent="space-between" alignItems="center">
             <Button scale="sm" variant="text">
-              Arken: Evolution Isles
+              Evolution Isles
             </Button>
             <span>&nbsp;</span>{' '}
           </Flex>
@@ -467,7 +470,7 @@ const Evolution: React.FC<any> = ({ match }) => {
               <MainCard>
                 <Flex flexDirection="column" alignItems="center" justifyContent="center">
                   <Heading as="h2" size="xl" color="#fff" mb="24px">
-                    Arken: Evolution Isles
+                    Evolution Isles
                   </Heading>
                 </Flex>
               </MainCard>

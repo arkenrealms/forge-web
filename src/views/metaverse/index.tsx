@@ -91,10 +91,10 @@ const Home: React.FC<any> = () => {
           Battle your way through the Arcane Sanctuary arena for glory and loot.
           <br />
           <br />
-          This online multiplayer arena game is set in Haerra, the world of Arken: Heart of the Oasis. <br />
+          This online multiplayer arena game is set in Haerra, the world of Heart of the Oasis. <br />
           <br />
-          Ready to join the battle in Arken: Infinite Arena? Equip your hero with items found in Arken: Runic Raids and
-          Arken: Evolution Isles.
+          Ready to join the battle in Infinite Arena? Equip your hero with items found in Runic Raids and Evolution
+          Isles.
         </p>
         <br />
         <br />

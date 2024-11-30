@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
   html{
@@ -169,7 +169,7 @@ export default createGlobalStyle`
 
   #root {
     width: 100%;
-    height: 100%;
+    // height: 100%;
 
     background-image: url(https://www.anaconda.com/wp-content/uploads/2024/05/data-globe-hero@3x.png);
     background-attachment: fixed;
@@ -317,4 +317,4 @@ export default createGlobalStyle`
     content: "28";
     font-size: 28px !important;
   }
-`
+`;

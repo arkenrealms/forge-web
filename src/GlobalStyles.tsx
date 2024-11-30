@@ -62,10 +62,17 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
     }
   }
 
-  body.brand-w4 {
+  body.brand-arken {
     * {
       font-family: 'Alegreya Sans', sans-serif, Cambria, Verdana, monospace;
       text-transform: none;
+    }
+
+    hr {
+      border: none;
+      height: 2px;
+      margin: 0 5px;
+      background: linear-gradient(to bottom, #f7d08f, #bb955e);
     }
 
     .app__styled-nav {
@@ -132,6 +139,103 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
     }
     // stuff
 
+    .app__styled-card2 {
+    overflow: visible;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: linear-gradient(180deg, rgb(134 123 251 / 6%), rgb(207 144 255 / 6%));
+    // padding: 20px;
+    box-shadow: rgb(0 0 0 / 50%) 0px 2px 25px 10px, rgb(0 0 0 / 10%) 0px -1px 0px 0px inset, rgb(0 0 0 / 10%) 0px 0px 66px 66px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -4px;
+        bottom: -5px;
+        z-index: 0; /* Ensures it sits behind the element */
+        pointer-events: none; /* Optional: Prevent interaction */
+        border-width: 0;
+        border-style: solid;
+        border-color: transparent;
+        background-image: linear-gradient(180deg, rgb(134 123 251 / 6%), rgb(207 144 255 / 6%));
+        border-image: url(/images/frame2.png) 80 / 80px / 0 repeat;
+      }
+        
+      // &::before {
+      //     content: '';
+      //     position: absolute;
+      //     top: 0;
+      //     left: 0;
+      //     right: 0;
+      //     bottom: 0;
+      //     background-color: ${({ theme }) => theme.card.background};
+      //     background-size: cover;
+      //     background-repeat: repeat-y;
+      //     opacity: 0.8;
+      //     z-index: -1;
+      //   }
+    }
+
+    .app__styled-card3 {
+      overflow: visible;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: linear-gradient(180deg, rgb(134 123 251 / 6%), rgb(207 144 255 / 6%));
+    padding: 20px;
+    box-shadow: rgb(0 0 0 / 50%) 0px 2px 25px 10px, rgb(0 0 0 / 10%) 0px -1px 0px 0px inset, rgb(0 0 0 / 10%) 0px 0px 66px 66px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        z-index: 0; /* Ensures it sits behind the element */
+        pointer-events: none; /* Optional: Prevent interaction */
+        border-width: 0;
+        border-style: solid;
+        border-color: transparent;
+        background-image: linear-gradient(180deg, rgb(134 123 251 / 6%), rgb(207 144 255 / 6%));
+        border-image: url(/images/frame3.png) 80 / 80px / 0 repeat;
+      }
+          color: ${({ theme }) => theme.colors['text']};
+          text-shadow: 1px 1px 1px black;
+          text-align: center;
+          color: #bb955e;
+    }
+
+    .app__styled-card4 {
+      overflow: visible;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: linear-gradient(180deg, rgb(134 123 251 / 6%), rgb(207 144 255 / 6%));
+    padding: 20px;
+    box-shadow: rgb(0 0 0 / 50%) 0px 2px 25px 10px, rgb(0 0 0 / 10%) 0px -1px 0px 0px inset, rgb(0 0 0 / 10%) 0px 0px 66px 66px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        z-index: 0; /* Ensures it sits behind the element */
+        pointer-events: none; /* Optional: Prevent interaction */
+        border-width: 0;
+        border-style: solid;
+        border-color: transparent;
+        background-image: linear-gradient(180deg, rgb(134 123 251 / 6%), rgb(207 144 255 / 6%));
+        border-image: url(/images/frame4.png) 80 / 80px / 0 repeat;
+      }
+          color: ${({ theme }) => theme.colors['text']};
+          text-shadow: 1px 1px 1px black;
+          text-align: center;
+          color: #bb955e;
+        }
+
     .app__styled-card--bg {
       // background-color: hsla(0, 0%, 100%, 0.04);
       // background-image: linear-gradient(180deg, rgba(114, 255, 182, 0.06), rgba(253, 255, 144, 0.06));
@@ -150,7 +254,6 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
       box-shadow: 1px 1px 17px 0 rgb(0 0 0 / 38%);
 
     }
-
   }
   
   body.brand-rune {

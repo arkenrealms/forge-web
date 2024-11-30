@@ -1,6 +1,6 @@
 export default {
   translations: {
-    // "Arken is the next evolution of DeFi farming. Farming is when you use your tokens to earn bonus tokens by staking them. Every week a new token is created (called a rune). It's farmed until the max supply of 50,000. That rune can then be combined with other runes to create NFTs. Those NFTs can be used to improve your earnings.": `Arken: Runic Raids (符文农场) 的目标是成为在加密游戏中的世界领先NFT平台
+    // "Arken is the next evolution of DeFi farming. Farming is when you use your tokens to earn bonus tokens by staking them. Every week a new token is created (called a rune). It's farmed until the max supply of 50,000. That rune can then be combined with other runes to create NFTs. Those NFTs can be used to improve your earnings.": `Runic Raids (符文农场) 的目标是成为在加密游戏中的世界领先NFT平台
     // Rune启动""产量农场""作为获取和组合NFT的一种方式,名为Rune World (符文世界)
     // 平台上的角色和公会将根据他们的属性获得某些农场奖金或NFT奖励
     // 我们是一个公平启动的项目，没有投资者，没有预售，也没有预挖。`,

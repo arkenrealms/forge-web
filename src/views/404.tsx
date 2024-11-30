@@ -102,7 +102,7 @@ const NotFound = ({ defaultNotFoundValue }) => {
               align-content: flex-start;
               margin-left: 20px;
             `}>
-            <div
+            {/* <div
               css={css`
                 text-align: center;
                 height: 90px;
@@ -127,7 +127,7 @@ const NotFound = ({ defaultNotFoundValue }) => {
               }}>
               <img src={RaidIcon} />
               <p>Raid</p>
-            </div>
+            </div> */}
             <div
               css={css`
                 text-align: center;
@@ -150,7 +150,7 @@ const NotFound = ({ defaultNotFoundValue }) => {
               `}
               onClick={() => history.push('/infinite')}>
               <img src={InfiniteIcon} />
-              <p>Infinite</p>
+              <p>Infinite Arena</p>
             </div>
             <div
               css={css`
@@ -174,7 +174,7 @@ const NotFound = ({ defaultNotFoundValue }) => {
               `}
               onClick={() => history.push('/evolution')}>
               <img src={EvolutionIcon} />
-              <p>Evolution</p>
+              <p>Evolution Isles</p>
             </div>
             <div
               css={css`
@@ -198,9 +198,9 @@ const NotFound = ({ defaultNotFoundValue }) => {
               `}
               onClick={() => history.push('/sanctuary')}>
               <img src={SanctuaryIcon} />
-              <p>Sanctuary</p>
+              <p>Heart of the Oasis</p>
             </div>
-            <div
+            {/* <div
               css={css`
                 text-align: center;
                 height: 90px;
@@ -223,7 +223,7 @@ const NotFound = ({ defaultNotFoundValue }) => {
               onClick={() => history.push('/guardians')}>
               <img src={GuardiansIcon} />
               <p>Guardians</p>
-            </div>
+            </div> */}
           </div>
         </div>
       ) : null}

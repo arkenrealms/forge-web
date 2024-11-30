@@ -96,7 +96,8 @@ const HeadingFire = styled.div<{
 
   @keyframes fire {
     0% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         0 ${(props) => props.fireStrength * -5}px ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 2}px ${(props) => props.fireStrength * -10}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color1},
@@ -106,7 +107,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 18}px ${(props) => props.color4};
     }
     25% {
-      text-shadow: 0 0 3px ${(props) => props.color1},
+      text-shadow:
+        0 0 3px ${(props) => props.color1},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -6}px
           ${(props) => props.fireStrength * 5}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -11}px
@@ -117,7 +119,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 20}px ${(props) => props.color4};
     }
     50% {
-      text-shadow: 0 0 3px ${(props) => props.color1},
+      text-shadow:
+        0 0 3px ${(props) => props.color1},
         ${(props) => props.fireStrength * -1}px ${(props) => props.fireStrength * -4}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 0}px ${(props) => props.fireStrength * -12}px
@@ -128,7 +131,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 22}px ${(props) => props.color4};
     }
     75% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -7}px
           ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -11}px
@@ -139,7 +143,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 21}px ${(props) => props.color4};
     }
     100% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         0 ${(props) => props.fireStrength * -5}px ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 2}px ${(props) => props.fireStrength * -10}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color1},
@@ -278,13 +283,13 @@ const Evolution: React.FC<any> = () => {
         <p>These will be redeemable for multiple benefits. Including:</p>
         <br />
         <p>
-          - Arken: Heart of the Oasis Collector's Edition
+          - Heart of the Oasis Collector's Edition
           <br />
           - Earliest Access to Arken games
           <br />
           - Access to Founder's Tavern in the End of Time
           <br />
-          - Every Rune in Arken: Heart of the Oasis (1 EL-ZOD)
+          - Every Rune in Heart of the Oasis (1 EL-ZOD)
           <br />
           - Golden Cube Skin
           <br />

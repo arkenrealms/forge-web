@@ -186,7 +186,7 @@ const RxsView = () => {
             <h3 style={{ fontSize: '1.2rem' }}>Expert Mode</h3>
             <br />
             <p>
-              Expert mode is a tool to navigate the history of farms that existed in Arken: Runic Raids in an easier and
+              Expert mode is a tool to navigate the history of farms that existed in Runic Raids in an easier and
               quicker way, and chat with other experts.
               <br />
               <br />

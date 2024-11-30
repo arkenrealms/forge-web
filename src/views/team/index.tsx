@@ -763,7 +763,7 @@ const Team = ({ match }) => {
                   Design the towns/landscape with Inkarnate (basis has already been created by a professional but each
                   zone needs detailing)
                 </li>
-                <li>Design levels for Arken: Heart of the Oasis or Arken: Infinite Arena</li>
+                <li>Design levels for Heart of the Oasis or Infinite Arena</li>
               </ol>
               <br />
               <hr />

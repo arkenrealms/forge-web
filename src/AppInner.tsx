@@ -840,7 +840,7 @@ const SiteNav = ({ id }) => {
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
-                      <div className="text-block-5">Arken: Runic Raids</div>
+                      <div className="text-block-5">Runic Raids</div>
                       <div className="text-block-4">NFT&nbsp;Hyperfarm</div>
                     </div>
                   </a>
@@ -851,7 +851,7 @@ const SiteNav = ({ id }) => {
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
-                      <div className="text-block-5">Arken: Evolution Isles</div>
+                      <div className="text-block-5">Evolution Isles</div>
                       <div className="text-block-4">Casual P2E&nbsp;arcade</div>
                     </div>
                   </a>
@@ -862,7 +862,7 @@ const SiteNav = ({ id }) => {
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
-                      <div className="text-block-5">Arken: Infinite Arena</div>
+                      <div className="text-block-5">Infinite Arena</div>
                       <div className="text-block-4">ESPORTS&nbsp;Battle Arena</div>
                     </div>
                   </a>
@@ -884,7 +884,7 @@ const SiteNav = ({ id }) => {
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
-                      <div className="text-block-5">Arken: Heart of the Oasis</div>
+                      <div className="text-block-5">Heart of the Oasis</div>
                       <div className="text-block-4">Dark Fantasy ARPG</div>
                     </div>
                   </a>
@@ -1542,7 +1542,7 @@ const ToolbarNotification = () => {
 
   const messages = [
     {
-      text: 'Play Arken: Evolution Isles Season Ladder',
+      text: 'Play Evolution Isles Season Ladder',
       to: '/evolution',
     },
     {
@@ -1847,7 +1847,7 @@ const DraggableWindow: React.FC<any> = React.memo(
                   </Flex>
                   <Flex justifyContent="space-between" alignItems="center">
                     {isMaximized ? <ToolbarNotification /> : null}
-                    {isMaximized && settings?.isCrypto ? (
+                    {/* {isMaximized && settings?.isCrypto ? (
                       <div css={{ marginTop: -8 }}>
                         <Button
                           scale="sm"
@@ -1862,7 +1862,7 @@ const DraggableWindow: React.FC<any> = React.memo(
                           Swap Runes
                         </Button>
                       </div>
-                    ) : null}
+                    ) : null} */}
                     <span>&nbsp;</span>{' '}
                     <Button
                       scale="sm"
@@ -1966,7 +1966,7 @@ const DraggableWindow: React.FC<any> = React.memo(
               {/* <RouterLink to="/evolution">
               <TopBanner>
                 <TopBannerBg />
-                Play Arken: Evolution Isles Beta
+                Play Evolution Isles Beta
               </TopBanner>
             </RouterLink>
             <RouterLink to="/shards">
@@ -1979,7 +1979,7 @@ const DraggableWindow: React.FC<any> = React.memo(
                 <ToolbarBanner path={path} id="evolutionSeason1" to="/evolution">
                   <TopBanner3>
                     <TopBannerBg3 />
-                    Play Arken: Evolution Isles Season Ladder
+                    Play Evolution Isles Season Ladder
                   </TopBanner3>
                 </ToolbarBanner>
               ) : null}

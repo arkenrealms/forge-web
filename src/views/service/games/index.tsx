@@ -11,7 +11,7 @@ import type { Types } from '@arken/node/modules/game';
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function () {
-  const { data: games } = trpc.relay.game.getGames.useQuery<Types.Game[]>();
+  const { data: games } = trpc.seer.game.getGames.useQuery<Types.Game[]>();
 
   if (!games?.length)
     return (

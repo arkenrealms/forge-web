@@ -39,7 +39,7 @@ export default {
     'Purchase Runes': 'COMPRA RUNAS',
     'NFT Hyperfarming': 'HIPERPRODUCCIÓN DE NFT',
     "Arken is the next evolution of DeFi farming. Farming is when you use your tokens to earn bonus tokens by staking them. Every week a new token is created (called a rune). It's farmed until the max supply of 50,000. That rune can then be combined with other runes to create NFTs. Those NFTs can be used to improve your earnings.":
-      'Arken: Runic Raids es la próxima evolución del farming DeFi. Farming es cuando depositas tus fichas para obtener una recompensa extra por invertir en el proyecto. Cada semana se crea un nuevo token (llamado runa). Estos se producen hasta que el suministro máximo de 50.000. Estas runas se pueden combinar con otras runas para crear los NFTs. Esos NFTs se pueden utilizar para mejorar sus ganancias.',
+      'Runic Raids es la próxima evolución del farming DeFi. Farming es cuando depositas tus fichas para obtener una recompensa extra por invertir en el proyecto. Cada semana se crea un nuevo token (llamado runa). Estos se producen hasta que el suministro máximo de 50.000. Estas runas se pueden combinar con otras runas para crear los NFTs. Esos NFTs se pueden utilizar para mejorar sus ganancias.',
     'Blockchain Gaming': 'JUEGO BLOCKCHAIN',
     'You can start building your character right away. Choose from 1 of 7 classes, join a guild, and raid farms to start earning runes instantly.':
       'Puede comenzar creando su personaje ahora mismo. Elija 1 de las 7 clases, unirse a una hermandad, y comience a ganar runas al instante depositando sus runas.',

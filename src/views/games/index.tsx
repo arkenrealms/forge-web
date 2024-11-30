@@ -1,16 +1,16 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import styled, { css } from 'styled-components'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { Button, Tag, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import Page from '~/components/layout/Page'
-import { PurchaseModal } from '~/components/PurchaseModal'
-import TipCard from '~/components/TipCard'
-import Linker from '~/components/Linker'
-import i18n from '~/config/i18n'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import styled, { css } from 'styled-components';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Button, Tag, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import Page from '~/components/layout/Page';
+import { PurchaseModal } from '~/components/PurchaseModal';
+import TipCard from '~/components/TipCard';
+import Linker from '~/components/Linker';
+import i18n from '~/config/i18n';
 
-const Text = styled.div``
+const Text = styled.div``;
 
 const Cards = styled(BaseLayout)`
   display: block;
@@ -31,7 +31,7 @@ const Cards = styled(BaseLayout)`
       grid-column: span 4;
     }
   }
-`
+`;
 
 const Header = styled.div`
   min-height: 28px;
@@ -40,23 +40,23 @@ const Header = styled.div`
   font-size: 18px;
   text-align: center;
   padding: 10px;
-`
+`;
 
 const InfoBlock = styled.div`
   // padding: 24px;
   margin-top: 20px;
   text-align: left;
   font-size: 0.9rem;
-`
+`;
 
 const HeaderTag = styled.div`
   margin-top: 10px;
   width: 100%;
-`
+`;
 
 const Tag2 = styled(Tag)`
   zoom: 0.7;
-`
+`;
 
 const MainCard = styled(Card)`
   position: relative;
@@ -69,13 +69,13 @@ const MainCard = styled(Card)`
   color: #bb955e;
   text-shadow: 1px 1px 1px black;
   font-weight: bold;
-`
+`;
 
 const Image = styled.img`
   border-radius: 7px;
-`
+`;
 
-const ImageBlock = ({ url }) => <Image src={url} />
+const ImageBlock = ({ url }) => <Image src={url} />;
 
 const BottomMenu = styled.div`
   position: absolute;
@@ -83,16 +83,16 @@ const BottomMenu = styled.div`
   left: 0;
   width: 100%;
   text-align: center;
-`
+`;
 
 const Rules = () => {
-  const { t } = useTranslation()
-  const [showVision, setShowVision] = useState(false)
-  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />)
+  const { t } = useTranslation();
+  const [showVision, setShowVision] = useState(false);
+  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
   const games = [
     {
-      name: 'Arken: Runic Raids',
+      name: 'Runic Raids',
       path: '/raid',
       image: '/images/games/raid-card.png',
       description: (
@@ -101,10 +101,10 @@ const Rules = () => {
           <li>Craft items that change harvest mechanics.</li>
         </ul>
       ),
-      status: 'released',
+      status: 'retired',
     },
     {
-      name: 'Arken: Evolution Isles',
+      name: 'Evolution Isles',
       path: '/evolution',
       image: '/images/games/evolution-card.png',
       description: (
@@ -117,7 +117,7 @@ const Rules = () => {
       status: 'beta',
     },
     {
-      name: 'Arken: Infinite Arena',
+      name: 'Infinite Arena',
       path: '/infinite',
       image: '/images/games/infinite-card.png',
       description: (
@@ -131,7 +131,7 @@ const Rules = () => {
       status: 'pending',
     },
     {
-      name: 'Arken: Heart of the Oasis',
+      name: 'Heart of the Oasis',
       path: '/sanctuary',
       image: '/images/games/sanctuary-card.png',
       description: (
@@ -144,19 +144,19 @@ const Rules = () => {
       ),
       status: 'pending',
     },
-    {
-      name: 'Arken: Guardians Unleashed',
-      path: '/guardians',
-      image: '/images/games/guardians-card.png',
-      description: (
-        <ul>
-          <li>2D breeding game, generate and hatch pets used in other Arken games.</li>
-          <li>Web, android, iphone, desktop.</li>
-        </ul>
-      ),
-      status: 'pending',
-    },
-  ]
+    // {
+    //   name: 'Arken: Guardians Unleashed',
+    //   path: '/guardians',
+    //   image: '/images/games/guardians-card.png',
+    //   description: (
+    //     <ul>
+    //       <li>2D breeding game, generate and hatch pets used in other Arken games.</li>
+    //       <li>Web, android, iphone, desktop.</li>
+    //     </ul>
+    //   ),
+    //   status: 'pending',
+    // },
+  ];
 
   return (
     <Page>
@@ -167,10 +167,10 @@ const Rules = () => {
           <Linker id="play" replaceItems={false} replaceStringLinks={false}>
             Here's the low down.. our games are made to be <strong>fun traditional games</strong> with deep blockchain
             integration. We were the first in the world to build <strong>on-chain mechanics directly into NFTs</strong>{' '}
-            with our Arken: Runic Raids blockchain game. We followed it up with our first downloadable Play4Rewards game
-            Arken: Evolution Isles <strong>within 6 months</strong>. Our next big endevour is an arena brawler called
-            Zeno Infinite. During this process, we'll build on everything we've created for Arken: Heart of the Oasis -
-            a massive RPG in the Arken Realms.
+            with our Runic Raids blockchain game. We followed it up with our first downloadable Play4Rewards game
+            Evolution Isles <strong>within 6 months</strong>. Our next big endevour is an arena brawler called Zeno
+            Infinite. During this process, we'll build on everything we've created for Heart of the Oasis - a massive
+            RPG in the Arken Realms.
           </Linker>
         </p>
         <br />
@@ -185,6 +185,11 @@ const Rules = () => {
                 {game.status === 'released' ? (
                   <Tag2 outline variant="success">
                     Released
+                  </Tag2>
+                ) : null}
+                {game.status === 'retired' ? (
+                  <Tag2 outline variant="textDisabled">
+                    Retired
                   </Tag2>
                 ) : null}
                 {game.status === 'beta' ? (
@@ -245,7 +250,7 @@ const Rules = () => {
         ))}
       </Cards>
     </Page>
-  )
-}
+  );
+};
 
-export default Rules
+export default Rules;

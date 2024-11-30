@@ -191,7 +191,7 @@ const Updates = () => {
                         Evolution gear mechanics added to page info <UX />
                       </li>
                       <li>
-                        Rune Live: added evo killstreaks, old market contract, and more <UX />
+                        Arken Live: added evo killstreaks, old market contract, and more <UX />
                       </li>
                     </ol>
                   </PatchNote>
@@ -436,7 +436,7 @@ const Updates = () => {
                         more. <UX />
                       </li>
                       <li>
-                        Integrate and release Arken: Evolution Isles beta. <Game />
+                        Integrate and release Evolution Isles beta. <Game />
                       </li>
                       <li>
                         Basic language localization (French, Spanish, German, Japanese, Chinese, Vietnamese, Swedish).{' '}
@@ -446,7 +446,7 @@ const Updates = () => {
                         Improved user profile info (points, achievements). <Game />
                       </li>
                       <li>
-                        Live Player Leaderboard (currently Arken: Evolution Isles). <Game />
+                        Live Player Leaderboard (currently Evolution Isles). <Game />
                       </li>
                     </ol>
                   </PatchNote>

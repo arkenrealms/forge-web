@@ -329,7 +329,7 @@ const Rules = () => {
           <ul role="list">
             <li>Create a hero (NFT) from one of seven different classes</li>
             <li>
-              Play the <strong>Arken: Evolution Isles</strong> game and acquire crypto
+              Play the <strong>Evolution Isles</strong> game and acquire crypto
             </li>
             <li>Collect all the different runes (crypto)</li>
             <li>

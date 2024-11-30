@@ -3,10 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import LoreBlock1 from '~/components/LoreBlock1';
 import { Skeleton } from '~/ui';
 import { trpc } from '~/utils/trpc';
-import type { Types } from '@arken/node/modules/core';
+import type * as Arken from '@arken/node/types';
 
 export default function (props) {
-  const { data: realms } = trpc.relay.core.getRealms.useQuery<Types.Realm[]>({
+  const { data: realms } = trpc.seer.core.getRealms.useQuery<Arken.Core.Types.Realm[]>({
     where: { gameId: { equals: props.match.params.id } },
   });
 
@@ -19,7 +19,7 @@ export default function (props) {
 
   return (
     <>
-      {realms.map((realm: Types.Realm) => {
+      {realms.map((realm: Arken.Core.Types.Realm) => {
         return <Link to={'/service/realm/' + realm.id}>{realm.name}</Link>;
       })}
     </>
