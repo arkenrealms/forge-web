@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin'); // Import the plugin
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin'); // Import the plugin
 
 module.exports = function (config, env) {
   if (!config.resolve) config.resolve = {};
@@ -112,7 +112,7 @@ module.exports = function (config, env) {
       },
     ],
   };
-
+  console.log(config.plugins);
   // Plugins
   config.plugins.push(
     new webpack.ProvidePlugin({
@@ -121,14 +121,14 @@ module.exports = function (config, env) {
     })
   );
 
-  // config.plugins.push(
-  //   new ForkTsCheckerWebpackPlugin({
-  //     async: false,
-  //     typescript: {
-  //       memoryLimit: 8192, // Adjust as needed
-  //     },
-  //   })
-  // );
+  config.plugins.push(
+    new ForkTsCheckerWebpackPlugin({
+      async: false,
+      typescript: {
+        memoryLimit: 8192, // Adjust as needed
+      },
+    })
+  );
 
   // config.plugins.push(
   //   new webpack.DefinePlugin({

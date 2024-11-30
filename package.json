@@ -7,7 +7,7 @@
     "start": "react-app-rewired start",
     "build": "npm-run-all clean build:*",
     "build:react": "react-app-rewired build",
-    "dev": "dotenv -e .env.development react-app-rewired start  --trace-gc",
+    "dev": "NODE_OPTIONS=\"--openssl-legacy-provider --max_semi_space_size=64000 --max-old-space-size=64000 --max_old_space_size=64000\" dotenv -e .env.development react-app-rewired start  --trace-gc",
     "serve": "serve build -p 3004",
     "clean": "del-cli ./dist && make-dir ./dist",
     "compile": "tsc",
