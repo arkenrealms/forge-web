@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Card3 } from '~/ui';
 
 const Runeforms = function () {
   return (
-    <>
+    <Card3 style={{ marginTop: 10 }}>
       <main className="content-wrapper wf-section">
         <div className="page-bg-top">
           <img
@@ -184,7 +185,7 @@ const Runeforms = function () {
           </div>
         </div>
       </main>
-    </>
+    </Card3>
   );
 };
 

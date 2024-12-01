@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import styled from 'styled-components'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { Button, Tag, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import Page from '~/components/layout/Page'
-import { PurchaseModal } from '~/components/PurchaseModal'
-import PageWindow from '~/components/PageWindow'
-import i18n from '~/config/i18n'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import styled from 'styled-components';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Button, Tag, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import Page from '~/components/layout/Page';
+import { PurchaseModal } from '~/components/PurchaseModal';
+import PageWindow from '~/components/PageWindow';
+import i18n from '~/config/i18n';
 
-const Text = styled.div``
+const Text = styled.div``;
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -33,7 +33,7 @@ const Cards = styled(BaseLayout)`
       grid-column: span 4;
     }
   }
-`
+`;
 
 const Header = styled.div`
   min-height: 28px;
@@ -42,23 +42,23 @@ const Header = styled.div`
   font-size: 18px;
   text-align: center;
   padding: 10px;
-`
+`;
 
 const InfoBlock = styled.div`
   // padding: 24px;
   margin-top: 20px;
   text-align: left;
   font-size: 0.8rem;
-`
+`;
 
 const HeaderTag = styled.div`
   margin-top: 10px;
   width: 100%;
-`
+`;
 
 const Tag2 = styled(Tag)`
   zoom: 0.7;
-`
+`;
 
 const MainCard = styled(Card)`
   position: relative;
@@ -78,13 +78,13 @@ const MainCard = styled(Card)`
   color: #bb955e;
   text-shadow: 1px 1px 1px black;
   font-weight: bold;
-`
+`;
 
 const Image = styled.img`
   border-radius: 7px;
-`
+`;
 
-const ImageBlock = ({ url }) => <Image src={url} />
+const ImageBlock = ({ url }) => <Image src={url} />;
 
 const BottomMenu = styled.div`
   position: absolute;
@@ -92,12 +92,12 @@ const BottomMenu = styled.div`
   left: 0;
   width: 100%;
   text-align: center;
-`
+`;
 
 const Rules = () => {
-  const { t } = useTranslation()
-  const [showVision, setShowVision] = useState(false)
-  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />)
+  const { t } = useTranslation();
+  const [showVision, setShowVision] = useState(false);
+  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
   return (
     <Page>
@@ -108,13 +108,13 @@ const Rules = () => {
         <hr />
         <CardBody>
           We host weekly quizzes with prizes, contests, and riddles in our main Telegram chat. Join us here:{' '}
-          <a href="https://t.me/ArkenRealms" target="_blank" rel="noreferrer noopener">
-            https://t.me/ArkenRealms
+          <a href="https://t.me/Arken_Realms" target="_blank" rel="noreferrer noopener">
+            https://t.me/Arken_Realms
           </a>
         </CardBody>
       </Card>
     </Page>
-  )
-}
+  );
+};
 
-export default Rules
+export default Rules;

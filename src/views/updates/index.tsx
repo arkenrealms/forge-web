@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Page from '~/components/layout/Page';
-import { ButtonMenu, ButtonMenuItem, Card, CardBody, Heading } from '~/ui';
+import { ButtonMenu, ButtonMenuItem, Card, Card2, CardBody, Heading } from '~/ui';
 
 const Container = styled.div``;
 
@@ -120,15 +120,15 @@ const Updates = () => {
     <Page>
       <Container>
         <Cards>
-          <Card>
+          <Card2>
             <CardBody>
               <ButtonMenu activeIndex={tabIndex} scale="md" onItemClick={(index) => updateTab(index)}>
-                <ButtonMenuItem>arken.gg</ButtonMenuItem>
-                <ButtonMenuItem>Raid</ButtonMenuItem>
-                <ButtonMenuItem>Evolution</ButtonMenuItem>
-                <ButtonMenuItem>Infinite</ButtonMenuItem>
-                <ButtonMenuItem>Guardians</ButtonMenuItem>
-                <ButtonMenuItem>Sanctuary</ButtonMenuItem>
+                <ButtonMenuItem>Arken Realms</ButtonMenuItem>
+                <ButtonMenuItem>Runic Raids</ButtonMenuItem>
+                <ButtonMenuItem>Evolution Isles</ButtonMenuItem>
+                <ButtonMenuItem>Infinite Arena</ButtonMenuItem>
+                {/* <ButtonMenuItem>Guardians</ButtonMenuItem> */}
+                <ButtonMenuItem>Heart of the Oasis</ButtonMenuItem>
               </ButtonMenu>
 
               {tabIndex === 0 /* arken.gg */ ? (
@@ -1063,7 +1063,7 @@ const Updates = () => {
                 </>
               ) : null}
             </CardBody>
-          </Card>
+          </Card2>
         </Cards>
       </Container>
     </Page>

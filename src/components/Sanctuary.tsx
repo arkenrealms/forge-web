@@ -15,7 +15,7 @@ import useCache from '~/hooks/useCache';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import useSettings from '~/hooks/useSettings2';
 import useWeb3 from '~/hooks/useWeb3';
-import { Button, Card, CloseIcon, Flex, Heading, Text } from '~/ui';
+import { Button, Card, Card3, CloseIcon, Flex, Heading, Text } from '~/ui';
 // import initReactFastclick from "react-fastclick";
 import ChampionDetail from '~/components/ChampionDetail';
 import ChampionWelcome from '~/components/ChampionWelcome';
@@ -897,7 +897,7 @@ const Home: React.FC<any> = () => {
             <Lore />
           </div>
 
-          <Card style={{ zIndex: 2 }}>
+          <Card3 style={{ zIndex: 2 }}>
             <BigCard align="left">
               {!isMobile ? (
                 <ProfileContainer
@@ -1193,7 +1193,7 @@ const Home: React.FC<any> = () => {
               ) : null}
               <Mechanics />
             </BigCard>
-          </Card>
+          </Card3>
           <br />
           <br />
           <br />

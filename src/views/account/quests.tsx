@@ -1,36 +1,36 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Card, CardBody, CardHeader, Flex, Heading, Text } from '~/ui'
-import useI18n from '~/hooks/useI18n'
-import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
-import { useToast, useProfile, useFetchProfile } from '~/state/hooks'
-import Page from '~/components/layout/Page'
-import useWeb3 from '~/hooks/useWeb3'
-import PageLoader from '~/components/PageLoader'
-import { ConnectNetwork } from '~/components/ConnectNetwork'
-import AchievementsList from '~/components/AchievementsList'
-import WalletNotConnected from '~/components/account/WalletNotConnected'
-import ComingSoon from '~/components/account/ComingSoon'
-import Menu from '~/components/account/Menu'
-import Header from '~/components/account/Header'
-import ProfileCreation from './ProfileCreation'
+import React from 'react';
+import styled from 'styled-components';
+import { Card, CardBody, CardHeader, Flex, Heading, Text } from '~/ui';
+import useI18n from '~/hooks/useI18n';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
+import { useToast, useProfile, useFetchProfile } from '~/state/hooks';
+import Page from '~/components/layout/Page';
+import useWeb3 from '~/hooks/useWeb3';
+import PageLoader from '~/components/PageLoader';
+import { ConnectNetwork } from '~/components/ConnectNetwork';
+import AchievementsList from '~/components/AchievementsList';
+import WalletNotConnected from '~/components/account/WalletNotConnected';
+import ComingSoon from '~/components/account/ComingSoon';
+import Menu from '~/components/account/Menu';
+import Header from '~/components/account/Header';
+import ProfileCreation from './ProfileCreation';
 
-const gemoji = styled.span<{ gemoji: string }>``
+const gemoji = styled.span<{ gemoji: string }>``;
 
 const QuestsContainer = styled.div`
   a {
     border-bottom: 1px solid #fff;
   }
-`
+`;
 
 const TaskCenter = ({ match }) => {
-  const { id }: { id: string } = match.params
-  const { address: _account, library } = useWeb3()
-  const account = id ? id : _account
-  useFetchProfile(account)
-  const { profile, hasProfile } = useProfile(account)
-  const { t } = useTranslation()
+  const { id }: { id: string } = match.params;
+  const { address: _account, library } = useWeb3();
+  const account = id ? id : _account;
+  useFetchProfile(account);
+  const { profile, hasProfile } = useProfile(account);
+  const { t } = useTranslation();
 
   // if (!account) {
   //   return <Page><WalletNotConnected /></Page>
@@ -41,7 +41,7 @@ const TaskCenter = ({ match }) => {
       <Page>
         <ProfileCreation />
       </Page>
-    )
+    );
   }
 
   return (
@@ -118,7 +118,7 @@ const TaskCenter = ({ match }) => {
                 </a>
                 <br />
                 <br />
-                <a href="https://www.twitch.tv/arkenrealms" target="_blank" rel="noreferrer noopener">
+                <a href="https://twitch.arken.gg" target="_blank" rel="noreferrer noopener">
                   Rune on Twitch
                 </a>{' '}
                 +{' '}
@@ -138,7 +138,7 @@ const TaskCenter = ({ match }) => {
                 - Follow
                 <br />
                 <br />
-                <a href="https://discord.gg/rune" target="_blank" rel="noreferrer noopener">
+                <a href="https://discord.arken.gg" target="_blank" rel="noreferrer noopener">
                   Rune on Discord
                 </a>{' '}
                 - Join &amp; LIKE announcements
@@ -171,7 +171,7 @@ const TaskCenter = ({ match }) => {
         </CardBody>
       </Card>
     </Page>
-  )
-}
+  );
+};
 
-export default TaskCenter
+export default TaskCenter;

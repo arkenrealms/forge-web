@@ -2,7 +2,7 @@ import { CurrencyAmount, JSBI, Token, Trade, TradeType } from '@arcanefinance/sd
 import { css } from 'styled-components';
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 // import { ArrowDown } from 'react-feather'
-import { CardBody, ArrowDownIcon, Button, IconButton, Text } from '~/ui';
+import { CardBody, ArrowDownIcon, Button, IconButton, Text, Card2 } from '~/ui';
 import styled, { ThemeContext } from 'styled-components';
 import AddressInputPanel from '~/components/AddressInputPanel';
 import Card from '~/components/Card';
@@ -20,8 +20,6 @@ import TradePrice from '~/components/swap/TradePrice';
 import TokenWarningModal from '~/components/TokenWarningModal';
 import SyrupWarningModal from '~/components/SyrupWarningModal';
 import ProgressSteps from '~/components/ProgressSteps';
-import Page from '~/components/layout/Page';
-
 import { INITIAL_ALLOWED_SLIPPAGE } from '~/constants/index';
 import useWeb3 from '~/hooks/useWeb3';
 import { useCurrency } from '~/hooks/Tokens';
@@ -199,8 +197,8 @@ const Swap = ({ showMenu = false }) => {
   const formattedAmounts = {
     [independentField]: typedValue,
     [dependentField]: showWrap
-      ? parsedAmounts[independentField]?.toExact() ?? ''
-      : parsedAmounts[dependentField]?.toSignificant(6) ?? '',
+      ? (parsedAmounts[independentField]?.toExact() ?? '')
+      : (parsedAmounts[dependentField]?.toSignificant(6) ?? ''),
   };
 
   const route = trade?.route;
@@ -448,7 +446,6 @@ const Swap = ({ showMenu = false }) => {
   }, [onCurrencySelection, rxsCurrency]);
 
   const Wrapper2 = showMenu ? AppBody : ({ children }) => <div>{children}</div>;
-
   return (
     <div
       css={css`
@@ -475,162 +472,191 @@ const Swap = ({ showMenu = false }) => {
         onConfirm={handleConfirmSyrupWarning}
       />
       {showMenu ? <CardNav /> : null}
-      <Wrapper2>
-        <Wrapper id="swap-page">
-          <ConfirmSwapModal
-            isOpen={showConfirm}
-            trade={trade}
-            originalTrade={tradeToConfirm}
-            onAcceptChanges={handleAcceptChanges}
-            attemptingTxn={attemptingTxn}
-            txHash={txHash}
-            recipient={recipient}
-            allowedSlippage={allowedSlippage}
-            onConfirm={handleSwap}
-            swapErrorMessage={swapErrorMessage}
-            onDismiss={handleConfirmDismiss}
-          />
-          {showMenu ? (
-            <PageHeader
-              title={TranslateString(8, 'Exchange')}
-              description={TranslateString(1192, 'Trade tokens in an instant')}
+      <Card2 style={{ maxWidth: 600 }}>
+        <Wrapper2>
+          <Wrapper id="swap-page">
+            <ConfirmSwapModal
+              isOpen={showConfirm}
+              trade={trade}
+              originalTrade={tradeToConfirm}
+              onAcceptChanges={handleAcceptChanges}
+              attemptingTxn={attemptingTxn}
+              txHash={txHash}
+              recipient={recipient}
+              allowedSlippage={allowedSlippage}
+              onConfirm={handleSwap}
+              swapErrorMessage={swapErrorMessage}
+              onDismiss={handleConfirmDismiss}
             />
-          ) : null}
-          <CardBody>
-            <AutoColumn gap="md">
-              <CurrencyInputPanel
-                label={
-                  independentField === Field.OUTPUT && !showWrap && trade
-                    ? TranslateString(194, 'From (estimated)')
-                    : TranslateString(76, 'From')
-                }
-                value={formattedAmounts[Field.INPUT]}
-                showMaxButton={!atMaxAmountInput}
-                currency={currencies[Field.INPUT]}
-                onUserInput={handleTypeInput}
-                onMax={handleMaxInput}
-                onCurrencySelect={handleInputSelect}
-                otherCurrency={currencies[Field.OUTPUT]}
-                id="swap-currency-input"
+            {showMenu ? (
+              <PageHeader
+                title={TranslateString(8, 'Exchange')}
+                description={TranslateString(1192, 'Trade tokens in an instant')}
               />
-              <AutoColumn justify="space-between">
-                <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
-                  <ArrowWrapper clickable>
-                    <IconButton
-                      variant="tertiary"
-                      onClick={() => {
-                        setApprovalSubmitted(false); // reset 2 step UI for approvals
-                        onSwitchTokens();
-                      }}
-                      style={{ borderRadius: '50%' }}
-                      scale="sm">
-                      <ArrowDownIcon color="primary" width="24px" />
-                    </IconButton>
-                  </ArrowWrapper>
-                  {recipient === null && !showWrap && isExpertMode ? (
-                    <LinkStyledButton id="add-recipient-button" onClick={() => onChangeRecipient('')}>
-                      + Add a send (optional)
-                    </LinkStyledButton>
-                  ) : null}
-                </AutoRow>
-              </AutoColumn>
-              <CurrencyInputPanel
-                value={formattedAmounts[Field.OUTPUT]}
-                onUserInput={handleTypeOutput}
-                label={
-                  independentField === Field.INPUT && !showWrap && trade
-                    ? TranslateString(196, 'To (estimated)')
-                    : TranslateString(80, 'To')
-                }
-                showMaxButton={false}
-                currency={currencies[Field.OUTPUT]}
-                onCurrencySelect={handleOutputSelect}
-                otherCurrency={currencies[Field.INPUT]}
-                id="swap-currency-output"
-              />
-
-              {recipient !== null && !showWrap ? (
-                <>
-                  <AutoRow justify="space-between" style={{ padding: '0 1rem' }}>
-                    <ArrowWrapper clickable={false}>
-                      <ArrowDownIcon color="primary" width="24px" />
+            ) : null}
+            <CardBody>
+              <AutoColumn gap="md">
+                <CurrencyInputPanel
+                  label={
+                    independentField === Field.OUTPUT && !showWrap && trade
+                      ? TranslateString(194, 'From (estimated)')
+                      : TranslateString(76, 'From')
+                  }
+                  value={formattedAmounts[Field.INPUT]}
+                  showMaxButton={!atMaxAmountInput}
+                  currency={currencies[Field.INPUT]}
+                  onUserInput={handleTypeInput}
+                  onMax={handleMaxInput}
+                  onCurrencySelect={handleInputSelect}
+                  otherCurrency={currencies[Field.OUTPUT]}
+                  id="swap-currency-input"
+                />
+                <AutoColumn justify="space-between">
+                  <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
+                    <ArrowWrapper clickable>
+                      <IconButton
+                        variant="tertiary"
+                        onClick={() => {
+                          setApprovalSubmitted(false); // reset 2 step UI for approvals
+                          onSwitchTokens();
+                        }}
+                        style={{ borderRadius: '50%' }}
+                        scale="sm">
+                        <ArrowDownIcon color="primary" width="24px" />
+                      </IconButton>
                     </ArrowWrapper>
-                    <LinkStyledButton id="remove-recipient-button" onClick={() => onChangeRecipient(null)}>
-                      - Remove send
-                    </LinkStyledButton>
+                    {recipient === null && !showWrap && isExpertMode ? (
+                      <LinkStyledButton id="add-recipient-button" onClick={() => onChangeRecipient('')}>
+                        + Add a send (optional)
+                      </LinkStyledButton>
+                    ) : null}
                   </AutoRow>
-                  <AddressInputPanel id="recipient" value={recipient} onChange={onChangeRecipient} />
-                </>
-              ) : null}
+                </AutoColumn>
+                <CurrencyInputPanel
+                  value={formattedAmounts[Field.OUTPUT]}
+                  onUserInput={handleTypeOutput}
+                  label={
+                    independentField === Field.INPUT && !showWrap && trade
+                      ? TranslateString(196, 'To (estimated)')
+                      : TranslateString(80, 'To')
+                  }
+                  showMaxButton={false}
+                  currency={currencies[Field.OUTPUT]}
+                  onCurrencySelect={handleOutputSelect}
+                  otherCurrency={currencies[Field.INPUT]}
+                  id="swap-currency-output"
+                />
 
-              {showWrap ? null : (
-                <Card padding=".25rem .75rem 0 .75rem" borderRadius="20px">
-                  <AutoColumn gap="4px">
-                    {Boolean(trade) && (
-                      <RowBetween align="center">
-                        <Text fontSize="14px">{TranslateString(1182, 'Price')}</Text>
-                        <TradePrice
-                          price={trade?.executionPrice}
-                          showInverted={showInverted}
-                          setShowInverted={setShowInverted}
-                        />
-                      </RowBetween>
-                    )}
-                    {allowedSlippage !== INITIAL_ALLOWED_SLIPPAGE && (
-                      <RowBetween align="center">
-                        <Text fontSize="14px" onClick={toggleSetExpertMode}>
-                          {TranslateString(88, 'Slippage Tolerance')}
-                        </Text>
-                        <Text fontSize="14px">{allowedSlippage / 100}%</Text>
-                      </RowBetween>
-                    )}
-                  </AutoColumn>
-                </Card>
-              )}
-            </AutoColumn>
-            <BottomGrouping>
-              {isTooManyDecimals ? (
-                <Button width="100%" onClick={switchOutputAndInput}>
-                  Update Decimals
-                </Button>
-              ) : isWrongRuneOutput ? (
-                <Button width="100%" onClick={switchOutputAndInput}>
-                  Update Price
-                </Button>
-              ) : isWrongSafemoonInput ? (
-                <Button width="100%" onClick={switchInputAndOutput}>
-                  Update Price
-                </Button>
-              ) : (
-                <>
-                  {!account ? (
-                    <ConnectWalletButton width="100%" />
-                  ) : showWrap ? (
-                    <Button disabled={Boolean(wrapInputError)} onClick={onWrap} width="100%">
-                      {wrapInputError ??
-                        (wrapType === WrapType.WRAP ? 'Wrap' : wrapType === WrapType.UNWRAP ? 'Unwrap' : null)}
-                    </Button>
-                  ) : noRoute && userHasSpecifiedInputOutput ? (
-                    <GreyCard style={{ textAlign: 'center' }}>
-                      <Text mb="4px">{TranslateString(1194, 'Loading...')}</Text>
-                    </GreyCard>
-                  ) : showApproveFlow ? (
-                    <RowBetween>
-                      <Button
-                        onClick={approveCallback}
-                        disabled={approval !== ApprovalState.NOT_APPROVED || approvalSubmitted}
-                        style={{ width: '48%' }}
-                        variant={approval === ApprovalState.APPROVED ? 'success' : 'primary'}>
-                        {approval === ApprovalState.PENDING ? (
-                          <AutoRow gap="6px" justify="center">
-                            Approving <Loader stroke="white" />
-                          </AutoRow>
-                        ) : approvalSubmitted && approval === ApprovalState.APPROVED ? (
-                          'Approved'
-                        ) : (
-                          `Approve ${symbolMap(currencies[Field.INPUT]?.symbol)}`
-                        )}
+                {recipient !== null && !showWrap ? (
+                  <>
+                    <AutoRow justify="space-between" style={{ padding: '0 1rem' }}>
+                      <ArrowWrapper clickable={false}>
+                        <ArrowDownIcon color="primary" width="24px" />
+                      </ArrowWrapper>
+                      <LinkStyledButton id="remove-recipient-button" onClick={() => onChangeRecipient(null)}>
+                        - Remove send
+                      </LinkStyledButton>
+                    </AutoRow>
+                    <AddressInputPanel id="recipient" value={recipient} onChange={onChangeRecipient} />
+                  </>
+                ) : null}
+
+                {showWrap ? null : (
+                  <Card padding=".25rem .75rem 0 .75rem" borderRadius="20px">
+                    <AutoColumn gap="4px">
+                      {Boolean(trade) && (
+                        <RowBetween align="center">
+                          <Text fontSize="14px">{TranslateString(1182, 'Price')}</Text>
+                          <TradePrice
+                            price={trade?.executionPrice}
+                            showInverted={showInverted}
+                            setShowInverted={setShowInverted}
+                          />
+                        </RowBetween>
+                      )}
+                      {allowedSlippage !== INITIAL_ALLOWED_SLIPPAGE && (
+                        <RowBetween align="center">
+                          <Text fontSize="14px" onClick={toggleSetExpertMode}>
+                            {TranslateString(88, 'Slippage Tolerance')}
+                          </Text>
+                          <Text fontSize="14px">{allowedSlippage / 100}%</Text>
+                        </RowBetween>
+                      )}
+                    </AutoColumn>
+                  </Card>
+                )}
+              </AutoColumn>
+              <BottomGrouping>
+                {isTooManyDecimals ? (
+                  <Button width="100%" onClick={switchOutputAndInput}>
+                    Update Decimals
+                  </Button>
+                ) : isWrongRuneOutput ? (
+                  <Button width="100%" onClick={switchOutputAndInput}>
+                    Update Price
+                  </Button>
+                ) : isWrongSafemoonInput ? (
+                  <Button width="100%" onClick={switchInputAndOutput}>
+                    Update Price
+                  </Button>
+                ) : (
+                  <>
+                    {!account ? (
+                      <ConnectWalletButton width="100%" />
+                    ) : showWrap ? (
+                      <Button disabled={Boolean(wrapInputError)} onClick={onWrap} width="100%">
+                        {wrapInputError ??
+                          (wrapType === WrapType.WRAP ? 'Wrap' : wrapType === WrapType.UNWRAP ? 'Unwrap' : null)}
                       </Button>
+                    ) : noRoute && userHasSpecifiedInputOutput ? (
+                      <GreyCard style={{ textAlign: 'center' }}>
+                        <Text mb="4px">{TranslateString(1194, 'Loading...')}</Text>
+                      </GreyCard>
+                    ) : showApproveFlow ? (
+                      <RowBetween>
+                        <Button
+                          onClick={approveCallback}
+                          disabled={approval !== ApprovalState.NOT_APPROVED || approvalSubmitted}
+                          style={{ width: '48%' }}
+                          variant={approval === ApprovalState.APPROVED ? 'success' : 'primary'}>
+                          {approval === ApprovalState.PENDING ? (
+                            <AutoRow gap="6px" justify="center">
+                              Approving <Loader stroke="white" />
+                            </AutoRow>
+                          ) : approvalSubmitted && approval === ApprovalState.APPROVED ? (
+                            'Approved'
+                          ) : (
+                            `Approve ${symbolMap(currencies[Field.INPUT]?.symbol)}`
+                          )}
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            if (isExpertMode) {
+                              handleSwap();
+                            } else {
+                              setSwapState({
+                                tradeToConfirm: trade,
+                                attemptingTxn: false,
+                                swapErrorMessage: undefined,
+                                showConfirm: true,
+                                txHash: undefined,
+                              });
+                            }
+                          }}
+                          style={{ width: '48%' }}
+                          id="swap-button"
+                          disabled={
+                            !isValid ||
+                            approval !== ApprovalState.APPROVED ||
+                            (priceImpactSeverity > 3 && !isExpertMode)
+                          }
+                          variant={isValid && priceImpactSeverity > 2 ? 'danger' : 'primary'}>
+                          {priceImpactSeverity > 3 && !isExpertMode
+                            ? `Price Impact High`
+                            : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
+                        </Button>
+                      </RowBetween>
+                    ) : (
                       <Button
                         onClick={() => {
                           if (isExpertMode) {
@@ -645,89 +671,64 @@ const Swap = ({ showMenu = false }) => {
                             });
                           }
                         }}
-                        style={{ width: '48%' }}
                         id="swap-button"
-                        disabled={
-                          !isValid || approval !== ApprovalState.APPROVED || (priceImpactSeverity > 3 && !isExpertMode)
-                        }
-                        variant={isValid && priceImpactSeverity > 2 ? 'danger' : 'primary'}>
-                        {priceImpactSeverity > 3 && !isExpertMode
-                          ? `Price Impact High`
-                          : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
+                        disabled={!isValid || (priceImpactSeverity > 3 && !isExpertMode) || !!swapCallbackError}
+                        variant={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'danger' : 'primary'}
+                        width="100%">
+                        {swapInputError ||
+                          (priceImpactSeverity > 3 && !isExpertMode
+                            ? `Price Impact Too High`
+                            : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`)}
                       </Button>
-                    </RowBetween>
-                  ) : (
-                    <Button
-                      onClick={() => {
-                        if (isExpertMode) {
-                          handleSwap();
-                        } else {
-                          setSwapState({
-                            tradeToConfirm: trade,
-                            attemptingTxn: false,
-                            swapErrorMessage: undefined,
-                            showConfirm: true,
-                            txHash: undefined,
-                          });
-                        }
-                      }}
-                      id="swap-button"
-                      disabled={!isValid || (priceImpactSeverity > 3 && !isExpertMode) || !!swapCallbackError}
-                      variant={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'danger' : 'primary'}
-                      width="100%">
-                      {swapInputError ||
-                        (priceImpactSeverity > 3 && !isExpertMode
-                          ? `Price Impact Too High`
-                          : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`)}
-                    </Button>
-                  )}
-                </>
-              )}
-              {showApproveFlow && <ProgressSteps steps={[approval === ApprovalState.APPROVED]} />}
-              {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
-            </BottomGrouping>
-          </CardBody>
-          <RuneHolder>
-            {/* <Rune src="/images/farms/bnb.png" onClick={() => onCurrencySelection(Field.OUTPUT, wbnbCurrency!)} /> */}
-            {/* <Rune src="https://safemoon.net/public/img/favicon.png" onClick={() => onCurrencySelection(Field.OUTPUT, safeCurrency!)} /> */}
-            {/* <Rune src="/images/rune-500x500.png" onClick={() => onCurrencySelection(Field.OUTPUT, runeCurrency!)} /> */}
-            {/* <Rune src="/images/rune-500x500.png" onClick={() => onCurrencySelection(Field.OUTPUT, rxsCurrency!)} /> */}
-            <Rune src="/images/farms/el.png" onClick={() => onCurrencySelection(Field.OUTPUT, elCurrency!)} />
-            <Rune src="/images/farms/eld.png" onClick={() => onCurrencySelection(Field.OUTPUT, eldCurrency!)} />
-            <Rune src="/images/farms/eth.png" onClick={() => onCurrencySelection(Field.OUTPUT, ethCurrency!)} />
-            <Rune src="/images/farms/tir.png" onClick={() => onCurrencySelection(Field.OUTPUT, tirCurrency!)} />
-            <Rune src="/images/farms/nef.png" onClick={() => onCurrencySelection(Field.OUTPUT, nefCurrency!)} />
-            <Rune src="/images/farms/ith.png" onClick={() => onCurrencySelection(Field.OUTPUT, ithCurrency!)} />
-            <Rune src="/images/farms/tal.png" onClick={() => onCurrencySelection(Field.OUTPUT, talCurrency!)} />
-            <Rune src="/images/farms/ral.png" onClick={() => onCurrencySelection(Field.OUTPUT, ralCurrency!)} />
-            <Rune src="/images/farms/ort.png" onClick={() => onCurrencySelection(Field.OUTPUT, ortCurrency!)} />
-            <Rune src="/images/farms/thul.png" onClick={() => onCurrencySelection(Field.OUTPUT, thulCurrency!)} />
-            <Rune src="/images/farms/amn.png" onClick={() => onCurrencySelection(Field.OUTPUT, amnCurrency!)} />
-            <Rune src="/images/farms/sol.png" onClick={() => onCurrencySelection(Field.OUTPUT, solCurrency!)} />
-            <Rune src="/images/farms/shael.png" onClick={() => onCurrencySelection(Field.OUTPUT, shaelCurrency!)} />
-            <Rune src="/images/farms/dol.png" onClick={() => onCurrencySelection(Field.OUTPUT, dolCurrency!)} />
-            <Rune src="/images/farms/hel.png" onClick={() => onCurrencySelection(Field.OUTPUT, helCurrency!)} />
-            <Rune src="/images/farms/io.png" onClick={() => onCurrencySelection(Field.OUTPUT, ioCurrency!)} />
-            <Rune src="/images/farms/lum.png" onClick={() => onCurrencySelection(Field.OUTPUT, lumCurrency!)} />
-            <Rune src="/images/farms/ko.png" onClick={() => onCurrencySelection(Field.OUTPUT, koCurrency!)} />
-            <Rune src="/images/farms/fal.png" onClick={() => onCurrencySelection(Field.OUTPUT, falCurrency!)} />
-            <Rune src="/images/farms/lem.png" onClick={() => onCurrencySelection(Field.OUTPUT, lemCurrency!)} />
-            <Rune src="/images/farms/pul.png" onClick={() => onCurrencySelection(Field.OUTPUT, pulCurrency!)} />
-            <Rune src="/images/farms/um.png" onClick={() => onCurrencySelection(Field.OUTPUT, umCurrency!)} />
-            <Rune src="/images/farms/mal.png" onClick={() => onCurrencySelection(Field.OUTPUT, malCurrency!)} />
-            <Rune src="/images/farms/ist.png" onClick={() => onCurrencySelection(Field.OUTPUT, istCurrency!)} />
-            <Rune src="/images/farms/gul.png" onClick={() => onCurrencySelection(Field.OUTPUT, gulCurrency!)} />
-            <Rune src="/images/farms/vex.png" onClick={() => onCurrencySelection(Field.OUTPUT, vexCurrency!)} />
-            <Rune src="/images/farms/ohm.png" onClick={() => onCurrencySelection(Field.OUTPUT, ohmCurrency!)} />
-            <Rune src="/images/farms/lo.png" onClick={() => onCurrencySelection(Field.OUTPUT, loCurrency!)} />
-            <Rune src="/images/farms/sur.png" onClick={() => onCurrencySelection(Field.OUTPUT, surCurrency!)} />
-            <Rune src="/images/farms/ber.png" onClick={() => onCurrencySelection(Field.OUTPUT, berCurrency!)} />
-            <Rune src="/images/farms/jah.png" onClick={() => onCurrencySelection(Field.OUTPUT, jahCurrency!)} />
-            <Rune src="/images/farms/cham.png" onClick={() => onCurrencySelection(Field.OUTPUT, chamCurrency!)} />
-            <Rune src="/images/farms/zod.png" onClick={() => onCurrencySelection(Field.OUTPUT, zodCurrency!)} />
-          </RuneHolder>
-        </Wrapper>
-      </Wrapper2>
+                    )}
+                  </>
+                )}
+                {showApproveFlow && <ProgressSteps steps={[approval === ApprovalState.APPROVED]} />}
+                {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
+              </BottomGrouping>
+            </CardBody>
+            <RuneHolder>
+              {/* <Rune src="/images/farms/bnb.png" onClick={() => onCurrencySelection(Field.OUTPUT, wbnbCurrency!)} /> */}
+              {/* <Rune src="https://safemoon.net/public/img/favicon.png" onClick={() => onCurrencySelection(Field.OUTPUT, safeCurrency!)} /> */}
+              {/* <Rune src="/images/rune-500x500.png" onClick={() => onCurrencySelection(Field.OUTPUT, runeCurrency!)} /> */}
+              {/* <Rune src="/images/rune-500x500.png" onClick={() => onCurrencySelection(Field.OUTPUT, rxsCurrency!)} /> */}
+              <Rune src="/images/farms/el.png" onClick={() => onCurrencySelection(Field.OUTPUT, elCurrency!)} />
+              <Rune src="/images/farms/eld.png" onClick={() => onCurrencySelection(Field.OUTPUT, eldCurrency!)} />
+              <Rune src="/images/farms/eth.png" onClick={() => onCurrencySelection(Field.OUTPUT, ethCurrency!)} />
+              <Rune src="/images/farms/tir.png" onClick={() => onCurrencySelection(Field.OUTPUT, tirCurrency!)} />
+              <Rune src="/images/farms/nef.png" onClick={() => onCurrencySelection(Field.OUTPUT, nefCurrency!)} />
+              <Rune src="/images/farms/ith.png" onClick={() => onCurrencySelection(Field.OUTPUT, ithCurrency!)} />
+              <Rune src="/images/farms/tal.png" onClick={() => onCurrencySelection(Field.OUTPUT, talCurrency!)} />
+              <Rune src="/images/farms/ral.png" onClick={() => onCurrencySelection(Field.OUTPUT, ralCurrency!)} />
+              <Rune src="/images/farms/ort.png" onClick={() => onCurrencySelection(Field.OUTPUT, ortCurrency!)} />
+              <Rune src="/images/farms/thul.png" onClick={() => onCurrencySelection(Field.OUTPUT, thulCurrency!)} />
+              <Rune src="/images/farms/amn.png" onClick={() => onCurrencySelection(Field.OUTPUT, amnCurrency!)} />
+              <Rune src="/images/farms/sol.png" onClick={() => onCurrencySelection(Field.OUTPUT, solCurrency!)} />
+              <Rune src="/images/farms/shael.png" onClick={() => onCurrencySelection(Field.OUTPUT, shaelCurrency!)} />
+              <Rune src="/images/farms/dol.png" onClick={() => onCurrencySelection(Field.OUTPUT, dolCurrency!)} />
+              <Rune src="/images/farms/hel.png" onClick={() => onCurrencySelection(Field.OUTPUT, helCurrency!)} />
+              <Rune src="/images/farms/io.png" onClick={() => onCurrencySelection(Field.OUTPUT, ioCurrency!)} />
+              <Rune src="/images/farms/lum.png" onClick={() => onCurrencySelection(Field.OUTPUT, lumCurrency!)} />
+              <Rune src="/images/farms/ko.png" onClick={() => onCurrencySelection(Field.OUTPUT, koCurrency!)} />
+              <Rune src="/images/farms/fal.png" onClick={() => onCurrencySelection(Field.OUTPUT, falCurrency!)} />
+              <Rune src="/images/farms/lem.png" onClick={() => onCurrencySelection(Field.OUTPUT, lemCurrency!)} />
+              <Rune src="/images/farms/pul.png" onClick={() => onCurrencySelection(Field.OUTPUT, pulCurrency!)} />
+              <Rune src="/images/farms/um.png" onClick={() => onCurrencySelection(Field.OUTPUT, umCurrency!)} />
+              <Rune src="/images/farms/mal.png" onClick={() => onCurrencySelection(Field.OUTPUT, malCurrency!)} />
+              <Rune src="/images/farms/ist.png" onClick={() => onCurrencySelection(Field.OUTPUT, istCurrency!)} />
+              <Rune src="/images/farms/gul.png" onClick={() => onCurrencySelection(Field.OUTPUT, gulCurrency!)} />
+              <Rune src="/images/farms/vex.png" onClick={() => onCurrencySelection(Field.OUTPUT, vexCurrency!)} />
+              <Rune src="/images/farms/ohm.png" onClick={() => onCurrencySelection(Field.OUTPUT, ohmCurrency!)} />
+              <Rune src="/images/farms/lo.png" onClick={() => onCurrencySelection(Field.OUTPUT, loCurrency!)} />
+              <Rune src="/images/farms/sur.png" onClick={() => onCurrencySelection(Field.OUTPUT, surCurrency!)} />
+              <Rune src="/images/farms/ber.png" onClick={() => onCurrencySelection(Field.OUTPUT, berCurrency!)} />
+              <Rune src="/images/farms/jah.png" onClick={() => onCurrencySelection(Field.OUTPUT, jahCurrency!)} />
+              <Rune src="/images/farms/cham.png" onClick={() => onCurrencySelection(Field.OUTPUT, chamCurrency!)} />
+              <Rune src="/images/farms/zod.png" onClick={() => onCurrencySelection(Field.OUTPUT, zodCurrency!)} />
+            </RuneHolder>
+          </Wrapper>
+        </Wrapper2>
+      </Card2>
       <AdvancedSwapDetailsDropdown trade={trade} />
     </div>
   );

@@ -229,7 +229,7 @@ window.addEventListener('unhandledrejection', function (promiseRejectionEvent) {
 // }
 
 function FallbackComponent() {
-  return <div style={{ color: '#fff' }}>An error has occurred. Please report in t.me/runereports</div>;
+  return <div style={{ color: '#fff' }}>An error has occurred. Please report in t.me/Arken_Reports</div>;
 }
 
 const myFallback = <FallbackComponent />;
@@ -1406,7 +1406,7 @@ const SiteNav = ({ id }) => {
                   </a>
                   <a
                     id="w-node-_72d3b942-4be6-9e12-7c52-5a22e3d5aebd-1186d119"
-                    href="https://t.me/ArkenRealms"
+                    href="https://t.me/Arken_Realms"
                     target="_blank"
                     rel="noreferrer"
                     className="subnavlink w-inline-block">
@@ -1992,7 +1992,7 @@ const DraggableWindow: React.FC<any> = React.memo(
               }
               className="app__fullpage-window__content">
               {isMaximized &&
-              !['/lore', '/evolution', '/whitepaper', '/art', '*'].includes(routePath) &&
+              !['/lore', '/evolution', '/whitepaper', '/art', '/swap', '/swap/pool', '*'].includes(routePath) &&
               brand !== 'w4' ? (
                 <div
                   css={css`

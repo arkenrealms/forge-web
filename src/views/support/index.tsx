@@ -1,11 +1,11 @@
-import React, { useState, useLayoutEffect } from 'react'
-import styled, { css } from 'styled-components'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { Card, Heading, CardBody, Skeleton, Flex } from '~/ui'
-import Page from '~/components/layout/Page'
+import React, { useState, useLayoutEffect } from 'react';
+import styled, { css } from 'styled-components';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Card, Heading, CardBody, Skeleton, Flex } from '~/ui';
+import Page from '~/components/layout/Page';
 
-const zzz = styled.div``
+const zzz = styled.div``;
 
 const SupportView = () => {
   return (
@@ -17,8 +17,8 @@ const SupportView = () => {
         <hr />
         <CardBody>
           <strong>Telegram Support:</strong>{' '}
-          <a href="https://t.me/RuneReports" target="_blank" rel="noreferrer">
-            https://t.me/RuneReports
+          <a href="https://t.me/Arken_Reports" target="_blank" rel="noreferrer">
+            https://t.me/Arken_Reports
           </a>
           <br />
           <br />
@@ -35,7 +35,7 @@ const SupportView = () => {
         </CardBody>
       </Card>
     </Page>
-  )
-}
+  );
+};
 
-export default SupportView
+export default SupportView;

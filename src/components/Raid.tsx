@@ -596,7 +596,7 @@ const Raid: React.FC<any> = () => {
 
         {/* <CardBanner id="banner1">
         <a
-          href="https://t.me/ArkenRealms/354"
+          href="https://t.me/Arken_Realms/354"
           rel="noreferrer noopener"
           target="_blank"
           style={{ display: 'block', width: '100%', height: '100%', opacity: 0 }}

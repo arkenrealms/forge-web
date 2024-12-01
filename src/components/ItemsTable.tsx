@@ -134,7 +134,7 @@ const sections = [
 
 const ItemsTable = function () {
   return (
-    <div className="div-block-24 frame padding-adjust">
+    <div className="div-block-24 frame">
       <h2 id="w-node-bde60e1f-0335-b179-271c-7d40fcbd5f61-3d100cc1" className="pagetitle itemcattitle">
         Item Types
       </h2>

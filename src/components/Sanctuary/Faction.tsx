@@ -2,10 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import factions from '@arken/node/data/generated/characterFactions.json';
 import styled from 'styled-components';
 import Linker from '~/components/Linker';
 import { Skeleton } from '~/ui';
+import { trpc } from '~/utils/trpc';
+import type * as Arken from '@arken/node';
 
 const Abc = styled.div``;
 
@@ -14,10 +15,12 @@ const Faction = function ({ id }) {
   // const { data } = useFetch(url)
 
   // const factions = data?.[url] || []
-  const faction = factions.find((z) => z.name.toLowerCase().replace(' ', '-') === id);
+  const { data: faction } = trpc.seer.character.getCharacterFaction.useQuery<Arken.Character.Types.CharacterFaction>(
+    {}
+  );
+
   const { t } = useTranslation();
 
-  if (factions.length && !faction) return <>Not found</>;
   if (!faction)
     return (
       <div style={{ padding: 10 }}>
@@ -47,22 +50,22 @@ const Faction = function ({ id }) {
               <br />
               <br />
               <div className="w-richtext">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.lore1}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.meta.lore1}</ReactMarkdown>
               </div>
               <br />
               <br />
               <div className="w-richtext">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.lore2}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.meta.lore2}</ReactMarkdown>
               </div>
               <br />
               <br />
               <div className="w-richtext">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.lore3}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.meta.lore3}</ReactMarkdown>
               </div>
             </div>
             <div style={{ marginBottom: 20, marginTop: 60 }}>
               <div className="w-richtext">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.lore4}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.meta.lore4}</ReactMarkdown>
               </div>
             </div>
           </div>

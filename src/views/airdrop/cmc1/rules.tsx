@@ -165,7 +165,7 @@ const Rules = () => {
                 <br />
                 <br />
                 <p>
-                  <HighlightLink href="https://t.me/ArkenRealms">
+                  <HighlightLink href="https://t.me/Arken_Realms">
                     4. Join Rune&rsquo;s Telegram group. <OpenNewIcon color="#7576df" ml="4px" />
                   </HighlightLink>
                 </p>

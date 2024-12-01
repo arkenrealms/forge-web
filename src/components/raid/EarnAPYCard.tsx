@@ -199,7 +199,7 @@ const EarnAPYCard = () => {
                   <br />
                   <LinkExternal href={`https://v${OLD_VERSION}.arken.gg/farms`}>Unstake Old Farms</LinkExternal>
                   {/* <LinkExternal href={`https://bscscan.com/block/countdown/${startBlock}`}>Countdown</LinkExternal> */}
-                  <LinkExternal href="https://t.me/ArkenRealms">Open Announcements</LinkExternal>
+                  <LinkExternal href="https://t.me/Arken_Realms">Open Announcements</LinkExternal>
                 </Heading>
                 <br />
                 <br />
@@ -219,7 +219,7 @@ const EarnAPYCard = () => {
                   {symbolMap(nextFarmSymbol)} RUNIC RAIDS STARTS SOON.
                   <br />
                   <br />
-                  <LinkExternal href="https://t.me/ArkenRealms">Open Announcements</LinkExternal>
+                  <LinkExternal href="https://t.me/Arken_Realms">Open Announcements</LinkExternal>
                 </Heading>
                 <br />
                 <br />
@@ -364,7 +364,7 @@ const EarnAPYCard = () => {
               </a>
               <br />
               &bull;{' '}
-              <a href="https://t.me/ArkenRealms" rel="noreferrer noopener" target="_blank">
+              <a href="https://t.me/Arken_Realms" rel="noreferrer noopener" target="_blank">
                 Join Telegram
               </a>
               <br />

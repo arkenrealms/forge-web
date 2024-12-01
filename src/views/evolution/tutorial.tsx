@@ -7,6 +7,8 @@ import {
   AutoRenewIcon,
   Button,
   Card,
+  Card3,
+  Card2,
   CardBody,
   Skeleton,
   CheckmarkCircleIcon,
@@ -21,30 +23,11 @@ import {
   ButtonMenuItem,
 } from '~/ui';
 import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import Cookies from 'js-cookie';
-import useI18n from '~/hooks/useI18n';
-import i18n from '~/config/i18n';
 import { useTranslation } from 'react-i18next';
-import history from '~/routerHistory';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import Page from '~/components/layout/Page';
-import { getBalanceNumber } from '~/utils/formatBalance';
-import { useTotalSupply, useBurnedBalance } from '~/hooks/useTokenBalance';
-import { useProfile } from '~/state/hooks';
-import { useRunePrice } from '~/state/hooks';
-import PageWindow from '~/components/PageWindow';
-import CardHeader from '~/components/account/CardHeader';
-import useGetWalletNfts from '~/hooks/useGetWalletNfts';
-import { getNativeAddress, getRuneAddress } from '~/utils/addressHelpers';
-import { itemData } from '@arken/node/data/items';
-import CardValueUnstyled from '~/components/raid/CardValueUnstyled';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
-import { RecipeInfo } from '~/components/RecipeInfo';
-import { ProfileInfo } from '~/components/ProfileInfo';
 import { PurchaseModal } from '~/components/PurchaseModal';
-import NftList from '~/components/characters/NftList';
-import useStats from '~/hooks/useStats';
 import useCache from '~/hooks/useCache';
 
 const GuideContainer = styled.div`
@@ -147,7 +130,10 @@ const BigCard = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   background-image: url(/images/background.jpeg);
   background-size: 400px;
-  box-shadow: 0 2px 0 0 rgb(0 0 0 / 80%), inset 0 -1px 0 0 rgb(0 0 0 / 10%), 0 0 66px 66px rgb(0 0 0 / 10%);
+  box-shadow:
+    0 2px 0 0 rgb(0 0 0 / 80%),
+    inset 0 -1px 0 0 rgb(0 0 0 / 10%),
+    0 0 66px 66px rgb(0 0 0 / 10%);
   // background-color: rgba(0,0,0,0.4);
   line-height: 1.6rem;
   font-size: 1rem;
@@ -355,7 +341,7 @@ const Guide: React.FC<any> = () => {
 
   return (
     <Page>
-      <Card>
+      <Card3>
         {referer ? (
           <CardBody>
             <BoxHeading as="h2" size="xl">
@@ -387,7 +373,7 @@ const Guide: React.FC<any> = () => {
           </Heading>
           <hr />
           <br />
-          <Flex
+          {/* <Flex
             flexDirection="column"
             alignItems="center"
             mb="8px"
@@ -444,7 +430,7 @@ const Guide: React.FC<any> = () => {
             )}
           </Flex>
           <br />
-          <br />
+          <br /> */}
           <Flex flexDirection="column" alignItems="center" justifyContent="center">
             <ButtonMenu activeIndex={tabIndex} scale="md" onItemClick={(index) => setTabIndex(index)}>
               <ButtonMenuItem>General</ButtonMenuItem>
@@ -998,7 +984,7 @@ const Guide: React.FC<any> = () => {
             </Flex>
           ) : null}
         </CardBody>
-      </Card>
+      </Card3>
       <br />
       <br />
       <br />

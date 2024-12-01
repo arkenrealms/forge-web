@@ -1,16 +1,29 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import styled, { css } from 'styled-components'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { Button, Tag, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon, LinkExternal, Text } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import Page from '~/components/layout/Page'
-import { PurchaseModal } from '~/components/PurchaseModal'
-import PageWindow from '~/components/PageWindow'
-import i18n from '~/config/i18n'
-import useCache from '~/hooks/useCache'
-import Tokenomics from '~/components/Tokenomics'
-import { safeRuneList } from '~/config'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import styled, { css } from 'styled-components';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import {
+  Button,
+  Tag,
+  Flex,
+  Card,
+  Card3,
+  Heading,
+  CardBody,
+  Link,
+  BaseLayout,
+  OpenNewIcon,
+  LinkExternal,
+  Text,
+} from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import Page from '~/components/layout/Page';
+import { PurchaseModal } from '~/components/PurchaseModal';
+import PageWindow from '~/components/PageWindow';
+import i18n from '~/config/i18n';
+import useCache from '~/hooks/useCache';
+import Tokenomics from '~/components/Tokenomics';
+import { safeRuneList } from '~/config';
 
 const Row = styled.div`
   align-items: center;
@@ -18,7 +31,7 @@ const Row = styled.div`
   font-size: 14px;
   justify-content: space-between;
   margin-bottom: 8px;
-`
+`;
 const Cards = styled(BaseLayout)`
   align-items: stretch;
   justify-content: stretch;
@@ -41,7 +54,7 @@ const Cards = styled(BaseLayout)`
       grid-column: span 4;
     }
   }
-`
+`;
 
 const Header = styled.div`
   min-height: 28px;
@@ -50,23 +63,23 @@ const Header = styled.div`
   font-size: 18px;
   text-align: center;
   padding: 10px;
-`
+`;
 
 const InfoBlock = styled.div`
   // padding: 24px;
   margin-top: 20px;
   text-align: left;
   font-size: 0.8rem;
-`
+`;
 
 const HeaderTag = styled.div`
   margin-top: 10px;
   width: 100%;
-`
+`;
 
 const Tag2 = styled(Tag)`
   zoom: 0.7;
-`
+`;
 
 const MainCard = styled(Card)`
   position: relative;
@@ -86,34 +99,31 @@ const MainCard = styled(Card)`
   color: #bb955e;
   text-shadow: 1px 1px 1px black;
   font-weight: bold;
-`
+`;
 const BottomMenu = styled.div`
   position: absolute;
   bottom: 10px;
   left: 0;
   width: 100%;
   text-align: center;
-`
-const StyledRuneStats = styled(Card)`
-  margin-left: auto;
-  margin-right: auto;
-`
+`;
 
 const TokenomicsView = () => {
-  const { t } = useTranslation()
-  const [showVision, setShowVision] = useState(false)
-  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />)
+  const { t } = useTranslation();
+  const [showVision, setShowVision] = useState(false);
+  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
-  const cache = useCache()
+  const cache = useCache();
 
-  const runes = window?.location?.hostname === 'localhost' ? ['rxs', 'rune', ...safeRuneList] : ['rxs', ...safeRuneList]
-  let totalMarketCap = 0
+  const runes =
+    window?.location?.hostname === 'localhost' ? ['rxs', 'rune', ...safeRuneList] : ['rxs', ...safeRuneList];
+  let totalMarketCap = 0;
 
   return (
     <Page>
       <Tokenomics />
       <br />
-      <StyledRuneStats>
+      <Card3>
         <CardBody>
           <Heading size="xl" mb="24px">
             {t('Token Stats')}
@@ -121,14 +131,14 @@ const TokenomicsView = () => {
           <Flex alignItems={['start', null, 'start']} flexDirection={['column', null, 'row']}>
             <div style={{ width: '50%' }}>
               {runes.slice(0, runes.length / 2).map((rune) => {
-                const price = cache.runes[rune].price || 0
-                const totalSupply = cache.runes[rune].totalSupply || 0
-                const totalBurned = cache.runes[rune].totalBurned || 0
-                const circulatingSupply = cache.runes[rune].circulatingSupply || 0
-                const marketCap = price * circulatingSupply || 0
+                const price = cache.runes[rune].price || 0;
+                const totalSupply = cache.runes[rune].totalSupply || 0;
+                const totalBurned = cache.runes[rune].totalBurned || 0;
+                const circulatingSupply = cache.runes[rune].circulatingSupply || 0;
+                const marketCap = price * circulatingSupply || 0;
 
                 if (rune !== runes[runes.length - 1] && rune !== 'rune') {
-                  totalMarketCap += marketCap
+                  totalMarketCap += marketCap;
                 }
 
                 return (
@@ -160,7 +170,7 @@ const TokenomicsView = () => {
                       <br />
                     </Row>
                   </div>
-                )
+                );
               })}
             </div>
             <div
@@ -169,17 +179,16 @@ const TokenomicsView = () => {
                 padding-left: 50px;
                 margin-left: 50px;
                 border-left: 1px solid #bb955e;
-              `}
-            >
+              `}>
               {runes.slice(runes.length / 2).map((rune) => {
-                const price = cache.runes[rune].price || 0
-                const totalSupply = cache.runes[rune].totalSupply || 0
-                const totalBurned = cache.runes[rune].totalBurned || 0
-                const circulatingSupply = cache.runes[rune].circulatingSupply || 0
-                const marketCap = price * circulatingSupply || 0
+                const price = cache.runes[rune].price || 0;
+                const totalSupply = cache.runes[rune].totalSupply || 0;
+                const totalBurned = cache.runes[rune].totalBurned || 0;
+                const circulatingSupply = cache.runes[rune].circulatingSupply || 0;
+                const marketCap = price * circulatingSupply || 0;
 
                 if (rune !== runes[runes.length - 1] && rune !== 'rune') {
-                  totalMarketCap += marketCap
+                  totalMarketCap += marketCap;
                 }
 
                 return (
@@ -211,7 +220,7 @@ const TokenomicsView = () => {
                       <br />
                     </Row>
                   </div>
-                )
+                );
               })}
             </div>
           </Flex>
@@ -220,9 +229,9 @@ const TokenomicsView = () => {
             <Text bold>${totalMarketCap.toLocaleString(undefined, { maximumFractionDigits: 0 })}</Text>
           </Row>
         </CardBody>
-      </StyledRuneStats>
+      </Card3>
     </Page>
-  )
-}
+  );
+};
 
-export default TokenomicsView
+export default TokenomicsView;

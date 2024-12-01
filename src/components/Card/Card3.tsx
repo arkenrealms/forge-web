@@ -36,9 +36,9 @@ const StyledCard = styled.div<StyledCardProps>`
   ${space}
 `;
 
-const StyledCard3: React.FC<CardProps> = (props) => {
+const StyledCard3: React.FC<CardProps> = ({ children, className, ...rest }) => {
   return (
-    <StyledCard className="app__styled-card3" {...props}>
+    <StyledCard className={'app__styled-card3 ' + className} {...rest}>
       <div
         className="app__styled-card3--bg"
         css={css`
@@ -51,7 +51,7 @@ const StyledCard3: React.FC<CardProps> = (props) => {
           pointer-events: none;
         `}
       />
-      {props.children}
+      {children}
     </StyledCard>
   );
 };

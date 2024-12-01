@@ -7,29 +7,6 @@ const arkenConfig: MenuEntry[] = [
     href: '/',
   },
   {
-    label: 'Trade',
-    icon: 'TradeIcon',
-    initialOpenState: true,
-    items: [
-      {
-        label: 'Swap Currency',
-        href: '/swap',
-      },
-      {
-        label: 'Item Market',
-        href: '/market',
-      },
-      {
-        label: 'Item Explorer',
-        href: '/catalog',
-      },
-      // {
-      //   label: 'Add/Remove Liquidity',
-      //   href: '/swap/pool',
-      // },
-    ],
-  },
-  {
     label: 'Arken Realms',
     icon: 'MetaverseIcon',
     href: '/metaverse',
@@ -264,6 +241,29 @@ const arkenConfig: MenuEntry[] = [
   //     },
   //   ],
   // },
+  {
+    label: 'Trade',
+    icon: 'TradeIcon',
+    initialOpenState: true,
+    items: [
+      {
+        label: 'Swap Currency',
+        href: '/swap',
+      },
+      {
+        label: 'Item Market',
+        href: '/market',
+      },
+      {
+        label: 'Item Explorer',
+        href: '/catalog',
+      },
+      // {
+      //   label: 'Add/Remove Liquidity',
+      //   href: '/swap/pool',
+      // },
+    ],
+  },
   {
     label: 'Craft',
     icon: 'CraftIcon',

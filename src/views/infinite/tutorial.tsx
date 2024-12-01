@@ -6,7 +6,7 @@ import {
   BaseLayout,
   AutoRenewIcon,
   Button,
-  Card,
+  Card3,
   CardBody,
   Skeleton,
   CheckmarkCircleIcon,
@@ -20,13 +20,7 @@ import {
   ButtonMenu,
   ButtonMenuItem,
 } from '~/ui';
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
-import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
-import Cookies from 'js-cookie';
-import useI18n from '~/hooks/useI18n';
 import { useTranslation } from 'react-i18next';
-import history from '~/routerHistory';
-import { Link as RouterLink, NavLink } from 'react-router-dom';
 import Page from '~/components/layout/Page';
 import Skills from '~/components/Skills';
 import useCache from '~/hooks/useCache';
@@ -48,7 +42,7 @@ const Guide: React.FC<any> = () => {
 
   return (
     <Page>
-      <Card>
+      <Card3>
         <CardBody>
           <BoxHeading as="h2" size="xl">
             {t('Infinite Tutorial')}
@@ -111,7 +105,7 @@ const Guide: React.FC<any> = () => {
             </Flex>
           ) : null}
         </CardBody>
-      </Card>
+      </Card3>
       <br />
       <br />
       <br />

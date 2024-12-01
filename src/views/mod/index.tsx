@@ -319,7 +319,7 @@ const Evolution: React.FC<any> = () => {
   const { toastError, toastSuccess } = useToast();
 
   const [messageText, setMessageText] = useState(
-    'Cheating/exploiting will result in ban. Read the announcement: https://t.me/ArkenRealms/397'
+    'Cheating/exploiting will result in ban. Read the announcement: https://t.me/Arken_Realms/397'
   );
 
   const updateHistory = useCallback(

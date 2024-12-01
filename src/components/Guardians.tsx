@@ -254,7 +254,7 @@ const Home: React.FC<any> = () => {
           `}>
           <ChampionWelcome
             title="Guardians Unleashed"
-            description={`Hatch unique pets, unlock special abilities, and raise your perfect Guardian in the newest digital pet NFT game from Rune. Grow and evolve your pets as you fight alongside them in Arken's expanding metaverse: from the Infinite Arena PvP brawler to the vast RPG of Sanctuary. With over 50 unique pet designs and nearly a trillion combinations: breed an epic companion that’s unique to you! Earn new and exclusive recipes, rewards, and abilities as you progress in this constantly evolving game, seamlessly integrated into Arken's flourishing ecosystem.`}>
+            description={`Hatch unique pets, unlock special abilities, and raise your perfect Guardian in the newest digital pet NFT game from Arken. Grow and evolve your pets as you fight alongside them in Arken's expanding metaverse: from the Infinite Arena PvP brawler to the vast RPG of Sanctuary. With over 50 unique pet designs and nearly a trillion combinations: breed an epic companion that’s unique to you! Earn new and exclusive recipes, rewards, and abilities as you progress in this constantly evolving game, seamlessly integrated into Arken's flourishing ecosystem.`}>
             <div>
               {account && holders.find((p) => p.address.toLowerCase() === account.toLowerCase()) ? (
                 <Button as={RouterLink} scale="md" to="/download/guardians" style={{ zoom: 1.5 }}>

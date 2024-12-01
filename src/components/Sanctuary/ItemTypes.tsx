@@ -5,9 +5,9 @@ import remarkGfm from 'remark-gfm';
 import useFetch from '~/hooks/useFetch';
 import history from '~/routerHistory';
 import LoreBlock1 from '~/components/LoreBlock1';
-import { Flex, Skeleton } from '~/ui';
+import { Flex, Card2, Skeleton } from '~/ui';
 
-const Abc = styled.div``;
+const zzz = styled.div``;
 
 const ItemTypes = function () {
   const url = `https://s1.envoy.arken.asi.sh/itemTypes.json`;
@@ -23,7 +23,7 @@ const ItemTypes = function () {
     );
 
   return (
-    <>
+    <Card2>
       <main className="content-wrapper wf-section">
         <div className="page-bg-top">
           <img
@@ -70,7 +70,7 @@ const ItemTypes = function () {
           </div>
         </div>
       </main>
-    </>
+    </Card2>
   );
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import LoreContainer from '~/components/LoreContainer';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
-import { CardBody, Heading } from '~/ui';
+import { CardBody, Card2, Heading } from '~/ui';
 import NftList from '~/components/characters/NftList';
 
 const StyledHero = styled.div`
@@ -43,28 +43,30 @@ const Collectibles = () => {
 
   return (
     <>
-      <LoreContainer color="dark">
-        <CardBody>
-          <Heading as="h2" size="xl">
-            {t('Characters')}
-          </Heading>
-          <p>
-            Choose from seven classes of heroes. Each class has its own unique weapons and power.
-            <br />
-            <br />
-            In Runic Raids, develop your raiding strategy by equipping your character with Runeforms that give unique
-            raiding yield bonuses.
-          </p>
-          <div
-            css={css`
-              margin-top: 50px;
-            `}>
-            <CharacterContainer>
-              <NftList autoShowDescription showCard={false} />
-            </CharacterContainer>
-          </div>
-        </CardBody>
-      </LoreContainer>
+      <Card2>
+        <LoreContainer color="dark">
+          <CardBody>
+            <Heading as="h2" size="xl">
+              {t('Characters')}
+            </Heading>
+            <p>
+              Choose from seven classes of heroes. Each class has its own unique weapons and power.
+              <br />
+              <br />
+              In Runic Raids, develop your raiding strategy by equipping your character with Runeforms that give unique
+              raiding yield bonuses.
+            </p>
+            <div
+              css={css`
+                margin-top: 50px;
+              `}>
+              <CharacterContainer>
+                <NftList autoShowDescription showCard={false} />
+              </CharacterContainer>
+            </div>
+          </CardBody>
+        </LoreContainer>
+      </Card2>
     </>
   );
 };

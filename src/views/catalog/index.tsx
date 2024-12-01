@@ -7,6 +7,8 @@ import {
   AutoRenewIcon,
   Button,
   Card,
+  Card2,
+  Card3,
   CardBody,
   Skeleton,
   CheckmarkCircleIcon,
@@ -56,36 +58,6 @@ const ItemContainer = styled.div`
   }
 `;
 
-const ItemCard = styled.div`
-  position: relative;
-  font-weight: bold;
-  border-width: 15px;
-  border-style: solid;
-  border-color: transparent;
-  border-image: url('/images/frame.png') 80 repeat;
-  border-image-width: 80px;
-  padding: 30px;
-  background: none;
-  // transform: scale(0.8);
-  text-shadow: 1px 1px 1px black;
-  // box-shadow: 0 2px 0 0 rgb(0 0 0 / 80%), inset 0 -1px 0 0 rgb(0 0 0 / 10%), 0 0 66px 66px rgb(0 0 0 / 10%);
-  filter: contrast(1.08);
-  text-align: center;
-  background: #000;
-  color: #bb955e;
-  text-shadow: 1px 1px 1px black;
-  font-weight: bold;
-  width: calc(100% - 0px);
-
-  & > div {
-    position: relative;
-    z-index: 2;
-  }
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-  }
-`;
-
 const Catalog: React.FC<any> = () => {
   const { t } = useTranslation();
   const { address: account } = useWeb3();
@@ -104,9 +76,11 @@ const Catalog: React.FC<any> = () => {
       </TipCard>
       {/* <PageWindow> */}
       <br />
-      <LoreContainer color="dark">
-        <ItemsTable />
-      </LoreContainer>
+      <Card3>
+        <LoreContainer color="dark">
+          <ItemsTable />
+        </LoreContainer>
+      </Card3>
       <br />
       <ItemContainer>
         {itemData[ItemsMainCategoriesType.OTHER]
@@ -117,7 +91,7 @@ const Catalog: React.FC<any> = () => {
           )
           .reverse()
           .map((item) => (
-            <ItemCard>
+            <Card3 className="catalog-item">
               <RecipeInfo
                 item={itemData[ItemsMainCategoriesType.OTHER].find((r) => r.name === item.name)}
                 showStatus
@@ -126,7 +100,7 @@ const Catalog: React.FC<any> = () => {
                 showMarketButton
                 showDetailsButton
               />
-            </ItemCard>
+            </Card3>
           ))}
       </ItemContainer>
       <br />

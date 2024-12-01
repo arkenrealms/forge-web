@@ -9,7 +9,7 @@ import Linker from '~/components/Linker';
 import TeamComponent from '~/components/Team';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import history from '~/routerHistory';
-import { Accordion, BaseLayout, Button, Card, CardBody, Flex, Heading, Link, Tag } from '~/ui';
+import { Accordion, BaseLayout, Button, Card, Card2, Card3, CardBody, Flex, Heading, Link, Tag } from '~/ui';
 
 import { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -25,6 +25,7 @@ import { useTranslation } from 'react-i18next';
 import Page from '~/components/layout/Page';
 import Lore from '~/components/Lore';
 import News from '~/components/News';
+import Games from '~/components/Games';
 import CardValueUnstyled from '~/components/raid/CardValueUnstyled';
 import ThankYou from '~/components/ThankYou';
 import useCache from '~/hooks/useCache';
@@ -117,11 +118,12 @@ const ProfileContainer = styled.div``;
 const Shortcut = styled.div<{ active?: boolean }>`
   text-align: center;
   height: 90px;
-  width: 134px;
+  width: 160px;
   // padding: 0 20px 20px;
   cursor: pointer;
   color: #fff;
   font-size: 0.9rem;
+  white-space: nowrap;
 
   p {
     margin-top: 5px;
@@ -712,7 +714,7 @@ const Home: React.FC<any> = ({ match }) => {
       title: 'Arken Realms',
       image: 'https://i.imgur.com/ba1Jc3E.png',
       date: 'Future',
-      description: `Arken Realms will connect everything we've built into connected metaverses/subverses.`,
+      description: `Arken Realms will connect everything we've built into an omniverse.`,
     },
     {
       title: 'Heart of the Oasis',
@@ -832,10 +834,10 @@ const Home: React.FC<any> = ({ match }) => {
                 filter: drop-shadow(4px 6px 10px black);
                 padding: 30px;
               `}>
-              <LogoImg src="/images/rune-500x500.png" />
+              {/* <LogoImg src="/images/rune-500x500.png" />
               <Heading as="h1" size="xxl" color="secondary" mb="0px" mt="8px">
                 <HeadingSilver>RUNE</HeadingSilver>
-              </Heading>
+              </Heading> */}
             </Flex>
             <Card
               css={css`
@@ -873,33 +875,33 @@ const Home: React.FC<any> = ({ match }) => {
                   css={css`
                     min-height: 135px;
                   `}>
-                  <Shortcut
+                  {/* <Shortcut
                     onClick={() => {
                       history.push('/raid');
                     }}>
                     <img src={RaidIcon} />
-                    <p>RAID</p>
-                  </Shortcut>
+                    <p>RUNIC RAIDS</p>
+                  </Shortcut> */}
                   <Shortcut onClick={() => history.push('/evolution')}>
                     <img src={EvolutionIcon} />
-                    <p>EVOLUTION</p>
+                    <p>EVOLUTION ISLES</p>
                   </Shortcut>
                   <Shortcut onClick={() => history.push('/infinite')} active>
                     <img src={InfiniteIcon} />
-                    <p>INFINITE</p>
+                    <p>INFINITE ARENA</p>
                   </Shortcut>
                   {!isMobile ? (
                     <Shortcut onClick={() => history.push('/sanctuary')}>
                       <img src={SanctuaryIcon} />
-                      <p>SANCTUARY</p>
+                      <p>HEART OF THE OASIS</p>
                     </Shortcut>
                   ) : null}
-                  {!isMobile ? (
+                  {/* {!isMobile ? (
                     <Shortcut onClick={() => history.push('/guardians')}>
                       <img src={GuardiansIcon} />
                       <p>GUARDIANS</p>
                     </Shortcut>
-                  ) : null}
+                  ) : null} */}
                 </Flex>
                 <Heading
                   as="h2"
@@ -970,7 +972,7 @@ z-index: 999;
       </div>*/}
       </div>
       <Page style={{ zIndex: 2, position: 'relative', maxWidth: 'none', width: '100%' }}>
-        <Card
+        <Card3
           id="landing-intro"
           css={css`
             max-width: 1200px;
@@ -985,100 +987,102 @@ z-index: 999;
               transition: margin 0.5s;
             }
           `}>
-          <CardBody>
-            <PitchCard>
-              <div style={{ width: '280px', marginTop: '-20px' }}>
-                <img src="/images/nfts/sorceress.png" alt="Metaverse"></img>
-              </div>
-              <div>
-                <BoxHeading as="h2" size="xl">
-                  {t('Metaverse')}
-                </BoxHeading>
-                <br />
-                <p>
-                  Immerse yourself in our fantasy games, win runes and items, trade them on our{' '}
-                  <RouterLink to="/market" style={{ borderBottom: '1px solid #fff' }}>
-                    NFT Market
-                  </RouterLink>{' '}
-                  and participate in{' '}
-                  <RouterLink to="/raid" style={{ borderBottom: '1px solid #fff' }}>
-                    NFT farms and pools
-                  </RouterLink>
-                  .
+          <Card>
+            <CardBody>
+              <PitchCard>
+                <div style={{ width: '280px', marginTop: '-20px' }}>
+                  <img src="/images/nfts/sorceress.png" alt="Metaverse"></img>
+                </div>
+                <div>
+                  <BoxHeading as="h2" size="xl">
+                    {t('Metaverse')}
+                  </BoxHeading>
                   <br />
-                  <br />
-                  We build fun games, and incorporate blockchain gaming so you own your character and items for life,
-                  can bring them between games, and monetize on your hard work.
-                </p>
-              </div>
-            </PitchCard>
-            <br />
-            <PitchCard>
-              <div style={{ width: '280px', marginTop: '-20px' }}>
-                <img src="/images/dragons.png" alt="Play4Rewards"></img>
-              </div>
-              <div>
-                <BoxHeading as="h2" size="xl">
-                  {t('Play4Rewards')}
-                </BoxHeading>
-                <br />
-                <p>
-                  Imagine a digital game world where you have real ownership, control and impact. You have developed
-                  your skill &amp; knowledge, and are now rewarded for your effort.
-                  <br />
-                  <br />
-                  Our goal is for rewards to feel meaningful, and provide an income for at least 1% of our most
-                  talented/hard working players.
-                  <br />
-                  <br />
-                  There will only ever be{' '}
-                  <RouterLink to="/runes" style={{ borderBottom: '1px solid #fff' }}>
-                    33 Runes
-                  </RouterLink>{' '}
-                  and each have different utility. Runes can be used to unlock specific features, or for crafting items.
-                  Players are then rewarded runes by winning games or finding them randomly in the game.
-                </p>
-              </div>
-            </PitchCard>
-            <br />
-            <PitchCard>
-              <div style={{ width: '275px', marginRight: '10px' }}>
-                <Image src="/images/cube-preview.png" />
-              </div>
-              <div>
-                <BoxHeading as="h2" size="xl">
-                  {t('Evolving NFTs')}
-                </BoxHeading>
-                <br />
-                <p>
-                  <Linker id="home-1">
-                    Runes are needed to{' '}
-                    <RouterLink to="/craft" style={{ borderBottom: '1px solid #fff' }}>
-                      craft Runeforms
+                  <p>
+                    Immerse yourself in our fantasy games, win runes and items, trade them on our{' '}
+                    <RouterLink to="/market" style={{ borderBottom: '1px solid #fff' }}>
+                      NFT Market
                     </RouterLink>{' '}
-                    (NFTs), unique and powerful weapons and armor used to enhance your Runic Raids farm rewards, or buff
-                    your Infinite Arena hero. <br />
+                    and participate in{' '}
+                    <RouterLink to="/raid" style={{ borderBottom: '1px solid #fff' }}>
+                      NFT farms and pools
+                    </RouterLink>
+                    .
                     <br />
-                    The item attributes that power the mechanics are built directly into the NFTs themselves. These
-                    items can be used in all Arken games, or even games not published by us. We call these Evolving
-                    NFTs.
+                    <br />
+                    We build fun games, and incorporate blockchain gaming so you own your character and items for life,
+                    can bring them between games, and monetize on your hard work.
+                  </p>
+                </div>
+              </PitchCard>
+              <br />
+              <PitchCard>
+                <div style={{ width: '280px', marginTop: '-20px' }}>
+                  <img src="/images/dragons.png" alt="Play4Rewards"></img>
+                </div>
+                <div>
+                  <BoxHeading as="h2" size="xl">
+                    {t('Play4Rewards')}
+                  </BoxHeading>
+                  <br />
+                  <p>
+                    Imagine a digital game world where you have real ownership, control and impact. You have developed
+                    your skill &amp; knowledge, and are now rewarded for your effort.
                     <br />
                     <br />
-                    Our eventual goal is to build unstoppable distributed &amp; modular games within the Arken Realms.
-                  </Linker>
-                </p>
-              </div>
-            </PitchCard>
-            <br />
-            <br />
-            <Flex flexDirection="column" alignItems="center" justifyContent="center">
-              <Button as={RouterLink} to="/about" variant="text" style={{ border: '2px solid #ddd' }}>
-                Learn More
-              </Button>
-            </Flex>
-          </CardBody>
-        </Card>
-        {!isMobile ? (
+                    Our goal is for rewards to feel meaningful, and provide an income for at least 1% of our most
+                    talented/hard working players.
+                    <br />
+                    <br />
+                    There will only ever be{' '}
+                    <RouterLink to="/runes" style={{ borderBottom: '1px solid #fff' }}>
+                      33 Runes
+                    </RouterLink>{' '}
+                    and each have different utility. Runes can be used to unlock specific features, or for crafting
+                    items. Players are then rewarded runes by winning games or finding them randomly in the game.
+                  </p>
+                </div>
+              </PitchCard>
+              <br />
+              <PitchCard>
+                <div style={{ width: '275px', marginRight: '10px' }}>
+                  <Image src="/images/cube-preview.png" />
+                </div>
+                <div>
+                  <BoxHeading as="h2" size="xl">
+                    {t('Evolving NFTs')}
+                  </BoxHeading>
+                  <br />
+                  <p>
+                    <Linker id="home-1">
+                      Runes are needed to{' '}
+                      <RouterLink to="/craft" style={{ borderBottom: '1px solid #fff' }}>
+                        craft Runeforms
+                      </RouterLink>{' '}
+                      (NFTs), unique and powerful weapons and armor used to enhance your Runic Raids farm rewards, or
+                      buff your Infinite Arena hero. <br />
+                      <br />
+                      The item attributes that power the mechanics are built directly into the NFTs themselves. These
+                      items can be used in all Arken games, or even games not published by us. We call these Evolving
+                      NFTs.
+                      <br />
+                      <br />
+                      Our eventual goal is to build unstoppable distributed &amp; modular games within the Arken Realms.
+                    </Linker>
+                  </p>
+                </div>
+              </PitchCard>
+              <br />
+              <br />
+              <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                <Button as={RouterLink} to="/about" variant="text" style={{ border: '2px solid #ddd' }}>
+                  Learn More
+                </Button>
+              </Flex>
+            </CardBody>
+          </Card>
+        </Card3>
+        {/* {!isMobile ? (
           <Flex
             flexDirection={['column', null, 'row']}
             alignItems="center"
@@ -1133,31 +1137,16 @@ z-index: 999;
                 <div>{t('Users')}</div>
               </CardBodyHover>
             </BigCard>
-            {/* <BigCard>
-            <CardBody>
-              <BoxHeading as="h2" size="lg">
-                {characterCount}
-              </BoxHeading>
-              <div>Characters</div>
-            </CardBody>
-          </BigCard>
-          <BigCard>
-            <CardBody>
-              <BoxHeading as="h2" size="lg">
-                {itemCount}
-              </BoxHeading>
-              <div>Items</div>
-            </CardBody>
-          </BigCard> */}
           </Flex>
-        ) : null}
+        ) : null} */}
 
-        <Card style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
-          <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-            {t('Our Games')}
-          </BoxHeading>
-          <hr />
-          <Swiper
+        <Card2 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
+          <Card>
+            <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+              {t('Games')}
+            </BoxHeading>
+            <Games />
+            {/* <Swiper
             // install Swiper modules
             // direction={"vertical"}
             modules={[Navigation, Pagination, Scrollbar]}
@@ -1211,16 +1200,6 @@ z-index: 999;
                         </Tag2>
                       ) : null}
                     </HeaderTag>
-                    {/* {walletOwnsNft && (
-                                    <Tag outline variant="secondary">
-                                        {t('Chosen')}
-                                    </Tag>
-                                    )} */}
-                    {/* {profile?.nft?.characterId === characterId && (
-                                    <Tag outline variant="success">
-                                        {t('Active')}
-                                    </Tag>
-                                    )} */}
                   </Header>
                   <ImageBlock url={game.image} />
                   <InfoBlock>{game.description}</InfoBlock>
@@ -1275,9 +1254,10 @@ z-index: 999;
                 View All Games
               </Button>
             </Flex>
-          </CardBody>
-        </Card>
-        <Flex
+          </CardBody> */}
+          </Card>
+        </Card2>
+        {/* <Flex
           flexDirection="row"
           alignItems="center"
           justifyContent="center"
@@ -1342,98 +1322,104 @@ z-index: 999;
               <EarnEvolution />
             </div>
           </BigCard>
-        </Flex>
+        </Flex> */}
         <News />
-        <Card style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
-          <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-            {t('Roadmap')}
-          </BoxHeading>
-          <hr />
-          <br />
-          <Swiper
-            // install Swiper modules
-            // direction={"vertical"}
-            modules={[Navigation, Pagination, Scrollbar]}
-            spaceBetween={30}
-            slidesPerView={isMobile ? 1 : 3}
-            navigation
-            // pagination={{ clickable: true }}
-            // scrollbar={{ draggable: true }}
-            // onSwiper={(swiper) => console.log(swiper)}
-            // onSlideChange={() => console.log('slide change')}
-            style={{ maxWidth: 1200, margin: '0 auto 30px auto', padding: '0 20px' }}>
-            {roadmapItems.map((item) => (
-              <SwiperSlide style={{ maxWidth: 1200, margin: '0 auto', height: 'auto' }}>
-                <RoadmapItem item={item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <CardBody>
-            <Flex flexDirection="column" alignItems="center" justifyContent="center">
-              <Button as={RouterLink} to="/roadmap" variant="text" style={{ border: '2px solid #ddd' }}>
-                View Full Roadmap
-              </Button>
-            </Flex>
-          </CardBody>
-        </Card>
+        <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
+          <Card>
+            <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+              {t('Roadmap')}
+            </BoxHeading>
+            <hr />
+            <br />
+            <Swiper
+              // install Swiper modules
+              // direction={"vertical"}
+              modules={[Navigation, Pagination, Scrollbar]}
+              spaceBetween={30}
+              slidesPerView={isMobile ? 1 : 3}
+              navigation
+              // pagination={{ clickable: true }}
+              // scrollbar={{ draggable: true }}
+              // onSwiper={(swiper) => console.log(swiper)}
+              // onSlideChange={() => console.log('slide change')}
+              style={{ maxWidth: 1200, margin: '0 auto 30px auto', padding: '0 20px' }}>
+              {roadmapItems.map((item) => (
+                <SwiperSlide style={{ maxWidth: 1200, margin: '0 auto', height: 'auto' }}>
+                  <RoadmapItem item={item} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <CardBody>
+              <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                <Button as={RouterLink} to="/roadmap" variant="text" style={{ border: '2px solid #ddd' }}>
+                  View Full Roadmap
+                </Button>
+              </Flex>
+            </CardBody>
+          </Card>
+        </Card3>
 
-        <Card style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
-          <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-            {t('FAQ')}
-          </BoxHeading>
-          <hr />
-          <CardBody>
-            {faq.map((item, index) => (
-              <Accordion
-                isPushed={activeFaq === index}
-                pushNav={(isPushed) => setActiveFaq(index)}
-                icon={<div />}
-                label={item.title}
-                initialOpenState={activeFaq === index}
-                // className={calloutClass}
-                isActive={index === activeFaq}
-                // style={{maxHeight: 'auto'}}
-                contentCss={css`
-                  box-shadow: 0 0 10px rgb(255 255 255 / 20%);
-                  max-height: ${activeFaq === index ? 'none' : '0'};
-                `}
-                entryCss={css`
-                  // background: rgba(0, 0, 0, 0.1);
-                  font-weight: bold;
-                  box-shadow: 0 0 10px rgb(255 255 255 / 20%);
-                  * {
-                    color: #bb955e !important;
-                  }
-                `}>
-                <AccordionContent>{item.content}</AccordionContent>
-              </Accordion>
-            ))}
-            <br />
-            <br />
-            <Flex flexDirection="column" alignItems="center" justifyContent="center">
-              <Button as={RouterLink} to="/faq" variant="text" style={{ border: '2px solid #ddd' }}>
-                View All
-              </Button>
-            </Flex>
-          </CardBody>
-        </Card>
+        <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
+          <Card>
+            <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+              {t('FAQ')}
+            </BoxHeading>
+            <hr />
+            <CardBody>
+              {faq.map((item, index) => (
+                <Accordion
+                  isPushed={activeFaq === index}
+                  pushNav={(isPushed) => setActiveFaq(index)}
+                  icon={<div />}
+                  label={item.title}
+                  initialOpenState={activeFaq === index}
+                  // className={calloutClass}
+                  isActive={index === activeFaq}
+                  // style={{maxHeight: 'auto'}}
+                  contentCss={css`
+                    box-shadow: 0 0 10px rgb(255 255 255 / 20%);
+                    max-height: ${activeFaq === index ? 'none' : '0'};
+                  `}
+                  entryCss={css`
+                    // background: rgba(0, 0, 0, 0.1);
+                    font-weight: bold;
+                    box-shadow: 0 0 10px rgb(255 255 255 / 20%);
+                    * {
+                      color: #bb955e !important;
+                    }
+                  `}>
+                  <AccordionContent>{item.content}</AccordionContent>
+                </Accordion>
+              ))}
+              <br />
+              <br />
+              <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                <Button as={RouterLink} to="/faq" variant="text" style={{ border: '2px solid #ddd' }}>
+                  View All
+                </Button>
+              </Flex>
+            </CardBody>
+          </Card>
+        </Card3>
 
-        <Card style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
-          <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-            {t('Team')}
-          </BoxHeading>
-          <hr />
-          <CardBody>
-            <TeamComponent showAll={false} match={match} />
-            <br />
-            <br />
-            <Flex flexDirection="column" alignItems="center" justifyContent="center">
-              <Button as={RouterLink} to="/team" variant="text" style={{ border: '2px solid #ddd' }}>
-                View Full Team
-              </Button>
-            </Flex>
-          </CardBody>
-        </Card>
+        <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
+          <Card>
+            <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+              {t('Team')}
+            </BoxHeading>
+            <hr />
+            <CardBody>
+              <TeamComponent showAll={false} match={match} />
+              <br />
+              <br />
+              <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                <Button as={RouterLink} to="/team" variant="text" style={{ border: '2px solid #ddd' }}>
+                  View Full Team
+                </Button>
+              </Flex>
+            </CardBody>
+          </Card>
+        </Card3>
 
         <Swiper
           // install Swiper modules
@@ -1481,99 +1467,103 @@ z-index: 999;
             return (
               <ReactFullpage.Wrapper> */}
           <SwiperSlide style={{ maxWidth: 1200, margin: '0 auto' }}>
-            <Card style={{ minHeight: 610 }}>
-              <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-                {t('Features')}
-              </BoxHeading>
-              <hr />
-              <CardBody>
-                <Cards>
-                  <BigCard align="left">
-                    <BulletPoints>
-                      <BulletPoint>
+            <div style={{ padding: 5 }}>
+              <Card3 style={{ minHeight: 610 }}>
+                <Card>
+                  <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+                    {t('Features')}
+                  </BoxHeading>
+                  <hr />
+                  <CardBody>
+                    <Cards>
+                      <BigCard align="left">
+                        <BulletPoints>
+                          {/* <BulletPoint>
                         <a href="/raid" rel="noreferrer noopener">
                           ■ Farm / Pool mechanics
                         </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="/craft" rel="noreferrer noopener">
-                          ■ NFT Crafting
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="/craft" rel="noreferrer noopener">
-                          ■ NFT Mechanics
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="/characters" rel="noreferrer noopener">
-                          ■ Character NFTs
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="/account/inventory" rel="noreferrer noopener">
-                          ■ Cross-game Inventory
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="/account/inventory" rel="noreferrer noopener">
-                          ■ Character Equipment
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="https://www.certik.com/projects/rune" rel="noreferrer noopener">
-                          ■ Audited (CertiK)
-                        </a>
-                      </BulletPoint>
-                    </BulletPoints>
-                  </BigCard>
-                  <BigCard align="right">
-                    <BulletPoints>
-                      <BulletPoint>
+                      </BulletPoint> */}
+                          <BulletPoint>
+                            <a href="/craft" rel="noreferrer noopener">
+                              ■ NFT Crafting
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="/craft" rel="noreferrer noopener">
+                              ■ NFT Mechanics
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="/characters" rel="noreferrer noopener">
+                              ■ Character NFTs
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="/account/inventory" rel="noreferrer noopener">
+                              ■ Cross-game Inventory
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="/account/inventory" rel="noreferrer noopener">
+                              ■ Character Equipment
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="https://www.certik.com/projects/rune" rel="noreferrer noopener">
+                              ■ Audited (CertiK)
+                            </a>
+                          </BulletPoint>
+                        </BulletPoints>
+                      </BigCard>
+                      <BigCard align="right">
+                        <BulletPoints>
+                          {/* <BulletPoint>
                         <a href="/runes" rel="noreferrer noopener">
                           33 Rune Tokens Max ■
                         </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="/runes" rel="noreferrer noopener">
-                          Utility Per Rune ■
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="/developers" rel="noreferrer noopener">
-                          Data Transparency ■
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="https://github.arken.gg" rel="noreferrer noopener">
-                          Open Source ■
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="/community" rel="noreferrer noopener">
-                          Weekly Quizes ■
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="/community" rel="noreferrer noopener">
-                          Contests ■
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="/community" rel="noreferrer noopener">
-                          Community Riddles ■
-                        </a>
-                      </BulletPoint>
-                    </BulletPoints>
-                  </BigCard>
-                </Cards>
-                <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                  <Button as={RouterLink} to="/features" variant="text" style={{ border: '2px solid #ddd' }}>
-                    View More
-                  </Button>
-                </Flex>
-              </CardBody>
-            </Card>
+                      </BulletPoint> */}
+                          <BulletPoint>
+                            <a href="/runes" rel="noreferrer noopener">
+                              Utility Per Rune ■
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="/developers" rel="noreferrer noopener">
+                              Data Transparency ■
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="https://github.arken.gg" rel="noreferrer noopener">
+                              Open Source ■
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="/community" rel="noreferrer noopener">
+                              Weekly Quizes ■
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="/community" rel="noreferrer noopener">
+                              Contests ■
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="/community" rel="noreferrer noopener">
+                              Community Riddles ■
+                            </a>
+                          </BulletPoint>
+                        </BulletPoints>
+                      </BigCard>
+                    </Cards>
+                    <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                      <Button as={RouterLink} to="/features" variant="text" style={{ border: '2px solid #ddd' }}>
+                        View More
+                      </Button>
+                    </Flex>
+                  </CardBody>
+                </Card>
+              </Card3>
+            </div>
           </SwiperSlide>
           {/* <SwiperSlide style={{maxWidth: 1200, margin: '0 auto'}}>
                   <Card>
@@ -1776,87 +1766,92 @@ z-index: 999;
                   </Card>
                 </SwiperSlide> */}
           <SwiperSlide style={{ maxWidth: 1200, margin: '0 auto' }}>
-            <Card style={{ minHeight: 610 }}>
-              <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-                {t('Stats')}
-              </BoxHeading>
-              <hr />
-              <CardBody>
-                <Cards>
-                  <BigCard>
-                    <BulletPoints>
-                      <BulletPoint>
-                        <a href="https://arken.gg/stats" rel="noreferrer noopener" target="_blank">
-                          {'≥'}{' '}
-                          <strong>
-                            <CardValueUnstyled fontSize="14px" value={14873} decimals={0} />
-                          </strong>{' '}
-                          {t(`token holders`)}
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="https://arken.gg/stats" rel="noreferrer noopener" target="_blank">
-                          {'≥'}{' '}
-                          <strong>
-                            <CardValueUnstyled fontSize="14px" value={totalCharacters} decimals={0} />
-                          </strong>{' '}
-                          {t(`registered users`)}
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="https://arken.gg/stats" rel="noreferrer noopener" target="_blank">
-                          {'≥'}{' '}
-                          <strong>
-                            <CardValueUnstyled fontSize="14px" value={totalItems} decimals={0} />
-                          </strong>{' '}
-                          {t(`items created`)}
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="https://arken.gg/market" rel="noreferrer noopener" target="_blank">
-                          {'≥'}{' '}
-                          <strong>
-                            <CardValueUnstyled
-                              fontSize="14px"
-                              value={cache.stats.marketItemsSold + 3454}
-                              decimals={0}
-                            />
-                          </strong>{' '}
-                          {t(`items sold in market`)}
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="https://arken.gg/docs/#welcome-to-rune-farm" rel="noreferrer noopener" target="_blank">
-                          {'≥'}{' '}
-                          <strong>
-                            <CardValueUnstyled fontSize="14px" value={totalCommunities} decimals={0} />
-                          </strong>{' '}
-                          {t(`language communities`)}
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="https://polls.arken.gg/" rel="noreferrer noopener" target="_blank">
-                          {'≥'}{' '}
-                          <strong>
-                            <CardValueUnstyled fontSize="14px" value={totalPolls} decimals={0} />
-                          </strong>{' '}
-                          {t(`community polls`)}
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a
-                          href="https://bscscan.com/address/0xa40b29b0dacb37331456c2ca3b65e56a6d79fc9e"
-                          rel="noreferrer noopener"
-                          target="_blank">
-                          {'≥'}{' '}
-                          <strong>
-                            <CardValueUnstyled fontSize="14px" value={totalRaised} decimals={0} prefix="$" />
-                          </strong>{' '}
-                          {t(`raised for charity`)}
-                        </a>
-                      </BulletPoint>
-                      <br />
-                      {/* <BulletPoint>
+            <div style={{ padding: 5 }}>
+              <Card3 style={{ minHeight: 610 }}>
+                <Card>
+                  <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+                    {t('Stats')}
+                  </BoxHeading>
+                  <hr />
+                  <CardBody>
+                    <Cards>
+                      <BigCard>
+                        <BulletPoints>
+                          <BulletPoint>
+                            <a href="https://arken.gg/stats" rel="noreferrer noopener" target="_blank">
+                              {'≥'}{' '}
+                              <strong>
+                                <CardValueUnstyled fontSize="14px" value={14873} decimals={0} />
+                              </strong>{' '}
+                              {t(`token holders`)}
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="https://arken.gg/stats" rel="noreferrer noopener" target="_blank">
+                              {'≥'}{' '}
+                              <strong>
+                                <CardValueUnstyled fontSize="14px" value={totalCharacters} decimals={0} />
+                              </strong>{' '}
+                              {t(`registered users`)}
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="https://arken.gg/stats" rel="noreferrer noopener" target="_blank">
+                              {'≥'}{' '}
+                              <strong>
+                                <CardValueUnstyled fontSize="14px" value={totalItems} decimals={0} />
+                              </strong>{' '}
+                              {t(`items created`)}
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="https://arken.gg/market" rel="noreferrer noopener" target="_blank">
+                              {'≥'}{' '}
+                              <strong>
+                                <CardValueUnstyled
+                                  fontSize="14px"
+                                  value={cache.stats.marketItemsSold + 3454}
+                                  decimals={0}
+                                />
+                              </strong>{' '}
+                              {t(`items sold in market`)}
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a
+                              href="https://arken.gg/docs/#welcome-to-rune-farm"
+                              rel="noreferrer noopener"
+                              target="_blank">
+                              {'≥'}{' '}
+                              <strong>
+                                <CardValueUnstyled fontSize="14px" value={totalCommunities} decimals={0} />
+                              </strong>{' '}
+                              {t(`language communities`)}
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="https://polls.arken.gg/" rel="noreferrer noopener" target="_blank">
+                              {'≥'}{' '}
+                              <strong>
+                                <CardValueUnstyled fontSize="14px" value={totalPolls} decimals={0} />
+                              </strong>{' '}
+                              {t(`community polls`)}
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a
+                              href="https://bscscan.com/address/0xa40b29b0dacb37331456c2ca3b65e56a6d79fc9e"
+                              rel="noreferrer noopener"
+                              target="_blank">
+                              {'≥'}{' '}
+                              <strong>
+                                <CardValueUnstyled fontSize="14px" value={totalRaised} decimals={0} prefix="$" />
+                              </strong>{' '}
+                              {t(`raised for charity`)}
+                            </a>
+                          </BulletPoint>
+                          <br />
+                          {/* <BulletPoint>
                   <p>
                     Raised For Charity: <CardValueUnstyled fontSize="14px" value={totalRaised} decimals={0} prefix="$" />{' '}
                     USD
@@ -1867,58 +1862,58 @@ z-index: 999;
                     Held By Vault: <CardValueUnstyled fontSize="14px" value={totalVault} decimals={0} prefix="$" /> USD
                   </p>
                 </BulletPoint> */}
-                    </BulletPoints>
-                  </BigCard>
-                  <BigCard align="right">
-                    <BulletPoints>
-                      <BulletPoint>
-                        <a href="https://arken.gg/stats" rel="noreferrer noopener" target="_blank">
-                          <strong>
-                            <CardValueUnstyled fontSize="14px" value={28} decimals={0} /> / 33 runes
-                          </strong>{' '}
-                          {t(`released`)}
-                        </a>
-                      </BulletPoint>
-                      {/* <BulletPoint><a href="https://arken.gg/characters" rel="noreferrer noopener" target="_blank">Currently <strong><CardValueUnstyled fontSize="14px" value={totalRuneWords} decimals={0} /></strong> runewords</a></BulletPoint> */}
-                      <BulletPoint>
-                        <a href="https://arken.gg/characters" rel="noreferrer noopener" target="_blank">
-                          <strong>
-                            <CardValueUnstyled fontSize="14px" value={totalClasses} decimals={0} />
-                          </strong>{' '}
-                          {t(`classes`)}
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <a href="https://arken.gg/guilds" rel="noreferrer noopener" target="_blank">
-                          <strong>
-                            <CardValueUnstyled fontSize="14px" value={totalGuilds} decimals={0} />
-                          </strong>{' '}
-                          {t(`guilds`)}
-                        </a>
-                      </BulletPoint>
-                      <BulletPoint>
-                        <p>
-                          Total MC:{' '}
-                          <CardValueUnstyled
-                            fontSize="14px"
-                            value={runeMarketCap + runesMarketCap}
-                            decimals={0}
-                            prefix="$"
-                          />{' '}
-                          USD
-                          <br />
-                          <span style={{ paddingLeft: 10 }}>
-                            $RXS: <CardValueUnstyled fontSize="14px" value={runeMarketCap} decimals={0} prefix="$" />{' '}
-                            USD
-                          </span>
-                          <br />
-                          <span style={{ paddingLeft: 10 }}>
-                            $EL-$ZOD:{' '}
-                            <CardValueUnstyled fontSize="14px" value={runesMarketCap} decimals={0} prefix="$" /> USD
-                          </span>
-                        </p>
-                      </BulletPoint>
-                      {/* <br />
+                        </BulletPoints>
+                      </BigCard>
+                      <BigCard align="right">
+                        <BulletPoints>
+                          <BulletPoint>
+                            <a href="https://arken.gg/stats" rel="noreferrer noopener" target="_blank">
+                              <strong>
+                                <CardValueUnstyled fontSize="14px" value={28} decimals={0} /> / 33 runes
+                              </strong>{' '}
+                              {t(`released`)}
+                            </a>
+                          </BulletPoint>
+                          {/* <BulletPoint><a href="https://arken.gg/characters" rel="noreferrer noopener" target="_blank">Currently <strong><CardValueUnstyled fontSize="14px" value={totalRuneWords} decimals={0} /></strong> runewords</a></BulletPoint> */}
+                          <BulletPoint>
+                            <a href="https://arken.gg/characters" rel="noreferrer noopener" target="_blank">
+                              <strong>
+                                <CardValueUnstyled fontSize="14px" value={totalClasses} decimals={0} />
+                              </strong>{' '}
+                              {t(`classes`)}
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <a href="https://arken.gg/guilds" rel="noreferrer noopener" target="_blank">
+                              <strong>
+                                <CardValueUnstyled fontSize="14px" value={totalGuilds} decimals={0} />
+                              </strong>{' '}
+                              {t(`guilds`)}
+                            </a>
+                          </BulletPoint>
+                          <BulletPoint>
+                            <p>
+                              Total MC:{' '}
+                              <CardValueUnstyled
+                                fontSize="14px"
+                                value={runeMarketCap + runesMarketCap}
+                                decimals={0}
+                                prefix="$"
+                              />{' '}
+                              USD
+                              <br />
+                              <span style={{ paddingLeft: 10 }}>
+                                $RXS:{' '}
+                                <CardValueUnstyled fontSize="14px" value={runeMarketCap} decimals={0} prefix="$" /> USD
+                              </span>
+                              <br />
+                              <span style={{ paddingLeft: 10 }}>
+                                $EL-$ZOD:{' '}
+                                <CardValueUnstyled fontSize="14px" value={runesMarketCap} decimals={0} prefix="$" /> USD
+                              </span>
+                            </p>
+                          </BulletPoint>
+                          {/* <br />
               <BulletPoints>
                 <BulletPoint>
                   <a href="https://runeguardians.com" rel="noreferrer noopener" target="_blank">
@@ -2017,196 +2012,202 @@ z-index: 999;
                     View More...
                   </a>
                 </BulletPoint> */}
-                    </BulletPoints>
-                  </BigCard>
-                </Cards>
-                <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                  <Button as={RouterLink} to="/stats" variant="text" style={{ border: '2px solid #ddd' }}>
-                    View More
-                  </Button>
-                </Flex>
-              </CardBody>
-            </Card>
+                        </BulletPoints>
+                      </BigCard>
+                    </Cards>
+                    <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                      <Button as={RouterLink} to="/stats" variant="text" style={{ border: '2px solid #ddd' }}>
+                        View More
+                      </Button>
+                    </Flex>
+                  </CardBody>
+                </Card>
+              </Card3>
+            </div>
           </SwiperSlide>
         </Swiper>
 
-        <Card style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
-          {/* <hr />
+        <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
+          <Card>
+            {/* <hr />
           <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
             {t('Partners')}
           </BoxHeading>
           <hr /> */}
-          <CardBody>
-            <BoxHeading as="h2" size="lg" style={{ textAlign: 'center' }}>
-              {t('Partners & Listings')}
-            </BoxHeading>
-            <Partners>
-              <a
-                href="https://www.binance.com/en/nft/profile/rune-7a727bcfb6d429fda32f2af9bb513f64"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img src="/images/other/binancenft.png" alt="Binance NFT" />
-              </a>
-              <a
-                href="https://app.mochi.market/collection/56/0xe97a1b9f5d4b849f0d78f58adb7dd91e90e0fb40?ViewAll=true"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img
-                  src="/images/other/mochi.png"
-                  alt="Mochi.Market"
-                  css={css`
-                    height: 35px;
-                  `}
-                />
-              </a>
-              <a
-                href="https://treasureland.market/assets?contract=0xe97a1b9f5d4b849f0d78f58adb7dd91e90e0fb40&chain_id=56"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img
-                  src="/images/other/treasureland.svg"
-                  alt="Treasureland"
-                  css={css`
-                    filter: invert(1);
-                  `}
-                />
-              </a>
-              <a
-                href="https://app.alturanft.com/user/0xa987f487639920a3c2efe58c8fbdedb96253ed9b?view=collections"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img
-                  src="/images/other/altura.png"
-                  alt="Altura"
-                  css={css`
-                    width: 110px;
-                  `}
-                />
-              </a>
-              <a
-                href="https://app.babylons.io/rune"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img
-                  src="/images/other/babylons.png"
-                  alt="Babylons"
-                  css={css`
-                    height: 40px;
-                  `}
-                />
-              </a>
-              <a
-                href="https://app.teaparty.life/p/arkenrealms"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img
-                  src="/images/other/teaparty.png"
-                  alt="Teaparty"
-                  css={css`
-                    height: 40px;
-                  `}
-                />
-              </a>
-              {/* <a href="https://bscproject.org/#/project/507"><img src="/images/other/bscgemz.png" alt="BSC Gemz" /></a> */}
-            </Partners>
-          </CardBody>
-          {/* <hr />
+            <CardBody>
+              <BoxHeading as="h2" size="lg" style={{ textAlign: 'center' }}>
+                {t('Partners & Listings')}
+              </BoxHeading>
+              <Partners>
+                <a
+                  href="https://www.binance.com/en/nft/profile/rune-7a727bcfb6d429fda32f2af9bb513f64"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img src="/images/other/binancenft.png" alt="Binance NFT" />
+                </a>
+                <a
+                  href="https://app.mochi.market/collection/56/0xe97a1b9f5d4b849f0d78f58adb7dd91e90e0fb40?ViewAll=true"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img
+                    src="/images/other/mochi.png"
+                    alt="Mochi.Market"
+                    css={css`
+                      height: 35px;
+                    `}
+                  />
+                </a>
+                <a
+                  href="https://treasureland.market/assets?contract=0xe97a1b9f5d4b849f0d78f58adb7dd91e90e0fb40&chain_id=56"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img
+                    src="/images/other/treasureland.svg"
+                    alt="Treasureland"
+                    css={css`
+                      filter: invert(1);
+                    `}
+                  />
+                </a>
+                <a
+                  href="https://app.alturanft.com/user/0xa987f487639920a3c2efe58c8fbdedb96253ed9b?view=collections"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img
+                    src="/images/other/altura.png"
+                    alt="Altura"
+                    css={css`
+                      width: 110px;
+                    `}
+                  />
+                </a>
+                <a
+                  href="https://app.babylons.io/rune"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img
+                    src="/images/other/babylons.png"
+                    alt="Babylons"
+                    css={css`
+                      height: 40px;
+                    `}
+                  />
+                </a>
+                <a
+                  href="https://app.teaparty.life/p/arkenrealms"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img
+                    src="/images/other/teaparty.png"
+                    alt="Teaparty"
+                    css={css`
+                      height: 40px;
+                    `}
+                  />
+                </a>
+                {/* <a href="https://bscproject.org/#/project/507"><img src="/images/other/bscgemz.png" alt="BSC Gemz" /></a> */}
+              </Partners>
+            </CardBody>
+            {/* <hr />
           <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
             {t('Listings')}
           </BoxHeading>
           <hr /> */}
-          <CardBody>
-            <Partners>
-              <a
-                href="https://coinmarketcap.com/watchlist/6155d7e5bea8737592b2b8a6"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img
-                  src="/images/other/coinmarketcap.svg"
-                  alt="Coin Market Cap"
-                  css={css`
-                    filter: invert(1);
-                  `}
-                />
-              </a>
-              <a
-                href="https://www.coingecko.com/en/coins/rune-shards"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img
-                  src="/images/other/coingecko.png"
-                  alt="Coin Gecko"
-                  css={css`
-                    width: 125px;
-                  `}
-                />
-              </a>
-              {/* <a href="https://www.cointiger.com/" rel="noreferrer noopener" target="_blank">
+            <CardBody>
+              <Partners>
+                <a
+                  href="https://coinmarketcap.com/watchlist/6155d7e5bea8737592b2b8a6"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img
+                    src="/images/other/coinmarketcap.svg"
+                    alt="Coin Market Cap"
+                    css={css`
+                      filter: invert(1);
+                    `}
+                  />
+                </a>
+                <a
+                  href="https://www.coingecko.com/en/coins/rune-shards"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img
+                    src="/images/other/coingecko.png"
+                    alt="Coin Gecko"
+                    css={css`
+                      width: 125px;
+                    `}
+                  />
+                </a>
+                {/* <a href="https://www.cointiger.com/" rel="noreferrer noopener" target="_blank">
                 <img src="/images/other/cointiger.png" alt="Coin Tiger" />
               </a> */}
-              <a
-                href="https://bnbproject.org/#/project/1669"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img
-                  src="/images/other/bscproject.png"
-                  alt="BSC Project"
-                  css={css`
-                    width: 140px;
-                  `}
-                />
-              </a>
-              <a
-                href="https://bscscan.com/token/0x2098fef7eeae592038f4f3c4b008515fed0d5886#balances"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img
-                  src="/images/other/bscscan.png"
-                  alt="BscScan"
-                  css={css`
-                    width: 120px;
-                  `}
-                />
-              </a>
-              <a
-                href="https://www.dapp.com/app/rune-farm"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img
-                  src="/images/other/dapp.png"
-                  alt="Dapp.com"
-                  css={css`
-                    width: 140px;
-                  `}
-                />
-              </a>
-              <a
-                href="https://dappradar.com/binance-smart-chain/defi/rune-farm"
-                rel="noreferrer noopener"
-                target="_blank"
-                style={{ textAlign: 'center' }}>
-                <img src="/images/other/dappradar.png" alt="Dapp Radar" />
-              </a>
-            </Partners>
-          </CardBody>
-        </Card>
+                <a
+                  href="https://bnbproject.org/#/project/1669"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img
+                    src="/images/other/bscproject.png"
+                    alt="BSC Project"
+                    css={css`
+                      width: 140px;
+                    `}
+                  />
+                </a>
+                <a
+                  href="https://bscscan.com/token/0x2098fef7eeae592038f4f3c4b008515fed0d5886#balances"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img
+                    src="/images/other/bscscan.png"
+                    alt="BscScan"
+                    css={css`
+                      width: 120px;
+                    `}
+                  />
+                </a>
+                <a
+                  href="https://www.dapp.com/app/rune-farm"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img
+                    src="/images/other/dapp.png"
+                    alt="Dapp.com"
+                    css={css`
+                      width: 140px;
+                    `}
+                  />
+                </a>
+                <a
+                  href="https://dappradar.com/binance-smart-chain/defi/rune-farm"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                  style={{ textAlign: 'center' }}>
+                  <img src="/images/other/dappradar.png" alt="Dapp Radar" />
+                </a>
+              </Partners>
+            </CardBody>
+          </Card>
+        </Card3>
 
-        <Card style={{ maxWidth: 1200, margin: '0 auto 30px auto', overflow: 'visible' }}>
-          <CardBody>
-            <ThankYou />
-          </CardBody>
-        </Card>
+        <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto', overflow: 'visible' }}>
+          <Card>
+            <CardBody>
+              <ThankYou />
+            </CardBody>
+          </Card>
+        </Card3>
       </Page>
     </div>
   );

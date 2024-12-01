@@ -133,7 +133,8 @@
     "webpack": "^5",
     "webpack-dev-server": "^5",
     "@ant-design/pro-provider": "^2",
-    "@ant-design/pro-flow": "^1"
+    "@ant-design/pro-flow": "^1",
+    "jquery": "*"
   },
   "devDependencies": {
     "@babel/core": "^7",

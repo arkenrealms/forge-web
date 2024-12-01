@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { DefaultTheme } from 'styled-components';
 import { Link } from 'react-router-dom';
-import { Button, Card, CommunityIcon, Flex, Heading, PrizeIcon, Text } from '~/ui';
+import { Button, Card3, CommunityIcon, Flex, Heading, PrizeIcon, Text } from '~/ui';
 import useI18n from '~/hooks/useI18n';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
@@ -106,17 +106,12 @@ const AvatarBg = styled.div`
   height: 100%;
 `;
 
-const StyledTeamCard = styled(Card)`
-  display: flex;
-  margin-bottom: 16px;
-`;
-
 const TeamCard: React.FC<TeamCardProps> = ({ rank, team }) => {
   const { t } = useTranslation();
   const avatar = <></>; // <Avatar src={`/images/teams/${team.images?.md}`} alt="team avatar" />;
 
   return (
-    <StyledTeamCard>
+    <Card3 style={{ display: 'flex', marginBottom: 16 }}>
       {/* <TeamRank>
         <Text bold fontSize="24px">
           {rank}
@@ -158,7 +153,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ rank, team }) => {
           {avatar}
         </DesktopAvatar>
       </Body>
-    </StyledTeamCard>
+    </Card3>
   );
 };
 

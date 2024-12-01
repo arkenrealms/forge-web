@@ -30,6 +30,7 @@ import {
   ButtonMenu,
   ButtonMenuItem,
   Card,
+  Card3,
   CardBody,
   Flex,
   Heading,
@@ -365,7 +366,7 @@ const ItemCard = ({ trade, account, advanced }) => {
         </div>
       ) : null}
       {advanced ? (
-        <Card style={{ padding: 20 }}>
+        <Card3 style={{ padding: 20 }}>
           <Flex flexDirection="column" alignItems="center" justifyContent="center">
             <ItemHeading>
               {item.name} {item.shorthand}
@@ -376,7 +377,7 @@ const ItemCard = ({ trade, account, advanced }) => {
               View Trade
             </Button>
           </Flex>
-        </Card>
+        </Card3>
       ) : (
         <ItemInformation
           item={item}
@@ -1216,114 +1217,115 @@ const Market = () => {
       <Cards>
         {!query.find((q) => isFundraiserAddress(q)) ? (
           <div style={{ gridColumn: isMobile ? 'span 12' : 'span 3', minWidth: 240 }}>
-            <Card style={{ width: '100%', overflow: 'visible', marginBottom: 25 }}>
-              <Heading as="h2" size="lg" style={{ textAlign: 'center', marginTop: 15 }}>
-                {t('Filters')}
-              </Heading>
-              <hr />
-              <CardBody style={{ padding: 10, textShadow: '1px 1px 1px #000' }}>
-                <ControlContainer>
-                  <FilterContainer>
-                    <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
-                      <Text>SEARCH</Text>
-                      {/* <SearchInput onChange={handleInputChangeQuery} onKeyDown={handleInputKeyDownQuery} onBlur={() => {}} value={queuedQuery} /> */}
-                      <CreatableSelect
-                        theme={selectTheme(true)}
-                        components={{
-                          DropdownIndicator: null,
-                        }}
-                        inputValue={queuedQuery}
-                        isClearable
-                        // isMulti
-                        menuIsOpen={false}
-                        onChange={handleChangeQuery}
-                        // onBlur={handleBlurQuery}
-                        onInputChange={handleInputChangeQuery}
-                        onKeyDown={handleInputKeyDownQuery}
-                        placeholder="Search..."
-                        value={searchOptions}
-                      />
-                    </LabelWrapper>
-                  </FilterContainer>
-                  <ViewControls>
-                    <ToggleWrapper>
-                      <Toggle
-                        checked={myListingsOnly}
-                        onChange={() => updateMyListingsOnly(!myListingsOnly)}
-                        scale="sm"
-                      />
-                      <Text> {t('My Listings')}</Text>
-                    </ToggleWrapper>
-                    <ToggleWrapper>
-                      <Toggle checked={meOnly} onChange={() => updateMeOnly(!meOnly)} scale="sm" />
-                      <Text> {t('My Offers')}</Text>
-                    </ToggleWrapper>
-                    <ToggleWrapper>
-                      <Toggle checked={perfectOnly} onChange={() => updatePerfectOnly(!perfectOnly)} scale="sm" />
-                      <Text> {t('Perfect Only')}</Text>
-                    </ToggleWrapper>
-                    <ToggleWrapper>
-                      <Toggle checked={advanced} onChange={() => updateAdvanced(!advanced)} scale="sm" />
-                      <Text> {t('Advanced Mode')}</Text>
-                    </ToggleWrapper>
-                    <ToggleWrapper>
-                      <Toggle checked={selectMode} onChange={() => setSelectMode(!selectMode)} scale="sm" />
-                      <Text> {t('Bulk Mode')}</Text>
-                    </ToggleWrapper>
-                    {selectMode ? (
-                      <ControlContainer style={{ filter: 'saturate(0) contrast(1.4)', marginTop: 5 }}>
-                        <FilterContainer>
-                          <div
-                            css={css`
-                              button {
-                                border: 2px solid rgba(255, 255, 255, 0.2);
-                                border-radius: 7px;
-                                zoom: 0.8;
+            <Card3>
+              <Card style={{ width: '100%', overflow: 'visible', marginBottom: 25 }}>
+                <Heading as="h2" size="lg" style={{ textAlign: 'center', marginTop: 15 }}>
+                  {t('Filters')}
+                </Heading>
+                <hr />
+                <CardBody style={{ padding: 10, textShadow: '1px 1px 1px #000' }}>
+                  <ControlContainer>
+                    <FilterContainer>
+                      <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
+                        <Text>SEARCH</Text>
+                        {/* <SearchInput onChange={handleInputChangeQuery} onKeyDown={handleInputKeyDownQuery} onBlur={() => {}} value={queuedQuery} /> */}
+                        <CreatableSelect
+                          theme={selectTheme(true)}
+                          components={{
+                            DropdownIndicator: null,
+                          }}
+                          inputValue={queuedQuery}
+                          isClearable
+                          // isMulti
+                          menuIsOpen={false}
+                          onChange={handleChangeQuery}
+                          // onBlur={handleBlurQuery}
+                          onInputChange={handleInputChangeQuery}
+                          onKeyDown={handleInputKeyDownQuery}
+                          placeholder="Search..."
+                          value={searchOptions}
+                        />
+                      </LabelWrapper>
+                    </FilterContainer>
+                    <ViewControls>
+                      <ToggleWrapper>
+                        <Toggle
+                          checked={myListingsOnly}
+                          onChange={() => updateMyListingsOnly(!myListingsOnly)}
+                          scale="sm"
+                        />
+                        <Text> {t('My Listings')}</Text>
+                      </ToggleWrapper>
+                      <ToggleWrapper>
+                        <Toggle checked={meOnly} onChange={() => updateMeOnly(!meOnly)} scale="sm" />
+                        <Text> {t('My Offers')}</Text>
+                      </ToggleWrapper>
+                      <ToggleWrapper>
+                        <Toggle checked={perfectOnly} onChange={() => updatePerfectOnly(!perfectOnly)} scale="sm" />
+                        <Text> {t('Perfect Only')}</Text>
+                      </ToggleWrapper>
+                      <ToggleWrapper>
+                        <Toggle checked={advanced} onChange={() => updateAdvanced(!advanced)} scale="sm" />
+                        <Text> {t('Advanced Mode')}</Text>
+                      </ToggleWrapper>
+                      <ToggleWrapper>
+                        <Toggle checked={selectMode} onChange={() => setSelectMode(!selectMode)} scale="sm" />
+                        <Text> {t('Bulk Mode')}</Text>
+                      </ToggleWrapper>
+                      {selectMode ? (
+                        <ControlContainer style={{ filter: 'saturate(0) contrast(1.4)', marginTop: 5 }}>
+                          <FilterContainer>
+                            <div
+                              css={css`
+                                button {
+                                  border: 2px solid rgba(255, 255, 255, 0.2);
+                                  border-radius: 7px;
+                                  zoom: 0.8;
 
-                                &.active,
-                                &:hover {
+                                  &.active,
+                                  &:hover {
+                                  }
                                 }
-                              }
-                            `}>
-                            <ViewControls>
-                              <Button
-                                size="sm"
-                                onClick={onPresentDelistModal}
-                                disabled={!Object.keys(selectedItems).length}
-                                style={{ marginTop: 5 }}>
-                                Delist Items
-                              </Button>
-                              <Button
-                                size="sm"
-                                onClick={onPresentUpdateModal}
-                                disabled={!Object.keys(selectedItems).length}
-                                style={{ marginTop: 5 }}>
-                                Update Items
-                              </Button>
-                              <Button
-                                size="sm"
-                                onClick={onPresentBuyModal}
-                                disabled={!Object.keys(selectedItems).length}
-                                style={{ marginTop: 5 }}>
-                                Purchase Items
-                              </Button>
-                            </ViewControls>
-                          </div>
-                        </FilterContainer>
-                      </ControlContainer>
-                    ) : null}
-                  </ViewControls>
-                  <FilterContainer>
-                    <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
-                      <Text>RARITY</Text>
-                      <ReactSelect
-                        theme={selectTheme()}
-                        value={rarityOptions.find((o) => o.value === rarityFilter)}
-                        options={rarityOptions}
-                        onChange={(option) => updateRarityFilter(option.value)}
-                      />
-                    </LabelWrapper>
-                    {/* <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
+                              `}>
+                              <ViewControls>
+                                <Button
+                                  size="sm"
+                                  onClick={onPresentDelistModal}
+                                  disabled={!Object.keys(selectedItems).length}
+                                  style={{ marginTop: 5 }}>
+                                  Delist Items
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  onClick={onPresentUpdateModal}
+                                  disabled={!Object.keys(selectedItems).length}
+                                  style={{ marginTop: 5 }}>
+                                  Update Items
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  onClick={onPresentBuyModal}
+                                  disabled={!Object.keys(selectedItems).length}
+                                  style={{ marginTop: 5 }}>
+                                  Purchase Items
+                                </Button>
+                              </ViewControls>
+                            </div>
+                          </FilterContainer>
+                        </ControlContainer>
+                      ) : null}
+                    </ViewControls>
+                    <FilterContainer>
+                      <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
+                        <Text>RARITY</Text>
+                        <ReactSelect
+                          theme={selectTheme()}
+                          value={rarityOptions.find((o) => o.value === rarityFilter)}
+                          options={rarityOptions}
+                          onChange={(option) => updateRarityFilter(option.value)}
+                        />
+                      </LabelWrapper>
+                      {/* <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
                       <Text>TYPE</Text>
                       <Select
                         value={rarityFilter}
@@ -1436,7 +1438,7 @@ const Market = () => {
                         onChange={(option) => updateRarityFilter(option.value)}
                       />
                     </LabelWrapper> */}
-                    {/* <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
+                      {/* <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
                       <Text>SLOT</Text>
                       <Select
                         value={rarityFilter}
@@ -1529,144 +1531,147 @@ const Market = () => {
                         onChange={(option) => updateRarityFilter(option.value)}
                       />
                     </LabelWrapper> */}
-                    <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
-                      <Text>RUNEWORD</Text>
-                      <ReactSelect
-                        value={
-                          query.length
-                            ? runewordOptions.find((r) =>
-                                query.map((q) => q?.toLowerCase()).includes(r.value.toLowerCase())
-                              )
-                            : runewordOptions[0]
-                        }
-                        options={runewordOptions}
-                        theme={selectTheme()}
-                        onChange={(option) => {
-                          // setQuery(option.value)
-                          updateHistory('query', [option.value]);
-                        }}
-                      />
-                    </LabelWrapper>
-                    <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
-                      <Text>STATUS</Text>
-                      <ReactSelect
-                        theme={selectTheme()}
-                        value={statusOptions.find((o) => o.value === statusFilter)}
-                        options={statusOptions}
-                        onChange={(option) => updateStatusFilter(option.value)}
-                      />
-                    </LabelWrapper>
-                    <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
-                      <Text>GAME</Text>
-                      <ReactSelect
-                        theme={selectTheme()}
-                        value={branchOptions.find((o) => o.value === branchFilter)}
-                        options={branchOptions}
-                        onChange={handleBranchFilterChange}
-                      />
-                    </LabelWrapper>
-                    <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
-                      <Text>SORT BY</Text>
-                      <ReactSelect
-                        value={sortOptions.find((o) => o.value === sortFilter)}
-                        options={sortOptions}
-                        theme={selectTheme()}
-                        onChange={handleSortFilterChange}
-                      />
-                    </LabelWrapper>
-                    <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
-                      <Text>SHOW</Text>
-                      <ReactSelect
-                        theme={selectTheme()}
-                        value={showOptions.find((o) => o.value === count + '')}
-                        options={showOptions}
-                        onChange={(option: any) => updateCount(option.value)}
-                      />
-                    </LabelWrapper>
-                    {account === '0xa987f487639920A3c2eFe58C8FBDedB96253ed9B' ? (
-                      <>
-                        <hr style={{ width: '100%' }} />
-                        <Button variant="text" onClick={addAttributeFilter}>
-                          Attribute Filters <BsPlusSquare style={{ marginLeft: 10 }} />
-                        </Button>
-                        {attributeFilters.map((attributeFilter) => (
-                          <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
-                            <Text>ATTRIBUTE</Text>
-                            <ReactSelect
-                              theme={selectTheme()}
-                              closeMenuOnSelect={false}
-                              components={{ AttributeInput } as any}
-                              defaultValue={[
-                                {
-                                  label: 'Not Leader Skill Bonus',
-                                  value: 'Not Leader Skill Bonus',
-                                },
-                                {
-                                  label: '>=',
-                                  value: '>=',
-                                },
-                              ]}
-                              isMulti
-                              options={attributeStepOptions[attributeFilter.step]}
-                              onChange={(option: any) => {
-                                console.log(option);
-                              }}
-                            />
-                          </LabelWrapper>
-                        ))}
-                      </>
-                    ) : null}
-                  </FilterContainer>
-                </ControlContainer>
+                      <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
+                        <Text>RUNEWORD</Text>
+                        <ReactSelect
+                          value={
+                            query.length
+                              ? runewordOptions.find((r) =>
+                                  query.map((q) => q?.toLowerCase()).includes(r.value.toLowerCase())
+                                )
+                              : runewordOptions[0]
+                          }
+                          options={runewordOptions}
+                          theme={selectTheme()}
+                          onChange={(option) => {
+                            // setQuery(option.value)
+                            updateHistory('query', [option.value]);
+                          }}
+                        />
+                      </LabelWrapper>
+                      <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
+                        <Text>STATUS</Text>
+                        <ReactSelect
+                          theme={selectTheme()}
+                          value={statusOptions.find((o) => o.value === statusFilter)}
+                          options={statusOptions}
+                          onChange={(option) => updateStatusFilter(option.value)}
+                        />
+                      </LabelWrapper>
+                      <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
+                        <Text>GAME</Text>
+                        <ReactSelect
+                          theme={selectTheme()}
+                          value={branchOptions.find((o) => o.value === branchFilter)}
+                          options={branchOptions}
+                          onChange={handleBranchFilterChange}
+                        />
+                      </LabelWrapper>
+                      <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
+                        <Text>SORT BY</Text>
+                        <ReactSelect
+                          value={sortOptions.find((o) => o.value === sortFilter)}
+                          options={sortOptions}
+                          theme={selectTheme()}
+                          onChange={handleSortFilterChange}
+                        />
+                      </LabelWrapper>
+                      <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
+                        <Text>SHOW</Text>
+                        <ReactSelect
+                          theme={selectTheme()}
+                          value={showOptions.find((o) => o.value === count + '')}
+                          options={showOptions}
+                          onChange={(option: any) => updateCount(option.value)}
+                        />
+                      </LabelWrapper>
+                      {account === '0xa987f487639920A3c2eFe58C8FBDedB96253ed9B' ? (
+                        <>
+                          <hr style={{ width: '100%' }} />
+                          <Button variant="text" onClick={addAttributeFilter}>
+                            Attribute Filters <BsPlusSquare style={{ marginLeft: 10 }} />
+                          </Button>
+                          {attributeFilters.map((attributeFilter) => (
+                            <LabelWrapper style={{ marginBottom: 15, width: '100%' }}>
+                              <Text>ATTRIBUTE</Text>
+                              <ReactSelect
+                                theme={selectTheme()}
+                                closeMenuOnSelect={false}
+                                components={{ AttributeInput } as any}
+                                defaultValue={[
+                                  {
+                                    label: 'Not Leader Skill Bonus',
+                                    value: 'Not Leader Skill Bonus',
+                                  },
+                                  {
+                                    label: '>=',
+                                    value: '>=',
+                                  },
+                                ]}
+                                isMulti
+                                options={attributeStepOptions[attributeFilter.step]}
+                                onChange={(option: any) => {
+                                  console.log(option);
+                                }}
+                              />
+                            </LabelWrapper>
+                          ))}
+                        </>
+                      ) : null}
+                    </FilterContainer>
+                  </ControlContainer>
 
-                {currentTrades !== undefined ? (
-                  <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                    <hr style={{ width: '100%' }} />
-                    <h3
-                      css={css`
-                        text-align: center;
-                        margin-top: 5px;
-                      `}>
-                      Found {currentTrades.length === count ? currentTrades.length + '+' : currentTrades.length} results
-                    </h3>
-                    {isFiltered ? (
-                      <Button variant="text" onClick={clearFilters}>
-                        <CgClose style={{ marginRight: 5 }} />{' '}
-                        <span
-                          css={css`
-                            font-family: 'webfontexl', sans-serif;
-                            font-size: 0.8rem;
-                          `}>
-                          CLEAR FILTERS
-                        </span>
-                      </Button>
-                    ) : null}
-                  </Flex>
-                ) : null}
-              </CardBody>
-            </Card>
+                  {currentTrades !== undefined ? (
+                    <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                      <hr style={{ width: '100%' }} />
+                      <h3
+                        css={css`
+                          text-align: center;
+                          margin-top: 5px;
+                        `}>
+                        Found {currentTrades.length === count ? currentTrades.length + '+' : currentTrades.length}{' '}
+                        results
+                      </h3>
+                      {isFiltered ? (
+                        <Button variant="text" onClick={clearFilters}>
+                          <CgClose style={{ marginRight: 5 }} />{' '}
+                          <span
+                            css={css`
+                              font-family: 'webfontexl', sans-serif;
+                              font-size: 0.8rem;
+                            `}>
+                            CLEAR FILTERS
+                          </span>
+                        </Button>
+                      ) : null}
+                    </Flex>
+                  ) : null}
+                </CardBody>
+              </Card>
+            </Card3>
           </div>
         ) : null}
 
         <div style={{ gridColumn: isMobile || query.find((q) => isFundraiserAddress(q)) ? 'span 12' : 'span 9' }}>
-          <Card style={{ width: '100%', overflow: 'visible' }}>
-            <CardBody>
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <ButtonMenu activeIndex={tab} scale="md" onItemClick={(index) => updateTab(index)}>
-                  <ButtonMenuItem>{t('Skins')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Pets')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Items')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Land')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('NPCs')}</ButtonMenuItem>
-                </ButtonMenu>
-              </Flex>
-            </CardBody>
-            {tab === 0 ? (
-              <InfiniteFlex id="infinite-wrapper" flexDirection="column" alignItems="center" justifyContent="center">
-                <MainHeading>Coming Soon</MainHeading>
-              </InfiniteFlex>
-            ) : null}
-            {/* {tab === 1 ? (
+          <Card3>
+            <Card style={{ width: '100%', overflow: 'visible' }}>
+              <CardBody>
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <ButtonMenu activeIndex={tab} scale="md" onItemClick={(index) => updateTab(index)}>
+                    <ButtonMenuItem>{t('Skins')}</ButtonMenuItem>
+                    <ButtonMenuItem>{t('Pets')}</ButtonMenuItem>
+                    <ButtonMenuItem>{t('Items')}</ButtonMenuItem>
+                    <ButtonMenuItem>{t('Land')}</ButtonMenuItem>
+                    <ButtonMenuItem>{t('NPCs')}</ButtonMenuItem>
+                  </ButtonMenu>
+                </Flex>
+              </CardBody>
+              {tab === 0 ? (
+                <InfiniteFlex id="infinite-wrapper" flexDirection="column" alignItems="center" justifyContent="center">
+                  <MainHeading>Coming Soon</MainHeading>
+                </InfiniteFlex>
+              ) : null}
+              {/* {tab === 1 ? (
               <InfiniteFlex id="infinite-wrapper" flexDirection="column" alignItems="center" justifyContent="center">
                 {currentTrades === undefined ? <MainHeading>Finding trades...</MainHeading> : null}
                 {currentTrades !== undefined ? (
@@ -1685,37 +1690,37 @@ const Market = () => {
                 ) : null}
               </InfiniteFlex>
             ) : null} */}
-            {tab === 2 || tab === 1 ? (
-              <>
-                {advanced && currentTrades === undefined ? (
-                  <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" />
-                ) : null}
-                {advanced && currentTrades !== undefined ? (
-                  <div style={{ padding: '0 10px' }}>
-                    <ItemCatalogFull
-                      sort={sortFilter.toLowerCase()}
-                      rows={isMobile ? 4 : 10}
-                      tokens={currentTrades.map((t2) => t2.tokenId)}
-                      autoColumn
-                      rightSidedInfo={!isMobile}
-                      showControls={false}
-                      selectMode={selectMode}
-                      defaultBranch={branchFilter}
-                      onItemMultiSelected={onItemMultiSelected}
-                    />
-                  </div>
-                ) : (
-                  <InfiniteFlex
-                    id="infinite-wrapper"
-                    flexDirection="column"
-                    alignItems="center"
-                    justifyContent="center">
-                    {currentTrades === undefined ? (
-                      <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" />
-                    ) : null}
-                    {currentTrades !== undefined ? (
-                      <>
-                        {/* <InfiniteScroll
+              {tab === 2 || tab === 1 ? (
+                <>
+                  {advanced && currentTrades === undefined ? (
+                    <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" />
+                  ) : null}
+                  {advanced && currentTrades !== undefined ? (
+                    <div style={{ padding: '0 10px' }}>
+                      <ItemCatalogFull
+                        sort={sortFilter.toLowerCase()}
+                        rows={isMobile ? 4 : 10}
+                        tokens={currentTrades.map((t2) => t2.tokenId)}
+                        autoColumn
+                        rightSidedInfo={!isMobile}
+                        showControls={false}
+                        selectMode={selectMode}
+                        defaultBranch={branchFilter}
+                        onItemMultiSelected={onItemMultiSelected}
+                      />
+                    </div>
+                  ) : (
+                    <InfiniteFlex
+                      id="infinite-wrapper"
+                      flexDirection="column"
+                      alignItems="center"
+                      justifyContent="center">
+                      {currentTrades === undefined ? (
+                        <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" />
+                      ) : null}
+                      {currentTrades !== undefined ? (
+                        <>
+                          {/* <InfiniteScroll
                       dataLength={currentTrades.length} //This is important field to render the next data
                       next={fetchData}
                       hasMore={!allLoaded}
@@ -1729,43 +1734,44 @@ const Market = () => {
                       releaseToRefreshContent={<h3 style={{ textAlign: 'center' }}>&#8593; Release to refresh</h3>}
                       scrollableTarget="#infinite-wrapper"
                     > */}
-                        {/* {!advanced && !isFundraiserAddress(query) ? (
+                          {/* {!advanced && !isFundraiserAddress(query) ? (
                           <>
                             <MainHeading>{currentTrades.length} Results</MainHeading>
                             <br />
                           </>
                         ) : null} */}
-                        <CardBody style={{ zoom: 0.8 }}>
-                          <ItemLayout>
-                            {currentTrades.map((trade, index) => (
-                              <ItemCard
-                                key={`trade-${trade.id}-${index}`}
-                                trade={trade}
-                                account={account}
-                                advanced={advanced}
-                              />
-                            ))}
-                          </ItemLayout>
-                        </CardBody>
-                        {/* </InfiniteScroll> */}
-                      </>
-                    ) : null}
-                  </InfiniteFlex>
-                )}
-              </>
-            ) : null}
-            {tab === 3 ? (
-              <InfiniteFlex id="infinite-wrapper" flexDirection="column" alignItems="center" justifyContent="center">
-                <MainHeading>Coming soon</MainHeading>
-              </InfiniteFlex>
-            ) : null}
-            {tab === 4 ? (
-              <InfiniteFlex id="infinite-wrapper" flexDirection="column" alignItems="center" justifyContent="center">
-                <MainHeading>Coming soon</MainHeading>
-              </InfiniteFlex>
-            ) : null}
-            <br />
-          </Card>
+                          <CardBody style={{ zoom: 0.8 }}>
+                            <ItemLayout>
+                              {currentTrades.map((trade, index) => (
+                                <ItemCard
+                                  key={`trade-${trade.id}-${index}`}
+                                  trade={trade}
+                                  account={account}
+                                  advanced={advanced}
+                                />
+                              ))}
+                            </ItemLayout>
+                          </CardBody>
+                          {/* </InfiniteScroll> */}
+                        </>
+                      ) : null}
+                    </InfiniteFlex>
+                  )}
+                </>
+              ) : null}
+              {tab === 3 ? (
+                <InfiniteFlex id="infinite-wrapper" flexDirection="column" alignItems="center" justifyContent="center">
+                  <MainHeading>Coming soon</MainHeading>
+                </InfiniteFlex>
+              ) : null}
+              {tab === 4 ? (
+                <InfiniteFlex id="infinite-wrapper" flexDirection="column" alignItems="center" justifyContent="center">
+                  <MainHeading>Coming soon</MainHeading>
+                </InfiniteFlex>
+              ) : null}
+              <br />
+            </Card>
+          </Card3>
         </div>
       </Cards>
       <br />

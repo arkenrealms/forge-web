@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Heading, Card, CardBody, Text, Link, BaseLayout } from '~/ui';
+import { Heading, Card3, CardBody, Text, Link, BaseLayout } from '~/ui';
 import Page from '~/components/layout/Page';
 import PageWindow from '~/components/PageWindow';
 import styled from 'styled-components';
@@ -9,11 +9,6 @@ import CardValue from '~/components/raid/CardValue';
 import useCache from '~/hooks/useCache';
 import SimpleLineChart from '~/components/SimpleLineChart';
 import { safeRuneList } from '~/config';
-
-const StyledRuneStats = styled(Card)`
-  margin-left: auto;
-  margin-right: auto;
-`;
 
 const Row = styled.div`
   align-items: center;
@@ -124,7 +119,7 @@ const Stats = () => {
   return (
     <>
       <Cards>
-        <StyledRuneStats>
+        <Card3>
           <CardBody>
             <Heading size="xl" mb="24px">
               {t('Token Stats')}
@@ -188,8 +183,8 @@ const Stats = () => {
               </Text>
             </Row>
           </CardBody>
-        </StyledRuneStats>
-        <StyledRuneStats>
+        </Card3>
+        <Card3>
           <CardBody>
             <Heading size="xl" mb="24px">
               {t('Character Stats')}
@@ -627,9 +622,9 @@ const Stats = () => {
               {itemCount && <CardValue fontSize="1rem" bold value={itemCount} decimals={0} />}
             </Row>
           </CardBody>
-        </StyledRuneStats>
+        </Card3>
         {/* {evolutionHistorical?.playerCount ? (
-          <StyledRuneStats>
+          <Card3>
             <CardBody>
               <Heading size="xl" mb="24px">
                 {t('Evolution Players')}
@@ -645,7 +640,7 @@ const Stats = () => {
                 />
               </ChartWrapper>
             </CardBody>
-          </StyledRuneStats>
+          </Card3>
         ) : null} */}
       </Cards>
       <br />

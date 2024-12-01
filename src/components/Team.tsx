@@ -243,13 +243,13 @@ const Team = ({ showAll = true, match }) => {
       name: '',
     },
     {
-      name: 'Memefella',
+      name: 'Eric M.',
       handle: 'Memefella',
-      title: 'CEO',
+      title: 'Meme Czar',
       image: '/images/team/jake-anime.png',
       imageBig: '/images/team/jake-anime-big.png',
       isDoxxed: false,
-      socials: {},
+      socials: { linkedin: 'https://www.linkedin.com/in/ericmuyser' },
       bio: [
         `20 years’ experience programming (C++/C#/Python/Go/Node/etc).`,
         `9 years’ experience of research, development and investment within the crypto space.`,
@@ -299,7 +299,7 @@ const Team = ({ showAll = true, match }) => {
     {
       name: 'Ramir G.',
       handle: 'Maiev',
-      title: 'Director of Operations',
+      title: 'Director of Meat',
       image: '/images/team/ramir-anime.png',
       imageBig: '/images/team/ramir-anime-big.png',
       isDoxxed: false,
@@ -420,38 +420,38 @@ const Team = ({ showAll = true, match }) => {
     // },
     ...(showAll
       ? [
-          {
-            name: 'Alex D.',
-            handle: 'AlexD',
-            title: 'Lead Game Developer',
-            image: '/images/team/alex-anime.png',
-            imageBig: '/images/team/alex-anime-big.png',
-            isDoxxed: false,
-            socials: {},
-            bio: [
-              `5 years’ 3D experience.`,
-              `3 years’ Unity experience.`,
-              `Worked on AR projects for: Nickelodeon, Adidas, Red Bull, LG U+, Softbank, eyecandylab.`,
-              `BSc in Biotechnology Engineering, MSc in Molecular Genetics.`,
-            ],
-          },
-          {
-            name: 'Julian F.',
-            handle: 'julian',
-            title: 'Lead Music Composer',
-            image: '/images/team/julian-anime.png',
-            imageBig: '/images/team/julian-anime-big.png',
-            isDoxxed: false,
-            socials: {
-              linkedin: 'https://www.linkedin.com/in/julianrfogel/',
-            },
-            bio: [
-              `10 years’ experience in music production`,
-              `Clients include Element Animation/Mojang, Utah University, Valnet Inc.`,
-              `MA in Composition for Scenic & Audiovisual Media`,
-              `Licenciate in Music (Orchestral Conducting orientation)`,
-            ],
-          },
+          // {
+          //   name: 'Alex D.',
+          //   handle: 'AlexD',
+          //   title: 'Lead Game Developer',
+          //   image: '/images/team/alex-anime.png',
+          //   imageBig: '/images/team/alex-anime-big.png',
+          //   isDoxxed: false,
+          //   socials: {},
+          //   bio: [
+          //     `5 years’ 3D experience.`,
+          //     `3 years’ Unity experience.`,
+          //     `Worked on AR projects for: Nickelodeon, Adidas, Red Bull, LG U+, Softbank, eyecandylab.`,
+          //     `BSc in Biotechnology Engineering, MSc in Molecular Genetics.`,
+          //   ],
+          // },
+          // {
+          //   name: 'Julian F.',
+          //   handle: 'julian',
+          //   title: 'Lead Music Composer',
+          //   image: '/images/team/julian-anime.png',
+          //   imageBig: '/images/team/julian-anime-big.png',
+          //   isDoxxed: false,
+          //   socials: {
+          //     linkedin: 'https://www.linkedin.com/in/julianrfogel/',
+          //   },
+          //   bio: [
+          //     `10 years’ experience in music production`,
+          //     `Clients include Element Animation/Mojang, Utah University, Valnet Inc.`,
+          //     `MA in Composition for Scenic & Audiovisual Media`,
+          //     `Licenciate in Music (Orchestral Conducting orientation)`,
+          //   ],
+          // },
           // {
           //   name: 'Maxwell V.',
           //   handle: 'Max',
@@ -502,26 +502,26 @@ const Team = ({ showAll = true, match }) => {
           //   socials: {},
           //   bio: [],
           // },
-          {
-            name: 'Ricardo',
-            handle: 'Lionheart',
-            title: 'Community Manager',
-            image: '/images/team/ricardo-anime.png',
-            imageBig: '/images/team/ricardo-anime-big.png',
-            isDoxxed: false,
-            socials: {},
-            bio: [],
-          },
-          {
-            name: 'Panda',
-            handle: 'Panda',
-            title: 'Stream Wizard',
-            image: '/images/team/panda-anime.png',
-            imageBig: '/images/team/panda-anime-big.png',
-            isDoxxed: false,
-            socials: {},
-            bio: [`Played a lot of games`],
-          },
+          // {
+          //   name: 'Ricardo',
+          //   handle: 'Lionheart',
+          //   title: 'Community Manager',
+          //   image: '/images/team/ricardo-anime.png',
+          //   imageBig: '/images/team/ricardo-anime-big.png',
+          //   isDoxxed: false,
+          //   socials: {},
+          //   bio: [],
+          // },
+          // {
+          //   name: 'Panda',
+          //   handle: 'Panda',
+          //   title: 'Stream Wizard',
+          //   image: '/images/team/panda-anime.png',
+          //   imageBig: '/images/team/panda-anime-big.png',
+          //   isDoxxed: false,
+          //   socials: {},
+          //   bio: [`Played a lot of games`],
+          // },
           {
             name: 'Discomonk',
             handle: 'Discomonk',
@@ -544,16 +544,16 @@ const Team = ({ showAll = true, match }) => {
             },
             bio: [],
           },
-          {
-            name: 'Lazy',
-            handle: 'Lazy',
-            title: 'Guild General',
-            image: '/images/team/lazy-anime.png',
-            imageBig: '/images/team/lazy-anime-big.png',
-            isDoxxed: false,
-            socials: {},
-            bio: [],
-          },
+          // {
+          //   name: 'Lazy',
+          //   handle: 'Lazy',
+          //   title: 'Guild General',
+          //   image: '/images/team/lazy-anime.png',
+          //   imageBig: '/images/team/lazy-anime-big.png',
+          //   isDoxxed: false,
+          //   socials: {},
+          //   bio: [],
+          // },
           // {
           //   name: 'Wingedspawn',
           //   handle: 'Wingedspawn',
@@ -618,7 +618,7 @@ const Team = ({ showAll = true, match }) => {
         ]
       : []),
   ];
-  const [selectedTeamMember, setSelectedTeamMember] = useState(team.find((t) => t.name === 'Memefella'));
+  const [selectedTeamMember, setSelectedTeamMember] = useState(team.find((t) => t.name === 'Eric M.'));
 
   const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
   const isSmall = !isXxxl;
@@ -665,10 +665,10 @@ const Team = ({ showAll = true, match }) => {
         </Heading>
 
         <Cards style={{ height: showAll ? '3000px' : '1190px' }}>
-          {team.map((teamMember) => {
+          {team.map((teamMember, index) => {
             return (
               <TeamCard
-                key={teamMember.name}
+                key={teamMember.name + index}
                 member={teamMember}
                 onClick={() => setSelectedTeamMember(teamMember)}
                 isSelected={selectedTeamMember?.name === teamMember.name}

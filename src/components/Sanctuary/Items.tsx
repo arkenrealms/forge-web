@@ -43,7 +43,7 @@ const Items = function () {
             <p>These are items that have been crafted onchain as NFTs using runes earned from playing our games.</p>
           </div>
         </div>
-        <div className="div-block-24 frame padding-adjust">
+        <div className="div-block-24 frame">
           <h2 id="w-node-bde60e1f-0335-b179-271c-7d40fcbd5f61-3d100cc1" className="pagetitle itemcattitle">
             Crafted&nbsp;Items
           </h2>
@@ -754,7 +754,7 @@ const Items = function () {
             <p>Rune Tokens - Rune&nbsp;Evolution</p>
           </div>
         </div>
-        <div className="div-block-24 frame padding-adjust">
+        <div className="div-block-24 frame">
           <div className="itemtypesection">
             <h3 className="heading-2 itemtypetitle">Evolution</h3>
             <div className="w-dyn-list">
@@ -844,7 +844,7 @@ const Items = function () {
               <p>$RXS - Sunday Quiz, Haiku&nbsp;Contest, etc.</p>
             </div>
           </div>
-          <div className="div-block-24 frame padding-adjust">
+          <div className="div-block-24 frame">
             <div className="itemtypesection">
               <h3 className="heading-2 itemtypetitle">CoinMarketCap</h3>
               <div className="w-dyn-list">
@@ -957,7 +957,7 @@ const Items = function () {
               </ul>
             </div>
           </div>
-          <div className="div-block-24 frame padding-adjust">
+          <div className="div-block-24 frame">
             <div className="itemtypesection">
               <h3 className="heading-2 itemtypetitle">Battle Pets</h3>
               <div className="w-dyn-list">

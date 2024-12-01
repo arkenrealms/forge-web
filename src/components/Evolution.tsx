@@ -25,7 +25,7 @@ import useSettings from '~/hooks/useSettings2';
 import useWeb3 from '~/hooks/useWeb3';
 import { useProfile, useToast } from '~/state/hooks';
 import { getUsername } from '~/state/profiles/getProfile';
-import { BaseLayout, Button, Card, CardBody, Flex, Heading, Link, OpenNewIcon, Text, Toggle } from '~/ui';
+import { BaseLayout, Button, Card, Card2, Card3, CardBody, Flex, Heading, Link, OpenNewIcon, Text, Toggle } from '~/ui';
 
 import addresses from '@arken/node/contractInfo';
 
@@ -1614,149 +1614,154 @@ const Evolution: any = ({ open }) => {
             </Flex>
             <br />
             <br /> */}
-            <Card>
-              <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-                {t('Download Now')}
-              </BoxHeading>
-              <hr />
-              <CardBody>
-                <Flex flexDirection={isMobile ? 'column' : 'row'} alignItems="center" justifyContent="space-between">
-                  <Button as={RouterLink} scale="md" to="/download/evolution" style={{ zoom: 1.2, marginBottom: 10 }}>
-                    {t('Mac')}
-                  </Button>
-                  <Button as={RouterLink} scale="md" to="/download/evolution" style={{ zoom: 1.2, marginBottom: 10 }}>
-                    {t('Windows')}
-                  </Button>
-                  <Button as={RouterLink} scale="md" to="/download/evolution" style={{ zoom: 1.2, marginBottom: 10 }}>
-                    {t('Android')}
-                  </Button>
-                </Flex>
-              </CardBody>
-            </Card>
+            <Card2>
+              <Card>
+                <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+                  {t('Download Now')}
+                </BoxHeading>
+                <hr />
+                <CardBody>
+                  <Flex flexDirection={isMobile ? 'column' : 'row'} alignItems="center" justifyContent="space-between">
+                    <Button as={RouterLink} scale="md" to="/download/evolution" style={{ zoom: 1.2, marginBottom: 10 }}>
+                      {t('Mac')}
+                    </Button>
+                    <Button as={RouterLink} scale="md" to="/download/evolution" style={{ zoom: 1.2, marginBottom: 10 }}>
+                      {t('Windows')}
+                    </Button>
+                    <Button as={RouterLink} scale="md" to="/download/evolution" style={{ zoom: 1.2, marginBottom: 10 }}>
+                      {t('Android')}
+                    </Button>
+                  </Flex>
+                </CardBody>
+              </Card>
+            </Card2>
             <br />
             <Cards>
-              <MainCard>
-                <Heading color="contrast" size="lg" style={{ textAlign: 'center', marginTop: 20 }}>
-                  Quick Links
-                  {/* <br />
-                        <span style={{ fontSize: '0.9rem', opacity: '0.8' }}>(Optional)</span> */}
-                </Heading>
-                <br />
-                <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                  <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                    <Button
-                      variant="text"
-                      as={Link}
-                      href="https://arken.gg/evolution/tutorial"
-                      target="_blank"
-                      style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}>
-                      {t('Tutorial')}
-                      <OpenNewIcon ml="4px" />
-                    </Button>
-                  </Flex>
-                  <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                    <Button
-                      variant="text"
-                      as={Link}
-                      href="https://youtu.be/cejd-7BDVYg"
-                      target="_blank"
-                      style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}>
-                      {t('Video Guide')}
-                      <OpenNewIcon ml="4px" />
-                    </Button>
-                  </Flex>
-                  <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                    <Button
-                      variant="text"
-                      as={Link}
-                      href="https://t.me/ArkenRealms"
-                      target="_blank"
-                      style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}>
-                      {t('Announcements')}
-                      <OpenNewIcon ml="4px" />
-                    </Button>
-                  </Flex>
-                  <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                    <Button
-                      variant="text"
-                      as={Link}
-                      href="https://t.me/runereports"
-                      target="_blank"
-                      style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}>
-                      {t('Report Bugs')}
-                      <OpenNewIcon ml="4px" />
-                    </Button>
-                  </Flex>
-                  <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                    <Button
-                      variant="text"
-                      as={Link}
-                      href="https://arken.gg/sign?message=evolution"
-                      target="_blank"
-                      style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}>
-                      {t('Mobile Login')}
-                      <OpenNewIcon ml="4px" />
-                    </Button>
-                  </Flex>
-                </Flex>
-              </MainCard>
-              <MainCard style={{ position: 'relative' }}>
-                <Flex flexDirection="column" alignItems="center" justifyContent="start" style={{ minHeight: 400 }}>
+              <Card3>
+                <MainCard>
                   <Heading color="contrast" size="lg" style={{ textAlign: 'center', marginTop: 20 }}>
-                    Play Web
+                    Quick Links
                     {/* <br />
                         <span style={{ fontSize: '0.9rem', opacity: '0.8' }}>(Optional)</span> */}
                   </Heading>
                   <br />
-                  {realms ? (
-                    <ControlContainer>
-                      <ViewControls>
-                        {realms.map((r) => {
-                          return (
-                            <ToggleWrapper key={r.key}>
-                              <Toggle
-                                checked={realm?.key === r.key}
-                                disabled={!isAdmin && r.status !== 'online'}
-                                onChange={() => updateRealm(r)}
-                                scale="sm"
-                              />
-                              <Text style={{ textAlign: 'left' }}>
-                                {' '}
-                                {t(r.name)} {r.regionId}
-                                {(!realm || (realm.key === r.key && !isServerOffline) || realm.key !== r.key) &&
-                                r.status === 'online'
-                                  ? ` (${r.playerCount} online)`
-                                  : t(` (offline)`)}
-                              </Text>
-                            </ToggleWrapper>
-                          );
-                        })}
-                        <div style={{ width: '100%', height: '20px' }} onClick={addLocalRealm}></div>
-                      </ViewControls>
-                    </ControlContainer>
-                  ) : null}
-                  {!realms ? <p>Loading realms...</p> : null}
-                  {realms?.length === 0 ? <p>No realms online</p> : null}
-                  <p style={{ fontSize: '0.9em' }}>
-                    <Button scale="sm" variant="text" onClick={onPresentRulesModal}>
-                      View Rules
-                    </Button>
-                  </p>
-                  <p style={{ fontSize: '0.9em' }}>
-                    <Button scale="sm" variant="text" onClick={onPresentWarningsModal}>
-                      View Warnings
-                    </Button>
-                  </p>
-                </Flex>
-                <div
-                  css={css`
-                    position: absolute;
-                    bottom: 20px;
-                    left: 0;
-                    text-align: center;
-                    width: 100%;
-                  `}>
-                  {/* {!account || !profile?.nft ? (
+                  <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                    <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                      <Button
+                        variant="text"
+                        as={Link}
+                        href="https://arken.gg/evolution/tutorial"
+                        target="_blank"
+                        style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}>
+                        {t('Tutorial')}
+                        <OpenNewIcon ml="4px" />
+                      </Button>
+                    </Flex>
+                    <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                      <Button
+                        variant="text"
+                        as={Link}
+                        href="https://youtu.be/cejd-7BDVYg"
+                        target="_blank"
+                        style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}>
+                        {t('Video Guide')}
+                        <OpenNewIcon ml="4px" />
+                      </Button>
+                    </Flex>
+                    <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                      <Button
+                        variant="text"
+                        as={Link}
+                        href="https://t.me/Arken_Realms"
+                        target="_blank"
+                        style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}>
+                        {t('Announcements')}
+                        <OpenNewIcon ml="4px" />
+                      </Button>
+                    </Flex>
+                    <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                      <Button
+                        variant="text"
+                        as={Link}
+                        href="https://t.me/Arken_Reports"
+                        target="_blank"
+                        style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}>
+                        {t('Report Bugs')}
+                        <OpenNewIcon ml="4px" />
+                      </Button>
+                    </Flex>
+                    <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                      <Button
+                        variant="text"
+                        as={Link}
+                        href="https://arken.gg/sign?message=evolution"
+                        target="_blank"
+                        style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}>
+                        {t('Mobile Login')}
+                        <OpenNewIcon ml="4px" />
+                      </Button>
+                    </Flex>
+                  </Flex>
+                </MainCard>
+              </Card3>
+              <Card3>
+                <MainCard style={{ position: 'relative' }}>
+                  <Flex flexDirection="column" alignItems="center" justifyContent="start" style={{ minHeight: 400 }}>
+                    <Heading color="contrast" size="lg" style={{ textAlign: 'center', marginTop: 20 }}>
+                      Play Web
+                      {/* <br />
+                        <span style={{ fontSize: '0.9rem', opacity: '0.8' }}>(Optional)</span> */}
+                    </Heading>
+                    <br />
+                    {realms ? (
+                      <ControlContainer>
+                        <ViewControls>
+                          {realms.map((r) => {
+                            return (
+                              <ToggleWrapper key={r.key}>
+                                <Toggle
+                                  checked={realm?.key === r.key}
+                                  disabled={!isAdmin && r.status !== 'online'}
+                                  onChange={() => updateRealm(r)}
+                                  scale="sm"
+                                />
+                                <Text style={{ textAlign: 'left' }}>
+                                  {' '}
+                                  {t(r.name)} {r.regionId}
+                                  {(!realm || (realm.key === r.key && !isServerOffline) || realm.key !== r.key) &&
+                                  r.status === 'online'
+                                    ? ` (${r.playerCount} online)`
+                                    : t(` (offline)`)}
+                                </Text>
+                              </ToggleWrapper>
+                            );
+                          })}
+                          <div style={{ width: '100%', height: '20px' }} onClick={addLocalRealm}></div>
+                        </ViewControls>
+                      </ControlContainer>
+                    ) : null}
+                    {!realms ? <p>Loading realms...</p> : null}
+                    {realms?.length === 0 ? <p>No realms online</p> : null}
+                    <p style={{ fontSize: '0.9em' }}>
+                      <Button scale="sm" variant="text" onClick={onPresentRulesModal}>
+                        View Rules
+                      </Button>
+                    </p>
+                    <p style={{ fontSize: '0.9em' }}>
+                      <Button scale="sm" variant="text" onClick={onPresentWarningsModal}>
+                        View Warnings
+                      </Button>
+                    </p>
+                  </Flex>
+                  <div
+                    css={css`
+                      position: absolute;
+                      bottom: 20px;
+                      left: 0;
+                      text-align: center;
+                      width: 100%;
+                    `}>
+                    {/* {!account || !profile?.nft ? (
                     <>
                       <p>
                         You aren't on BSC network and don't have an account yet.
@@ -1773,10 +1778,10 @@ const Evolution: any = ({ open }) => {
                       </Button>
                     </>
                   ) : null} */}
-                  <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
-                    <SpecialButton title="TEST GAME" onClick={startOldGame} />
-                  </HeadingFire>
-                  {/* {account && realm && profile?.nft ? (
+                    <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
+                      <SpecialButton title="TEST GAME" onClick={startOldGame} />
+                    </HeadingFire>
+                    {/* {account && realm && profile?.nft ? (
                     <Flex flexDirection="column" alignItems="center" justifyContent="center">
                       <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
                         <SpecialButton title="Start Game" onClick={startOldGame} />
@@ -1805,34 +1810,36 @@ const Evolution: any = ({ open }) => {
                       ) : null}
                     </Flex>
                   ) : null} */}
-                </div>
-              </MainCard>
-              <MainCard>
-                <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                  <Heading color="contrast" size="lg" style={{ textAlign: 'center', marginTop: 20 }}>
-                    Round Rewards
-                  </Heading>
-                  <br />
-                  {cache.evolution?.config ? (
-                    <div style={{ textAlign: 'left' }}>
-                      <strong>Now:</strong> {cache.evolution?.config.rewardWinnerAmountPerLegitPlayer} ZOD per player (
-                      {cache.evolution?.config.rewardWinnerAmountMax} ZOD max)
-                      <br />
-                      <strong>Next Week:</strong>{' '}
-                      {cache.evolution?.config.rewardWinnerAmountPerLegitPlayerQueued ||
-                        cache.evolution?.config.rewardWinnerAmountPerLegitPlayer}{' '}
-                      ZOD per player
-                    </div>
-                  ) : null}
-                  <br />
-                  Rewards increase with more players, so tell your friends!
-                  <br />
-                  <br />
-                  <Heading color="contrast" size="md" style={{ textAlign: 'center', marginTop: 20 }}>
-                    Your Rewards
-                  </Heading>
-                  <br />
-                  {/* {!profile?.nft ? (
+                  </div>
+                </MainCard>
+              </Card3>
+              <Card3>
+                <MainCard>
+                  <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                    <Heading color="contrast" size="lg" style={{ textAlign: 'center', marginTop: 20 }}>
+                      Round Rewards
+                    </Heading>
+                    <br />
+                    {cache.evolution?.config ? (
+                      <div style={{ textAlign: 'left' }}>
+                        <strong>Now:</strong> {cache.evolution?.config.rewardWinnerAmountPerLegitPlayer} ZOD per player
+                        ({cache.evolution?.config.rewardWinnerAmountMax} ZOD max)
+                        <br />
+                        <strong>Next Week:</strong>{' '}
+                        {cache.evolution?.config.rewardWinnerAmountPerLegitPlayerQueued ||
+                          cache.evolution?.config.rewardWinnerAmountPerLegitPlayer}{' '}
+                        ZOD per player
+                      </div>
+                    ) : null}
+                    <br />
+                    Rewards increase with more players, so tell your friends!
+                    <br />
+                    <br />
+                    <Heading color="contrast" size="md" style={{ textAlign: 'center', marginTop: 20 }}>
+                      Your Rewards
+                    </Heading>
+                    <br />
+                    {/* {!profile?.nft ? (
                     <>
                       <br />
                       <br />
@@ -1880,163 +1887,168 @@ const Evolution: any = ({ open }) => {
                       </Button>
                     </>
                   )} */}
-                </Flex>
-              </MainCard>
+                  </Flex>
+                </MainCard>
+              </Card3>
             </Cards>
-            <Card style={{ overflow: 'visible' }}>
-              <CardBody>
-                <SeasonRankings />
-                <br />
-                <br />
-                <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                  <Button
-                    as={RouterLink}
-                    variant="text"
-                    to="/leaderboard"
-                    style={{ border: '2px solid #bb955e', color: '#bb955e' }}>
-                    View Full Leaderboard
-                  </Button>
-                </Flex>
-              </CardBody>
-            </Card>
+            <Card3>
+              <Card style={{ overflow: 'visible' }}>
+                <CardBody>
+                  <SeasonRankings />
+                  <br />
+                  <br />
+                  <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                    <Button
+                      as={RouterLink}
+                      variant="text"
+                      to="/leaderboard"
+                      style={{ border: '2px solid #bb955e', color: '#bb955e' }}>
+                      View Full Leaderboard
+                    </Button>
+                  </Flex>
+                </CardBody>
+              </Card>
+            </Card3>
             <br />
-            <Card>
-              <CardBody>
-                {!isMobile ? (
-                  <img
-                    src="/images/dragons.png"
-                    alt="Evolve Your Dragon"
-                    css={css`
-                      float: right;
-                      width: 280px;
-                      margin-top: -20px;
-                    `}></img>
-                ) : null}
-                <BoxHeading as="h2" size="xl">
-                  {t('Evolve Your Dragon')}
-                </BoxHeading>
-                <hr />
-                <br />
-                <p>
-                  Battle for victory of the skies in a 5 minute round. You must track down and eat as many sprites as
-                  you can to evolve your dragon and defeat other dragons. Watch out though, each game mode provides a
-                  different challenge.
-                </p>
-                <br />
-                {settings.isCrypto ? (
-                  <Paragraph>
-                    Using your hero's magical abilities, you can buff your dragon while you play Evolution Isles. Equip
-                    NFTs to see the effects in-game. Currently supported item mechanics:
-                    <br />
-                    <ul>
-                      <li>
-                        <Linker id="evolution-1" defaultItemBranch="2">
-                          Win Reward Bonus Titan Hellfire Beacon Elder Pledge
-                        </Linker>
-                      </li>
-                      <li>
-                        <Linker id="evolution-2" defaultItemBranch="2">
-                          Movement Burst On Kill (5 seconds) Steel Eternity Fury Flash Glory Grace Instinct
-                        </Linker>
-                      </li>
-                      <li>
-                        <Linker id="evolution-3" defaultItemBranch="2">
-                          Movement Burst On Evolve (1 second) Flash
-                        </Linker>
-                      </li>
-                      <li>
-                        <Linker id="evolution-4" defaultItemBranch="2">
-                          Movement Burst Strength Guiding Light Wrath Fortress Flow Flash
-                        </Linker>
-                      </li>
-                      <li>
-                        <Linker id="evolution-5" defaultItemBranch="2">
-                          Avoid Death Penalty (point loss / orb) Flow Luminous Flywings Lorekeeper Smoke Beacon
-                        </Linker>
-                      </li>
-                      <li>
-                        <Linker id="evolution-6" defaultItemBranch="2">
-                          Double Pickup Chance Beacon
-                        </Linker>
-                      </li>
-                      <li>
-                        <Linker id="evolution-7" defaultItemBranch="2">
-                          Increase Health On Kill Titan Lionheart Hellfire
-                        </Linker>
-                      </li>
-                      <li>More coming soon!</li>
-                    </ul>
-                  </Paragraph>
-                ) : null}
-                <br />
-                <br />
-                <Button as={RouterLink} to="/evolution/tutorial">
-                  View Tutorial
-                </Button>
-                {/* <p>
-                  {t(
-                    `Arken is the next evolution of DeFi farming. Farming is when you use your tokens to earn bonus tokens by staking them. Every week a new token is created (called a rune). It's farmed until the max supply of 50,000. That rune can then be combined with other runes to create NFTs. Those NFTs can be used to improve your earnings.`,
-                  )}
-                </p> */}
-              </CardBody>
-              <br />
-              <br />
-              <br />
-              <br />
-              {settings.isCrypto ? (
+            <Card3>
+              <Card>
                 <CardBody>
                   {!isMobile ? (
                     <img
-                      src="/images/cube-preview.png"
-                      alt="Win Tokens & NFTs"
+                      src="/images/dragons.png"
+                      alt="Evolve Your Dragon"
                       css={css`
-                        float: left;
+                        float: right;
                         width: 280px;
                         margin-top: -20px;
                       `}></img>
                   ) : null}
                   <BoxHeading as="h2" size="xl">
-                    {t('Win Tokens & NFTs')}
+                    {t('Evolve Your Dragon')}
                   </BoxHeading>
                   <hr />
                   <br />
-                  <Paragraph>
-                    Battling angels and demons requires a hero.{' '}
-                    <Linker id="evolution-classes">
-                      Choose a hero from one of seven classes: Assassin, Warrior, Druid, Necromancer, Ranger, Mage, or
-                      Paladin
-                    </Linker>
-                  </Paragraph>
-                  <br />
                   <p>
-                    We have incorporated blockchain gaming so your hero is a unique NFT, and you control their destiny.
-                    Take your hero into different games, join a guild with friends, and choose a gaming strategy that is
-                    unique to you and your hero.
+                    Battle for victory of the skies in a 5 minute round. You must track down and eat as many sprites as
+                    you can to evolve your dragon and defeat other dragons. Watch out though, each game mode provides a
+                    different challenge.
                   </p>
                   <br />
+                  {settings.isCrypto ? (
+                    <Paragraph>
+                      Using your hero's magical abilities, you can buff your dragon while you play Evolution Isles.
+                      Equip NFTs to see the effects in-game. Currently supported item mechanics:
+                      <br />
+                      <ul>
+                        <li>
+                          <Linker id="evolution-1" defaultItemBranch="2">
+                            Win Reward Bonus Titan Hellfire Beacon Elder Pledge
+                          </Linker>
+                        </li>
+                        <li>
+                          <Linker id="evolution-2" defaultItemBranch="2">
+                            Movement Burst On Kill (5 seconds) Steel Eternity Fury Flash Glory Grace Instinct
+                          </Linker>
+                        </li>
+                        <li>
+                          <Linker id="evolution-3" defaultItemBranch="2">
+                            Movement Burst On Evolve (1 second) Flash
+                          </Linker>
+                        </li>
+                        <li>
+                          <Linker id="evolution-4" defaultItemBranch="2">
+                            Movement Burst Strength Guiding Light Wrath Fortress Flow Flash
+                          </Linker>
+                        </li>
+                        <li>
+                          <Linker id="evolution-5" defaultItemBranch="2">
+                            Avoid Death Penalty (point loss / orb) Flow Luminous Flywings Lorekeeper Smoke Beacon
+                          </Linker>
+                        </li>
+                        <li>
+                          <Linker id="evolution-6" defaultItemBranch="2">
+                            Double Pickup Chance Beacon
+                          </Linker>
+                        </li>
+                        <li>
+                          <Linker id="evolution-7" defaultItemBranch="2">
+                            Increase Health On Kill Titan Lionheart Hellfire
+                          </Linker>
+                        </li>
+                        <li>More coming soon!</li>
+                      </ul>
+                    </Paragraph>
+                  ) : null}
                   <br />
+                  <br />
+                  <Button as={RouterLink} to="/evolution/tutorial">
+                    View Tutorial
+                  </Button>
                   {/* <p>
+                  {t(
+                    `Arken is the next evolution of DeFi farming. Farming is when you use your tokens to earn bonus tokens by staking them. Every week a new token is created (called a rune). It's farmed until the max supply of 50,000. That rune can then be combined with other runes to create NFTs. Those NFTs can be used to improve your earnings.`,
+                  )}
+                </p> */}
+                </CardBody>
+                <br />
+                <br />
+                <br />
+                <br />
+                {settings.isCrypto ? (
+                  <CardBody>
+                    {!isMobile ? (
+                      <img
+                        src="/images/cube-preview.png"
+                        alt="Win Tokens & NFTs"
+                        css={css`
+                          float: left;
+                          width: 280px;
+                          margin-top: -20px;
+                        `}></img>
+                    ) : null}
+                    <BoxHeading as="h2" size="xl">
+                      {t('Win Tokens & NFTs')}
+                    </BoxHeading>
+                    <hr />
+                    <br />
+                    <Paragraph>
+                      Battling angels and demons requires a hero.{' '}
+                      <Linker id="evolution-classes">
+                        Choose a hero from one of seven classes: Assassin, Warrior, Druid, Necromancer, Ranger, Mage, or
+                        Paladin
+                      </Linker>
+                    </Paragraph>
+                    <br />
+                    <p>
+                      We have incorporated blockchain gaming so your hero is a unique NFT, and you control their
+                      destiny. Take your hero into different games, join a guild with friends, and choose a gaming
+                      strategy that is unique to you and your hero.
+                    </p>
+                    <br />
+                    <br />
+                    {/* <p>
                     {t(
                       `You can start building your character right away. Choose from 1 of 7 classes, join a guild, and raid farms to start earning runes instantly.`,
                     )}
                   </p> */}
-                  {isMobile ? (
-                    <img
-                      src="/images/cube-preview.png"
-                      alt="Win Tokens & NFTs"
-                      css={css`
-                        width: 240px;
-                      `}></img>
-                  ) : null}
-                  {!isMobile ? (
-                    <>
-                      <br />
-                      <br />
-                    </>
-                  ) : null}
-                </CardBody>
-              ) : null}
-            </Card>
+                    {isMobile ? (
+                      <img
+                        src="/images/cube-preview.png"
+                        alt="Win Tokens & NFTs"
+                        css={css`
+                          width: 240px;
+                        `}></img>
+                    ) : null}
+                    {!isMobile ? (
+                      <>
+                        <br />
+                        <br />
+                      </>
+                    ) : null}
+                  </CardBody>
+                ) : null}
+              </Card>
+            </Card3>
             <br />
             <br />
             <br />
@@ -2054,7 +2066,7 @@ const Evolution: any = ({ open }) => {
             You've been banned. Do not play any servers.
             <br />
             <br />
-            Contact @RuneReports in Telegram if you feel it's unwarranted.
+            Contact @Arken_Reports in Telegram if you feel it's unwarranted.
           </Heading>
         </StyledNotFound>
       ) : null} */}

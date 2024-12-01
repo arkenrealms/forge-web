@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import random from 'lodash/random';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Button, Tag, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui';
+import { Button, Tag, Flex, Card, Heading, Card2, Card3, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui';
 import Page from '~/components/layout/Page';
 
 const dummy = styled.div``;
@@ -2921,15 +2921,15 @@ const Tournament = () => {
   return (
     <>
       <Cards>
-        <Card style={{ width: '100%' }}>
+        <Card3 style={{ width: '100%' }}>
           <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
             {t('Tournaments')}
           </Heading>
           <hr />
           <CardBody>
             <p>
-              Rune often hosts tournaments. These are usually weekly and monthly. Our monthly tournament is called Rune
-              Royale.
+              Arken Realms often hosts tournaments. These are usually weekly and monthly. Our monthly tournament is
+              called Rune Royale.
             </p>
             <br />
             <p>
@@ -2951,8 +2951,7 @@ const Tournament = () => {
               <br />
               <strong>Venue:</strong>
               <br />
-              Tournaments are usually hosed on Twitch at{' '}
-              <a href="https://twitch.tv/ArkenRealms">twitch.tv/ArkenRealms</a>
+              Tournaments are usually hosed on Twitch at <a href="https://twitch.arken.gg">twitch.arken.gg</a>
               <br />
               <br />
               <strong>Rules:</strong>
@@ -2965,8 +2964,8 @@ const Tournament = () => {
               <br />
               <br />
               In the event of any bugs and/or issues please tune into{' '}
-              <a href="https://twitch.tv/arkenrealms">twitch.tv/ArkenRealms</a> or the #evolution channel in{' '}
-              <a href="https://discord.gg/rune">discord.gg/Rune</a>
+              <a href="https://twitch.arken.gg">twitch.arken.gg</a> or the #evolution channel in{' '}
+              <a href="https://discord.arken.gg">discord.arken.gg</a>
             </p>
             <br />
             <br />
@@ -3004,8 +3003,8 @@ const Tournament = () => {
               </p>
             </div>
           </CardBody>
-        </Card>
-        <Card style={{ width: '100%' }}>
+        </Card3>
+        <Card2 style={{ width: '100%' }}>
           <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
             {t('Top Players')}
           </Heading>
@@ -3030,10 +3029,10 @@ const Tournament = () => {
               </div>
             ))}
           </CardBody>
-        </Card>
+        </Card2>
       </Cards>
       <Cards>
-        <Card style={{ width: '100%' }}>
+        <Card3 style={{ width: '100%' }}>
           <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
             {t('Game Mode')}
           </Heading>
@@ -3062,8 +3061,8 @@ const Tournament = () => {
               </div>
             ))}
           </CardBody>
-        </Card>
-        <Card style={{ width: '100%' }}>
+        </Card3>
+        <Card3 style={{ width: '100%' }}>
           <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
             {t('Server')}
           </Heading>
@@ -3092,9 +3091,9 @@ const Tournament = () => {
               </div>
             ))}
           </CardBody>
-        </Card>
+        </Card3>
       </Cards>
-      <Card style={{ width: '100%' }}>
+      <Card3 style={{ width: '100%' }}>
         <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
           {t('History')}
         </Heading>
@@ -3106,7 +3105,7 @@ const Tournament = () => {
             <TournamentResult key={result.name} result={result} />
           ))}
         </CardBody>
-      </Card>
+      </Card3>
     </>
   );
 };

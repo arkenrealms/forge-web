@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   Card,
+  Card2,
+  Card3,
   CardHeader,
   CardBody,
   CheckmarkCircleIcon,
@@ -144,7 +146,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
 
   return (
     <Wrapper>
-      <StyledCard>
+      <Card2>
         <StyledCardHeader bg={`/images/teams/${team.meta.background}`}>
           <AvatarWrap>
             <Avatar src={`/images/teams/${team.meta.images.md}`} alt="guild avatar" />
@@ -190,7 +192,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
             );
           })}
         </CardBody>
-      </StyledCard>
+      </Card2>
     </Wrapper>
   );
 };

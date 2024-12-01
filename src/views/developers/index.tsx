@@ -1,16 +1,16 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useTranslation } from 'react-i18next'
-import { Card, Heading, CardBody } from '~/ui'
-import Page from '~/components/layout/Page'
+import React from 'react';
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import { Card2, Heading, CardBody } from '~/ui';
+import Page from '~/components/layout/Page';
 
 const Developers = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <Page>
-      <Card style={{ width: '100%' }}>
-        <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+      <Card2 style={{ width: '100%' }}>
+        <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, padding: 20 }}>
           {t('Developer Portal')}
         </Heading>
         <hr />
@@ -19,7 +19,7 @@ const Developers = () => {
           team about developing for the Arken Realms.
           <br />
           <br />
-          <a href="https://trello.com/b/bAyYYc2u/rune-community" rel="noreferrer" target="_blank">
+          <a href="https://trello.com/b/bAyYYc2u" rel="noreferrer" target="_blank">
             View Data &amp; Endpoints
           </a>
           <br />
@@ -27,9 +27,9 @@ const Developers = () => {
             View Github Projects
           </a>
         </CardBody>
-      </Card>
+      </Card2>
     </Page>
-  )
-}
+  );
+};
 
-export default Developers
+export default Developers;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { Card, Heading, CardBody } from '~/ui';
+import { Card, Card2, Heading, CardBody } from '~/ui';
 import Page from '~/components/layout/Page';
 
 const AI = () => {
@@ -9,8 +9,8 @@ const AI = () => {
 
   return (
     <Page>
-      <Card style={{ width: '100%' }}>
-        <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+      <Card2 style={{ width: '100%' }}>
+        <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, padding: 20 }}>
           {t('Arken AI')}
         </Heading>
         <hr />
@@ -28,16 +28,13 @@ const AI = () => {
             <br />
             <br />
             We've already begun the process of AI generating our Runeform items,{' '}
-            <a
-              href="https://arkenrealms.medium.com/new-age-of-game-items-432e06a7cda5"
-              rel="noreferrer noopener"
-              target="_blank">
+            <a href="/news/new-age-of-game-items" rel="noreferrer noopener" target="_blank">
               as detailed in this announcement
             </a>
             . Every item dropped or crafted in Arken games will come with a unique skin that nobody else has.
           </p>
         </CardBody>
-      </Card>
+      </Card2>
     </Page>
   );
 };

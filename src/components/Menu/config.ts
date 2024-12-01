@@ -1,4 +1,4 @@
-export const links = []
+export const links = [];
 
 export const socials = [
   {
@@ -7,7 +7,7 @@ export const socials = [
     items: [
       {
         label: 'English',
-        href: 'https://t.me/ArkenRealms',
+        href: 'https://t.me/Arken_Realms',
       },
       {
         label: '日本語',
@@ -82,9 +82,9 @@ export const socials = [
       },
     ],
   },
-]
+];
 
-export const MENU_HEIGHT = 64
-export const MENU_ENTRY_HEIGHT = 48
-export const SIDEBAR_WIDTH_FULL = 240
-export const SIDEBAR_WIDTH_REDUCED = 56
+export const MENU_HEIGHT = 64;
+export const MENU_ENTRY_HEIGHT = 48;
+export const SIDEBAR_WIDTH_FULL = 240;
+export const SIDEBAR_WIDTH_REDUCED = 56;

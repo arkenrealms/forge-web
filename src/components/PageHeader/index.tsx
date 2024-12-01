@@ -1,15 +1,15 @@
-import React, { ReactNode } from 'react'
-import styled from 'styled-components'
-import { Heading, IconButton, Text, Flex, CogIcon, Svg } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import useI18n from '~/hooks/useI18n'
-import SettingsModal from './SettingsModal'
-import RecentTransactionsModal from './RecentTransactionsModal'
+import React, { ReactNode } from 'react';
+import styled from 'styled-components';
+import { Heading, IconButton, Text, Flex, CogIcon, Svg } from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import useI18n from '~/hooks/useI18n';
+import SettingsModal from './SettingsModal';
+import RecentTransactionsModal from './RecentTransactionsModal';
 
 interface PageHeaderProps {
-  title: ReactNode
-  description?: ReactNode
-  children?: ReactNode
+  title: ReactNode;
+  description?: ReactNode;
+  children?: ReactNode;
 }
 
 const HistoryIcon = () => (
@@ -19,21 +19,22 @@ const HistoryIcon = () => (
       fill="currentColor"
     />
   </Svg>
-)
+);
 
 const StyledPageHeader = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.borderColor};
-  padding: 24px;
-`
+  padding: 16px;
+  margin: 8px;
+`;
 
 const Details = styled.div`
   flex: 1;
-`
+`;
 
 const PageHeader = ({ title, description, children }: PageHeaderProps) => {
-  const TranslateString = useI18n()
-  const [onPresentSettings] = useModal(<SettingsModal translateString={TranslateString} />)
-  const [onPresentRecentTransactions] = useModal(<RecentTransactionsModal translateString={TranslateString} />)
+  const TranslateString = useI18n();
+  const [onPresentSettings] = useModal(<SettingsModal translateString={TranslateString} />);
+  const [onPresentRecentTransactions] = useModal(<RecentTransactionsModal translateString={TranslateString} />);
 
   return (
     <StyledPageHeader>
@@ -52,14 +53,13 @@ const PageHeader = ({ title, description, children }: PageHeaderProps) => {
         <IconButton
           variant="text"
           onClick={onPresentRecentTransactions}
-          title={TranslateString(1202, 'Recent transactions')}
-        >
+          title={TranslateString(1202, 'Recent transactions')}>
           <HistoryIcon />
         </IconButton>
       </Flex>
       {children && <Text mt="16px">{children}</Text>}
     </StyledPageHeader>
-  )
-}
+  );
+};
 
-export default PageHeader
+export default PageHeader;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { Card, Heading, CardBody, Button, Link } from '~/ui';
+import { Card, Card2, Card3, Heading, CardBody, Button, Link } from '~/ui';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -32,11 +32,11 @@ const newsItems = [
     description: `Every NFT item dropped in Arken games will have 100% unique AI-generated designs, adding to the functionality of our Evolving NFT concept. You can claim/detach/attach Guiding Light skins now!`,
   },
   {
-    title: 'arken.gg v1.8.1',
+    title: 'Arken Realms v1.8.1',
     href: 'https://twitter.com/ArkenRealms/status/1569090862076018688',
     image: 'https://pbs.twimg.com/media/FcaHuK7agAAVOWx?format=jpg&name=large',
     date: 'September 11, 2022',
-    description: `arken.gg v1.8.1`,
+    description: `Arken Realms v1.8.1`,
   },
   {
     title: 'Arken Realms DAO',
@@ -117,7 +117,7 @@ const newsItems = [
   },
   {
     title: 'Rune Royale: Dawning',
-    href: 'http://twitch.tv/ArkenRealms',
+    href: 'http://twitch.arken.gg',
     image: 'https://pbs.twimg.com/media/FMkoMBAVcAIGXC3?format=jpg&name=large',
     date: 'Feb 27, 2022',
     description: `50,000 $RXS is at stake! That comes out to around $500. Come prove your might in the Mage Isles and take home the victory! 🏆`,
@@ -190,34 +190,36 @@ const News = () => {
   const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
 
   return (
-    <Card style={{ maxWidth: 1200, minHeight: 300, margin: '0 auto 30px auto' }}>
-      <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, marginBottom: 16 }}>
-        {t('News')}
-      </Heading>
-      <hr />
-      <br />
-      <Swiper
-        // install Swiper modules
-        // direction={"vertical"}
-        modules={[Navigation, Pagination, Scrollbar]}
-        spaceBetween={30}
-        slidesPerView={isMobile ? 1 : 3}
-        navigation
-        // mousewheel={{
-        //   forceToAxis: true,
-        // }}
-        // pagination={{ clickable: true }}
-        // scrollbar={{ draggable: true }}
-        // onSwiper={(swiper) => console.log(swiper)}
-        // onSlideChange={() => console.log('slide change')}
-        style={{ maxWidth: 1200, margin: '0 auto 30px auto', padding: '0 20px' }}>
-        {newsItems.map((item) => (
-          <SwiperSlide style={{ maxWidth: 1200, margin: '0 auto', height: 'auto' }}>
-            <NewsItem item={item} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </Card>
+    <Card3 style={{ maxWidth: 1200, minHeight: 300, margin: '0 auto 30px auto' }}>
+      <Card>
+        <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, marginBottom: 16 }}>
+          {t('News')}
+        </Heading>
+        <hr />
+        <br />
+        <Swiper
+          // install Swiper modules
+          // direction={"vertical"}
+          modules={[Navigation, Pagination, Scrollbar]}
+          spaceBetween={30}
+          slidesPerView={isMobile ? 1 : 3}
+          navigation
+          // mousewheel={{
+          //   forceToAxis: true,
+          // }}
+          // pagination={{ clickable: true }}
+          // scrollbar={{ draggable: true }}
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log('slide change')}
+          style={{ maxWidth: 1200, margin: '0 auto 30px auto', padding: '0 20px' }}>
+          {newsItems.map((item) => (
+            <SwiperSlide style={{ maxWidth: 1200, margin: '0 auto', height: 'auto' }}>
+              <NewsItem item={item} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </Card>
+    </Card3>
   );
 };
 

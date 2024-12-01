@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import TeamHeader from '~/components/guilds/TeamHeader';
 import TeamListCard from '~/components/guilds/TeamListCard';
 import { useTeams } from '~/state/hooks';
-import { Card, CardBody, Heading, Skeleton } from '~/ui';
+import { Card2, CardBody, Heading, Skeleton } from '~/ui';
 import { trpc } from '~/utils/trpc';
 import type * as Arken from '@arken/node';
 
@@ -29,12 +29,12 @@ const Guilds = () => {
 
   return (
     <>
-      <Card style={{ width: '100%' }}>
-        <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+      <Card2 style={{ width: '100%' }}>
+        <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, padding: 20 }}>
           {t('Guilds')}
         </Heading>
         <hr />
-        <CardBody>
+        <CardBody style={{ overflow: 'hidden' }}>
           <div
             css={css`
               ${({ theme }) => theme.mediaQueries.lg} {
@@ -55,7 +55,7 @@ const Guilds = () => {
             {isLoading && <AutoRenewIcon spin style={{ width: 50 }} />}
           </Flex> */}
         </CardBody>
-      </Card>
+      </Card2>
       <br />
       {topTeams.map((team: any, index: number) => (
         <TeamListCard key={team.id + ''} rank={index + 1} team={team} />

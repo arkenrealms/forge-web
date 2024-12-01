@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Page from '~/components/layout/Page';
 import styled, { css } from 'styled-components';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
-import { Button, Flex, Card, Heading, CardBody, BaseLayout, ButtonMenu, ButtonMenuItem } from '~/ui';
+import { Button, Flex, Card, Card2, Card3, Heading, CardBody, BaseLayout, ButtonMenu, ButtonMenuItem } from '~/ui';
 import { ImCheckboxChecked } from 'react-icons/im';
 import { ImCheckboxUnchecked } from 'react-icons/im';
 import { CgTimelapse } from 'react-icons/cg';
@@ -61,9 +61,9 @@ const ProgressIcon = ({ status }) => (
     ) : null}
   </div>
 );
-const CardCustom = styled(Card)`
-  border-width: 8px;
+const CardCustom = styled(Card3)`
   margin-top: 30px;
+  padding: 0;
 `;
 const Tag = styled.span`
   background: #113657;
@@ -655,7 +655,7 @@ const Team = ({ match }) => {
     <Page>
       <PageWindow>
         {collapseTeam ? (
-          <Card>
+          <Card2>
             <Heading
               as="h2"
               size="xl"
@@ -668,23 +668,23 @@ const Team = ({ match }) => {
               `}>
               Show Team
             </Heading>
-          </Card>
+          </Card2>
         ) : (
-          <Card>
-            <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+          <Card2>
+            <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, padding: 20 }}>
               Team
             </Heading>
             <hr />
             <CardBody>
               <TeamComponent match={match} />
             </CardBody>
-          </Card>
+          </Card2>
         )}
         <div id="join" ref={joinRef} />
         <br />
         <br />
         {collapseJoin ? (
-          <Card>
+          <Card3>
             <Heading
               as="h2"
               size="xl"
@@ -697,10 +697,10 @@ const Team = ({ match }) => {
               `}>
               Show Join
             </Heading>
-          </Card>
+          </Card3>
         ) : (
-          <Card>
-            <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+          <Card3>
+            <Heading as="h2" size="xl" style={{ textAlign: 'left', marginTop: 15, padding: 20 }}>
               Join Arken <PerformanceTag>Currently Only Mods</PerformanceTag>
             </Heading>
             <hr />
@@ -740,11 +740,11 @@ const Team = ({ match }) => {
                 Arken was built from the ground up by the community. We believe in community. If you're somebody who
                 understands <RouterLink to="/about">our vision</RouterLink> and wants to be part of building the Rune
                 Metaverse, please reach out on{' '}
-                <a target="_blank" rel="noreferrer noopener" href="https://discord.gg/rune">
+                <a target="_blank" rel="noreferrer noopener" href="https://discord.arken.gg">
                   Discord
                 </a>{' '}
                 or{' '}
-                <a target="_blank" rel="noreferrer noopener" href={`https://t.me/ArkenRealms`}>
+                <a target="_blank" rel="noreferrer noopener" href={`https://t.me/Arken_Realms`}>
                   Telegram
                 </a>
                 . When the market gives us the opportunity, we'll look at our volunteers for the first hires. It takes a
@@ -855,62 +855,64 @@ const Team = ({ match }) => {
                 </li>
               </ol>
             </CardBody>
-          </Card>
+          </Card3>
         )}
 
         <div id="raffle" ref={raffleRef} />
         <br />
         <RiccardoContainer>
-          <CardCustom className="lore-container">
-            <div className="sitenav-sub" style={{ width: '100%' }}>
-              <div>
-                <div className="w-layout-grid grid-3">
-                  <div className="subnav-list first">
-                    <div className="text-block-3">Round</div>
-                    <div className="w-layout-grid grid-subnav-list">
-                      {roadmap.phases.map((phase, index) => (
-                        <div
-                          className={`subnavlink w-inline-block ${index === selectedPhase ? 'selected' : ''}`}
-                          onClick={() => {
-                            setSelectedPhase(index);
-                            setSelectedGoal(0);
-                          }}>
-                          <ProgressIcon status={phase.status} />
-                          <div>{phase.content}</div>
-                        </div>
-                      ))}
+          <Card3>
+            <div className="lore-container">
+              <div className="sitenav-sub" style={{ width: '100%' }}>
+                <div>
+                  <div className="w-layout-grid grid-3">
+                    <div className="subnav-list first">
+                      <div className="text-block-3">Round</div>
+                      <div className="w-layout-grid grid-subnav-list">
+                        {roadmap.phases.map((phase, index) => (
+                          <div
+                            className={`subnavlink w-inline-block ${index === selectedPhase ? 'selected' : ''}`}
+                            onClick={() => {
+                              setSelectedPhase(index);
+                              setSelectedGoal(0);
+                            }}>
+                            <ProgressIcon status={phase.status} />
+                            <div>{phase.content}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="subnavcolshadow"></div>
                     </div>
-                    <div className="subnavcolshadow"></div>
-                  </div>
-                  <div className="subnav-list">
-                    <div className="text-block-3">Rewards</div>
-                    <div className="w-layout-grid grid-subnav-list">
-                      {roadmap.phases[selectedPhase].goals.map((goal, index) => (
-                        <div
-                          className={`subnavlink w-inline-block ${index === selectedGoal ? 'selected' : ''}`}
-                          onClick={() => setSelectedGoal(index)}>
-                          <div>{goal.content}</div>
-                        </div>
-                      ))}
+                    <div className="subnav-list">
+                      <div className="text-block-3">Rewards</div>
+                      <div className="w-layout-grid grid-subnav-list">
+                        {roadmap.phases[selectedPhase].goals.map((goal, index) => (
+                          <div
+                            className={`subnavlink w-inline-block ${index === selectedGoal ? 'selected' : ''}`}
+                            onClick={() => setSelectedGoal(index)}>
+                            <div>{goal.content}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="subnavcolshadow"></div>
                     </div>
-                    <div className="subnavcolshadow"></div>
-                  </div>
-                  <div className="subnav-list">
-                    <div className="text-block-3">Notes</div>
-                    <div className="w-layout-grid grid-subnav-list">
-                      {roadmap.phases[selectedPhase].goals[selectedGoal].notes.map((note, index) => (
-                        <div className="subnavlink w-inline-block">
-                          <div>{note}</div>
-                        </div>
-                      ))}
+                    <div className="subnav-list">
+                      <div className="text-block-3">Notes</div>
+                      <div className="w-layout-grid grid-subnav-list">
+                        {roadmap.phases[selectedPhase].goals[selectedGoal].notes.map((note, index) => (
+                          <div className="subnavlink w-inline-block">
+                            <div>{note}</div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="subnavcolshadow"></div>
                     </div>
-                    <div className="subnavcolshadow"></div>
                   </div>
                 </div>
+                <div className="div-block-23"></div>
               </div>
-              <div className="div-block-23"></div>
             </div>
-          </CardCustom>
+          </Card3>
         </RiccardoContainer>
       </PageWindow>
     </Page>

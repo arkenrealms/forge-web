@@ -16,7 +16,7 @@ import LoreContainer from '~/components/LoreContainer';
 import { RecipeInfo } from '~/components/RecipeInfo';
 import useCache from '~/hooks/useCache';
 import useWeb3 from '~/hooks/useWeb3';
-import { BaseLayout, Card, CardBody, CardHeader, Flex, Heading, Text } from '~/ui';
+import { BaseLayout, Card, Card2, Card3, CardBody, CardHeader, Flex, Heading, Text } from '~/ui';
 
 const Wrapper = styled.div`
   // ol {
@@ -399,10 +399,10 @@ const RuneInner = ({ active, match }) => {
                                       )
                                       .join(' or ')
                                 : parent1.value !== undefined
-                                ? parent1.value
-                                : parent1.min === parent1.max
-                                ? parent1.min
-                                : `${parent1.min}-${parent1.max}`;
+                                  ? parent1.value
+                                  : parent1.min === parent1.max
+                                    ? parent1.min
+                                    : `${parent1.min}-${parent1.max}`;
 
                               if (typeof value1 === 'string')
                                 value1 = value1.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
@@ -419,10 +419,10 @@ const RuneInner = ({ active, match }) => {
                                       )
                                       .join(' or ')
                                 : parent2.value !== undefined
-                                ? parent2.value
-                                : parent2.min === parent2.max
-                                ? parent2.min
-                                : `${parent2.min}-${parent2.max}`;
+                                  ? parent2.value
+                                  : parent2.min === parent2.max
+                                    ? parent2.min
+                                    : `${parent2.min}-${parent2.max}`;
 
                               if (typeof value2 === 'string')
                                 value2 = value2.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
@@ -439,10 +439,10 @@ const RuneInner = ({ active, match }) => {
                                       )
                                       .join(' or ')
                                 : parent3.value !== undefined
-                                ? parent3.value
-                                : parent3.min === parent3.max
-                                ? parent3.min
-                                : `${parent3.min}-${parent3.max}`;
+                                  ? parent3.value
+                                  : parent3.min === parent3.max
+                                    ? parent3.min
+                                    : `${parent3.min}-${parent3.max}`;
 
                               if (typeof value3 === 'string')
                                 value3 = value3.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
@@ -534,9 +534,9 @@ const RuneInner = ({ active, match }) => {
       <br />
       <br />
       <br />
-      <Card style={{ overflow: 'visible', backgroundImage: 'none', marginBottom: 30 }}>
+      <Card2 style={{ overflow: 'visible', backgroundImage: 'none', marginBottom: 30 }}>
         <CardHeader>
-          <Flex alignItems="center" justifyContent="space-between">
+          <Flex alignItems="center" justifyContent="space-between" padding="20px">
             <div>
               <Heading size="lg" mb="8px">
                 {t('Rarity Examples')}
@@ -657,11 +657,11 @@ const RuneInner = ({ active, match }) => {
             </Flex>
           </div>
         </CardBody>
-      </Card>
+      </Card2>
 
-      <Card style={{ overflow: 'visible', backgroundImage: 'none' }}>
+      <Card2 style={{ overflow: 'visible', backgroundImage: 'none' }}>
         <CardHeader>
-          <Flex alignItems="center" justifyContent="space-between">
+          <Flex alignItems="center" justifyContent="space-between" padding="20px">
             <div>
               <Heading size="lg" mb="8px">
                 {t('Minted Items')}
@@ -673,7 +673,7 @@ const RuneInner = ({ active, match }) => {
         <CardBody css={css``}>
           <ItemCatalogFull itemId={item.id} autoColumn rightSidedInfo />
         </CardBody>
-      </Card>
+      </Card2>
       <br />
       <br />
       <div style={{ padding: 20 }}>

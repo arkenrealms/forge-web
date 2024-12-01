@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { ChevronLeftIcon, Flex, Text, Skeleton } from '~/ui';
+import { ChevronLeftIcon, Flex, Text, Skeleton, Card3 } from '~/ui';
 import PageLoader from '~/components/PageLoader';
 import teams from '~/config/constants/teams';
 import useI18n from '~/hooks/useI18n';
@@ -38,12 +38,14 @@ const Team = ({ match }) => {
       <PageWindow>
         <TeamHeader />
         <Flex mb="24px">
-          <Link to="/guilds">
-            <Flex alignItems="center">
-              <ChevronLeftIcon color="primary" />
-              <Text color="primary">{t('Guilds')}</Text>
-            </Flex>
-          </Link>
+          <Card3 style={{ padding: '10px 10px 5px 10px' }}>
+            <Link to="/guilds">
+              <Flex alignItems="center">
+                <ChevronLeftIcon color="primary" />
+                <Text color="primary">{t('Guilds')}</Text>
+              </Flex>
+            </Link>
+          </Card3>
         </Flex>
         <TeamCard team={team} />
       </PageWindow>

@@ -1,10 +1,10 @@
-import { BsX } from 'react-icons/bs'
-import React, { useState } from 'react'
-import styled, { css } from 'styled-components'
+import { BsX } from 'react-icons/bs';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
 
-import { Button, Card, CardBody, Heading } from '~/ui'
+import { Button, Card2, CardBody, Heading } from '~/ui';
 
-const Content = styled.div``
+const Content = styled.div``;
 
 export default function ({
   id,
@@ -13,32 +13,32 @@ export default function ({
   npcMargin,
   children,
 }: {
-  id: string
-  npc: string
-  heading?: any
-  npcMargin?: number
-  children?: any
+  id: string;
+  npc: string;
+  heading?: any;
+  npcMargin?: number;
+  children?: any;
 }) {
-  const cacheKey = `TipCard-${id}`
+  const cacheKey = `TipCard-${id}`;
 
   const [isClosed, _setIsClosed] = useState(() => {
-    if (!window.localStorage) return false
+    if (!window.localStorage) return false;
 
-    return window.localStorage.getItem(cacheKey) === 'closed'
-  })
+    return window.localStorage.getItem(cacheKey) === 'closed';
+  });
 
   const setIsClosed = (val) => {
-    _setIsClosed(val)
-    window.localStorage.setItem(cacheKey, 'closed')
-  }
+    _setIsClosed(val);
+    window.localStorage.setItem(cacheKey, 'closed');
+  };
 
-  if (isClosed) return <></>
+  if (isClosed) return <></>;
 
   return (
-    <Card style={{ width: '100%', position: 'relative', overflow: 'visible' }}>
+    <Card2 style={{ width: '100%', position: 'relative', overflow: 'visible' }}>
       {heading ? (
         <>
-          <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+          <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, padding: 20 }}>
             {heading}
           </Heading>
           <hr />
@@ -71,6 +71,6 @@ export default function ({
         `}>
         <BsX style={{ zoom: 1.7 }} />
       </Button>
-    </Card>
-  )
+    </Card2>
+  );
 }

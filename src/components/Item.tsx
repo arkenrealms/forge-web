@@ -158,6 +158,8 @@ const Item: React.FC<Props> = ({
   defaultBranch = undefined,
   children,
 }) => {
+  if (!item?.name) return <div>ERROR: Item doesn't exist</div>;
+
   const { name, icon: _icon, tokenId, value, category, bonus, details, isNew } = item;
   const { tokenSkins, userNotes } = useCache();
   const icon = tokenId && tokenSkins[tokenId] ? `https://s1.envoy.arken.asi.sh${tokenSkins[tokenId]}` : _icon;

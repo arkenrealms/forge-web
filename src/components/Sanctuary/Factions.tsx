@@ -5,26 +5,26 @@ import remarkGfm from 'remark-gfm';
 import useFetch from '~/hooks/useFetch';
 import history from '~/routerHistory';
 import LoreBlock1 from '~/components/LoreBlock1';
-import { Flex, Skeleton } from '~/ui';
+import { Flex, Skeleton, Card3 } from '~/ui';
 import { trpc } from '~/utils/trpc';
-import type { CharacterFaction } from '@arken/node/modules/character/character.types';
+import type * as Arken from '@arken/node';
 
 const Abc = styled.div``;
 
 const Factions = function () {
-  const { data: factions } = trpc.seer.character.getCharacterFaction.useQuery<CharacterFaction[]>({
-    where: { name: { contains: 'A' } },
-  });
+  const { data: factions } = trpc.seer.character.getCharacterFactions.useQuery<
+    Arken.Character.Types.CharacterFaction[]
+  >({});
 
-  if (!factions.length)
+  if (!factions?.length)
     return (
-      <div style={{ padding: 10 }}>
+      <Card3 style={{ padding: 10 }}>
         <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" />
-      </div>
+      </Card3>
     );
 
   return (
-    <>
+    <Card3 style={{ marginTop: 10 }}>
       <main className="content-wrapper wf-section">
         <div className="page-bg-top">
           <img
@@ -72,7 +72,7 @@ const Factions = function () {
                       css={css`
                         margin-top: 20px;
                       `}>
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.data.lore1}</ReactMarkdown>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{faction.meta.lore1}</ReactMarkdown>
                     </div>
                   </Flex>
                 </LoreBlock1>
@@ -85,7 +85,7 @@ const Factions = function () {
           </div>
         </div>
       </main>
-    </>
+    </Card3>
   );
 };
 

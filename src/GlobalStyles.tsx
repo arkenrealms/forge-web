@@ -61,6 +61,15 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
     }
   }
 
+    .catalog-item {
+      padding: 30px;
+    
+      & > div {
+        position: relative;
+        z-index: 2;
+      }
+    }
+
   body.brand-arken {
     * {
       font-family: 'Alegreya Sans', sans-serif, Cambria, Verdana, monospace;
@@ -182,7 +191,7 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
     position: relative;
     background-color: rgba(0, 0, 0, 0.8);
     background-image: linear-gradient(180deg, rgb(134 123 251 / 6%), rgb(207 144 255 / 6%));
-    padding: 20px;
+    // padding: 20px;
     box-shadow: rgb(0 0 0 / 50%) 0px 2px 25px 10px, rgb(0 0 0 / 10%) 0px -1px 0px 0px inset, rgb(0 0 0 / 10%) 0px 0px 66px 66px;
 
       &::after {
@@ -202,7 +211,6 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
       }
           color: ${({ theme }) => theme.colors['text']};
           text-shadow: 1px 1px 1px black;
-          text-align: center;
           color: #bb955e;
     }
 
@@ -231,7 +239,6 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
       }
           color: ${({ theme }) => theme.colors['text']};
           text-shadow: 1px 1px 1px black;
-          text-align: center;
           color: #bb955e;
         }
 
@@ -657,10 +664,10 @@ zoom: 0.001;
   transform: rotate(0deg); */
 }
 
-.react-tiny-popover-scout {
+#react-tiny-popover-scout {
   z-index: 9998;
 }
-.react-tiny-popover-container {
+#react-tiny-popover-container {
   z-index: 9999;
 }
 

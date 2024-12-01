@@ -8,7 +8,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { AutoColumn } from '~/components/Column';
 import { AutoRow, RowBetween } from '~/components/Row';
-import { Button, Card, CardBody, Heading, Text } from '~/ui';
+import { Button, Card, Card3, CardBody, Heading, Text } from '~/ui';
 
 const Shortcut = styled.div`
   text-align: center;
@@ -284,7 +284,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Rune conceptualized</strong> <Core />
+                <strong>Arken conceptualized</strong> <Core />
               </>
             ),
             status: 'done',
@@ -303,7 +303,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Rune website launched</strong> <Core />
+                <strong>Arken website launched</strong> <Core />
               </>
             ),
             status: 'done',
@@ -312,7 +312,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>arken.gg v1.1</strong> <Core />
+                <strong>Arken v1.1</strong> <Core />
               </>
             ),
             status: 'done',
@@ -326,7 +326,7 @@ const Roadmap = () => {
             ),
             status: 'done',
             notes: [
-              <>Rune token, farm, and pools</>,
+              <>Arken token, farm, and pools</>,
               <>
                 Link to <RouterLink to="/farms">Farms</RouterLink>
               </>,
@@ -343,7 +343,7 @@ const Roadmap = () => {
             ),
             status: 'done',
             notes: [
-              <>Rune character (NFT) creation</>,
+              <>Arken character (NFT) creation</>,
               <>
                 Link to <RouterLink to="/characters">Characters</RouterLink>
               </>,
@@ -376,17 +376,17 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Release Rune Swap</strong> <Core />
+                <strong>Release Arken Swap</strong> <Core />
               </>
             ),
             status: 'done',
             notes: [
               <>
                 {' '}
-                for trading <strong>$RUNE</strong> and runes Character inventory system
+                for trading <strong>$ARX</strong> and runes
               </>,
               <>
-                Link to <RouterLink to="/swap">Rune Swap</RouterLink>
+                Link to <RouterLink to="/swap">Arken Swap</RouterLink>
               </>,
             ],
           },
@@ -441,7 +441,7 @@ const Roadmap = () => {
             notes: [
               <>Guild verification, evolution stats, etc.</>,
               <>
-                Link to <a href="https://discord.gg/rune">Discord</a>
+                Link to <a href="https://discord.arken.gg">Discord</a>
               </>,
             ],
           },
@@ -461,7 +461,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>arken.gg v1.2</strong> <Core />
+                <strong>Arken v1.2</strong> <Core />
               </>
             ),
             status: 'done',
@@ -470,7 +470,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>arken.gg v1.3</strong> <Core />
+                <strong>Arken v1.3</strong> <Core />
               </>
             ),
             status: 'done',
@@ -558,7 +558,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>arken.gg v1.4</strong> <Core />
+                <strong>Arken v1.4</strong> <Core />
               </>
             ),
             status: 'done',
@@ -581,7 +581,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Rune Lore Development</strong> <Bonus />
+                <strong>Arken Lore Development</strong> <Bonus />
               </>
             ),
             status: 'done',
@@ -590,7 +590,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Rune Translations:</strong> <Bonus />
+                <strong>Arken Translations:</strong> <Bonus />
               </>
             ),
             status: 'done',
@@ -782,7 +782,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>arken.gg v1.5</strong> <Core />
+                <strong>Arken v1.5</strong> <Core />
               </>
             ),
             status: 'done',
@@ -800,7 +800,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Rune Lore</strong> previews <Bonus />
+                <strong>Arken Lore</strong> previews <Bonus />
               </>
             ),
             status: 'done',
@@ -855,7 +855,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Rune Nexus release</strong> <UX />
+                <strong>Arken Nexus release</strong> <UX />
               </>
             ),
             status: 'done',
@@ -875,9 +875,9 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>Started the monthly Rune Royale tournament, live streamed on Twitch.</>,
-              <>Started the weekly stream on Twitch, where players can play with and chat with the Rune team.</>,
+              <>Started the weekly stream on Twitch, where players can play with and chat with the Arken team.</>,
               <>
-                Link to <a href="https://www.twitch.tv/arkenrealms">Rune on Twitch</a>
+                Link to <a href="https://twitch.arken.gg">Arken on Twitch</a>
               </>,
             ],
           },
@@ -902,7 +902,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>arken.gg v1.6</strong> <Core />
+                <strong>Arken v1.6</strong> <Core />
               </>
             ),
             status: 'done',
@@ -917,7 +917,7 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>
-                Link to <a href="https://t.me/ArkenRealms/533">Announcement</a>
+                Link to <a href="https://t.me/Arken_Realms/533">Announcement</a>
               </>,
             ],
           },
@@ -964,7 +964,7 @@ const Roadmap = () => {
             content: (
               <>
                 <strong>
-                  arken.gg v1.7 <Core />
+                  Arken v1.7 <Core />
                 </strong>
               </>
             ),
@@ -993,7 +993,7 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>
-                Link to <a href="https://vote.arken.gg/">Rune Governance</a>
+                Link to <a href="https://vote.arken.gg/">Arken Governance</a>
               </>,
             ],
           },
@@ -1010,7 +1010,7 @@ const Roadmap = () => {
               <>
                 Link to{' '}
                 <a href="https://www.youtube.com/watch?v=e0w60rW6xqM&list=PLtQV3vQDJxarq_X0WsAT4goj9mf-3wmGg&ab_channel=ArkenRealms">
-                  Rune on YouTube
+                  Arken on YouTube
                 </a>
               </>,
               <>
@@ -1075,7 +1075,7 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>
-                Link to <a href="https://t.me/ArkenRealms/598">Announcement</a>
+                Link to <a href="https://t.me/Arken_Realms/598">Announcement</a>
               </>,
               <>
                 Link to <RouterLink to="/market">Market</RouterLink>
@@ -1102,7 +1102,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>arken.gg v1.7.1</strong> <Core />
+                <strong>Arken v1.7.1</strong> <Core />
               </>
             ),
             status: 'done',
@@ -1140,7 +1140,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                arken.gg v2.0 <UX />
+                Arken v2.0 <UX />
               </>
             ),
             status: 'working',
@@ -1183,7 +1183,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Rune Launcher</strong> <Bonus />
+                <strong>Arken Launcher</strong> <Bonus />
               </>
             ),
             status: 'working',
@@ -1377,7 +1377,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                <strong>Rune Lending</strong>
+                <strong>Arken Lending</strong>
                 <Idea />
               </>
             ),
@@ -1396,7 +1396,7 @@ const Roadmap = () => {
           {
             content: (
               <>
-                Rune Ultimate Tournament <Idea />
+                Arken Ultimate Tournament <Idea />
               </>
             ),
             status: 'pending',
@@ -1438,61 +1438,63 @@ const Roadmap = () => {
   return (
     <>
       <Container>
-        <Card>
-          <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-            Roadmap
-          </Heading>
-          <hr />
-          <CardBody>
-            {/* {!confirmedUnderstood ? ( */}
-            <AutoColumn gap="lg">
-              <AutoRow gap="6px">
-                <p style={{ color: '#bb955e' }}>
-                  I understand that the roadmap is <strong>TENTATIVE</strong>, and that means the objectives and
-                  timelines could be changed anytime by the <RouterLink to="/team">Rune team</RouterLink> as they feel
-                  needed (we will do our best to communicate changes). I also understand that in the future the
-                  objectives and timelines could be changed entirely, as they would be determined by the token holders
-                  through direct or delegated voting in a DAO (Decentralized Autonomous Organization).
-                </p>
-              </AutoRow>
-              <RowBetween>
-                <div
-                  css={css`
-                    background: rgba(255, 255, 255, 0.1);
-                    border-radius: 8px;
-                    padding: 13px 15px;
-                  `}>
-                  <label htmlFor="understand-checkbox" style={{ cursor: 'pointer', userSelect: 'none' }}>
-                    <input
-                      id="understand-checkbox"
-                      type="checkbox"
-                      className="understand-checkbox"
-                      checked={understandChecked}
-                      onChange={() => {
-                        setUnderstandChecked(!understandChecked);
+        <Card3>
+          <Card>
+            <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+              Roadmap
+            </Heading>
+            <hr />
+            <CardBody>
+              {/* {!confirmedUnderstood ? ( */}
+              <AutoColumn gap="lg">
+                <AutoRow gap="6px">
+                  <p style={{ color: '#bb955e' }}>
+                    I understand that the roadmap is <strong>TENTATIVE</strong>, and that means the objectives and
+                    timelines could be changed anytime by the <RouterLink to="/team">Arken team</RouterLink> as they
+                    feel needed (we will do our best to communicate changes). I also understand that in the future the
+                    objectives and timelines could be changed entirely, as they would be determined by the token holders
+                    through direct or delegated voting in a DAO (Decentralized Autonomous Organization).
+                  </p>
+                </AutoRow>
+                <RowBetween>
+                  <div
+                    css={css`
+                      background: rgba(255, 255, 255, 0.1);
+                      border-radius: 8px;
+                      padding: 13px 15px;
+                    `}>
+                    <label htmlFor="understand-checkbox" style={{ cursor: 'pointer', userSelect: 'none' }}>
+                      <input
+                        id="understand-checkbox"
+                        type="checkbox"
+                        className="understand-checkbox"
+                        checked={understandChecked}
+                        onChange={() => {
+                          setUnderstandChecked(!understandChecked);
 
-                        if (understandChecked) {
-                          setIsAgreed(false);
-                        }
-                      }}
-                      style={{ marginRight: 4 }}
-                    />{' '}
-                    <Text as="span">I understand</Text>
-                  </label>
-                </div>
-                <Button
-                  disabled={!understandChecked || isAgreed}
-                  style={{ width: '140px' }}
-                  onClick={() => {
-                    setIsAgreed(true);
-                  }}>
-                  Continue
-                </Button>
-              </RowBetween>
-            </AutoColumn>
-            {/* // ) : null} */}
-          </CardBody>
-        </Card>
+                          if (understandChecked) {
+                            setIsAgreed(false);
+                          }
+                        }}
+                        style={{ marginRight: 4 }}
+                      />{' '}
+                      <Text as="span">I understand</Text>
+                    </label>
+                  </div>
+                  <Button
+                    disabled={!understandChecked || isAgreed}
+                    style={{ width: '140px' }}
+                    onClick={() => {
+                      setIsAgreed(true);
+                    }}>
+                    Continue
+                  </Button>
+                </RowBetween>
+              </AutoColumn>
+              {/* // ) : null} */}
+            </CardBody>
+          </Card>
+        </Card3>
 
         {isAgreed ? (
           <>

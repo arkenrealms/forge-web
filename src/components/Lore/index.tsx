@@ -2,17 +2,18 @@ import React, { lazy, Suspense, useContext, useCallback, useEffect, useState, us
 import styled, { css, createGlobalStyle } from 'styled-components';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import $ from 'jquery';
 import { Button, Tag, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon, Skeleton } from '~/ui';
 import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
 import Page from '~/components/layout/Page';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import { PurchaseModal } from '~/components/PurchaseModal';
 import Area from '~/components/Sanctuary/Area';
-import jQ from './jquery';
+// import jQ from './jquery';
 import something from './something';
 import loadDragdealer from './dragdealer';
 
-let $;
+// let $;
 const zzz = styled.div``;
 
 const StatsComponent = lazy(() => import(/* webpackChunkName: "StatsComponent" */ '~/components/Stats'));
@@ -28,8 +29,9 @@ const Lore = () => {
   useEffect(
     function () {
       if (!window) return;
-      jQ();
-      something();
+      // @ts-ignore
+      // $ = jQ();
+      something($);
 
       // @ts-ignore
       window.innerShiv = (function () {
@@ -65,7 +67,7 @@ const Lore = () => {
 
       // @ts-ignore
       function initializeMap($$) {
-        $ = $$;
+        // $ = $$;
         loadDragdealer(window);
 
         // const location = new String(window.location);
@@ -358,17 +360,17 @@ const Lore = () => {
           // @ts-ignore
           mapHover.currentTime = 0;
           // @ts-ignore
-          mapHover.play();
+          // mapHover.play();
         });
 
         $('.button').on('mouseenter', function () {
           // @ts-ignore
-          zoomHoverIn.play();
+          // zoomHoverIn.play();
         });
 
         $('.button').on('mouseleave', function () {
           // @ts-ignore
-          zoomHoverOut.play();
+          // zoomHoverOut.play();
         });
 
         $('.button').on('click', function () {
@@ -407,10 +409,11 @@ const Lore = () => {
         });
 
         // Close Popup
-        $('.item-link').on('click', function () {
+        $('.item-link').on('click', function (e) {
           // @ts-ignore
           slideClose.play();
           $('.item').removeClass('is--show');
+          e.preventDefault();
           // $('#landing-intro, #landing-actions').removeClass('disabled')
         });
 
@@ -497,7 +500,7 @@ const Lore = () => {
       }
 
       // @ts-ignore
-      setTimeout(() => jQ(document).ready(initializeMap), 100);
+      $(document).ready(initializeMap);
     },
     [breakpoints]
   );

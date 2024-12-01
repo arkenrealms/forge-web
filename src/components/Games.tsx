@@ -3,13 +3,6 @@ import styled, { css } from 'styled-components';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button, Tag, Flex, Card, Card3, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui';
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
-import Page from '~/components/layout/Page';
-import { PurchaseModal } from '~/components/PurchaseModal';
-import TipCard from '~/components/TipCard';
-import Linker from '~/components/Linker';
-import Games from '~/components/Games';
-import i18n from '~/config/i18n';
 
 const Text = styled.div``;
 
@@ -101,22 +94,8 @@ const BottomMenu = styled.div`
 
 const Rules = () => {
   const { t } = useTranslation();
-  const [showVision, setShowVision] = useState(false);
-  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
   const games = [
-    {
-      name: 'Runic Raids',
-      path: '/raid',
-      image: '/images/games/raid-card.png',
-      description: (
-        <ul>
-          <li>Farm for rune rewards (by staking liquidity).</li>
-          <li>Craft items that change harvest mechanics.</li>
-        </ul>
-      ),
-      status: 'retired',
-    },
     {
       name: 'Evolution Isles',
       path: '/evolution',
@@ -159,6 +138,18 @@ const Rules = () => {
       status: 'pending',
     },
     // {
+    //   name: 'Runic Raids',
+    //   path: '/raid',
+    //   image: '/images/games/raid-card.png',
+    //   description: (
+    //     <ul>
+    //       <li>Farm for rune rewards (by staking liquidity).</li>
+    //       <li>Craft items that change harvest mechanics.</li>
+    //     </ul>
+    //   ),
+    //   status: 'retired',
+    // },
+    // {
     //   name: 'Guardians Unleashed',
     //   path: '/guardians',
     //   image: '/images/games/guardians-card.png',
@@ -173,25 +164,76 @@ const Rules = () => {
   ];
 
   return (
-    <Page>
-      <TipCard npc="ramir" id="our-games" heading={t('Our Games')}>
-        <p>Hey, you!</p>
-        <br />
-        <p>
-          <Linker id="play" replaceItems={false} replaceStringLinks={false}>
-            Here's the low down.. our games are made to be <strong>fun traditional games</strong> with deep blockchain
-            integration. We were the first in the world to build <strong>on-chain mechanics directly into NFTs</strong>{' '}
-            with our Runic Raids blockchain game. We followed it up with our first downloadable Play4Rewards game
-            Evolution Isles <strong>within 6 months</strong>. Our next big endevour is an arena brawler called Infinite
-            Arena. During this process, we'll build on everything we've created for Heart of the Oasis - a massive RPG
-            in the Arken Realms.
-          </Linker>
-        </p>
-        <br />
-      </TipCard>
-      <br />
-      <Games />
-    </Page>
+    <Cards>
+      {games.map((game) => (
+        <Card3>
+          <Header>
+            <Heading size="lg">{game.name}</Heading>
+            <HeaderTag>
+              {game.status === 'released' ? (
+                <Tag2 outline variant="failure">
+                  Released
+                </Tag2>
+              ) : null}
+              {game.status === 'retired' ? (
+                <Tag2 outline variant="textDisabled">
+                  Retired
+                </Tag2>
+              ) : null}
+              {game.status === 'beta' ? (
+                <Tag2 outline variant="success">
+                  Beta
+                </Tag2>
+              ) : null}
+              {game.status === 'pending' ? (
+                <Tag2 outline variant="textDisabled">
+                  In Development
+                </Tag2>
+              ) : null}
+            </HeaderTag>
+          </Header>
+          <ImageBlock url={game.image} />
+          <CardBody>
+            <InfoBlock>{game.description}</InfoBlock>
+            <br />
+            <br />
+            <br />
+            <br />
+          </CardBody>
+          <BottomMenu>
+            {game.status === 'released' || game.status === 'beta' ? (
+              <Button as={RouterLink} to={game.path} style={{ zoom: 1, padding: '6px 20px', textAlign: 'center' }}>
+                Play Now
+              </Button>
+            ) : null}
+            {game.status === 'earlyaccess' ? (
+              <Button as={RouterLink} to={game.path} style={{ zoom: 1, padding: '6px 20px', textAlign: 'center' }}>
+                Get Early Access
+              </Button>
+            ) : null}
+            {game.status === 'earliestaccess' ? (
+              <Button as={RouterLink} to={game.path} style={{ zoom: 1, padding: '6px 20px', textAlign: 'center' }}>
+                Get Earliest Access
+              </Button>
+            ) : null}
+            {game.status === 'pending' ? (
+              <Button as={RouterLink} to={game.path} style={{ zoom: 1, padding: '6px 20px', textAlign: 'center' }}>
+                Preview
+              </Button>
+            ) : null}
+            {game.status === 'retired' ? (
+              <Button
+                as={RouterLink}
+                to={game.path}
+                disabled
+                style={{ zoom: 1, padding: '6px 20px', textAlign: 'center' }}>
+                Retired
+              </Button>
+            ) : null}
+          </BottomMenu>
+        </Card3>
+      ))}
+    </Cards>
   );
 };
 

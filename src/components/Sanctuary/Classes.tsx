@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm';
 import useFetch from '~/hooks/useFetch';
 import history from '~/routerHistory';
 import LoreBlock1 from '~/components/LoreBlock1';
-import { Flex, Skeleton } from '~/ui';
+import { Flex, Skeleton, Card3 } from '~/ui';
 import classes from '@arken/node/data/generated/characterClasses.json';
 
 const Abc = styled.div``;
@@ -24,7 +24,7 @@ const Classes = function () {
     );
 
   return (
-    <>
+    <Card3 style={{ marginTop: 10 }}>
       <main className="content-wrapper wf-section">
         <div className="page-bg-top">
           <img
@@ -122,7 +122,7 @@ const Classes = function () {
           </div>
         </div>
       </main>
-    </>
+    </Card3>
   );
 };
 

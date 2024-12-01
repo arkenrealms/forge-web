@@ -3,7 +3,7 @@ import { decodeItem } from '@arken/node/util/decoder';
 import styled, { css } from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
-import { Button, Flex, Card, Heading, CardBody, BaseLayout, Skeleton, ButtonMenu, ButtonMenuItem } from '~/ui';
+import { Button, Flex, Card, Card2, Heading, CardBody, BaseLayout, Skeleton, ButtonMenu, ButtonMenuItem } from '~/ui';
 import Page from '~/components/layout/Page';
 import { Link as RouterLink } from 'react-router-dom';
 import useI18n from '~/hooks/useI18n';
@@ -306,400 +306,401 @@ const Leaderboard = () => {
     <Page>
       <GlobalStyles />
       <Container>
-        <Card style={{ width: '100%' }}>
-          <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-            {t('Leaderboard')}
-          </Heading>
-          <hr />
-          <CardBody>
-            <Flex flexDirection="column" alignItems="center" justifyContent="center">
-              <ButtonMenu activeIndex={tab} scale="md" onItemClick={(index) => updateTab(index)}>
-                <ButtonMenuItem>{t('Crafters')}</ButtonMenuItem>
-                <ButtonMenuItem>{t('Guilds')}</ButtonMenuItem>
-                <ButtonMenuItem>{t('Raiders')}</ButtonMenuItem>
-                <ButtonMenuItem>{t('Royales')}</ButtonMenuItem>
-                <ButtonMenuItem>{t('Evolution')}</ButtonMenuItem>
-                <ButtonMenuItem>{t('Infinite')}</ButtonMenuItem>
-              </ButtonMenu>
-            </Flex>
-            <br />
-            <br />
-            {tab === 3 ? (
+        <Card2>
+          <Card style={{ width: '100%' }}>
+            <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+              {t('Leaderboard')}
+            </Heading>
+            <hr />
+            <CardBody>
               <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <RouterLink to={`/tournament`}>View Rune Royale Tournament Data</RouterLink>
-              </Flex>
-            ) : null}
-            {tab === 0 ? (
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <ButtonMenu activeIndex={subtab} scale="md" onItemClick={(index) => updateSubTab(index)}>
-                  <ButtonMenuItem>{t('Overall')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Competition #1')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Competition #2')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Competition #3')}</ButtonMenuItem>
+                <ButtonMenu activeIndex={tab} scale="md" onItemClick={(index) => updateTab(index)}>
+                  <ButtonMenuItem>{t('Crafters')}</ButtonMenuItem>
+                  <ButtonMenuItem>{t('Guilds')}</ButtonMenuItem>
+                  <ButtonMenuItem>{t('Raiders')}</ButtonMenuItem>
+                  <ButtonMenuItem>{t('Royales')}</ButtonMenuItem>
+                  <ButtonMenuItem>{t('Evolution')}</ButtonMenuItem>
+                  <ButtonMenuItem>{t('Infinite')}</ButtonMenuItem>
                 </ButtonMenu>
-                <br />
-                <br />
-                {!craftingLeaderboard ? <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" /> : null}
               </Flex>
-            ) : null}
-            {tab === 4 ? (
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <ButtonMenu activeIndex={subtab} scale="md" onItemClick={(index) => updateSubTab(index)}>
-                  {realms.map((realm) => (
-                    <ButtonMenuItem key={realm.name}>
-                      {t(realm.name)}
-                      {/* {realm.regionId} */}
-                    </ButtonMenuItem>
-                  ))}
-                </ButtonMenu>
-                <br />
-                <br />
+              <br />
+              <br />
+              {tab === 3 ? (
                 <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                  <ButtonMenu activeIndex={subSubtab} scale="md" onItemClick={(index) => updateSubSubTab(index)}>
-                    <ButtonMenuItem>{t('Season 1 (2022)')}</ButtonMenuItem>
-                    <ButtonMenuItem>{t('Season 2 (2022)')}</ButtonMenuItem>
-                    <ButtonMenuItem>{t('Season 3 (2022)')}</ButtonMenuItem>
-                    <ButtonMenuItem>{t('Season 4 (2022)')}</ButtonMenuItem>
-                    <ButtonMenuItem>{t('Season 5 (2022)')}</ButtonMenuItem>
-                    <ButtonMenuItem>{t('Season 1 (2023)')}</ButtonMenuItem>
-                    <ButtonMenuItem style={{ display: 'none' }}>{t('Season 0')}</ButtonMenuItem>
-                  </ButtonMenu>
+                  <RouterLink to={`/tournament`}>View Rune Royale Tournament Data</RouterLink>
                 </Flex>
-                <br />
-                <br />
-                {!playerLeaderboard ? <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" /> : null}
-              </Flex>
-            ) : null}
-            <br />
-            <br />
-            <br />
-            {tab === 0 && subtab === 0 && craftingLeaderboard ? (
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <MainHeading>Top Crafters</MainHeading>
-                <br />
-                <br />
-                <br />
-                <Cards>
-                  <VerticalCards>
-                    {craftingLeaderboard?.all.slice(0, 1).map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      let other = cache.stats.totalItems;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data.map((item, index) => {
-                              if (rank >= count) return null;
-                              if (prevItem && item.count !== prevItem.count) rank++;
-                              prevItem = item;
-                              other -= item.count;
-                              return (
-                                <ListItem key={index}>
-                                  <ListItemLeft>{rank}</ListItemLeft>
-                                  <ListItemCenter>
-                                    <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
-                                  </ListItemCenter>
-                                  <ListItemRight>{item.count}</ListItemRight>
-                                </ListItem>
-                              );
-                            })}
-                            <ListItem key="other">
-                              <ListItemCenter>{count + 1}+</ListItemCenter>
-                              <ListItemLeft></ListItemLeft>
-                              <ListItemRight>{other}</ListItemRight>
-                            </ListItem>
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                  <VerticalCards>
-                    {craftingLeaderboard?.all.slice(1).map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data.map((item, index) => {
-                              if (rank >= count) return null;
-                              if (prevItem && item.count !== prevItem.count) rank++;
-                              prevItem = item;
-                              return (
-                                <ListItem key={index}>
-                                  <ListItemLeft>{rank}</ListItemLeft>
-                                  <ListItemCenter>
-                                    <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
-                                  </ListItemCenter>
-                                  <ListItemRight>{item.count}</ListItemRight>
-                                </ListItem>
-                              );
-                            })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                </Cards>
-                <br />
-                <br />
-                <p>
-                  <em>Note: Direct crafts only. Not transfers/sales.</em>
-                </p>
-                <br />
-                <br />
-                <a href="https://www.youtube.com/channel/UCFkCD9N_-d4QGKddOkWbhgg">
-                  <em>
-                    Data provided by <strong>Rune Experiments</strong>
-                  </em>
-                </a>
-              </Flex>
-            ) : null}
-            {tab === 0 && subtab === 1 && craftingLeaderboard ? (
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <MainHeading>Crafting Competition #1</MainHeading>
-                <br />
-                <br />
-                <br />
-                <Cards>
-                  <VerticalCards>
-                    {craftingLeaderboard?.competition1.slice(0, 1).map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data.map((item, index) => {
-                              if (rank >= count) return null;
-                              if (prevItem && item.count !== prevItem.count) rank++;
-                              prevItem = item;
-                              return (
-                                <ListItem key={index}>
-                                  <ListItemLeft>{rank}</ListItemLeft>
-                                  <ListItemCenter>
-                                    <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
-                                  </ListItemCenter>
-                                  <ListItemRight>{item.count}</ListItemRight>
-                                </ListItem>
-                              );
-                            })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                  <VerticalCards>
-                    {craftingLeaderboard?.competition1.slice(1).map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data.map((item, index) => {
-                              if (rank >= count) return null;
-                              if (prevItem && item.count !== prevItem.count) rank++;
-                              prevItem = item;
-                              return (
-                                <ListItem key={index}>
-                                  <ListItemLeft>{rank}</ListItemLeft>
-                                  <ListItemCenter>
-                                    <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
-                                  </ListItemCenter>
-                                  <ListItemRight>{item.count}</ListItemRight>
-                                </ListItem>
-                              );
-                            })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                </Cards>
-                <br />
-                <br />
-                <p>
-                  <em>Note: Direct crafts only. Not transfers/sales.</em>
-                </p>
-                <br />
-                <br />
-                <a href="https://www.youtube.com/channel/UCFkCD9N_-d4QGKddOkWbhgg">
-                  <em>
-                    Data provided by <strong>Rune Experiments</strong>
-                  </em>
-                </a>
-              </Flex>
-            ) : null}
-            {tab === 0 && subtab === 2 && craftingLeaderboard ? (
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <MainHeading>Crafting Competition #2</MainHeading>
-                <br />
-                <br />
-                <br />
-                <Cards>
-                  <VerticalCards>
-                    {craftingLeaderboard?.competition2.slice(0, 1).map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data.map((item, index) => {
-                              if (rank >= count) return null;
-                              if (prevItem && item.count !== prevItem.count) rank++;
-                              prevItem = item;
-                              return (
-                                <ListItem key={index}>
-                                  <ListItemLeft>{rank}</ListItemLeft>
-                                  <ListItemCenter>
-                                    <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
-                                  </ListItemCenter>
-                                  <ListItemRight>{item.count}</ListItemRight>
-                                </ListItem>
-                              );
-                            })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                  <VerticalCards>
-                    {craftingLeaderboard?.competition2.slice(1).map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data.map((item, index) => {
-                              if (rank >= count) return null;
-                              if (prevItem && item.count !== prevItem.count) rank++;
-                              prevItem = item;
-                              return (
-                                <ListItem key={index}>
-                                  <ListItemLeft>{rank}</ListItemLeft>
-                                  <ListItemCenter>
-                                    <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
-                                  </ListItemCenter>
-                                  <ListItemRight>{item.count}</ListItemRight>
-                                </ListItem>
-                              );
-                            })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                </Cards>
-                <br />
-                <br />
-                <p>
-                  <em>Note: Direct crafts only. Not transfers/sales.</em>
-                </p>
-                <br />
-                <br />
-                <a href="https://www.youtube.com/channel/UCFkCD9N_-d4QGKddOkWbhgg">
-                  <em>
-                    Data provided by <strong>Rune Experiments</strong>
-                  </em>
-                </a>
-              </Flex>
-            ) : null}
-            {tab === 0 && subtab === 3 && craftingLeaderboard ? (
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <MainHeading>Crafting Competition #3</MainHeading>
-                <br />
-                <br />
-                <br />
-                <Cards>
-                  <VerticalCards>
-                    {craftingLeaderboard?.competition3.slice(0, 1).map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data.map((item, index) => {
-                              if (rank >= count) return null;
-                              if (prevItem && item.count !== prevItem.count) rank++;
-                              prevItem = item;
-                              return (
-                                <ListItem key={index}>
-                                  <ListItemLeft>{rank}</ListItemLeft>
-                                  <ListItemCenter>
-                                    <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
-                                  </ListItemCenter>
-                                  <ListItemRight>{item.count}</ListItemRight>
-                                </ListItem>
-                              );
-                            })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                  <VerticalCards>
-                    {craftingLeaderboard?.competition3.slice(1).map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data.map((item, index) => {
-                              if (rank >= count) return null;
-                              if (prevItem && item.count !== prevItem.count) rank++;
-                              prevItem = item;
-                              return (
-                                <ListItem key={index}>
-                                  <ListItemLeft>{rank}</ListItemLeft>
-                                  <ListItemCenter>
-                                    <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
-                                  </ListItemCenter>
-                                  <ListItemRight>{item.count}</ListItemRight>
-                                </ListItem>
-                              );
-                            })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                </Cards>
-                <br />
-                <br />
-                <p>
-                  <em>Note: Direct crafts only. Not transfers/sales.</em>
-                </p>
-                <br />
-                <br />
-                <a href="https://www.youtube.com/channel/UCFkCD9N_-d4QGKddOkWbhgg">
-                  <em>
-                    Data provided by <strong>Rune Experiments</strong>
-                  </em>
-                </a>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-              </Flex>
-            ) : null}
+              ) : null}
+              {tab === 0 ? (
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <ButtonMenu activeIndex={subtab} scale="md" onItemClick={(index) => updateSubTab(index)}>
+                    <ButtonMenuItem>{t('Overall')}</ButtonMenuItem>
+                    <ButtonMenuItem>{t('Competition #1')}</ButtonMenuItem>
+                    <ButtonMenuItem>{t('Competition #2')}</ButtonMenuItem>
+                    <ButtonMenuItem>{t('Competition #3')}</ButtonMenuItem>
+                  </ButtonMenu>
+                  <br />
+                  <br />
+                  {!craftingLeaderboard ? <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" /> : null}
+                </Flex>
+              ) : null}
+              {tab === 4 ? (
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <ButtonMenu activeIndex={subtab} scale="md" onItemClick={(index) => updateSubTab(index)}>
+                    {realms.map((realm) => (
+                      <ButtonMenuItem key={realm.name}>
+                        {t(realm.name)}
+                        {/* {realm.regionId} */}
+                      </ButtonMenuItem>
+                    ))}
+                  </ButtonMenu>
+                  <br />
+                  <br />
+                  <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                    <ButtonMenu activeIndex={subSubtab} scale="md" onItemClick={(index) => updateSubSubTab(index)}>
+                      <ButtonMenuItem>{t('Season 1 (2022)')}</ButtonMenuItem>
+                      <ButtonMenuItem>{t('Season 2 (2022)')}</ButtonMenuItem>
+                      <ButtonMenuItem>{t('Season 3 (2022)')}</ButtonMenuItem>
+                      <ButtonMenuItem>{t('Season 4 (2022)')}</ButtonMenuItem>
+                      <ButtonMenuItem>{t('Season 5 (2022)')}</ButtonMenuItem>
+                      <ButtonMenuItem>{t('Season 1 (2023)')}</ButtonMenuItem>
+                      <ButtonMenuItem style={{ display: 'none' }}>{t('Season 0')}</ButtonMenuItem>
+                    </ButtonMenu>
+                  </Flex>
+                  <br />
+                  <br />
+                  {!playerLeaderboard ? <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" /> : null}
+                </Flex>
+              ) : null}
+              <br />
+              <br />
+              <br />
+              {tab === 0 && subtab === 0 && craftingLeaderboard ? (
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <MainHeading>Top Crafters</MainHeading>
+                  <br />
+                  <br />
+                  <br />
+                  <Cards>
+                    <VerticalCards>
+                      {craftingLeaderboard?.all.slice(0, 1).map(({ name, count, data }) => {
+                        let rank = 1;
+                        let prevItem = null;
+                        let other = cache.stats.totalItems;
+                        return (
+                          <div key={name}>
+                            <SubHeading>{name}</SubHeading>
+                            <List>
+                              {data.map((item, index) => {
+                                if (rank >= count) return null;
+                                if (prevItem && item.count !== prevItem.count) rank++;
+                                prevItem = item;
+                                other -= item.count;
+                                return (
+                                  <ListItem key={index}>
+                                    <ListItemLeft>{rank}</ListItemLeft>
+                                    <ListItemCenter>
+                                      <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
+                                    </ListItemCenter>
+                                    <ListItemRight>{item.count}</ListItemRight>
+                                  </ListItem>
+                                );
+                              })}
+                              <ListItem key="other">
+                                <ListItemCenter>{count + 1}+</ListItemCenter>
+                                <ListItemLeft></ListItemLeft>
+                                <ListItemRight>{other}</ListItemRight>
+                              </ListItem>
+                            </List>
+                          </div>
+                        );
+                      })}
+                    </VerticalCards>
+                    <VerticalCards>
+                      {craftingLeaderboard?.all.slice(1).map(({ name, count, data }) => {
+                        let rank = 1;
+                        let prevItem = null;
+                        return (
+                          <div key={name}>
+                            <SubHeading>{name}</SubHeading>
+                            <List>
+                              {data.map((item, index) => {
+                                if (rank >= count) return null;
+                                if (prevItem && item.count !== prevItem.count) rank++;
+                                prevItem = item;
+                                return (
+                                  <ListItem key={index}>
+                                    <ListItemLeft>{rank}</ListItemLeft>
+                                    <ListItemCenter>
+                                      <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
+                                    </ListItemCenter>
+                                    <ListItemRight>{item.count}</ListItemRight>
+                                  </ListItem>
+                                );
+                              })}
+                            </List>
+                          </div>
+                        );
+                      })}
+                    </VerticalCards>
+                  </Cards>
+                  <br />
+                  <br />
+                  <p>
+                    <em>Note: Direct crafts only. Not transfers/sales.</em>
+                  </p>
+                  <br />
+                  <br />
+                  <a href="https://www.youtube.com/channel/UCFkCD9N_-d4QGKddOkWbhgg">
+                    <em>
+                      Data provided by <strong>Rune Experiments</strong>
+                    </em>
+                  </a>
+                </Flex>
+              ) : null}
+              {tab === 0 && subtab === 1 && craftingLeaderboard ? (
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <MainHeading>Crafting Competition #1</MainHeading>
+                  <br />
+                  <br />
+                  <br />
+                  <Cards>
+                    <VerticalCards>
+                      {craftingLeaderboard?.competition1.slice(0, 1).map(({ name, count, data }) => {
+                        let rank = 1;
+                        let prevItem = null;
+                        return (
+                          <div key={name}>
+                            <SubHeading>{name}</SubHeading>
+                            <List>
+                              {data.map((item, index) => {
+                                if (rank >= count) return null;
+                                if (prevItem && item.count !== prevItem.count) rank++;
+                                prevItem = item;
+                                return (
+                                  <ListItem key={index}>
+                                    <ListItemLeft>{rank}</ListItemLeft>
+                                    <ListItemCenter>
+                                      <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
+                                    </ListItemCenter>
+                                    <ListItemRight>{item.count}</ListItemRight>
+                                  </ListItem>
+                                );
+                              })}
+                            </List>
+                          </div>
+                        );
+                      })}
+                    </VerticalCards>
+                    <VerticalCards>
+                      {craftingLeaderboard?.competition1.slice(1).map(({ name, count, data }) => {
+                        let rank = 1;
+                        let prevItem = null;
+                        return (
+                          <div key={name}>
+                            <SubHeading>{name}</SubHeading>
+                            <List>
+                              {data.map((item, index) => {
+                                if (rank >= count) return null;
+                                if (prevItem && item.count !== prevItem.count) rank++;
+                                prevItem = item;
+                                return (
+                                  <ListItem key={index}>
+                                    <ListItemLeft>{rank}</ListItemLeft>
+                                    <ListItemCenter>
+                                      <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
+                                    </ListItemCenter>
+                                    <ListItemRight>{item.count}</ListItemRight>
+                                  </ListItem>
+                                );
+                              })}
+                            </List>
+                          </div>
+                        );
+                      })}
+                    </VerticalCards>
+                  </Cards>
+                  <br />
+                  <br />
+                  <p>
+                    <em>Note: Direct crafts only. Not transfers/sales.</em>
+                  </p>
+                  <br />
+                  <br />
+                  <a href="https://www.youtube.com/channel/UCFkCD9N_-d4QGKddOkWbhgg">
+                    <em>
+                      Data provided by <strong>Rune Experiments</strong>
+                    </em>
+                  </a>
+                </Flex>
+              ) : null}
+              {tab === 0 && subtab === 2 && craftingLeaderboard ? (
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <MainHeading>Crafting Competition #2</MainHeading>
+                  <br />
+                  <br />
+                  <br />
+                  <Cards>
+                    <VerticalCards>
+                      {craftingLeaderboard?.competition2.slice(0, 1).map(({ name, count, data }) => {
+                        let rank = 1;
+                        let prevItem = null;
+                        return (
+                          <div key={name}>
+                            <SubHeading>{name}</SubHeading>
+                            <List>
+                              {data.map((item, index) => {
+                                if (rank >= count) return null;
+                                if (prevItem && item.count !== prevItem.count) rank++;
+                                prevItem = item;
+                                return (
+                                  <ListItem key={index}>
+                                    <ListItemLeft>{rank}</ListItemLeft>
+                                    <ListItemCenter>
+                                      <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
+                                    </ListItemCenter>
+                                    <ListItemRight>{item.count}</ListItemRight>
+                                  </ListItem>
+                                );
+                              })}
+                            </List>
+                          </div>
+                        );
+                      })}
+                    </VerticalCards>
+                    <VerticalCards>
+                      {craftingLeaderboard?.competition2.slice(1).map(({ name, count, data }) => {
+                        let rank = 1;
+                        let prevItem = null;
+                        return (
+                          <div key={name}>
+                            <SubHeading>{name}</SubHeading>
+                            <List>
+                              {data.map((item, index) => {
+                                if (rank >= count) return null;
+                                if (prevItem && item.count !== prevItem.count) rank++;
+                                prevItem = item;
+                                return (
+                                  <ListItem key={index}>
+                                    <ListItemLeft>{rank}</ListItemLeft>
+                                    <ListItemCenter>
+                                      <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
+                                    </ListItemCenter>
+                                    <ListItemRight>{item.count}</ListItemRight>
+                                  </ListItem>
+                                );
+                              })}
+                            </List>
+                          </div>
+                        );
+                      })}
+                    </VerticalCards>
+                  </Cards>
+                  <br />
+                  <br />
+                  <p>
+                    <em>Note: Direct crafts only. Not transfers/sales.</em>
+                  </p>
+                  <br />
+                  <br />
+                  <a href="https://www.youtube.com/channel/UCFkCD9N_-d4QGKddOkWbhgg">
+                    <em>
+                      Data provided by <strong>Rune Experiments</strong>
+                    </em>
+                  </a>
+                </Flex>
+              ) : null}
+              {tab === 0 && subtab === 3 && craftingLeaderboard ? (
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <MainHeading>Crafting Competition #3</MainHeading>
+                  <br />
+                  <br />
+                  <br />
+                  <Cards>
+                    <VerticalCards>
+                      {craftingLeaderboard?.competition3.slice(0, 1).map(({ name, count, data }) => {
+                        let rank = 1;
+                        let prevItem = null;
+                        return (
+                          <div key={name}>
+                            <SubHeading>{name}</SubHeading>
+                            <List>
+                              {data.map((item, index) => {
+                                if (rank >= count) return null;
+                                if (prevItem && item.count !== prevItem.count) rank++;
+                                prevItem = item;
+                                return (
+                                  <ListItem key={index}>
+                                    <ListItemLeft>{rank}</ListItemLeft>
+                                    <ListItemCenter>
+                                      <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
+                                    </ListItemCenter>
+                                    <ListItemRight>{item.count}</ListItemRight>
+                                  </ListItem>
+                                );
+                              })}
+                            </List>
+                          </div>
+                        );
+                      })}
+                    </VerticalCards>
+                    <VerticalCards>
+                      {craftingLeaderboard?.competition3.slice(1).map(({ name, count, data }) => {
+                        let rank = 1;
+                        let prevItem = null;
+                        return (
+                          <div key={name}>
+                            <SubHeading>{name}</SubHeading>
+                            <List>
+                              {data.map((item, index) => {
+                                if (rank >= count) return null;
+                                if (prevItem && item.count !== prevItem.count) rank++;
+                                prevItem = item;
+                                return (
+                                  <ListItem key={index}>
+                                    <ListItemLeft>{rank}</ListItemLeft>
+                                    <ListItemCenter>
+                                      <RouterLink to={`/user/${item.username}`}>{item.username}</RouterLink>
+                                    </ListItemCenter>
+                                    <ListItemRight>{item.count}</ListItemRight>
+                                  </ListItem>
+                                );
+                              })}
+                            </List>
+                          </div>
+                        );
+                      })}
+                    </VerticalCards>
+                  </Cards>
+                  <br />
+                  <br />
+                  <p>
+                    <em>Note: Direct crafts only. Not transfers/sales.</em>
+                  </p>
+                  <br />
+                  <br />
+                  <a href="https://www.youtube.com/channel/UCFkCD9N_-d4QGKddOkWbhgg">
+                    <em>
+                      Data provided by <strong>Rune Experiments</strong>
+                    </em>
+                  </a>
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                </Flex>
+              ) : null}
 
-            {tab === 4 && playerLeaderboard?.[subSubtab + 1]?.[subtabToRealmKey(subtab)] ? (
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <MainHeading>Top Players</MainHeading>
-                <br />
-                <br />
-                <br />
+              {tab === 4 && playerLeaderboard?.[subSubtab + 1]?.[subtabToRealmKey(subtab)] ? (
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <MainHeading>Top Players</MainHeading>
+                  <br />
+                  <br />
+                  <br />
 
-                <Cards>
-                  {/* <VerticalCards>
+                  <Cards>
+                    {/* <VerticalCards>
                 {players.all.slice(0, 1).map(({ name, count, data }) => {
                   let rank = 1
                   let prevItem = null
@@ -724,7 +725,7 @@ const Leaderboard = () => {
                   )
                 })}
               </VerticalCards> */}
-                  {/* <VerticalCards>
+                    {/* <VerticalCards>
                     {playerLeaderboard[subtabToRealmKey(subtab)].monetary.slice(0, 1).map(({ name, count, data }) => {
                       let rank = 1
                       let prevItem = null
@@ -753,127 +754,39 @@ const Leaderboard = () => {
                       )
                     })}
                   </VerticalCards> */}
-                  <VerticalCards>
-                    {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].monetary.map(
-                      ({ name, count, data }) => {
-                        let rank = 1;
-                        let prevItem = null;
-                        return (
-                          <div key={name}>
-                            <SubHeading>Rewards</SubHeading>
-                            <List>
-                              {data
-                                .filter((item) => !['Testman', 'Botter'].includes(item.name))
-                                .map((item, index) => {
-                                  if (prevItem && item.count !== prevItem.count) rank++;
-                                  prevItem = item;
-                                  if (rank > 50 && item.name !== username) return null;
-                                  return (
-                                    <ListItem key={index}>
-                                      <ListItemLeft>{rank}</ListItemLeft>
-                                      <ListItemCenter>
-                                        <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
-                                      </ListItemCenter>
-                                      <ListItemRight>{item.count.toFixed(2)} ZOD</ListItemRight>
-                                    </ListItem>
-                                  );
-                                })}
-                            </List>
-                          </div>
-                        );
-                      }
-                    )}
-                  </VerticalCards>
-                  <VerticalCards>
-                    {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].kills.map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data
-                              .filter((item) => !['Testman', 'Botter'].includes(item.name))
-                              .map((item, index) => {
-                                if (prevItem && item.count !== prevItem.count) rank++;
-                                prevItem = item;
-                                if (rank > 50 && item.name !== username) return null;
-                                return (
-                                  <ListItem key={index}>
-                                    <ListItemLeft>{rank}</ListItemLeft>
-                                    <ListItemCenter>
-                                      <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
-                                    </ListItemCenter>
-                                    <ListItemRight>{item.count}</ListItemRight>
-                                  </ListItem>
-                                );
-                              })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                  <VerticalCards>
-                    {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].rounds.map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data
-                              .filter((item) => !['Testman', 'Botter'].includes(item.name))
-                              .map((item, index) => {
-                                if (prevItem && item.count !== prevItem.count) rank++;
-                                prevItem = item;
-                                if (rank > 50 && item.name !== username) return null;
-                                return (
-                                  <ListItem key={index}>
-                                    <ListItemLeft>{rank}</ListItemLeft>
-                                    <ListItemCenter>
-                                      <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
-                                    </ListItemCenter>
-                                    <ListItemRight>{item.count}</ListItemRight>
-                                  </ListItem>
-                                );
-                              })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                  <VerticalCards>
-                    {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].wins.map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data
-                              .filter((item) => !['Testman', 'Botter'].includes(item.name))
-                              .map((item, index) => {
-                                if (prevItem && item.count !== prevItem.count) rank++;
-                                prevItem = item;
-                                if (rank > 50 && item.name !== username) return null;
-                                return (
-                                  <ListItem key={index}>
-                                    <ListItemLeft>{rank}</ListItemLeft>
-                                    <ListItemCenter>
-                                      <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
-                                    </ListItemCenter>
-                                    <ListItemRight>{item.count}</ListItemRight>
-                                  </ListItem>
-                                );
-                              })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                  <VerticalCards>
-                    {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].powerups.map(
-                      ({ name, count, data }) => {
+                    <VerticalCards>
+                      {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].monetary.map(
+                        ({ name, count, data }) => {
+                          let rank = 1;
+                          let prevItem = null;
+                          return (
+                            <div key={name}>
+                              <SubHeading>Rewards</SubHeading>
+                              <List>
+                                {data
+                                  .filter((item) => !['Testman', 'Botter'].includes(item.name))
+                                  .map((item, index) => {
+                                    if (prevItem && item.count !== prevItem.count) rank++;
+                                    prevItem = item;
+                                    if (rank > 50 && item.name !== username) return null;
+                                    return (
+                                      <ListItem key={index}>
+                                        <ListItemLeft>{rank}</ListItemLeft>
+                                        <ListItemCenter>
+                                          <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
+                                        </ListItemCenter>
+                                        <ListItemRight>{item.count.toFixed(2)} ZOD</ListItemRight>
+                                      </ListItem>
+                                    );
+                                  })}
+                              </List>
+                            </div>
+                          );
+                        }
+                      )}
+                    </VerticalCards>
+                    <VerticalCards>
+                      {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].kills.map(({ name, count, data }) => {
                         let rank = 1;
                         let prevItem = null;
                         return (
@@ -899,106 +812,202 @@ const Leaderboard = () => {
                             </List>
                           </div>
                         );
-                      }
-                    )}
-                  </VerticalCards>
-                  <VerticalCards>
-                    {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].rewards.map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>Pickups</SubHeading>
-                          <List>
-                            {data
-                              .filter((item) => !['Testman', 'Botter'].includes(item.name))
-                              .map((item, index) => {
-                                if (prevItem && item.count !== prevItem.count) rank++;
-                                prevItem = item;
-                                if (rank > 50 && item.name !== username) return null;
-                                return (
-                                  <ListItem key={index}>
-                                    <ListItemLeft>{rank}</ListItemLeft>
-                                    <ListItemCenter>
-                                      <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
-                                    </ListItemCenter>
-                                    <ListItemRight>{item.count}</ListItemRight>
-                                  </ListItem>
-                                );
-                              })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                  <VerticalCards>
-                    {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].evolves.map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data
-                              .filter((item) => !['Testman', 'Botter'].includes(item.name))
-                              .map((item, index) => {
-                                if (prevItem && item.count !== prevItem.count) rank++;
-                                prevItem = item;
-                                if (rank > 50 && item.name !== username) return null;
-                                return (
-                                  <ListItem key={index}>
-                                    <ListItemLeft>{rank}</ListItemLeft>
-                                    <ListItemCenter>
-                                      <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
-                                    </ListItemCenter>
-                                    <ListItemRight>{item.count}</ListItemRight>
-                                  </ListItem>
-                                );
-                              })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                  <VerticalCards>
-                    {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].points.map(({ name, count, data }) => {
-                      let rank = 1;
-                      let prevItem = null;
-                      return (
-                        <div key={name}>
-                          <SubHeading>{name}</SubHeading>
-                          <List>
-                            {data
-                              .filter((item) => !['Testman', 'Botter'].includes(item.name))
-                              .map((item, index) => {
-                                if (prevItem && item.count !== prevItem.count) rank++;
-                                prevItem = item;
-                                if (rank > 50 && item.name !== username) return null;
-                                return (
-                                  <ListItem key={index}>
-                                    <ListItemLeft>{rank}</ListItemLeft>
-                                    <ListItemCenter>
-                                      <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
-                                    </ListItemCenter>
-                                    <ListItemRight>{item.count}</ListItemRight>
-                                  </ListItem>
-                                );
-                              })}
-                          </List>
-                        </div>
-                      );
-                    })}
-                  </VerticalCards>
-                </Cards>
-                <br />
-                <br />
-                <p>
-                  <em>Note: Only counts Rune accounts.</em>
-                </p>
-              </Flex>
-            ) : null}
+                      })}
+                    </VerticalCards>
+                    <VerticalCards>
+                      {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].rounds.map(
+                        ({ name, count, data }) => {
+                          let rank = 1;
+                          let prevItem = null;
+                          return (
+                            <div key={name}>
+                              <SubHeading>{name}</SubHeading>
+                              <List>
+                                {data
+                                  .filter((item) => !['Testman', 'Botter'].includes(item.name))
+                                  .map((item, index) => {
+                                    if (prevItem && item.count !== prevItem.count) rank++;
+                                    prevItem = item;
+                                    if (rank > 50 && item.name !== username) return null;
+                                    return (
+                                      <ListItem key={index}>
+                                        <ListItemLeft>{rank}</ListItemLeft>
+                                        <ListItemCenter>
+                                          <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
+                                        </ListItemCenter>
+                                        <ListItemRight>{item.count}</ListItemRight>
+                                      </ListItem>
+                                    );
+                                  })}
+                              </List>
+                            </div>
+                          );
+                        }
+                      )}
+                    </VerticalCards>
+                    <VerticalCards>
+                      {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].wins.map(({ name, count, data }) => {
+                        let rank = 1;
+                        let prevItem = null;
+                        return (
+                          <div key={name}>
+                            <SubHeading>{name}</SubHeading>
+                            <List>
+                              {data
+                                .filter((item) => !['Testman', 'Botter'].includes(item.name))
+                                .map((item, index) => {
+                                  if (prevItem && item.count !== prevItem.count) rank++;
+                                  prevItem = item;
+                                  if (rank > 50 && item.name !== username) return null;
+                                  return (
+                                    <ListItem key={index}>
+                                      <ListItemLeft>{rank}</ListItemLeft>
+                                      <ListItemCenter>
+                                        <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
+                                      </ListItemCenter>
+                                      <ListItemRight>{item.count}</ListItemRight>
+                                    </ListItem>
+                                  );
+                                })}
+                            </List>
+                          </div>
+                        );
+                      })}
+                    </VerticalCards>
+                    <VerticalCards>
+                      {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].powerups.map(
+                        ({ name, count, data }) => {
+                          let rank = 1;
+                          let prevItem = null;
+                          return (
+                            <div key={name}>
+                              <SubHeading>{name}</SubHeading>
+                              <List>
+                                {data
+                                  .filter((item) => !['Testman', 'Botter'].includes(item.name))
+                                  .map((item, index) => {
+                                    if (prevItem && item.count !== prevItem.count) rank++;
+                                    prevItem = item;
+                                    if (rank > 50 && item.name !== username) return null;
+                                    return (
+                                      <ListItem key={index}>
+                                        <ListItemLeft>{rank}</ListItemLeft>
+                                        <ListItemCenter>
+                                          <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
+                                        </ListItemCenter>
+                                        <ListItemRight>{item.count}</ListItemRight>
+                                      </ListItem>
+                                    );
+                                  })}
+                              </List>
+                            </div>
+                          );
+                        }
+                      )}
+                    </VerticalCards>
+                    <VerticalCards>
+                      {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].rewards.map(
+                        ({ name, count, data }) => {
+                          let rank = 1;
+                          let prevItem = null;
+                          return (
+                            <div key={name}>
+                              <SubHeading>Pickups</SubHeading>
+                              <List>
+                                {data
+                                  .filter((item) => !['Testman', 'Botter'].includes(item.name))
+                                  .map((item, index) => {
+                                    if (prevItem && item.count !== prevItem.count) rank++;
+                                    prevItem = item;
+                                    if (rank > 50 && item.name !== username) return null;
+                                    return (
+                                      <ListItem key={index}>
+                                        <ListItemLeft>{rank}</ListItemLeft>
+                                        <ListItemCenter>
+                                          <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
+                                        </ListItemCenter>
+                                        <ListItemRight>{item.count}</ListItemRight>
+                                      </ListItem>
+                                    );
+                                  })}
+                              </List>
+                            </div>
+                          );
+                        }
+                      )}
+                    </VerticalCards>
+                    <VerticalCards>
+                      {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].evolves.map(
+                        ({ name, count, data }) => {
+                          let rank = 1;
+                          let prevItem = null;
+                          return (
+                            <div key={name}>
+                              <SubHeading>{name}</SubHeading>
+                              <List>
+                                {data
+                                  .filter((item) => !['Testman', 'Botter'].includes(item.name))
+                                  .map((item, index) => {
+                                    if (prevItem && item.count !== prevItem.count) rank++;
+                                    prevItem = item;
+                                    if (rank > 50 && item.name !== username) return null;
+                                    return (
+                                      <ListItem key={index}>
+                                        <ListItemLeft>{rank}</ListItemLeft>
+                                        <ListItemCenter>
+                                          <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
+                                        </ListItemCenter>
+                                        <ListItemRight>{item.count}</ListItemRight>
+                                      </ListItem>
+                                    );
+                                  })}
+                              </List>
+                            </div>
+                          );
+                        }
+                      )}
+                    </VerticalCards>
+                    <VerticalCards>
+                      {playerLeaderboard[subSubtab + 1][subtabToRealmKey(subtab)].points.map(
+                        ({ name, count, data }) => {
+                          let rank = 1;
+                          let prevItem = null;
+                          return (
+                            <div key={name}>
+                              <SubHeading>{name}</SubHeading>
+                              <List>
+                                {data
+                                  .filter((item) => !['Testman', 'Botter'].includes(item.name))
+                                  .map((item, index) => {
+                                    if (prevItem && item.count !== prevItem.count) rank++;
+                                    prevItem = item;
+                                    if (rank > 50 && item.name !== username) return null;
+                                    return (
+                                      <ListItem key={index}>
+                                        <ListItemLeft>{rank}</ListItemLeft>
+                                        <ListItemCenter>
+                                          <RouterLink to={`/user/${item.name}`}>{item.name}</RouterLink>
+                                        </ListItemCenter>
+                                        <ListItemRight>{item.count}</ListItemRight>
+                                      </ListItem>
+                                    );
+                                  })}
+                              </List>
+                            </div>
+                          );
+                        }
+                      )}
+                    </VerticalCards>
+                  </Cards>
+                  <br />
+                  <br />
+                  <p>
+                    <em>Note: Only counts Rune accounts.</em>
+                  </p>
+                </Flex>
+              ) : null}
 
-            {/* {tab === 1 && subtab === 1 && playerLeaderboard ? (
+              {/* {tab === 1 && subtab === 1 && playerLeaderboard ? (
           <Flex flexDirection="column" alignItems="center" justifyContent="center">
             <MainHeading>Player Competition #1</MainHeading>
             <br />
@@ -1082,32 +1091,33 @@ const Leaderboard = () => {
             <br />
           </Flex>
         ) : null} */}
-            {tab === 2 ? (
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <MainHeading>Coming Soon</MainHeading>
-              </Flex>
-            ) : null}
-            {tab === 1 ? (
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <MainHeading>Coming Soon</MainHeading>
-              </Flex>
-            ) : null}
-            {tab === 5 ? (
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <ButtonMenu activeIndex={subtab} scale="md" onItemClick={(index) => updateSubTab(index)}>
-                  <ButtonMenuItem>{t('Europe')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Asia')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('North America')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('South America')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Oceanic')}</ButtonMenuItem>
-                </ButtonMenu>
-                <br />
-                <br />
-                {!playerLeaderboard ? <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" /> : null}
-              </Flex>
-            ) : null}
-          </CardBody>
-        </Card>
+              {tab === 2 ? (
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <MainHeading>Coming Soon</MainHeading>
+                </Flex>
+              ) : null}
+              {tab === 1 ? (
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <MainHeading>Coming Soon</MainHeading>
+                </Flex>
+              ) : null}
+              {tab === 5 ? (
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <ButtonMenu activeIndex={subtab} scale="md" onItemClick={(index) => updateSubTab(index)}>
+                    <ButtonMenuItem>{t('Europe')}</ButtonMenuItem>
+                    <ButtonMenuItem>{t('Asia')}</ButtonMenuItem>
+                    <ButtonMenuItem>{t('North America')}</ButtonMenuItem>
+                    <ButtonMenuItem>{t('South America')}</ButtonMenuItem>
+                    <ButtonMenuItem>{t('Oceanic')}</ButtonMenuItem>
+                  </ButtonMenu>
+                  <br />
+                  <br />
+                  {!playerLeaderboard ? <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" /> : null}
+                </Flex>
+              ) : null}
+            </CardBody>
+          </Card>
+        </Card2>
       </Container>
     </Page>
   );

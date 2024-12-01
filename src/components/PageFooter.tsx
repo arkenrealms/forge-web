@@ -6,7 +6,7 @@ import Page from '~/components/layout/Page';
 import { useModal } from '~/components/Modal';
 import { PurchaseModal } from '~/components/PurchaseModal';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
-import { BaseLayout, Card, Heading, Link } from '~/ui';
+import { BaseLayout, Card, Card3, Heading, Link } from '~/ui';
 
 const Img = styled.img`
   filter: contrast(1.1) drop-shadow(2px 4px 6px black);
@@ -141,37 +141,7 @@ const BottomCTA = () => {
         pointer-events: none;
       `}
     ></div> */}
-      <div
-        css={css`
-          max-width: 1200px;
-          margin: 0 auto;
-          // background: #000;
-          box-shadow:
-            rgb(0 0 0 / 50%) 0px 2px 25px 10px,
-            rgb(0 0 0 / 10%) 0px -1px 0px 0px inset,
-            rgb(0 0 0 / 10%) 0px 0px 66px 66px;
-          border-radius: 7px 7px 0 0;
-          position: relative;
-        `}>
-        <div
-          css={css`
-            position: absolute;
-            left: 8px;
-            top: 8px;
-            right: 8px;
-            bottom: 8px;
-            z-index: -1;
-            border-style: solid;
-            border-width: 1px;
-            border-color: rgba(255, 217, 0, 0.1);
-            border-radius: 6px;
-            background-color: hsla(0, 0%, 100%, 0.04);
-            background-image: linear-gradient(180deg, rgba(114, 255, 182, 0.06), rgba(253, 255, 144, 0.06));
-            box-shadow: 1px 1px 17px 0 rgb(0 0 0 / 38%);
-            filter: hue-rotate(0deg) contrast(71%) brightness(94%) sepia(40%);
-            pointer-events: none;
-            opacity: 0.5;
-          `}></div>
+      <Card3>
         <Page2>
           <Row>
             <Column>
@@ -206,7 +176,7 @@ const BottomCTA = () => {
             <Column style={{ minWidth: 200 }}>
               <Heading size="md">Contact</Heading>
               <br />
-              <p>team@arken.gg</p>
+              <p>sup@arken.gg</p>
             </Column>
             <Column style={{ minWidth: 200 }}>
               <Heading>About</Heading>
@@ -249,7 +219,7 @@ const BottomCTA = () => {
                   style={{ marginBottom: 20, display: 'inline-block' }}
                   target="_blank"
                   rel="noreferrer noopener"
-                  href={`https://t.me/ArkenRealms`}>
+                  href={`https://t.me/Arken_Realms`}>
                   Telegram
                 </a>
 
@@ -328,7 +298,7 @@ const BottomCTA = () => {
             </Column>
           </Row>
         </Page2>
-      </div>
+      </Card3>
     </Container>
   );
 };

@@ -12,7 +12,7 @@ import useCache from '~/hooks/useCache';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import useWeb3 from '~/hooks/useWeb3';
 import { useProfile } from '~/state/hooks';
-import { BaseLayout, Button, Card, CloseIcon, Flex, Heading, Text } from '~/ui';
+import { BaseLayout, Button, Card, Card2, Card3, CloseIcon, Flex, Heading, Text } from '~/ui';
 // import initReactFastclick from "react-fastclick";
 import { safeRuneList } from '~/config';
 
@@ -508,7 +508,7 @@ const Home: React.FC<any> = () => {
               <ChampionWelcome
                 isActive={isActive}
                 title="Infinite Arena"
-                description={`Crush opponents while earning unique prizes in this fast-paced fantasy PvP brawler from Rune: an innovative
+                description={`Crush opponents while earning unique prizes in this fast-paced fantasy PvP brawler from Arken: an innovative
             crypto gaming company pushing GameFi to new horizons. Choose your class, customize your avatar, and collect
             unique NFTs playing the third game in Arken's ever-expanding metaverse. Test your mettle against players
             across the globe and rise above the rest as Champion of the Infinite Arena.`}>
@@ -582,7 +582,7 @@ const Home: React.FC<any> = () => {
                 <Button
                   variant="text"
                   as={Link}
-                  href="https://t.me/ArkenRealms"
+                  href="https://t.me/Arken_Realms"
                   target="_blank"
                   style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}
                 >
@@ -594,7 +594,7 @@ const Home: React.FC<any> = () => {
                 <Button
                   variant="text"
                   as={Link}
-                  href="https://t.me/runereports"
+                  href="https://t.me/Arken_Reports"
                   target="_blank"
                   style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}
                 >
@@ -730,7 +730,7 @@ const Home: React.FC<any> = () => {
           background-size: cover;
         `}>
         <Page>
-          <Card style={{ zIndex: 2 }}>
+          <Card3 style={{ zIndex: 2 }}>
             <BigCard align="left">
               {!isMobile ? (
                 <ProfileContainer
@@ -980,7 +980,7 @@ const Home: React.FC<any> = () => {
             <br /> */}
               <Skills />
             </BigCard>
-          </Card>
+          </Card3>
         </Page>
       </div>
       <br />

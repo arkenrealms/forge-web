@@ -131,21 +131,14 @@ const DAO = () => {
     <Page>
       <Card style={{ width: '100%' }}>
         <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-          {t('Rune DAO')}
+          {t('Arken Realms Council (DAO)')}
         </Heading>
         <hr />
         <CardBody>
           <p>
             Arken Realms will transition from advisory governance to a complete decentralized autonomous organization
-            when{' '}
-            <a
-              href="https://arkenrealms.medium.com/rune-metaverse-dao-1a90f6e1cd18"
-              rel="noreferrer noopener"
-              target="_blank">
-              our 4 phase plan is complete and voted upon
-            </a>
-            . There will be a proposal with more details and a vote before we move to each phase. $RXS token holders can
-            vote if the details / timing are satisfactory on{' '}
+            when our 4 phase plan is complete and voted upon. There will be a proposal with more details and a vote
+            before we move to each phase. $RXS token holders can vote if the details / timing are satisfactory on{' '}
             <a href="https://vote.arken.gg" rel="noreferrer noopener" target="_blank">
               vote.arken.gg
             </a>
@@ -163,7 +156,7 @@ const DAO = () => {
           <p>
             As we work towards the DAO switch, we'll codify configurations &amp; permissions so they can be changed
             using DAO proposals. For details of what could be controlled so far,{' '}
-            <a href="https://github.arken.gg/dao" rel="noreferrer noopener" target="_blank">
+            <a href="https://github.com/ArkenRealsm/dao" rel="noreferrer noopener" target="_blank">
               check ArkenRealms/dao on Github
             </a>
             .

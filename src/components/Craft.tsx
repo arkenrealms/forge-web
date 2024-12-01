@@ -7,6 +7,7 @@ import {
   AutoRenewIcon,
   Button,
   Card,
+  Card3,
   CardBody,
   Skeleton,
   CheckmarkCircleIcon,
@@ -90,11 +91,14 @@ const Runeforms: React.FC<any> = () => {
           cube below!
         </p>
         <br />
+        <br />
+        <br />
+        {/* <br />
         <p>
           My good friend will explain it full detail in the video below. That's all there is to it. Good luck on the
           crafts!
-        </p>
-        <br />
+        </p> */}
+        {/* <br />
         <br />
         <Flex
           flexDirection="column"
@@ -109,7 +113,7 @@ const Runeforms: React.FC<any> = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             style={{ width: '100%', height: '100%', top: 0, left: 0, position: 'absolute' }}></iframe>
-        </Flex>
+        </Flex> */}
       </TipCard>
       {/* <PageWindow> */}
       <br />
@@ -118,7 +122,7 @@ const Runeforms: React.FC<any> = () => {
           .filter((item) => !item.isDisabled && !item.isSecret && !(item as any).isUltraSecret && item.isCraftable)
           .reverse()
           .map((item) => (
-            <ItemCard key={item.name}>
+            <Card3 className="catalog-item" key={item.name}>
               <RecipeInfo
                 item={items.find((r) => r.name === item.name)}
                 // showStatus
@@ -126,7 +130,7 @@ const Runeforms: React.FC<any> = () => {
                 showCraftButton
                 showMarketButton
               />
-            </ItemCard>
+            </Card3>
           ))}
       </ItemContainer>
       <br />
