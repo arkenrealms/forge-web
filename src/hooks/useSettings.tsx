@@ -2,12 +2,74 @@ import React, { useEffect, useState, useContext, createContext } from 'react';
 import styled, { createGlobalStyle, css } from 'styled-components';
 import _ from 'lodash';
 import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from 'antd';
-import useNexusSettings from '@arken/forge-ui/hooks/useSettings';
+import useNexusSettings from '~/hooks/useSettings2';
 import Settings from '../components/Settings';
+import { SettingsContext as SettingsContext2 } from '~/contexts/SettingsContext';
+import { useCallback } from 'react';
+import useMatchBreakpoints from './useMatchBreakpoints';
 
 const { Option } = Select;
 
 const zzz = styled.div``;
+
+const useSettings = () => {
+  const cont: any = useContext(SettingsContext2);
+  const { isMobile } = useMatchBreakpoints();
+  const [settings, setSettings] = useState(defaultSettings);
+
+  if (isMobile) {
+    settings.ContentEditor = 'modal';
+  }
+
+  // useEffect(function () {
+  //   if (settings) return
+  //   if (!window?.localStorage) return
+
+  //   setSettings(JSON.parse(window.localStorage.getItem('Settings') || '{}'))
+  // }, [])
+  // console.log(settings)
+
+  const set = useCallback(
+    function (key: string, value: any) {
+      settings[key] = value;
+      defaultSettings[key] = value;
+      setSettings({ ...settings });
+
+      console.log('Settings set', key, value, settings);
+
+      // setSettings(settings)
+      // setSettings((v: any) => ({ ...v, [key]: value }))
+    },
+    [settings]
+  );
+
+  const save = useCallback(
+    function (values?: any) {
+      console.log('Saving settings', values || settings);
+      window.localStorage.setItem('Settings', JSON.stringify(values || settings));
+    },
+    [settings]
+  );
+
+  return {
+    ...cont,
+    settings,
+    set,
+    save,
+  };
+};
+
+const defaultSettings = {
+  LocalMode: false,
+  DeveloperMode: false,
+  DarkMode: false,
+  ShowDataTrees: false,
+  RemoveConfirmation: true,
+  Validation: true,
+  ContentEditor: 'standalone',
+  TableWidth: 400,
+  ...JSON.parse(window.localStorage.getItem('Settings') || '{}'),
+};
 
 const SettingsContext = createContext<any>({
   settings: {},
@@ -153,10 +215,6 @@ const SettingsProvider = ({ children }: any) => {
   );
 };
 
-function useSettings() {
-  const context = useContext(SettingsContext);
-
-  return context;
-}
-
 export { useSettings, SettingsProvider, SettingsContext };
+
+export default useSettings;

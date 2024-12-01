@@ -7,8 +7,8 @@ import { useEagerConnect, useInactiveListener } from '~/hooks';
 import useAuth from '~/hooks/useAuth';
 import useBrand from '~/hooks/useBrand';
 import useMarket from '~/hooks/useMarket';
-import { AuthProvider } from '@arken/forge-ui/hooks/useAuth';
-import { NavProvider } from '@arken/forge-ui/hooks/useNav';
+import { AuthProvider } from '~/hooks/useAuth';
+import { NavProvider } from '~/hooks/useNav';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import useTheme from '~/hooks/useTheme';
 import useWeb3 from '~/hooks/useWeb3';
@@ -873,7 +873,7 @@ const SiteNav = ({ id }) => {
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
-                      <div className="text-block-5">Arken: Guardians Unleashed</div>
+                      <div className="text-block-5">Guardians Unleashed</div>
                       <div className="text-block-4">Casual Pet world</div>
                     </div>
                   </a>

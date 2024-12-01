@@ -35,7 +35,6 @@
     "@ethersproject/units": "^5",
     "@ethersproject/abstract-provider": "^5",
     "@ethersproject/bytes": "^5",
-    "@arken/forge-ui": "workspace:*",
     "@arken/node": "workspace:*",
     "@arken/evolution-protocol": "workspace:*",
     "@arken/seer-protocol": "workspace:*",
@@ -76,7 +75,6 @@
     "js-md5": "^0",
     "lodash": "^4",
     "lodash.flatmap": "^4",
-    "make-dir-cli": "^3",
     "mathjs": "^12",
     "multicodec": "^3",
     "multihashes": "^4",
@@ -134,7 +132,6 @@
     "web3-utils": "^4",
     "webpack": "^5",
     "webpack-dev-server": "^5",
-    "lightweight-charts": "^4",
     "@ant-design/pro-provider": "^2",
     "@ant-design/pro-flow": "^1"
   },
@@ -171,8 +168,6 @@
     "eslint-plugin-promise": "^5",
     "eslint-plugin-react": "^7",
     "file-loader": "^6",
-    "html-webpack-plugin": "^5",
-    "make-dir-cli": "^3",
     "npm-run-all": "^4",
     "postcss-loader": "^7",
     "prettier": "^3",
@@ -183,9 +178,9 @@
     "typescript": "^5",
     "webpack-bundle-analyzer": "^4",
     "webpack-cli": "^5",
-    "fork-ts-checker-webpack-plugin": "~9.0.2",
-    "@types/redux": "~3.6.0",
-    "redux": "~5.0.1"
+    "fork-ts-checker-webpack-plugin": "^9",
+    "@types/redux": "^3",
+    "redux": "^5"
   },
   "eslintConfig": {
     "overrides": [

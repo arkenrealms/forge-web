@@ -1,7 +1,4 @@
 import { MenuEntry } from '~/components/Menu/types';
-import accounts from '~/views/service/accounts';
-
-import info from '../../package.json';
 
 const arkenConfig: MenuEntry[] = [
   {
@@ -33,7 +30,7 @@ const arkenConfig: MenuEntry[] = [
     ],
   },
   {
-    label: 'Metaverse',
+    label: 'Arken Realms',
     icon: 'MetaverseIcon',
     href: '/metaverse',
     initialOpenState: false,

@@ -1,8 +1,97 @@
-import { useCallback, useState } from 'react';
 import { ConnectorNames } from '~/components/WalletModal/types';
 import { useToast } from '~/state/hooks';
 import useWeb3 from '~/hooks/useWeb3';
 import { connectorsByName } from '~/utils/web3React';
+import React, { useContext, useState, useCallback, useEffect, createContext } from 'react';
+import _ from 'lodash';
+import type { NotificationPlacement } from 'antd/es/notification/interface';
+// import useSettings from './useSettings';
+import { usePrompt } from './usePrompt';
+import config from '../config';
+
+interface AuthProviderProps {
+  trpc: any;
+  children?: React.ReactElement;
+}
+
+const AuthContext = createContext({
+  profile: null,
+  permissions: {} as any,
+  isLoading: true,
+  login: () => {},
+  logout: () => {},
+});
+
+const pca = null;
+
+// const scopes = ['profile', 'openid', 'email', 'User.Read'];
+
+const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
+  // const { settings } = useSettings();
+  const { prompt } = usePrompt();
+
+  const [token, setToken] = useState(
+    config.isAuthorizationEnabled ? window.localStorage.getItem(config.tokenKey) : undefined
+  );
+  const [profile, setProfile] = useState(JSON.parse(window.localStorage.getItem(config.accountKey) || '{}'));
+  const [isLoading, setIsLoading] = useState(true);
+  const [permissions, setPermissions] = useState({});
+
+  const { mutateAsync: authorize, isLoading: isAuthorizing } = trpc.seer.core.authorize.useMutation();
+
+  async function authSilent() {
+    console.log('Refreshing auth');
+
+    const res = await authorize({
+      token: window.localStorage.getItem(config.tokenKey) || undefined,
+      loginAs: window.localStorage.getItem('LoginAs') || undefined,
+    });
+
+    console.log('useAuth res', res);
+
+    if (res) {
+      setToken(res.token);
+      setProfile(res.profile);
+      setPermissions(res.permissions);
+    } else {
+      prompt.error({
+        message: 'Error',
+        description: 'Failed to sign in',
+        placement: 'topRight' as NotificationPlacement,
+        duration: 5,
+      });
+    }
+
+    setIsLoading(false);
+  }
+
+  useEffect(function () {
+    authSilent();
+  }, []);
+
+  async function login() {
+    window.localStorage.removeItem(config.tokenKey);
+    window.localStorage.removeItem(config.accountKey);
+    window.localStorage.removeItem('LoginAs');
+  }
+
+  async function logout() {
+    window.localStorage.removeItem(config.tokenKey);
+    window.localStorage.removeItem(config.accountKey);
+    window.localStorage.removeItem('LoginAs');
+  }
+
+  return (
+    <AuthContext.Provider value={{ profile, permissions, login, logout, isLoading }}>{children}</AuthContext.Provider>
+  );
+};
+
+function useAuth() {
+  const context = useContext(AuthContext);
+  return context;
+}
+
+export { AuthContext, AuthProvider, useAuth };
 
 const addBscToMetamask = () => {
   // @ts-ignore
@@ -42,7 +131,7 @@ const addBscToMetamask = () => {
   }
 };
 
-const useAuth = () => {
+const useAuthOld = () => {
   const { activate, deactivate, account } = useWeb3();
   const { toastError } = useToast();
   const [error, setError] = useState(null);
@@ -78,4 +167,4 @@ const useAuth = () => {
   return { login, logout: deactivate, error };
 };
 
-export default useAuth;
+export default useAuthOld;

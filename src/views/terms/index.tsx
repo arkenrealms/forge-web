@@ -125,8 +125,8 @@ const Risks = () => {
               which can be used commercial given that you follow the terms set herein:
             </p>
             <p>
-              Anyone creating fanart of Arken: Guardians Unleashed needs to either own the Rune Guardian they are
-              creating fan art from or receive permission from that Arken: Guardians Unleashed owner.
+              Anyone creating fanart of Guardians Unleashed needs to either own the Rune Guardian they are creating fan
+              art from or receive permission from that Guardians Unleashed owner.
             </p>
             <p>Creating original fanart without monetizing it is acceptable without any license or ownership.</p>
             <br />
@@ -151,13 +151,13 @@ const Risks = () => {
               (8) you can only play on on one account in any 24-hour period. (9) you, as an Rune owner, are responsible
               for the actions of any "scholars" (players hired by you) that play on your behalf, and that their actions
               can have consequences for any connected accounts that you own. (10) you will not manipulate the energy
-              system, such as gifting Arken: Guardians Unleashed to make use of more energy (This goes under
-              multi-accounting). (11) you have not been included in any trade embargoes or economic sanctions list (such
-              as united nations security council sanctions list), the list of specially designated nationals maintained
-              by ofac (the office of foreign assets control of the u.s. department of the treasury), or the denied
-              persons or entity list of the u.s. department of commerce. Arken Entertainment Inc. reserves the right to
-              choose markets and jurisdictions to conduct business, and may restrict or refuse, in its discretion, the
-              provision of arken.gg services in certain countries or regions.
+              system, such as gifting Guardians Unleashed to make use of more energy (This goes under multi-accounting).
+              (11) you have not been included in any trade embargoes or economic sanctions list (such as united nations
+              security council sanctions list), the list of specially designated nationals maintained by ofac (the
+              office of foreign assets control of the u.s. department of the treasury), or the denied persons or entity
+              list of the u.s. department of commerce. Arken Entertainment Inc. reserves the right to choose markets and
+              jurisdictions to conduct business, and may restrict or refuse, in its discretion, the provision of
+              arken.gg services in certain countries or regions.
             </p>
             <br />
             <br />
@@ -267,17 +267,16 @@ const Risks = () => {
             <br />
             <h2>5. FEE AND PAYMENT</h2>
             <p>
-              If you elect to purchase, trade, or breed Arken: Guardians Unleashed (“mascots”) and Rune Guardian Eggs
-              (collectively, “Arken: Guardians Unleashed"), which will be released by us and we will make them available
-              for purchase on the day we first launch Arken: Guardians Unleashed, then we will release additional Arken:
-              Guardians Unleashed from time to time an egg is purchased on the Site and/or the App, or with or from
-              other users via the App, any financial transactions that you engage in will be conducted solely through
-              the Blockchain via a wallet such as MetaMask or Binance Smart Chain Wallet. We will have no insight into
-              or control over these payments or transactions, nor do we have the ability to reverse any transactions.
-              With that in mind, we will have no liability to you or to any third party for any claims or damages that
-              may arise as a result of any transactions that you engage in via the Site and/or the App or using the
-              Smart Contracts, or any other transactions that you conduct via the Ethereum or Binance Smart Chain
-              ("BSC") network,
+              If you elect to purchase, trade, or breed Guardians Unleashed (“mascots”) and Rune Guardian Eggs
+              (collectively, “Guardians Unleashed"), which will be released by us and we will make them available for
+              purchase on the day we first launch Guardians Unleashed, then we will release additional Arken: Guardians
+              Unleashed from time to time an egg is purchased on the Site and/or the App, or with or from other users
+              via the App, any financial transactions that you engage in will be conducted solely through the Blockchain
+              via a wallet such as MetaMask or Binance Smart Chain Wallet. We will have no insight into or control over
+              these payments or transactions, nor do we have the ability to reverse any transactions. With that in mind,
+              we will have no liability to you or to any third party for any claims or damages that may arise as a
+              result of any transactions that you engage in via the Site and/or the App or using the Smart Contracts, or
+              any other transactions that you conduct via the Ethereum or Binance Smart Chain ("BSC") network,
             </p>
             <p>
               Ethereum requires the payment of a transaction fee (a “Gas Fee”) for every transaction that occurs on the

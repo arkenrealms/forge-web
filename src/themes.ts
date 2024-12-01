@@ -1,6 +1,24 @@
-import { DefaultTheme } from 'styled-components'
-import type { MainTheme } from '@arken/forge-ui/themes'
-import _ from 'lodash'
+import { DefaultTheme } from 'styled-components';
+import _ from 'lodash';
+
+export interface MainTheme {
+  brand?: string;
+  isMobile?: boolean;
+  isDark: boolean;
+  colors: {
+    primary?: string;
+    primaryVariant?: string;
+    secondary?: string;
+    secondaryVariant?: string;
+    bodyBackground?: string;
+    colorBgLayout?: string;
+    contentBackground?: string;
+  };
+  fonts: {
+    material: string;
+    default: string;
+  };
+}
 
 export const lightBaseTheme: MainTheme = {
   isDark: false,
@@ -17,7 +35,7 @@ export const lightBaseTheme: MainTheme = {
     material: 'Lato',
     default: 'Lato',
   },
-}
+};
 
 export const lightTheme: any = {
   base: lightBaseTheme,
@@ -28,7 +46,7 @@ export const lightTheme: any = {
       contentBackground: '#fff',
     },
   }),
-}
+};
 
 export const darkBaseTheme: MainTheme = {
   isDark: true,
@@ -45,7 +63,7 @@ export const darkBaseTheme: MainTheme = {
     material: 'Lato',
     default: 'Lato',
   },
-}
+};
 
 export const darkTheme: any = {
   base: darkBaseTheme,
@@ -54,4 +72,4 @@ export const darkTheme: any = {
       bodyBackground: '#000',
     },
   }),
-}
+};

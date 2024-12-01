@@ -144,7 +144,7 @@ const Rules = () => {
       status: 'pending',
     },
     {
-      name: 'Arken: Guardians Unleashed',
+      name: 'Guardians Unleashed',
       path: '/guardians',
       image: '/images/games/guardians-card.png',
       description: (

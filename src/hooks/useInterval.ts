@@ -1,36 +1,56 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react';
 
-export default function useInterval(callback: any, delay: any) {
-  const savedCallback = useRef()
-  const intervalId = useRef(null)
-  const [currentDelay, setDelay] = useState(delay)
+const defaultOptions = {
+  cancelOnUnmount: true,
+};
 
-  const toggleRunning = useCallback(() => setDelay((d: any) => (d === null ? delay : null)), [delay])
+/**
+ * An async-utility hook that accepts a callback function and a delay time (in milliseconds), then repeats the
+ * execution of the given function by the defined milliseconds.
+ */
+export const useInterval = (fn: () => void, milliseconds: number, options = defaultOptions) => {
+  const opts = { ...defaultOptions, ...(options || {}) };
+  const timeout = useRef<number>();
+  const callback = useRef(fn);
+  const [isCleared, setIsCleared] = useState(false);
 
-  // @ts-ignore
-  const clear = useCallback(() => clearInterval(intervalId.current), [])
-
-  // Remember the latest function.
-  useEffect(() => {
-    savedCallback.current = callback
-  }, [callback])
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      // @ts-ignore
-      savedCallback.current()
+  // the clear method
+  const clear = useCallback(() => {
+    if (timeout.current) {
+      clearInterval(timeout.current);
+      setIsCleared(true);
     }
+  }, []);
 
-    if (intervalId.current) clear()
-
-    if (currentDelay !== null) {
-      // @ts-ignore
-      intervalId.current = setInterval(tick, currentDelay)
+  // if the provided function changes, change its reference
+  useEffect(() => {
+    if (typeof fn === 'function') {
+      callback.current = fn;
     }
+  }, [fn]);
 
-    return clear
-  }, [currentDelay, clear])
+  // when the milliseconds change, reset the timeout
+  useEffect(() => {
+    if (milliseconds && typeof milliseconds === 'number') {
+      clear();
+      // @ts-ignore
+      timeout.current = setInterval(() => {
+        callback.current();
+      }, milliseconds);
+    }
+  }, [milliseconds, clear]);
 
-  return [toggleRunning, !!currentDelay]
-}
+  // when component unmount clear the timeout
+  useEffect(
+    () => () => {
+      if (opts.cancelOnUnmount) {
+        clear();
+      }
+    },
+    []
+  );
+
+  return [isCleared, clear];
+};
+
+export default useInterval;

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Avatar, Dropdown, Menu } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import cerebroConfig from '@arken/forge-ui/config';
+import cerebroConfig from '~/config';
 import { useTour } from '~/hooks/useTour';
 import { useSettings } from '~/hooks/useSettings';
 

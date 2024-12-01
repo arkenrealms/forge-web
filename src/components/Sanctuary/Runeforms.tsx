@@ -136,11 +136,11 @@ const Runeforms = function () {
                           These NFT pets will be generated with random appearances and stats. The combinations are
                           nearly endless, with over 1 trillion possible variations. <br />
                           <br />
-                          Arken: Guardians Unleashed will be build into our unique Rune protocol, which generates the
+                          Guardians Unleashed will be build into our unique Rune protocol, which generates the
                           attributes of each NFT&nbsp;directly into the token ID, for further portability between chains
                           and games. <br />
                           <br />
-                          Estimated launch for Arken: Guardians Unleashed is Q4, 2022 <br />
+                          Estimated launch for Guardians Unleashed is Q4, 2022 <br />
                         </strong>
                       </div>
                     </div>

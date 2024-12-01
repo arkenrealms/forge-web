@@ -1,3 +1,7 @@
+import useMatchBreakpoints from './useMatchBreakpoints';
+import useSettings from './useSettings';
+import useWindowSize from './useWindowSize';
+
 import { Web3Provider } from '@ethersproject/providers';
 import { ChainId } from '@arcanefinance/sdk';
 import { useWeb3React as useWeb3ReactCore } from '@web3-react/core';
@@ -5,6 +9,12 @@ import { Web3ReactContextInterface } from '@web3-react/core/dist/types';
 import { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { injected } from '~/utils/web3React';
+
+export { useBrand } from './useBrand';
+// export { useDataModel } from "./useDataModel";
+export * from './usePrompt';
+export { useMatchBreakpoints, useSettings, useWindowSize };
+
 // import { connectorLocalStorageKey } from 'widgets/WalletModal/config'
 // import { NetworkContextName } from '~/constants'
 const NetworkContextName = 'NETWORK';

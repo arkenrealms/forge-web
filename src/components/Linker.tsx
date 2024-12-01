@@ -30,45 +30,34 @@ import history from '~/routerHistory';
 const zzz = styled.div``;
 
 const gameInfo = {
-  Raid: {
+  'Runic Raids': {
     ...games.find((g) => g.name === 'Runic Raids'),
     icon: RaidIcon,
     color: '#b59494', //'#c4504c'
   },
-  Infinite: {
+  'Infinite Arena': {
     ...games.find((g) => g.name === 'Infinite Arena'),
     icon: InfiniteIcon,
     color: '#b59494', //'#32b2df'
   },
-  Evolution: {
+  'Evolution Isles': {
     ...games.find((g) => g.name === 'Evolution Isles'),
     icon: EvolutionIcon,
     color: '#b59494', //'#0fc1ff'
   },
-  Sanctuary: {
+  'Heart of the Oasis': {
     ...games.find((g) => g.name === 'Heart of the Oasis'),
     icon: SanctuaryIcon,
     color: '#b59494', //'#d6a542'
   },
-  Guardians: {
-    ...games.find((g) => g.name === 'Arken: Guardians Unleashed'),
+  'Guardians Unleashed': {
+    ...games.find((g) => g.name === 'Guardians Unleashed'),
     icon: GuardiansIcon,
     color: '#b59494', //'#2fff0f'
   },
 };
 
-const gameNames = [
-  'Evolution Isles',
-  'Infinite Arena',
-  'Heart of the Oasis',
-  'Arken: Guardians Unleashed',
-  'Runic Raids',
-  'Evolution',
-  'Infinite',
-  'Sanctuary',
-  'Guardians',
-  'Raid',
-];
+const gameNames = ['Evolution Isles', 'Infinite Arena', 'Heart of the Oasis', 'Guardians Unleashed', 'Runic Raids'];
 
 const stringReplacements = {
   '0xA9B91...': 'Market contract',
@@ -830,7 +819,7 @@ const Linker = function ({
 
             for (let j = 0; j < split.length - 1; j++) {
               const previewId = `linker-game-${id}-${gameKey}-${i}-${j}`;
-
+              console.log(333222, gameKey);
               fragments.splice(i + j, 0, split[j]);
               fragments.splice(
                 i + j + 1,

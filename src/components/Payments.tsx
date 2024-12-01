@@ -7,16 +7,16 @@
 // import { FaEye } from 'react-icons/fa';
 // import { useNavigate } from 'react-router-dom';
 // import { css } from 'styled-components';
-// import App from '@arken/forge-ui/components/App';
-// import FormFieldText from '@arken/forge-ui/components/FormFieldText';
-// import FormFieldNumber from '@arken/forge-ui/components/FormFieldNumber';
-// import FormFieldSelect from '@arken/forge-ui/components/FormFieldSelect';
-// import FormFieldChoice from '@arken/forge-ui/components/FormFieldChoice';
-// import useSettings from '@arken/forge-ui/hooks/useSettings';
+// import App from '~/components/App';
+// import FormFieldText from '~/components/FormFieldText';
+// import FormFieldNumber from '~/components/FormFieldNumber';
+// import FormFieldSelect from '~/components/FormFieldSelect';
+// import FormFieldChoice from '~/components/FormFieldChoice';
+// import useSettings from '~/hooks/useSettings';
 // import * as log from '@arken/node/util/log';
 // import { camelize } from '@arken/node/util/string';
-// import { usePrompt } from '@arken/forge-ui/hooks/usePrompt';
-// import { useAuth } from '@arken/forge-ui/hooks/useAuth';
+// import { usePrompt } from '~/hooks/usePrompt';
+// import { useAuth } from '~/hooks/useAuth';
 // import appConfig from '~/config';
 
 // // const Payments = ({ themeConfig }: any) => {

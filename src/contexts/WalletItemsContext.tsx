@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { getWeb3NoAccount } from '~/utils/web3';
-import BigNumber from 'bignumber.js';
-import { decodeItem } from '@arken/node/util/decoder';
 import { getArcaneItemContract } from '~/utils/contractHelpers';
 import { makeBatchRequest } from '~/utils/web3';
-import useInterval from '~/hooks/useInterval';
-import { useBarracks, useMasterchef } from '~/hooks/useContract';
 import useWeb3 from '~/hooks/useWeb3';
 
 const arcaneItemsContract = getArcaneItemContract();

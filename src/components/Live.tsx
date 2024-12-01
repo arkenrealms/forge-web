@@ -400,7 +400,7 @@ const LiveInner = () => {
                     </ToggleWrapper>
                   </ViewControls>
                   <Heading as="h3" size="md" style={{ marginTop: 15 }}>
-                    {t('Arken: Guardians Unleashed')}
+                    {t('Guardians Unleashed')}
                   </Heading>
                   <ViewControls>
                     <ToggleWrapper>

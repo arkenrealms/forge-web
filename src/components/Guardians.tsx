@@ -37,7 +37,10 @@ const BigCard = styled.div<{ align?: string }>`
   background-color: rgba(0, 0, 0, 0.4);
 
   background-size: 400px;
-  box-shadow: 0 2px 0 0 rgb(0 0 0 / 80%), inset 0 -1px 0 0 rgb(0 0 0 / 10%), 0 0 66px 66px rgb(0 0 0 / 10%);
+  box-shadow:
+    0 2px 0 0 rgb(0 0 0 / 80%),
+    inset 0 -1px 0 0 rgb(0 0 0 / 10%),
+    0 0 66px 66px rgb(0 0 0 / 10%);
   // background-color: rgba(0,0,0,0.4);
   line-height: 1.6rem;
   font-size: 1rem;
@@ -250,7 +253,7 @@ const Home: React.FC<any> = () => {
             }
           `}>
           <ChampionWelcome
-            title="Arken: Guardians Unleashed"
+            title="Guardians Unleashed"
             description={`Hatch unique pets, unlock special abilities, and raise your perfect Guardian in the newest digital pet NFT game from Rune. Grow and evolve your pets as you fight alongside them in Arken's expanding metaverse: from the Infinite Arena PvP brawler to the vast RPG of Sanctuary. With over 50 unique pet designs and nearly a trillion combinations: breed an epic companion that’s unique to you! Earn new and exclusive recipes, rewards, and abilities as you progress in this constantly evolving game, seamlessly integrated into Arken's flourishing ecosystem.`}>
             <div>
               {account && holders.find((p) => p.address.toLowerCase() === account.toLowerCase()) ? (
@@ -298,7 +301,7 @@ const Home: React.FC<any> = () => {
             mb="20px"
             style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)' }}
           >
-            {t('Arken: Guardians Unleashed')}
+            {t('Guardians Unleashed')}
           </Heading> */}
         {/* <Img src="/images/chars.png" /> */}
         {/* <br />

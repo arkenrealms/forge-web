@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import { MainTheme } from '~/theme';
 
 // :root {
 //   --font-default: "Alegreya Sans";

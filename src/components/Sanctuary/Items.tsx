@@ -927,7 +927,7 @@ const Items = function () {
                 <li>
                   Founder Cubes - There is a max of 1000 cubes. Each comes with benefits:&nbsp;Heart of the Oasis
                   Collector's Edition, Early Access to Arken games, Access to Founder's Tavern in the End of Time, Every
-                  Rune in Heart of the Oasis (1 EL-ZOD), Golden Cube Skin - Angel Skin + Wings, Discord Badge + Private
+                  Rune in Heart of the Oasis (1 EX-ZEL), Golden Cube Skin - Angel Skin + Wings, Discord Badge + Private
                   Channel, Exclusive T-shirt
                 </li>
               </ul>

@@ -19,9 +19,6 @@ const Guilds = lazy(() => import('../views/guilds'));
 const Cube = lazy(() => import('../views/cube'));
 const Creature = lazy(() => import('../views/creature'));
 const News = lazy(() => import('../views/news'));
-const Interfaces = lazy(() => import('../views/interfaces'));
-const InterfaceTemplates = lazy(() => import('../views/interface/templates'));
-const InterfaceGroups = lazy(() => import('../views/interface/groups'));
 const Bounties = lazy(() => import('../views/bounties'));
 const Support = lazy(() => import('../views/support'));
 const ClassDesigner = lazy(() => import('../views/class-designer'));
@@ -36,14 +33,12 @@ const AccountRewards = lazy(() => import('../views/account/rewards'));
 const AccountStats = lazy(() => import('../views/account/stats'));
 const AccountCreation = lazy(() => import('../views/account/signup'));
 const AccountLink = lazy(() => import('../views/account/link'));
-const Creator = lazy(() => import('../views/service/creator'));
 const Whitepaper = lazy(() => import('../views/whitepaper'));
 const Token = lazy(() => import('../views/token'));
 const Polls = lazy(() => import('../views/polls'));
 const Risks = lazy(() => import('../views/risks'));
 const Terms = lazy(() => import('../views/terms'));
 const Guides = lazy(() => import('../views/guides'));
-const InterfaceDesigner = lazy(() => import('../components/InterfaceDesigner'));
 const Features = lazy(() => import('../views/features'));
 const Tokenomics = lazy(() => import('../views/tokenomics'));
 const Faq = lazy(() => import('../views/faq'));
@@ -135,17 +130,22 @@ const SwapRemoveLiquidity = lazy(() => import('../views/swap/remove/_currencyIdA
 const SwapAddLiquidity = lazy(() => import('../views/swap/add/_currencyIdA'));
 const SwapPool = lazy(() => import('../views/swap/pool'));
 const SwapPoolFinder = lazy(() => import('../views/swap/find'));
-const Services = lazy(() => import('../views/services'));
-const ServiceMetaverses = lazy(() => import('../views/service/metaverses'));
-const ServiceReferrals = lazy(() => import('../views/service/referrals'));
-const ServicePayments = lazy(() => import('../views/service/payments'));
-const ServiceRealms = lazy(() => import('../views/service/realms'));
-const ServiceRealm = lazy(() => import('../views/service/realm'));
-const ServiceGames = lazy(() => import('../views/service/games'));
-const ServiceGame = lazy(() => import('../views/service/game'));
-const ServiceAccounts = lazy(() => import('../views/service/accounts'));
-const ServiceProfiles = lazy(() => import('../views/service/profiles'));
-const CryptoTransactions = lazy(() => import('../views/crypto/transactions'));
+// const Interfaces = lazy(() => import('../views/interfaces'));
+// const InterfaceTemplates = lazy(() => import('../views/interface/templates'));
+// const InterfaceGroups = lazy(() => import('../views/interface/groups'));
+// const Creator = lazy(() => import('../views/service/creator'));
+// const InterfaceDesigner = lazy(() => import('../components/InterfaceDesigner'));
+// const Services = lazy(() => import('../views/services'));
+// const ServiceMetaverses = lazy(() => import('../views/service/metaverses'));
+// const ServiceReferrals = lazy(() => import('../views/service/referrals'));
+// const ServicePayments = lazy(() => import('../views/service/payments'));
+// const ServiceRealms = lazy(() => import('../views/service/realms'));
+// const ServiceRealm = lazy(() => import('../views/service/realm'));
+// const ServiceGames = lazy(() => import('../views/service/games'));
+// const ServiceGame = lazy(() => import('../views/service/game'));
+// const ServiceAccounts = lazy(() => import('../views/service/accounts'));
+// const ServiceProfiles = lazy(() => import('../views/service/profiles'));
+// const CryptoTransactions = lazy(() => import('../views/crypto/transactions'));
 
 const AirdropCmc1Rules = lazy(() => import('../views/airdrop/cmc1/rules'));
 const AirdropCmc1Winners = lazy(() => import('../views/airdrop/cmc1/winners'));
@@ -842,271 +842,271 @@ const useWindows = () => {
       component: Evolution,
       showable: true,
     },
-    {
-      path: '/services',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Services',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: Services,
-      showable: false,
-    },
-    {
-      path: '/crypto/transactions',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Transactions',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: CryptoTransactions,
-      showable: false,
-    },
-    {
-      path: '/service/realms',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Realms',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: ServiceRealms,
-      showable: false,
-    },
-    {
-      path: '/service/realm/:id',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Realm',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: ServiceRealm,
-      showable: false,
-    },
-    {
-      path: '/service/games',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Games',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: ServiceGames,
-      showable: false,
-    },
-    {
-      path: '/service/game/:id',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Game',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: ServiceGame,
-      showable: false,
-    },
-    {
-      path: '/service/game/eras',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Game Eras',
-        interfaceKey: 'game-eras',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: InterfaceDesigner,
-      showable: false,
-    },
-    {
-      path: '/service/metaverses',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Metaverses',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: ServiceMetaverses,
-      showable: false,
-    },
-    {
-      path: '/service/referrals',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Referrals',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: ServiceReferrals,
-      showable: false,
-    },
-    {
-      path: '/service/payments',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Payments',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: ServicePayments,
-      showable: false,
-    },
-    {
-      path: '/service/accounts',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Accounts',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: ServiceAccounts,
-      showable: false,
-    },
-    {
-      path: '/service/profiles',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Profiles',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined, //500,
-      component: ServiceProfiles,
-      showable: false,
-    },
+    // {
+    //   path: '/services',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Services',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: Services,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/crypto/transactions',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Transactions',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: CryptoTransactions,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/service/realms',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Realms',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: ServiceRealms,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/service/realm/:id',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Realm',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: ServiceRealm,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/service/games',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Games',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: ServiceGames,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/service/game/:id',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Game',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: ServiceGame,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/service/game/eras',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Game Eras',
+    //     interfaceKey: 'game-eras',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: InterfaceDesigner,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/service/metaverses',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Metaverses',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: ServiceMetaverses,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/service/referrals',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Referrals',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: ServiceReferrals,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/service/payments',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Payments',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: ServicePayments,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/service/accounts',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Accounts',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: ServiceAccounts,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/service/profiles',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Profiles',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined, //500,
+    //   component: ServiceProfiles,
+    //   showable: false,
+    // },
     {
       path: '/sanctuary',
       icon: AboutIcon,
@@ -2634,72 +2634,72 @@ const useWindows = () => {
       component: Links,
       showable: false,
     },
-    {
-      path: '/interfaces',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Interfaces',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: 100,
-      component: Interfaces,
-      showable: false,
-    },
-    {
-      path: '/interface/templates',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Interface Templates',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: 100,
-      component: InterfaceTemplates,
-      showable: false,
-    },
-    {
-      path: '/interface/groups',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Interface Groups',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: 100,
-      component: InterfaceGroups,
-      showable: false,
-    },
+    // {
+    //   path: '/interfaces',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Interfaces',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: 100,
+    //   component: Interfaces,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/interface/templates',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Interface Templates',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: 100,
+    //   component: InterfaceTemplates,
+    //   showable: false,
+    // },
+    // {
+    //   path: '/interface/groups',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Interface Groups',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: 100,
+    //   component: InterfaceGroups,
+    //   showable: false,
+    // },
     {
       path: '/vote',
       icon: AboutIcon,
@@ -2788,28 +2788,28 @@ const useWindows = () => {
       component: Leaderboard,
       showable: true,
     },
-    {
-      path: '/creator',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Creator',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined,
-      component: Creator,
-      showable: true,
-    },
+    // {
+    //   path: '/creator',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Creator',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined,
+    //   component: Creator,
+    //   showable: true,
+    // },
     {
       path: '/guilds',
       icon: AboutIcon,

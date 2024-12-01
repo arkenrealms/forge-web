@@ -289,7 +289,7 @@ const Evolution: React.FC<any> = () => {
           <br />
           - Access to Founder's Tavern in the End of Time
           <br />
-          - Every Rune in Heart of the Oasis (1 EL-ZOD)
+          - Every Rune in Heart of the Oasis (1 EX-ZEL)
           <br />
           - Golden Cube Skin
           <br />

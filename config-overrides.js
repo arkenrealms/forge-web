@@ -2,14 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin'); // Import the plugin
+// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin'); // Import the plugin
 
 module.exports = function (config, env) {
   if (!config.resolve) config.resolve = {};
   if (!config.resolve.fallback) config.resolve.fallback = {};
 
+  config.cache = true;
+
   config.optimization = {
+    ...config.optimization,
     minimizer: [
+      ...(config.optimization.minimizer || []),
       new TerserPlugin({
         parallel: 2,
       }),
@@ -25,7 +29,7 @@ module.exports = function (config, env) {
     buffer: require.resolve('buffer'),
     assert: false, // require.resolve('assert'),
     url: require.resolve('url'), // For browser-compatible URL handling
-    process: require.resolve('process/browser'),
+    // process: require.resolve('process/browser'),
     crypto: require.resolve('crypto-browserify'),
     util: false,
     http: false,
@@ -58,7 +62,7 @@ module.exports = function (config, env) {
   config.resolve.alias = {
     '~': path.resolve(__dirname, './src'),
     // 'ethereumjs-util': false,
-    'process/browser': false, // require.resolve('process/browser.js'), // Ensure correct resolution
+    // 'process/browser': false, // require.resolve('process/browser.js'), // Ensure correct resolution
     fs: false,
     path: false,
     net: false,
@@ -121,14 +125,14 @@ module.exports = function (config, env) {
     })
   );
 
-  config.plugins.push(
-    new ForkTsCheckerWebpackPlugin({
-      async: false,
-      typescript: {
-        memoryLimit: 8192, // Adjust as needed
-      },
-    })
-  );
+  // config.plugins.push(
+  //   new ForkTsCheckerWebpackPlugin({
+  //     async: false,
+  //     typescript: {
+  //       memoryLimit: 8192, // Adjust as needed
+  //     },
+  //   })
+  // );
 
   // config.plugins.push(
   //   new webpack.DefinePlugin({

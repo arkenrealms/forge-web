@@ -3,12 +3,10 @@ import styled, { css } from 'styled-components';
 import { Button } from '~/components/Button';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { toFixed } from '@arken/node/util/math';
 import useFetch from '~/hooks/useFetch';
 import { Card, Heading, CardBody, ArrowForwardIcon, Flex, Skeleton } from '~/ui';
 import Page from '~/components/layout/Page';
 import Paragraph from '~/components/Paragraph';
-import { getUsername } from '~/state/profiles/getProfile';
 
 const zzz = styled.div``;
 

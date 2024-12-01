@@ -1,6 +1,5 @@
 import type {} from 'styled-components/cssprop';
 import { CSSProp } from 'styled-components';
-// import type { MainTheme } from '@arken/forge-ui/themes';
 import { MainTheme } from './theme';
 
 // This will make it so any styled theme stuff (DefaultTheme) is extending our theme (MainTheme)

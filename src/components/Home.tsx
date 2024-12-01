@@ -1922,7 +1922,7 @@ z-index: 999;
               <BulletPoints>
                 <BulletPoint>
                   <a href="https://runeguardians.com" rel="noreferrer noopener" target="_blank">
-                    Arken: Guardians Unleashed (Collectibles)
+                    Guardians Unleashed (Collectibles)
                   </a>
                 </BulletPoint>
                 <BulletPoint>

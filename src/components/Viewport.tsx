@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import useWindowSize from '~/hooks/useWindowSize'
+import React from 'react';
+import styled from 'styled-components';
+import useWindowSize from '~/hooks/useWindowSize';
 
 const Viewport = styled.div`
   position: relative;
@@ -14,12 +14,12 @@ const Viewport = styled.div`
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.35);
 
   overflow: visible;
-`
+`;
 const ViewportContent = styled.div`
   height: 100%;
   width: 100%;
   overflow: auto;
-`
+`;
 const BottomCornersCover = styled.div`
   position: fixed;
   bottom: 0;
@@ -30,13 +30,13 @@ const BottomCornersCover = styled.div`
   z-index: 999;
   height: 0;
   height: var(--safe-area-inset-bottom);
-`
+`;
 export default ({ children, maxWidth = 450, maxHeight = 896 }) => {
-  const [width, height] = useWindowSize()
+  // const [width, height] = useWindowSize()
   return (
     <>
       {children}
       <BottomCornersCover />
     </>
-  )
-}
+  );
+};

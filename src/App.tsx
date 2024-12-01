@@ -1,7 +1,7 @@
 // App.tsx
 
 import React from 'react';
-import { hydrate, render } from 'react-dom';
+// import { hydrate, render } from 'react-dom';
 // import * as Sentry from '@sentry/react'
 import AppInner from './AppInner';
 import Providers from './Providers';
@@ -11,23 +11,25 @@ import MulticallUpdater from './state/multicall/updater';
 import TransactionUpdater from './state/transactions/updater';
 import ToastListener from './components/ToastListener';
 import enUS from 'antd/lib/locale/en_US';
-import { ProProvider } from '@ant-design/pro-provider';
-import proEnUS from '@ant-design/pro-provider/es/locale/en_US';
-// import reportWebVitals from './reportWebVitals'
+// import { ProProvider } from '@ant-design/pro-provider';
+// import proEnUS from '@ant-design/pro-provider/es/locale/en_US';
 import { ConfigProvider, theme } from 'antd';
-import { ThemeProvider } from 'antd-style';
+// import { ThemeProvider } from 'antd-style';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useBrand, useMatchBreakpoints, useSettings } from '@arken/forge-ui/hooks';
-import { PromptProvider } from '@arken/forge-ui/hooks/usePrompt';
-import { AuthProvider } from '@arken/forge-ui/hooks/useAuth';
-import { NavProvider } from '@arken/forge-ui/hooks/useNav';
-import { NoticeProvider } from '@arken/forge-ui/hooks/useNotice';
+import { useBrand, useMatchBreakpoints } from '~/hooks';
+import { useSettings } from '~/hooks/useSettings';
+import { PromptProvider } from '~/hooks/usePrompt';
+// import { AuthProvider } from '~/hooks/useAuth';
+// import { NavProvider } from '~/hooks/useNav';
+import { NoticeProvider } from '~/hooks/useNotice';
 import { lightTheme, darkTheme } from '~/themes';
 import { trpc, trpcClient, queryClient } from '~/utils/trpc';
-import ResetStyles from '~/reset-styles';
-import GlobalStyles from '~/global-styles';
+// import ResetStyles from '~/reset-styles';
+// import GlobalStyles from '~/global-styles';
+// <ResetStyles />
+// <GlobalStyles />
 // import { trpc, trpcClient } from '~/utils/trpc'; // Adjust path as needed
 
 // Initialize QueryClients for both core and evolution backends
@@ -91,8 +93,6 @@ const App = ({ apolloClient }: any) => {
             <PromptProvider>
               <NoticeProvider>
                 <>
-                  <ResetStyles />
-                  <GlobalStyles />
                   <Providers>
                     <>
                       <ListsUpdater />

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { EllipsisOutlined } from '@ant-design/icons';
-import type { TourProps } from 'antd';
+// import { EllipsisOutlined } from '@ant-design/icons';
+// import type { TourProps } from 'antd';
 import styled, { createGlobalStyle, css } from 'styled-components';
-import { Layout, Spin, Button, Modal, Divider, Space, Tour, Tabs } from 'antd';
+// import { Layout, Spin, Button, Modal, Divider, Space, Tour, Tabs } from 'antd';
 import _ from 'lodash';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { QuestionCircleOutlined, SyncOutlined } from '@ant-design/icons';
-import { FloatButton } from 'antd';
-import { useAuth } from '@arken/forge-ui/hooks/useAuth';
-import Header from './Header';
+// import { QuestionCircleOutlined, SyncOutlined } from '@ant-design/icons';
+// import { FloatButton } from 'antd';
+// import { useAuth } from '~/hooks/useAuth';
+// import Header from './Header';
 import Footer from './Footer';
-import { Collapse, Col, Row } from 'antd';
+// import { Collapse, Col, Row } from 'antd';
 import { LikeOutlined, UserOutlined } from '@ant-design/icons';
 import type { ProSettings } from '@ant-design/pro-components';
 import { PageContainer, ProLayout, SettingDrawer } from '@ant-design/pro-components';
@@ -187,7 +187,7 @@ export default ({ children }) => {
 
   const history = useNavigate();
   const location = useLocation();
-  const { profile, permissions, login, logout } = useAuth();
+  // const { profile, permissions, login, logout } = useAuth();
 
   return (
     <div
