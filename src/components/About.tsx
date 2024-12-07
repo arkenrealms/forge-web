@@ -53,7 +53,7 @@ const Rules = () => {
           </Heading>
           <hr />
           <CardBody>
-            <p>Arken was launched March 28, 2021.</p>
+            <p>Arken was launched March 28, 2021. It has evolved and will continue to evolve over the years.</p>
             <br />
             <br />
 
@@ -126,8 +126,8 @@ const Rules = () => {
                     <br />
                     <br />
                     This is balanced to support economic inflows and outflows. For example, disenchanting an item will
-                    give you LEM runes, and upgrading items will require LEM runes based on the global disenchant rate.
-                    There's a ying and yang to each economy within the Arken Realms.
+                    give you LENI runes, and upgrading items will require LENI runes based on the global disenchant
+                    rate. There's a ying and yang to each economy within the Arken Realms.
                   </Linker>
                 </p>
               </div>

@@ -1,44 +1,31 @@
 import { MenuEntry } from '~/components/Menu/types';
 
 const arkenConfig: MenuEntry[] = [
+  // {
+  //   label: 'Home',
+  //   icon: 'HomeIcon',
+  //   href: '/',
+  // },
   {
-    label: 'Home',
-    icon: 'HomeIcon',
-    href: '/',
-  },
-  {
-    label: 'Arken Realms',
-    icon: 'MetaverseIcon',
-    href: '/metaverse',
-    initialOpenState: false,
+    label: 'About',
+    icon: 'AccountIcon',
+    href: '/about',
     items: [
       {
-        label: 'About',
-        href: '/about',
-      },
-      {
-        label: 'Games',
-        href: '/games',
-      },
-      {
-        label: 'Team',
-        href: '/team',
+        label: 'Council',
+        href: '/about/council',
       },
       {
         label: 'Tokenomics',
-        href: '/tokenomics',
+        href: '/about/tokenomics',
       },
       {
         label: 'Roadmap',
-        href: '/roadmap',
-      },
-      {
-        label: 'Council',
-        href: '/dao',
+        href: '/about/roadmap',
       },
       {
         label: 'AI',
-        href: '/ai',
+        href: '/about/ai',
       },
       // {
       //   label: 'FAQ',
@@ -46,19 +33,80 @@ const arkenConfig: MenuEntry[] = [
       // },
       {
         label: 'Stats',
-        href: '/stats',
+        href: '/about/stats',
       },
       {
         label: 'Guilds',
-        href: '/guilds',
+        href: '/about/guilds',
       },
       {
         label: `Patch Notes`,
-        href: '/updates',
+        href: '/about/updates',
       },
       {
         label: `Developer Portal`,
-        href: '/developer',
+        href: '/about/developer',
+      },
+    ],
+  },
+  {
+    label: 'Games',
+    icon: 'CraftIcon',
+    href: '/games',
+    items: [
+      {
+        label: 'Evolution Isles',
+        icon: 'EvolutionIcon',
+        href: '/evolution',
+      },
+      {
+        label: 'Infinite Arena',
+        icon: 'InfiniteIcon',
+        href: '/infinite',
+      },
+      {
+        label: 'Heart of the Oasis',
+        icon: 'SanctuaryIcon',
+        href: '/oasis',
+      },
+    ],
+  },
+  {
+    label: 'Realms',
+    icon: 'MetaverseIcon',
+    href: '/realms',
+    initialOpenState: false,
+    items: [
+      {
+        label: 'Fantasy Realm',
+        href: '/realms/fantasy',
+        items: [
+          {
+            label: 'Games',
+            href: '/realms/fantasy/games',
+            items: [
+              {
+                label: 'Evolution Isles',
+                icon: 'EvolutionIcon',
+                href: '/evolution',
+              },
+              {
+                label: 'Infinite Arena',
+                icon: 'EvolutionIcon',
+                href: '/infinite',
+              },
+              {
+                label: 'Heart of the Oasis',
+                icon: 'EvolutionIcon',
+                href: '/oasis',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        label: 'Meme Realm',
+        href: '/realms/meme',
       },
     ],
   },
@@ -175,7 +223,7 @@ const arkenConfig: MenuEntry[] = [
       // },
       {
         label: 'Runeforms',
-        href: '/runewords',
+        href: '/runeforms',
       },
       // {
       //   label: 'Mechanics',
@@ -455,7 +503,7 @@ const arkenConfig: MenuEntry[] = [
   //   ],
   // },
   // {
-  //   label: 'RuneWords',
+  //   label: 'Runeforms',
   //   icon: 'NftIcon',
   //   items: [
   //     {

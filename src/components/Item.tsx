@@ -18,7 +18,7 @@ import SparkleAnimation from '~/components/SparkleAnimation';
 
 type Props = {
   item: ItemType;
-  itemIndex: string;
+  itemIndex?: string;
   isDisabled?: boolean;
   showQuantity?: boolean;
   showDropdown?: boolean;
@@ -140,7 +140,7 @@ const Container = styled.div<{ rarity: string; isSelected: boolean }>`
 
 const Item: React.FC<Props> = ({
   item,
-  itemIndex,
+  itemIndex = 0,
   showName = false,
   showQuantity = true,
   showDropdown = true,

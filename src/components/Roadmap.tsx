@@ -1160,7 +1160,7 @@ const Roadmap = () => {
             ),
             status: 'working',
             notes: [
-              <>Runeforms will be disenchantable for LEM runes using the Transmute Cube</>,
+              <>Runeforms will be disenchantable for LENI runes using the Transmute Cube</>,
               <>
                 Link to <RouterLink to="/runes">Runes</RouterLink>
               </>,
@@ -1174,7 +1174,7 @@ const Roadmap = () => {
             ),
             status: 'working',
             notes: [
-              <>Runeforms will be upgradeable using LEM runes + worldstone shards using the Transmute Cube</>,
+              <>Runeforms will be upgradeable using LENI runes + worldstone shards using the Transmute Cube</>,
               <>
                 Link to <RouterLink to="/runes">Runes</RouterLink>
               </>,

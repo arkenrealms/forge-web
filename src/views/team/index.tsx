@@ -744,7 +744,7 @@ const Team = ({ match }) => {
                   Discord
                 </a>{' '}
                 or{' '}
-                <a target="_blank" rel="noreferrer noopener" href={`https://t.me/Arken_Realms`}>
+                <a target="_blank" rel="noreferrer noopener" href={`https://telegram.arken.gg`}>
                   Telegram
                 </a>
                 . When the market gives us the opportunity, we'll look at our volunteers for the first hires. It takes a

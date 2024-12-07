@@ -1124,6 +1124,7 @@ zoom: 0.001;
     margin-left: auto;
     margin-right: auto;
     max-width: 940px;
+    // text-align: center;
   }
   
   .w-container:before,
@@ -3089,6 +3090,7 @@ zoom: 0.001;
   
   .character-details-content {
     position: relative;
+    width: 100%;
   }
   
   .character-details-content.mt-1 {
@@ -4175,7 +4177,7 @@ zoom: 0.001;
     margin-bottom: 0px;
     padding: 8px 96px;
     border-bottom-style: none;
-    background-image: url("/images/6193455bc9880a818f35e670_title-mask-right.png"), url("/images/6193455b64b7ed61090bc85c_title-mask-left.png");
+    background-image: url("/images/title-mask-right.png"), url("/images/title-mask-left.png");
     background-position: 100% 50%, 0% 50%;
     background-size: contain, contain;
     background-repeat: no-repeat, no-repeat;
@@ -4194,7 +4196,7 @@ zoom: 0.001;
     height: 60px;
     margin-right: auto;
     margin-left: auto;
-    background-image: url("/images/6193455bc55119bd11b86c5d_title-mask-middle.png");
+    background-image: url("/images/title-mask-middle.png");
     background-position: 0px 0px;
     background-size: contain;
   }
@@ -4404,7 +4406,7 @@ zoom: 0.001;
   .bg-art-char1 {
     width: 100%;
     height: 400px;
-    background-image: url("/images/618eca38b94fd52d0d7ba61a_370519537010211.png");
+    background-image: url("/images/370519537010211.png");
     background-position: 50% 0%;
     background-size: auto;
     background-repeat: no-repeat;
@@ -4440,7 +4442,7 @@ zoom: 0.001;
     width: 24px;
     height: 24px;
     margin-right: 6px;
-    background-image: url("/images/618ec26aa362f8712b86d128_rune-500x500.png");
+    background-image: url("/images/rune-500x500.png");
     background-position: 50% 50%;
     background-size: contain;
     background-repeat: no-repeat;
@@ -4493,7 +4495,7 @@ zoom: 0.001;
     grid-template-rows: auto auto;
     // border-bottom: 1px solid hsla(0, 0%, 100%, 0.18);
     
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), transparent 13%), url("/images/619b09aec0d05b6e97f00ebf_bg-normal.jpg");
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), transparent 13%), url("/images/bg-normal.jpg");
     background-position: 0px 0px, 0px 0px;
     background-size: auto, 400px;
     box-shadow: 0 0 64px 5px #000;
@@ -4683,7 +4685,7 @@ zoom: 0.001;
     border-top: 1px none hsla(0, 0%, 100%, 0.19);
     border-bottom: 1px solid rgba(0, 0, 0, 0.91);
     
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.54), transparent 48%), url("/images/618ec26aa362f8704a86d13a_frame-rune.png");
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.54), transparent 48%), url("/images/frame-rune.png");
     background-position: 0px 0px, 50% 0%;
     background-size: auto, auto;
     background-repeat: repeat, repeat-x;
@@ -4807,7 +4809,7 @@ zoom: 0.001;
     position: relative;
     padding: 64px;
     
-    background-image: linear-gradient(180deg, rgba(255, 242, 219, 0.75), rgba(255, 242, 219, 0.75)), url("/images/619b09ae6e052712492b4a18_bg-sepia.jpg");
+    background-image: linear-gradient(180deg, rgba(255, 242, 219, 0.75), rgba(255, 242, 219, 0.75)), url("/images/bg-sepia.jpg");
     background-position: 0px 0px, 0px 0px;
     background-size: auto, 400px;
     background-repeat: repeat, repeat;
@@ -4927,7 +4929,7 @@ zoom: 0.001;
     border-right: 1px solid #8f1a1a;
     border-left: 1px solid #8f1a1a;
     
-    background-image: linear-gradient(180deg, rgba(255, 195, 110, 0.77), rgba(255, 195, 110, 0.77)), url("/images/619b09ae9b20f10295d6ff30_bg-light.jpg");
+    background-image: linear-gradient(180deg, rgba(255, 195, 110, 0.77), rgba(255, 195, 110, 0.77)), url("/images/bg-light.jpg");
     background-position: 0px 0px, 0px 0px;
     background-size: auto, 400px;
     box-shadow: inset 0 0 60px 0 rgba(138, 105, 43, 0.61);
@@ -4999,7 +5001,7 @@ zoom: 0.001;
     position: relative;
     padding-top: 32px;
     padding-bottom: 32px;
-    background-image: url("/images/61a307d6c748b56fc0a455af_item-bg-weird-2.png");
+    background-image: url("/images/item-bg-weird-2.png");
     background-position: 50% 50%;
     background-size: contain;
     background-repeat: no-repeat;
@@ -5008,7 +5010,7 @@ zoom: 0.001;
   }
   
   .div-block-30.hidesm {
-    background-image: url("/images/61c225b3c0c573e1cf313910_kona2_fixed.png");
+    background-image: url("/images/kona2_fixed.png");
     background-position: 50% 50%;
     background-size: contain;
     background-repeat: no-repeat;
@@ -5046,7 +5048,7 @@ zoom: 0.001;
     -ms-grid-rows: auto auto;
     grid-template-rows: auto auto;
     border-bottom: 2px none #8f1a1a;
-    background-image: url("/images/618ec26aa362f815e286d126_separator-red-1.png");
+    background-image: url("/images/separator-red-1.png");
     background-position: 50% 100%;
     background-size: 100% 3px;
     background-repeat: repeat-x;
@@ -5056,7 +5058,7 @@ zoom: 0.001;
   .character-details-block-2.red {
     border-bottom-style: none;
     border-bottom-color: #8f1a1a;
-    background-image: url("/images/618ec26aa362f815e286d126_separator-red-1.png");
+    background-image: url("/images/separator-red-1.png");
     background-position: 50% 100%;
     background-size: 100% 3px;
     background-repeat: repeat-x;
@@ -5091,7 +5093,7 @@ zoom: 0.001;
     -ms-grid-rows: auto;
     grid-template-rows: auto;
     border-bottom: 2px none #8f1a1a;
-    background-image: url("/images/618ec26aa362f815e286d126_separator-red-1.png");
+    background-image: url("/images/separator-red-1.png");
     background-position: 50% 100%;
     background-size: 100% 3px;
     background-repeat: repeat-x;
@@ -5119,7 +5121,7 @@ zoom: 0.001;
     display: none;
     margin-top: 90px;
     padding: 21px;
-    background-image: url("/images/618ec26aa362f842b786d135_background-dark.png");
+    background-image: url("/images/background-dark.png");
     background-position: 0px 0px;
     background-size: auto;
   }
@@ -5218,7 +5220,7 @@ zoom: 0.001;
   }
   
   .itemdisplaydd-bg.dark {
-    background-image: url("/images/61a32ae37c26a175b906c190_paper-side-whiter-revert.png"), url("/images/61a32a894e1fe133dfc55cd7_paper-side-whiter.png");
+    background-image: url("/images/paper-side-whiter-revert.png"), url("/images/paper-side-whiter.png");
     background-position: 100% 50%, 0% 50%;
     background-size: contain, contain;
     background-repeat: no-repeat, no-repeat;
@@ -5339,7 +5341,7 @@ zoom: 0.001;
     -webkit-flex: 0 0 auto;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
-    background-image: url("/images/618ec26aa362f836d386d133_character-art-1-bg-detail.png");
+    background-image: url("/images/character-art-1-bg-detail.png");
     background-position: 50% 50%;
     background-size: contain;
     background-repeat: no-repeat;
@@ -5348,7 +5350,7 @@ zoom: 0.001;
   }
   
   .item-bg-1.alt {
-    background-image: url("/images/618ec26aa362f836d386d133_character-art-1-bg-detail.png");
+    background-image: url("/images/character-art-1-bg-detail.png");
     background-size: contain;
   }
   
@@ -5360,7 +5362,7 @@ zoom: 0.001;
   }
   
   .item-bg-1.darkbg {
-    background-image: url("/images/61933896f4d92d923e0af98c_mask-non-uniform.png");
+    background-image: url("/images/mask-non-uniform.png");
     background-size: 90%;
   }
   
@@ -5387,7 +5389,7 @@ zoom: 0.001;
   
   .charactercontainer.bg {
     top: -465px;
-    background-image: url("/images/61a307d6c748b56fc0a455af_item-bg-weird-2.png");
+    background-image: url("/images/item-bg-weird-2.png");
     background-position: 50% 50%;
     background-size: contain;
     background-repeat: no-repeat;
@@ -5426,7 +5428,7 @@ zoom: 0.001;
     margin-bottom: 32px;
     padding: 24px;
     
-    background-image: linear-gradient(180deg, rgba(15, 13, 7, 0.36), rgba(15, 13, 7, 0.36)), url("/images/619b09aec0d05b6e97f00ebf_bg-normal.jpg");
+    background-image: linear-gradient(180deg, rgba(15, 13, 7, 0.36), rgba(15, 13, 7, 0.36)), url("/images/bg-normal.jpg");
     background-position: 0px 0px, 0px 0px;
     background-size: auto, 400px;
   }
@@ -5608,7 +5610,7 @@ zoom: 0.001;
     overflow: visible;
     min-height: 300px;
     padding: 20px;
-    background-image: url("/images/618ec26aa362f836d386d133_character-art-1-bg-detail.png");
+    background-image: url("/images/character-art-1-bg-detail.png");
     background-position: 50% 50%;
     background-size: contain;
     background-repeat: no-repeat;
@@ -5744,7 +5746,7 @@ zoom: 0.001;
     bottom: 0%;
     z-index: 1;
     display: none;
-    background-image: url("/images/619b09ae9b20f10295d6ff30_bg-light.jpg");
+    background-image: url("/images/bg-light.jpg");
     background-position: 0px 0px;
     background-size: 400px;
     opacity: 0.76;
@@ -5754,7 +5756,7 @@ zoom: 0.001;
   
   .div-block-37 {
     position: relative;
-    background-image: url("/images/61933896f4d92d923e0af98c_mask-non-uniform.png");
+    background-image: url("/images/mask-non-uniform.png");
     background-position: 50% 50%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -5817,7 +5819,7 @@ zoom: 0.001;
   .energydisplay {
     min-height: 100%;
     padding: 43px 32px 38px;
-    // background-image: url("/images/618ec26aa362f8dd0586d13b_background-darker.jpg");
+    // background-image: url("/images/background-darker.jpg");
     // background-position: 0px 0px;
     // background-size: 400px;
   }
@@ -6012,232 +6014,232 @@ zoom: 0.001;
     text-shadow: 0 0 6px #000, 0 0 9px #000;
   }
   
-  .rune.runenef {
-    background-image: url("/images/61bd48c700541eccdfa4ec4f_NEF.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runenen {
+    background-image: url("/images/new-runes/NEN.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeeld {
-    background-image: url("/images/61bd48c3f1d2fb9d1c363ba0_ELD.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeelm {
+    background-image: url("/images/new-runes/ELM.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runetir {
-    background-image: url("/images/61bd48cb2045056ac0d1d85f_TIR.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runetyr {
+    background-image: url("/images/new-runes/TYR.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeel {
-    background-image: url("/images/61bd48c3ed803d6c41792062_EL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeex {
+    background-image: url("/images/new-runes/EX.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeeth {
-    background-image: url("/images/61bd48c3f7d41ab4829d62fb_ETH.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeeva {
+    background-image: url("/images/new-runes/EVA.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeith {
-    background-image: url("/images/61bd48c4c856cb7a8c4c8757_ITH.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeisa {
+    background-image: url("/images/new-runes/ISA.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runetal {
-    background-image: url("/images/61bd48ca1374a37c7211adf1_TAL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runetato {
+    background-image: url("/images/new-runes/TATO.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeral {
-    background-image: url("/images/61bd48c879a9531ffef9c6c7_RAL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runero {
+    background-image: url("/images/new-runes/RO.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeort {
-    background-image: url("/images/61bd48c8d23567fa2e0edbca_ORT.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeore {
+    background-image: url("/images/new-runes/ORE.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runethul {
-    background-image: url("/images/61bd48cb4f2500890ee41d20_THUL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runethal {
+    background-image: url("/images/new-runes/THAL.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeamn {
-    background-image: url("/images/61bd48c3784d3888d53b04af_AMN.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeash {
+    background-image: url("/images/new-runes/ASH.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runesol {
-    background-image: url("/images/61bd48cae68b5f6fdc646015_SOL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runesolo {
+    background-image: url("/images/new-runes/SOLO.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeshael {
-    background-image: url("/images/61bd48c89ef6a82c0a837c01_SHAEL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runesen {
+    background-image: url("/images/new-runes/SEN.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runedol {
-    background-image: url("/images/61bd48c29b88c76ee8e4f6c9_DOL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeda {
+    background-image: url("/images/new-runes/DA.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runehel {
-    background-image: url("/images/61c0f7749871af6db99e7b98_HEL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runehan {
+    background-image: url("/images/new-runes/HAN.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeio {
-    background-image: url("/images/61bd48c3c69c245f9a5a25e2_IO.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeion {
+    background-image: url("/images/new-runes/ION.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runelum {
-    background-image: url("/images/61bd48c6df8081331ff33508_LUM.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runelux {
+    background-image: url("/images/new-runes/LUX.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeko {
-    background-image: url("/images/61bd48c702a8981f374f5027_KO.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeka {
+    background-image: url("/images/new-runes/KA.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runefal {
-    background-image: url("/images/61bd48c33366924677910061_FAL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runefus {
+    background-image: url("/images/new-runes/FUS.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runelem {
-    background-image: url("/images/61bd48c6ed803d7245792063_LEM.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeleni {
+    background-image: url("/images/new-runes/LENI.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runepul {
-    background-image: url("/images/61bd48c800541e0848a4ec50_PUL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runepai {
+    background-image: url("/images/new-runes/PAI.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeum {
-    background-image: url("/images/61bd48cbab9f272d5ff92e35_UM.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeuln {
+    background-image: url("/images/new-runes/ULN.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runemal {
-    background-image: url("/images/61bd48c70b1c0f802a6bb1ee_MAL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runemor {
+    background-image: url("/images/new-runes/MOR.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeist {
-    background-image: url("/images/61bd48c4b2f1c6ea66a49e9b_IST.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeisk {
+    background-image: url("/images/new-runes/ISK.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runegul {
-    background-image: url("/images/61bd48c39e6f4e67556ba2f5_GUL.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runegon {
+    background-image: url("/images/new-runes/GON.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runevex {
-    background-image: url("/images/61bd48cbf1d2fb6736363ba5_VEX.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeval {
+    background-image: url("/images/new-runes/VAL.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeohm {
-    background-image: url("/images/61bd48c8d143ca8692f609d3_OHM.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeoh {
+    background-image: url("/images/new-runes/OH.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runelo {
-    background-image: url("/images/61bd48c62045052ab7d1d85d_LO.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runelor {
+    background-image: url("/images/new-runes/LOR.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runesur {
-    background-image: url("/images/61bd48ca983fe7fd0c7df09a_SUR.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runesu {
+    background-image: url("/images/new-runes/SU.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runeber {
-    background-image: url("/images/61bd48c3ed803d0916792061_BER.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runeberu {
+    background-image: url("/images/new-runes/BERU.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runejah {
-    background-image: url("/images/61bd48c7f7d41acc7f9d62fd_JAH.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runejau {
+    background-image: url("/images/new-runes/JAU.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runecham {
-    background-image: url("/images/61bd48c3008466dddb057b12_CHAM.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runechin {
+    background-image: url("/images/new-runes/CHIN.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
   }
   
-  .rune.runezod {
-    background-image: url("/images/61bd48cc8bd001a5a771479e_ZOD.png"), url("/images/61bd48fe3aeacc26a3168b91_rune-bg.png"), url("/images/61afe864e6d1182687c66262_kona2.png");
+  .rune.runezeno {
+    background-image: url("/images/new-runes/ZENO.png"), url("/images/rune-bg.png"), url("/images/kona2.png");
     background-position: 50% 3px, 50% 5px, -77px -103px;
     background-size: 60px, 60px, 220px;
     background-repeat: no-repeat, no-repeat, no-repeat;
@@ -6263,7 +6265,7 @@ zoom: 0.001;
   
   .body-3 {
     padding: 24px;
-    background-image: url("/images/618ec26aa362f8dd0586d13b_background-darker.jpg");
+    background-image: url("/images/background-darker.jpg");
     background-position: 0px 0px;
     background-size: 400px;
   }
@@ -6290,14 +6292,14 @@ zoom: 0.001;
   }
   
   .body-4 {
-    background-image: url("/images/618ec26aa362f8dd0586d13b_background-darker.jpg");
+    background-image: url("/images/background-darker.jpg");
     background-position: 0px 0px;
     background-size: 400px;
   }
   
   .body-5 {
     
-    // background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.39), rgba(0, 0, 0, 0.39)), url("/images/618ec26aa362f8dd0586d13b_background-darker.jpg");
+    // background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.39), rgba(0, 0, 0, 0.39)), url("/images/background-darker.jpg");
     // background-position: 0px 0px, 0px 0px;
     // background-size: auto, 400px;
   }
@@ -6363,7 +6365,7 @@ zoom: 0.001;
     display: none;
     width: 129px;
     height: 430px;
-    background-image: url("/images/61c12a4bcadcf1076ac1b4db_vines-side-2.png");
+    background-image: url("/images/vines-side-2.png");
     background-position: 0% 0%;
     background-size: 115px;
     background-repeat: no-repeat;
@@ -6703,7 +6705,7 @@ zoom: 0.001;
       grid-template-columns: 1fr;
       -ms-grid-rows: auto;
       grid-template-rows: auto;
-      background-image: url("/images/619b09aec0d05b6e97f00ebf_bg-normal.jpg");
+      background-image: url("/images/bg-normal.jpg");
       background-position: 0px 0px;
       background-size: 400px;
     }
@@ -6758,7 +6760,7 @@ zoom: 0.001;
       grid-auto-flow: row;
       -ms-grid-columns: 1fr;
       grid-template-columns: 1fr;
-      background-image: url("/images/619b09aec0d05b6e97f00ebf_bg-normal.jpg");
+      background-image: url("/images/bg-normal.jpg");
       background-position: 0px 0px;
       background-size: 400px; */
     }
@@ -6980,7 +6982,7 @@ zoom: 0.001;
       -webkit-justify-content: center;
       -ms-flex-pack: center;
       justify-content: center;
-      background-image: url("/images/61afe864e6d1182687c66262_kona2.png");
+      background-image: url("/images/kona2.png");
     }
   
     .section-left-2 {
@@ -7030,7 +7032,7 @@ zoom: 0.001;
       top: 0%;
       right: 0%;
       bottom: auto;
-      background-image: url("/images/61c12a4b7a0ed75fcee49241_vines-side1.png");
+      background-image: url("/images/vines-side1.png");
     }
   
     .sidescroll-richtext {
@@ -8585,12 +8587,12 @@ zoom: 0.001;
   }
   
   .bg-art{
-      -webkit-mask-image: url(https://uploads-ssl.webflow.com/61888fc216a41f3be2f8ae35/618c8cbbf09b3420e8fc1075_css-mask-2.png);
+      -webkit-mask-image: url(/images/css-mask-2.png);
       -webkit-mask-position: bottom;
       -webkit-mask-size: contain;
       -webkit-mask-repeat: no-repeat;
     
-    mask-image: url(https://uploads-ssl.webflow.com/61888fc216a41f3be2f8ae35/618c8cbbf09b3420e8fc1075_css-mask-2.png);
+    mask-image: url(/images/css-mask-2.png);
       mask-position: bottom;
       mask-size: contain;
       mask-repeat: no-repeat;
@@ -8600,7 +8602,7 @@ zoom: 0.001;
       border-width: 1px;
       border-style: solid;
       border-color: transparent;
-      border-image: url(/images/61933e0f25619deab717576c_frame.png) 80 / 80px / 0 repeat;
+      border-image: url(/images/frame.png) 80 / 80px / 0 repeat;
       background-color: rgba(0, 0, 0, 0.4);
       border-radius: 0px;
   }
@@ -8609,14 +8611,14 @@ zoom: 0.001;
       border-width: 1px;
       border-style: solid;
       border-color: transparent;
-      border-image: url(https://uploads-ssl.webflow.com/618dc22207c2a24a5e92cbcf/618e26b57a9e8114d4595dc1_frame-rune-light.png) 140 / 15px / 0 repeat;
+      border-image: url(/images/frame-rune-light.png) 140 / 15px / 0 repeat;
       background-color: rgba(0, 0, 0, 0.4);
       border-radius: 0px;
   }
 
 
   .top-right-mask {
-    -webkit-mask-image: url(https://uploads-ssl.webflow.com/618ec26aa362f8479a86d117/619abe5cb521b2aa40456ecf_parchment-overlay-2.png);
+    -webkit-mask-image: url(/images/parchment-overlay-2.png);
     -webkit-mask-position: top;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-size: auto;
@@ -8626,14 +8628,14 @@ zoom: 0.001;
   //   -webkit-filter: drop-shadow(1px 1px 30px rgba(0,0,0,1));
   // }
   // .item{
-  // -webkit-mask-image: url(https://uploads-ssl.webflow.com/618ec26aa362f8479a86d117/619abd17dab55b090dfd2c7f_parchment-bg-2.png);
+  // -webkit-mask-image: url(/images/parchment-bg-2.png);
   // -webkit-mask-size: 100%;
     
   // &:before {
   //   position: absolute;
   //   top: 0;
   //   left: 0;
-  //   background: url(https://uploads-ssl.webflow.com/618ec26aa362f8479a86d117/619abe5cb521b2aa40456ecf_parchment-overlay-2.png) no-repeat 0 0;
+  //   background: url(/images/parchment-overlay-2.png) no-repeat 0 0;
   //   background-size: 100%;
   //   width: 100%;
   //   height: 100%;

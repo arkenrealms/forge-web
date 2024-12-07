@@ -15,7 +15,7 @@ const Developers = () => {
         </Heading>
         <hr />
         <CardBody>
-          Developer Portal &amp; API will be released in 2023. In the meantime please visit the Discord to talk with the
+          Developer Portal &amp; API will be released in 2025. In the meantime please visit the Discord to talk with the
           team about developing for the Arken Realms.
           <br />
           <br />

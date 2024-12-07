@@ -148,7 +148,7 @@ export default {
     'Early adopters will have an opportunity to get some of the rarest NFTs either through airdrops, fundraising, or farming.':
       '早期采用者将有机会通过空投、筹款或农业获得一些最稀有的 NFT。',
     Items: '物品',
-    'Items in Arken Realms are randomly generated NFTs with real utility. So far, we have 3 unique Rune Word NFTs that can be generated using runes.':
+    'Items in Arken Realms are randomly generated NFTs with real utility. So far, we have 3 unique Runeform NFTs that can be generated using runes.':
       '符文农场里的物品是随机生成的，具有实际效用的 NFT。目前我们有三个利用符文创造的，独特符文农场 NFT',
     'These items can be used in our upcoming games, because they are EVOLVING NFTS that have branching attributes.':
       '这些物品可以在我们即将推出的游戏中使用，因为它们是具有分支属性的 EVOLVING NFTS ',
@@ -309,7 +309,7 @@ export default {
     '2021 Q3': '2021年 Q3',
     'Launch runes: AMN SOL SHAEL DOL HEL IO LUM KO FAL LEM': '发射符文: AMN SOL SHAEL DOL HEL IO LUM KO FAL LEM',
     'Desktop app. Progress on this has already started.': '桌面应用程序。 这方面的进展已经开始。',
-    "Runeforms. Combine runes into NFT Runeforms (each with random affixes). Rune Word items will initially be designed by us, but a limited amount of custom Runeforms will be put up for auction, where you will have a chance to design one of your own. If you hold many of the runes required, you can craft them as your heart desires until you've created a Perfect Rune Word.":
+    "Runeforms. Combine runes into NFT Runeforms (each with random affixes). Runeform items will initially be designed by us, but a limited amount of custom Runeforms will be put up for auction, where you will have a chance to design one of your own. If you hold many of the runes required, you can craft them as your heart desires until you've created a Perfect Runeform.":
       '符文词。 将符文组合成 NFT 符文词（每个都有随机词缀）。 符文词物品最初将由我们设计，但数量有限的自定义符文词将被拍卖，您将有机会设计自己的符文词。 如果您拥有许多所需的符文，您可以随心所欲地制作它们，直到您创造出完美的符文之词。',
     'More gambling systems. Gamble your old LPs in a locked LP pool, and win all proceeds earned by those LPs for an entire day. The locked LP pool gets bigger and bigger over time. Eventually we may add cVault style mechanics against this liquidity pool (arbitrage, flash loans) or ITS rebase mechanics. TBD.':
       '更多赌博系统。 在锁定的 LP 池中赌博您的旧 LP，并赢取这些 LP 一整天赚取的所有收益。 随着时间的推移，锁定的 LP 池会变得越来越大。 最终，我们可能会针对这个流动性池（套利、闪贷）或 ITS 变基机制添加 cVault 风格的机制。 待定',
@@ -330,7 +330,7 @@ export default {
     'Team starts working on cross-chain bridge.': '团队开始在 cross-chain 桥 上工作。',
     '2022 Q1-Q4': '2022年 Q1-Q4',
     'Think Ready Player One on the blockchain. More TBA.': '想玩家一号上的区块链，更多待定。',
-    'Website: Rune.Farm Exchange interface: https://arken.gg/swap/ FAQ /faq Documentation https://arken.gg/docs Twitter https://twitter.com/ArkenRealms Telegram Announcement https://t.me/Arken_ Telegram Public Chat https://t.me/Arken_ Telegram Trading https://t.me/Arken_Trade Telegram JP: https://t.me/Arken_JP Telegram CN: https://t.me/Arken_CN Telegram PH: https://t.me/Arken_PH Telegram FR: https://t.me/Arken_FR Telegram ESP: https://t.me/Arken_ESP Telegram IN: https://t.me/Arken_IN Telegram DE: https://t.me/Arken_DE Github https://github.arken.gg + https://github.com/ArcaneDefi Medium https://ArkenRealms.medium.com/ Roadmap /roadmap Guilds https://arken.gg/team NFT Partnership: https://forms.gle/JnufYQjqAvn6KBhb7':
-      '网站：Rune.Farm 交换界面：https://arken.gg/swap/ FAQ /faq Documentation https://arken.gg/docs Twitter https://twitter.com/ArkenRealms Telegram Announcement https://t.me/Arken_ Telegram Public Chat https://t.me/Arken_ Telegram Trading https://t.me/Arken_Trade Telegram JP: https://t.me/Arken_JP Telegram CN: https://t.me/Arken_CN Telegram PH: https://t.me/Arken_PH Telegram FR: https://t.me/Arken_FR Telegram ESP: https://t.me/Arken_ESP Telegram IN: https://t.me/Arken_IN Telegram DE: https://t.me/Arken_DE Github https://github.arken.gg + https://github.com/ArcaneDefi Medium https://ArkenRealms.medium.com/ Roadmap /roadmap Guilds https://arken.gg/team NFT Partnership: https://forms.gle/JnufYQjqAvn6KBhb7',
+    'Website: Rune.Farm Exchange interface: https://arken.gg/swap/ FAQ /faq Documentation https://arken.gg/docs Twitter https://twitter.arken.gg Telegram Announcement https://t.me/Arken_ Telegram Public Chat https://t.me/Arken_ Telegram Trading https://t.me/Arken_Trade Telegram JP: https://t.me/Arken_JP Telegram CN: https://t.me/Arken_CN Telegram PH: https://t.me/Arken_PH Telegram FR: https://t.me/Arken_FR Telegram ESP: https://t.me/Arken_ESP Telegram IN: https://t.me/Arken_IN Telegram DE: https://t.me/Arken_DE Github https://github.arken.gg + https://github.com/ArcaneDefi Medium https://ArkenRealms.medium.com/ Roadmap /roadmap Guilds https://arken.gg/team NFT Partnership: https://forms.gle/JnufYQjqAvn6KBhb7':
+      '网站：Rune.Farm 交换界面：https://arken.gg/swap/ FAQ /faq Documentation https://arken.gg/docs Twitter https://twitter.arken.gg Telegram Announcement https://t.me/Arken_ Telegram Public Chat https://t.me/Arken_ Telegram Trading https://t.me/Arken_Trade Telegram JP: https://t.me/Arken_JP Telegram CN: https://t.me/Arken_CN Telegram PH: https://t.me/Arken_PH Telegram FR: https://t.me/Arken_FR Telegram ESP: https://t.me/Arken_ESP Telegram IN: https://t.me/Arken_IN Telegram DE: https://t.me/Arken_DE Github https://github.arken.gg + https://github.com/ArcaneDefi Medium https://ArkenRealms.medium.com/ Roadmap /roadmap Guilds https://arken.gg/team NFT Partnership: https://forms.gle/JnufYQjqAvn6KBhb7',
   },
 };

@@ -91,18 +91,11 @@ const ThankYou = () => {
               height: 30px;
             }
           `}>
-          <Item
-            itemIndex="thanksCube"
-            item={cubeItem}
-            isDisabled={false}
-            showDropdown
-            showQuantity={false}
-            showActions={false}
-            hideMetadata>
-            <span style={{ borderBottom: '1px solid transparent' }}>Founder's Tavern</span>
+          <Item item={cubeItem} isDisabled={false} showDropdown showQuantity={false} showActions={false} hideMetadata>
+            <span style={{ borderBottom: '1px solid transparent' }}>Founder's Cube</span>
           </Item>
         </RouterLink>{' '}
-        patrons 🍻
+        patrons, we'll see you in the Tavern of Time 🍻
         <br />
         <br />
         <div

@@ -19,7 +19,7 @@ const Guide = ({ match }) => {
                 <RouterLink to="/guide/convert-binance-cube">Convert Founder's Cube from Binance</RouterLink>
               </li>
               <li>
-                <RouterLink to="/runewords">How Runeforms work</RouterLink>
+                <RouterLink to="/runeforms">How Runeforms work</RouterLink>
               </li>
               <li>
                 <RouterLink to="/guide/change-character-guild">

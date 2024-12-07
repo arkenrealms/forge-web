@@ -177,7 +177,7 @@ export default {
     // "ASSASSIN": "アサシン",
     // "AMAZON": "アマゾン",
     Items: 'アイテム',
-    'Items in Arken Realms are randomly generated NFTs with real utility. So far, we have 3 unique Rune Word NFTs that can be generated using runes.':
+    'Items in Arken Realms are randomly generated NFTs with real utility. So far, we have 3 unique Runeform NFTs that can be generated using runes.':
       'Arken Realmsのアイテムは、実用性のあるNFTをランダムに生成したものです。今のところ、ルーンを使って生成できるユニークルーンNFTは3種類あります。',
     'These items can be used in our upcoming games, because they are EVOLVING NFTS that have branching attributes.':
       'これらのアイテムは、属性が分岐している進化するNFTなので、今後発売されるゲームで使用することができます。',
@@ -356,7 +356,7 @@ export default {
     '2021 Q3': '2021年第3四半期',
     'Launch runes: AMN SOL SHAEL DOL HEL IO LUM KO FAL LEM': 'リリースルーン：AMN SOL SHAEL DOL HEL IO LUM KO FAL LEM',
     'Desktop app. Progress on this has already started.': 'デスクトップアプリ。これについては、すでに進行中です。',
-    "Runeforms. Combine runes into NFT Runeforms (each with random affixes). Rune Word items will initially be designed by us, but a limited amount of custom Runeforms will be put up for auction, where you will have a chance to design one of your own. If you hold many of the runes required, you can craft them as your heart desires until you've created a Perfect Rune Word.":
+    "Runeforms. Combine runes into NFT Runeforms (each with random affixes). Runeform items will initially be designed by us, but a limited amount of custom Runeforms will be put up for auction, where you will have a chance to design one of your own. If you hold many of the runes required, you can craft them as your heart desires until you've created a Perfect Runeform.":
       'ルーン語。ルーンを組み合わせて、NFTのルーン・ワード（それぞれにランダムな付箋が付いています）を作ります。ルーン・ワードのアイテムは、最初は私たちがデザインしますが、数量限定でカスタム・ルーン・ワードをオークションに出品し、自分でデザインするチャンスがあります。必要なルーンをたくさん持っていれば、「完璧なルーン・ワード」ができるまで、好きなようにルーンを作ることができます。',
     'More gambling systems. Gamble your old LPs in a locked LP pool, and win all proceeds earned by those LPs for an entire day. The locked LP pool gets bigger and bigger over time. Eventually we may add cVault style mechanics against this liquidity pool (arbitrage, flash loans) or ITS rebase mechanics. TBD.':
       'ギャンブル系が多め。ロックされたLPプールで古いLPをギャンブルすると、そのLPで得たすべての収益を丸一日獲得できます。ロックされたLPプールは時間の経過とともにどんどん大きくなっていきます。最終的には、この流動性プールに対するcVaultスタイルの仕組み（アービトラージ、フラッシュローン）や、ITSのリベースの仕組みを追加するかもしれません。未定です。',
@@ -379,7 +379,7 @@ export default {
     '2022 Q1-Q4': '2022年Q1-Q4',
     'Think Ready Player One on the blockchain. More TBA.':
       'ブロックチェーン上の「レディプレイヤー1」を考えてみましょう。詳細は未定です。',
-    'Website: Rune.Farm Exchange interface: https://arken.gg/swap/ FAQ /faq Documentation https://arken.gg/docs Twitter https://twitter.com/ArkenRealms Telegram Announcement https://t.me/Arken_ Telegram Public Chat https://t.me/Arken_ Telegram Trading https://t.me/Arken_Trade Telegram JP: https://t.me/Arken_JP Telegram CN: https://t.me/Arken_CN Telegram PH: https://t.me/Arken_PH Telegram FR: https://t.me/Arken_FR Telegram ESP: https://t.me/Arken_ESP Telegram IN: https://t.me/Arken_IN Telegram DE: https://t.me/Arken_DE Github https://github.arken.gg + https://github.com/ArcaneDefi Medium https://ArkenRealms.medium.com/ Roadmap /roadmap Guilds https://arken.gg/team NFT Partnership: https://forms.gle/JnufYQjqAvn6KBhb7':
+    'Website: Rune.Farm Exchange interface: https://arken.gg/swap/ FAQ /faq Documentation https://arken.gg/docs Twitter https://twitter.arken.gg Telegram Announcement https://t.me/Arken_ Telegram Public Chat https://t.me/Arken_ Telegram Trading https://t.me/Arken_Trade Telegram JP: https://t.me/Arken_JP Telegram CN: https://t.me/Arken_CN Telegram PH: https://t.me/Arken_PH Telegram FR: https://t.me/Arken_FR Telegram ESP: https://t.me/Arken_ESP Telegram IN: https://t.me/Arken_IN Telegram DE: https://t.me/Arken_DE Github https://github.arken.gg + https://github.com/ArcaneDefi Medium https://ArkenRealms.medium.com/ Roadmap /roadmap Guilds https://arken.gg/team NFT Partnership: https://forms.gle/JnufYQjqAvn6KBhb7':
       'ウェブサイト：Rune.Farm両替インターフェース：https://arken.gg/swap/　よくある質問　/faq　ドキュメント　https://arken.gg/docs　Twitter　https://twitter.com/　RuneFarmTelegram発表　https://t.me/Arken_　Telegram公開チャット　https://t.me/Arken_　Telegram取引　https://t.me/Arken_Trade　Telegram JP：https://t.me/Arken_JP　Telegram CN ：https://t.me/Arken_CN Telegram PH：https://t.me/Arken_PH Telegram FR：https://t.me/Arken_FR Telegram ESP：https://t.me/Arken_ESP Telegram IN：https://t.me/Arken_IN Telegram DE：　https://t.me/Arken_DE Github 　https://github.arken.gg + https://github.com/Arcane　Defi Medium https://ArkenRealms.medium.com/　ロードマップ　/roadmap　ギルド　https://arken.gg/team 　NFTパートナーシップ：https://forms.gle/JnufYQjqAvn6KBhb7',
     'Runic Raids requires using the Binance Smart Chain network (BSC) with Metamask.':
       'Runic Raidsは、Metamaskを使ってBinanceスマートチェーンネットワーク（BSC）を使用する必要があります。',

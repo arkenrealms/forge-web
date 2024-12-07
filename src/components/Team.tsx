@@ -155,7 +155,7 @@ const SelectedTeamMember = ({ member }) => {
                 zoom: 1.3;
                 font-size: 1.4rem;
               `}>
-              {member.handle}
+              {member.name}
             </Button>
             {member.name && member.name !== member.handle ? (
               <>
@@ -165,11 +165,11 @@ const SelectedTeamMember = ({ member }) => {
                     font-size: 1.3rem;
                     color: #fff;
                   `}>
-                  {member.name}
+                  {member.handle}
                 </h2>
                 <h2
                   css={css`
-                    font-size: 1.3rem;
+                    font-size: 1.1rem;
                   `}>
                   {member.title}
                 </h2>
@@ -235,29 +235,29 @@ const SelectedTeamMember = ({ member }) => {
   );
 };
 
-const Team = ({ showAll = true, match }) => {
-  const { id: idStr }: { id: string } = match.params;
-  const id = Number(idStr);
+const Team = ({ showAll = true }) => {
+  // const { id: idStr }: { id: string } = match.params;
+  // const id = Number(idStr);
   const team = [
     {
       name: '',
     },
     {
-      name: 'Eric M.',
-      handle: 'Memefella',
-      title: 'Meme Czar',
-      image: '/images/team/jake-anime.png',
-      imageBig: '/images/team/jake-anime-big.png',
+      name: 'Eric Muyser',
+      handle: '@hashwarp',
+      title: 'Meme Bro',
+      image: '/images/team/eric-anime.png',
+      imageBig: '/images/team/eric-anime-big.png',
       isDoxxed: false,
       socials: { linkedin: 'https://www.linkedin.com/in/ericmuyser' },
       bio: [
         `20 years’ experience programming (C++/C#/Python/Go/Node/etc).`,
-        `9 years’ experience of research, development and investment within the crypto space.`,
-        `4 years’ experience advising crypto startups and mentoring best software industry practices.`,
+        `10 years’ experience of research, development and investment within the crypto space.`,
+        `5 years’ experience advising crypto startups and mentoring best software industry practices.`,
         `10 years’ experience developing games.`,
-        `3 years’ experience with Solidity.`,
-        `6 years’ experience with Unity.`,
-        `2 years’ experience in graphic design, UI and UX.`,
+        `5 years’ experience with Solidity.`,
+        `5 years’ experience with Unity.`,
+        `5 years’ experience in graphic design, UI and UX.`,
         `Contract work for various SF startups and Fortune 500 corporations.`,
       ],
     },
@@ -298,7 +298,7 @@ const Team = ({ showAll = true, match }) => {
     // },
     {
       name: 'Ramir G.',
-      handle: 'Maiev',
+      handle: '@Ethermonarch',
       title: 'Director of Meat',
       image: '/images/team/ramir-anime.png',
       imageBig: '/images/team/ramir-anime-big.png',
@@ -523,7 +523,7 @@ const Team = ({ showAll = true, match }) => {
           //   bio: [`Played a lot of games`],
           // },
           {
-            name: 'Discomonk',
+            name: '@KarmaKitten',
             handle: 'Discomonk',
             title: 'Community Manager',
             image: '/images/team/discomonk-anime.png',
@@ -534,7 +534,7 @@ const Team = ({ showAll = true, match }) => {
           },
           {
             name: 'Riccardo',
-            handle: 'Riccardo',
+            handle: '@Riccardo94r',
             title: 'Community Manager',
             image: '/images/team/riccardo-anime.png',
             imageBig: '/images/team/riccardo-anime-big.png',
@@ -618,7 +618,7 @@ const Team = ({ showAll = true, match }) => {
         ]
       : []),
   ];
-  const [selectedTeamMember, setSelectedTeamMember] = useState(team.find((t) => t.name === 'Eric M.'));
+  const [selectedTeamMember, setSelectedTeamMember] = useState(team.find((t) => t.name === 'Eric Muyser'));
 
   const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
   const isSmall = !isXxxl;
@@ -638,7 +638,7 @@ const Team = ({ showAll = true, match }) => {
           Choose Your Hero
         </Heading>
 
-        <Cards style={{ height: showAll ? '3000px' : '1190px' }}>
+        <Cards style={{ height: showAll ? '1000px' : '1190px' }}>
           {team.map((teamMember, index) => {
             return (
               <TeamCard

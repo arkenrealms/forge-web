@@ -1,10 +1,12 @@
-import styled from 'styled-components'
-import Container from './Container'
+import styled from 'styled-components';
+import Container from './Container';
 
 const Page = styled(Container)`
   // min-height: calc(100vh - 85px);
   padding-top: 16px;
   padding-bottom: 16px;
+  padding-left: 15px;
+  padding-right: 15px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     padding-top: 24px;
@@ -17,6 +19,6 @@ const Page = styled(Container)`
   }
 
   ${({ theme }) => (theme.brand === 'w4' ? `padding: 0 !important` : '')}
-`
+`;
 
-export default Page
+export default Page;

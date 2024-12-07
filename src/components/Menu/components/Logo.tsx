@@ -1,20 +1,20 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { LogoIcon } from '../../Svg'
-import Flex from '../../Box/Flex'
-import { HamburgerIcon, HamburgerCloseIcon, LogoIcon as LogoWithText } from '../icons'
-import MenuButton from './MenuButton'
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { LogoIcon } from '../../Svg';
+import Flex from '../../Box/Flex';
+import { HamburgerIcon, HamburgerCloseIcon, LogoIcon as LogoWithText } from '../icons';
+import MenuButton from './MenuButton';
 
 interface Props {
-  isPushed: boolean
-  isDark: boolean
-  isMobile: boolean
-  togglePush: () => void
-  href: string
-  imageUrl: string
-  heading: any
-  subheading: any
+  isPushed: boolean;
+  isDark: boolean;
+  isMobile: boolean;
+  togglePush: () => void;
+  href: string;
+  imageUrl: string;
+  heading: any;
+  subheading: any;
 }
 
 const StyledLink = styled(Link)`
@@ -33,10 +33,10 @@ const StyledLink = styled(Link)`
       display: block;
     }
   }
-`
+`;
 
 const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, isMobile, href, imageUrl, heading, subheading }) => {
-  const isAbsoluteUrl = href.startsWith('http')
+  const isAbsoluteUrl = href.startsWith('http');
   const innerLogo = (
     <>
       {/* <LogoIcon className="mobile-icon" /> */}
@@ -49,11 +49,11 @@ const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, isMobile, href, i
         subheading={subheading}
       />
     </>
-  )
+  );
 
   return (
-    <Flex style={{ zoom: 0.9 }}>
-      <MenuButton aria-label="Toggle menu" onClick={togglePush} mr="0px">
+    <Flex style={{ marginTop: 0 }}>
+      <MenuButton aria-label="Toggle menu" onClick={togglePush}>
         <Img src={imageUrl} isPushed={isPushed} />
       </MenuButton>
       {isAbsoluteUrl ? (
@@ -64,13 +64,13 @@ const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, isMobile, href, i
         <StyledLink to={href}>{innerLogo}</StyledLink>
       )}
     </Flex>
-  )
-}
+  );
+};
 
 const Img = styled.img<{ isPushed: boolean }>`
-  width: 45px;
-  height: 45px;
-  max-width: 45px;
+  width: 38px !important;
+  height: 38px !important;
+  max-width: 38px !important;
   image-rendering: auto;
   filter: drop-shadow(0px 0px 2px black);
 
@@ -96,6 +96,6 @@ const Img = styled.img<{ isPushed: boolean }>`
   transform: rotate(0deg);
 
   // ${({ isPushed }) => (isPushed ? 'transform: rotate(180deg);' : 'transform: rotate(0deg);')}
-`
+`;
 
-export default React.memo(Logo, (prev, next) => prev.isPushed === next.isPushed && prev.isDark === next.isDark)
+export default React.memo(Logo, (prev, next) => prev.isPushed === next.isPushed && prev.isDark === next.isDark);

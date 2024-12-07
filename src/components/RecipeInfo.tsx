@@ -193,7 +193,7 @@ export const RecipeInfo: React.FC<any> = ({
       {!item.rarity?.name && item.details?.['Type'] ? <ItemType>{item.details?.['Type']}</ItemType> : null}
       {/* <ItemType>{item.details?.['Type']}</ItemType> */}
       <ItemSubType>{item.details?.['Subtype']}</ItemSubType>
-      {item?.details['Rune Word'] ? <RecipeRunes>&apos;{item.details?.['Rune Word']}&apos;</RecipeRunes> : null}
+      {item?.details['Runeform'] ? <RecipeRunes>&apos;{item.details?.['Runeform']}&apos;</RecipeRunes> : null}
       <br />
 
       <RecipeDescription>{description}</RecipeDescription>
@@ -219,10 +219,10 @@ export const RecipeInfo: React.FC<any> = ({
                 )
                 .join(' or ')
             : param1.value !== undefined
-            ? param1.value
-            : param1.min === param1.max
-            ? param1.min
-            : `${param1.min}-${param1.max}`;
+              ? param1.value
+              : param1.min === param1.max
+                ? param1.min
+                : `${param1.min}-${param1.max}`;
 
           if (typeof value1 === 'string') value1 = value1.replace(/Hidden Skill([ 0-9]*)/gi, 'Hidden Skill');
 
@@ -235,10 +235,10 @@ export const RecipeInfo: React.FC<any> = ({
                   )
                   .join(' or ')
               : param2.value !== undefined
-              ? param2.value
-              : param2.min === param2.max
-              ? param2.min
-              : `${param2.min}-${param2.max}`
+                ? param2.value
+                : param2.min === param2.max
+                  ? param2.min
+                  : `${param2.min}-${param2.max}`
             : '';
 
           const value3 = param3
@@ -250,10 +250,10 @@ export const RecipeInfo: React.FC<any> = ({
                   )
                   .join(' or ')
               : param3.value !== undefined
-              ? param3.value
-              : param3.min === param3.max
-              ? param3.min
-              : `${param3.min}-${attribute.param3.max}`
+                ? param3.value
+                : param3.min === param3.max
+                  ? param3.min
+                  : `${param3.min}-${attribute.param3.max}`
             : '';
 
           const attr = attribute.description

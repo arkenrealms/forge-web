@@ -158,25 +158,23 @@ const BottomCTA = () => {
               {/* <p style={{ marginTop: 20 }}>
                 Crypto's premiere fantasy omniverse driven by innovative solutions using non-fungible tokens
                 (NFTs). Battle, win &amp; collect items.
-              </p> */}
-              <br />
-              <br />
-              <iframe
+              // </p> */}
+              {/* <iframe
                 src="https://discord.com/widget?id=857533189948964874&amp;theme=dark"
                 width={isMobile ? '300' : '350'}
                 height="350"
                 frameBorder="0"
                 sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
                 className="discord-widget"
-                title="Discord"></iframe>
-              <Heading style={{ color: '#fff', marginTop: 40 }}>
+                title="Discord"></iframe> */}
+              <p style={{ color: '#fff', marginTop: 40 }}>
                 {t(`© ${new Date().getFullYear()} Arken Technologies, Inc.`)}
-              </Heading>
+              </p>
             </Column>
             <Column style={{ minWidth: 200 }}>
               <Heading size="md">Contact</Heading>
               <br />
-              <p>sup@arken.gg</p>
+              <p>hello@arken.gg</p>
             </Column>
             <Column style={{ minWidth: 200 }}>
               <Heading>About</Heading>
@@ -219,7 +217,7 @@ const BottomCTA = () => {
                   style={{ marginBottom: 20, display: 'inline-block' }}
                   target="_blank"
                   rel="noreferrer noopener"
-                  href={`https://t.me/Arken_Realms`}>
+                  href={`https://telegram.arken.gg`}>
                   Telegram
                 </a>
 
@@ -228,7 +226,7 @@ const BottomCTA = () => {
                   style={{ marginBottom: 20, display: 'inline-block' }}
                   target="_blank"
                   rel="noreferrer noopener"
-                  href={`https://twitter.com/ArkenRealms`}>
+                  href={`https://twitter.arken.gg`}>
                   Twitter
                 </a>
 

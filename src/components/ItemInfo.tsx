@@ -399,8 +399,8 @@ export const ItemInfo: React.FC<any> = ({
         {item.rarity?.name} {item.details?.['Type']}
       </ItemType>
       <ItemSubtype>{item.details?.['Subtype']}</ItemSubtype>
-      {!hideRecipe && item.details?.['Rune Word'] ? (
-        <ItemRecipe>&apos;{runeformMap(item.details?.['Rune Word'])}&apos;</ItemRecipe>
+      {!hideRecipe && item.details?.['Runeform'] ? (
+        <ItemRecipe>&apos;{runeformMap(item.details?.['Runeform'])}&apos;</ItemRecipe>
       ) : null}
       <br />
       {!hideAttributes ? (

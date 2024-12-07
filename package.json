@@ -16,7 +16,9 @@
     "p:check": "prettier --check ./",
     "p:format": "prettier --write ./",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "release": "cd ../../../../sites/arken.gg && rm -rf docs && cp -R ../../packages/forge/packages/web/build . && mv build docs && touch docs/CNAME && echo 'arken-prod.asi.sh' > docs/CNAME && git add -A && git commit -m 'rebuild' && git push && cd ../../packages/forge/packages/web",
+    "release:beta": "cd ../../../../sites/beta.arken.gg && rm -rf docs && cp -R ../../packages/forge/packages/web/build . && mv build docs && touch docs/CNAME && echo 'arken-beta.asi.sh' > docs/CNAME && git add -A && git commit -m 'rebuild' && git push && cd ../../packages/forge/packages/web"
   },
   "dependencies": {
     "@ant-design/icons": "^5",
@@ -162,6 +164,7 @@
     "babel-loader": "^9",
     "babel-plugin-transform-decorators-legacy": "^1",
     "css-loader": "^5",
+    "del-cli": "^5",
     "dotenv": "^16",
     "dotenv-cli": "^7",
     "dotenv-webpack": "^6",
@@ -171,6 +174,7 @@
     "eslint-plugin-promise": "^5",
     "eslint-plugin-react": "^7",
     "file-loader": "^6",
+    "make-dir-cli": "^3",
     "npm-run-all": "^4",
     "postcss-loader": "^7",
     "prettier": "^3",

@@ -7,7 +7,7 @@ export const socials = [
     items: [
       {
         label: 'English',
-        href: 'https://t.me/Arken_Realms',
+        href: 'https://telegram.arken.gg',
       },
       {
         label: '日本語',
@@ -74,11 +74,11 @@ export const socials = [
   {
     label: 'Twitter',
     icon: 'TwitterIcon',
-    href: 'https://twitter.com/ArkenRealms',
+    href: 'https://twitter.arken.gg',
     items: [
       {
         label: 'English',
-        href: 'https://twitter.com/ArkenRealms',
+        href: 'https://twitter.arken.gg',
       },
     ],
   },

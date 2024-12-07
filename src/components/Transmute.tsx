@@ -111,7 +111,10 @@ const CubeContainer3 = styled.div`
 
 const InventoryContainer = styled.div`
   width: 100%;
-  box-shadow: 0 2px 0 0 rgb(0 0 0 / 80%), inset 0 -1px 0 0 rgb(0 0 0 / 10%), 0 0 66px 66px rgb(0 0 0 / 10%);
+  box-shadow:
+    0 2px 0 0 rgb(0 0 0 / 80%),
+    inset 0 -1px 0 0 rgb(0 0 0 / 10%),
+    0 0 66px 66px rgb(0 0 0 / 10%);
   max-width: 100%;
   float: right;
   margin-bottom: 50px;
@@ -143,7 +146,10 @@ const RecipeContainer = styled.div`
   border-image: url('/images/frame.png') 80 repeat;
   border-image-width: 80px;
   background-color: rgba(0, 0, 0, 1);
-  box-shadow: 0 2px 0 0 rgb(0 0 0 / 80%), inset 0 -1px 0 0 rgb(0 0 0 / 10%), 0 0 66px 66px rgb(0 0 0 / 10%);
+  box-shadow:
+    0 2px 0 0 rgb(0 0 0 / 80%),
+    inset 0 -1px 0 0 rgb(0 0 0 / 10%),
+    0 0 66px 66px rgb(0 0 0 / 10%);
   max-width: 100%;
   margin-top: 25px;
 
@@ -245,7 +251,8 @@ const HeadingFire = styled.div<{
 
   @keyframes fire {
     0% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         0 ${(props) => props.fireStrength * -5}px ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 2}px ${(props) => props.fireStrength * -10}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color1},
@@ -255,7 +262,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 18}px ${(props) => props.color4};
     }
     25% {
-      text-shadow: 0 0 3px ${(props) => props.color1},
+      text-shadow:
+        0 0 3px ${(props) => props.color1},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -6}px
           ${(props) => props.fireStrength * 5}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -11}px
@@ -266,7 +274,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 20}px ${(props) => props.color4};
     }
     50% {
-      text-shadow: 0 0 3px ${(props) => props.color1},
+      text-shadow:
+        0 0 3px ${(props) => props.color1},
         ${(props) => props.fireStrength * -1}px ${(props) => props.fireStrength * -4}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 0}px ${(props) => props.fireStrength * -12}px
@@ -277,7 +286,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 22}px ${(props) => props.color4};
     }
     75% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -7}px
           ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 1}px ${(props) => props.fireStrength * -11}px
@@ -288,7 +298,8 @@ const HeadingFire = styled.div<{
           ${(props) => props.fireStrength * 21}px ${(props) => props.color4};
     }
     100% {
-      text-shadow: 0 0 2px ${(props) => props.color1},
+      text-shadow:
+        0 0 2px ${(props) => props.color1},
         0 ${(props) => props.fireStrength * -5}px ${(props) => props.fireStrength * 4}px ${(props) => props.color2},
         ${(props) => props.fireStrength * 2}px ${(props) => props.fireStrength * -10}px
           ${(props) => props.fireStrength * 6}px ${(props) => props.color1},
@@ -513,9 +524,9 @@ const Container: React.FC<any> = ({ match }) => {
           <br />
           <ul>
             <li>Add the combination of Runes to the crafting cube.</li>
-            <li>Rune Words follow Recipes.</li>
-            <li>Runes should be in exact order to create a Rune Word</li>
-            <li>Attributes are randomly generated based on the Rune Word Attribute Range</li>
+            <li>Runeforms follow Recipes.</li>
+            <li>Runes should be in exact order to create a Runeform</li>
+            <li>Attributes are randomly generated based on the Runeform Attribute Range</li>
             <li>Make sure that there is sufficient amount of runes when crafting. A recipe requires 1 of each rune.</li>
           </ul>
         </p>

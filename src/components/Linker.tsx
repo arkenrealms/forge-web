@@ -238,6 +238,7 @@ const Linker = function ({
                       border-radius: 5px;
                       padding: 0 2px 2px;
                       min-height: 37px;
+                      margin: 3px 0;
 
                       &:hover {
                         background: rgb(73 74 128 / 20%);
@@ -741,6 +742,7 @@ const Linker = function ({
                   background: rgb(73 74 128 / 10%);
                   border-radius: 5px;
                   padding: 0 2px 2px;
+                  margin: 3px 0;
 
                   &:hover {
                     background: rgb(73 74 128 / 20%);
@@ -869,7 +871,7 @@ const Linker = function ({
                       background: rgb(70 70 70 / 50%) url(${gameInfo[gameKey].icon}) no-repeat 0 0;
                       background-size: 24px;
                       background-position: 1px 1px;
-                      padding: 0 5px 0 32px !important;
+                      padding: 4px 5px 4px 32px !important;
 
                       color: ${gameInfo[gameKey].color};
                       // border-color: ${gameInfo[gameKey].color};
@@ -1126,6 +1128,7 @@ const Linker = function ({
                       background: rgb(73 74 128 / 10%);
                       border-radius: 5px;
                       padding: 0 2px 2px;
+                      margin: 3px 0;
 
                       &:hover {
                         background: rgb(73 74 128 / 20%);

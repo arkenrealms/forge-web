@@ -476,11 +476,11 @@ const Guide: React.FC<any> = () => {
               {t('Runes')}
             </BoxHeading>
             <p>
-              Runes are small stones inscribed with magical glyphs. From March 2021, 33 different runes will be
-              distributed to players through the Arken ecosystem over a two year period. There are currently{' '}
-              {totalRunes} released. Each rune builds on the last, expanding the universe with new storylines, games,
-              and unique collectibles that make your heroes stronger. Players can earn runes in games by competing
-              against other players, guilds, and AI, raiding yield farms, and community participation.
+              Runes are small stones inscribed with magical glyphs. Runes will be distributed to players through the
+              Arken ecosystem over time. There are currently {totalRunes} released. Each rune builds on the last,
+              expanding the universe with new storylines, games, and unique collectibles that make your heroes stronger.
+              Players can earn runes in games by competing against other players, guilds, and AI, raiding, and community
+              participation.
             </p>
             {/* <p className="paragraph-2">Attribute mechanics in Runic Raids are executed on the blockchain within the farms. Attributes from your equipped items are added together, and then processed. <br />‍ <br />Final Harvest is computed based on the following steps: <br />*&nbsp;Fee - Calc fee based on harvest <br />*&nbsp;Early Unstake No Reward - Check, if so then set harvest to <br />*&nbsp;Burn - Apply burn to harvest <br />*&nbsp;Swap - Swap % of harvest <br />*&nbsp;Fee - Take fee *if theres any harvest left* <br />*&nbsp;Hidden Pool - Check if sending to hidden pool, if so then set harvest to <br />*&nbsp;Bonus Yield - Give bonus based on harvest if anything left <br />
             <br />
@@ -535,7 +535,7 @@ const Guide: React.FC<any> = () => {
               <strong>visit our FAQ</strong>
             </a>{' '}
             or{' '}
-            <a href="https://t.me/Arken_Realms" rel="noreferrer noopener" target="_blank">
+            <a href="https://telegram.arken.gg" rel="noreferrer noopener" target="_blank">
               <strong>join our telegram</strong>
             </a>
             .

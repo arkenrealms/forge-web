@@ -108,8 +108,8 @@ const Rules = () => {
         <hr />
         <CardBody>
           We host weekly quizzes with prizes, contests, and riddles in our main Telegram chat. Join us here:{' '}
-          <a href="https://t.me/Arken_Realms" target="_blank" rel="noreferrer noopener">
-            https://t.me/Arken_Realms
+          <a href="https://telegram.arken.gg" target="_blank" rel="noreferrer noopener">
+            https://telegram.arken.gg
           </a>
         </CardBody>
       </Card>

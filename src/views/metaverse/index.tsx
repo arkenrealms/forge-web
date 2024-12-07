@@ -88,7 +88,7 @@ const Home: React.FC<any> = () => {
         <Heading size="xl">Under Development</Heading>
         <br />
         <p style={{ color: 'white' }}>
-          Battle your way through the Arcane Sanctuary arena for glory and loot.
+          Battle your way through the Infinite Arena for glory and loot.
           <br />
           <br />
           This online multiplayer arena game is set in Haerra, the world of Heart of the Oasis. <br />

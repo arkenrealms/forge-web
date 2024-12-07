@@ -97,7 +97,7 @@ export default {
     '3. CRAFT ITEMS': '3. OBJETOS ARTESANOS',
     'At any time, you can craft items using the Cube. To do this, you must select the correct rune combination.':
       'En cualquier momento, puedes crear objetos utilizando el Cubo. Para ello, debes seleccionar la combinación correcta de runas.',
-    '• View Runeforms': ' • Ver RuneWords',
+    '• View Runeforms': ' • Ver Runeforms',
     '• Start Crafting': '• Empezar a crear',
     '4. EQUIP ITEMS': '4. EQUIPAR OBJETOS',
     "Once you have your items crafted, you can equip them on the inventory screen and they will show up as equipped on the raid page. Don't worry if you don't see it right away, just refresh in a minute.":
@@ -137,8 +137,8 @@ export default {
     'Early adopters will have an opportunity to get some of the rarest NFTs either through airdrops, fundraising, or farming.':
       'Los primeros usuarios tendrán la oportunidad de conseguir los NFTs más raros a través recompensas, recaudación de fondos o en el farming.',
     Items: 'OBJETOS',
-    'Items in Arken Realms are randomly generated NFTs with real utility. So far, we have 3 unique Rune Word NFTs that can be generated using runes.':
-      'Los objetos en Arken Realms son NFTs generados al azar con gran utilidad. Hasta el momento, tenemos 3 Rune Word NFTs únicos que se pueden crear usando runas.',
+    'Items in Arken Realms are randomly generated NFTs with real utility. So far, we have 3 unique Runeform NFTs that can be generated using runes.':
+      'Los objetos en Arken Realms son NFTs generados al azar con gran utilidad. Hasta el momento, tenemos 3 Runeform NFTs únicos que se pueden crear usando runas.',
     'These items can be used in our upcoming games, because they are EVOLVING NFTS that have branching attributes.':
       'Estos objetos puedrán ser utilizados en nuestros próximos juegos, al ser NFTS mejorados con atributos ramificados.',
     RUNES: 'RUNAS',
@@ -314,8 +314,8 @@ export default {
     'Launch runes: AMN SOL SHAEL DOL HEL IO LUM KO FAL LEM':
       'Lanzamiento de las runas: $AMN $SOL $SHAEL $DOL $HEL $IO $LUM $KO $FAL $LEM',
     'Desktop app. Progress on this has already started.': 'Aplicación de escritorio. Actualmente en progreso.',
-    "Runeforms. Combine runes into NFT Runeforms (each with random affixes). Rune Word items will initially be designed by us, but a limited amount of custom Runeforms will be put up for auction, where you will have a chance to design one of your own. If you hold many of the runes required, you can craft them as your heart desires until you've created a Perfect Rune Word.":
-      'RuneWords. Combina runas para crear RuneWords NFTs (cada uno con atributos aleatorios). Los objetos RuneWords serán inicialmente diseñados por nosotros, pero una cantidad limitada de RuneWords personalizados serán ofrecidos en subasta, donde tendrás la oportunidad de diseñar uno propio. Si guardas muchas de las runas necesarias, podrás diseñar tantos como tu corazón desee hasta que hayas creado una RuneWord perfecta.',
+    "Runeforms. Combine runes into NFT Runeforms (each with random affixes). Runeform items will initially be designed by us, but a limited amount of custom Runeforms will be put up for auction, where you will have a chance to design one of your own. If you hold many of the runes required, you can craft them as your heart desires until you've created a Perfect Runeform.":
+      'Runeforms. Combina runas para crear Runeforms NFTs (cada uno con atributos aleatorios). Los objetos Runeforms serán inicialmente diseñados por nosotros, pero una cantidad limitada de Runeforms personalizados serán ofrecidos en subasta, donde tendrás la oportunidad de diseñar uno propio. Si guardas muchas de las runas necesarias, podrás diseñar tantos como tu corazón desee hasta que hayas creado una RuneWord perfecta.',
     'More gambling systems. Gamble your old LPs in a locked LP pool, and win all proceeds earned by those LPs for an entire day. The locked LP pool gets bigger and bigger over time. Eventually we may add cVault style mechanics against this liquidity pool (arbitrage, flash loans) or ITS rebase mechanics. TBD.':
       'Más sistemas de juegos de azar. Juega tus viejos LP en una pool bloqueada, y gana todas las ganancias obtenidas por esos LP durante un día completo. Los LPs bloqueados en ese pool se hace cada vez más grande con el tiempo. Eventualmente, podemos agregar mecánicas de estilo cVault contra este pool de liquidez (arbitraje, préstamos flash) o mecánicas de rebase de ITS. TBD.',
     'PvP farms - use NFTs to compete against other raiders for glory and riches.':
@@ -335,11 +335,11 @@ export default {
     'Team starts working on cross-chain bridge.': 'El equipo empieza a trabajar en el puente de cadena cruzada.',
     '2022 Q1-Q4': '2022 Q1-Q4',
     'Think Ready Player One on the blockchain. More TBA.': 'Piensa en Ready Player One en el blockchain. Más TBA.',
-    'Website: Rune.Farm Exchange interface: https://arken.gg/swap/ FAQ /faq Documentation https://arken.gg/docs Twitter https://twitter.com/ArkenRealms Telegram Announcement https://t.me/Arken_ Telegram Public Chat https://t.me/Arken_ Telegram Trading https://t.me/Arken_Trade Telegram JP: https://t.me/Arken_JP Telegram CN: https://t.me/Arken_CN Telegram PH: https://t.me/Arken_PH Telegram FR: https://t.me/Arken_FR Telegram ESP: https://t.me/Arken_ESP Telegram IN: https://t.me/Arken_IN Telegram DE: https://t.me/Arken_DE Github https://github.arken.gg + https://github.com/ArcaneDefi Medium https://ArkenRealms.medium.com/ Roadmap /roadmap Guilds https://arken.gg/team NFT Partnership: https://forms.gle/JnufYQjqAvn6KBhb7': `Página web: Rune.Farm 
+    'Website: Rune.Farm Exchange interface: https://arken.gg/swap/ FAQ /faq Documentation https://arken.gg/docs Twitter https://twitter.arken.gg Telegram Announcement https://t.me/Arken_ Telegram Public Chat https://t.me/Arken_ Telegram Trading https://t.me/Arken_Trade Telegram JP: https://t.me/Arken_JP Telegram CN: https://t.me/Arken_CN Telegram PH: https://t.me/Arken_PH Telegram FR: https://t.me/Arken_FR Telegram ESP: https://t.me/Arken_ESP Telegram IN: https://t.me/Arken_IN Telegram DE: https://t.me/Arken_DE Github https://github.arken.gg + https://github.com/ArcaneDefi Medium https://ArkenRealms.medium.com/ Roadmap /roadmap Guilds https://arken.gg/team NFT Partnership: https://forms.gle/JnufYQjqAvn6KBhb7': `Página web: Rune.Farm 
         Interfaz de Intercambio: https://arken.gg/swap
         FAQ: /faq 
         Documentación: https://arken.gg/docs 
-        Twitter: https://twitter.com/ArkenRealms 
+        Twitter: https://twitter.arken.gg 
         Telegram Anuncio: https://t.me/Arken_ 
         Chat público de Telegram: https://t.me/Arken_ 
         Telegram de Comercio: https://t.me/Arken_Trade

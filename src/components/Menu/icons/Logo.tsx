@@ -22,12 +22,12 @@ const Logo: React.FC<LogoProps> = ({ isDark, isMobile, heading, subheading, ...p
 
   useLayoutEffect(() => {
     if (!window || !window.document || !window.location) return;
-    if (
-      window.location.hostname === 'localhost' ||
-      window.location.hostname === '127.0.0.1' ||
-      window.location.hostname === '0.0.0.0'
-    )
-      return;
+    // if (
+    //   window.location.hostname === 'localhost' ||
+    //   window.location.hostname === '127.0.0.1' ||
+    //   window.location.hostname === '0.0.0.0'
+    // )
+    //   return;
 
     function switchToFancyLogo() {
       setTimeout(() => {
@@ -47,7 +47,9 @@ const Logo: React.FC<LogoProps> = ({ isDark, isMobile, heading, subheading, ...p
   return (
     <div
       css={css`
-        animate: opacity 1.5s;
+        zoom: 0.9;
+        margin-top: 0;
+        animation: opacity 1.5s;
 
         opacity: ${pageLoaded ? 1 : 0};
       `}>
@@ -58,7 +60,7 @@ const Logo: React.FC<LogoProps> = ({ isDark, isMobile, heading, subheading, ...p
           margin-left: 3px;
           font-family: 'Alegreya Sans', sans-serif, monospace;
           color: #d8c692;
-          font-size: 20px;
+          font-size: 14px;
           line-height: 17px;
           font-weight: 500;
           letter-spacing: 9px;
@@ -89,7 +91,7 @@ const Heading = styled.div`
   // filter: sepia(1) saturate(5) hue-rotate(-25deg);
   // sepia(1) saturate(5) hue-rotate(-25deg) grayscale(1) drop-shadow(0px 0px 10px #000) invert(1)
   margin-bottom: -6px;
-  font-size: 33px;
+  font-size: 28px;
   // letter-spacing: 3px;
   filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
   transform: scale(1, 1);

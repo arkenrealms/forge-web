@@ -2,7 +2,7 @@ import queryString from 'query-string';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import BottomCTA from '~/components/BottomCTA';
 import Page from '~/components/layout/Page';
 import useWeb3 from '~/hooks/useWeb3';
@@ -232,7 +232,6 @@ const Promo1 = styled.div`
   text-align: right;
   width: 100%;
   padding: 30px 0 10px;
-  background: #000;
   border-radius: 7px;
   opacity: 1;
   margin-top: 10px;
@@ -254,7 +253,8 @@ const Evolution: React.FC<any> = () => {
   return (
     <Page>
       <Card2 style={{ maxWidth: 600 }}>
-        <MainCard>
+        <Card>
+          {/* <MainCard> */}
           <Promo1
             onClick={() => {
               navigate('/fundraiser');
@@ -274,7 +274,13 @@ const Evolution: React.FC<any> = () => {
           >
             Available Now
           </Heading> */}
-            <Video loop autoPlay muted>
+            <Video
+              loop
+              autoPlay
+              muted
+              css={css`
+                mix-blend-mode: difference;
+              `}>
               <source src={videoUrl} type="video/mp4" />
             </Video>
           </Promo1>
@@ -283,13 +289,13 @@ const Evolution: React.FC<any> = () => {
           <p>These will be redeemable for multiple benefits. Including:</p>
           <br />
           <p>
-            - Heart of the Oasis Collector's Edition
+            - Heart of the Oasis: Collector's Edition
             <br />
             - Earliest Access to Arken games
             <br />
             - Access to Founder's Tavern in the End of Time
             <br />
-            - Every Rune in Heart of the Oasis (1 EX-ZENO)
+            - Every Rune in Heart of the Oasis release (1 EX-ZENO)
             <br />
             - Golden Cube Skin
             <br />
@@ -318,7 +324,8 @@ const Evolution: React.FC<any> = () => {
           <p style={{ fontSize: '0.8rem' }}>
             <em>Certain benefits will only be unlocked when available.</em>
           </p>
-        </MainCard>
+          {/* </MainCard> */}
+        </Card>
       </Card2>
       <br />
       <BottomCTA />

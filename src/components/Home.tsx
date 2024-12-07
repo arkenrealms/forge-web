@@ -853,6 +853,8 @@ const Home: React.FC<any> = ({ match }) => {
                 css={css`
                   filter: drop-shadow(1px 1px 1px black);
                   padding: 30px;
+                  border-radius: 8px;
+                  background: rgba(0, 0, 0, 0.1) radial-gradient(black, transparent);
 
                   // &:before {
                   //   position: absolute;
@@ -999,19 +1001,15 @@ z-index: 999;
                   </BoxHeading>
                   <br />
                   <p>
-                    Immerse yourself in our fantasy games, win runes and items, trade them on our{' '}
+                    Immerse yourself in our fantasy games, win runes and items, trade them on the{' '}
                     <RouterLink to="/market" style={{ borderBottom: '1px solid #fff' }}>
-                      NFT Market
-                    </RouterLink>{' '}
-                    and participate in{' '}
-                    <RouterLink to="/raid" style={{ borderBottom: '1px solid #fff' }}>
-                      NFT farms and pools
+                      Arken Market
                     </RouterLink>
                     .
                     <br />
                     <br />
-                    We build fun games, and incorporate blockchain gaming so you own your character and items for life,
-                    can bring them between games, and monetize on your hard work.
+                    We build fun games, and incorporate web3 gaming so you own your character and items for life, can
+                    bring them between games, and monetize on your hard work.
                   </p>
                 </div>
               </PitchCard>
@@ -1405,16 +1403,16 @@ z-index: 999;
         <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
           <Card>
             <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-              {t('Team')}
+              {t('Council')}
             </BoxHeading>
             <hr />
             <CardBody>
-              <TeamComponent showAll={false} match={match} />
+              <TeamComponent showAll={true} match={match} />
               <br />
               <br />
               <Flex flexDirection="column" alignItems="center" justifyContent="center">
                 <Button as={RouterLink} to="/team" variant="text" style={{ border: '2px solid #ddd' }}>
-                  View Full Team
+                  View Full Council
                 </Button>
               </Flex>
             </CardBody>
@@ -1874,7 +1872,7 @@ z-index: 999;
                               {t(`released`)}
                             </a>
                           </BulletPoint>
-                          {/* <BulletPoint><a href="https://arken.gg/characters" rel="noreferrer noopener" target="_blank">Currently <strong><CardValueUnstyled fontSize="14px" value={totalRuneWords} decimals={0} /></strong> runewords</a></BulletPoint> */}
+                          {/* <BulletPoint><a href="https://arken.gg/characters" rel="noreferrer noopener" target="_blank">Currently <strong><CardValueUnstyled fontSize="14px" value={totalRuneforms} decimals={0} /></strong> runewords</a></BulletPoint> */}
                           <BulletPoint>
                             <a href="https://arken.gg/characters" rel="noreferrer noopener" target="_blank">
                               <strong>
@@ -1908,7 +1906,7 @@ z-index: 999;
                               </span>
                               <br />
                               <span style={{ paddingLeft: 10 }}>
-                                $EL-$ZOD:{' '}
+                                $EX-$ZENO:{' '}
                                 <CardValueUnstyled fontSize="14px" value={runesMarketCap} decimals={0} prefix="$" /> USD
                               </span>
                             </p>

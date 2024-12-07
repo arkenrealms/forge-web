@@ -147,14 +147,14 @@ const Rules = () => {
                 <br />
                 <br />
                 <p>
-                  <HighlightLink href="https://twitter.com/ArkenRealms">
+                  <HighlightLink href="https://twitter.arken.gg">
                     2. Follow Rune&rsquo;s official Twitter account. <OpenNewIcon color="#7576df" ml="4px" />
                   </HighlightLink>
                 </p>
                 <br />
                 <br />
                 <p>
-                  <HighlightLink href="https://twitter.com/ArkenRealms">
+                  <HighlightLink href="https://twitter.arken.gg">
                     3. Like and retweet the Rune x CoinMarketCap NFT Airdrop Tweet, pinned on Twitter.{' '}
                     <OpenNewIcon color="#7576df" ml="4px" />
                   </HighlightLink>
@@ -165,7 +165,7 @@ const Rules = () => {
                 <br />
                 <br />
                 <p>
-                  <HighlightLink href="https://t.me/Arken_Realms">
+                  <HighlightLink href="https://telegram.arken.gg">
                     4. Join Rune&rsquo;s Telegram group. <OpenNewIcon color="#7576df" ml="4px" />
                   </HighlightLink>
                 </p>

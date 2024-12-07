@@ -696,7 +696,7 @@ const Home: React.FC<any> = () => {
                   released
                 </a>
               </BulletPoint>
-              {/* <BulletPoint><a href="https://arken.gg/characters" rel="noreferrer noopener" target="_blank">Currently <strong><CardValueUnstyled fontSize="14px" value={totalRuneWords} decimals={0} /></strong> runewords</a></BulletPoint> */}
+              {/* <BulletPoint><a href="https://arken.gg/characters" rel="noreferrer noopener" target="_blank">Currently <strong><CardValueUnstyled fontSize="14px" value={totalRuneforms} decimals={0} /></strong> runewords</a></BulletPoint> */}
               <BulletPoint>
                 <a href="https://arken.gg/characters" rel="noreferrer noopener" target="_blank">
                   <strong>

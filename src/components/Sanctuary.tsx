@@ -972,19 +972,18 @@ const Home: React.FC<any> = () => {
               <hr />
               <br />
               <p>
-                Arken is inspired by the best ARPGs in history, primarily Diablo 2 and Chrono Trigger. Runes are small
-                stones inscribed with magical glyphs. From March 2021, 33 different runes will be distributed to players
-                over a two year period. Runes can be collected in play to earn games, competing with other players,
-                raiding yield farms, purchasing through the market, airdrops, boss battles, and other mechanics. Each
-                rune builds on the last, expanding the universe with new storylines, games, and unique collectibles that
-                make your heroes stronger.
+                Arken aspires to build some of the best RPGs in history. Runes are small stones inscribed with magical
+                glyphs. Runes will be distributed to players over time. Runes can be collected in play to earn games,
+                competing with other players, raiding, purchasing through the market, airdrops, boss battles, and other
+                mechanics. Each rune builds on the last, expanding the universe with new storylines, games, and unique
+                collectibles that make your heroes stronger.
               </p>
               {/* <p>
               {t(
                 `Arken is the next evolution of DeFi farming. Farming is when you use your tokens to earn bonus tokens by staking them. Every week a new token is created (called a rune). It's farmed until the max supply of 50,000. That rune can then be combined with other runes to create NFTs. Those NFTs can be used to improve your earnings.`,
               )}
             </p> */}
-              {isMobile ? (
+              {/* {isMobile ? (
                 <ProfileContainer style={{ width: '100%', margin: '30px auto 0', zoom: '0.9', opacity: '0.9' }}>
                   <Inventory
                     columns={5}
@@ -1031,7 +1030,7 @@ const Home: React.FC<any> = () => {
                     </div>
                   ) : null}
                 </ProfileContainer>
-              ) : null}
+              ) : null} */}
               {!isMobile ? (
                 <>
                   <br />
@@ -1098,7 +1097,7 @@ const Home: React.FC<any> = () => {
               <hr />
               <p>
                 Imagine a digital world where your NFTs adapt to the game you're playing. Equip your hero with unique
-                Rune Words with varying attributes to make them more powerful in battle, increase magic find, or improve
+                Runeforms with varying attributes to make them more powerful in battle, increase magic find, or improve
                 farming and merchant abilities.
               </p>
               <br />
@@ -1160,10 +1159,9 @@ const Home: React.FC<any> = () => {
               </p>
               <br />
               <p>
-                To mint or craft a Rune Word in the Crafting Cube you need to know the specific combination of runes,
+                To mint or craft a Runeform in the Crafting Cube you need to know the specific combination of runes,
                 called a recipe. Some recipes are <RouterLink to="/craft">known</RouterLink>, some are secret. Once you
-                know the recipe of a Rune Word you need to burn at least one of each rune in the recipe to craft the
-                NFT.
+                know the recipe of a Runeform you need to burn at least one of each rune in the recipe to craft the NFT.
               </p>
               {/* <p>
               <span

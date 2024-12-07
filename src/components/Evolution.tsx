@@ -1492,15 +1492,7 @@ const Evolution: any = ({ open }) => {
               ) : null} */}
             </Flex>
           ) : (
-            <div
-              css={css`
-                border-width: 8px;
-                border-style: solid;
-                border-color: transparent;
-                border-image: url(/images/frame.png) 80 / 80px / 0 repeat;
-                border-radius: 0px;
-                background: #000;
-              `}>
+            <Card3>
               <div
                 css={css`
                   position: relative;
@@ -1570,9 +1562,9 @@ const Evolution: any = ({ open }) => {
                           onClick={() => {
                             window.scrollTo(0, 0);
                           }}>
-                          {t('Digital Purchase')}
+                          {t('Play Free')}
                         </Button>
-                        <br />
+                        {/* <br />
                         <Flex flexDirection="row" alignItems="center" justifyContent="space-between">
                           <Button
                             as={RouterLink}
@@ -1583,13 +1575,13 @@ const Evolution: any = ({ open }) => {
                             }}>
                             {t("Founder's Edition")}
                           </Button>
-                        </Flex>
+                        </Flex> */}
                       </>
                     ) : null}
                   </Flex>
                 </div>
               </div>
-            </div>
+            </Card3>
           )}
           <Page>
             {/* <Flex
@@ -1672,7 +1664,7 @@ const Evolution: any = ({ open }) => {
                       <Button
                         variant="text"
                         as={Link}
-                        href="https://t.me/Arken_Realms"
+                        href="https://telegram.arken.gg"
                         target="_blank"
                         style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}>
                         {t('Announcements')}
@@ -1760,6 +1752,7 @@ const Evolution: any = ({ open }) => {
                       left: 0;
                       text-align: center;
                       width: 100%;
+                      padding: 20px;
                     `}>
                     {/* {!account || !profile?.nft ? (
                     <>
@@ -1779,7 +1772,7 @@ const Evolution: any = ({ open }) => {
                     </>
                   ) : null} */}
                     <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
-                      <SpecialButton title="TEST GAME" onClick={startOldGame} />
+                      <SpecialButton title="PLAY NOW" onClick={startOldGame} />
                     </HeadingFire>
                     {/* {account && realm && profile?.nft ? (
                     <Flex flexDirection="column" alignItems="center" justifyContent="center">

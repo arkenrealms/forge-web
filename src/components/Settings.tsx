@@ -88,7 +88,7 @@ const AI = () => {
                 onChange={() => settings.update('isAdvancedUser', !settings.isAdvancedUser)}
                 scale="sm"
               />
-              <Text> {t(`I'm an advanced Rune user`)}</Text>
+              <Text> {t(`I'm an advanced Arken user`)}</Text>
             </ToggleWrapper>
           </ViewControls>
         </CardBody>

@@ -67,39 +67,39 @@ const Swap = ({ showMenu = false }) => {
   const wbnbCurrency = useCurrency('0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c');
   const rxsCurrency = useCurrency('0x2098fef7eeae592038f4f3c4b008515fed0d5886');
   const runeCurrency = useCurrency('0xa9776b590bfc2f956711b3419910a5ec1f63153e');
-  const elCurrency = useCurrency('0x210c14fbecc2bd9b6231199470da12ad45f64d45');
-  const eldCurrency = useCurrency('0xe00b8109bcb70b1edeb4cf87914efc2805020995');
-  const ethCurrency = useCurrency('0x919676B73a8d124597cBbA2E400f81Aa91Aa2450');
-  const tirCurrency = useCurrency('0x125a3e00a9a11317d4d95349e68ba0bc744addc4');
-  const nefCurrency = useCurrency('0xef4f66506aaaeeff6d10775ad6f994105d8f11b4');
-  const ithCurrency = useCurrency('0x098Afb73F809D8Fe145363F802113E3825d7490C');
-  const talCurrency = useCurrency('0x5DE72A6fca2144Aa134650bbEA92Cc919244F05D');
-  const ralCurrency = useCurrency('0x2F25DbD430CdbD1a6eC184c79C56C18918fcc97D');
-  const ortCurrency = useCurrency('0x33bc7539D83C1ADB95119A255134e7B584cd5c59');
-  const thulCurrency = useCurrency('0x1fC5bffCf855B9D7897F1921363547681F6847Aa');
-  const amnCurrency = useCurrency('0x346C03fe8BE489baAAc5CE67e817Ff11fb580F98');
-  const solCurrency = useCurrency('0x4ffd3b8ba90f5430cda7f4cc4c0a80df3cd0e495');
-  const shaelCurrency = useCurrency('0x56DeFe2310109624c20c2E985c3AEa63b9718319');
-  const dolCurrency = useCurrency('0x94F2E23c7422fa8c5A348a0E6D7C05b0a6C8a5b8');
-  const helCurrency = useCurrency('0x0D3877152BaaC86D42A4123ABBeCd1178d784cC7');
-  const ioCurrency = useCurrency('0xa00672c2a70E4CD3919afc2043b4b46e95041425');
-  const lumCurrency = useCurrency('0xD481F4eA902e207AAda9Fa093f80d50B19444253');
-  const koCurrency = useCurrency('0x2a74b7d7d44025Bcc344E7dA80d542e7b0586330');
-  const falCurrency = useCurrency('0xcd06c743a1628fB02C15946a56037CD7020F3Bd2');
-  const lemCurrency = useCurrency('0xFF0682D330C7a6381214fa541d8D288dD0D098ED');
-  const pulCurrency = useCurrency('0xfa3f14C55adaDDC2035083146c1cF768bD035E06');
-  const umCurrency = useCurrency('0x7e8a6d548a68339481c500f2B56367698A9F7213');
-  const malCurrency = useCurrency('0xdfFeB26FbaCF79823C50a4e7DCF69378667c9941');
-  const istCurrency = useCurrency('0x90132915EbDe0CF93283D55AB3fBBA15449f95A9');
-  const gulCurrency = useCurrency('0xa89805AB2ca5B70c89B74b3B0346a88a5B8eAc85');
-  const vexCurrency = useCurrency('0x60E3538610e9f4974A36670842044CB4936e5232');
-  const ohmCurrency = useCurrency('0x9449D198AB998388a577D4eBfDa4656D9fa3468a');
-  const loCurrency = useCurrency('0x08fb6740Cc5170e48B2Ad8Cc07422d3302EF5e78');
-  const surCurrency = useCurrency('0x191472E8E899E98048AeB82faa1AE4Ec3801b936');
-  const berCurrency = useCurrency('0x1656f8d69F2354a9989Fe705c0107190A4815287');
-  const jahCurrency = useCurrency('0xBC996F2f6703cc13AA494F846A1c563A4A0f1A80');
-  const chamCurrency = useCurrency('0xfb134f1721bc602Eb14148f89e1225dC7C93D8d4');
-  const zodCurrency = useCurrency('0x3e151ca82b3686f555c381530732df1cfc3c7890');
+  const exCurrency = useCurrency('0x210c14fbecc2bd9b6231199470da12ad45f64d45');
+  const elmCurrency = useCurrency('0xe00b8109bcb70b1edeb4cf87914efc2805020995');
+  const evaCurrency = useCurrency('0x919676B73a8d124597cBbA2E400f81Aa91Aa2450');
+  const tyrCurrency = useCurrency('0x125a3e00a9a11317d4d95349e68ba0bc744addc4');
+  const nenCurrency = useCurrency('0xef4f66506aaaeeff6d10775ad6f994105d8f11b4');
+  const isaCurrency = useCurrency('0x098Afb73F809D8Fe145363F802113E3825d7490C');
+  const tatoCurrency = useCurrency('0x5DE72A6fca2144Aa134650bbEA92Cc919244F05D');
+  const roCurrency = useCurrency('0x2F25DbD430CdbD1a6eC184c79C56C18918fcc97D');
+  const oreCurrency = useCurrency('0x33bc7539D83C1ADB95119A255134e7B584cd5c59');
+  const ashCurrency = useCurrency('0x1fC5bffCf855B9D7897F1921363547681F6847Aa');
+  const senCurrency = useCurrency('0x346C03fe8BE489baAAc5CE67e817Ff11fb580F98');
+  const thalCurrency = useCurrency('0x4ffd3b8ba90f5430cda7f4cc4c0a80df3cd0e495');
+  const soloCurrency = useCurrency('0x56DeFe2310109624c20c2E985c3AEa63b9718319');
+  const daCurrency = useCurrency('0x94F2E23c7422fa8c5A348a0E6D7C05b0a6C8a5b8');
+  const hanCurrency = useCurrency('0x0D3877152BaaC86D42A4123ABBeCd1178d784cC7');
+  const ionCurrency = useCurrency('0xa00672c2a70E4CD3919afc2043b4b46e95041425');
+  const luxCurrency = useCurrency('0xD481F4eA902e207AAda9Fa093f80d50B19444253');
+  const kaCurrency = useCurrency('0x2a74b7d7d44025Bcc344E7dA80d542e7b0586330');
+  const fusCurrency = useCurrency('0xcd06c743a1628fB02C15946a56037CD7020F3Bd2');
+  const leniCurrency = useCurrency('0xFF0682D330C7a6381214fa541d8D288dD0D098ED');
+  const paiCurrency = useCurrency('0xfa3f14C55adaDDC2035083146c1cF768bD035E06');
+  const ulnCurrency = useCurrency('0x7e8a6d548a68339481c500f2B56367698A9F7213');
+  const morCurrency = useCurrency('0xdfFeB26FbaCF79823C50a4e7DCF69378667c9941');
+  const iskCurrency = useCurrency('0x90132915EbDe0CF93283D55AB3fBBA15449f95A9');
+  const gonCurrency = useCurrency('0xa89805AB2ca5B70c89B74b3B0346a88a5B8eAc85');
+  const valCurrency = useCurrency('0x60E3538610e9f4974A36670842044CB4936e5232');
+  const ohCurrency = useCurrency('0x9449D198AB998388a577D4eBfDa4656D9fa3468a');
+  const lorCurrency = useCurrency('0x08fb6740Cc5170e48B2Ad8Cc07422d3302EF5e78');
+  const suCurrency = useCurrency('0x191472E8E899E98048AeB82faa1AE4Ec3801b936');
+  const beruCurrency = useCurrency('0x1656f8d69F2354a9989Fe705c0107190A4815287');
+  const juaCurrency = useCurrency('0xBC996F2f6703cc13AA494F846A1c563A4A0f1A80');
+  const chinCurrency = useCurrency('0xfb134f1721bc602Eb14148f89e1225dC7C93D8d4');
+  const zenoCurrency = useCurrency('0x3e151ca82b3686f555c381530732df1cfc3c7890');
 
   // token warning stuff
   const [loadedInputCurrency, loadedOutputCurrency] = [
@@ -692,39 +692,39 @@ const Swap = ({ showMenu = false }) => {
               {/* <Rune src="https://safemoon.net/public/img/favicon.png" onClick={() => onCurrencySelection(Field.OUTPUT, safeCurrency!)} /> */}
               {/* <Rune src="/images/rune-500x500.png" onClick={() => onCurrencySelection(Field.OUTPUT, runeCurrency!)} /> */}
               {/* <Rune src="/images/rune-500x500.png" onClick={() => onCurrencySelection(Field.OUTPUT, rxsCurrency!)} /> */}
-              <Rune src="/images/farms/el.png" onClick={() => onCurrencySelection(Field.OUTPUT, elCurrency!)} />
-              <Rune src="/images/farms/eld.png" onClick={() => onCurrencySelection(Field.OUTPUT, eldCurrency!)} />
-              <Rune src="/images/farms/eth.png" onClick={() => onCurrencySelection(Field.OUTPUT, ethCurrency!)} />
-              <Rune src="/images/farms/tir.png" onClick={() => onCurrencySelection(Field.OUTPUT, tirCurrency!)} />
-              <Rune src="/images/farms/nef.png" onClick={() => onCurrencySelection(Field.OUTPUT, nefCurrency!)} />
-              <Rune src="/images/farms/ith.png" onClick={() => onCurrencySelection(Field.OUTPUT, ithCurrency!)} />
-              <Rune src="/images/farms/tal.png" onClick={() => onCurrencySelection(Field.OUTPUT, talCurrency!)} />
-              <Rune src="/images/farms/ral.png" onClick={() => onCurrencySelection(Field.OUTPUT, ralCurrency!)} />
-              <Rune src="/images/farms/ort.png" onClick={() => onCurrencySelection(Field.OUTPUT, ortCurrency!)} />
-              <Rune src="/images/farms/thul.png" onClick={() => onCurrencySelection(Field.OUTPUT, thulCurrency!)} />
-              <Rune src="/images/farms/amn.png" onClick={() => onCurrencySelection(Field.OUTPUT, amnCurrency!)} />
-              <Rune src="/images/farms/sol.png" onClick={() => onCurrencySelection(Field.OUTPUT, solCurrency!)} />
-              <Rune src="/images/farms/shael.png" onClick={() => onCurrencySelection(Field.OUTPUT, shaelCurrency!)} />
-              <Rune src="/images/farms/dol.png" onClick={() => onCurrencySelection(Field.OUTPUT, dolCurrency!)} />
-              <Rune src="/images/farms/hel.png" onClick={() => onCurrencySelection(Field.OUTPUT, helCurrency!)} />
-              <Rune src="/images/farms/io.png" onClick={() => onCurrencySelection(Field.OUTPUT, ioCurrency!)} />
-              <Rune src="/images/farms/lum.png" onClick={() => onCurrencySelection(Field.OUTPUT, lumCurrency!)} />
-              <Rune src="/images/farms/ko.png" onClick={() => onCurrencySelection(Field.OUTPUT, koCurrency!)} />
-              <Rune src="/images/farms/fal.png" onClick={() => onCurrencySelection(Field.OUTPUT, falCurrency!)} />
-              <Rune src="/images/farms/lem.png" onClick={() => onCurrencySelection(Field.OUTPUT, lemCurrency!)} />
-              <Rune src="/images/farms/pul.png" onClick={() => onCurrencySelection(Field.OUTPUT, pulCurrency!)} />
-              <Rune src="/images/farms/um.png" onClick={() => onCurrencySelection(Field.OUTPUT, umCurrency!)} />
-              <Rune src="/images/farms/mal.png" onClick={() => onCurrencySelection(Field.OUTPUT, malCurrency!)} />
-              <Rune src="/images/farms/ist.png" onClick={() => onCurrencySelection(Field.OUTPUT, istCurrency!)} />
-              <Rune src="/images/farms/gul.png" onClick={() => onCurrencySelection(Field.OUTPUT, gulCurrency!)} />
-              <Rune src="/images/farms/vex.png" onClick={() => onCurrencySelection(Field.OUTPUT, vexCurrency!)} />
-              <Rune src="/images/farms/ohm.png" onClick={() => onCurrencySelection(Field.OUTPUT, ohmCurrency!)} />
-              <Rune src="/images/farms/lo.png" onClick={() => onCurrencySelection(Field.OUTPUT, loCurrency!)} />
-              <Rune src="/images/farms/sur.png" onClick={() => onCurrencySelection(Field.OUTPUT, surCurrency!)} />
-              <Rune src="/images/farms/ber.png" onClick={() => onCurrencySelection(Field.OUTPUT, berCurrency!)} />
-              <Rune src="/images/farms/jah.png" onClick={() => onCurrencySelection(Field.OUTPUT, jahCurrency!)} />
-              <Rune src="/images/farms/cham.png" onClick={() => onCurrencySelection(Field.OUTPUT, chamCurrency!)} />
-              <Rune src="/images/farms/zod.png" onClick={() => onCurrencySelection(Field.OUTPUT, zodCurrency!)} />
+              <Rune src="/images/farms/ex.png" onClick={() => onCurrencySelection(Field.OUTPUT, exCurrency!)} />
+              <Rune src="/images/farms/elm.png" onClick={() => onCurrencySelection(Field.OUTPUT, elmCurrency!)} />
+              <Rune src="/images/farms/eva.png" onClick={() => onCurrencySelection(Field.OUTPUT, evaCurrency!)} />
+              <Rune src="/images/farms/tyr.png" onClick={() => onCurrencySelection(Field.OUTPUT, tyrCurrency!)} />
+              <Rune src="/images/farms/nen.png" onClick={() => onCurrencySelection(Field.OUTPUT, nenCurrency!)} />
+              <Rune src="/images/farms/isa.png" onClick={() => onCurrencySelection(Field.OUTPUT, isaCurrency!)} />
+              <Rune src="/images/farms/tato.png" onClick={() => onCurrencySelection(Field.OUTPUT, tatoCurrency!)} />
+              <Rune src="/images/farms/ro.png" onClick={() => onCurrencySelection(Field.OUTPUT, roCurrency!)} />
+              <Rune src="/images/farms/ore.png" onClick={() => onCurrencySelection(Field.OUTPUT, oreCurrency!)} />
+              <Rune src="/images/farms/ash.png" onClick={() => onCurrencySelection(Field.OUTPUT, ashCurrency!)} />
+              <Rune src="/images/farms/sen.png" onClick={() => onCurrencySelection(Field.OUTPUT, senCurrency!)} />
+              <Rune src="/images/farms/thal.png" onClick={() => onCurrencySelection(Field.OUTPUT, thalCurrency!)} />
+              <Rune src="/images/farms/solo.png" onClick={() => onCurrencySelection(Field.OUTPUT, soloCurrency!)} />
+              <Rune src="/images/farms/da.png" onClick={() => onCurrencySelection(Field.OUTPUT, daCurrency!)} />
+              <Rune src="/images/farms/han.png" onClick={() => onCurrencySelection(Field.OUTPUT, hanCurrency!)} />
+              <Rune src="/images/farms/ion.png" onClick={() => onCurrencySelection(Field.OUTPUT, ionCurrency!)} />
+              <Rune src="/images/farms/lux.png" onClick={() => onCurrencySelection(Field.OUTPUT, luxCurrency!)} />
+              <Rune src="/images/farms/ka.png" onClick={() => onCurrencySelection(Field.OUTPUT, kaCurrency!)} />
+              <Rune src="/images/farms/fus.png" onClick={() => onCurrencySelection(Field.OUTPUT, fusCurrency!)} />
+              <Rune src="/images/farms/leni.png" onClick={() => onCurrencySelection(Field.OUTPUT, leniCurrency!)} />
+              <Rune src="/images/farms/pai.png" onClick={() => onCurrencySelection(Field.OUTPUT, paiCurrency!)} />
+              <Rune src="/images/farms/uln.png" onClick={() => onCurrencySelection(Field.OUTPUT, ulnCurrency!)} />
+              <Rune src="/images/farms/mor.png" onClick={() => onCurrencySelection(Field.OUTPUT, morCurrency!)} />
+              <Rune src="/images/farms/isk.png" onClick={() => onCurrencySelection(Field.OUTPUT, iskCurrency!)} />
+              <Rune src="/images/farms/gon.png" onClick={() => onCurrencySelection(Field.OUTPUT, gonCurrency!)} />
+              <Rune src="/images/farms/val.png" onClick={() => onCurrencySelection(Field.OUTPUT, valCurrency!)} />
+              <Rune src="/images/farms/oh.png" onClick={() => onCurrencySelection(Field.OUTPUT, ohCurrency!)} />
+              <Rune src="/images/farms/lor.png" onClick={() => onCurrencySelection(Field.OUTPUT, lorCurrency!)} />
+              <Rune src="/images/farms/su.png" onClick={() => onCurrencySelection(Field.OUTPUT, suCurrency!)} />
+              <Rune src="/images/farms/beru.png" onClick={() => onCurrencySelection(Field.OUTPUT, beruCurrency!)} />
+              <Rune src="/images/farms/jua.png" onClick={() => onCurrencySelection(Field.OUTPUT, juaCurrency!)} />
+              <Rune src="/images/farms/chin.png" onClick={() => onCurrencySelection(Field.OUTPUT, chinCurrency!)} />
+              <Rune src="/images/farms/zeno.png" onClick={() => onCurrencySelection(Field.OUTPUT, zenoCurrency!)} />
             </RuneHolder>
           </Wrapper>
         </Wrapper2>

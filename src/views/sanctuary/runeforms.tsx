@@ -7,9 +7,11 @@ import LoreContainer from '~/components/LoreContainer';
 
 const RuneformsView = () => {
   return (
-    <LoreContainer color="dark">
-      <Runeforms />
-    </LoreContainer>
+    <Page>
+      <LoreContainer color="dark">
+        <Runeforms />
+      </LoreContainer>
+    </Page>
   );
 };
 

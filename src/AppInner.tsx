@@ -121,6 +121,8 @@ const WindowHeader = styled.div<{ active: boolean }>`
   padding: 0px;
   // border-bottom: 1px solid #000;
   z-index: 2;
+  background: #11111e;
+  border-bottom: 1px solid #000;
   flex-direction: column;
 
   :hover {
@@ -528,13 +530,13 @@ const SiteNav = ({ id }) => {
                 <div className="text-block-3">PRIMARY&nbsp;Types</div>
                 <div className="w-layout-grid grid-subnav-list">
                   <a
-                    data-load-page="/runewords"
+                    data-load-page="/runeforms"
                     id="w-node-_3516db66-66a0-079a-08d5-2070d10b7433-1186d119"
-                    href="/runewords"
+                    href="/runeforms"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/runewords');
+                      history.push('/runeforms');
                     }}>
                     <div className="icon" />
                     <div>Runewords</div>
@@ -894,13 +896,13 @@ const SiteNav = ({ id }) => {
                     <div>Areas</div>
                   </a>
                   <a
-                    data-load-page="/runewords"
+                    data-load-page="/runeforms"
                     id="w-node-c16538f4-fa64-7ea2-171e-d88e5b99a3eb-1186d119"
-                    href="/runewords"
+                    href="/runeforms"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/runewords');
+                      history.push('/runeforms');
                     }}>
                     <div className="icon" />
                     <div>Runewords</div>
@@ -1357,7 +1359,7 @@ const SiteNav = ({ id }) => {
                   </a>
                   <a
                     id="w-node-_72d3b942-4be6-9e12-7c52-5a22e3d5aebd-1186d119"
-                    href="https://t.me/Arken_Realms"
+                    href="https://telegram.arken.gg"
                     target="_blank"
                     rel="noreferrer"
                     className="subnavlink w-inline-block">
@@ -1366,14 +1368,14 @@ const SiteNav = ({ id }) => {
                   </a>
                   <a
                     id="w-node-c7945639-64b1-6bce-4e66-c692eae2c1f8-1186d119"
-                    href="https://twitter.com/ArkenRealms"
+                    href="https://twitter.arken.gg"
                     target="_blank"
                     rel="noreferrer"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>Twitter</div>
                   </a>
-                  <a
+                  {/* <a
                     id="w-node-_49d6ec76-61aa-ffb2-59dc-64c14234c347-1186d119"
                     href="https://facebook.com/ArkenRealms"
                     target="_blank"
@@ -1381,8 +1383,8 @@ const SiteNav = ({ id }) => {
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>Facebook</div>
-                  </a>
-                  <a
+                  </a> */}
+                  {/* <a
                     id="w-node-_8841d407-ece8-48ad-8af8-9290166c0132-1186d119"
                     href="https://arkenrealms.medium.com/"
                     target="_blank"
@@ -1390,10 +1392,10 @@ const SiteNav = ({ id }) => {
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>Medium</div>
-                  </a>
+                  </a> */}
                   <a
                     id="w-node-_04966c78-8932-1c1e-fab2-552bee552675-1186d119"
-                    href="https://www.youtube.com/ArkenRealms"
+                    href="https://youtube.arken.gg"
                     target="_blank"
                     rel="noreferrer"
                     className="subnavlink w-inline-block">
@@ -1948,7 +1950,7 @@ const DraggableWindow: React.FC<any> = React.memo(
                 <div
                   css={css`
                     position: relative;
-                    padding: 20px;
+                    // padding: 20px;
                   `}>
                   <div
                     css={css`

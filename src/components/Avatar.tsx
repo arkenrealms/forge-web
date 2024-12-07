@@ -11,15 +11,20 @@ interface IAvatarUser {
 }
 
 interface IAvatar {
-  user: IAvatarUser;
+  profile: IAvatarUser;
   login?: () => void;
   logout?: () => void;
 }
 
 const { Item } = Menu;
 
-export default ({ user = { name: null, picture: null }, login = () => {}, logout = () => {}, ...props }: IAvatar) => {
-  const { name, picture } = user;
+export default ({
+  profile = { name: null, picture: null },
+  login = () => {},
+  logout = () => {},
+  ...props
+}: IAvatar) => {
+  const { name, picture } = profile;
   const navigate = useNavigate();
   const tour = useTour();
   const { settings, show: showSettings } = useSettings();
@@ -75,7 +80,7 @@ export default ({ user = { name: null, picture: null }, login = () => {}, logout
         }
       : undefined,
     {
-      label: 'Change user',
+      label: 'Change profile',
       key: 'login',
       onClick: async () => {
         if (settings.LoginAsUser) {
@@ -114,7 +119,8 @@ export default ({ user = { name: null, picture: null }, login = () => {}, logout
           cursor: 'pointer',
           color: '#fff',
           fontSize: '14px',
-          background: '#09af42',
+          background: 'rgb(0 0 0 / 50%)',
+          margin: '7px 7px 0 0',
         }}
         data-testid="app-header-avatar">
         {name}

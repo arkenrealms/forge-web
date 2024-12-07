@@ -12,6 +12,8 @@ const BrandMap = {
   'isles.localhost': 'isles',
   'binzy.localhost': 'binzy',
 
+  'arken-prod.asi.sh': 'arken',
+  'arken-beta.asi.sh': 'arken',
   'arken.gg': 'arken',
   'swap.arken.gg': 'rune',
   'dev.arken.gg': 'arken',

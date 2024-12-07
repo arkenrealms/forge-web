@@ -582,7 +582,7 @@ const Home: React.FC<any> = () => {
                 <Button
                   variant="text"
                   as={Link}
-                  href="https://t.me/Arken_Realms"
+                  href="https://telegram.arken.gg"
                   target="_blank"
                   style={{ color: '#bb955e', padding: '6px 20px', textAlign: 'center' }}
                 >

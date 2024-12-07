@@ -457,7 +457,7 @@ const Evolution: any = ({ open }) => {
                     text-align: center;
                   `}>
                   <a
-                    href="https://t.me/Arken_Realms"
+                    href="https://telegram.arken.gg"
                     target="_blank"
                     rel="noreferrer"
                     css={css`

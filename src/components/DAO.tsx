@@ -4,9 +4,10 @@ import { Button } from '~/components/Button';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useFetch from '~/hooks/useFetch';
-import { Card, Heading, CardBody, ArrowForwardIcon, Flex, Skeleton } from '~/ui';
+import { Card, Card3, Card2, Heading, CardBody, ArrowForwardIcon, Flex, Skeleton } from '~/ui';
 import Page from '~/components/layout/Page';
 import Paragraph from '~/components/Paragraph';
+import Team from '~/components/Team';
 
 const zzz = styled.div``;
 
@@ -129,167 +130,181 @@ const DAO = () => {
 
   return (
     <Page>
-      <Card style={{ width: '100%' }}>
-        <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-          {t('Arken Realms Council (DAO)')}
+      <Card3 style={{ marginTop: 10 }}>
+        <Card>
+          <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+            {t('Arken Council (DAO)')}
+          </Heading>
+          <hr />
+          <CardBody>
+            <p>
+              Arken Realms will transition from advisory governance to a complete decentralized autonomous organization
+              when our 4 phase plan is complete and voted upon. There will be a proposal with more details and a vote
+              before we move to each phase. $RXS token holders can vote if the details / timing are satisfactory on{' '}
+              <a href="https://vote.arken.gg" rel="noreferrer noopener" target="_blank">
+                vote.arken.gg
+              </a>
+            </p>
+            <br />
+            <p>
+              Voting is easy: connect your wallet and sign a message. By voting you're helping the project grow, and
+              we've allocated a portion of rune rewards for those who do vote. The pool will grow 1 rune reward per 1M
+              RXS that participates. The rune is chosen randomly from 10 options: Gon Isk Uln Fus Ore Solo Nen Tyr Ex.
+              Finally, that rune reward pool is split between the voters evenly. Each user will also get 10 points
+              towards the player + guild leaderboard. Your rewards and points can be found in the{' '}
+              <RouterLink to="/account/rewards">Reward Centre</RouterLink>.
+            </p>
+            <br />
+            <p>
+              As we work towards the DAO switch, we'll codify configurations &amp; permissions so they can be changed
+              using DAO proposals. For details of what could be controlled so far,{' '}
+              <a href="https://github.com/ArkenRealms/council" rel="noreferrer noopener" target="_blank">
+                check ArkenRealms/council on Github
+              </a>
+              .
+            </p>
+            <br />
+            <p>
+              <strong>Note:</strong> Voting requires the <RouterLink to="/swap">$RXS token</RouterLink>. When a proposal
+              is created, it uses a snapshot of holdings at the time. The reason is so nobody can acquire more to swing
+              the vote in the middle of the voting period. Rewards require an Arken user voting with a minimum of 1000
+              RXS.
+            </p>
+            <br />
+            <br />
+            <Flex flexDirection="column" alignItems="center" justifyContent="center">
+              <Button
+                variant="primary"
+                as="a"
+                href="https://vote.arken.gg"
+                rel="noreferrer noopener"
+                target="_blank"
+                css={css`
+                  zoom: 1.3;
+                  border-radius: 8px;
+                  height: 50px;
+                  box-shadow: 0px -1px 0px 0pxrgb (14 14 44 / 40%) inset;
+                  padding: 16px 25px;
+                  background-color: #6e0000;
+                  filter: drop-shadow(rgba(0, 0, 0, 0.6) 1px 1px 1px) drop-shadow(rgba(0, 0, 0, 0.6) 0px 0px 4px);
+                  &:hover {
+                    cursor: url('/images/cursor3.png'), pointer;
+                  }
+                `}>
+                <HeadingFire
+                  fireStrength={1}
+                  color1="#fd3"
+                  color2="#ff3"
+                  color3="#f80"
+                  color4="#f20"
+                  css={css`
+                    font-size: 1.2rem;
+                    color: #000;
+                    text-transform: uppercase;
+                    font-family: 'webfontexl';
+                  `}>
+                  Voting Portal
+                </HeadingFire>
+              </Button>
+            </Flex>
+            <br />
+            <br />
+            <br />
+            <Heading as="h2" size="lg" style={{ textAlign: 'center' }}>
+              Proposals
+            </Heading>
+            <br />
+            {!proposals.length ? <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" /> : null}
+            {proposals.map((proposal) => {
+              const sortedScores = proposal.scores.sort((a, b) => (a > b ? 1 : -1));
+              const scoreIndex = proposal.scores.indexOf(sortedScores[0]);
+              const result = proposal.choices[scoreIndex];
+              return (
+                <div
+                  css={css`
+                    border: 1px solid #bb955e;
+                    padding: 10px;
+                    margin-bottom: 20px;
+                    font-size: 0.9rem;
+                  `}>
+                  <h3 style={{ fontSize: '1.2rem' }}>{proposal.title}</h3>
+                  <br />
+                  <Paragraph>
+                    {proposal.body.slice(0, 300)}...
+                    <br />
+                    <br />
+                    <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                      <Button
+                        as="a"
+                        scale="sm"
+                        rel="noreferrer noopener"
+                        target="_blank"
+                        href={`https://vote.arken.gg/#/proposal/${proposal.id}`}
+                        variant="text"
+                        style={{ border: '1px solid #ddd' }}>
+                        View Proposal
+                      </Button>
+                    </Flex>
+                    <br />
+                    <strong>Status:</strong> {proposal.state}
+                    <br />
+                    <strong>Result:</strong> {proposal.state === 'closed' ? result : 'Pending'}
+                    <br />
+                    <strong>Reward Pool:</strong>{' '}
+                    {proposal.rewardToken
+                      ? `${proposal.rewardPool} ${proposal.rewardToken.toUpperCase()}`
+                      : `??? Runes (Random)`}{' '}
+                    <br />
+                    {proposal.state === 'closed' ? (
+                      <>
+                        <strong>Voters ({proposal.voteList.length}):</strong>
+                        <br />
+                        <div
+                          css={css`
+                            display: grid;
+                            grid-template-columns: repeat(5, 1fr);
+                            grid-template-rows: 1fr;
+                            grid-column-gap: 0px;
+                            grid-row-gap: 0px;
+
+                            a {
+                              display: inline-block;
+                            }
+                          `}>
+                          {proposal.voteList?.map((vote) => (
+                            <span>
+                              <RouterLink
+                                to={`/user/${vote.username || vote.voter}`}
+                                css={css`
+                                  margin-right: 5px;
+                                  border-bottom: 1px solid #fff;
+                                `}>
+                                {vote.username || `${vote.voter.slice(0, 5)}...${vote.voter.slice(-3)}`}
+                              </RouterLink>{' '}
+                              ({vote.rewarded || 0} {proposal.rewardToken.toUpperCase()})
+                            </span>
+                          ))}
+                        </div>
+                      </>
+                    ) : null}
+                  </Paragraph>
+                </div>
+              );
+            })}
+          </CardBody>
+        </Card>
+      </Card3>
+      <br />
+      <br />
+      <Card2>
+        <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, padding: 20 }}>
+          Current Council
         </Heading>
         <hr />
         <CardBody>
-          <p>
-            Arken Realms will transition from advisory governance to a complete decentralized autonomous organization
-            when our 4 phase plan is complete and voted upon. There will be a proposal with more details and a vote
-            before we move to each phase. $RXS token holders can vote if the details / timing are satisfactory on{' '}
-            <a href="https://vote.arken.gg" rel="noreferrer noopener" target="_blank">
-              vote.arken.gg
-            </a>
-          </p>
-          <br />
-          <p>
-            Voting is easy: connect your wallet and sign a message. By voting you're helping the project grow, and we've
-            allocated a portion of rune rewards for those who do vote. The pool will grow 1 rune reward per 1M RXS that
-            participates. The rune is chosen randomly from 10 options: ZOD GUL IST UM FAL ORT SOL NEF TIR EL. Finally,
-            that rune reward pool is split between the voters evenly. Each user will also get 10 points towards the
-            player + guild leaderboard. Your rewards and points can be found in the{' '}
-            <RouterLink to="/account/rewards">Reward Centre</RouterLink>.
-          </p>
-          <br />
-          <p>
-            As we work towards the DAO switch, we'll codify configurations &amp; permissions so they can be changed
-            using DAO proposals. For details of what could be controlled so far,{' '}
-            <a href="https://github.com/ArkenRealsm/dao" rel="noreferrer noopener" target="_blank">
-              check ArkenRealms/dao on Github
-            </a>
-            .
-          </p>
-          <br />
-          <p>
-            <strong>Note:</strong> Voting requires the <RouterLink to="/swap">$RXS token</RouterLink>. When a proposal
-            is created, it uses a snapshot of holdings at the time. The reason is so nobody can acquire more to swing
-            the vote in the middle of the voting period. Rewards require a Rune user voting with a minimum of 1000 RXS.
-          </p>
-          <br />
-          <br />
-          <Flex flexDirection="column" alignItems="center" justifyContent="center">
-            <Button
-              variant="primary"
-              as="a"
-              href="https://vote.arken.gg"
-              rel="noreferrer noopener"
-              target="_blank"
-              css={css`
-                zoom: 1.3;
-                border-radius: 8px;
-                height: 50px;
-                box-shadow: 0px -1px 0px 0pxrgb (14 14 44 / 40%) inset;
-                padding: 16px 25px;
-                background-color: #6e0000;
-                filter: drop-shadow(rgba(0, 0, 0, 0.6) 1px 1px 1px) drop-shadow(rgba(0, 0, 0, 0.6) 0px 0px 4px);
-                &:hover {
-                  cursor: url('/images/cursor3.png'), pointer;
-                }
-              `}>
-              <HeadingFire
-                fireStrength={1}
-                color1="#fd3"
-                color2="#ff3"
-                color3="#f80"
-                color4="#f20"
-                css={css`
-                  font-size: 1.2rem;
-                  color: #000;
-                  text-transform: uppercase;
-                  font-family: 'webfontexl';
-                `}>
-                Voting Portal
-              </HeadingFire>
-            </Button>
-          </Flex>
-          <br />
-          <br />
-          <br />
-          <Heading as="h2" size="lg" style={{ textAlign: 'center' }}>
-            Proposals
-          </Heading>
-          <br />
-          {!proposals.length ? <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" /> : null}
-          {proposals.map((proposal) => {
-            const sortedScores = proposal.scores.sort((a, b) => (a > b ? 1 : -1));
-            const scoreIndex = proposal.scores.indexOf(sortedScores[0]);
-            const result = proposal.choices[scoreIndex];
-            return (
-              <div
-                css={css`
-                  border: 1px solid #bb955e;
-                  padding: 10px;
-                  margin-bottom: 20px;
-                  font-size: 0.9rem;
-                `}>
-                <h3 style={{ fontSize: '1.2rem' }}>{proposal.title}</h3>
-                <br />
-                <Paragraph>
-                  {proposal.body.slice(0, 300)}...
-                  <br />
-                  <br />
-                  <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                    <Button
-                      as="a"
-                      scale="sm"
-                      rel="noreferrer noopener"
-                      target="_blank"
-                      href={`https://vote.arken.gg/#/proposal/${proposal.id}`}
-                      variant="text"
-                      style={{ border: '1px solid #ddd' }}>
-                      View Proposal
-                    </Button>
-                  </Flex>
-                  <br />
-                  <strong>Status:</strong> {proposal.state}
-                  <br />
-                  <strong>Result:</strong> {proposal.state === 'closed' ? result : 'Pending'}
-                  <br />
-                  <strong>Reward Pool:</strong>{' '}
-                  {proposal.rewardToken
-                    ? `${proposal.rewardPool} ${proposal.rewardToken.toUpperCase()}`
-                    : `??? Runes (Random)`}{' '}
-                  <br />
-                  {proposal.state === 'closed' ? (
-                    <>
-                      <strong>Voters ({proposal.voteList.length}):</strong>
-                      <br />
-                      <div
-                        css={css`
-                          display: grid;
-                          grid-template-columns: repeat(5, 1fr);
-                          grid-template-rows: 1fr;
-                          grid-column-gap: 0px;
-                          grid-row-gap: 0px;
-
-                          a {
-                            display: inline-block;
-                          }
-                        `}>
-                        {proposal.voteList?.map((vote) => (
-                          <span>
-                            <RouterLink
-                              to={`/user/${vote.username || vote.voter}`}
-                              css={css`
-                                margin-right: 5px;
-                                border-bottom: 1px solid #fff;
-                              `}>
-                              {vote.username || `${vote.voter.slice(0, 5)}...${vote.voter.slice(-3)}`}
-                            </RouterLink>{' '}
-                            ({vote.rewarded || 0} {proposal.rewardToken.toUpperCase()})
-                          </span>
-                        ))}
-                      </div>
-                    </>
-                  ) : null}
-                </Paragraph>
-              </div>
-            );
-          })}
+          <Team />
         </CardBody>
-      </Card>
+      </Card2>
     </Page>
   );
 };

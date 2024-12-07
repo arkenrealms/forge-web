@@ -23,16 +23,10 @@ export interface NavTheme {
   hover: string;
 }
 
-export interface MenuSubEntry {
-  label: string;
-  href: string;
-  calloutClass?: string;
-}
-
 export interface MenuEntry {
   label: string;
-  icon: string;
-  items?: MenuSubEntry[];
+  icon?: string;
+  items?: MenuEntry[];
   href?: string;
   calloutClass?: string;
   initialOpenState?: boolean;

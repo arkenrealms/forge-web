@@ -55,8 +55,8 @@ const Runeforms = function () {
             </p>
             <p>‍</p>
             <p>
-              For example, to craft a <strong>Genesis Runeform</strong>, you need one of each <strong>SOL</strong> +
-              <strong>THUL</strong> +<strong>AMN</strong> +<strong>ORT</strong> in that order.
+              For example, to craft a <strong>Genesis Runeform</strong>, you need one of each <strong>SOLO</strong> +
+              <strong>THAL</strong> +<strong>ASH</strong> +<strong>ORE</strong> in that order.
             </p>
             <p>‍</p>
             <p>
@@ -93,7 +93,7 @@ const Runeforms = function () {
             </p>
             <p>
               Within them, they tell a tale of mystical disenchanting powers that turn Runeforms back into runes. But
-              rather than the runes used to craft the Runeform, you’ll receive LEM runes instead. As this process
+              rather than the runes used to craft the Runeform, you’ll receive LENI runes instead. As this process
               requires some degree of sorcery, items of a higher perfection will yield more LEM than more common ones.
               LEM can then be used to upgrade your other items, or for crafting more Runeforms.
             </p>

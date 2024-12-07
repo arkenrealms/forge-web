@@ -12,8 +12,8 @@ const RXS = lazy(() => import('../views/rxs'));
 const First = lazy(() => import('../views/first'));
 const ItemAttributes = lazy(() => import('../views/item-attributes'));
 const Art = lazy(() => import('../views/art'));
-const AI = lazy(() => import('../views/ai'));
-const DAO = lazy(() => import('../views/dao'));
+const AI = lazy(() => import('../views/about/ai'));
+const Council = lazy(() => import('../views/about/council'));
 const MarketTrade = lazy(() => import('../views/trade'));
 const Guilds = lazy(() => import('../views/guilds'));
 const Cube = lazy(() => import('../views/cube'));
@@ -381,7 +381,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/stats',
+      path: '/about/stats',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -1208,7 +1208,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/ai',
+      path: '/about/ai',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -1230,13 +1230,13 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/dao',
+      path: '/about/council',
       icon: AboutIcon,
       exact: true,
       strict: false,
       persist: false,
       props: {
-        title: 'DAO',
+        title: 'Council',
         routeIndex: 1000,
         open: false,
         minimized: false,
@@ -1247,8 +1247,8 @@ const useWindows = () => {
           search: null,
         },
       },
-      navPosition: 0.9,
-      component: DAO,
+      navPosition: undefined, //0.9,
+      component: Council,
       showable: true,
     },
     {
@@ -1423,7 +1423,7 @@ const useWindows = () => {
           search: null,
         },
       },
-      navPosition: 1,
+      navPosition: undefined,
       component: Live,
       showable: true,
     },
@@ -2784,7 +2784,7 @@ const useWindows = () => {
           search: null,
         },
       },
-      navPosition: 2,
+      navPosition: undefined,
       component: Leaderboard,
       showable: true,
     },
@@ -2811,7 +2811,7 @@ const useWindows = () => {
     //   showable: true,
     // },
     {
-      path: '/guilds',
+      path: '/about/guilds',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2899,7 +2899,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/updates',
+      path: '/about/updates',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -3048,7 +3048,7 @@ const useWindows = () => {
           search: null,
         },
       },
-      navPosition: -1000,
+      navPosition: undefined, //-1000,
       component: Sitemap,
       showable: true,
     },
@@ -3333,7 +3333,7 @@ const useWindows = () => {
           search: null,
         },
       },
-      navPosition: -2000,
+      navPosition: undefined, //-2000,
       component: Mod,
       showable: true,
     },
@@ -3404,7 +3404,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/developer',
+      path: '/about/developer',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -3492,7 +3492,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/tokenomics',
+      path: '/about/tokenomics',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -3536,7 +3536,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/roadmap',
+      path: '/about/roadmap',
       icon: AboutIcon,
       exact: false,
       strict: false,

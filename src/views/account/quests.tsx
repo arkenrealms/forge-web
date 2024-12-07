@@ -159,7 +159,7 @@ const TaskCenter = ({ match }) => {
                 - Review
                 <br />
                 <br />
-                <a href="https://twitter.com/arkenrealms" target="_blank" rel="noreferrer noopener">
+                <a href="https://twitter.arken.gg" target="_blank" rel="noreferrer noopener">
                   Rune on Twitter
                 </a>{' '}
                 - Tweet about Rune! Use the tag #ArkenRealms
