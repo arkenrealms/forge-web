@@ -26,7 +26,6 @@ const Svg = styled.svg.attrs<SvgProps>((props) => ({
   flex-shrink: 0;
 
   ${({ spin }) => spin && spinStyle}
-  ${space}
 `;
 
 export default Svg;

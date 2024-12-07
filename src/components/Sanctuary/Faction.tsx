@@ -4,11 +4,11 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styled from 'styled-components';
 import Linker from '~/components/Linker';
-import { Skeleton } from '~/ui';
+import { Skeleton, Card3 } from '~/ui';
 import { trpc } from '~/utils/trpc';
 import type * as Arken from '@arken/node';
 
-const Abc = styled.div``;
+const zzz = styled.div``;
 
 const Faction = function ({ id }) {
   // const url = `https://s1.envoy.arken.asi.sh/characterFactions.json`
@@ -29,7 +29,7 @@ const Faction = function ({ id }) {
     );
 
   return (
-    <>
+    <Card3 style={{ marginTop: 10 }}>
       <div className="w-embed">
         <style
           dangerouslySetInnerHTML={{
@@ -229,7 +229,7 @@ const Faction = function ({ id }) {
           </div>
         </div>
       </main>
-    </>
+    </Card3>
   );
 };
 

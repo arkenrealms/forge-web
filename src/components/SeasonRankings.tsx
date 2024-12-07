@@ -392,8 +392,8 @@ const Skills = () => {
             <br />
             {settings.isCrypto ? (
               <Linker id="evo-season-1">
-                Every round you are a top 10 winner, you earn ZOD rune rewards. The winners of the season will be
-                players who have won the most ZOD rewards. One ZOD = 1000 points. It doesn't matter if you've
+                Every round you are a top 10 winner, you earn ZEL rune rewards. The winners of the season will be
+                players who have won the most ZEL rewards. One ZEL = 1000 points. It doesn't matter if you've
                 claimed/used them.
               </Linker>
             ) : (

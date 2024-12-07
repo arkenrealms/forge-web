@@ -1,22 +1,22 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import styled from 'styled-components'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { Button, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import Page from '~/components/layout/Page'
-import { PurchaseModal } from '~/components/PurchaseModal'
-import Newsletter from '~/components/Newsletter'
-import i18n from '~/config/i18n'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import styled from 'styled-components';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Button, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import Page from '~/components/layout/Page';
+import { PurchaseModal } from '~/components/PurchaseModal';
+import Newsletter from '~/components/Newsletter';
+import i18n from '~/config/i18n';
 
-const Container = styled.div``
+const Container = styled.div``;
 
 const Img = styled.img`
   filter: contrast(1.1) drop-shadow(2px 4px 6px black);
   ${({ theme }) => theme.mediaQueries.sm} {
     width: 100%;
   }
-`
+`;
 const HeadingSilver = styled.div`
   background-image: -webkit-linear-gradient(
     top,
@@ -39,7 +39,7 @@ const HeadingSilver = styled.div`
   // filter: sepia(1) saturate(5) hue-rotate(-25deg);
   // sepia(1) saturate(5) hue-rotate(-25deg) grayscale(1) drop-shadow(0px 0px 10px #000) invert(1)
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
-`
+`;
 
 const HeadingPlain = styled.div`
   color: #cecece;
@@ -51,7 +51,7 @@ const HeadingPlain = styled.div`
   // filter: sepia(1) saturate(5) hue-rotate(-25deg);
   // sepia(1) saturate(5) hue-rotate(-25deg) grayscale(1) drop-shadow(0px 0px 10px #000) invert(1)
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
-`
+`;
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -74,26 +74,26 @@ const Cards = styled(BaseLayout)`
       grid-column: span 6;
     }
   }
-`
+`;
 
-const Text = styled.div``
+const Text = styled.div``;
 
 const HighlightLink = styled.a`
   color: #7576df;
-`
+`;
 
 const StyledCard = styled(Card)`
   background: rgba(0, 0, 0, 0.8);
   z-index: 2;
-`
+`;
 
 const LogoImg = styled.img`
   max-width: 200px;
-`
+`;
 
 const HightlightText = styled.span`
   color: #7576df;
-`
+`;
 
 const LearnMore = styled.div`
   text-align: center;
@@ -105,12 +105,12 @@ const LearnMore = styled.div`
   &:hover {
     cursor: url('/images/cursor3.png'), pointer;
   }
-`
+`;
 
 const Rules = () => {
-  const { t } = useTranslation()
-  const [showVision, setShowVision] = useState(false)
-  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />)
+  const { t } = useTranslation();
+  const [showVision, setShowVision] = useState(false);
+  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
   return (
     <Page>
@@ -129,16 +129,15 @@ const Rules = () => {
           </StyledCard>
           <div style={{ width: '200%', marginLeft: '-50%' }}>
             <Flex flexDirection="column" alignItems="center" justifyContent="center">
-              <LogoImg src="/images/rune-500x500.png" />
+              <LogoImg src="/images/arken-256x256.png" />
               <Heading as="h1" size="xxl" color="secondary" mb="8px">
-                <HeadingPlain>RUNE</HeadingPlain>
+                <HeadingPlain>ARKEN REALMS</HeadingPlain>
               </Heading>
               <Heading
                 as="h2"
                 size="lg"
                 mb="8px"
-                style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)' }}
-              >
+                style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)' }}>
                 {t('The First NFT Hyperfarm')}
               </Heading>
               <Img src="/images/chars.png" />
@@ -149,9 +148,8 @@ const Rules = () => {
                 to="/raid"
                 style={{ zoom: 1.5, padding: '6px 20px', textAlign: 'center' }}
                 onClick={() => {
-                  window.scrollTo(0, 0)
-                }}
-              >
+                  window.scrollTo(0, 0);
+                }}>
                 {t('Open App')}
                 <OpenNewIcon color="white" ml="4px" />
               </Button>
@@ -162,9 +160,8 @@ const Rules = () => {
                   to="/profile"
                   style={{ zoom: 1, padding: '6px 20px', textAlign: 'center', background: '#222' }}
                   onClick={() => {
-                    window.scrollTo(0, 0)
-                  }}
-                >
+                    window.scrollTo(0, 0);
+                  }}>
                   {t('Create Account')}
                 </Button>
                 <Button
@@ -172,9 +169,8 @@ const Rules = () => {
                   to="/guide"
                   style={{ zoom: 1, padding: '6px 20px', textAlign: 'center', background: '#222', marginLeft: 10 }}
                   onClick={() => {
-                    window.scrollTo(0, 0)
-                  }}
-                >
+                    window.scrollTo(0, 0);
+                  }}>
                   {t('Starter Guide')}
                 </Button>
                 {i18n.language === 'cn' ? (
@@ -182,8 +178,7 @@ const Rules = () => {
                     as={Link}
                     href="https://rune-1.gitbook.io/rune-cn/"
                     target="_blank"
-                    style={{ zoom: 1, padding: '6px 20px', textAlign: 'center', background: '#222', marginLeft: 10 }}
-                  >
+                    style={{ zoom: 1, padding: '6px 20px', textAlign: 'center', background: '#222', marginLeft: 10 }}>
                     {t('查看说明文档')}
                   </Button>
                 ) : null}
@@ -197,7 +192,7 @@ const Rules = () => {
         </Cards>
       </Container>
     </Page>
-  )
-}
+  );
+};
 
-export default Rules
+export default Rules;

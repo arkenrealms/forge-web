@@ -120,7 +120,10 @@ const BigCard = styled.div<{ align?: string }>`
   background-color: rgba(0, 0, 0, 0.4);
 
   background-size: 400px;
-  box-shadow: 0 2px 0 0 rgb(0 0 0 / 80%), inset 0 -1px 0 0 rgb(0 0 0 / 10%), 0 0 66px 66px rgb(0 0 0 / 10%);
+  box-shadow:
+    0 2px 0 0 rgb(0 0 0 / 80%),
+    inset 0 -1px 0 0 rgb(0 0 0 / 10%),
+    0 0 66px 66px rgb(0 0 0 / 10%);
   // background-color: rgba(0,0,0,0.4);
   line-height: 1.6rem;
   font-size: 1rem;
@@ -344,9 +347,9 @@ const Home: React.FC<any> = () => {
     <Page>
       {/* <PageWindow> */}
       <Flex flexDirection="column" alignItems="center" justifyContent="center">
-        <LogoImg src="/images/rune-500x500.png" />
+        <LogoImg src="/images/arken-256x256.png" />
         <Heading as="h1" size="xxl" color="secondary" mb="8px">
-          {pageLoaded ? <HeadingSilver>RUNE</HeadingSilver> : <HeadingPlain>RUNE</HeadingPlain>}
+          {pageLoaded ? <HeadingSilver>ARKEN REALMS</HeadingSilver> : <HeadingPlain>ARKEN REALMS</HeadingPlain>}
         </Heading>
         <Heading as="h2" size="lg" mb="8px" style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)' }}>
           {t('The First NFT Hyperfarm')}

@@ -217,9 +217,9 @@ const Rules = () => {
           </StyledCard>
           <div style={{ width: '200%', marginLeft: '-50%' }}>
             <Flex flexDirection="column" alignItems="center" justifyContent="center">
-              <LogoImg src="/images/rune-500x500.png" />
+              <LogoImg src="/images/arken-256x256.png" />
               <Heading as="h1" size="xxl" color="secondary" mb="8px">
-                <HeadingPlain>RUNE</HeadingPlain>
+                <HeadingPlain>ARKEN REALMS</HeadingPlain>
               </Heading>
               <Heading
                 as="h2"

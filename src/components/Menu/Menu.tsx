@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import throttle from 'lodash/throttle';
 import useWeb3 from '~/hooks/useWeb3';
+import { Link as RouterLink } from 'react-router-dom';
 import { useRunePrice, useProfile } from '~/state/hooks';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import Overlay from '../Overlay/Overlay';
@@ -69,6 +70,60 @@ const MobileOnlyOverlay = styled(Overlay)`
 
 let init = false;
 
+const Nav = styled.div`
+  width: calc(100% - 300px);
+  padding: 0px 5px 0px 20px;
+  line-height: 40px;
+  color: #fff;
+  margin: -20px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  span {
+    padding-top: 3px;
+    display: inline-block;
+  }
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    color: #fff;
+  }
+`;
+
+const NavItem = styled(RouterLink)<{ isFocused?: boolean }>`
+  font-size: 1.35rem;
+  padding: 15px 20px 10px;
+  // border-right: 2px solid #030303;
+  color: #bb955e;
+  // background-color: #222;
+  // background-image: linear-gradient(180deg,transparent 0,rgba(0,0,0,1) 50%,transparent);
+  height: 65px;
+  text-shadow:
+    0 0 5px #000,
+    00 0 10px #000,
+    0 0 15px #000000,
+    0 0 20px #000000;
+
+  ${({ isFocused }) =>
+    isFocused
+      ? `
+    font-weight: bold;
+    text-shadow: 0 0 5px #000, 0 0 5px #000, 0 0 5px #000, 0 0 10px #000, 0 0 10px #000, 0 0 10px #000, 0 0 15px #000000,
+      0 0 15px #000000, 0 0 15px #000000, 0 0 20px #000000, 0 0 20px #000000, 0 0 20px #000000;
+  `
+      : ''}
+
+  &:last-child {
+    // border-right: 2px solid #030303;
+    // border-right: none;
+  }
+
+  &:hover {
+    filter: brightness(1.4);
+  }
+`;
+
 const Menu: React.FC<NavProps> = ({
   location,
   login,
@@ -83,162 +138,7 @@ const Menu: React.FC<NavProps> = ({
   children,
   content,
 }) => {
-  const { address: account } = useWeb3();
-  const { isXl } = useMatchBreakpoints();
-  const { profile: profile2 } = useProfile(account);
-  const profile = {
-    username: profile2?.username,
-    image: profile2?.nft ? `/images/nfts/${profile2.nft?.images.sm}` : undefined,
-    profileLink: '/account',
-    noProfileLink: '/account',
-    showPip: !profile2?.username,
-  };
-  const isMobile = isXl === false;
-  const [isPushed, setIsPushed] = useState(false);
-  const [showMenu, setShowMenu] = useState(true);
-  const { brand } = useBrand();
-  // const refPrevOffset = useRef(window.pageYOffset)
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const currentOffset = window.pageYOffset;
-  //     const isBottomOfPage = window.document.body.clientHeight === currentOffset + window.innerHeight;
-  //     const isTopOfPage = currentOffset === 0;
-  //     // Always show the menu when user reach the top
-  //     if (isTopOfPage) {
-  //       setShowMenu(true);
-  //     }
-  //     // Avoid triggering anything at the bottom because of layout shift
-  //     else if (!isBottomOfPage) {
-  //       if (currentOffset < refPrevOffset.current) {
-  //         // Has scroll up
-  //         setShowMenu(true);
-  //       } else {
-  //         // Has scroll down
-  //         setShowMenu(false);
-  //       }
-  //     }
-  //     refPrevOffset.current = currentOffset;
-  //   };
-  //   const throttledHandleScroll = throttle(handleScroll, 200);
-
-  //   window.addEventListener("scroll", throttledHandleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", throttledHandleScroll);
-  //   };
-  // }, []);
-
-  useInterval(() => {
-    const pushedSetting = window.localStorage
-      ? !!parseInt(window.localStorage.getItem('autoPushSidebar') || '1')
-      : true;
-    if (pushedSetting !== isPushed) {
-      setIsPushed(pushedSetting);
-    }
-  }, 1 * 1000);
-
-  useEffect(() => {
-    if (init) return;
-
-    init = true;
-
-    setIsPushed(true);
-  }, [isPushed]);
-
-  useEffect(() => {
-    if (!window || !window.localStorage) return;
-
-    const pushedSetting = window.localStorage
-      ? !!parseInt(window.localStorage.getItem('autoPushSidebar') || '1')
-      : true;
-    if (pushedSetting !== isPushed) {
-      setIsPushed(pushedSetting);
-    }
-  }, [isPushed, setIsPushed]);
-  // Find the home link if provided
-  const homeLink = links.find((link) => link.label === 'Home');
-
-  const brandHeading = {
-    rune: 'ARKEN',
-    arken: 'ARKEN',
-    return: 'RETURN.GG',
-  };
-
-  const brandSubheading = {
-    rune: 'REALMS',
-    raids: 'RUNIC RAIDS',
-    evolution: 'EVOLUTION',
-    infinite: 'INFINITE ARENA',
-    oasis: 'HEART OF THE OASIS',
-    guardians: 'GUARDIANS UNLEASHED',
-    isles: 'MEME ISLES',
-    arken: 'GAME SERVICES',
-    return: '',
-  };
-
-  const headingText = brandHeading[brand] || brandHeading.rune;
-  const subheadingText = brandSubheading[brand] || brandSubheading.rune;
-
-  return (
-    <Wrapper>
-      <StyledNav showMenu={showMenu} className="app__styled-nav">
-        <Logo
-          isPushed={isPushed}
-          togglePush={() => {
-            setIsPushed((prevState: boolean) => {
-              window.localStorage.setItem('autoPushSidebar', prevState ? '0' : '1');
-              return !prevState;
-            });
-          }}
-          isDark={isDark}
-          isMobile={isMobile}
-          href={homeLink?.href ?? '/'}
-          imageUrl={`/images/${brand}-256x256.png`}
-          heading={
-            <>
-              <span style={{ fontSize: 35 }}>{headingText.slice(0, 1)}</span>
-              {headingText.slice(1)}
-            </>
-          }
-          subheading={subheadingText}
-        />
-        {content}
-        <Flex>
-          <UserBlock username={profile?.username} account={account} login={login} logout={logout} />
-          {profile && <Avatar profile={profile} />}
-        </Flex>
-      </StyledNav>
-      <BodyWrapper>
-        <Panel
-          location={location}
-          isPushed={isPushed}
-          isMobile={isMobile}
-          showMenu={showMenu}
-          isDark={isDark}
-          toggleTheme={toggleTheme}
-          langs={langs}
-          setLang={setLang}
-          currentLang={currentLang}
-          runePriceUsd={runePriceUsd}
-          pushNav={(pushed) => {
-            setIsPushed(pushed);
-            window.localStorage.setItem('autoPushSidebar', pushed ? '1' : '0');
-          }}
-          links={links}
-        />
-        <Inner isPushed={isPushed} showMenu={showMenu}>
-          {children}
-        </Inner>
-        <MobileOnlyOverlay
-          show={isPushed}
-          onClick={() => {
-            setIsPushed(false);
-            window.localStorage.setItem('autoPushSidebar', '0');
-          }}
-          role="presentation"
-        />
-      </BodyWrapper>
-    </Wrapper>
-  );
+  return <></>;
 };
 
 export default Menu;

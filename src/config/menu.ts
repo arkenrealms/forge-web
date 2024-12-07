@@ -70,7 +70,7 @@ const arkenConfig: MenuEntry[] = [
     items: [
       {
         label: 'Play Now',
-        href: '/evolution',
+        href: '/evolution/play',
       },
       {
         label: 'Tutorial',
@@ -95,7 +95,7 @@ const arkenConfig: MenuEntry[] = [
     items: [
       {
         label: 'Preview',
-        href: '/infinite',
+        href: '/infinite/play',
       },
       {
         label: 'Tutorial',
@@ -106,12 +106,12 @@ const arkenConfig: MenuEntry[] = [
   {
     label: 'Heart of the Oasis',
     icon: 'SanctuaryIcon',
-    href: '/sanctuary',
+    href: '/oasis',
     initialOpenState: false,
     items: [
       {
         label: 'Preview',
-        href: '/sanctuary',
+        href: '/oasis/play',
       },
       {
         label: 'World',

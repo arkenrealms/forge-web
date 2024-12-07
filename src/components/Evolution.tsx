@@ -1443,7 +1443,7 @@ const Evolution: any = ({ open }) => {
           {isMobile ? (
             <Flex flexDirection="column" alignItems="center" justifyContent="center" style={{ margin: '0 auto' }}>
               <LogoImg
-                src="/images/rune-500x500.png"
+                src="/images/arken-256x256.png"
                 css={css`
                   max-width: 200px;
                   margin-top: 30px;
@@ -1461,7 +1461,7 @@ const Evolution: any = ({ open }) => {
                   textShadow: '0px 0px 1px #000',
                   color: '#c8c7cd',
                 }}>
-                {t('Rune')}
+                {t('Arken Realms')}
               </Heading>
               <br />
               <br />

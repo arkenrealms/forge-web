@@ -5,7 +5,7 @@ const symbolMap = {
   NEF: 'NEN',
   ETH: 'EVA',
   ITH: 'ISA',
-  TAL: 'TAI',
+  TAL: 'TATO',
   RAL: 'RO',
   ORT: 'ORE',
   THUL: 'THAL',
@@ -15,7 +15,7 @@ const symbolMap = {
   DOL: 'DA',
   HEL: 'HAN',
   IO: 'ION',
-  LUM: 'LUPH',
+  LUM: 'LUX',
   KO: 'KA',
   FAL: 'FUS',
   LEM: 'LEX',
@@ -31,7 +31,7 @@ const symbolMap = {
   BER: 'BERU',
   JAH: 'JUA',
   CHAM: 'CHIN',
-  ZOD: 'ZEL',
+  ZOD: 'ZENO',
 };
 
 function capitalizeFirstLetter(string) {

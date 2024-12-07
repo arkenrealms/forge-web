@@ -13,6 +13,7 @@ export default createGlobalStyle`
     background-color: var(--bg-color);
   }
 
+
   /* latin */
   @font-face {
     font-family: 'Open Sans';

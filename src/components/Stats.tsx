@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Heading, Card3, CardBody, Text, Link, BaseLayout } from '~/ui';
+import { Heading, Card3, CardBody, Text, Link, BaseLayout, Skeleton } from '~/ui';
 import Page from '~/components/layout/Page';
 import PageWindow from '~/components/PageWindow';
 import styled from 'styled-components';
@@ -9,6 +9,8 @@ import CardValue from '~/components/raid/CardValue';
 import useCache from '~/hooks/useCache';
 import SimpleLineChart from '~/components/SimpleLineChart';
 import { safeRuneList } from '~/config';
+import { trpc } from '~/utils/trpc';
+import type * as Arken from '@arken/node';
 
 const Row = styled.div`
   align-items: center;
@@ -40,77 +42,89 @@ const Cards = styled(BaseLayout)`
   }
 `;
 
-const ChartWrapper = styled.div`
-  // position: absolute;
-  // bottom: 0px;
-  // left: -20px;
-  width: 100%;
-  flex: 1;
-  // background: radial-gradient(#1d8a99, teal);
-  // padding: 1em;
-  // width: 540px;
-  height: 427px;
-  // pointer-events: none;
-  // z-index: 10;
-  // opacity: 0.5;
-`;
+// const ChartWrapper = styled.div`
+//   // position: absolute;
+//   // bottom: 0px;
+//   // left: -20px;
+//   width: 100%;
+//   flex: 1;
+//   // background: radial-gradient(#1d8a99, teal);
+//   // padding: 1em;
+//   // width: 540px;
+//   height: 427px;
+//   // pointer-events: none;
+//   // z-index: 10;
+//   // opacity: 0.5;
+// `;
 
-const isLocal = process.env.REACT_APP_RUNE_ENV === 'local';
+// const isLocal = process.env.REACT_APP_RUNE_ENV === 'local';
 
 const Stats = () => {
   const { t } = useTranslation();
-  const cache = useCache();
 
-  const [evolutionHistorical, setEvolutionHistorical] = useState(null);
+  const { data: game } = trpc.seer.game.getGame.useQuery<Arken.Game.Types.Game>({
+    where: {
+      name: { equals: 'Runic Raids' },
+    },
+  });
 
-  useEffect(function () {
-    if (!window) return;
+  if (!game?.stat)
+    return (
+      <div style={{ padding: 10 }}>
+        <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" />
+      </div>
+    );
 
-    const coeff = 1000 * 60 * 5;
-    const date = new Date(); //or use any other date
-    const rand = new Date(Math.round(date.getTime() / coeff) * coeff).getTime();
+  // const [evolutionHistorical, setEvolutionHistorical] = useState(null);
 
-    async function init() {
-      const data = (await (
-        await fetch(
-          (isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/evolution/historical.json?' + rand
-        )
-      ).json()) as any;
+  // useEffect(function () {
+  //   if (!window) return;
 
-      setEvolutionHistorical(data);
-    }
+  //   const coeff = 1000 * 60 * 5;
+  //   const date = new Date(); //or use any other date
+  //   const rand = new Date(Math.round(date.getTime() / coeff) * coeff).getTime();
 
-    init();
-  }, []);
+  //   async function init() {
+  //     const data = (await (
+  //       await fetch(
+  //         (isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/evolution/historical.json?' + rand
+  //       )
+  //     ).json()) as any;
 
-  const totalWarrior = cache.stats.characters[1].total;
-  const totalMage = cache.stats.characters[2].total;
-  const totalRanger = cache.stats.characters[3].total;
-  const totalNecromancer = cache.stats.characters[4].total;
-  const totalPaladin = cache.stats.characters[5].total;
-  const totalAssassin = cache.stats.characters[6].total;
-  const totalDruid = cache.stats.characters[7].total;
-  const totalBards = cache.stats.characters[8]?.total || 0;
-  const characterCount = cache.stats.totalCharacters;
+  //     setEvolutionHistorical(data);
+  //   }
 
-  const totalSteel = cache.stats.items[1].total;
-  const totalFury = cache.stats.items[2].total;
-  const totalLorekeeper = cache.stats.items[3].total;
-  const totalWorldstone = cache.stats.items[4].total;
-  const totalFlash = cache.stats.items[5].total;
-  const totalTitan = cache.stats.items[6].total;
-  const totalSmoke = cache.stats.items[7].total;
-  const totalGlory = cache.stats.items[10].total;
-  const totalGrace = cache.stats.items[11].total;
-  const totalGenesis = cache.stats.items[12].total;
-  const totalDestiny = cache.stats.items[13].total;
-  const totalWrath = cache.stats.items[14].total;
-  const totalPledge = cache.stats.items[19].total;
-  const totalInstinct = cache.stats.items[27]?.total || 0;
-  const totalBeacon = cache.stats.items[28]?.total || 0;
-  const totalGuidingLight = cache.stats.items[21]?.total || 0;
-  const totalDragonlight = cache.stats.items[29]?.total || 0;
-  const itemCount = cache.stats.totalItems;
+  //   init();
+  // }, []);
+
+  const totalWarrior = game.stat.meta.characters[1].total;
+  const totalMage = game.stat.meta.characters[2].total;
+  const totalRanger = game.stat.meta.characters[3].total;
+  const totalNecromancer = game.stat.meta.characters[4].total;
+  const totalPaladin = game.stat.meta.characters[5].total;
+  const totalAssassin = game.stat.meta.characters[6].total;
+  const totalDruid = game.stat.meta.characters[7].total;
+  const totalBards = game.stat.meta.characters[8]?.total || 0;
+  const characterCount = game.stat.meta.totalCharacters;
+
+  const totalSteel = game.stat.meta.items[1].total;
+  const totalFury = game.stat.meta.items[2].total;
+  const totalLorekeeper = game.stat.meta.items[3].total;
+  const totalWorldstone = game.stat.meta.items[4].total;
+  const totalFlash = game.stat.meta.items[5].total;
+  const totalTitan = game.stat.meta.items[6].total;
+  const totalSmoke = game.stat.meta.items[7].total;
+  const totalGlory = game.stat.meta.items[10].total;
+  const totalGrace = game.stat.meta.items[11].total;
+  const totalGenesis = game.stat.meta.items[12].total;
+  const totalDestiny = game.stat.meta.items[13].total;
+  const totalWrath = game.stat.meta.items[14].total;
+  const totalPledge = game.stat.meta.items[19].total;
+  const totalInstinct = game.stat.meta.items[27]?.total || 0;
+  const totalBeacon = game.stat.meta.items[28]?.total || 0;
+  const totalGuidingLight = game.stat.meta.items[21]?.total || 0;
+  const totalDragonlight = game.stat.meta.items[29]?.total || 0;
+  const itemCount = game.stat.meta.totalItems;
 
   const runes =
     window?.location?.hostname === 'localhost' ? ['rxs', 'rune', ...safeRuneList] : ['rxs', 'rune', ...safeRuneList];
@@ -125,10 +139,10 @@ const Stats = () => {
               {t('Token Stats')}
             </Heading>
             {runes.map((rune) => {
-              const price = cache.runes[rune].price || 0;
-              const totalSupply = cache.runes[rune].totalSupply || 0;
-              const totalBurned = cache.runes[rune].totalBurned || 0;
-              const circulatingSupply = cache.runes[rune].circulatingSupply || 0;
+              const price = game.stat.meta.runes[rune].price || 0;
+              const totalSupply = game.stat.meta.runes[rune].totalSupply || 0;
+              const totalBurned = game.stat.meta.runes[rune].totalBurned || 0;
+              const circulatingSupply = game.stat.meta.runes[rune].circulatingSupply || 0;
               const marketCap = price * circulatingSupply || 0;
 
               if (rune !== runes[runes.length - 1] && rune !== 'rune') {
@@ -284,14 +298,14 @@ const Stats = () => {
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Fortress (Ultra Secret)')}</Text>
-              {cache.stats.items[15]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[15]?.total || 0} decimals={0} />
+              {game.stat.meta.items[15]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[15]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Flow (Retired)')}</Text>
-              {cache.stats.items[20]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[20]?.total || 0} decimals={0} />
+              {game.stat.meta.items[20]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[20]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
@@ -300,32 +314,32 @@ const Stats = () => {
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Lionheart (Ultra Secret Retired)')}</Text>
-              {cache.stats.items[22]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[22]?.total || 0} decimals={0} />
+              {game.stat.meta.items[22]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[22]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Pressure (Retired)')}</Text>
-              {cache.stats.items[23]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[23]?.total || 0} decimals={0} />
+              {game.stat.meta.items[23]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[23]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Zeal (Ultra Secret Retired)')}</Text>
-              {cache.stats.items[24]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[24]?.total || 0} decimals={0} />
+              {game.stat.meta.items[24]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[24]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Balance (Retired)')}</Text>
-              {cache.stats.items[25]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[25]?.total || 0} decimals={0} />
+              {game.stat.meta.items[25]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[25]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Eternity (Ultra Secret Retired)')}</Text>
-              {cache.stats.items[26]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[26]?.total || 0} decimals={0} />
+              {game.stat.meta.items[26]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[26]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
@@ -338,68 +352,68 @@ const Stats = () => {
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Haze (Ultra Secret Retired)')}</Text>
-              {cache.stats.items[30]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[30]?.total || 0} decimals={0} />
+              {game.stat.meta.items[30]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[30]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Mercy (Ultra Secret Retired)')}</Text>
-              {cache.stats.items[35]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[35]?.total || 0} decimals={0} />
+              {game.stat.meta.items[35]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[35]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Burial (Retired)')}</Text>
-              {cache.stats.items[37]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[37]?.total || 0} decimals={0} />
+              {game.stat.meta.items[37]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[37]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Blur')}</Text>
-              {cache.stats.items[34]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[34]?.total || 0} decimals={0} />
+              {game.stat.meta.items[34]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[34]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Reave (Retired)')}</Text>
-              {cache.stats.items[55]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[55]?.total || 0} decimals={0} />
+              {game.stat.meta.items[55]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[55]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Exile')}</Text>
-              {cache.stats.items[182]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[182]?.total || 0} decimals={0} />
+              {game.stat.meta.items[182]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[182]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Elder')}</Text>
-              {cache.stats.items[16]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[16]?.total || 0} decimals={0} />
+              {game.stat.meta.items[16]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[16]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Hellfire')}</Text>
-              {cache.stats.items[31]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[31]?.total || 0} decimals={0} />
+              {game.stat.meta.items[31]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[31]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Hellreaver')}</Text>
-              {cache.stats.items[44]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[44]?.total || 0} decimals={0} />
+              {game.stat.meta.items[44]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[44]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Flare')}</Text>
-              {cache.stats.items[56]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[56]?.total || 0} decimals={0} />
+              {game.stat.meta.items[56]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[56]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Ignition (Secret)')}</Text>
-              {cache.stats.items[46]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[46]?.total || 0} decimals={0} />
+              {game.stat.meta.items[46]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[46]?.total || 0} decimals={0} />
               )}
             </Row>
             <br />
@@ -416,44 +430,44 @@ const Stats = () => {
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Luminous Flywings (Airdrop)')}</Text>
-              {cache.stats.items[32]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[32]?.total} decimals={0} />
+              {game.stat.meta.items[32]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[32]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Black Drake Scale (P2E Reward)')}</Text>
-              {cache.stats.items[1207]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[1207]?.total} decimals={0} />
+              {game.stat.meta.items[1207]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[1207]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Black Drake Talon (P2E Reward)')}</Text>
-              {cache.stats.items[1208]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[1208]?.total} decimals={0} />
+              {game.stat.meta.items[1208]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[1208]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Glow Fly Powder (P2E Reward)')}</Text>
-              {cache.stats.items[1209]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[1209]?.total} decimals={0} />
+              {game.stat.meta.items[1209]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[1209]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t("Founder's Cube (Fundraiser)")}</Text>
-              {cache.stats.items[1205]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[1205]?.total} decimals={0} />
+              {game.stat.meta.items[1205]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[1205]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Crafting Competition Certificate (Competition)')}</Text>
-              {cache.stats.items[1201]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[1201]?.total} decimals={0} />
+              {game.stat.meta.items[1201]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[1201]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Rune Royale Ticket')}</Text>
-              {cache.stats.items[1211]?.total && (
-                <CardValue fontSize="1rem" value={cache.stats.items[1211]?.total} decimals={0} />
+              {game.stat.meta.items[1211]?.total && (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[1211]?.total} decimals={0} />
               )}
             </Row>
             <br />
@@ -462,56 +476,56 @@ const Stats = () => {
             <br />
             <Row>
               <Text fontSize="1rem">{t('Stone of Jordan (Fundraiser)')}</Text>
-              {cache.stats.items[2001]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[2001].total} decimals={0} />
+              {game.stat.meta.items[2001]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[2001].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Vampire Gaze (Fundraiser)')}</Text>
-              {cache.stats.items[2002]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[2002].total} decimals={0} />
+              {game.stat.meta.items[2002]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[2002].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Harlequin Crest (Fundraiser)')}</Text>
-              {cache.stats.items[2003]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[2003].total} decimals={0} />
+              {game.stat.meta.items[2003]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[2003].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('The Oculus (Fundraiser)')}</Text>
-              {cache.stats.items[2004]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[2004].total} decimals={0} />
+              {game.stat.meta.items[2004]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[2004].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('War Traveler (Fundraiser)')}</Text>
-              {cache.stats.items[2005]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[2005].total} decimals={0} />
+              {game.stat.meta.items[2005]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[2005].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Lightsabre (Fundraiser)')}</Text>
-              {cache.stats.items[2047]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[2047].total} decimals={0} />
+              {game.stat.meta.items[2047]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[2047].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Crown of Ages (Fundraiser)')}</Text>
-              {cache.stats.items[2052]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[2052].total} decimals={0} />
+              {game.stat.meta.items[2052]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[2052].total} decimals={0} />
               ) : (
                 0
               )}
@@ -522,16 +536,16 @@ const Stats = () => {
             <br />
             <Row>
               <Text fontSize="1rem">{t("Scholar's Codex (Airdrop)")}</Text>
-              {cache.stats.items[1200]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[1200].total} decimals={0} />
+              {game.stat.meta.items[1200]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[1200].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t("General's Medallion (Airdrop)")}</Text>
-              {cache.stats.items[1201]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[1201].total} decimals={0} />
+              {game.stat.meta.items[1201]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[1201].total} decimals={0} />
               ) : (
                 0
               )}
@@ -543,72 +557,72 @@ const Stats = () => {
             <br />
             <Row>
               <Text fontSize="1rem">{t('Golden Lion Cub (Fundraiser)')}</Text>
-              {cache.stats.items[3000]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[3000].total} decimals={0} />
+              {game.stat.meta.items[3000]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[3000].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Blue-Eyes White Drake (Fundraiser)')}</Text>
-              {cache.stats.items[3001]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[3001].total} decimals={0} />
+              {game.stat.meta.items[3001]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[3001].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Red-Eyes Black Drake (Fundraiser)')}</Text>
-              {cache.stats.items[3002]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[3002].total} decimals={0} />
+              {game.stat.meta.items[3002]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[3002].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Fairy Drake (Fundraiser)')}</Text>
-              {cache.stats.items[3003]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[3003].total} decimals={0} />
+              {game.stat.meta.items[3003]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[3003].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Goblin Drake (Fundraiser)')}</Text>
-              {cache.stats.items[3004]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[3004].total} decimals={0} />
+              {game.stat.meta.items[3004]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[3004].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Hippogryph (Fundraiser)')}</Text>
-              {cache.stats.items[3005]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[3005].total} decimals={0} />
+              {game.stat.meta.items[3005]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[3005].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Wyvern (Fundraiser)')}</Text>
-              {cache.stats.items[3006]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[3006].total} decimals={0} />
+              {game.stat.meta.items[3006]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[3006].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Forest Turtle (Fundraiser)')}</Text>
-              {cache.stats.items[3007]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[3007].total} decimals={0} />
+              {game.stat.meta.items[3007]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[3007].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Skeleton Drake (Fundraiser)')}</Text>
-              {cache.stats.items[3008]?.total ? (
-                <CardValue fontSize="1rem" value={cache.stats.items[3008].total} decimals={0} />
+              {game.stat.meta.items[3008]?.total ? (
+                <CardValue fontSize="1rem" value={game.stat.meta.items[3008].total} decimals={0} />
               ) : (
                 0
               )}

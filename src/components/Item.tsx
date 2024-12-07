@@ -188,7 +188,7 @@ const Item: React.FC<Props> = ({
     setItemPreviewed(null);
 
     if (!isModalOpened) {
-      playAction();
+      // playAction();
     }
 
     if (showDropdown) {

@@ -135,7 +135,7 @@ const SwapPoolFinder = lazy(() => import('../views/swap/find'));
 // const InterfaceGroups = lazy(() => import('../views/interface/groups'));
 // const Creator = lazy(() => import('../views/service/creator'));
 // const InterfaceDesigner = lazy(() => import('../components/InterfaceDesigner'));
-// const Services = lazy(() => import('../views/services'));
+const Services = lazy(() => import('../views/services'));
 // const ServiceMetaverses = lazy(() => import('../views/service/metaverses'));
 // const ServiceReferrals = lazy(() => import('../views/service/referrals'));
 // const ServicePayments = lazy(() => import('../views/service/payments'));
@@ -842,28 +842,28 @@ const useWindows = () => {
       component: Evolution,
       showable: true,
     },
-    // {
-    //   path: '/services',
-    //   icon: AboutIcon,
-    //   exact: true,
-    //   strict: false,
-    //   persist: false,
-    //   props: {
-    //     title: 'Services',
-    //     routeIndex: 1000,
-    //     open: false,
-    //     minimized: false,
-    //     active: false,
-    //     windowSize: { width: '100%', height: '100%' },
-    //     windowPosition: { x: 0, y: 0 },
-    //     location: {
-    //       search: null,
-    //     },
-    //   },
-    //   navPosition: undefined, //500,
-    //   component: Services,
-    //   showable: false,
-    // },
+    {
+      path: '/services',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'Services',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined, //500,
+      component: Services,
+      showable: false,
+    },
     // {
     //   path: '/crypto/transactions',
     //   icon: AboutIcon,
@@ -2584,7 +2584,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/runewords',
+      path: '/runeforms',
       icon: AboutIcon,
       exact: true,
       strict: false,

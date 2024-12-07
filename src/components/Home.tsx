@@ -1034,7 +1034,7 @@ z-index: 999;
                     talented/hard working players.
                     <br />
                     <br />
-                    There will only ever be{' '}
+                    There are{' '}
                     <RouterLink to="/runes" style={{ borderBottom: '1px solid #fff' }}>
                       33 Runes
                     </RouterLink>{' '}

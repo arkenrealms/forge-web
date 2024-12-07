@@ -3,7 +3,12 @@ import { PurchaseModal } from '~/components/PurchaseModal';
 import { SwapModal } from '~/components/SwapModal';
 import { EN } from '~/config/localisation/languageCodes';
 import { motion } from 'framer-motion';
+
+import Layout from '~/components/Layout2';
 import { useEagerConnect, useInactiveListener } from '~/hooks';
+import Moveable, { type OnResize, type OnDrag, type OnScale } from 'react-moveable';
+import InfiniteViewer from 'react-infinite-viewer';
+
 import useAuth from '~/hooks/useAuth';
 import useBrand from '~/hooks/useBrand';
 import useMarket from '~/hooks/useMarket';
@@ -429,60 +434,6 @@ const TopBannerBg3 = styled.div`
     100% {
       transform: translateY(0%);
     }
-  }
-`;
-
-const Nav = styled.div`
-  width: calc(100% - 300px);
-  padding: 0px 5px 0px 20px;
-  line-height: 40px;
-  color: #fff;
-  margin: -20px 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  span {
-    padding-top: 3px;
-    display: inline-block;
-  }
-
-  button {
-    display: inline-flex;
-    align-items: center;
-    color: #fff;
-  }
-`;
-
-const NavItem = styled(RouterLink)<{ isFocused?: boolean }>`
-  font-size: 1.35rem;
-  padding: 15px 20px 10px;
-  // border-right: 2px solid #030303;
-  color: #bb955e;
-  // background-color: #222;
-  // background-image: linear-gradient(180deg,transparent 0,rgba(0,0,0,1) 50%,transparent);
-  height: 65px;
-  text-shadow:
-    0 0 5px #000,
-    00 0 10px #000,
-    0 0 15px #000000,
-    0 0 20px #000000;
-
-  ${({ isFocused }) =>
-    isFocused
-      ? `
-    font-weight: bold;
-    text-shadow: 0 0 5px #000, 0 0 5px #000, 0 0 5px #000, 0 0 10px #000, 0 0 10px #000, 0 0 10px #000, 0 0 15px #000000,
-      0 0 15px #000000, 0 0 15px #000000, 0 0 20px #000000, 0 0 20px #000000, 0 0 20px #000000;
-  `
-      : ''}
-
-  &:last-child {
-    // border-right: 2px solid #030303;
-    // border-right: none;
-  }
-
-  &:hover {
-    filter: brightness(1.4);
   }
 `;
 
@@ -1997,6 +1948,7 @@ const DraggableWindow: React.FC<any> = React.memo(
                 <div
                   css={css`
                     position: relative;
+                    padding: 20px;
                   `}>
                   <div
                     css={css`
@@ -2689,30 +2641,7 @@ const App: React.FC<any> = (props) => {
   const { pendingPageUpdate, setPendingPageUpdate, pageState, setPageState, pageSort, setPageSort, onChangePage } =
     useWindows();
 
-  // useEffect(function() {
-  //   try {
-  //     const tokenCacheText = localStorage.getItem('tokenCache')
-
-  //     if (tokenCacheText) {
-  //       let tokenCache = JSON.parse(tokenCacheText)
-
-  //       const now = new Date()
-  //       if (now.getTime() > tokenCache.expiry) {
-  //         localStorage.removeItem('tokenCache')
-
-  //         tokenCache = []
-  //       }
-
-  //       setTokenCache(tokenCache.value)
-  //     }
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }, [])
-
   const { profile } = useProfile(account);
-  // const runePriceUsd = useRunePrice('RUNE')
-  // useGetDocumentTitlePrice()
   const { isProd } = useEnv();
   const { login, logout } = useAuth();
   const { isDark, toggleTheme } = useTheme();
@@ -2721,40 +2650,6 @@ const App: React.FC<any> = (props) => {
 
   const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
   const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
-
-  // useEffect(() => {
-  //   if (initialized) return
-
-  //   initialized = true
-
-  //   history.listen((location, action) => {
-  //     // location is an object like window.location
-  //     // console.log(action, location.pathname, location.state)
-  //     if (location.pathname.indexOf('market') !== -1) {
-  //       onRouteChange(location.pathname)
-  //       return
-  //     }
-
-  //     // window.scrollTo(0, 0)
-  //     onRouteChange(location.pathname)
-  //   })
-  // }, [])
-
-  // useEffect(() => {
-  //   setInterval(autoSize, 300)
-
-  //   window.addEventListener('resize', autoSize, true)
-
-  //   document.addEventListener('dragover', (event) => {
-  //     event.preventDefault()
-  //     return false
-  //   })
-
-  //   document.addEventListener('drop', (event) => {
-  //     event.preventDefault()
-  //     return false
-  //   })
-  // }, [])
 
   return (
     <>
@@ -2773,82 +2668,7 @@ const App: React.FC<any> = (props) => {
             <NavProvider>
               <TourProvider>
                 <SettingsProvider>
-                  <Menu
-                    location={''}
-                    login={login}
-                    logout={logout}
-                    isDark={isDark}
-                    toggleTheme={toggleTheme}
-                    currentLang={i18n.language}
-                    langs={[EN]} //langs={[EN, JP, CN, DE, ES, FR, VI, SV]}
-                    setLang={updateLanguage}
-                    runePriceUsd={0}
-                    links={config[brand]}
-                    content={
-                      <Nav>
-                        <Flex
-                          alignItems={['start', null, 'center']}
-                          justifyContent={['start', null, 'space-between']}
-                          flexDirection={['column', null, 'row']}
-                          style={{ marginLeft: 0 }}>
-                          <Flex justifyContent="space-between" alignItems="center">
-                            {!isMobile && settings?.isCrypto
-                              ? pageState
-                                  .filter((r) => !!r.showable)
-                                  .filter((r) => !!r.navPosition || r.props.open)
-                                  .sort((a, b) => (a.navPosition || 1) - (b.navPosition || 1))
-                                  .reverse()
-                                  .map((r) => {
-                                    return (
-                                      <NavItem
-                                        key={r.path}
-                                        // isFocused={false}
-                                        // isFocused={r.props.open && r.props.routeIndex === currentRouteIndex}
-                                        to={r.path}>
-                                        {/* {pageState[page].focused ? <Icon
-                            src={pageState[page].icon}
-                            alt="icon"
-                          /> : null} */}
-                                        {r.props.title}
-                                      </NavItem>
-                                    );
-                                  })
-                              : null}
-                          </Flex>
-                          {/* <Flex justifyContent="space-between" alignItems="center">
-                        <NavItem to="/play">Buy RUNE ${runePriceUsd.toNumber()}</NavItem>
-                        <NavItem to="/play">MCAP ${runePriceUsd.toNumber()}</NavItem>
-                    </Flex> */}
-                        </Flex>
-                        {/* <NavBar
-                  pageState={pageState}
-                  pageSort={pageSort}
-                  onChangePage={(page, path) => {
-                    setPendingPageUpdate({
-                      path: path ? path : pageState[page].path,
-                      page,
-                      data: { open: true, focused: true, minimized: false },
-                    });
-                  }}
-                /> */}
-                        {/* <Flex
-                  alignItems={['start', null, 'center']}
-                  justifyContent={['start', null, 'space-between']}
-                  flexDirection={['column', null, 'row']}
-                >
-                  <Flex justifyContent="space-between" alignItems="center">
-                    {!isMobile ? (
-                      <>
-                        <NavItem to="/games" isFocused={}>Games</NavItem>
-                        <NavItem to="/market">Market</NavItem>
-                        <NavItem to="/craft">Craft</NavItem>
-                        <NavItem to="/nexus">Lore</NavItem>
-                      </>
-                    ) : null}
-                  </Flex>
-                </Flex> */}
-                      </Nav>
-                    }>
+                  <Layout pageState={pageState}>
                     <AppContent
                       pendingPageUpdate={pendingPageUpdate}
                       setPendingPageUpdate={setPendingPageUpdate}
@@ -2859,7 +2679,7 @@ const App: React.FC<any> = (props) => {
                       onChangePage={onChangePage}
                       brand={brand}
                     />
-                  </Menu>
+                  </Layout>
                 </SettingsProvider>
               </TourProvider>
             </NavProvider>

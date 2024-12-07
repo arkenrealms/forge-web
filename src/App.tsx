@@ -11,10 +11,10 @@ import MulticallUpdater from './state/multicall/updater';
 import TransactionUpdater from './state/transactions/updater';
 import ToastListener from './components/ToastListener';
 import enUS from 'antd/lib/locale/en_US';
-// import { ProProvider } from '@ant-design/pro-provider';
+import { ProProvider } from '@ant-design/pro-provider';
 // import proEnUS from '@ant-design/pro-provider/es/locale/en_US';
 import { ConfigProvider, theme } from 'antd';
-// import { ThemeProvider } from 'antd-style';
+import { ThemeProvider } from 'antd-style';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 // import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -66,6 +66,7 @@ const App = ({ apolloClient }: any) => {
       colorError: '#c72527',
       fontSizeLG: 18,
       // borderRadius: 0,
+      // colorText: '#bb955e',
       colorFillQuaternary: 'rgba(0, 0, 0, 0.04)',
       // colorBgBase: '#fff',
     },
@@ -87,61 +88,27 @@ const App = ({ apolloClient }: any) => {
     <ConfigProvider theme={themeConfig} locale={enUS}>
       {/* <ProProvider value={{ locale: proEnUS }}> */}
       <StyledThemeProvider theme={themeSettings}>
-        {/* <ThemeProvider2 theme={themeConfig}> */}
+        {/* <ThemeProvider theme={themeConfig}> */}
         <trpc.Provider client={trpcClient} queryClient={queryClient}>
           <QueryClientProvider client={queryClient}>
             <PromptProvider>
               <NoticeProvider>
-                <>
-                  <Providers>
-                    <>
-                      <ResetStyles />
-                      <ListsUpdater />
-                      <ApplicationUpdater />
-                      <TransactionUpdater />
-                      <MulticallUpdater />
-                      <ToastListener />
-                    </>
-                    <AppInner />
-                  </Providers>
-                  {/* 
-                        Uncomment and adjust your routing as needed:
-                        <BrowserRouter basename="/">
-                          <NavProvider>
-                            <TourProvider>
-                              <SettingsProvider>
-                                <Providers>
-                                  <>
-                                    <ListsUpdater />
-                                    <ApplicationUpdater />
-                                    <TransactionUpdater />
-                                    <MulticallUpdater />
-                                    <ToastListener />
-                                  </>
-                                  <Routes>
-                                    <Route
-                                      path="/"
-                                      element={
-                                        <Authorize permissions={[]}>
-                                          <Dashboard themeConfig={themeConfig} />
-                                        </Authorize>
-                                      }
-                                    />
-                                    {/* Add other routes here */}
-                  {/* </Routes>
-                                </Providers>
-                              </SettingsProvider>
-                            </TourProvider>
-                          </NavProvider>
-                        </BrowserRouter> 
-                        */}
-                </>
+                <Providers>
+                  <>
+                    <ResetStyles />
+                    <ListsUpdater />
+                    <ApplicationUpdater />
+                    <TransactionUpdater />
+                    <MulticallUpdater />
+                    <ToastListener />
+                  </>
+                  <AppInner />
+                </Providers>
               </NoticeProvider>
             </PromptProvider>
           </QueryClientProvider>
         </trpc.Provider>
-
-        {/* </ThemeProvider2> */}
+        {/* </ThemeProvider> */}
       </StyledThemeProvider>
       {/* </ProProvider> */}
     </ConfigProvider>

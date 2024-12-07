@@ -134,7 +134,9 @@
     "webpack-dev-server": "^5",
     "@ant-design/pro-provider": "^2",
     "@ant-design/pro-flow": "^1",
-    "jquery": "*"
+    "jquery": "*",
+    "react-moveable": "~0.56.0",
+    "react-infinite-viewer": "~0.28.1"
   },
   "devDependencies": {
     "@babel/core": "^7",

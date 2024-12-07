@@ -82,21 +82,21 @@ const CacheContextProvider = ({ children }) => {
           setApp(data);
         }
 
-        {
-          const data = (await (
-            await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/stats.json?' + rand)
-          ).json()) as any;
+        // {
+        //   const data = (await (
+        //     await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/stats.json?' + rand)
+        //   ).json()) as any;
 
-          setStats(data);
-        }
+        //   setStats(data);
+        // }
 
-        {
-          const data = (await (
-            await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/runes.json?' + rand)
-          ).json()) as any;
+        // {
+        //   const data = (await (
+        //     await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/runes.json?' + rand)
+        //   ).json()) as any;
 
-          setRunes(data);
-        }
+        //   setRunes(data);
+        // }
 
         // {
         //   const data = (await (

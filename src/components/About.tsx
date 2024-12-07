@@ -6,6 +6,7 @@ import Linker from '~/components/Linker';
 import { useModal } from '~/components/Modal';
 import { PurchaseModal } from '~/components/PurchaseModal';
 import { Card, Card2, CardBody, Heading } from '~/ui';
+import { trpc, trpcClient, queryClient } from '~/utils/trpc';
 
 const Image = styled.img`
   border-radius: 7px;
@@ -29,6 +30,15 @@ const PitchCard = styled.div`
     }
   }
 `;
+
+// const PollingExample = () => {
+//   const { data, refetch } = trpc.someQuery.useQuery(undefined, {
+//     refetchInterval: 1000, // Poll every 1 second
+//   });
+
+//   return <div>Data: {JSON.stringify(data)}</div>;
+// };
+
 const Rules = () => {
   const { t } = useTranslation();
   const [showVision, setShowVision] = useState(false);
@@ -91,11 +101,11 @@ const Rules = () => {
             <br />
             <PitchCard>
               <div style={{ width: '280px', marginTop: '-20px' }}>
-                <img src="/images/dragons.png" alt="Play4Rewards"></img>
+                <img src="/images/dragons.png" alt="Ownership"></img>
               </div>
               <div>
                 <BoxHeading as="h2" size="xl">
-                  {t('Play4Rewards')}
+                  {t('Ownership')}
                 </BoxHeading>
                 <br />
                 <p>

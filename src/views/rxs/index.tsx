@@ -27,7 +27,7 @@ const Item = styled.div`
 const RxsView = () => {
   const { walletTokens, stakedTokens } = useAccount();
   const { address } = useWeb3();
-  const { call, callUnsigned } = useLive();
+  const { call } = useLive();
   const [status, setStatus] = useState('');
   const [lockedTokens, setLockedTokens] = useState(0);
   const [unlockedTokens, setUnlockedTokens] = useState(0);
@@ -70,7 +70,7 @@ const RxsView = () => {
       if (unlockedFeatures !== undefined) return;
 
       async function run() {
-        const res = await callUnsigned('CS_GetUserUnlocksRequest', { address });
+        const res = await call('CS_GetUserUnlocksRequest', { address });
 
         if (res?.status === 1) {
           setUnlockedFeatures(res.data.features);
@@ -83,7 +83,7 @@ const RxsView = () => {
 
       run();
     },
-    [callUnsigned, unlockedFeatures, setUnlockedFeatures, setLockedTokens, address]
+    [call, unlockedFeatures, setUnlockedFeatures, setLockedTokens, address]
   );
 
   return (
