@@ -1407,7 +1407,7 @@ z-index: 999;
             </BoxHeading>
             <hr />
             <CardBody>
-              <TeamComponent showAll={true} match={match} />
+              <TeamComponent showAll={true} />
               <br />
               <br />
               <Flex flexDirection="column" alignItems="center" justifyContent="center">

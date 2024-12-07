@@ -203,7 +203,7 @@ const Item: React.FC<Props> = ({
     if (selectMode && category !== ItemCategoriesType.RUNE) {
       if (setItemMultiSelected) setItemMultiSelected(item.tokenId);
     } else {
-      if (setItemSelected) setItemSelected(itemIndex);
+      if (setItemSelected) setItemSelected(itemIndex + '');
     }
   };
   // console.log(itemSelected, itemIndex)
@@ -220,7 +220,7 @@ const Item: React.FC<Props> = ({
     if (itemPreviewed === itemIndex) return;
     // if (isMobile) return
     // console.log(88881, itemIndex)
-    setItemPreviewed(itemIndex);
+    setItemPreviewed(itemIndex + '');
     // setTimeout(() => {
     //   if (itemIndex === itemPreviewed)
     //     setItemPreviewed(null)

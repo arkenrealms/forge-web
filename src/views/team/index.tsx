@@ -676,7 +676,7 @@ const Team = ({ match }) => {
             </Heading>
             <hr />
             <CardBody>
-              <TeamComponent match={match} />
+              <TeamComponent />
             </CardBody>
           </Card2>
         )}
