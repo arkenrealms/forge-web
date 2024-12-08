@@ -15,7 +15,7 @@ const Art = lazy(() => import('../views/art'));
 const AI = lazy(() => import('../views/about/ai'));
 const Council = lazy(() => import('../views/about/council'));
 const MarketTrade = lazy(() => import('../views/trade'));
-const Guilds = lazy(() => import('../views/guilds'));
+const Guilds = lazy(() => import('../views/about/guilds'));
 const Cube = lazy(() => import('../views/cube'));
 const Creature = lazy(() => import('../views/creature'));
 const News = lazy(() => import('../views/news'));
@@ -40,19 +40,19 @@ const Risks = lazy(() => import('../views/risks'));
 const Terms = lazy(() => import('../views/terms'));
 const Guides = lazy(() => import('../views/guides'));
 const Features = lazy(() => import('../views/features'));
-const Tokenomics = lazy(() => import('../views/tokenomics'));
+const Tokenomics = lazy(() => import('../views/about/tokenomics'));
 const Faq = lazy(() => import('../views/faq'));
 const Docs = lazy(() => import('../views/docs'));
-const Developers = lazy(() => import('../views/developers'));
+const Developers = lazy(() => import('../views/about/developers'));
 const Community = lazy(() => import('../views/community'));
 const About = lazy(() => import('../views/about'));
-const Roadmap = lazy(() => import('../views/roadmap'));
+const Roadmap = lazy(() => import('../views/about/roadmap'));
 const Sign = lazy(() => import('../views/sign'));
 const MarketWatch = lazy(() => import('../views/market-watch'));
 const Craft = lazy(() => import('../views/craft'));
 const Characters = lazy(() => import('../views/characters'));
 const Transmute = lazy(() => import('../views/transmute'));
-const Stats = lazy(() => import('../views/stats'));
+const Stats = lazy(() => import('../views/about/stats'));
 const User = lazy(() => import('../views/user'));
 const Expert = lazy(() => import('../views/expert'));
 const Mod = lazy(() => import('../views/mod'));
@@ -65,7 +65,7 @@ const Distro = lazy(() => import('../views/distro'));
 const Sitemap = lazy(() => import('../views/sitemap'));
 // const Marketplace = lazy(() => import('../views/Marketplace'))
 const Market = lazy(() => import('../views/market'));
-const Updates = lazy(() => import('../views/updates'));
+const Updates = lazy(() => import('../views/about/updates'));
 const Team = lazy(() => import('../views/team'));
 const Register = lazy(() => import('../views/register'));
 const Guild = lazy(() => import('../views/guild'));
@@ -73,7 +73,7 @@ const Press = lazy(() => import('../views/press'));
 const Refer = lazy(() => import('../views/refer'));
 const Catalog = lazy(() => import('../views/catalog'));
 const CatalogItem = lazy(() => import('../views/catalog/item'));
-const Lore = lazy(() => import('../views/lore'));
+const Lore = lazy(() => import('../views/games/oasis/lore'));
 const Links = lazy(() => import('../views/links'));
 const Vote = lazy(() => import('../views/vote'));
 const Newsletter = lazy(() => import('../views/newsletter'));
@@ -81,47 +81,42 @@ const Shards = lazy(() => import('../views/shards'));
 const Play = lazy(() => import('../views/games'));
 const Subverses = lazy(() => import('../views/subverses'));
 const Metaverse = lazy(() => import('../views/metaverse'));
-const Infinite = lazy(() => import('../views/infinite'));
-const InfiniteTutorial = lazy(() => import('../views/infinite/tutorial'));
-const Evolution = lazy(() => import('../views/evolution'));
-const EvolutionTutorial = lazy(() => import('../views/evolution/tutorial'));
-const MemeIsles = lazy(() => import('../views/isles'));
+const Infinite = lazy(() => import('../views/games/infinite'));
+const InfiniteTutorial = lazy(() => import('../views/games/infinite/tutorial'));
+const Evolution = lazy(() => import('../views/games/evolution'));
+const EvolutionTutorial = lazy(() => import('../views/games/evolution/tutorial'));
+const MemeIsles = lazy(() => import('../views/games/isles'));
 const Raid = lazy(() => import('../views/raid'));
 const RaidTutorial = lazy(() => import('../views/raid'));
-const Sanctuary = lazy(() => import('../views/sanctuary'));
-const Energies = lazy(() => import('../views/sanctuary/energies'));
-const Areas = lazy(() => import('../views/sanctuary/areas'));
-const NPCs = lazy(() => import('../views/sanctuary/npcs'));
-const Eras = lazy(() => import('../views/sanctuary/eras'));
-const Acts = lazy(() => import('../views/sanctuary/acts'));
-const Bosses = lazy(() => import('../views/sanctuary/bosses'));
-const Monsters = lazy(() => import('../views/sanctuary/monsters'));
-const Races = lazy(() => import('../views/sanctuary/races'));
-const Factions = lazy(() => import('../views/sanctuary/factions'));
-const Area = lazy(() => import('../views/sanctuary/area'));
+const Oasis = lazy(() => import('../views/games/oasis'));
+const Energies = lazy(() => import('../views/games/oasis/energies'));
+const Areas = lazy(() => import('../views/games/oasis/areas'));
+const NPCs = lazy(() => import('../views/games/oasis/npcs'));
+const Eras = lazy(() => import('../views/games/oasis/eras'));
+const Acts = lazy(() => import('../views/games/oasis/acts'));
+const Bosses = lazy(() => import('../views/games/oasis/bosses'));
+const Monsters = lazy(() => import('../views/games/oasis/monsters'));
+const Races = lazy(() => import('../views/games/oasis/races'));
+const Factions = lazy(() => import('../views/games/oasis/factions'));
+const Area = lazy(() => import('../views/games/oasis/area'));
 const GuideConvertBinanceCube = lazy(() => import('../views/guides/convert-binance-cube'));
 const GuideChangeCharacterGuild = lazy(() => import('../views/guides/change-character-guild'));
-const NPC = lazy(() => import('../views/sanctuary/npc'));
-const Era = lazy(() => import('../views/sanctuary/era'));
-const Act = lazy(() => import('../views/sanctuary/act'));
-const Boss = lazy(() => import('../views/sanctuary/boss'));
-const Monster = lazy(() => import('../views/sanctuary/monster'));
-const Race = lazy(() => import('../views/sanctuary/race'));
-const Faction = lazy(() => import('../views/sanctuary/faction'));
-const Classes = lazy(() => import('../views/sanctuary/classes'));
-const Classs = lazy(() => import('../views/sanctuary/class'));
-const Items = lazy(() => import('../views/sanctuary/items'));
-const ItemTypes = lazy(() => import('../views/sanctuary/item-types'));
-const Skills = lazy(() => import('../views/sanctuary/skills'));
-const Mechanics = lazy(() => import('../views/sanctuary/mechanics'));
-const Runeforms = lazy(() => import('../views/sanctuary/runeforms'));
-const SanctuaryTutorial = lazy(() => import('../views/sanctuary/tutorial'));
+const NPC = lazy(() => import('../views/games/oasis/npc'));
+const Era = lazy(() => import('../views/games/oasis/era'));
+const Act = lazy(() => import('../views/games/oasis/act'));
+const Boss = lazy(() => import('../views/games/oasis/boss'));
+const Monster = lazy(() => import('../views/games/oasis/monster'));
+const Race = lazy(() => import('../views/games/oasis/race'));
+const Faction = lazy(() => import('../views/games/oasis/faction'));
+const Classes = lazy(() => import('../views/games/oasis/classes'));
+const Classs = lazy(() => import('../views/games/oasis/class'));
+const ItemTypes = lazy(() => import('../views/games/oasis/item-types'));
+const Skills = lazy(() => import('../views/games/oasis/skills'));
+const Mechanics = lazy(() => import('../views/games/oasis/mechanics'));
 const Guardians = lazy(() => import('../views/guardians'));
 const GuardiansTutorial = lazy(() => import('../views/guardians/tutorial'));
 const Pools = lazy(() => import('../views/pools'));
-const Leaderboard = lazy(() => import('../views/leaderboard'));
 const Rune = lazy(() => import('../views/rune'));
-const Tournament = lazy(() => import('../views/tournament'));
 const Transparency = lazy(() => import('../views/transparency'));
 const Live = lazy(() => import('../views/live'));
 const Royale = lazy(() => import('../views/royale'));
@@ -821,7 +816,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/evolution',
+      path: '/games/evolution',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -1108,13 +1103,13 @@ const useWindows = () => {
     //   showable: false,
     // },
     {
-      path: '/sanctuary',
+      path: '/oasis',
       icon: AboutIcon,
       exact: true,
       strict: false,
       persist: false,
       props: {
-        title: 'Sanctuary',
+        title: 'Oasis',
         routeIndex: 1000,
         open: false,
         minimized: false,
@@ -1126,37 +1121,37 @@ const useWindows = () => {
         },
       },
       navPosition: undefined, //400,
-      component: Sanctuary,
+      component: Oasis,
       toolbarNav: (subnav, setSubnav) => (
         <>
           {/* <Button scale="sm" variant="text" className={subnav === 'sanctuary-getting-started' ? 'active' : ''} onClick={() => setSubnav('sanctuary-getting-started')}>
             Getting Started
           </Button> */}
-          <Button scale="sm" variant="text" onClick={() => setSubnav('sanctuary-lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/areas')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/areas')}>
             Areas
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/npcs')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/npcs')}>
             NPCs
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/eras')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/eras')}>
             Eras
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/races')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/races')}>
             Races
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/factions')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/factions')}>
             Factions
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/classes')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/classes')}>
             Classes
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/energies')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/energies')}>
             Energies
           </Button>
-          <Button scale="sm" variant="text" onClick={() => setSubnav('items')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/items')}>
             Items
           </Button>
         </>
@@ -1780,7 +1775,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/lore',
+      path: '/games/oasis/lore',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -1800,31 +1795,31 @@ const useWindows = () => {
       navPosition: 200,
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => setSubnav('sanctuary-lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/areas')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/areas')}>
             Areas
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/npcs')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/npcs')}>
             NPCs
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/eras')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/eras')}>
             Eras
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/races')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/races')}>
             Races
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/factions')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/factions')}>
             Factions
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/classes')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/classes')}>
             Classes
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/energies')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/energies')}>
             Energies
           </Button>
-          <Button scale="sm" variant="text" onClick={() => setSubnav('items')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/items')}>
             Items
           </Button>
         </>
@@ -1858,7 +1853,7 @@ const useWindows = () => {
     // //   showable: true,
     // // },
     {
-      path: '/energies',
+      path: '/games/oasis/energies',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -1877,7 +1872,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -1887,7 +1882,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/areas',
+      path: '/games/oasis/areas',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -1906,7 +1901,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -1916,7 +1911,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/area/:id',
+      path: '/games/oasis/area/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -1935,10 +1930,10 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/areas')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/areas')}>
             Areas
           </Button>
         </>
@@ -1948,7 +1943,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/creature/:id',
+      path: '/games/oasis/creature/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -1967,10 +1962,10 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/creatures')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/creatures')}>
             Creatures
           </Button>
         </>
@@ -1980,7 +1975,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/npcs',
+      path: '/games/oasis/npcs',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -1999,7 +1994,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -2009,7 +2004,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/npc/:id',
+      path: '/games/oasis/npc/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2028,10 +2023,10 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/npcs')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/npcs')}>
             NPCs
           </Button>
         </>
@@ -2041,7 +2036,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/eras',
+      path: '/games/oasis/eras',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2060,7 +2055,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -2070,7 +2065,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/era/:id',
+      path: '/games/oasis/era/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2089,10 +2084,10 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/eras')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/eras')}>
             Eras
           </Button>
         </>
@@ -2102,7 +2097,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/acts',
+      path: '/games/oasis/acts',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2121,7 +2116,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -2131,7 +2126,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/act/:id',
+      path: '/games/oasis/act/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2150,10 +2145,10 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/acts')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/acts')}>
             Acts
           </Button>
         </>
@@ -2163,7 +2158,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/bosses',
+      path: '/games/oasis/bosses',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2182,7 +2177,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -2192,7 +2187,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/boss/:id',
+      path: '/games/oasis/boss/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2211,10 +2206,10 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/bosses')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/bosses')}>
             Bosses
           </Button>
         </>
@@ -2224,7 +2219,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/monsters',
+      path: '/games/oasis/monsters',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2243,7 +2238,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -2253,7 +2248,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/monster/:id',
+      path: '/games/oasis/monster/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2272,10 +2267,10 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/monsters')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/monsters')}>
             Monsters
           </Button>
         </>
@@ -2285,7 +2280,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/races',
+      path: '/games/oasis/races',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2304,7 +2299,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -2314,7 +2309,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/race/:id',
+      path: '/games/oasis/race/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2333,10 +2328,10 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/races')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/races')}>
             Races
           </Button>
         </>
@@ -2346,7 +2341,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/factions',
+      path: '/games/oasis/factions',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2365,7 +2360,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -2375,7 +2370,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/faction/:id',
+      path: '/games/oasis/faction/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2394,10 +2389,10 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/factions')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/factions')}>
             Factions
           </Button>
         </>
@@ -2407,7 +2402,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/classes',
+      path: '/games/oasis/classes',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2426,7 +2421,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -2436,7 +2431,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/class/:id',
+      path: '/games/oasis/class/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2455,10 +2450,10 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
-          <Button scale="sm" variant="text" onClick={() => history.push('/classes')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/classes')}>
             Classes
           </Button>
         </>
@@ -2468,7 +2463,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/items',
+      path: '/games/oasis/items',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2487,17 +2482,17 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
       ),
       navPosition: undefined,
-      component: Items,
+      component: lazy(() => import('../views/games/oasis/items')),
       showable: true,
     },
     {
-      path: '/item-types',
+      path: '/games/oasis/item-types',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2516,7 +2511,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -2526,7 +2521,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/skills',
+      path: '/games/oasis/skills',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2545,7 +2540,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -2555,7 +2550,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/mechanics',
+      path: '/games/oasis/mechanics',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2574,7 +2569,7 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
@@ -2584,7 +2579,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/runeforms',
+      path: '/games/oasis/runeforms',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2603,13 +2598,13 @@ const useWindows = () => {
       },
       toolbarNav: (subnav, setSubnav) => (
         <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/lore')}>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
             Lore
           </Button>
         </>
       ),
       navPosition: undefined,
-      component: Runeforms,
+      component: lazy(() => import('../views/games/oasis/runeforms')),
       showable: true,
     },
     {
@@ -2767,7 +2762,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/leaderboard',
+      path: '/games/evolution/leaderboard',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -2785,7 +2780,65 @@ const useWindows = () => {
         },
       },
       navPosition: undefined,
-      component: Leaderboard,
+      component: lazy(() => import('../views/games/evolution/leaderboard')),
+      showable: true,
+    },
+    {
+      path: '/games/evolution/items',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'Items',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      toolbarNav: (subnav, setSubnav) => (
+        <>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/evolution/lore')}>
+            Lore
+          </Button>
+        </>
+      ),
+      navPosition: undefined,
+      component: lazy(() => import('../views/games/evolution/items')),
+      showable: true,
+    },
+    {
+      path: '/games/evolution/runeforms',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'Runeforms',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      toolbarNav: (subnav, setSubnav) => (
+        <>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/evolution/lore')}>
+            Lore
+          </Button>
+        </>
+      ),
+      navPosition: undefined,
+      component: lazy(() => import('../views/games/evolution/runeforms')),
       showable: true,
     },
     // {
@@ -3097,7 +3150,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/infinite',
+      path: '/games/infinite',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -3119,7 +3172,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/infinite/tutorial',
+      path: '/games/infinite/tutorial',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -3141,13 +3194,13 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/raid/tutorial',
+      path: '/games/raids/tutorial',
       icon: AboutIcon,
       exact: true,
       strict: false,
       persist: false,
       props: {
-        title: 'Raid Tutorial',
+        title: 'Raids Tutorial',
         routeIndex: 1000,
         open: false,
         minimized: false,
@@ -3170,7 +3223,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/evolution/tutorial',
+      path: '/games/evolution/tutorial',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -3221,7 +3274,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/guardians/tutorial',
+      path: '/games/guardians/tutorial',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -3404,7 +3457,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/about/developer',
+      path: '/about/developers',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -3712,7 +3765,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/tournament',
+      path: '/games/evolution/tournament',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -3730,7 +3783,7 @@ const useWindows = () => {
         },
       },
       navPosition: undefined,
-      component: Tournament,
+      component: lazy(() => import('../views/games/evolution/tournament')),
       showable: true,
     },
     {
@@ -3866,7 +3919,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/evolution/replay/:realmKey/:roundId',
+      path: '/games/evolution/replay/:realmKey/:roundId',
       icon: AboutIcon,
       exact: false,
       strict: false,

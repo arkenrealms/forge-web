@@ -59,7 +59,7 @@ type BackendConfig = {
 };
 
 const backends: BackendConfig[] = [
-  { name: 'relay', url: 'http://localhost:8020' },
+  // { name: 'relay', url: 'http://localhost:8020' },
   { name: 'evolution', url: 'http://localhost:4010' },
   { name: 'seer', url: 'http://localhost:7060' },
 ];

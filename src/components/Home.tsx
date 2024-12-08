@@ -1399,7 +1399,7 @@ z-index: 999;
             </CardBody>
           </Card>
         </Card3>
-
+        {/* 
         <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
           <Card>
             <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
@@ -1417,7 +1417,7 @@ z-index: 999;
               </Flex>
             </CardBody>
           </Card>
-        </Card3>
+        </Card3> */}
 
         <Swiper
           // install Swiper modules

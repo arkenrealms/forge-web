@@ -5,6 +5,7 @@ import { connectorsByName } from '~/utils/web3React';
 import React, { useContext, useState, useCallback, useEffect, createContext } from 'react';
 import _ from 'lodash';
 import type { NotificationPlacement } from 'antd/es/notification/interface';
+import { isCryptoMode } from '~/utils/mode';
 // import useSettings from './useSettings';
 import { usePrompt } from './usePrompt';
 import config from '../config';
@@ -18,8 +19,10 @@ const AuthContext = createContext({
   profile: null,
   permissions: {} as any,
   isLoading: true,
+  isCryptoMode: false,
   login: () => {},
   logout: () => {},
+  setProfileMode: (mode: string) => {},
 });
 
 const pca = null;
@@ -38,6 +41,7 @@ const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
   const [permissions, setPermissions] = useState({});
 
   const { mutateAsync: authorize, isLoading: isAuthorizing } = trpc.seer.core.authorize.useMutation();
+  const { mutateAsync: setProfileMode } = trpc.seer.profile.setProfileMode.useMutation();
 
   async function authSilent() {
     console.log('Refreshing auth');
@@ -81,8 +85,23 @@ const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
     window.localStorage.removeItem('LoginAs');
   }
 
+  // async function setProfileMode() {
+
+  // }
+
   return (
-    <AuthContext.Provider value={{ profile, permissions, login, logout, isLoading }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{
+        profile,
+        permissions,
+        login,
+        logout,
+        isLoading,
+        setProfileMode,
+        isCryptoMode: isCryptoMode(profile?.mode),
+      }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

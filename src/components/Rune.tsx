@@ -168,7 +168,7 @@ const Rune = ({ match }) => {
                   //   (i) => i.id - 1 === parseInt(indexSelected.replace('inventory', ''))
                   // );
                   // @ts-ignore
-                  window.history.replaceState({}, 'Rune', `/runes/${token?.meta?.details.Symbol.toLowerCase()}`);
+                  window.history.replaceState({}, 'Rune', `/runes/${token?.symbol.toLowerCase()}`);
                   // setTimeout(function() {
                   //   setSymbol(selectedItem.details.Symbol.toLowerCase())
                   // }, 1000)
@@ -186,17 +186,15 @@ const Rune = ({ match }) => {
         <VerticalCards>
           <ItemCard>
             <Heading as="h2" size="lg" color="secondary" mb="24px">
-              {t(`${token?.meta?.details.Symbol} Price History`)}
+              {t(`${token?.symbol} Price History`)}
             </Heading>
             <ChartWrapper>
-              {token?.meta?.historical?.price?.[token?.meta?.details.Symbol.toLowerCase()] && (
+              {token?.meta?.historical?.price?.[token?.symbol.toLowerCase()] && (
                 <SimpleLineChart
-                  data={token?.meta?.historical?.price?.[token?.meta?.details.Symbol.toLowerCase()]
-                    .slice(1)
-                    .map((point, i) => ({
-                      name: ``,
-                      AVG: point[1],
-                    }))}
+                  data={token?.meta?.historical?.price?.[token?.symbol.toLowerCase()].slice(1).map((point, i) => ({
+                    name: ``,
+                    AVG: point[1],
+                  }))}
                 />
               )}
               {/* {!historical?.price?.[item.details.Symbol.toLowerCase()] && <AutoRenewIcon spin />} */}

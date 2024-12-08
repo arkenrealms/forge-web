@@ -45,7 +45,7 @@ const arkenConfig: MenuEntry[] = [
       },
       {
         label: `Developer Portal`,
-        href: '/about/developer',
+        href: '/about/developers',
       },
     ],
   },
@@ -57,17 +57,128 @@ const arkenConfig: MenuEntry[] = [
       {
         label: 'Evolution Isles',
         icon: 'EvolutionIcon',
-        href: '/evolution',
+        href: '/games/evolution',
+        items: [
+          {
+            label: 'Play Now',
+            href: '/games/evolution',
+          },
+          {
+            label: 'Tutorial',
+            href: '/games/evolution/tutorial',
+          },
+          {
+            label: 'Tournament',
+            href: '/games/evolution/tournament',
+          },
+          {
+            label: 'Leaderboard',
+            // icon: 'InfoIcon',
+            href: '/games/evolution/leaderboard',
+          },
+          {
+            label: 'Items',
+            href: '/games/evolution/items',
+          },
+          {
+            label: 'Runeforms',
+            href: '/games/evolution/runeforms',
+          },
+        ],
       },
       {
         label: 'Infinite Arena',
         icon: 'InfiniteIcon',
-        href: '/infinite',
+        href: '/games/infinite',
+        items: [
+          {
+            label: 'Preview',
+            href: '/games/infinite',
+          },
+          {
+            label: 'Tutorial',
+            href: '/games/infinite/tutorial',
+          },
+        ],
       },
       {
         label: 'Heart of the Oasis',
         icon: 'SanctuaryIcon',
-        href: '/oasis',
+        href: '/games/oasis',
+        items: [
+          {
+            label: 'Preview',
+            href: '/games/oasis',
+          },
+          {
+            label: 'World',
+            href: '/games/oasis/lore',
+          },
+          {
+            label: 'Energies',
+            href: '/games/oasis/energies',
+          },
+          {
+            label: 'Areas',
+            href: '/games/oasis/areas',
+          },
+          {
+            label: 'NPCs',
+            href: '/games/oasis/npcs',
+          },
+          {
+            label: 'Eras',
+            href: '/games/oasis/eras',
+          },
+          {
+            label: 'Acts',
+            href: '/games/oasis/acts',
+          },
+          // {
+          //   label: 'Bosses',
+          //   href: '/bosses',
+          // },
+          // {
+          //   label: 'Monsters',
+          //   href: '/monsters',
+          // },
+          // {
+          //   label: 'Creatures',
+          //   href: '/creatures',
+          // },
+          {
+            label: 'Races',
+            href: '/games/oasis/races',
+          },
+          {
+            label: 'Classes',
+            href: '/games/oasis/classes',
+          },
+          {
+            label: 'Factions',
+            href: '/games/oasis/factions',
+          },
+          {
+            label: 'Items',
+            href: '/games/oasis/items',
+          },
+          {
+            label: 'Runeforms',
+            href: '/games/oasis/runeforms',
+          },
+          // {
+          //   label: 'Pets',
+          //   href: '/pets',
+          // },
+          // {
+          //   label: 'Skills',
+          //   href: '/skills',
+          // },
+          // {
+          //   label: 'Mechanics',
+          //   href: '/mechanics',
+          // },
+        ],
       },
     ],
   },
@@ -79,111 +190,121 @@ const arkenConfig: MenuEntry[] = [
     items: [
       {
         label: 'Fantasy Realm',
+        icon: 'EvolutionIcon',
         href: '/realms/fantasy',
+        initialOpenState: true,
         items: [
           {
-            label: 'Games',
-            href: '/realms/fantasy/games',
-            items: [
-              {
-                label: 'Evolution Isles',
-                icon: 'EvolutionIcon',
-                href: '/evolution',
-              },
-              {
-                label: 'Infinite Arena',
-                icon: 'EvolutionIcon',
-                href: '/infinite',
-              },
-              {
-                label: 'Heart of the Oasis',
-                icon: 'EvolutionIcon',
-                href: '/oasis',
-              },
-            ],
+            label: 'Evolution Isles',
+            icon: 'EvolutionIcon',
+            href: '/games/evolution',
+          },
+          {
+            label: 'Infinite Arena',
+            icon: 'EvolutionIcon',
+            href: '/games/infinite',
+          },
+          {
+            label: 'Heart of the Oasis',
+            icon: 'EvolutionIcon',
+            href: '/games/oasis',
           },
         ],
       },
       {
         label: 'Meme Realm',
+        icon: 'SanctuaryIcon',
         href: '/realms/meme',
+        initialOpenState: true,
+        items: [
+          {
+            label: 'Meme Isles',
+            icon: 'EvolutionIcon',
+            href: '/games/isles',
+          },
+          {
+            label: 'Attack on Tatos',
+            icon: 'EvolutionIcon',
+            href: '/games/tatos',
+          },
+        ],
       },
     ],
   },
   {
     label: 'Evolution Isles',
     icon: 'EvolutionIcon',
-    href: '/evolution',
+    href: '/games/evolution',
     initialOpenState: false,
     items: [
       {
         label: 'Play Now',
-        href: '/evolution/play',
+        href: '/games/evolution',
       },
       {
         label: 'Tutorial',
-        href: '/evolution/tutorial',
+        href: '/games/evolution/tutorial',
       },
       {
         label: 'Tournament',
-        href: '/tournament',
+        href: '/games/evolution/tournament',
       },
       {
         label: 'Leaderboard',
         // icon: 'InfoIcon',
-        href: '/leaderboard',
+        href: '/games/evolution/leaderboard',
       },
     ],
   },
   {
     label: 'Infinite Arena',
     icon: 'InfiniteIcon',
-    href: '/infinite',
+    href: '/games/infinite',
     initialOpenState: false,
     items: [
       {
         label: 'Preview',
-        href: '/infinite/play',
+        href: '/games/oasis/infinite',
       },
       {
         label: 'Tutorial',
-        href: '/infinite/tutorial',
+        href: '/games/oasis/infinite/tutorial',
       },
     ],
   },
   {
     label: 'Heart of the Oasis',
     icon: 'SanctuaryIcon',
-    href: '/oasis',
+    href: '/games/oasis',
     initialOpenState: false,
     items: [
       {
         label: 'Preview',
-        href: '/oasis/play',
+        href: '/games/oasis',
       },
       {
         label: 'World',
-        href: '/lore',
+        href: '/games/oasis/lore',
       },
       {
         label: 'Energies',
-        href: '/energies',
+        href: '/games/oasis/energies',
       },
       {
         label: 'Areas',
-        href: '/areas',
+        href: '/games/oasis/areas',
       },
       {
         label: 'NPCs',
-        href: '/npcs',
+        href: '/games/oasis/npcs',
       },
       {
         label: 'Eras',
-        href: '/eras',
+        href: '/games/oasis/eras',
       },
       {
         label: 'Acts',
-        href: '/acts',
+        href: '/games/oasis/acts',
       },
       // {
       //   label: 'Bosses',
@@ -199,19 +320,19 @@ const arkenConfig: MenuEntry[] = [
       // },
       {
         label: 'Races',
-        href: '/races',
+        href: '/games/oasis/races',
       },
       {
         label: 'Classes',
-        href: '/classes',
+        href: '/games/oasis/classes',
       },
       {
         label: 'Factions',
-        href: '/factions',
+        href: '/games/oasis/factions',
       },
       {
         label: 'Items',
-        href: '/items',
+        href: '/games/oasis/items',
       },
       // {
       //   label: 'Pets',
@@ -223,7 +344,7 @@ const arkenConfig: MenuEntry[] = [
       // },
       {
         label: 'Runeforms',
-        href: '/runeforms',
+        href: '/games/oasis/runeforms',
       },
       // {
       //   label: 'Mechanics',

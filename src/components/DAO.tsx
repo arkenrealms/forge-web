@@ -203,7 +203,7 @@ const DAO = () => {
                     text-transform: uppercase;
                     font-family: 'webfontexl';
                   `}>
-                  Voting Portal
+                  Vote Now
                 </HeadingFire>
               </Button>
             </Flex>

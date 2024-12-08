@@ -168,12 +168,12 @@ const HeadingFire = styled.h1<{
   }
 `;
 
-const endpoints = {
-  // cache: 'https://s1.envoy.arken.asi.sh',
-  // coordinator: 'https://s1.relay.arken.asi.sh',
-  cache: isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh',
-  coordinator: isLocal ? 'http://localhost:5001' : 'https://s1.relay.arken.asi.sh',
-};
+// const endpoints = {
+//   // cache: 'https://s1.envoy.arken.asi.sh',
+//   // coordinator: 'https://s1.relay.arken.asi.sh',
+//   cache: isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh',
+//   coordinator: isLocal ? 'http://localhost:5001' : 'https://s1.relay.arken.asi.sh',
+// };
 
 const aaa = styled.div``;
 

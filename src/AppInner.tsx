@@ -8,8 +8,7 @@ import Layout from '~/components/Layout2';
 import { useEagerConnect, useInactiveListener } from '~/hooks';
 import Moveable, { type OnResize, type OnDrag, type OnScale } from 'react-moveable';
 import InfiniteViewer from 'react-infinite-viewer';
-
-import useAuth from '~/hooks/useAuth';
+import { useAuth } from '~/hooks/useAuth';
 import useBrand from '~/hooks/useBrand';
 import useMarket from '~/hooks/useMarket';
 import { AuthProvider } from '~/hooks/useAuth';
@@ -45,7 +44,6 @@ import PageFooter from '~/components/PageFooter';
 import ToastListener from '~/components/ToastListener';
 import { useEnv } from '~/hooks/useEnv';
 import config from '~/config/menu';
-import { useFetchProfile, useFetchPublicData } from './state/hooks';
 import { trpc } from '~/utils/trpc';
 
 import history from '~/routerHistory';
@@ -520,6 +518,8 @@ const CloseIcon = styled.div`
 `;
 
 const SiteNav = ({ id }) => {
+  const auth = useAuth();
+
   return (
     <div className="sitenav lore-container app__sitenav" css={css``}>
       {id === 'items' ? (
@@ -632,7 +632,7 @@ const SiteNav = ({ id }) => {
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/items');
+                      history.push('/games/oasis/items');
                     }}>
                     <div className="icon" />
                     <div>
@@ -646,97 +646,97 @@ const SiteNav = ({ id }) => {
                 <div className="text-block-3">Popular Items</div>
                 <div className="w-layout-grid grid-subnav-list twocols">
                   <a
-                    data-load-page="/item/wrath"
+                    data-load-page="/games/oasis/item/wrath"
                     id="w-node-_3516db66-66a0-079a-08d5-2070d10b746c-1186d119"
-                    href="/item/wrath"
+                    href="/games/oasis/item/wrath"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/item/wrath');
+                      history.push('/games/oasis/item/wrath');
                     }}>
                     <div className="icon" />
                     <div>Wrath</div>
                   </a>
                   <a
-                    data-load-page="/item/instinct"
+                    data-load-page="/games/oasis/item/instinct"
                     id="w-node-_3516db66-66a0-079a-08d5-2070d10b7470-1186d119"
-                    href="/item/instinct"
+                    href="/games/oasis/item/instinct"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/item/instinct');
+                      history.push('/games/oasis/item/instinct');
                     }}>
                     <div className="icon" />
                     <div>Instinct</div>
                   </a>
                   <a
-                    data-load-page="/item/smoke"
+                    data-load-page="/games/oasis/item/smoke"
                     id="w-node-_3516db66-66a0-079a-08d5-2070d10b7474-1186d119"
-                    href="/item/smoke"
+                    href="/games/oasis/item/smoke"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/item/smoke');
+                      history.push('/games/oasis/item/smoke');
                     }}>
                     <div className="icon" />
                     <div>Smoke</div>
                   </a>
                   <a
-                    data-load-page="/item/flow"
+                    data-load-page="/games/oasis/item/flow"
                     id="w-node-_3516db66-66a0-079a-08d5-2070d10b7478-1186d119"
-                    href="/item/flow"
+                    href="/games/oasis/item/flow"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/item/flow');
+                      history.push('/games/oasis/item/flow');
                     }}>
                     <div className="icon" />
                     <div>Flow</div>
                   </a>
                   <a
-                    data-load-page="/item/dragonlight"
+                    data-load-page="/games/oasis/item/dragonlight"
                     id="w-node-_3516db66-66a0-079a-08d5-2070d10b747c-1186d119"
-                    href="/item/dragonlight"
+                    href="/games/oasis/item/dragonlight"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/item/dragonlight');
+                      history.push('/games/oasis/item/dragonlight');
                     }}>
                     <div className="icon" />
                     <div>Dragonlight</div>
                   </a>
                   <a
-                    data-load-page="/item/titan"
+                    data-load-page="/games/oasis/item/titan"
                     id="w-node-_3516db66-66a0-079a-08d5-2070d10b7480-1186d119"
-                    href="/item/titan"
+                    href="/games/oasis/item/titan"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/item/titan');
+                      history.push('/games/oasis/item/titan');
                     }}>
                     <div className="icon" />
                     <div>Titan</div>
                   </a>
                   <a
-                    data-load-page="/item/flash"
+                    data-load-page="/games/oasis/item/flash"
                     id="w-node-_3516db66-66a0-079a-08d5-2070d10b7484-1186d119"
-                    href="/item/flash"
+                    href="/games/oasis/item/flash"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/item/flash');
+                      history.push('/games/oasis/item/flash');
                     }}>
                     <div className="icon" />
                     <div>Flash</div>
                   </a>
                   <a
-                    data-load-page="/item/grace"
+                    data-load-page="/games/oasis/item/grace"
                     id="w-node-_3516db66-66a0-079a-08d5-2070d10b748c-1186d119"
-                    href="/item/grace"
+                    href="/games/oasis/item/grace"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/item/grace');
+                      history.push('/games/oasis/item/grace');
                     }}>
                     <div className="icon" />
                     <div>Grace</div>
@@ -757,25 +757,25 @@ const SiteNav = ({ id }) => {
                 <div className="text-block-3">NEW?</div>
                 <div className="w-layout-grid grid-subnav-list">
                   <a
-                    data-load-page="/introduction"
+                    data-load-page="/games/oasis"
                     id="w-node-_904a9d28-258f-5392-b05b-501c2ac91af8-1186d119"
-                    href="/introduction"
+                    href="/games/oasis"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>Introduction</div>
                   </a>
                   <a
-                    data-load-page="/lore"
+                    data-load-page="/games/oasis/lore"
                     id="w-node-_57489108-b964-155a-220b-22824d4f10d3-1186d119"
-                    href="/lore"
+                    href="/games/oasis/lore"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>Lore</div>
                   </a>
                   <a
-                    data-load-page="/guides"
+                    data-load-page="/games/oasis/guides"
                     id="w-node-_8b6265b8-9773-ee57-d44f-7a7f695a5fab-1186d119"
-                    href="/guides"
+                    href="/games/oasis/guides"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>Guides</div>
@@ -786,54 +786,56 @@ const SiteNav = ({ id }) => {
               <div className="subnav-list">
                 <div className="text-block-3">GAMES</div>
                 <div className="w-layout-grid grid-subnav-list">
-                  <a
+                  {/* <a
                     data-load-page="/raid"
                     id="w-node-_6e51a4f0-1355-a7fe-5f82-acad18b13394-1186d119"
-                    href="/raid"
+                    href="/games/raids"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
                       <div className="text-block-5">Runic Raids</div>
-                      <div className="text-block-4">NFT&nbsp;Hyperfarm</div>
+                      <div className="text-block-4">Hyperfarm {auth?.isCryptoMode ? '(NFTs)' : ''}</div>
                     </div>
-                  </a>
+                  </a> */}
                   <a
-                    data-load-page="/evolution"
+                    data-load-page="/games/evolution"
                     id="w-node-_56aace6e-5b81-8524-2dd0-06eb44f98501-1186d119"
-                    href="/evolution"
+                    href="/games/evolution"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
                       <div className="text-block-5">Evolution Isles</div>
-                      <div className="text-block-4">Casual P2E&nbsp;arcade</div>
+                      <div className="text-block-4">
+                        Casual Arcade Game {auth?.isCryptoMode ? '(Play 4 Rewards)' : ''}
+                      </div>
                     </div>
                   </a>
                   <a
                     data-load-page="/infinite"
                     id="w-node-_16f54588-832f-0790-bccc-e07a3e82b8f2-1186d119"
-                    href="/infinite"
+                    href="/games/infinite"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
                       <div className="text-block-5">Infinite Arena</div>
-                      <div className="text-block-4">ESPORTS&nbsp;Battle Arena</div>
+                      <div className="text-block-4">Battle Arena (E-Sports style)</div>
                     </div>
                   </a>
-                  <a
+                  {/* <a
                     data-load-page="/guardians"
                     id="w-node-e2c58bf5-9541-8730-9039-86388f955177-1186d119"
-                    href="/guardians"
+                    href="/games/guardians"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
                       <div className="text-block-5">Guardians Unleashed</div>
-                      <div className="text-block-4">Casual Pet world</div>
+                      <div className="text-block-4">Casual Pet world {auth?.isCryptoMode ? '(NFT-powered)' : ''}</div>
                     </div>
-                  </a>
+                  </a> */}
                   <a
                     data-load-page=""
                     id="w-node-b2fe26cf-713f-4251-42cd-b9ef47e006ff-1186d119"
-                    href=""
+                    href="/games/oasis"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
@@ -848,85 +850,85 @@ const SiteNav = ({ id }) => {
                 <div className="text-block-3">⠀</div>
                 <div className="w-layout-grid grid-subnav-list twocols">
                   <a
-                    data-load-page="/classes"
+                    data-load-page="/games/oasis/classes"
                     id="w-node-_32af612e-56d2-f32f-1647-b17483dc6e7f-1186d119"
-                    href="/classes"
+                    href="/games/oasis/classes"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/classes');
+                      history.push('/games/oasis/classes');
                     }}>
                     <div className="icon" />
                     <div>Classes</div>
                   </a>
                   <a
-                    data-load-page="/races"
+                    data-load-page="/games/oasis/races"
                     id="w-node-_3b21ae9a-55f7-7cba-41e9-847d9ce8aa0a-1186d119"
-                    href="/races"
+                    href="/games/oasis/races"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/races');
+                      history.push('/games/oasis/races');
                     }}>
                     <div className="icon" />
                     <div>Races</div>
                   </a>
                   <a
-                    data-load-page="/skills"
+                    data-load-page="/games/oasis/skills"
                     id="w-node-_08fa9b25-0de5-d310-12ae-878d58359ca6-1186d119"
-                    href="/skills"
+                    href="/games/oasis/skills"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/skills');
+                      history.push('/games/oasis/skills');
                     }}>
                     <div className="icon" />
                     <div>Skills</div>
                   </a>
                   <a
-                    data-load-page="/areas"
+                    data-load-page="/games/oasis/areas"
                     id="w-node-_2629ee21-7661-5350-357c-d6459940d276-1186d119"
-                    href="/areas"
+                    href="/games/oasis/areas"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/areas');
+                      history.push('/games/oasis/areas');
                     }}>
                     <div className="icon" />
                     <div>Areas</div>
                   </a>
                   <a
-                    data-load-page="/runeforms"
+                    data-load-page="/games/oasis/runeforms"
                     id="w-node-c16538f4-fa64-7ea2-171e-d88e5b99a3eb-1186d119"
-                    href="/runeforms"
+                    href="/games/oasis/runeforms"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/runeforms');
+                      history.push('/games/oasis/runeforms');
                     }}>
                     <div className="icon" />
                     <div>Runewords</div>
                   </a>
                   <a
-                    data-load-page="/mechanics"
+                    data-load-page="/games/oasis/mechanics"
                     id="w-node-_61340ed2-41c9-a146-8011-a8857d6fc016-1186d119"
-                    href="/mechanics"
+                    href="/games/oasis/mechanics"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/mechanics');
+                      history.push('/games/oasis/mechanics');
                     }}>
                     <div className="icon" />
                     <div>Mechanics</div>
                   </a>
                   <a
-                    data-load-page="/item-attributes"
+                    data-load-page="/games/oasis/item-attributes"
                     id="w-node-_1d1f7e81-8273-dc5d-e1eb-b0cb63e72a39-1186d119"
-                    href="/item-attributes"
+                    href="/games/oasis/item-attributes"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/attributes');
+                      history.push('/games/oasis/attributes');
                     }}>
                     <div className="icon" />
                     <div>Attributes</div>
@@ -947,17 +949,17 @@ const SiteNav = ({ id }) => {
                 <div className="text-block-3">ECOSYSTEM</div>
                 <div className="w-layout-grid grid-subnav-list">
                   <a
-                    data-load-page="/runes"
+                    data-load-page="/games/oasis/runes"
                     id="w-node-_3880f8bd-4ecf-8be2-3c2c-61b9eb4cdedd-1186d119"
-                    href="/runes"
+                    href="/games/oasis/runes"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>Runes</div>
                   </a>
                   <a
-                    data-load-page="/smart-contracts"
+                    data-load-page="/about/smart-contracts"
                     id="w-node-_3880f8bd-4ecf-8be2-3c2c-61b9eb4cdee1-1186d119"
-                    href="/smart-contracts"
+                    href="/about/smart-contracts"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>Smart Contracts</div>
@@ -969,9 +971,9 @@ const SiteNav = ({ id }) => {
                 <div className="text-block-3">RESOURCES</div>
                 <div className="w-layout-grid grid-subnav-list">
                   <a
-                    data-load-page="/faq"
+                    data-load-page="/about/faq"
                     id="w-node-_3880f8bd-4ecf-8be2-3c2c-61b9eb4cdeea-1186d119"
-                    href="/faq"
+                    href="/about/faq"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
@@ -989,9 +991,9 @@ const SiteNav = ({ id }) => {
                     </div>
                   </a>
                   <a
-                    data-load-page="/useful-links"
+                    data-load-page="/about/useful-links"
                     id="w-node-_3880f8bd-4ecf-8be2-3c2c-61b9eb4cdef8-1186d119"
-                    href="/useful-links"
+                    href="/about/useful-links"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
@@ -999,9 +1001,9 @@ const SiteNav = ({ id }) => {
                     </div>
                   </a>
                   <a
-                    data-load-page="/polls"
+                    data-load-page="/about/polls"
                     id="w-node-_3880f8bd-4ecf-8be2-3c2c-61b9eb4cdeff-1186d119"
-                    href="/polls"
+                    href="/about/polls"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
@@ -1009,9 +1011,9 @@ const SiteNav = ({ id }) => {
                     </div>
                   </a>
                   <a
-                    data-load-page="/source"
+                    data-load-page="/about/source"
                     id="w-node-_3880f8bd-4ecf-8be2-3c2c-61b9eb4cdf06-1186d119"
-                    href="/source"
+                    href="/about/source"
                     className="subnavlink w-inline-block">
                     <div className="icon" />
                     <div>
@@ -1084,61 +1086,61 @@ const SiteNav = ({ id }) => {
                 <div className="text-block-3">Primary NPCs</div>
                 <div className="w-layout-grid grid-subnav-list">
                   <a
-                    data-load-page="/npc/zeno"
+                    data-load-page="/games/oasis/npcs/zeno"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0b5-1186d119"
-                    href="/npc/zeno"
+                    href="/games/oasis/npcs/zeno"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/npc/zeno');
+                      history.push('/npcs/zeno');
                     }}>
                     <div className="icon" />
                     <div>Zeno</div>
                   </a>
                   <a
-                    data-load-page="/npc/azorag"
+                    data-load-page="/games/oasis/npcs/azorag"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0b9-1186d119"
-                    href="/npc/azorag"
+                    href="/games/oasis/npcs/azorag"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/npc/azotag');
+                      history.push('/npcs/azotag');
                     }}>
                     <div className="icon" />
                     <div>Azorag</div>
                   </a>
                   <a
-                    data-load-page="/npc/eledon"
+                    data-load-page="/games/oasis/npcs/eledon"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0bd-1186d119"
-                    href="/npc/eledon"
+                    href="/games/oasis/npcs/eledon"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/npc/eledon');
+                      history.push('/npcs/eledon');
                     }}>
                     <div className="icon" />
                     <div>Eledon</div>
                   </a>
                   <a
-                    data-load-page="/npc/logos"
+                    data-load-page="/games/oasis/npcs/logos"
                     id="w-node-_5cd2fa3d-2b22-4c46-8866-6157c5070de4-1186d119"
-                    href="/npc/logos"
+                    href="/games/oasis/npcs/logos"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/npc/logos');
+                      history.push('/npcs/logos');
                     }}>
                     <div className="icon" />
                     <div>Logos</div>
                   </a>
                   <a
-                    data-load-page="/npc/delaran"
+                    data-load-page="/games/oasis/npcs/delaran"
                     id="w-node-be8330cc-f2ff-d197-dcc9-b6995e710e61-1186d119"
-                    href="/npc/delaran"
+                    href="/games/oasis/npcs/delaran"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/npc/delaran');
+                      history.push('/npcs/delaran');
                     }}>
                     <div className="icon" />
                     <div>Delaran</div>
@@ -1150,13 +1152,13 @@ const SiteNav = ({ id }) => {
                 <div className="text-block-3">Primary ZONES</div>
                 <div className="w-layout-grid grid-subnav-list">
                   <a
-                    data-load-page="/area/elysium"
+                    data-load-page="/games/oasis/areas/elysium"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0c6-1186d119"
-                    href="/area/elysium"
+                    href="/games/oasis/areas/elysium"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/area/elysium');
+                      history.push('/areas/elysium');
                     }}>
                     <div className="icon" />
                     <div>
@@ -1164,13 +1166,13 @@ const SiteNav = ({ id }) => {
                     </div>
                   </a>
                   <a
-                    data-load-page="/area/irondell"
+                    data-load-page="/games/oasis/areas/irondell"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0cd-1186d119"
-                    href="/area/irondell"
+                    href="/games/oasis/areas/irondell"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/area/irondell');
+                      history.push('/areas/irondell');
                     }}>
                     <div className="icon" />
                     <div>
@@ -1178,13 +1180,13 @@ const SiteNav = ({ id }) => {
                     </div>
                   </a>
                   <a
-                    data-load-page="/area/qiddir"
+                    data-load-page="/games/oasis/areas/qiddir"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0d4-1186d119"
-                    href="/area/qiddir"
+                    href="/games/oasis/areas/qiddir"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/area/qiddir');
+                      history.push('/games/oasis/areas/qiddir');
                     }}>
                     <div className="icon" />
                     <div>
@@ -1192,13 +1194,13 @@ const SiteNav = ({ id }) => {
                     </div>
                   </a>
                   <a
-                    data-load-page="/area/arreat-summit"
+                    data-load-page="/games/oasis/areas/arreat-summit"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0db-1186d119"
-                    href="/area/arreat-summit"
+                    href="/games/oasis/areas/arreat-summit"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/area/arreat-summit');
+                      history.push('/games/oasis/areas/arreat-summit');
                     }}>
                     <div className="icon" />
                     <div>
@@ -1206,13 +1208,13 @@ const SiteNav = ({ id }) => {
                     </div>
                   </a>
                   <a
-                    data-load-page="/area/end-of-time"
+                    data-load-page="/games/oasis/areas/end-of-time"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0e2-1"
-                    href="/area/end-of-time"
+                    href="/games/oasis/areas/end-of-time"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/area/end-of-time');
+                      history.push('/games/oasis/areas/end-of-time');
                     }}>
                     <div className="icon" />
                     <div>
@@ -1228,7 +1230,7 @@ const SiteNav = ({ id }) => {
                   <a
                     data-load-page="/eras"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0f2-1186d119"
-                    href="/eras"
+                    href="/games/oasis/eras"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
@@ -1240,7 +1242,7 @@ const SiteNav = ({ id }) => {
                   <a
                     data-load-page="/races"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0f6-1186d119"
-                    href="/races"
+                    href="/games/oasis/races"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
@@ -1250,9 +1252,9 @@ const SiteNav = ({ id }) => {
                     <div>Races</div>
                   </a>
                   <a
-                    data-load-page="/acts"
+                    data-load-page="/games/oasis/acts"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0fa-1186d119"
-                    href="/acts"
+                    href="/games/oasis/acts"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
@@ -1264,7 +1266,7 @@ const SiteNav = ({ id }) => {
                   <a
                     data-load-page="/factions"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac0fe-1186d119"
-                    href="/factions"
+                    href="/games/oasis/factions"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
@@ -1274,61 +1276,61 @@ const SiteNav = ({ id }) => {
                     <div>Factions</div>
                   </a>
                   <a
-                    data-load-page="/areas"
+                    data-load-page="/games/oasis/areas"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac106-1186d119"
-                    href="/areas"
+                    href="/games/oasis/areas"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/areas');
+                      history.push('/games/oasis/areas');
                     }}>
                     <div className="icon" />
                     <div>Areas</div>
                   </a>
                   <a
-                    data-load-page="/energies"
+                    data-load-page="/games/oasis/energies"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac10a-1186d119"
-                    href="/energies"
+                    href="/games/oasis/energies"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/energies');
+                      history.push('/games/oasis/energies');
                     }}>
                     <div className="icon" />
                     <div>Energies</div>
                   </a>
                   <a
-                    data-load-page="/bosses"
+                    data-load-page="/games/oasis/bosses"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac10e-1186d119"
-                    href="/bosses"
+                    href="/games/oasis/bosses"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/bosses');
+                      history.push('/games/oasis/bosses');
                     }}>
                     <div className="icon" />
                     <div>Bosses</div>
                   </a>
                   <a
-                    data-load-page="/npcs"
+                    data-load-page="/games/oasis/npcs"
                     id="w-node-_68e4aae3-6703-3c62-0536-6a5fec49528d-1186d119"
-                    href="/npcs"
+                    href="/games/oasis/npcs"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/npcs');
+                      history.push('/games/oasis/npcs');
                     }}>
                     <div className="icon" />
                     <div>NPCs</div>
                   </a>
                   <a
-                    data-load-page="/monsters"
+                    data-load-page="/games/oasis/monsters"
                     id="w-node-_6dae65cb-1c7c-423e-b30f-70c35f7ac112-1186d119"
-                    href="/monsters"
+                    href="/games/oasis/monsters"
                     className="subnavlink w-inline-block"
                     onClick={(e) => {
                       e.preventDefault();
-                      history.push('/monsters');
+                      history.push('/games/oasis/monsters');
                     }}>
                     <div className="icon" />
                     <div>Monsters</div>
@@ -2623,10 +2625,10 @@ const App: React.FC<any> = (props) => {
     document.body.classList.add(`brand-${brand}`);
   }, [brand]);
 
-  useFetchPublicData();
-  useFetchProfile(account);
+  // useFetchPublicData();
+  // useFetchProfile(account);
   // useFetchPriceList()
-  useReferral();
+  // useReferral();
 
   const { connector } = useWeb3();
 
@@ -2643,15 +2645,15 @@ const App: React.FC<any> = (props) => {
   const { pendingPageUpdate, setPendingPageUpdate, pageState, setPageState, pageSort, setPageSort, onChangePage } =
     useWindows();
 
-  const { profile } = useProfile(account);
+  // const { profile } = useProfile(account);
   const { isProd } = useEnv();
-  const { login, logout } = useAuth();
-  const { isDark, toggleTheme } = useTheme();
+  // const { login, logout } = useAuth();
+  // const { isDark, toggleTheme } = useTheme();
 
-  const isHome = window.location?.pathname === '/';
+  // const isHome = window.location?.pathname === '/';
 
-  const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
-  const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
+  // const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
+  // const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
 
   return (
     <>

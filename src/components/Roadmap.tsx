@@ -551,7 +551,7 @@ const Roadmap = () => {
             notes: [
               <>Casual play to earn game</>,
               <>
-                Link to <RouterLink to="/evolution">Evolution</RouterLink>
+                Link to <RouterLink to="/games/evolution">Evolution</RouterLink>
               </>,
             ],
           },
@@ -651,7 +651,7 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>
-                Link to <RouterLink to="/evolution">Evolution</RouterLink>
+                Link to <RouterLink to="/games/evolution">Evolution</RouterLink>
               </>,
             ],
           },
@@ -719,10 +719,10 @@ const Roadmap = () => {
             notes: [
               <>Launcher + better sign in</>,
               <>
-                Link to <RouterLink to="/evolution">Evolution</RouterLink>
+                Link to <RouterLink to="/games/evolution">Evolution</RouterLink>
               </>,
               <>
-                Link to <RouterLink to="/updates">Patch Notes</RouterLink>
+                Link to <RouterLink to="/about/updates">Patch Notes</RouterLink>
               </>,
             ],
           },
@@ -736,10 +736,10 @@ const Roadmap = () => {
             notes: [
               <>Graphic + UI overhaul</>,
               <>
-                Link to <RouterLink to="/evolution">Evolution</RouterLink>
+                Link to <RouterLink to="/games/evolution">Evolution</RouterLink>
               </>,
               <>
-                Link to <RouterLink to="/updates">Patch Notes</RouterLink>
+                Link to <RouterLink to="/about/updates">Patch Notes</RouterLink>
               </>,
             ],
           },
@@ -775,7 +775,7 @@ const Roadmap = () => {
             notes: [
               <>Launched on mobile (Android)</>,
               <>
-                Link to <RouterLink to="/evolution">Evolution</RouterLink>
+                Link to <RouterLink to="/games/evolution">Evolution</RouterLink>
               </>,
             ],
           },
@@ -875,7 +875,7 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>Started the monthly Rune Royale tournament, live streamed on Twitch.</>,
-              <>Started the weekly stream on Twitch, where players can play with and chat with the Arken team.</>,
+              <>Started the weekly stream on Twitch, where players can play with and chat with the Arken Council.</>,
               <>
                 Link to <a href="https://twitch.arken.gg">Arken on Twitch</a>
               </>,
@@ -1036,7 +1036,7 @@ const Roadmap = () => {
                 Link to <RouterLink to="/infinite">Infinite</RouterLink>
               </>,
               <>
-                Link to <RouterLink to="/updates">Patch Notes</RouterLink>
+                Link to <RouterLink to="/about/updates">Patch Notes</RouterLink>
               </>,
             ],
           },
@@ -1049,10 +1049,10 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>
-                Link to <RouterLink to="/evolution">Evolution</RouterLink>
+                Link to <RouterLink to="/games/evolution">Evolution</RouterLink>
               </>,
               <>
-                Link to <RouterLink to="/updates">Patch Notes</RouterLink>
+                Link to <RouterLink to="/about/updates">Patch Notes</RouterLink>
               </>,
             ],
           },
@@ -1092,7 +1092,7 @@ const Roadmap = () => {
             notes: [
               <>Live leaderboard competition to be the top player</>,
               <>
-                Link to <RouterLink to="/evolution">Evolution</RouterLink>
+                Link to <RouterLink to="/games/evolution">Evolution</RouterLink>
               </>,
               <>
                 Link to <RouterLink to="/leaderboard">Leaderboard</RouterLink>
@@ -1290,7 +1290,7 @@ const Roadmap = () => {
             notes: [
               <>Guardian integration + Gear-enabled servers</>,
               <>
-                Link to <RouterLink to="/evolution">Evolution Isles</RouterLink>
+                Link to <RouterLink to="/games/evolution">Evolution Isles</RouterLink>
               </>,
             ],
           },
@@ -1305,7 +1305,7 @@ const Roadmap = () => {
             notes: [
               <>Release of Evolution + Infinite</>,
               <>
-                Link to <RouterLink to="/evolution">Evolution Isles</RouterLink>
+                Link to <RouterLink to="/games/evolution">Evolution Isles</RouterLink>
               </>,
               <>
                 Link to <RouterLink to="/infinite">Infinite</RouterLink>
@@ -1323,7 +1323,7 @@ const Roadmap = () => {
             notes: [
               <>Release of Evolution + Infinite</>,
               <>
-                Link to <RouterLink to="/evolution">Evolution Isles</RouterLink>
+                Link to <RouterLink to="/games/evolution">Evolution Isles</RouterLink>
               </>,
               <>
                 Link to <RouterLink to="/infinite">Infinite</RouterLink>
@@ -1340,7 +1340,7 @@ const Roadmap = () => {
             notes: [
               <>Advanced filters + navigation</>,
               <>
-                Link to <RouterLink to="/evolution">Evolution Isles</RouterLink>
+                Link to <RouterLink to="/games/evolution">Evolution Isles</RouterLink>
               </>,
             ],
           },
@@ -1450,7 +1450,7 @@ const Roadmap = () => {
                 <AutoRow gap="6px">
                   <p style={{ color: '#bb955e' }}>
                     I understand that the roadmap is <strong>TENTATIVE</strong>, and that means the objectives and
-                    timelines could be changed anytime by the <RouterLink to="/team">Arken team</RouterLink> as they
+                    timelines could be changed anytime by the <RouterLink to="/team">Arken Council</RouterLink> as they
                     feel needed (we will do our best to communicate changes). I also understand that in the future the
                     objectives and timelines could be changed entirely, as they would be determined by the token holders
                     through direct or delegated voting in a DAO (Decentralized Autonomous Organization).
@@ -1589,7 +1589,7 @@ const Roadmap = () => {
                   <img src={RaidIcon} />
                   <p>RAID</p>
                 </Shortcut>
-                <Shortcut onClick={() => history.push('/evolution')}>
+                <Shortcut onClick={() => history.push('/games/evolution')}>
                   <img src={EvolutionIcon} />
                   <p>EVOLUTION</p>
                 </Shortcut>

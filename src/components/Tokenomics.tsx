@@ -220,23 +220,23 @@ const Rules = () => {
   const [selectedGoal, setSelectedGoal] = useState(0);
   const [oracle, setOracle] = useState(null);
 
-  useEffect(function () {
-    if (!window) return;
+  // useEffect(function () {
+  //   if (!window) return;
 
-    const coeff = 1000 * 60 * 5;
-    const date = new Date(); //or use any other date
-    const rand = new Date(Math.round(date.getTime() / coeff) * coeff).getTime();
+  //   const coeff = 1000 * 60 * 5;
+  //   const date = new Date(); //or use any other date
+  //   const rand = new Date(Math.round(date.getTime() / coeff) * coeff).getTime();
 
-    async function init() {
-      const data = (await (
-        await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/oracle.json?' + rand)
-      ).json()) as any;
+  //   async function init() {
+  //     const data = (await (
+  //       await fetch((isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh') + '/oracle.json?' + rand)
+  //     ).json()) as any;
 
-      setOracle(data);
-    }
+  //     setOracle(data);
+  //   }
 
-    init();
-  }, []);
+  //   init();
+  // }, []);
 
   if (!oracle) return <></>;
 

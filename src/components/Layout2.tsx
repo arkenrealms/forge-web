@@ -24,7 +24,7 @@ import {
   SearchOutlined,
 } from '@ant-design/icons';
 import { ProCard, ProConfigProvider } from '@ant-design/pro-components';
-import { Button, ConfigProvider, Divider, Dropdown, Input, Popover, theme } from 'antd';
+import { Button, ConfigProvider, Divider, Dropdown, Input, Popover, Select, theme } from 'antd';
 import useSettings from '~/hooks/useSettings2';
 import {
   HomeOutlined,
@@ -108,7 +108,6 @@ interface Route {
 
 function convertMenuEntriesToRoutes(entries: MenuEntry[]): Route[] {
   return entries.map((entry) => {
-    console.log(33332232, Icons);
     const Icon = entry.icon ? Icons[entry.icon] : undefined;
     const IconElement = Icon ? <Icon width="24px" mr="8px" /> : undefined;
     const route: Route = {
@@ -521,6 +520,7 @@ export default ({ children, pageState }) => {
         }}
         menu={{
           collapsedShowGroupTitle: true,
+          defaultOpenAll: false,
           request: async () => {
             // await waitTime(2000);
             return routes;
@@ -607,8 +607,19 @@ export default ({ children, pageState }) => {
                 textAlign: 'center',
                 paddingBlockStart: 12,
               }}>
-              <div>Expert Level: Normie</div>
-              <div>A / C / D / D</div>
+              <div>
+                <Select
+                  prefix="Expert Level: "
+                  placeholder="Choose"
+                  defaultValue={auth?.profile?.mode || 'Gamer'}
+                  onChange={(value: string) => auth.setProfileMode(value)}
+                  options={[
+                    { value: 'gamer', label: 'Gamer' },
+                    { value: 'crypt', label: 'Crypto' },
+                    { value: 'arken', label: 'Arkenian' },
+                  ]}
+                />
+              </div>
             </div>
           );
         }}

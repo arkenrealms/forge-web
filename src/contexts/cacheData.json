@@ -71,41 +71,41 @@
     "prices": {
       "busd": 1,
       "rune": 60.766226503236204,
-      "ral": 0.8693556241882846,
+      "ro": 0.8693556241882846,
       "usdt": 0.9995832759279912,
-      "el": 1.3505717590613544,
-      "tir": 1.0999565588522728,
-      "eld": 1.156566223645446,
-      "nef": 1.164627411360057,
-      "ith": 1.045427772208187,
-      "tal": 0.8244537506905013,
-      "ort": 1.0146495347442157,
-      "thul": 0.8408483424856394,
-      "amn": 0.8039036976418165,
+      "ex": 1.3505717590613544,
+      "tyr": 1.0999565588522728,
+      "elm": 1.156566223645446,
+      "nen": 1.164627411360057,
+      "isa": 1.045427772208187,
+      "tato": 0.8244537506905013,
+      "ore": 1.0146495347442157,
+      "thal": 0.8408483424856394,
+      "ash": 0.8039036976418165,
       "bnb": 357.9795077581818,
-      "sol": 0.832332441620988,
+      "solo": 0.832332441620988,
       "wbnb": 357.9795077581818,
-      "shael": 0.7917198791180169,
-      "dol": 10.24300128443678,
-      "hel": 1,
-      "io": 1,
-      "lum": 1,
-      "ko": 1,
-      "fal": 1,
-      "lem": 1,
-      "pul": 1,
-      "um": 1,
-      "mal": 1,
-      "ist": 1,
-      "gul": 1,
-      "vex": 1,
-      "ohm": 1,
-      "lo": 1,
-      "sur": 1,
-      "ber": 1,
-      "jah": 1,
-      "cham": 1,
-      "zod": 10
+      "sen": 0.7917198791180169,
+      "da": 10.24300128443678,
+      "han": 1,
+      "ion": 1,
+      "lux": 1,
+      "ka": 1,
+      "fus": 1,
+      "leni": 1,
+      "pai": 1,
+      "uln": 1,
+      "mor": 1,
+      "isk": 1,
+      "gon": 1,
+      "val": 1,
+      "oh": 1,
+      "lor": 1,
+      "su": 1,
+      "beru": 1,
+      "jua": 1,
+      "chin": 1,
+      "zeno": 10
     },
     "tvl": 1116854.0343070515,
     "marketItemsAvailable": 784,
@@ -120,7 +120,7 @@
     "totalRunewords": 7
   },
   "runes": {
-    "ral": {
+    "ro": {
       "price": 1.0792447688311166,
       "totalSupply": 120846.332,
       "circulatingSupply": 48915.42559999999,
@@ -147,7 +147,7 @@
         "evolution": 532.4922
       }
     },
-    "el": {
+    "ex": {
       "price": 1.7770628298984648,
       "totalSupply": 62193.6,
       "circulatingSupply": 34396.592099999994,
@@ -174,7 +174,7 @@
         "evolution": 489.899
       }
     },
-    "tir": {
+    "tyr": {
       "price": 1.6359858997133845,
       "totalSupply": 118676.4,
       "circulatingSupply": 49018.91609999999,
@@ -201,7 +201,7 @@
         "evolution": 204.053
       }
     },
-    "eld": {
+    "elm": {
       "price": 1.382626376645569,
       "totalSupply": 40000,
       "circulatingSupply": 40000,
@@ -228,7 +228,7 @@
         "evolution": 489.899
       }
     },
-    "nef": {
+    "nen": {
       "price": 1.2969889821388634,
       "totalSupply": 61581.4509,
       "circulatingSupply": 46721.4509,
@@ -255,7 +255,7 @@
         "evolution": 35.069
       }
     },
-    "ith": {
+    "isa": {
       "price": 0.8669213443611018,
       "totalSupply": 62511.7209,
       "circulatingSupply": 48426.5869,
@@ -282,7 +282,7 @@
         "evolution": 219.0445
       }
     },
-    "tal": {
+    "tato": {
       "price": 0.7453469016269988,
       "totalSupply": 103479.949,
       "circulatingSupply": 48986.479199999994,
@@ -309,7 +309,7 @@
         "evolution": 440.6635
       }
     },
-    "ort": {
+    "ore": {
       "price": 0.9477338374786487,
       "totalSupply": 108578.7858,
       "circulatingSupply": 48563.5933,
@@ -336,7 +336,7 @@
         "evolution": 218.0088
       }
     },
-    "thul": {
+    "thal": {
       "price": 0.8601872150340903,
       "totalSupply": 112780.6994,
       "circulatingSupply": 49925.812,
@@ -390,7 +390,7 @@
         "evolution": 434.3395
       }
     },
-    "sol": {
+    "solo": {
       "price": 1.296623610472396,
       "totalSupply": 118852.2864,
       "circulatingSupply": 49521.2751,
@@ -417,7 +417,7 @@
         "evolution": 231.2742
       }
     },
-    "shael": {
+    "sen": {
       "price": 0.80866294510244,
       "totalSupply": 140288.6191,
       "circulatingSupply": 49939.316900000005,
@@ -472,7 +472,7 @@
       }
     },
     "wbnb": { "price": 558.4708502598021 },
-    "dol": {
+    "da": {
       "price": 0.7574717734061218,
       "totalSupply": 154928.0318,
       "circulatingSupply": 57728.768299999996,
@@ -499,7 +499,7 @@
         "evolution": 496.129
       }
     },
-    "hel": {
+    "han": {
       "price": 0.8195276819196093,
       "totalSupply": 116814.555,
       "circulatingSupply": 48955.489899999986,
@@ -526,7 +526,7 @@
         "evolution": 691.269
       }
     },
-    "io": {
+    "ion": {
       "price": 0.7584820246172685,
       "totalSupply": 206225.61,
       "circulatingSupply": 91437.42989999999,
@@ -553,7 +553,7 @@
         "evolution": 100
       }
     },
-    "zod": {
+    "zeno": {
       "price": 5.914669550084143,
       "totalSupply": 20000,
       "circulatingSupply": 19950,
@@ -580,7 +580,7 @@
         "evolution": 59.1801
       }
     },
-    "lum": {
+    "lux": {
       "price": 0.6443720005400121,
       "totalSupply": 344129.369,
       "circulatingSupply": 158848.0687,
@@ -607,7 +607,7 @@
         "evolution": 600
       }
     },
-    "lo": {
+    "lor": {
       "price": 2.4017265503517304,
       "totalSupply": 47336.0554,
       "circulatingSupply": 39851.0516,
@@ -655,7 +655,7 @@
       "orgToken": 1454548.5754319325,
       "evolution": 0
     },
-    "ko": {
+    "ka": {
       "price": 0.7467465373793762,
       "totalSupply": 93755.3763,
       "circulatingSupply": 70101.2301,
@@ -682,7 +682,7 @@
         "evolution": 100
       }
     },
-    "fal": {
+    "fus": {
       "price": 0.6967229868982283,
       "totalSupply": 163346.4849,
       "circulatingSupply": 85825.85260000001,
@@ -709,7 +709,7 @@
         "evolution": 0
       }
     },
-    "pul": {
+    "pai": {
       "price": 0.45276649818365866,
       "totalSupply": 187311.3004,
       "circulatingSupply": 184775.57390000002,
@@ -736,7 +736,7 @@
         "evolution": 0
       }
     },
-    "um": {
+    "uln": {
       "price": 2.424383643172906,
       "totalSupply": 19821.6516,
       "circulatingSupply": 19661.8603,
@@ -763,7 +763,7 @@
         "evolution": 0
       }
     },
-    "mal": {
+    "mor": {
       "price": 1,
       "totalSupply": 1,
       "circulatingSupply": 1,
@@ -790,7 +790,7 @@
         "evolution": 0
       }
     },
-    "ist": {
+    "isk": {
       "price": 1,
       "totalSupply": 1,
       "circulatingSupply": 1,
@@ -817,7 +817,7 @@
         "evolution": 0
       }
     },
-    "gul": {
+    "gon": {
       "price": 1,
       "totalSupply": 1,
       "circulatingSupply": 1,
@@ -844,7 +844,7 @@
         "evolution": 0
       }
     },
-    "vex": {
+    "val": {
       "price": 1,
       "totalSupply": 1,
       "circulatingSupply": 1,
@@ -871,7 +871,7 @@
         "evolution": 0
       }
     },
-    "ohm": {
+    "oh": {
       "price": 1,
       "totalSupply": 1,
       "circulatingSupply": 1,
@@ -898,7 +898,7 @@
         "evolution": 0
       }
     },
-    "sur": {
+    "su": {
       "price": 1,
       "totalSupply": 1,
       "circulatingSupply": 1,
@@ -925,7 +925,7 @@
         "evolution": 0
       }
     },
-    "ber": {
+    "beru": {
       "price": 1,
       "totalSupply": 1,
       "circulatingSupply": 1,
@@ -952,7 +952,7 @@
         "evolution": 0
       }
     },
-    "jah": {
+    "jua": {
       "price": 1,
       "totalSupply": 1,
       "circulatingSupply": 1,
@@ -979,7 +979,7 @@
         "evolution": 0
       }
     },
-    "cham": {
+    "chin": {
       "price": 1,
       "totalSupply": 1,
       "circulatingSupply": 1,

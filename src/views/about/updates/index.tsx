@@ -97,7 +97,7 @@ const Updates = () => {
       setTimeout(() => {
         try {
           navigate({
-            pathname: '/updates',
+            pathname: '/about/updates',
             search:
               '?' +
               new URLSearchParams({

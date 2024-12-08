@@ -179,7 +179,7 @@ const ItemImage = styled.div<{ isPadded: boolean; path: string; rarity: string }
 `;
 
 const RuneImage = styled(ItemImage)`
-  filter: invert(1);
+  // filter: invert(1);
   top: -50px;
 `;
 

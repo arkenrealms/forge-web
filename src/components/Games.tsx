@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button, Tag, Flex, Card, Card3, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui';
+import { useAuth } from '~/hooks/useAuth';
 
 const Text = styled.div``;
 
@@ -94,6 +95,7 @@ const BottomMenu = styled.div`
 
 const Rules = () => {
   const { t } = useTranslation();
+  const auth = useAuth();
 
   const games = [
     {
@@ -103,7 +105,7 @@ const Rules = () => {
       description: (
         <ul>
           <li>2D Arcade. Easy to start, difficult to master.</li>
-          <li>P2E by winning rounds & finding items ingame.</li>
+          <li>Win rounds & find items ingame. {auth?.isCryptoMode ? '(Play 4 Rewards)' : ''}</li>
           <li>Web, android, iphone, desktop.</li>
         </ul>
       ),
@@ -116,7 +118,7 @@ const Rules = () => {
       description: (
         <ul>
           <li>2D Top Down ARPG. Very fluid action gameplay. </li>
-          <li>P2E by winning arena battles.</li>
+          <li>Win arena battles. {auth?.isCryptoMode ? '(Play 4 Rewards)' : ''}</li>
           <li>Gear-enabled by default.</li>
           <li>Desktop, with web + phone app for certain features.</li>
         </ul>
@@ -130,7 +132,7 @@ const Rules = () => {
       description: (
         <ul>
           <li>3D MMORPG.</li>
-          <li>P2E by finding unique items, winning raid battles, etc.</li>
+          <li>Find unique items, winning raid battles, etc. {auth?.isCryptoMode ? '(Play 4 Rewards)' : ''}</li>
           <li>Buy land + NPCs + Guild tokens to customize the world around you.</li>
           <li>Desktop, with web + phone app for certain features.</li>
         </ul>

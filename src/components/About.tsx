@@ -205,7 +205,7 @@ const Rules = () => {
                 </BoxHeading>
                 <ol>
                   <li>
-                    Fundraisers - The Arken team will have multiple fundraisers to raise money for marketing and
+                    Fundraisers - The Arken Council will have multiple fundraisers to raise money for marketing and
                     eventually a studio. 1) Pets 2) Guild Tokens 3) Nostalgic Items 4) NPCs. Most will be used toward
                     high quality marketing efforts.
                   </li>
@@ -238,8 +238,8 @@ const Rules = () => {
                     are retired frequently.
                   </li>
                   <li>
-                    Guild Scrolls - The Arken team is working on tokenizing the guild membership into guild scrolls, so
-                    it won't be open per se, but can be transferred, so maybe some of us have honorary ones to give
+                    Guild Scrolls - The Arken Council is working on tokenizing the guild membership into guild scrolls,
+                    so it won't be open per se, but can be transferred, so maybe some of us have honorary ones to give
                     away.
                   </li>
                   <li>
@@ -260,7 +260,7 @@ const Rules = () => {
                 </BoxHeading>
                 <ol>
                   <li>
-                    Immortalize Winners - The Arken Team is going to try to immortalize competition winners by
+                    Immortalize Winners - The Arken Council is going to try to immortalize competition winners by
                     integrating them into the Arcane game lore, items, or NPCs{' '}
                     <a rel="nofollow" className="external free" href="https://t.me/Arken_Council/5252">
                       https://t.me/Arken_Council/5252
@@ -275,7 +275,7 @@ const Rules = () => {
                     stick around, and the best way is probably though items + runewords.
                   </li>
                   <li>
-                    Congruency - The Arken team want to build the best game that can be built for the ARPG genre. For
+                    Congruency - The Arken Council want to build the best game that can be built for the ARPG genre. For
                     that reason, Arken will not have bunny skins or snowman pets. The team wants to take that genre to
                     the next level, not be everything to everybody.
                   </li>

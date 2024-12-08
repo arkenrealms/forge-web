@@ -821,7 +821,6 @@ const Linker = function ({
 
             for (let j = 0; j < split.length - 1; j++) {
               const previewId = `linker-game-${id}-${gameKey}-${i}-${j}`;
-              console.log(333222, gameKey);
               fragments.splice(i + j, 0, split[j]);
               fragments.splice(
                 i + j + 1,
@@ -857,7 +856,7 @@ const Linker = function ({
                     </ArrowContainer>
                   )}>
                   <RouterLink
-                    to={`/${gameKey.toLowerCase()}`}
+                    to={gameInfo[gameKey].path}
                     onMouseEnter={() => setItemPreviewed(previewId)}
                     onMouseLeave={() => setItemPreviewed(null)}
                     css={css`

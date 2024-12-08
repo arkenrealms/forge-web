@@ -37,22 +37,23 @@ import ChampionTrailer from '~/components/ChampionTrailer';
 import ChampionWelcome from '~/components/ChampionWelcome';
 
 import { championsData } from '~/assets/data/champions';
+import { trpc } from '~/utils/trpc';
 
 // SwiperCore.use([Mousewheel, Pagination, EffectFade])
 
-const Img = styled.img`
-  filter: contrast(1.1) drop-shadow(2px 4px 6px black);
-  ${({ theme }) => theme.mediaQueries.sm} {
-    width: 100%;
-  }
-`;
+// const Img = styled.img`
+//   filter: contrast(1.1) drop-shadow(2px 4px 6px black);
+//   ${({ theme }) => theme.mediaQueries.sm} {
+//     width: 100%;
+//   }
+// `;
 
-const endpoints = {
-  cache: 'https://s1.envoy.arken.asi.sh',
-  coordinator: 'https://s1.relay.arken.asi.sh',
-  // cache: 'http://localhost:6001', // 'https://s1.envoy.arken.asi.sh'
-  // coordinator: 'http://localhost:5001' // 'https://s1.relay.arken.asi.sh'
-};
+// const endpoints = {
+//   cache: 'https://s1.envoy.arken.asi.sh',
+//   coordinator: 'https://s1.relay.arken.asi.sh',
+//   // cache: 'http://localhost:6001', // 'https://s1.envoy.arken.asi.sh'
+//   // coordinator: 'http://localhost:5001' // 'https://s1.relay.arken.asi.sh'
+// };
 
 const LogoImg = styled.img``;
 
@@ -273,19 +274,19 @@ const Home: React.FC<any> = () => {
     _setItemSelected(item);
   };
 
-  const [holders, setHolders] = useState([]);
+  const { data: patrons } = trpc.seer.oasis.getPatrons.useQuery();
 
-  useEffect(() => {
-    if (holders.length) return;
+  // useEffect(() => {
+  //   if (holders.length) return;
 
-    const init = async function () {
-      const res = ((await (await fetch(`${endpoints.cache}/patrons.json`)).json()) as any) || [];
+  //   const init = async function () {
+  //     const res = ((await (await fetch(`${endpoints.cache}/patrons.json`)).json()) as any) || [];
 
-      setHolders(res.filter((p) => !!p.isCubeHolder));
-    };
+  //     setHolders(res.filter((p) => !!p.isCubeHolder));
+  //   };
 
-    init();
-  }, [holders, setHolders]);
+  //   init();
+  // }, [holders, setHolders]);
 
   const runes = safeRuneList;
 
@@ -295,39 +296,39 @@ const Home: React.FC<any> = () => {
 
   const [videoUrl, setVideoUrl] = useState();
 
-  useEffect(
-    function () {
-      if (!account) return;
-      if (!window) return;
+  // useEffect(
+  //   function () {
+  //     if (!account) return;
+  //     if (!window) return;
 
-      async function init() {
-        try {
-          // const account2 = '0x0d835cEa2c866B2be91E82e0b5FBfE6f64eD14cd' // pet account on asia1
-          // const account2 = '0xa6d1e757cE8de4341371a8e225f0bBB417D47E31' // rune account on asia1
-          const response = await fetch(`${endpoints.cache}/users/${account}/overview.json`);
-          const responseData = await response.json();
+  //     async function init() {
+  //       try {
+  //         // const account2 = '0x0d835cEa2c866B2be91E82e0b5FBfE6f64eD14cd' // pet account on asia1
+  //         // const account2 = '0xa6d1e757cE8de4341371a8e225f0bBB417D47E31' // rune account on asia1
+  //         const response = await fetch(`${endpoints.cache}/users/${account}/overview.json`);
+  //         const responseData = await response.json();
 
-          if (responseData) {
-            setPlayerRewards(responseData.rewards?.runes || {});
-            setRewards(responseData.rewards?.items || {});
-          }
-        } catch (e) {
-          console.log(e);
-          setPlayerRewards({});
-          setRewards({});
-        }
-      }
+  //         if (responseData) {
+  //           setPlayerRewards(responseData.rewards?.runes || {});
+  //           setRewards(responseData.rewards?.items || {});
+  //         }
+  //       } catch (e) {
+  //         console.log(e);
+  //         setPlayerRewards({});
+  //         setRewards({});
+  //       }
+  //     }
 
-      init();
+  //     init();
 
-      const inter = setInterval(init, 1 * 60 * 1000);
+  //     const inter = setInterval(init, 1 * 60 * 1000);
 
-      return () => {
-        clearInterval(inter);
-      };
-    },
-    [account]
-  );
+  //     return () => {
+  //       clearInterval(inter);
+  //     };
+  //   },
+  //   [account]
+  // );
   useEffect(() => {
     // @ts-ignore
     setVideoUrl('/videos/cube.mp4');
@@ -513,7 +514,7 @@ const Home: React.FC<any> = () => {
             unique NFTs playing the third game in Arken's ever-expanding metaverse. Test your mettle against players
             across the globe and rise above the rest as Champion of the Infinite Arena.`}>
                 <div>
-                  {account && holders.find((p) => p.address.toLowerCase() === account.toLowerCase()) ? (
+                  {account && patrons?.find((p) => p.address.toLowerCase() === account.toLowerCase()) ? (
                     <Button as={RouterLink} scale="md" to="/download/infinite" style={{ zoom: 1.5 }}>
                       {t('Download for Windows')}
                     </Button>
@@ -945,8 +946,8 @@ const Home: React.FC<any> = () => {
                 our Dynamic Charged Skill System.
                 <br />
                 <br />
-                Arken Entertainment are constantly evolving and being improved, and we listen to the community. Give us
-                a shout in Telegram and make yourself heard.
+                Arken Realms is constantly evolving and being improved, and we listen to the community. Give us a shout
+                in Telegram and make yourself heard.
               </p>
               {/* <p>
               <span

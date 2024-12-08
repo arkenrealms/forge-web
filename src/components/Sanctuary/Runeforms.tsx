@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card3 } from '~/ui';
+import { Flex, Card, Card3 } from '~/ui';
 
 const Runeforms = function () {
   return (
@@ -16,10 +16,12 @@ const Runeforms = function () {
           />
         </div>
         <div className="container hide-overflow w-container">
-          <div className="locationheader">
-            <div className="locationheaderbg" />
-            <h1 className="locationtitle">Runeforms</h1>
-          </div>
+          <Flex flexDirection="column" alignItems="center" justifyContent="center">
+            <div className="locationheader">
+              <div className="locationheaderbg" />
+              <h1 className="locationtitle">Runeforms</h1>
+            </div>
+          </Flex>
           <div className="locationdescription w-richtext">
             <p>
               <strong>Runeforms</strong> are unique weapons and armor used to equip your hero. Each{' '}

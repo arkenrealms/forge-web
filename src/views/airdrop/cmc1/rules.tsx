@@ -197,7 +197,7 @@ const Rules = () => {
                     To qualify to win, users must complete all of the above steps.
                     <br />
                     <br />
-                    Arken Entertainment will, at its sole discretion, select the winners and will transfer any Rune NFT
+                    Arken Realms will, at its sole discretion, select the winners and will transfer any Rune NFT
                     winnings to the user&#39;s BSC wallet address. Please direct any questions to the Rune support staff
                     in any of our official social media channels.
                   </span>

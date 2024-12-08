@@ -57,7 +57,7 @@
     "@web3-react/types": "^6",
     "@web3-react/walletconnect-connector": "^6",
     "@web3-react/walletlink-connector": "^6",
-    "antd": "^5",
+    "antd": "^5.22",
     "antd-style": "^3",
     "bignumber.js": "^9",
     "browserify-fs": "^1",

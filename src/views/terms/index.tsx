@@ -56,7 +56,7 @@ const Risks = () => {
             <br />
             <p>
               These Terms of Use constitute a legally binding agreement made between you, whether personally or on
-              behalf of an entity (“you") and Arken Entertainment Inc. (“we", “us", or “our") concerning your access to
+              behalf of an entity (“you") and Arken Technologies Inc. (“we", “us", or “our") concerning your access to
               and use of the arken.gg website and the arken.gg app as well as any other media form, media channel,
               mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the
               “Site" and the “App"). arken.gg is a distributed application that is currently running on the Ethereum
@@ -155,7 +155,7 @@ const Risks = () => {
               (11) you have not been included in any trade embargoes or economic sanctions list (such as united nations
               security council sanctions list), the list of specially designated nationals maintained by ofac (the
               office of foreign assets control of the u.s. department of the treasury), or the denied persons or entity
-              list of the u.s. department of commerce. Arken Entertainment Inc. reserves the right to choose markets and
+              list of the u.s. department of commerce. Arken Technologies Inc. reserves the right to choose markets and
               jurisdictions to conduct business, and may restrict or refuse, in its discretion, the provision of
               arken.gg services in certain countries or regions.
             </p>
@@ -175,7 +175,7 @@ const Risks = () => {
               You may not access or use the Site, the App, and the Smart Contracts for any purpose other than that for
               which we make the Site, the App, and the Smart Contracts available. The Site, the App, and the Smart
               Contracts may not be used in connection with any commercial endeavors except if agreed to in a binding
-              legal contract with Arken Entertainment Inc..
+              legal contract with Arken Technologies Inc..
             </p>
             <ul>
               <li>
@@ -455,7 +455,7 @@ const Risks = () => {
             <p>
               RUNE GUARDIANS ARE INTANGIBLE DIGITAL ASSETS THAT EXIST ONLY BY VIRTUE OF THE OWNERSHIP RECORD MAINTAINED
               ON THE BSC NETWORK. ALL SMART CONTRACTS ARE CONDUCTED AND OCCUR ON THE DECENTRALIZED LEDGER WITHIN THE BSC
-              NETWORK. Arken Entertainment Inc. HAS NO CONTROL OVER AND MAKES NO GUARANTEES OR PROMISES WITH RESPECT TO
+              NETWORK. Arken Technologies Inc. HAS NO CONTROL OVER AND MAKES NO GUARANTEES OR PROMISES WITH RESPECT TO
               SMART CONTRACTS. arken.gg IS NOT RESPONSIBLE FOR LOSSES DUE TO BLOCKCHAINS OR ANY OTHER FEATURES OF THE
               ETHEREUM NETWORK, BSC NETWORK, THE METAMASK ELECTRONIC WALLET, OR BSC ELECTRONIC WALLET. INCLUDING BUT NOT
               LIMITED TO LATE REPORT BY DEVELOPERS OR REPRESENTATIVES (OR NO REPORT AT ALL) OF ANY ISSUES WITH THE
@@ -581,7 +581,7 @@ const Risks = () => {
             <br />
             <br />
             <p>
-              <strong>LAST UPDATED: 06.08.2021</strong>
+              <strong>LAST UPDATED: 12.07.2024</strong>
             </p>
           </CardBody>
         </Card>

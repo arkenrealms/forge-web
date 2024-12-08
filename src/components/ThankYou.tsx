@@ -7,37 +7,31 @@ import { normalizeItem } from '@arken/node/util/decoder';
 import styled, { css } from 'styled-components';
 import Item from '~/components/Item';
 import { Heading } from '~/ui';
-
-const isLocal = process.env.REACT_APP_RUNE_ENV === 'local';
-
-const endpoints = {
-  // cache: 'https://s1.envoy.arken.asi.sh',
-  // coordinator: 'https://s1.relay.arken.asi.sh',
-  cache: isLocal ? 'http://localhost:6001' : 'https://s1.envoy.arken.asi.sh',
-  coordinator: isLocal ? 'http://localhost:5001' : 'https://s1.relay.arken.asi.sh',
-};
+import { trpc } from '~/utils/trpc';
 
 const BoxHeading = styled(Heading)`
   margin-bottom: 16px;
 `;
-const Nothing = styled.div``;
+const zzz = styled.div``;
 
 const ThankYou = () => {
   const { t } = useTranslation();
 
-  const [holders, setHolders] = useState([]);
+  const { data: patrons } = trpc.seer.oasis.getPatrons.useQuery();
 
-  useEffect(() => {
-    if (holders.length) return;
+  // const [patrons, setHolders] = useState([]);
 
-    const init = async function () {
-      const res = ((await (await fetch(`${endpoints.cache}/patrons.json`)).json()) as any) || [];
+  // useEffect(() => {
+  //   if (patrons.length) return;
 
-      setHolders(res.filter((p) => !!p.isCubeHolder));
-    };
+  //   const init = async function () {
+  //     const res = ((await (await fetch(`${endpoints.cache}/patrons.json`)).json()) as any) || [];
 
-    init();
-  }, [holders, setHolders]);
+  //     setHolders(res.filter((p) => !!p.isCubeHolder));
+  //   };
+
+  //   init();
+  // }, [patrons, setHolders]);
 
   const cubeItem = normalizeItem(itemData[ItemsMainCategoriesType.OTHER].find((r) => r.name === "Founder's Cube"));
 
@@ -106,20 +100,20 @@ const ThankYou = () => {
               border-bottom: none;
             }
           `}>
-          {holders
-            .sort(function (a, b) {
+          {patrons
+            ?.sort(function (a, b) {
               return a.name > b.name ? 1 : -1;
             })
             .map((holder, index) => (
               <>
                 <RouterLink to={`/user/${holder.name}`}>{holder.name}</RouterLink>
-                {index !== holders.length - 1 ? ', ' : ''}
+                {index !== patrons.length - 1 ? ', ' : ''}
               </>
             ))}
         </div>
-        {/* <span style={{color: '#888'}}>{holders.map(h => h.name).join(', ')}</span> */}
+        {/* <span style={{color: '#888'}}>{patrons.map(h => h.name).join(', ')}</span> */}
       </p>
-      {/* {holders
+      {/* {patrons
             .map((holder) => (
               <div
                 key={holder.id}
