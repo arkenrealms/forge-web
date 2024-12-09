@@ -33,7 +33,7 @@ const AccountRewards = lazy(() => import('../views/account/rewards'));
 const AccountStats = lazy(() => import('../views/account/stats'));
 const AccountCreation = lazy(() => import('../views/account/signup'));
 const AccountLink = lazy(() => import('../views/account/link'));
-const Whitepaper = lazy(() => import('../views/whitepaper'));
+// const Whitepaper = lazy(() => import('../views/whitepaper'));
 const Token = lazy(() => import('../views/token'));
 const Polls = lazy(() => import('../views/polls'));
 const Risks = lazy(() => import('../views/risks'));
@@ -121,6 +121,7 @@ const Transparency = lazy(() => import('../views/transparency'));
 const Live = lazy(() => import('../views/live'));
 const Royale = lazy(() => import('../views/royale'));
 const Swap = lazy(() => import('../views/swap'));
+const Realms = lazy(() => import('../views/realms'));
 const SwapRemoveLiquidity = lazy(() => import('../views/swap/remove/_currencyIdA'));
 const SwapAddLiquidity = lazy(() => import('../views/swap/add/_currencyIdA'));
 const SwapPool = lazy(() => import('../views/swap/pool'));
@@ -353,28 +354,28 @@ const useWindows = () => {
       component: Home,
       showable: false,
     },
-    {
-      path: '/whitepaper',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'Whitepaper',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      navPosition: undefined,
-      component: Whitepaper,
-      showable: true,
-    },
+    // {
+    //   path: '/whitepaper',
+    //   icon: AboutIcon,
+    //   exact: true,
+    //   strict: false,
+    //   persist: false,
+    //   props: {
+    //     title: 'Whitepaper',
+    //     routeIndex: 1000,
+    //     open: false,
+    //     minimized: false,
+    //     active: false,
+    //     windowSize: { width: '100%', height: '100%' },
+    //     windowPosition: { x: 0, y: 0 },
+    //     location: {
+    //       search: null,
+    //     },
+    //   },
+    //   navPosition: undefined,
+    //   component: Whitepaper,
+    //   showable: true,
+    // },
     {
       path: '/about/stats',
       icon: AboutIcon,
@@ -1103,7 +1104,7 @@ const useWindows = () => {
     //   showable: false,
     // },
     {
-      path: '/oasis',
+      path: '/games/oasis',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -4004,6 +4005,28 @@ const useWindows = () => {
       },
       navPosition: undefined,
       component: AirdropCmc2Winners,
+      showable: true,
+    },
+    {
+      path: '/realms',
+      icon: AboutIcon,
+      exact: true,
+      strict: true,
+      persist: false,
+      props: {
+        title: 'Realms',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined,
+      component: Realms,
       showable: true,
     },
     {

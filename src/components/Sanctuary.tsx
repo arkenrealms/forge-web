@@ -6,6 +6,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { itemData } from '@arken/node/data/items';
 import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
 import Inventory from '~/components/Inventory';
+import { useAuth } from '~/hooks/useAuth';
 import Page from '~/components/layout/Page';
 import Lore from '~/components/Lore';
 import { useModal } from '~/components/Modal';
@@ -225,6 +226,7 @@ const UtilityModalClose = styled.div`
   color: #999;
 `;
 const Home: React.FC<any> = () => {
+  const auth = useAuth();
   const cache = useCache();
   const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
   const [pageLoaded, setPageLoaded] = useState(false);
@@ -578,7 +580,7 @@ const Home: React.FC<any> = () => {
           <SwiperSlide style={{height: '1000px !important'}}>{({ isActive }) =>  */}
           <ChampionWelcome
             title="Heart of the Oasis"
-            description={`With the power of the Arkenverse Cube in your hands, you are tasked with saving Haerra from inevitable destruction. Immerse yourself in Arken's groundbreaking fantasy RPG as you customize your unique character and class, craft unique NFTs, and rise against the forces which seek to overwhelm Haerra. In Heart of the Oasis, every choice you make has consequences. Do you have what it takes to save your world, or will you fall to ruin at the feet of the gods?`}>
+            description={`With the power of the Arkencube in your hands, you are tasked with saving Haerra from inevitable destruction. Immerse yourself in Arken's groundbreaking fantasy RPG as you customize your unique character and class, craft unique NFTs, and rise against the forces which seek to overwhelm Haerra. In Heart of the Oasis, every choice you make has consequences. Do you have what it takes to save your world, or will you fall to ruin at the feet of the gods?`}>
             <div>
               {account && holders.find((p) => p.address.toLowerCase() === account.toLowerCase()) ? (
                 <Button as={RouterLink} scale="md" to="/download/infinite" style={{ zoom: 1.5 }}>
@@ -783,32 +785,34 @@ const Home: React.FC<any> = () => {
         </div>
       </div>
 
-      <div style={{ position: 'relative' }}>
-        {isHighRes ? (
-          <Promo1
-            onClick={() => {
-              navigate('/cube');
-            }}>
-            <Heading
-              as="h2"
-              size="lg"
-              mb="8px"
-              style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)', lineHeight: '1.6rem' }}>
-              {t(`Founder's Cube`)}
-            </Heading>
-            <Heading
-              as="h2"
-              size="md"
-              mb="8px"
-              style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)', lineHeight: '1.6rem' }}>
-              {t(`Available Now`)}
-            </Heading>
-            <Video loop autoPlay muted>
-              <source src={videoUrl} type="video/mp4" />
-            </Video>
-          </Promo1>
-        ) : null}
-      </div>
+      {auth?.isCryptoMode ? (
+        <div style={{ position: 'relative' }}>
+          {isHighRes ? (
+            <Promo1
+              onClick={() => {
+                navigate('/cube');
+              }}>
+              <Heading
+                as="h2"
+                size="lg"
+                mb="8px"
+                style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)', lineHeight: '1.6rem' }}>
+                {t(`Founder's Cube`)}
+              </Heading>
+              <Heading
+                as="h2"
+                size="md"
+                mb="8px"
+                style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)', lineHeight: '1.6rem' }}>
+                {t(`Available Now`)}
+              </Heading>
+              <Video loop autoPlay muted>
+                <source src={videoUrl} type="video/mp4" />
+              </Video>
+            </Promo1>
+          ) : null}
+        </div>
+      ) : null}
 
       <div
         className="relative overlay2"
