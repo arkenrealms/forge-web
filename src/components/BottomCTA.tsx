@@ -7,6 +7,7 @@ import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
 import Page from '~/components/layout/Page';
 import { PurchaseModal } from '~/components/PurchaseModal';
 import i18n from '~/config/i18n';
+import { useAuth } from '~/hooks/useAuth';
 
 const Container = styled.div``;
 
@@ -95,76 +96,78 @@ const StyledCard = styled(Card)`
 const LogoImg = styled.img``;
 
 const BottomCTA = () => {
+  const auth = useAuth();
   const { t } = useTranslation();
   const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
   return (
     <Cards>
-      <Card2>
-        <StyledCard>
-          <CardBody>
-            <Heading size="lg" mb="24px">
-              New?
-            </Heading>
-            <Heading size="xl" mb="24px">
-              Our Vision
-            </Heading>
-            <Text>
-              <p>
-                Arken is the future of gaming. <br />
+      {auth?.isCryptoMode ? (
+        <Card2>
+          <StyledCard>
+            <CardBody>
+              <Heading size="lg" mb="24px">
+                New?
+              </Heading>
+              <Heading size="xl" mb="24px">
+                Our Vision
+              </Heading>
+              <Text>
+                <p>
+                  Arken is the future of gaming. <br />
+                  <br />
+                  We're building modern game experiences, backed by open immutable hash technology. Aligning incentives
+                  between games and gamers in new revolutionary ways. Soon you won't know you're using blockchain, but
+                  you'll be glad you are.
+                </p>
                 <br />
-                We're building modern game experiences, backed by open immutable hash technology. Aligning incentives
-                between games and gamers in new revolutionary ways. Soon you won't know you're using blockchain, but
-                you'll be glad you are.
-              </p>
-              <br />
-              <p>
-                <HightlightText>1. Games should fun first, with blockchain enhancements.</HightlightText>
-              </p>
-              <br />
-              <p>
-                <HightlightText>2. Gamers own their own assets for life.</HightlightText>
-              </p>
-              <br />
-              <p>
-                <HightlightText>3. Gamers can monetize on their hard work.</HightlightText>
-              </p>
-              <br />
-              <p>
-                <HightlightText>
-                  4. Gamers have a say in the games through governance, polling, and constant feedback loop.
-                </HightlightText>
-              </p>
-              <br />
-              <p>
-                <HightlightText>
-                  5. Gamers can transfer their items to other games supporting Arken NFTs.
-                </HightlightText>
-              </p>
-              <br />
-              <p>
-                <HightlightText>6. Gamers can see true rarity, exposing manipulation or duping.</HightlightText>
-              </p>
-              <br />
-              <p>
-                <HightlightText>
-                  7. Define the future of blockchain gaming, evolving licensed NFTs and marketplaces.
-                </HightlightText>
-              </p>
-              <br />
-              <p>
-                <HightlightText>8. Unstoppable distributed &amp; modular games.</HightlightText>
-              </p>
-              <br />
-              <p>
-                <HightlightText>
-                  9. Spread adoption of blockchain and transfer wealth throughout the world.
-                </HightlightText>
-              </p>
-              <br />
-              {/* <p>Arken Realms will be the gold standard of metaverses.</p> */}
+                <p>
+                  <HightlightText>1. Games should fun first, with blockchain enhancements.</HightlightText>
+                </p>
+                <br />
+                <p>
+                  <HightlightText>2. Gamers own their own assets for life.</HightlightText>
+                </p>
+                <br />
+                <p>
+                  <HightlightText>3. Gamers can monetize on their hard work.</HightlightText>
+                </p>
+                <br />
+                <p>
+                  <HightlightText>
+                    4. Gamers have a say in the games through governance, polling, and constant feedback loop.
+                  </HightlightText>
+                </p>
+                <br />
+                <p>
+                  <HightlightText>
+                    5. Gamers can transfer their items to other games supporting Arken NFTs.
+                  </HightlightText>
+                </p>
+                <br />
+                <p>
+                  <HightlightText>6. Gamers can see true rarity, exposing manipulation or duping.</HightlightText>
+                </p>
+                <br />
+                <p>
+                  <HightlightText>
+                    7. Define the future of blockchain gaming, evolving licensed NFTs and marketplaces.
+                  </HightlightText>
+                </p>
+                <br />
+                <p>
+                  <HightlightText>8. Unstoppable distributed &amp; modular games.</HightlightText>
+                </p>
+                <br />
+                <p>
+                  <HightlightText>
+                    9. Spread adoption of blockchain and transfer wealth throughout the world.
+                  </HightlightText>
+                </p>
+                <br />
+                {/* <p>Arken Realms will be the gold standard of metaverses.</p> */}
 
-              {/* <img alt="Binzy Dragon" src="/images/binzy-dragon.png" style={{ opacity: 0.85 }} />
+                {/* <img alt="Binzy Dragon" src="/images/binzy-dragon.png" style={{ opacity: 0.85 }} />
             <p>
               Welcome to Rune, lets build{' '}
               <a href="https://ArkenRealms.medium.com/ready-player-one-df8cc19741e4" style={{ fontWeight: 'bold' }}>
@@ -174,10 +177,11 @@ const BottomCTA = () => {
               <br />
               <br />- Binzy
             </p> */}
-            </Text>
-          </CardBody>
-        </StyledCard>
-      </Card2>
+              </Text>
+            </CardBody>
+          </StyledCard>
+        </Card2>
+      ) : null}
       <div style={{ width: '200%', marginLeft: '-50%' }}>
         <Flex flexDirection="column" alignItems="center" justifyContent="center">
           {/* <LogoImg src="/images/rune-500x500.png" style={{ maxWidth: 200 }} /> */}

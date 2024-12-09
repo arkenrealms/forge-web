@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { Skeleton } from '~/ui';
 import useIntersectionObserver from '~/hooks/useIntersectionObserver';
 import useBrand from '~/hooks/useBrand';
+import { useAuth } from '~/hooks/useAuth';
 import Page from '~/components/layout/Page';
 import Swap from '~/components/Swap';
 
@@ -35,6 +36,7 @@ const DaoComponent = lazy(() => import(/* webpackChunkName: "DaoComponent" */ '~
 const AiComponent = lazy(() => import(/* webpackChunkName: "AiComponent" */ '~/components/AI'));
 
 const Home: React.FC<any> = ({ active, match }) => {
+  const auth = useAuth();
   const [loaded, setLoaded] = useState(false);
   const { brand } = useBrand();
   const refMarketSection = useRef(null);
@@ -244,7 +246,7 @@ const Home: React.FC<any> = ({ active, match }) => {
               min-height: 1000px;
               margin: 0 auto 100px auto;
             `}>
-            {isLiveSectionVisible ? (
+            {isLiveSectionVisible && auth?.isExpertMode ? (
               <Suspense fallback={<Skeleton height="300px" m="30px" />}>
                 <LiveComponent />
               </Suspense>
@@ -304,7 +306,7 @@ const Home: React.FC<any> = ({ active, match }) => {
                 max-width: 1200px;
                 margin: 0 auto 100px auto;
               `}>
-              {isSwapSectionVisible ? (
+              {isSwapSectionVisible && auth?.isCryptoMode ? (
                 <Suspense fallback={<Skeleton height="300px" m="30px" />}>
                   <SwapComponent showMenu />
                 </Suspense>
@@ -330,7 +332,7 @@ const Home: React.FC<any> = ({ active, match }) => {
                 max-width: 1200px;
                 margin: 0 auto 100px auto;
               `}>
-              {isRoadmapSectionVisible ? (
+              {isRoadmapSectionVisible && auth?.isExpertMode ? (
                 <Suspense fallback={<Skeleton height="300px" m="30px" />}>
                   <RoadmapComponent />
                 </Suspense>
@@ -369,7 +371,7 @@ const Home: React.FC<any> = ({ active, match }) => {
                 max-width: 1200px;
                 margin: 0 auto 100px auto;
               `}>
-              {isTokenomicsSectionVisible ? (
+              {isTokenomicsSectionVisible && auth?.isCryptoMode ? (
                 <Suspense fallback={<Skeleton height="300px" m="30px" />}>
                   <TokenomicsComponent />
                 </Suspense>
@@ -382,7 +384,7 @@ const Home: React.FC<any> = ({ active, match }) => {
                 max-width: 1200px;
                 margin: 0 auto 100px auto;
               `}>
-              {isRuneSectionVisible ? (
+              {isRuneSectionVisible && auth?.isExpertMode ? (
                 <Suspense fallback={<Skeleton height="300px" m="30px" />}>
                   <RuneComponent match={match} />
                 </Suspense>
@@ -408,7 +410,7 @@ const Home: React.FC<any> = ({ active, match }) => {
                 max-width: 1200px;
                 margin: 0 auto 100px auto;
               `}>
-              {isDaoSectionVisible ? (
+              {isDaoSectionVisible && auth?.isCryptoMode ? (
                 <Suspense fallback={<Skeleton height="300px" m="30px" />}>
                   <DaoComponent />
                 </Suspense>

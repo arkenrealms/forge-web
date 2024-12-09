@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Link as RouterLink } from 'react-router-dom';
+import { useAuth } from '~/hooks/useAuth';
 import { ThemeContext } from 'styled-components';
 import EarnEvolution from '~/components/EarnEvolution';
 import EarnRaid from '~/components/EarnRaid';
@@ -530,6 +531,7 @@ const Home: React.FC<any> = ({ match }) => {
   const [pageLoaded, setPageLoaded] = useState(false);
   const { t } = useTranslation();
   const themeContext = useContext(ThemeContext);
+  const auth = useAuth();
   const [activeFaq, setActiveFaq] = useState(0);
 
   // useEffect(() => {
@@ -1357,48 +1359,50 @@ z-index: 999;
           </Card>
         </Card3>
 
-        <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
-          <Card>
-            <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-              {t('FAQ')}
-            </BoxHeading>
-            <hr />
-            <CardBody>
-              {faq.map((item, index) => (
-                <Accordion
-                  isPushed={activeFaq === index}
-                  pushNav={(isPushed) => setActiveFaq(index)}
-                  icon={<div />}
-                  label={item.title}
-                  initialOpenState={activeFaq === index}
-                  // className={calloutClass}
-                  isActive={index === activeFaq}
-                  // style={{maxHeight: 'auto'}}
-                  contentCss={css`
-                    box-shadow: 0 0 10px rgb(255 255 255 / 20%);
-                    max-height: ${activeFaq === index ? 'none' : '0'};
-                  `}
-                  entryCss={css`
-                    // background: rgba(0, 0, 0, 0.1);
-                    font-weight: bold;
-                    box-shadow: 0 0 10px rgb(255 255 255 / 20%);
-                    * {
-                      color: #bb955e !important;
-                    }
-                  `}>
-                  <AccordionContent>{item.content}</AccordionContent>
-                </Accordion>
-              ))}
-              <br />
-              <br />
-              <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                <Button as={RouterLink} to="/faq" variant="text" style={{ border: '2px solid #ddd' }}>
-                  View All
-                </Button>
-              </Flex>
-            </CardBody>
-          </Card>
-        </Card3>
+        {auth?.isExpertMode ? (
+          <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
+            <Card>
+              <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+                {t('FAQ')}
+              </BoxHeading>
+              <hr />
+              <CardBody>
+                {faq.map((item, index) => (
+                  <Accordion
+                    isPushed={activeFaq === index}
+                    pushNav={(isPushed) => setActiveFaq(index)}
+                    icon={<div />}
+                    label={item.title}
+                    initialOpenState={activeFaq === index}
+                    // className={calloutClass}
+                    isActive={index === activeFaq}
+                    // style={{maxHeight: 'auto'}}
+                    contentCss={css`
+                      box-shadow: 0 0 10px rgb(255 255 255 / 20%);
+                      max-height: ${activeFaq === index ? 'none' : '0'};
+                    `}
+                    entryCss={css`
+                      // background: rgba(0, 0, 0, 0.1);
+                      font-weight: bold;
+                      box-shadow: 0 0 10px rgb(255 255 255 / 20%);
+                      * {
+                        color: #bb955e !important;
+                      }
+                    `}>
+                    <AccordionContent>{item.content}</AccordionContent>
+                  </Accordion>
+                ))}
+                <br />
+                <br />
+                <Flex flexDirection="column" alignItems="center" justifyContent="center">
+                  <Button as={RouterLink} to="/faq" variant="text" style={{ border: '2px solid #ddd' }}>
+                    View All
+                  </Button>
+                </Flex>
+              </CardBody>
+            </Card>
+          </Card3>
+        ) : null}
         {/* 
         <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
           <Card>
@@ -2025,179 +2029,181 @@ z-index: 999;
           </SwiperSlide>
         </Swiper>
 
-        <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
-          <Card>
-            {/* <hr />
+        {auth?.isCryptoMode ? (
+          <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto' }}>
+            <Card>
+              {/* <hr />
           <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
             {t('Partners')}
           </BoxHeading>
           <hr /> */}
-            <CardBody>
-              <BoxHeading as="h2" size="lg" style={{ textAlign: 'center' }}>
-                {t('Partners & Listings')}
-              </BoxHeading>
-              <Partners>
-                <a
-                  href="https://www.binance.com/en/nft/profile/rune-7a727bcfb6d429fda32f2af9bb513f64"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img src="/images/other/binancenft.png" alt="Binance NFT" />
-                </a>
-                <a
-                  href="https://app.mochi.market/collection/56/0xe97a1b9f5d4b849f0d78f58adb7dd91e90e0fb40?ViewAll=true"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img
-                    src="/images/other/mochi.png"
-                    alt="Mochi.Market"
-                    css={css`
-                      height: 35px;
-                    `}
-                  />
-                </a>
-                <a
-                  href="https://treasureland.market/assets?contract=0xe97a1b9f5d4b849f0d78f58adb7dd91e90e0fb40&chain_id=56"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img
-                    src="/images/other/treasureland.svg"
-                    alt="Treasureland"
-                    css={css`
-                      filter: invert(1);
-                    `}
-                  />
-                </a>
-                <a
-                  href="https://app.alturanft.com/user/0xa987f487639920a3c2efe58c8fbdedb96253ed9b?view=collections"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img
-                    src="/images/other/altura.png"
-                    alt="Altura"
-                    css={css`
-                      width: 110px;
-                    `}
-                  />
-                </a>
-                <a
-                  href="https://app.babylons.io/rune"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img
-                    src="/images/other/babylons.png"
-                    alt="Babylons"
-                    css={css`
-                      height: 40px;
-                    `}
-                  />
-                </a>
-                <a
-                  href="https://app.teaparty.life/p/arkenrealms"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img
-                    src="/images/other/teaparty.png"
-                    alt="Teaparty"
-                    css={css`
-                      height: 40px;
-                    `}
-                  />
-                </a>
-                {/* <a href="https://bscproject.org/#/project/507"><img src="/images/other/bscgemz.png" alt="BSC Gemz" /></a> */}
-              </Partners>
-            </CardBody>
-            {/* <hr />
+              <CardBody>
+                <BoxHeading as="h2" size="lg" style={{ textAlign: 'center' }}>
+                  {t('Partners & Listings')}
+                </BoxHeading>
+                <Partners>
+                  <a
+                    href="https://www.binance.com/en/nft/profile/rune-7a727bcfb6d429fda32f2af9bb513f64"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img src="/images/other/binancenft.png" alt="Binance NFT" />
+                  </a>
+                  <a
+                    href="https://app.mochi.market/collection/56/0xe97a1b9f5d4b849f0d78f58adb7dd91e90e0fb40?ViewAll=true"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img
+                      src="/images/other/mochi.png"
+                      alt="Mochi.Market"
+                      css={css`
+                        height: 35px;
+                      `}
+                    />
+                  </a>
+                  <a
+                    href="https://treasureland.market/assets?contract=0xe97a1b9f5d4b849f0d78f58adb7dd91e90e0fb40&chain_id=56"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img
+                      src="/images/other/treasureland.svg"
+                      alt="Treasureland"
+                      css={css`
+                        filter: invert(1);
+                      `}
+                    />
+                  </a>
+                  <a
+                    href="https://app.alturanft.com/user/0xa987f487639920a3c2efe58c8fbdedb96253ed9b?view=collections"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img
+                      src="/images/other/altura.png"
+                      alt="Altura"
+                      css={css`
+                        width: 110px;
+                      `}
+                    />
+                  </a>
+                  <a
+                    href="https://app.babylons.io/rune"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img
+                      src="/images/other/babylons.png"
+                      alt="Babylons"
+                      css={css`
+                        height: 40px;
+                      `}
+                    />
+                  </a>
+                  <a
+                    href="https://app.teaparty.life/p/arkenrealms"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img
+                      src="/images/other/teaparty.png"
+                      alt="Teaparty"
+                      css={css`
+                        height: 40px;
+                      `}
+                    />
+                  </a>
+                  {/* <a href="https://bscproject.org/#/project/507"><img src="/images/other/bscgemz.png" alt="BSC Gemz" /></a> */}
+                </Partners>
+              </CardBody>
+              {/* <hr />
           <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
             {t('Listings')}
           </BoxHeading>
           <hr /> */}
-            <CardBody>
-              <Partners>
-                <a
-                  href="https://coinmarketcap.com/watchlist/6155d7e5bea8737592b2b8a6"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img
-                    src="/images/other/coinmarketcap.svg"
-                    alt="Coin Market Cap"
-                    css={css`
-                      filter: invert(1);
-                    `}
-                  />
-                </a>
-                <a
-                  href="https://www.coingecko.com/en/coins/rune-shards"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img
-                    src="/images/other/coingecko.png"
-                    alt="Coin Gecko"
-                    css={css`
-                      width: 125px;
-                    `}
-                  />
-                </a>
-                {/* <a href="https://www.cointiger.com/" rel="noreferrer noopener" target="_blank">
+              <CardBody>
+                <Partners>
+                  <a
+                    href="https://coinmarketcap.com/watchlist/6155d7e5bea8737592b2b8a6"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img
+                      src="/images/other/coinmarketcap.svg"
+                      alt="Coin Market Cap"
+                      css={css`
+                        filter: invert(1);
+                      `}
+                    />
+                  </a>
+                  <a
+                    href="https://www.coingecko.com/en/coins/rune-shards"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img
+                      src="/images/other/coingecko.png"
+                      alt="Coin Gecko"
+                      css={css`
+                        width: 125px;
+                      `}
+                    />
+                  </a>
+                  {/* <a href="https://www.cointiger.com/" rel="noreferrer noopener" target="_blank">
                 <img src="/images/other/cointiger.png" alt="Coin Tiger" />
               </a> */}
-                <a
-                  href="https://bnbproject.org/#/project/1669"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img
-                    src="/images/other/bscproject.png"
-                    alt="BSC Project"
-                    css={css`
-                      width: 140px;
-                    `}
-                  />
-                </a>
-                <a
-                  href="https://bscscan.com/token/0x2098fef7eeae592038f4f3c4b008515fed0d5886#balances"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img
-                    src="/images/other/bscscan.png"
-                    alt="BscScan"
-                    css={css`
-                      width: 120px;
-                    `}
-                  />
-                </a>
-                <a
-                  href="https://www.dapp.com/app/rune-farm"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img
-                    src="/images/other/dapp.png"
-                    alt="Dapp.com"
-                    css={css`
-                      width: 140px;
-                    `}
-                  />
-                </a>
-                <a
-                  href="https://dappradar.com/binance-smart-chain/defi/rune-farm"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                  style={{ textAlign: 'center' }}>
-                  <img src="/images/other/dappradar.png" alt="Dapp Radar" />
-                </a>
-              </Partners>
-            </CardBody>
-          </Card>
-        </Card3>
+                  <a
+                    href="https://bnbproject.org/#/project/1669"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img
+                      src="/images/other/bscproject.png"
+                      alt="BSC Project"
+                      css={css`
+                        width: 140px;
+                      `}
+                    />
+                  </a>
+                  <a
+                    href="https://bscscan.com/token/0x2098fef7eeae592038f4f3c4b008515fed0d5886#balances"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img
+                      src="/images/other/bscscan.png"
+                      alt="BscScan"
+                      css={css`
+                        width: 120px;
+                      `}
+                    />
+                  </a>
+                  <a
+                    href="https://www.dapp.com/app/rune-farm"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img
+                      src="/images/other/dapp.png"
+                      alt="Dapp.com"
+                      css={css`
+                        width: 140px;
+                      `}
+                    />
+                  </a>
+                  <a
+                    href="https://dappradar.com/binance-smart-chain/defi/rune-farm"
+                    rel="noreferrer noopener"
+                    target="_blank"
+                    style={{ textAlign: 'center' }}>
+                    <img src="/images/other/dappradar.png" alt="Dapp Radar" />
+                  </a>
+                </Partners>
+              </CardBody>
+            </Card>
+          </Card3>
+        ) : null}
 
         <Card3 style={{ maxWidth: 1200, margin: '0 auto 30px auto', overflow: 'visible' }}>
           <Card>
