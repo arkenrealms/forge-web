@@ -34,12 +34,7 @@ const NPC = function ({ id }) {
     <>
       <main className="content-wrapper wf-section">
         <div className="page-bg-top">
-          <img
-            src={npc.image || '/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg'}
-            loading="eager"
-            alt=""
-            className="bg-art-top"
-          />
+          <img src={npc.image || '/images/mage-isles-tsunami3.jpeg'} loading="eager" alt="" className="bg-art-top" />
         </div>
         <div className="container w-container">
           <h1>{npc.name}</h1>

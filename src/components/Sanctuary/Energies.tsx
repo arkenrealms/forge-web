@@ -15,18 +15,18 @@ const Energies = function () {
                 </h1>
                 <div className="div-block-34">
                   <img
-                    src="/images/61afe8550a1d064d4808f2b1_mana3.png"
+                    src="/images/mana3.png"
                     loading="lazy"
                     sizes="(max-width: 479px) 57vw, (max-width: 767px) 180px, (max-width: 991px) 250px, 200px"
-                    srcSet="/images/61afe8550a1d064d4808f2b1_mana3-p-500.png 500w, /images/61afe8550a1d064d4808f2b1_mana3.png 650w"
+                    srcSet="/images/mana3-p-500.png 500w, /images/mana3.png 650w"
                     alt=""
                     className="image-16"
                   />
                   <img
-                    src="/images/61c225b3c0c573e1cf313910_kona2_fixed.png"
+                    src="/images/kona2_fixed.png"
                     loading="lazy"
                     sizes="120px"
-                    srcSet="/images/61c225b3c0c573e1cf313910_kona2_fixed-p-500.png 500w, /images/61c225b3c0c573e1cf313910_kona2_fixed.png 703w"
+                    srcSet="/images/kona2_fixed-p-500.png 500w, /images/kona2_fixed.png 703w"
                     alt=""
                     className="image-16 second"
                   />
@@ -76,10 +76,10 @@ const Energies = function () {
                         <img
                           height={210}
                           loading="lazy"
-                          src="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd7f6ded66643990bc6f2_source.png"
+                          src="/images/source.png"
                           alt=""
                           sizes="(max-width: 479px) 29vw, (max-width: 767px) 30vw, (max-width: 991px) 31vw, 33vw"
-                          srcSet="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd7f6ded66643990bc6f2_source-p-500.png 500w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd7f6ded66643990bc6f2_source-p-800.png 800w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd7f6ded66643990bc6f2_source.png 1000w"
+                          srcSet="/images/source-p-500.png 500w, /images/source-p-800.png 800w, /images/source.png 1000w"
                         />
                       </div>
                     </div>
@@ -105,10 +105,10 @@ const Energies = function () {
                         <img
                           height={210}
                           loading="lazy"
-                          src="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd80460f891fc747256c2_temporal.png"
+                          src="/images/temporal.png"
                           alt=""
                           sizes="(max-width: 479px) 29vw, (max-width: 767px) 30vw, (max-width: 991px) 31vw, 33vw"
-                          srcSet="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd80460f891fc747256c2_temporal-p-500.png 500w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd80460f891fc747256c2_temporal-p-800.png 800w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd80460f891fc747256c2_temporal-p-1080.png 1080w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd80460f891fc747256c2_temporal-p-1600.png 1600w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd80460f891fc747256c2_temporal.png 1869w"
+                          srcSet="/images/temporal-p-500.png 500w, /images/temporal-p-800.png 800w, /images/temporal-p-1080.png 1080w, /images/temporal-p-1600.png 1600w, /images/temporal.png 1869w"
                         />
                       </div>
                     </div>
@@ -137,10 +137,10 @@ const Energies = function () {
                         <img
                           height={210}
                           loading="lazy"
-                          src="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd8183e878ff49b0d8055_chaos.png"
+                          src="/images/chaos.png"
                           alt=""
                           sizes="(max-width: 479px) 29vw, (max-width: 767px) 30vw, (max-width: 991px) 31vw, 33vw"
-                          srcSet="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd8183e878ff49b0d8055_chaos-p-500.png 500w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd8183e878ff49b0d8055_chaos-p-800.png 800w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd8183e878ff49b0d8055_chaos.png 1000w"
+                          srcSet="/images/chaos-p-500.png 500w, /images/chaos-p-800.png 800w, /images/chaos.png 1000w"
                         />
                       </div>
                     </div>
@@ -168,10 +168,10 @@ const Energies = function () {
                         <img
                           height={210}
                           loading="lazy"
-                          src="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd82d1a055c5634645d27_ichor.png"
+                          src="/images/ichor.png"
                           alt=""
                           sizes="(max-width: 479px) 29vw, (max-width: 767px) 30vw, (max-width: 991px) 31vw, 33vw"
-                          srcSet="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd82d1a055c5634645d27_ichor-p-500.png 500w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd82d1a055c5634645d27_ichor-p-800.png 800w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd82d1a055c5634645d27_ichor.png 1000w"
+                          srcSet="/images/ichor-p-500.png 500w, /images/ichor-p-800.png 800w, /images/ichor.png 1000w"
                         />
                       </div>
                     </div>
@@ -196,10 +196,10 @@ const Energies = function () {
                         <img
                           height={210}
                           loading="lazy"
-                          src="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd83a03933b78cc7741a2_gaia.png"
+                          src="/images/gaia.png"
                           alt=""
                           sizes="(max-width: 479px) 29vw, (max-width: 767px) 30vw, (max-width: 991px) 31vw, 33vw"
-                          srcSet="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd83a03933b78cc7741a2_gaia-p-500.png 500w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd83a03933b78cc7741a2_gaia-p-800.png 800w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd83a03933b78cc7741a2_gaia.png 1100w"
+                          srcSet="/images/gaia-p-500.png 500w, /images/gaia-p-800.png 800w, /images/gaia.png 1100w"
                         />
                       </div>
                     </div>
@@ -224,10 +224,10 @@ const Energies = function () {
                         <img
                           height={210}
                           loading="lazy"
-                          src="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd84d5324e87b6b46f8cc_kona.png"
+                          src="/images/kona.png"
                           alt=""
                           sizes="(max-width: 479px) 29vw, (max-width: 767px) 30vw, (max-width: 991px) 31vw, 33vw"
-                          srcSet="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd84d5324e87b6b46f8cc_kona-p-500.png 500w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd84d5324e87b6b46f8cc_kona.png 559w"
+                          srcSet="/images/kona-p-500.png 500w, /images/kona.png 559w"
                         />
                       </div>
                     </div>
@@ -253,10 +253,10 @@ const Energies = function () {
                         <img
                           height={210}
                           loading="lazy"
-                          src="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd8718f78c495e3905163_mana3.png"
+                          src="/images/mana3.png"
                           alt=""
                           sizes="(max-width: 479px) 29vw, (max-width: 767px) 30vw, (max-width: 991px) 31vw, 33vw"
-                          srcSet="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd8718f78c495e3905163_mana3-p-500.png 500w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd8718f78c495e3905163_mana3.png 650w"
+                          srcSet="/images/mana3-p-500.png 500w, /images/mana3.png 650w"
                         />
                       </div>
                     </div>
@@ -282,10 +282,10 @@ const Energies = function () {
                         <img
                           height={210}
                           loading="lazy"
-                          src="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd87eff609504c46c8a66_astra.png"
+                          src="/images/astra.png"
                           alt=""
                           sizes="(max-width: 479px) 29vw, (max-width: 767px) 30vw, (max-width: 991px) 31vw, 33vw"
-                          srcSet="https://assets.website-files.com/618ec26aa362f88cee86d122/61afd87eff609504c46c8a66_astra-p-500.png 500w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd87eff609504c46c8a66_astra-p-800.png 800w, https://assets.website-files.com/618ec26aa362f88cee86d122/61afd87eff609504c46c8a66_astra.png 1000w"
+                          srcSet="/images/astra-p-500.png 500w, /images/astra-p-800.png 800w, /images/astra.png 1000w"
                         />
                       </div>
                     </div>

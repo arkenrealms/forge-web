@@ -27,10 +27,10 @@ const ItemTypes = function () {
       <main className="content-wrapper wf-section">
         <div className="page-bg-top">
           <img
-            src="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg"
+            src="/images/mage-isles-tsunami3.jpeg"
             loading="lazy"
             sizes="100vw"
-            srcSet="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-500.jpeg 500w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-800.jpeg 800w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg 1067w"
+            srcSet="/images/mage-isles-tsunami3-p-500.jpeg 500w, /images/mage-isles-tsunami3-p-800.jpeg 800w, /images/mage-isles-tsunami3.jpeg 1067w"
             alt=""
             className="bg-art-top"
           />

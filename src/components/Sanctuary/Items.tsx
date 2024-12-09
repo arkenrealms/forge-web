@@ -15,10 +15,10 @@ const Items = function () {
       <Card>
         <div className="page-bg-top">
           <img
-            src="/images/62242f6dacea24ab1bebc2a1_1d5cee0e.jpeg"
+            src="/images/1d5cee0e.jpeg"
             loading="eager"
             sizes="100vw"
-            srcSet="/images/62242f6dacea24ab1bebc2a1_1d5cee0e-p-500.jpeg 500w, /images/62242f6dacea24ab1bebc2a1_1d5cee0e-p-800.jpeg 800w, /images/62242f6dacea24ab1bebc2a1_1d5cee0e.jpeg 1067w"
+            srcSet="/images/p-500.jpeg 500w, /images/p-800.jpeg 800w, /images/1d5cee0e.jpeg 1067w"
             alt=""
             className="bg-art-top"
           />

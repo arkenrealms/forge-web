@@ -3231,7 +3231,7 @@ zoom: 0.001;
   
   .boxframe-1 {
     padding: 30px;
-    background-image: url("/images/618ec26aa362f842b786d135_background-dark.png");
+    background-image: url("/images/background-dark.png");
     background-position: 0px 0px;
     background-size: auto;
   }
@@ -3246,13 +3246,13 @@ zoom: 0.001;
     -webkit-align-items: flex-start;
     -ms-flex-align: start;
     align-items: flex-start;
-    background-image: url("/images/618ec26aa362f8dd0586d13b_background-darker.jpg");
+    background-image: url("/images/background-darker.jpg");
     background-size: 400px;
   }
   
   .boxframe-1.hmax.red {
     
-    background-image: linear-gradient(180deg, rgba(255, 241, 204, 0.51), rgba(255, 241, 204, 0.51)), url("/images/619b09ae9b20f10295d6ff30_bg-light.jpg");
+    background-image: linear-gradient(180deg, rgba(255, 241, 204, 0.51), rgba(255, 241, 204, 0.51)), url("/images/bg-light.jpg");
     background-position: 0px 0px, 0px 0px;
     background-size: auto, 400px;
     box-shadow: inset 0 0 170px 0 rgba(87, 67, 48, 0.86);
@@ -3287,7 +3287,7 @@ zoom: 0.001;
     border-width: 1px;
     border-style: solid;
     border-color: transparent;
-    border-image: url(/images/61933e0f25619deab717576c_frame.png) 80 / 80px / 0 repeat;
+    border-image: url(/images/frame.png) 80 / 80px / 0 repeat;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 0px;
   }
@@ -3414,7 +3414,7 @@ zoom: 0.001;
     padding: 16px;
     border-bottom: 1px solid #000;
     
-    background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0.04), hsla(0, 0%, 100%, 0.04)), url("/images/619b09aec0d05b6e97f00ebf_bg-normal.jpg");
+    background-image: linear-gradient(180deg, hsla(0, 0%, 100%, 0.04), hsla(0, 0%, 100%, 0.04)), url("/images/bg-normal.jpg");
     background-position: 0px 0px, 0px 0px;
     background-size: auto, 400px;
     font-family: "webfontexl", sans-serif;
@@ -3458,7 +3458,7 @@ zoom: 0.001;
     bottom: auto;
     z-index: 10;
     border-bottom: 1px solid hsla(0, 0%, 100%, 0.06);
-    background-image: url("/images/618ec26aa362f842b786d135_background-dark.png");
+    background-image: url("/images/background-dark.png");
     background-position: 0px 0px;
     background-size: 400px;
     box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.39);
@@ -3676,7 +3676,7 @@ zoom: 0.001;
     bottom: 0%;
     display: none;
     overflow: scroll;
-    background-image: url("/images/6190b89d8c3bca3e1b987020_Haerra.jpg");
+    background-image: url("/images/Haerra.jpg");
     background-position: 50% 50%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -3776,7 +3776,7 @@ zoom: 0.001;
     -ms-flex-align: center;
     align-items: center;
     background-color: rgba(187, 38, 38, 0);
-    background-image: url("/images/61b03c31a54aadefa8e7dd9d_pin-center.png");
+    background-image: url("/images/pin-center.png");
     background-position: 50% 50%;
     background-size: cover;
   }
@@ -8732,7 +8732,7 @@ body.brand-rune, body.brand-evolution, body.brand-infinite, body.brand-sanctuary
 
   .app__sitenav {
     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.36)),
-          url('/images/618ec26aa362f8dd0586d13b_background-darker.jpg');
+          url('/images/background-darker.jpg');
   }
 
   

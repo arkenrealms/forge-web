@@ -12,11 +12,11 @@ export default {
   },
   el: {
     usdFarmPid: 8,
-    contract: contracts.el,
+    contract: contracts.ex,
   },
   eld: {
     usdFarmPid: 17,
-    contract: contracts.eld,
+    contract: contracts.elm,
   },
   tir: {
     usdFarmPid: 14,
@@ -39,7 +39,7 @@ export default {
   },
   ral: {
     usdFarmPid: 33,
-    contract: contracts.ral,
+    contract: contracts.ro,
   },
   ort: {
     usdFarmPid: 35,
@@ -131,14 +131,14 @@ export default {
   },
   jah: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'JAH-BUSD LP')?.pid,
-    contract: contracts.jah,
+    contract: contracts.jua,
   },
   cham: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'CHAM-BUSD LP')?.pid,
-    contract: contracts.cham,
+    contract: contracts.chin,
   },
   zod: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'ZOD-BUSD LP')?.pid,
-    contract: contracts.zod,
+    contract: contracts.zeno,
   },
 };

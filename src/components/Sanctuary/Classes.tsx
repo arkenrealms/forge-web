@@ -28,10 +28,10 @@ const Classes = function () {
       <main className="content-wrapper wf-section">
         <div className="page-bg-top">
           <img
-            src="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg"
+            src="/images/mage-isles-tsunami3.jpeg"
             loading="lazy"
             sizes="100vw"
-            srcSet="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-500.jpeg 500w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-800.jpeg 800w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg 1067w"
+            srcSet="/images/mage-isles-tsunami3-p-500.jpeg 500w, /images/mage-isles-tsunami3-p-800.jpeg 800w, /images/mage-isles-tsunami3.jpeg 1067w"
             alt=""
             className="bg-art-top"
           />
@@ -57,7 +57,9 @@ const Classes = function () {
                   `}>
                   <LoreBlock1
                     name={classs.name}
-                    onClick={() => history.push('/class/' + classs.name.toLowerCase().replace(/ /g, '-'))}>
+                    onClick={() =>
+                      history.push('/games/oasis/classes/' + classs.name.toLowerCase().replace(/ /g, '-'))
+                    }>
                     <Flex flexDirection="row" alignItems="start" justifyContent="center">
                       <img
                         id="w-node-df400f55-31e6-1136-797f-230aa8853a1f-a4dd0c1b"
@@ -84,37 +86,37 @@ const Classes = function () {
             <p>‍</p>
             <p>‍</p>
             <p>‍</p>
-            {/* <LoreBlock1 name="The Mage" onClick={() => history.push('/class/mage')}>
+            {/* <LoreBlock1 name="The Mage" onClick={() => history.push('/games/oasis/classes/mage')}>
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {classes.find((c) => c.name === 'Mage').description}
               </ReactMarkdown>
             </LoreBlock1>
-            <LoreBlock1 name="The Paladin" onClick={() => history.push('/class/paladin')}>
+            <LoreBlock1 name="The Paladin" onClick={() => history.push('/games/oasis/classes/paladin')}>
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {classes.find((c) => c.name === 'Paladin').description}
               </ReactMarkdown>
             </LoreBlock1>
-            <LoreBlock1 name="The Necromancer" onClick={() => history.push('/class/necromancer')}>
+            <LoreBlock1 name="The Necromancer" onClick={() => history.push('/games/oasis/classes/necromancer')}>
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {classes.find((c) => c.name === 'Necromancer').description}
               </ReactMarkdown>
             </LoreBlock1>
-            <LoreBlock1 name="The Druid" onClick={() => history.push('/class/druid')}>
+            <LoreBlock1 name="The Druid" onClick={() => history.push('/games/oasis/classes/druid')}>
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {classes.find((c) => c.name === 'Druid').description}
               </ReactMarkdown>
             </LoreBlock1>
-            <LoreBlock1 name="The Warrior" onClick={() => history.push('/class/barbarian')}>
+            <LoreBlock1 name="The Warrior" onClick={() => history.push('/games/oasis/classes/barbarian')}>
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {classes.find((c) => c.name === 'Warrior').description}
               </ReactMarkdown>
             </LoreBlock1>
-            <LoreBlock1 name="The Assassin" onClick={() => history.push('/class/assassin')}>
+            <LoreBlock1 name="The Assassin" onClick={() => history.push('/games/oasis/classes/assassin')}>
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {classes.find((c) => c.name === 'Assassin').description}
               </ReactMarkdown>
             </LoreBlock1>
-            <LoreBlock1 name="The Ranger" onClick={() => history.push('/class/ranger')}>
+            <LoreBlock1 name="The Ranger" onClick={() => history.push('/games/oasis/classes/ranger')}>
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {classes.find((c) => c.name === 'Ranger').description}
               </ReactMarkdown>

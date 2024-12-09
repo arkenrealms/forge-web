@@ -25,10 +25,10 @@ const Acts = function () {
         <main className="content-wrapper wf-section">
           <div className="page-bg-top">
             <img
-              src="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg"
+              src="/images/mage-isles-tsunami3.jpeg"
               loading="lazy"
               sizes="100vw"
-              srcSet="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-500.jpeg 500w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-800.jpeg 800w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg 1067w"
+              srcSet="/images/mage-isles-tsunami3-p-500.jpeg 500w, /images/mage-isles-tsunami3-p-800.jpeg 800w, /images/mage-isles-tsunami3.jpeg 1067w"
               alt=""
               className="bg-art-top"
             />
@@ -41,7 +41,7 @@ const Acts = function () {
             <div className="locationdescription w-richtext">
               <p>Heart of the Oasis is composed of 8 acts, each with branches that will be improved in DLC content.</p>
             </div>
-            <div className="w-layout-grid page-layout" onClick={() => history.push('/act/1')}>
+            <div className="w-layout-grid page-layout" onClick={() => history.push('/games/oasis/acts/1')}>
               <article className="section-right">
                 <div className="boxframe-1 hmax">
                   <div className="character-details-content">
@@ -59,7 +59,7 @@ const Acts = function () {
                 </div>
               </article>
             </div>
-            <div className="w-layout-grid page-layout" onClick={() => history.push('/act/2')}>
+            <div className="w-layout-grid page-layout" onClick={() => history.push('/games/oasis/acts/2')}>
               <article className="section-right">
                 <div className="boxframe-1 hmax">
                   <div className="character-details-content">
@@ -77,7 +77,7 @@ const Acts = function () {
                 </div>
               </article>
             </div>
-            <div className="w-layout-grid page-layout" onClick={() => history.push('/act/3')}>
+            <div className="w-layout-grid page-layout" onClick={() => history.push('/games/oasis/acts/3')}>
               <article className="section-right">
                 <div className="boxframe-1 hmax">
                   <div className="character-details-content">
@@ -95,7 +95,7 @@ const Acts = function () {
                 </div>
               </article>
             </div>
-            <div className="w-layout-grid page-layout" onClick={() => history.push('/act/4')}>
+            <div className="w-layout-grid page-layout" onClick={() => history.push('/games/oasis/acts/4')}>
               <article className="section-right">
                 <div className="boxframe-1 hmax">
                   <div className="character-details-content">
@@ -113,7 +113,7 @@ const Acts = function () {
                 </div>
               </article>
             </div>
-            <div className="w-layout-grid page-layout" onClick={() => history.push('/act/5')}>
+            <div className="w-layout-grid page-layout" onClick={() => history.push('/games/oasis/acts/5')}>
               <article className="section-right">
                 <div className="boxframe-1 hmax">
                   <div className="character-details-content">
@@ -131,7 +131,7 @@ const Acts = function () {
                 </div>
               </article>
             </div>
-            <div className="w-layout-grid page-layout" onClick={() => history.push('/act/6')}>
+            <div className="w-layout-grid page-layout" onClick={() => history.push('/games/oasis/acts/6')}>
               <article className="section-right">
                 <div className="boxframe-1 hmax">
                   <div className="character-details-content">
@@ -149,7 +149,7 @@ const Acts = function () {
                 </div>
               </article>
             </div>
-            <div className="w-layout-grid page-layout" onClick={() => history.push('/act/7')}>
+            <div className="w-layout-grid page-layout" onClick={() => history.push('/games/oasis/acts/7')}>
               <article className="section-right">
                 <div className="boxframe-1 hmax">
                   <div className="character-details-content">
@@ -167,7 +167,7 @@ const Acts = function () {
                 </div>
               </article>
             </div>
-            <div className="w-layout-grid page-layout" onClick={() => history.push('/act/8')}>
+            <div className="w-layout-grid page-layout" onClick={() => history.push('/games/oasis/acts/8')}>
               <article className="section-right">
                 <div className="boxframe-1 hmax">
                   <div className="character-details-content">

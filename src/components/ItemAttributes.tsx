@@ -11,14 +11,7 @@ const ItemAttributes = () => {
   return (
     <Page>
       <Card style={{ width: '100%' }}>
-        <img
-          src="/images/61ac854395b5d05b05b58a37_pin2.png"
-          loading="lazy"
-          width="314"
-          alt=""
-          className="image-15"
-          style={{ opacity: 0.1 }}
-        />
+        <img src="/images/pin2.png" loading="lazy" width="314" alt="" className="image-15" style={{ opacity: 0.1 }} />
         <Heading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
           {t('Item Attributes')}
         </Heading>

@@ -350,7 +350,7 @@ export const RecipeInfo: React.FC<any> = ({
             prefix="Game: "
             placeholder="Choose"
             defaultValue={gameOptions.find((go) => go.value === gameTabIndex).label}
-            onChange={(value: string) => setGameTabIndex(value)}
+            onChange={(value: string) => setGameTabIndex(parseInt(value))}
             options={gameOptions}
           />
         ) : null}

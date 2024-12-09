@@ -7,10 +7,10 @@ const Runeforms = function () {
       <main className="content-wrapper wf-section">
         <div className="page-bg-top">
           <img
-            src="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg"
+            src="/images/mage-isles-tsunami3.jpeg"
             loading="lazy"
             sizes="100vw"
-            srcSet="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-500.jpeg 500w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-800.jpeg 800w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg 1067w"
+            srcSet="/images/mage-isles-tsunami3-p-500.jpeg 500w, /images/mage-isles-tsunami3-p-800.jpeg 800w, /images/mage-isles-tsunami3.jpeg 1067w"
             alt=""
             className="bg-art-top"
           />
@@ -105,20 +105,12 @@ const Runeforms = function () {
             </p>
             <figure className="w-richtext-align-center w-richtext-figure-type-image">
               <div>
-                <img
-                  src="/images/61ac64eb98da0b04d4548131_Screen%20Shot%202021-07-21%20at%2011.49.01%20AM.png"
-                  loading="lazy"
-                  alt=""
-                />
+                <img src="/images/Screen%20Shot%202021-07-21%20at%2011.49.01%20AM.png" loading="lazy" alt="" />
               </div>
             </figure>
             <figure className="w-richtext-align-center w-richtext-figure-type-image">
               <div>
-                <img
-                  src="/images/61ac64f150bc8be893552f25_Screen%20Shot%202021-07-21%20at%2011.49.17%20AM.png"
-                  loading="lazy"
-                  alt=""
-                />
+                <img src="/images/Screen%20Shot%202021-07-21%20at%2011.49.17%20AM.png" loading="lazy" alt="" />
               </div>
             </figure>
             <p>‍</p>
@@ -153,7 +145,7 @@ const Runeforms = function () {
                   <style
                     dangerouslySetInnerHTML={{
                       __html:
-                        '\n                .boxframe-1 {\n                  border-width: 1px;\n                  border-style: solid;\n                  border-color: transparent;\n                  border-image: url(/images/61933e0f25619deab717576c_frame.png) 80 / 80px / 0 repeat;\n                  background-color: rgba(0, 0, 0, 0.4);\n                  border-radius: 0px;\n                }\n              ',
+                        '\n                .boxframe-1 {\n                  border-width: 1px;\n                  border-style: solid;\n                  border-color: transparent;\n                  border-image: url(/images/frame.png) 80 / 80px / 0 repeat;\n                  background-color: rgba(0, 0, 0, 0.4);\n                  border-radius: 0px;\n                }\n              ',
                     }}
                   />
                 </div>

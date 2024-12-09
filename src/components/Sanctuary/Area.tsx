@@ -26,7 +26,7 @@ const Area = function ({ id }) {
         <style
           dangerouslySetInnerHTML={{
             __html:
-              '\n      .frame {\n        border-width: 1px;\n        border-style: solid;\n        border-color: transparent;\n        border-image: url(/images/61933e0f25619deab717576c_frame.png) 80 / 80px / 0 repeat;\n        background-color: rgba(0, 0, 0, 0.4);\n        border-radius: 0px;\n      }\n    ',
+              '\n      .frame {\n        border-width: 1px;\n        border-style: solid;\n        border-color: transparent;\n        border-image: url(/images/frame.png) 80 / 80px / 0 repeat;\n        background-color: rgba(0, 0, 0, 0.4);\n        border-radius: 0px;\n      }\n    ',
           }}
         />
       </div>

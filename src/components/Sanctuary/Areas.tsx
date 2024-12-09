@@ -9,10 +9,10 @@ const Areas = function () {
         <main className="content-wrapper wf-section">
           <div className="page-bg-top">
             <img
-              src="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg"
+              src="/images/mage-isles-tsunami3.jpeg"
               loading="lazy"
               sizes="100vw"
-              srcSet="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-500.jpeg 500w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-800.jpeg 800w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg 1067w"
+              srcSet="/images/mage-isles-tsunami3-p-500.jpeg 500w, /images/mage-isles-tsunami3-p-800.jpeg 800w, /images/mage-isles-tsunami3.jpeg 1067w"
               alt=""
               className="bg-art-top"
             />
@@ -32,72 +32,72 @@ const Areas = function () {
             <ul role="list">
               <li>
                 <a
-                  data-load-page="/area/elysium"
+                  data-load-page="/game/oasis/areas/elysium"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/elysium');
+                    history.push('/game/oasis/areas/elysium');
                   }}
-                  href="/area/elysium"
+                  href="/game/oasis/areas/elysium"
                   className="w-inline-block">
                   <div>Elysium</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/valburn"
+                  data-load-page="/game/oasis/areas/valburn"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/valburn');
+                    history.push('/game/oasis/areas/valburn');
                   }}
-                  href="/area/valburn"
+                  href="/game/oasis/areas/valburn"
                   className="w-inline-block">
                   <div>Valburn</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/qiddir"
+                  data-load-page="/game/oasis/areas/qiddir"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/qiddir');
+                    history.push('/game/oasis/areas/qiddir');
                   }}
-                  href="/area/qiddir"
+                  href="/game/oasis/areas/qiddir"
                   className="w-inline-block">
                   <div>Qiddir</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/ashyrah"
+                  data-load-page="/game/oasis/areas/ashyrah"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/ashyrah');
+                    history.push('/game/oasis/areas/ashyrah');
                   }}
-                  href="/area/ashyrah"
+                  href="/game/oasis/areas/ashyrah"
                   className="w-inline-block">
                   <div>Ashyrah</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/fayhelm"
+                  data-load-page="/game/oasis/areas/fayhelm"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/fayhelm');
+                    history.push('/game/oasis/areas/fayhelm');
                   }}
-                  href="/area/fayhelm"
+                  href="/game/oasis/areas/fayhelm"
                   className="w-inline-block">
                   <div>Fayhelm</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/forsaken-lands"
+                  data-load-page="/game/oasis/areas/forsaken-lands"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/forsaken-lands');
+                    history.push('/game/oasis/areas/forsaken-lands');
                   }}
-                  href="/area/forsaken-lands"
+                  href="/game/oasis/areas/forsaken-lands"
                   className="w-inline-block">
                   <div>Forsaken Lands</div>
                 </a>
@@ -110,120 +110,120 @@ const Areas = function () {
             <ul role="list">
               <li>
                 <a
-                  data-load-page="/area/dragonhollow"
+                  data-load-page="/game/oasis/areas/dragonhollow"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/dragonhollow');
+                    history.push('/game/oasis/areas/dragonhollow');
                   }}
-                  href="/area/dragonhollow"
+                  href="/game/oasis/areas/dragonhollow"
                   className="w-inline-block">
                   <div>Dragonhollow</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/irondell"
+                  data-load-page="/game/oasis/areas/irondell"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/irondell');
+                    history.push('/game/oasis/areas/irondell');
                   }}
-                  href="/area/irondell"
+                  href="/game/oasis/areas/irondell"
                   className="w-inline-block">
                   <div>Irondell</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/linden"
+                  data-load-page="/game/oasis/areas/linden"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/linden');
+                    history.push('/game/oasis/areas/linden');
                   }}
-                  href="/area/linden"
+                  href="/game/oasis/areas/linden"
                   className="w-inline-block">
                   <div>Linden</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/westmarsh"
+                  data-load-page="/game/oasis/areas/westmarsh"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/westmarsh');
+                    history.push('/game/oasis/areas/westmarsh');
                   }}
-                  href="/area/westmarsh"
+                  href="/game/oasis/areas/westmarsh"
                   className="w-inline-block">
                   <div>Westmarsh</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/toralir"
+                  data-load-page="/game/oasis/areas/toralir"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/toralir');
+                    history.push('/game/oasis/areas/toralir');
                   }}
-                  href="/area/toralir"
+                  href="/game/oasis/areas/toralir"
                   className="w-inline-block">
                   <div>Toralir</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/archon-citadel"
+                  data-load-page="/game/oasis/areas/archon-citadel"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/archon-citadel');
+                    history.push('/game/oasis/areas/archon-citadel');
                   }}
-                  href="/area/archon-citadel"
+                  href="/game/oasis/areas/archon-citadel"
                   className="w-inline-block">
                   <div>Archon Citadel</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/der-uden"
+                  data-load-page="/game/oasis/areas/der-uden"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/der-uden');
+                    history.push('/game/oasis/areas/der-uden');
                   }}
-                  href="/area/der-uden"
+                  href="/game/oasis/areas/der-uden"
                   className="w-inline-block">
                   <div>Der'uden</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/faytree"
+                  data-load-page="/game/oasis/areas/faytree"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/faytree');
+                    history.push('/game/oasis/areas/faytree');
                   }}
-                  href="/area/faytree"
+                  href="/game/oasis/areas/faytree"
                   className="w-inline-block">
                   <div>Faytree</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/free-city-of-vtello"
+                  data-load-page="/game/oasis/areas/free-city-of-vtello"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/free-city-of-vtello');
+                    history.push('/game/oasis/areas/free-city-of-vtello');
                   }}
-                  href="/area/free-city-of-vtello"
+                  href="/game/oasis/areas/free-city-of-vtello"
                   className="w-inline-block">
                   <div>Free City of Vtello</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/hevane"
+                  data-load-page="/game/oasis/areas/hevane"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/hevane');
+                    history.push('/game/oasis/areas/hevane');
                   }}
-                  href="/area/hevane"
+                  href="/game/oasis/areas/hevane"
                   className="w-inline-block">
                   <div>Hevane</div>
                 </a>
@@ -236,24 +236,24 @@ const Areas = function () {
             <ul role="list">
               <li>
                 <a
-                  data-load-page="/area/arreat-summit"
+                  data-load-page="/game/oasis/areas/arreat-summit"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/arreat-summit');
+                    history.push('/game/oasis/areas/arreat-summit');
                   }}
-                  href="/area/arreat-summit"
+                  href="/game/oasis/areas/arreat-summit"
                   className="w-inline-block">
                   <div>Arreat Summit</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/area/end-of-time"
+                  data-load-page="/game/oasis/areas/end-of-time"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/area/end-of-time');
+                    history.push('/game/oasis/areas/end-of-time');
                   }}
-                  href="/area/end-of-time"
+                  href="/game/oasis/areas/end-of-time"
                   className="w-inline-block">
                   <div>End of Time</div>
                 </a>

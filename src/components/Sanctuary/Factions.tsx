@@ -28,10 +28,10 @@ const Factions = function () {
       <main className="content-wrapper wf-section">
         <div className="page-bg-top">
           <img
-            src="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg"
+            src="/images/mage-isles-tsunami3.jpeg"
             loading="lazy"
             sizes="100vw"
-            srcSet="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-500.jpeg 500w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-800.jpeg 800w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg 1067w"
+            srcSet="/images/mage-isles-tsunami3-p-500.jpeg 500w, /images/mage-isles-tsunami3-p-800.jpeg 800w, /images/mage-isles-tsunami3.jpeg 1067w"
             alt=""
             className="bg-art-top"
           />
@@ -55,7 +55,7 @@ const Factions = function () {
                 `}>
                 <LoreBlock1
                   name={faction.name}
-                  onClick={() => history.push('/faction/' + faction.name.toLowerCase().replace(/ /g, '-'))}>
+                  onClick={() => history.push('/games/oasis/faction/' + faction.name.toLowerCase().replace(/ /g, '-'))}>
                   <Flex flexDirection="row" alignItems="start" justifyContent="center">
                     {/* <img
                       id="w-node-df400f55-31e6-1136-797f-230aa8853a1f-a4dd0c1b"

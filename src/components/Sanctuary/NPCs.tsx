@@ -15,10 +15,10 @@ const Zones = function () {
         <main className="content-wrapper wf-section">
           <div className="page-bg-top">
             <img
-              src="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg"
+              src="/images/mage-isles-tsunami3.jpeg"
               loading="lazy"
               sizes="100vw"
-              srcSet="/images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-500.jpeg 500w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3-p-800.jpeg 800w, /images/61909a3f8c3bca7411981f34_mage-isles-tsunami3.jpeg 1067w"
+              srcSet="/images/mage-isles-tsunami3-p-500.jpeg 500w, /images/mage-isles-tsunami3-p-800.jpeg 800w, /images/mage-isles-tsunami3.jpeg 1067w"
               alt=""
               className="bg-art-top"
             />
@@ -37,60 +37,60 @@ const Zones = function () {
             <ul role="list">
               <li>
                 <a
-                  data-load-page="/npc/zeno"
+                  data-load-page="/game/oasis/npcs/zeno"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/npc/zeno');
+                    history.push('/game/oasis/npcs/zeno');
                   }}
-                  href="/npc/zeno"
+                  href="/game/oasis/npcs/zeno"
                   className="w-inline-block">
                   <div>Zeno</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/npc/azorag"
+                  data-load-page="/game/oasis/npcs/azorag"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/npc/azorag');
+                    history.push('/game/oasis/npcs/azorag');
                   }}
-                  href="/npc/azorag"
+                  href="/game/oasis/npcs/azorag"
                   className="w-inline-block">
                   <div>Azorag</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/npc/eledon"
+                  data-load-page="/game/oasis/npcs/eledon"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/npc/eledon');
+                    history.push('/game/oasis/npcs/eledon');
                   }}
-                  href="/npc/eledon"
+                  href="/game/oasis/npcs/eledon"
                   className="w-inline-block">
                   <div>Eledon</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/npc/logos"
+                  data-load-page="/game/oasis/npcs/logos"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/npc/logos');
+                    history.push('/game/oasis/npcs/logos');
                   }}
-                  href="/npc/logos"
+                  href="/game/oasis/npcs/logos"
                   className="w-inline-block">
                   <div>Logos</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/npc/deleran"
+                  data-load-page="/game/oasis/npcs/deleran"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/npc/deleran');
+                    history.push('/game/oasis/npcs/deleran');
                   }}
-                  href="/npc/deleran"
+                  href="/game/oasis/npcs/deleran"
                   className="w-inline-block">
                   <div>Deleran</div>
                 </a>
@@ -103,24 +103,24 @@ const Zones = function () {
             <ul role="list">
               <li>
                 <a
-                  data-load-page="/npc/ghosharak"
+                  data-load-page="/game/oasis/npcs/ghosharak"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/npc/ghosharak');
+                    history.push('/game/oasis/npcs/ghosharak');
                   }}
-                  href="/npc/ghosharak"
+                  href="/game/oasis/npcs/ghosharak"
                   className="w-inline-block">
                   <div>Ghosharak</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/npc/miraqesh"
+                  data-load-page="/game/oasis/npcs/miraqesh"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/npc/miraqesh');
+                    history.push('/game/oasis/npcs/miraqesh');
                   }}
-                  href="/npc/miraqesh"
+                  href="/game/oasis/npcs/miraqesh"
                   className="w-inline-block">
                   <div>Miraqesh</div>
                 </a>

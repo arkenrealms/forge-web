@@ -8,17 +8,17 @@ const Creature = function () {
           <style
             dangerouslySetInnerHTML={{
               __html:
-                '\n    .bg-art-3 {\n      -webkit-mask-image: url(https://assets.website-files.com/61888fc216a41f3be2f8ae35/618c8cbbf09b3420e8fc1075_css-mask-2.png);\n      -webkit-mask-position: bottom;\n      -webkit-mask-size: contain;\n      -webkit-mask-repeat: no-repeat;\n      mask-image: url(https://assets.website-files.com/61888fc216a41f3be2f8ae35/618c8cbbf09b3420e8fc1075_css-mask-2.png);\n      mask-position: bottom;\n      mask-size: contain;\n      mask-repeat: no-repeat;\n    }\n  ',
+                '\n    .bg-art-3 {\n      -webkit-mask-image: url(/images/css-mask-2.png);\n      -webkit-mask-position: bottom;\n      -webkit-mask-size: contain;\n      -webkit-mask-repeat: no-repeat;\n      mask-image: url(/images/css-mask-2.png);\n      mask-position: bottom;\n      mask-size: contain;\n      mask-repeat: no-repeat;\n    }\n  ',
             }}
           />
         </div>
         <div className="page-bg-elements-2">
           <img
-            src="/images/618ec26aa362f83a9586d139_PZO9009-Quarantine.jpg"
+            src="/images/PZO9009-Quarantine.jpg"
             loading="lazy"
             width={700}
             sizes="(max-width: 767px) 100vw, 700px"
-            srcSet="/images/618ec26aa362f83a9586d139_PZO9009-Quarantine-p-500.jpeg 500w, /images/618ec26aa362f83a9586d139_PZO9009-Quarantine-p-1080.jpeg 1080w, /images/618ec26aa362f83a9586d139_PZO9009-Quarantine-p-1600.jpeg 1600w, /images/618ec26aa362f83a9586d139_PZO9009-Quarantine.jpg 1680w"
+            srcSet="/images/PZO9009-Quarantine-p-500.jpeg 500w, /images/PZO9009-Quarantine-p-1080.jpeg 1080w, /images/PZO9009-Quarantine-p-1600.jpeg 1600w, /images/PZO9009-Quarantine.jpg 1680w"
             alt=""
             className="bg-art-3"
           />
@@ -66,16 +66,16 @@ const Creature = function () {
                 </div>
                 <div className="div-block-12">
                   <img
-                    src="/images/618ec26aa362f836d386d133_character-art-1-bg-detail.png"
+                    src="/images/character-art-1-bg-detail.png"
                     loading="lazy"
                     alt=""
                     className="character-overlay image-crisp"
                   />
                   <img
-                    src="/images/618ec26aa362f8fdb886d137_character-art-1.png"
+                    src="/images/character-art-1.png"
                     loading="lazy"
                     sizes="(max-width: 479px) 90vw, (max-width: 767px) 94vw, 95vw"
-                    srcSet="/images/618ec26aa362f8fdb886d137_character-art-1-p-500.png 500w, /images/618ec26aa362f8fdb886d137_character-art-1-p-800.png 800w, /images/618ec26aa362f8fdb886d137_character-art-1.png 961w"
+                    srcSet="/images/character-art-1-p-500.png 500w, /images/character-art-1-p-800.png 800w, /images/character-art-1.png 961w"
                     alt=""
                     className="character-image-2"
                   />
@@ -128,18 +128,18 @@ const Creature = function () {
                   </div>
                   <div className="scroll-bg-2">
                     <img
-                      src="/images/618ec26aa362f8b0b886d134_top-frame-1.png"
+                      src="/images/top-frame-1.png"
                       loading="lazy"
-                      srcSet="/images/618ec26aa362f8b0b886d134_top-frame-1-p-500.png 500w, /images/618ec26aa362f8b0b886d134_top-frame-1-p-800.png 800w, /images/618ec26aa362f8b0b886d134_top-frame-1-p-1080.png 1080w, /images/618ec26aa362f8b0b886d134_top-frame-1-p-1600.png 1600w, /images/618ec26aa362f8b0b886d134_top-frame-1-p-2000.png 2000w, /images/618ec26aa362f8b0b886d134_top-frame-1.png 2029w"
+                      srcSet="/images/top-frame-1-p-500.png 500w, /images/top-frame-1-p-800.png 800w, /images/top-frame-1-p-1080.png 1080w, /images/top-frame-1-p-1600.png 1600w, /images/top-frame-1-p-2000.png 2000w, /images/top-frame-1.png 2029w"
                       sizes="(max-width: 479px) 90vw, (max-width: 767px) 94vw, 95vw"
                       alt=""
                       className="border-detail-top image-crisp"
                     />
                     <img
-                      src="/images/618ec26aa362f821c486d131_bottom-frame-1.png"
+                      src="/images/bottom-frame-1.png"
                       loading="lazy"
                       sizes="(max-width: 479px) 90vw, (max-width: 767px) 94vw, 95vw"
-                      srcSet="/images/618ec26aa362f821c486d131_bottom-frame-1-p-500.png 500w, /images/618ec26aa362f821c486d131_bottom-frame-1-p-800.png 800w, /images/618ec26aa362f821c486d131_bottom-frame-1-p-1080.png 1080w, /images/618ec26aa362f821c486d131_bottom-frame-1-p-1600.png 1600w, /images/618ec26aa362f821c486d131_bottom-frame-1.png 1812w"
+                      srcSet="/images/bottom-frame-1-p-500.png 500w, /images/bottom-frame-1-p-800.png 800w, /images/bottom-frame-1-p-1080.png 1080w, /images/bottom-frame-1-p-1600.png 1600w, /images/bottom-frame-1.png 1812w"
                       alt=""
                       className="border-detail-bottom image-crisp"
                     />
