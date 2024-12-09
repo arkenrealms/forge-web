@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import history from '~/routerHistory';
 import { Skeleton, Card, Card3 } from '~/ui';
+import { trpc } from '~/utils/trpc';
+import * as Arken from '@arken/node';
 
 const Zones = function () {
+  const { data: npcs } = trpc.seer.core.getCharacters.useQuery({
+    type: 'NPC',
+  });
+
   return (
     <Card3 style={{ marginTop: 10 }}>
       <Card>
@@ -20,7 +26,7 @@ const Zones = function () {
           <div className="container hide-overflow w-container">
             <div className="locationheader">
               <div className="locationheaderbg" />
-              <h1 className="locationtitle">Zones</h1>
+              <h1 className="locationtitle">NPCs</h1>
             </div>
             <div className="locationdescription w-richtext">
               <p>The majority of NPCs in Heart of the Oasis are native to Haerra, but some are not.</p>

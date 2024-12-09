@@ -28,6 +28,9 @@ export interface MenuEntry {
   icon?: string;
   items?: MenuEntry[];
   href?: string;
+  isCryptoMode?: boolean;
+  isExpertMode?: boolean;
+  isAuthed?: boolean;
   calloutClass?: string;
   initialOpenState?: boolean;
 }

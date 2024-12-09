@@ -1,12 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import { Nft } from '~/config/constants/types'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { Nft } from '~/config/constants/types';
 
 interface PreviewProps {
-  nft: Nft
-  onClick?: () => void
-  isOwned?: boolean
+  nft: Nft;
+  onClick?: () => void;
+  isOwned?: boolean;
 }
 
 const Container = styled.div`
@@ -15,7 +15,7 @@ const Container = styled.div`
   width: 100%;
   // overflow: hidden;
   // padding-bottom: 100%;
-`
+`;
 
 const StyledImage = styled.img`
   // position: absolute;
@@ -26,16 +26,16 @@ const StyledImage = styled.img`
   height: 100%;
   object-fit: cover;
   border-radius: 32px 32px 0 0;
-`
+`;
 
 const StyledVideo = styled.video`
   height: 100%;
   width: 100%;
-`
+`;
 
 const Preview: React.FC<PreviewProps> = ({ nft, onClick, isOwned = false }) => {
-  const { images, name, video } = nft
-  const previewImageSrc = `/images/nfts/${images.lg}`
+  const { images, name, video } = nft;
+  const previewImageSrc = `/images/character-classes/${images.lg}`;
 
   if (video) {
     const videoComponent = (
@@ -43,7 +43,7 @@ const Preview: React.FC<PreviewProps> = ({ nft, onClick, isOwned = false }) => {
         <source src={video.webm} type="video/webm" />
         <source src={video.mp4} type="video/mp4" />
       </StyledVideo>
-    )
+    );
 
     return isOwned ? (
       <Link to={images.ipfs} target="_blank" rel="noreferrer noopener">
@@ -51,10 +51,10 @@ const Preview: React.FC<PreviewProps> = ({ nft, onClick, isOwned = false }) => {
       </Link>
     ) : (
       videoComponent
-    )
+    );
   }
 
-  const previewImage = <StyledImage src={previewImageSrc} alt={name} onClick={onClick} />
+  const previewImage = <StyledImage src={previewImageSrc} alt={name} onClick={onClick} />;
 
   return (
     <Container>
@@ -66,7 +66,7 @@ const Preview: React.FC<PreviewProps> = ({ nft, onClick, isOwned = false }) => {
       {previewImage}
       {/* )} */}
     </Container>
-  )
-}
+  );
+};
 
-export default Preview
+export default Preview;

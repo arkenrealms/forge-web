@@ -100,7 +100,7 @@ const Mint: React.FC<any> = () => {
                 name="profilePicture"
                 key={walletNft.characterId}
                 value={firstTokenId}
-                image={`/images/nfts/${walletNft.images.md}`}
+                image={`/images/character-classes/${walletNft.images.md}`}
                 isChecked={firstTokenId === tokenId}
                 onChange={(value: string) => actions.setTokenId(parseInt(value, 10))}
                 disabled={isApproving || isConfirming || isConfirmed}>
@@ -119,7 +119,7 @@ const Mint: React.FC<any> = () => {
                 key={nft.characterId}
                 name="mintStarter"
                 value={nft.characterId}
-                image={`/images/nfts/${nft.images.md}`}
+                image={`/images/character-classes/${nft.images.md}`}
                 isChecked={characterId === nft.characterId}
                 onChange={handleChange}
                 disabled={isApproving || isConfirming || isConfirmed || !hasMinimumRuneRequired}>

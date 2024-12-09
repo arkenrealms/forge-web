@@ -114,9 +114,9 @@ const CardHeading: React.FC<ExpandableSectionProps> = ({
   const fullIsRune = firstSymbol && firstSymbol !== 'RUNE' ? runes[firstSymbol.toLowerCase()] : false;
   const firstIsRune = firstSymbol && firstSymbol !== 'RUNE' ? runes[firstSymbol.toLowerCase()] : false;
   const secondIsRune = secondSymbol && secondSymbol !== 'RUNE' ? runes[secondSymbol.toLowerCase()] : false;
-  const fullIcon = `/images/new-runes/${firstSymbol}.png`;
-  const firstIcon = `/images/new-runes/${firstSymbol}.png`;
-  const secondIcon = `/images/new-runes/${secondSymbol}.png`;
+  const fullIcon = `/images/runes/${firstSymbol}.png`;
+  const firstIcon = `/images/runes/${firstSymbol}.png`;
+  const secondIcon = `/images/runes/${secondSymbol}.png`;
 
   return (
     <Wrapper justifyContent="space-between" alignItems="center" mb="12px">

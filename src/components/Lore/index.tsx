@@ -1916,79 +1916,54 @@ const Lore = () => {
     </div> */}
 
         <audio id="music" loop>
-          <source src="https://arken.gg/sound/music/haerra1.mp3" type="audio/mpeg" />
+          <source src="/sound/music/haerra1.mp3" type="audio/mpeg" />
         </audio>
 
         <audio id="map-hover">
-          <source src="https://arken.gg/sound/fx/map_hover.mp3" type="audio/mpeg" />
+          <source src="/sound/fx/map_hover.mp3" type="audio/mpeg" />
         </audio>
 
         <audio id="zoom-hover-in">
-          <source src="https://arken.gg/sound/fx/hover_generic_04.mp3" type="audio/mpeg" />
+          <source src="/sound/fx/hover_generic_04.mp3" type="audio/mpeg" />
         </audio>
 
         <audio id="zoom-hover-out">
-          <source src="https://arken.gg/sound/fx/unhover_soft.mp3" type="audio/mpeg" />
+          <source src="/sound/fx/unhover_soft.mp3" type="audio/mpeg" />
         </audio>
 
         <audio id="zoom-click">
-          <source src="https://arken.gg/sound/fx/click_generic_01.mp3" type="audio/mpeg" />
+          <source src="/sound/fx/click_generic_01.mp3" type="audio/mpeg" />
         </audio>
 
         <audio id="dot-click">
-          <source src="https://arken.gg/sound/fx/map_click.mp3" type="audio/mpeg" />
+          <source src="/sound/fx/map_click.mp3" type="audio/mpeg" />
         </audio>
 
         <audio id="slide-open">
-          <source src="https://arken.gg/sound/fx/slide_open.mp3" type="audio/mpeg" />
+          <source src="/sound/fx/slide_open.mp3" type="audio/mpeg" />
         </audio>
 
         <audio id="slide-close">
-          <source src="https://arken.gg/sound/fx/slide_close.mp3" type="audio/mpeg" />
+          <source src="/sound/fx/slide_close.mp3" type="audio/mpeg" />
         </audio>
 
         <div className="wrap w-dyn-list">
           <div role="list" className="list w-dyn-items">
             <div role="listitem" className="item w-dyn-item active">
               <a href="#" className="item-link w-inline-block">
-                <img
-                  src="/images/6191209fd9f12099f6491727_back-arrow.svg"
-                  loading="lazy"
-                  alt=""
-                  className="item-link_arrow"
-                />
+                <img src="/images/back-arrow.svg" loading="lazy" alt="" className="item-link_arrow" />
               </a>
               <div className="border">
                 <div className="border-images is--top">
-                  <img
-                    src="/images/61935114b8097608f785185e_c1-top-right.png"
-                    loading="lazy"
-                    alt=""
-                    className="border-image is--1"
-                  />
+                  <img src="/images/c1-top-right.png" loading="lazy" alt="" className="border-image is--1" />
                   <div className="line"></div>
-                  <img
-                    src="/images/619120a6e44b94d27de059a6_border.png"
-                    loading="lazy"
-                    alt=""
-                    className="border-image"
-                  />
+                  <img src="/images/border.png" loading="lazy" alt="" className="border-image" />
                 </div>
                 <div className="side-border"></div>
                 <div className="border-images">
-                  <img
-                    src="/images/619120a6e44b94d27de059a6_border.png"
-                    loading="lazy"
-                    alt=""
-                    className="border-image is--3"
-                  />
+                  <img src="/images/border.png" loading="lazy" alt="" className="border-image is--3" />
                   <div className="line"></div>
-                  <img
-                    src="/images/619120a6e44b94d27de059a6_border.png"
-                    loading="lazy"
-                    alt=""
-                    className="border-image is--4"
-                  />
+                  <img src="/images/border.png" loading="lazy" alt="" className="border-image is--4" />
                 </div>
               </div>
               <div id="item-content" className="item-content">

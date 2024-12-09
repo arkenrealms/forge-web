@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { Flex, Card, Card3 } from '~/ui';
+import { trpc } from '~/utils/trpc';
+import * as Arken from '@arken/node';
 
 const Items = function () {
+  const { data: craftedItems } = trpc.seer.item.getItems.useQuery({
+    distribution: 'Crafted',
+  });
+
+  // TODO: group by type
+
   return (
     <Card3 style={{ marginTop: 10 }}>
       <Card>
@@ -31,6 +39,57 @@ const Items = function () {
             <h2 id="w-node-bde60e1f-0335-b179-271c-7d40fcbd5f61-3d100cc1" className="pagetitle itemcattitle">
               Crafted&nbsp;Items
             </h2>
+            {craftedItems?.map((item: Arken.Item.Types.Item) => {
+              return (
+                <div className="itemtypesection">
+                  <h3 className="heading-2 itemtypetitle">Swords</h3>
+                  <div className="w-dyn-list">
+                    <div role="list" className="collection-list w-dyn-items">
+                      <div role="listitem" className="w-dyn-item">
+                        <a data-load-page="x" href="/item/fury" className="list-item collapse-sm w-inline-block">
+                          <div className="div-block-19">
+                            <img
+                              src="https://assets.website-files.com/618ec26aa362f88cee86d122/621875752d2cb190e1313643_00002.png"
+                              loading="lazy"
+                              width={32}
+                              alt=""
+                              className="image-7"
+                            />
+                            <div className="no-image w-condition-invisible">
+                              <div>
+                                No <br />
+                                image{' '}
+                              </div>
+                            </div>
+                            <div className="list-link">{item.name}</div>
+                          </div>
+                        </a>
+                      </div>
+                      <div role="listitem" className="w-dyn-item">
+                        <a data-load-page="x" href="/item/steel" className="list-item collapse-sm w-inline-block">
+                          <div className="div-block-19">
+                            <img
+                              src="https://assets.website-files.com/618ec26aa362f88cee86d122/62187579d1c53271d873fbe8_00001.png"
+                              loading="lazy"
+                              width={32}
+                              alt=""
+                              className="image-7"
+                            />
+                            <div className="no-image w-condition-invisible">
+                              <div>
+                                No <br />
+                                image{' '}
+                              </div>
+                            </div>
+                            <div className="list-link">Steel</div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
             <div className="itemtypesection">
               <h3 className="heading-2 itemtypetitle">Swords</h3>
               <div className="w-dyn-list">

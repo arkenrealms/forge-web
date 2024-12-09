@@ -77,6 +77,9 @@ interface MenuEntry {
   label: string;
   icon?: string;
   href?: string;
+  isCryptoMode?: boolean;
+  isExpertMode?: boolean;
+  isAuthed?: boolean;
   initialOpenState?: boolean;
   items?: MenuEntry[];
 }
@@ -106,8 +109,16 @@ interface Route {
 //   MoonIcon: <MoonOutlined />,
 // };
 
-function convertMenuEntriesToRoutes(entries: MenuEntry[]): Route[] {
+function convertMenuEntriesToRoutes(
+  entries: MenuEntry[],
+  isAuthed: boolean,
+  isCryptoMode: boolean,
+  isExpertMode: boolean
+): Route[] {
   return entries.map((entry) => {
+    if (entry.isAuthed && !isAuthed) return undefined;
+    if (entry.isCryptoMode && !isCryptoMode) return undefined;
+    if (entry.isExpertMode && !isExpertMode) return undefined;
     const Icon = entry.icon ? Icons[entry.icon] : undefined;
     const IconElement = Icon ? <Icon width="24px" mr="8px" /> : undefined;
     const route: Route = {
@@ -116,7 +127,7 @@ function convertMenuEntriesToRoutes(entries: MenuEntry[]): Route[] {
       icon: IconElement,
     };
     if (entry.items && entry.items.length > 0) {
-      route.routes = convertMenuEntriesToRoutes(entry.items);
+      route.routes = convertMenuEntriesToRoutes(entry.items, isAuthed, isCryptoMode, isExpertMode);
     }
     return route;
   });
@@ -435,7 +446,7 @@ export default ({ children, pageState }) => {
   const location = useLocation();
 
   const menuConfig = menus.arken; // Choose the desired menu configuration
-  const routes = convertMenuEntriesToRoutes(menuConfig);
+  const routes = convertMenuEntriesToRoutes(menuConfig, !!auth?.profile, auth?.isCryptoMode, auth?.isExpertMode);
   const route = {
     path: '/',
     routes,
@@ -463,7 +474,7 @@ export default ({ children, pageState }) => {
 
   const headingText = brandHeading[brand] || brandHeading.rune;
   const subheadingText = brandSubheading[brand] || brandSubheading.rune;
-
+  console.log(289398289, auth?.profile?.mode);
   return (
     <div
       id="main-layout"
@@ -521,10 +532,10 @@ export default ({ children, pageState }) => {
         menu={{
           collapsedShowGroupTitle: true,
           defaultOpenAll: false,
-          request: async () => {
-            // await waitTime(2000);
-            return routes;
-          },
+          // request: async () => {
+          //   // await waitTime(2000);
+          //   return routes;
+          // },
         }}
         avatarProps={
           auth?.profile?.name
@@ -540,10 +551,11 @@ export default ({ children, pageState }) => {
                           {
                             key: 'logout',
                             icon: <LogoutOutlined />,
-                            label: '退出登录',
+                            label: 'Sign Out',
                           },
                         ],
-                      }}>
+                      }}
+                      onOpenChange={() => history('/account')}>
                       {dom}
                     </Dropdown>
                   );
@@ -609,13 +621,13 @@ export default ({ children, pageState }) => {
               }}>
               <div>
                 <Select
-                  prefix="Expert Level: "
+                  prefix="Experience: "
                   placeholder="Choose"
-                  defaultValue={auth?.profile?.mode || 'Gamer'}
+                  value={auth?.profile?.mode || 'Gamer'}
                   onChange={(value: string) => auth.setProfileMode(value)}
                   options={[
                     { value: 'gamer', label: 'Gamer' },
-                    { value: 'crypt', label: 'Crypto' },
+                    { value: 'crypto', label: 'Crypto' },
                     { value: 'arken', label: 'Arkenian' },
                   ]}
                 />
@@ -677,7 +689,7 @@ export default ({ children, pageState }) => {
           </ProCard>
         </PageContainer> */}
       </ProLayout>
-      <SettingDrawer
+      {/* <SettingDrawer
         pathname={location.pathname}
         getContainer={() => document.getElementById('main-layout')}
         settings={settings}
@@ -686,7 +698,7 @@ export default ({ children, pageState }) => {
           setSetting(changeSetting);
         }}
         disableUrlParams
-      />
+      /> */}
     </div>
   );
 };

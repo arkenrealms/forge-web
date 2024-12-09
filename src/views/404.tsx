@@ -148,7 +148,7 @@ const NotFound = ({ defaultNotFoundValue }) => {
                   image-rendering: pixelated;
                 }
               `}
-              onClick={() => history.push('/infinite')}>
+              onClick={() => history.push('/games/infinite')}>
               <img src={InfiniteIcon} />
               <p>Infinite Arena</p>
             </div>
@@ -172,7 +172,7 @@ const NotFound = ({ defaultNotFoundValue }) => {
                   image-rendering: pixelated;
                 }
               `}
-              onClick={() => history.push('/evolution')}>
+              onClick={() => history.push('/games/evolution')}>
               <img src={EvolutionIcon} />
               <p>Evolution Isles</p>
             </div>
@@ -196,7 +196,7 @@ const NotFound = ({ defaultNotFoundValue }) => {
                   image-rendering: pixelated;
                 }
               `}
-              onClick={() => history.push('/sanctuary')}>
+              onClick={() => history.push('/games/oasis')}>
               <img src={SanctuaryIcon} />
               <p>Heart of the Oasis</p>
             </div>

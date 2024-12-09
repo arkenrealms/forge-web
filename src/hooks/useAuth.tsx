@@ -5,7 +5,7 @@ import { connectorsByName } from '~/utils/web3React';
 import React, { useContext, useState, useCallback, useEffect, createContext } from 'react';
 import _ from 'lodash';
 import type { NotificationPlacement } from 'antd/es/notification/interface';
-import { isCryptoMode } from '~/utils/mode';
+import { isCryptoMode, isExpertMode } from '~/utils/mode';
 // import useSettings from './useSettings';
 import { usePrompt } from './usePrompt';
 import config from '../config';
@@ -20,6 +20,7 @@ const AuthContext = createContext({
   permissions: {} as any,
   isLoading: true,
   isCryptoMode: false,
+  isExpertMode: false,
   login: () => {},
   logout: () => {},
   setProfileMode: (mode: string) => {},
@@ -85,10 +86,6 @@ const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
     window.localStorage.removeItem('LoginAs');
   }
 
-  // async function setProfileMode() {
-
-  // }
-
   return (
     <AuthContext.Provider
       value={{
@@ -97,8 +94,12 @@ const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
         login,
         logout,
         isLoading,
-        setProfileMode,
+        setProfileMode: async function (value: string) {
+          await setProfileMode(value);
+          authSilent();
+        },
         isCryptoMode: isCryptoMode(profile?.mode),
+        isExpertMode: isExpertMode(profile?.mode),
       }}>
       {children}
     </AuthContext.Provider>

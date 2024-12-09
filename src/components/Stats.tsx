@@ -9,6 +9,7 @@ import CardValue from '~/components/raid/CardValue';
 import useCache from '~/hooks/useCache';
 import SimpleLineChart from '~/components/SimpleLineChart';
 import { safeRuneList } from '~/config';
+import { useAuth } from '~/hooks/useAuth';
 import { trpc } from '~/utils/trpc';
 import type * as Arken from '@arken/node';
 
@@ -61,6 +62,7 @@ const Cards = styled(BaseLayout)`
 
 const Stats = () => {
   const { t } = useTranslation();
+  const auth = useAuth();
 
   const { data: game } = trpc.seer.game.getGame.useQuery<Arken.Game.Types.Game>({
     where: {
@@ -133,71 +135,73 @@ const Stats = () => {
   return (
     <>
       <Cards>
-        <Card3>
-          <CardBody>
-            <Heading size="xl" mb="24px">
-              {t('Token Stats')}
-            </Heading>
-            {runes.map((rune) => {
-              const price = game.stat.meta.runes[rune].price || 0;
-              const totalSupply = game.stat.meta.runes[rune].totalSupply || 0;
-              const totalBurned = game.stat.meta.runes[rune].totalBurned || 0;
-              const circulatingSupply = game.stat.meta.runes[rune].circulatingSupply || 0;
-              const marketCap = price * circulatingSupply || 0;
+        {auth?.isCryptoMode ? (
+          <Card3>
+            <CardBody>
+              <Heading size="xl" mb="24px">
+                {t('Token Stats')}
+              </Heading>
+              {runes.map((rune) => {
+                const price = game.stat.meta.runes[rune].price || 0;
+                const totalSupply = game.stat.meta.runes[rune].totalSupply || 0;
+                const totalBurned = game.stat.meta.runes[rune].totalBurned || 0;
+                const circulatingSupply = game.stat.meta.runes[rune].circulatingSupply || 0;
+                const marketCap = price * circulatingSupply || 0;
 
-              if (rune !== runes[runes.length - 1] && rune !== 'rune') {
-                totalMarketCap += marketCap;
-              }
+                if (rune !== runes[runes.length - 1] && rune !== 'rune') {
+                  totalMarketCap += marketCap;
+                }
 
-              return (
-                <div key={rune}>
-                  <Row>
-                    <br />
-                  </Row>
-                  <Row>
-                    <Text fontSize="1rem">{t(`${rune.toUpperCase()} Price`)}</Text>
-                    {price && (
+                return (
+                  <div key={rune}>
+                    <Row>
+                      <br />
+                    </Row>
+                    <Row>
+                      <Text fontSize="1rem">{t(`${rune.toUpperCase()} Price`)}</Text>
+                      {price && (
+                        <Text fontSize="1rem" bold>
+                          ${price.toFixed(4)}
+                        </Text>
+                      )}
+                    </Row>
+                    <Row>
+                      <Text fontSize="1rem">{t(`${rune.toUpperCase()} Market Cap`)}</Text>
+                      {circulatingSupply && (
+                        <Text fontSize="1rem" bold>
+                          ${marketCap.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                        </Text>
+                      )}
+                    </Row>
+                    <Row>
+                      <Text fontSize="1rem">{t(`Max ${rune.toUpperCase()} Supply`)}</Text>
                       <Text fontSize="1rem" bold>
-                        ${price.toFixed(4)}
+                        {circulatingSupply.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                       </Text>
-                    )}
-                  </Row>
-                  <Row>
-                    <Text fontSize="1rem">{t(`${rune.toUpperCase()} Market Cap`)}</Text>
-                    {circulatingSupply && (
-                      <Text fontSize="1rem" bold>
-                        ${marketCap.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                    </Row>
+                    <Row>
+                      <Text fontSize="1rem">
+                        {totalSupply.toLocaleString(undefined, { maximumFractionDigits: 0 })} minted -{' '}
+                        {totalBurned.toLocaleString(undefined, { maximumFractionDigits: 0 })} burned
                       </Text>
-                    )}
-                  </Row>
-                  <Row>
-                    <Text fontSize="1rem">{t(`Max ${rune.toUpperCase()} Supply`)}</Text>
-                    <Text fontSize="1rem" bold>
-                      {circulatingSupply.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                    </Text>
-                  </Row>
-                  <Row>
-                    <Text fontSize="1rem">
-                      {totalSupply.toLocaleString(undefined, { maximumFractionDigits: 0 })} minted -{' '}
-                      {totalBurned.toLocaleString(undefined, { maximumFractionDigits: 0 })} burned
-                    </Text>
-                  </Row>
-                  <Row>
-                    <br />
-                  </Row>
-                </div>
-              );
-            })}
-            <Row>
-              <Text fontSize="1rem" bold>
-                {t('TOTAL MARKET CAP')}
-              </Text>
-              <Text fontSize="1rem" bold>
-                ${totalMarketCap.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-              </Text>
-            </Row>
-          </CardBody>
-        </Card3>
+                    </Row>
+                    <Row>
+                      <br />
+                    </Row>
+                  </div>
+                );
+              })}
+              <Row>
+                <Text fontSize="1rem" bold>
+                  {t('TOTAL MARKET CAP')}
+                </Text>
+                <Text fontSize="1rem" bold>
+                  ${totalMarketCap.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                </Text>
+              </Row>
+            </CardBody>
+          </Card3>
+        ) : null}
         <Card3>
           <CardBody>
             <Heading size="xl" mb="24px">
@@ -435,19 +439,19 @@ const Stats = () => {
               )}
             </Row>
             <Row>
-              <Text fontSize="1rem">{t('Black Drake Scale (P2E Reward)')}</Text>
+              <Text fontSize="1rem">{t('Black Drake Scale (Reward)')}</Text>
               {game.stat.meta.items[1207]?.total && (
                 <CardValue fontSize="1rem" value={game.stat.meta.items[1207]?.total} decimals={0} />
               )}
             </Row>
             <Row>
-              <Text fontSize="1rem">{t('Black Drake Talon (P2E Reward)')}</Text>
+              <Text fontSize="1rem">{t('Black Drake Talon (Reward)')}</Text>
               {game.stat.meta.items[1208]?.total && (
                 <CardValue fontSize="1rem" value={game.stat.meta.items[1208]?.total} decimals={0} />
               )}
             </Row>
             <Row>
-              <Text fontSize="1rem">{t('Glow Fly Powder (P2E Reward)')}</Text>
+              <Text fontSize="1rem">{t('Glow Fly Powder (Reward)')}</Text>
               {game.stat.meta.items[1209]?.total && (
                 <CardValue fontSize="1rem" value={game.stat.meta.items[1209]?.total} decimals={0} />
               )}

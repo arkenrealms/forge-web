@@ -93,7 +93,7 @@ const getProfile = async (address: string): Promise<GetProfileResponse> => {
         `profile_${address}`,
         {
           username,
-          avatar: `https://swap.arken.gg/images/nfts/${nft.images.sm}`,
+          avatar: `https://swap.arken.gg/images/character-classes/${nft.images.sm}`,
         },
         { domain: window.location.hostname, secure: true, expires: 30 }
       );

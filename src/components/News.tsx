@@ -109,7 +109,7 @@ const newsItems = [
     description: `We are giving away another Founder's Cube and Fully Equipped Character! ($650 value!). Be one of the first to play Infinite Arena by winning a Founder's Cube!`,
   },
   {
-    title: 'Sanctuary Pre-Alpha Sneak Peek',
+    title: 'Oasis Pre-Alpha Sneak Peek',
     href: 'https://t.co/w6ymcB6fcX',
     image: 'https://pbs.twimg.com/media/FKtrPCdVIAEmZL7?format=jpg&name=large',
     date: 'March 1, 2022',

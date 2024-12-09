@@ -1,22 +1,22 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import styled from 'styled-components'
-import { Link as RouterLink, NavLink } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { Button, Tag, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui'
-import { Modal, useModal, InjectedModalProps } from '~/components/Modal'
-import Page from '~/components/layout/Page'
-import { PurchaseModal } from '~/components/PurchaseModal'
-import PageWindow from '~/components/PageWindow'
-import BottomCTA from '~/components/BottomCTA'
-import i18n from '~/config/i18n'
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import styled from 'styled-components';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Button, Tag, Flex, Card, Heading, CardBody, Link, BaseLayout, OpenNewIcon } from '~/ui';
+import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
+import Page from '~/components/layout/Page';
+import { PurchaseModal } from '~/components/PurchaseModal';
+import PageWindow from '~/components/PageWindow';
+import BottomCTA from '~/components/BottomCTA';
+import i18n from '~/config/i18n';
 
 const Image = styled.img`
   border-radius: 7px;
-`
+`;
 
 const BoxHeading = styled(Heading)`
   margin-bottom: 16px;
-`
+`;
 const PitchCard = styled.div`
   ${({ theme }) => theme.mediaQueries.lg} {
     display: flex;
@@ -31,11 +31,11 @@ const PitchCard = styled.div`
     & > div {
     }
   }
-`
+`;
 const Rules = () => {
-  const { t } = useTranslation()
-  const [showVision, setShowVision] = useState(false)
-  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />)
+  const { t } = useTranslation();
+  const [showVision, setShowVision] = useState(false);
+  const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
 
   return (
     <Page>
@@ -47,7 +47,7 @@ const Rules = () => {
         <CardBody>
           <PitchCard>
             <div style={{ width: '280px', marginTop: '-20px' }}>
-              <img src="/images/nfts/sorceress.png" alt="Metaverse"></img>
+              <img src="/images/character-classes/sorceress.png" alt="Metaverse"></img>
             </div>
             <div>
               <BoxHeading as="h2" size="xl">
@@ -75,7 +75,7 @@ const Rules = () => {
       </Card>
       <BottomCTA />
     </Page>
-  )
-}
+  );
+};
 
-export default Rules
+export default Rules;

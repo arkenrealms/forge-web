@@ -117,7 +117,7 @@ const ProfilePicture: React.FC<any> = () => {
                 name="profilePicture"
                 key={walletNft.characterId}
                 value={firstTokenId}
-                image={`/images/nfts/${walletNft.images.md}`}
+                image={`/images/character-classes/${walletNft.images.md}`}
                 isChecked={firstTokenId === tokenId}
                 onChange={(value: string) => actions.setTokenId(parseInt(value, 10))}>
                 <Text bold>{walletNft.name}</Text>

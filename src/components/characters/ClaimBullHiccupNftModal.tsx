@@ -45,10 +45,10 @@ const renderNftPreview = (isBullClaimable: boolean, isHiccupClaimable: boolean) 
   }
 
   if (isBullClaimable) {
-    return <NftImage src={`/images/nfts/${bullNft.images.md}`} height="128px" width="128px" alt="nft" />;
+    return <NftImage src={`/images/character-classes/${bullNft.images.md}`} height="128px" width="128px" alt="nft" />;
   }
 
-  return <NftImage src={`/images/nfts/${hiccupNft.images.md}`} height="128px" width="128px" alt="nft" />;
+  return <NftImage src={`/images/character-classes/${hiccupNft.images.md}`} height="128px" width="128px" alt="nft" />;
 };
 
 const ClaimBullHiccupNftModal: React.FC<ClaimBullHiccupNftModalProps> = ({
@@ -62,9 +62,9 @@ const ClaimBullHiccupNftModal: React.FC<ClaimBullHiccupNftModalProps> = ({
 
   // This is required because the modal exists outside the Router
   const handleClick = () => {
-    onDismiss()
-    history.push('/characters')
-  }
+    onDismiss();
+    history.push('/characters');
+  };
 
   useEffect(() => {
     delay(showConfetti, 100);

@@ -59,7 +59,7 @@ const Rules = () => {
 
             <PitchCard>
               <div style={{ width: '280px', marginTop: '-20px' }}>
-                <img src="/images/nfts/sorceress.png" alt="Omniverse"></img>
+                <img src="/images/character-classes/sorceress.png" alt="Omniverse"></img>
               </div>
               <div>
                 <BoxHeading as="h2" size="xl">

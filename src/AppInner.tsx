@@ -35,7 +35,7 @@ import {
 } from 'react-router-dom';
 import { Panel } from 'react95';
 import { useProfile } from '~/state/hooks';
-import GlobalStyle from '~/GlobalStyles';
+import GlobalStyle from '~/global-styles';
 import styled, { css } from 'styled-components';
 import { Button, Flex, Skeleton } from '~/ui';
 import Menu from '~/components/Menu/Menu';

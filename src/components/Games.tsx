@@ -100,7 +100,7 @@ const Rules = () => {
   const games = [
     {
       name: 'Evolution Isles',
-      path: '/evolution',
+      path: '/games/evolution',
       image: '/images/games/evolution-card.png',
       description: (
         <ul>
@@ -113,7 +113,7 @@ const Rules = () => {
     },
     {
       name: 'Infinite Arena',
-      path: '/infinite',
+      path: '/games/infinite',
       image: '/images/games/infinite-card.png',
       description: (
         <ul>
@@ -127,7 +127,7 @@ const Rules = () => {
     },
     {
       name: 'Heart of the Oasis',
-      path: '/sanctuary',
+      path: '/games/oasis',
       image: '/images/games/sanctuary-card.png',
       description: (
         <ul>

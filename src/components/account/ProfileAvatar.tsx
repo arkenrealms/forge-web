@@ -1,10 +1,10 @@
-import React from 'react'
-import { NoProfileAvatarIcon } from '~/ui'
-import { Profile } from '~/state/types'
-import styled from 'styled-components'
+import React from 'react';
+import { NoProfileAvatarIcon } from '~/ui';
+import { Profile } from '~/state/types';
+import styled from 'styled-components';
 
 export interface ProfileAvatarProps {
-  profile: Profile
+  profile: Profile;
 }
 
 const TeamAvatar = styled.img`
@@ -25,7 +25,7 @@ const TeamAvatar = styled.img`
     height: calc(256px / 6);
     width: calc(256px / 6);
   }
-`
+`;
 
 const AvatarWrapper = styled.div<{ bg: string }>`
   background: url('${({ bg }) => bg}');
@@ -46,7 +46,7 @@ const AvatarWrapper = styled.div<{ bg: string }>`
     height: 128px;
     width: 128px;
   }
-`
+`;
 // TODO: replace with no provile avatar icon
 const AvatarInactive = styled(NoProfileAvatarIcon)`
   height: 64px;
@@ -56,15 +56,15 @@ const AvatarInactive = styled(NoProfileAvatarIcon)`
     height: 128px;
     width: 128px;
   }
-`
+`;
 
 const ProfileAvatar: React.FC<ProfileAvatarProps> = ({ profile }) => {
   return (
-    <AvatarWrapper bg={`/images/nfts/${profile.nft?.images?.md}`}>
+    <AvatarWrapper bg={`/images/character-classes/${profile.nft?.images?.md}`}>
       {!profile.isActive ? <AvatarInactive /> : null}
       {profile.team ? <TeamAvatar src={`/images/teams/${profile.team.images.alt}`} alt={profile.team.name} /> : null}
     </AvatarWrapper>
-  )
-}
+  );
+};
 
-export default ProfileAvatar
+export default ProfileAvatar;

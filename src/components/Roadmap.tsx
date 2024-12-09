@@ -367,7 +367,7 @@ const Roadmap = () => {
             ),
             status: 'done',
             notes: [
-              <>New: EL ELD TIR NEF ITH TAL RAL ORT THUL AMN SOL SHAEL DOL HEL</>,
+              <>New: EX ELM TYR NEN ISA TATO RO ORE THAL ASH SOLO SEN DA HAN</>,
               <>
                 Link to <RouterLink to="/runes">Runes</RouterLink>
               </>,
@@ -427,7 +427,7 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>
-                Link to <RouterLink to="/guilds">Guilds</RouterLink>
+                Link to <RouterLink to="/about/guilds">Guilds</RouterLink>
               </>,
             ],
           },
@@ -535,7 +535,7 @@ const Roadmap = () => {
             ),
             status: 'done',
             notes: [
-              <>New: IO LUM KO FAL LO ZOD</>,
+              <>New: ION LUX KA FUS LOR ZENO</>,
               <>
                 Link to <RouterLink to="/runes">Runes</RouterLink>
               </>,
@@ -686,7 +686,7 @@ const Roadmap = () => {
             ),
             status: 'done',
             notes: [
-              <>New: LEM VEX PUL UM MAL</>,
+              <>New: LENI VAL PAI ULN MOR</>,
               <>
                 Link to <RouterLink to="/runes">Runes</RouterLink>
               </>,
@@ -815,7 +815,7 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>
-                Link to <RouterLink to="/infinite">Infinite</RouterLink>
+                Link to <RouterLink to="/games/infinite">Infinite</RouterLink>
               </>,
             ],
           },
@@ -862,7 +862,7 @@ const Roadmap = () => {
             notes: [
               <>Lore concept explainers and replaces wiki + docs</>,
               <>
-                Link to <RouterLink to="/lore">Nexus</RouterLink>
+                Link to <RouterLink to="/games/oasis/lore">Nexus</RouterLink>
               </>,
             ],
           },
@@ -954,7 +954,7 @@ const Roadmap = () => {
             ),
             status: 'done',
             notes: [
-              <>New: IST GUL</>,
+              <>New: ISK GON</>,
               <>
                 Link to <RouterLink to="/runes">Runes</RouterLink>
               </>,
@@ -980,7 +980,7 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>
-                Link to <RouterLink to="/infinite">Infinite</RouterLink>
+                Link to <RouterLink to="/games/infinite">Infinite</RouterLink>
               </>,
             ],
           },
@@ -1033,7 +1033,7 @@ const Roadmap = () => {
             status: 'done',
             notes: [
               <>
-                Link to <RouterLink to="/infinite">Infinite</RouterLink>
+                Link to <RouterLink to="/games/infinite">Infinite</RouterLink>
               </>,
               <>
                 Link to <RouterLink to="/about/updates">Patch Notes</RouterLink>
@@ -1118,11 +1118,8 @@ const Roadmap = () => {
             notes: [
               <>
                 Launched first phase of DAO:{' '}
-                <a
-                  href="https://arkenrealms.medium.com/rune-metaverse-dao-1a90f6e1cd18"
-                  target="_blank"
-                  rel="noreferrer noopener">
-                  https://arkenrealms.medium.com/rune-metaverse-dao-1a90f6e1cd18
+                <a href="https://arken.gg/news/arken-council" target="_blank" rel="noreferrer noopener">
+                  https://arken.gg/news/arken-council
                 </a>
               </>,
             ],
@@ -1258,7 +1255,7 @@ const Roadmap = () => {
             ),
             status: 'working',
             notes: [
-              <>New: SUR BER JAH CHAM ETH</>,
+              <>New: SU BERU JUA CHIN EVA</>,
               <>
                 Link to <RouterLink to="/runes">Runes</RouterLink>
               </>,

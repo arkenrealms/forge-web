@@ -574,7 +574,7 @@ const Home: React.FC<any> = () => {
         <CardBody>
           {!isMobile ? (
             <img
-              src="/images/nfts/necromancer.png"
+              src="/images/character-classes/necromancer.png"
               alt="Necromancer"
               style={{ float: 'left', width: '240px', marginTop: '-20px' }}></img>
           ) : null}
@@ -587,7 +587,7 @@ const Home: React.FC<any> = () => {
             to start earning runes instantly.
           </p>
           {isMobile ? (
-            <img src="/images/nfts/necromancer.png" alt="Necromancer" style={{ width: '240px' }}></img>
+            <img src="/images/character-classes/necromancer.png" alt="Necromancer" style={{ width: '240px' }}></img>
           ) : null}
           {!isMobile ? (
             <>

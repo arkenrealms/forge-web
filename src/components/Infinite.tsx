@@ -891,7 +891,7 @@ const Home: React.FC<any> = () => {
             <BigCard>
               {!isMobile ? (
                 <img
-                  src="/images/nfts/sorceress.png"
+                  src="/images/character-classes/sorceress.png"
                   alt="Infinite Rewards"
                   style={{ float: 'left', width: '280px', marginTop: '-20px' }}></img>
               ) : null}
@@ -914,7 +914,10 @@ const Home: React.FC<any> = () => {
               )}
             </p> */}
               {isMobile ? (
-                <img src="/images/nfts/sorceress.png" alt="Infinite Rewards" style={{ width: '240px' }}></img>
+                <img
+                  src="/images/character-classes/sorceress.png"
+                  alt="Infinite Rewards"
+                  style={{ width: '240px' }}></img>
               ) : null}
               {!isMobile ? (
                 <>

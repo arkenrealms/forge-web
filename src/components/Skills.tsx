@@ -23,29 +23,29 @@ const Skills = () => {
   const [skills, setSkills] = useState([]);
   const [currentSkill, setCurrentSkill] = useState(null);
 
-  useEffect(() => {
-    if (skills.length) return;
+  // useEffect(() => {
+  //   if (skills.length) return;
 
-    const init = async function () {
-      const res = ((await (await fetch(`${endpoints.cache}/skills.json`)).json()) as any) || [];
+  //   const init = async function () {
+  //     const res = ((await (await fetch(`${endpoints.cache}/skills.json`)).json()) as any) || [];
 
-      setSkills(res.sort((a, b) => a.name.localeCompare(b.name)));
-    };
+  //     setSkills(res.sort((a, b) => a.name.localeCompare(b.name)));
+  //   };
 
-    init();
-  }, [skills, setSkills]);
+  //   init();
+  // }, [skills, setSkills]);
 
-  useEffect(() => {
-    if (items.length) return;
+  // useEffect(() => {
+  //   if (items.length) return;
 
-    const init = async function () {
-      const res = ((await (await fetch(`${endpoints.cache}/items.json`)).json()) as any) || [];
+  //   const init = async function () {
+  //     const res = ((await (await fetch(`${endpoints.cache}/items.json`)).json()) as any) || [];
 
-      setItems(res);
-    };
+  //     setItems(res);
+  //   };
 
-    init();
-  }, [items, setItems]);
+  //   init();
+  // }, [items, setItems]);
 
   if (items.length === 0 && skills.length === 0) return <PageLoader />;
 

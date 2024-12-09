@@ -39,7 +39,7 @@ const Team = ({ match }) => {
         <TeamHeader />
         <Flex mb="24px">
           <Card3 style={{ padding: '10px 10px 5px 10px' }}>
-            <Link to="/guilds">
+            <Link to="/about/guilds">
               <Flex alignItems="center">
                 <ChevronLeftIcon color="primary" />
                 <Text color="primary">{t('Guilds')}</Text>

@@ -993,7 +993,7 @@ z-index: 999;
             <CardBody>
               <PitchCard>
                 <div style={{ width: '280px', marginTop: '-20px' }}>
-                  <img src="/images/nfts/sorceress.png" alt="Metaverse"></img>
+                  <img src="/images/character-classes/sorceress.png" alt="Metaverse"></img>
                 </div>
                 <div>
                   <BoxHeading as="h2" size="xl">

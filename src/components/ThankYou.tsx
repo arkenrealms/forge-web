@@ -104,9 +104,9 @@ const ThankYou = () => {
             ?.sort(function (a, b) {
               return a.name > b.name ? 1 : -1;
             })
-            .map((holder, index) => (
+            .map((patron, index) => (
               <>
-                <RouterLink to={`/user/${holder.name}`}>{holder.name}</RouterLink>
+                <RouterLink to={`/profile/${patron.name}`}>{patron.name}</RouterLink>
                 {index !== patrons.length - 1 ? ', ' : ''}
               </>
             ))}

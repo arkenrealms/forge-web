@@ -41,7 +41,7 @@ const AvatarInactive = styled(NoProfileAvatarIcon)`
 
 const ProfileAvatar: React.FC<ProfileAvatarProps> = ({ profile }) => {
   return (
-    <AvatarWrapper bg={`/images/nfts/${profile.character.meta.images.md}`}>
+    <AvatarWrapper bg={`/images/character-classes/${profile.character.meta.images.md}`}>
       {profile.status === 'Active' ? <AvatarInactive /> : null}
     </AvatarWrapper>
   );

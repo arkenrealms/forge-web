@@ -12,12 +12,64 @@ const arkenConfig: MenuEntry[] = [
     href: '/about',
     items: [
       {
+        label: 'Trade',
+        icon: 'TradeIcon',
+        href: '/swap',
+        initialOpenState: true,
+        isCryptoMode: true,
+        items: [
+          {
+            label: 'Swap Currency',
+            href: '/swap',
+          },
+          {
+            label: 'Item Market',
+            href: '/market',
+          },
+          {
+            label: 'Item Explorer',
+            href: '/catalog',
+          },
+          // {
+          //   label: 'Add/Remove Liquidity',
+          //   href: '/swap/pool',
+          // },
+        ],
+      },
+      {
+        label: 'Craft',
+        icon: 'CraftIcon',
+        href: '/craft',
+        initialOpenState: false,
+        isCryptoMode: true,
+        items: [
+          {
+            label: 'Craft Items',
+            href: '/craft',
+          },
+          {
+            label: 'View Runes',
+            href: '/runes',
+          },
+          {
+            label: 'Transmute Items',
+            href: '/transmute',
+          },
+          // {
+          //   label: 'Leaderboard',
+          //   href: '/leaderboard?tab=0&subtab=0',
+          // },
+        ],
+      },
+      {
         label: 'Council',
         href: '/about/council',
+        isCryptoMode: true,
       },
       {
         label: 'Tokenomics',
         href: '/about/tokenomics',
+        isCryptoMode: true,
       },
       {
         label: 'Roadmap',
@@ -352,6 +404,31 @@ const arkenConfig: MenuEntry[] = [
       // },
     ],
   },
+  {
+    label: 'Account',
+    href: '/account',
+    icon: 'AccountIcon',
+    initialOpenState: false,
+    isAuthed: true,
+    items: [
+      {
+        label: 'Inventory',
+        href: '/account',
+      },
+      {
+        label: 'Achievements',
+        href: '/account/achievements',
+      },
+      {
+        label: 'Quests',
+        href: '/account/quests',
+      },
+      {
+        label: 'Public Profile',
+        href: '/account/public',
+      },
+    ],
+  },
   // {
   //   label: `Runic Raids`,
   //   icon: 'RaidIcon',
@@ -410,75 +487,6 @@ const arkenConfig: MenuEntry[] = [
   //     },
   //   ],
   // },
-  {
-    label: 'Trade',
-    icon: 'TradeIcon',
-    initialOpenState: true,
-    items: [
-      {
-        label: 'Swap Currency',
-        href: '/swap',
-      },
-      {
-        label: 'Item Market',
-        href: '/market',
-      },
-      {
-        label: 'Item Explorer',
-        href: '/catalog',
-      },
-      // {
-      //   label: 'Add/Remove Liquidity',
-      //   href: '/swap/pool',
-      // },
-    ],
-  },
-  {
-    label: 'Craft',
-    icon: 'CraftIcon',
-    initialOpenState: false,
-    items: [
-      {
-        label: 'Craft Items',
-        href: '/craft',
-      },
-      {
-        label: 'View Runes',
-        href: '/runes',
-      },
-      {
-        label: 'Transmute Items',
-        href: '/transmute',
-      },
-      // {
-      //   label: 'Leaderboard',
-      //   href: '/leaderboard?tab=0&subtab=0',
-      // },
-    ],
-  },
-  {
-    label: 'Account',
-    icon: 'AccountIcon',
-    initialOpenState: false,
-    items: [
-      {
-        label: 'Inventory',
-        href: '/account',
-      },
-      {
-        label: 'Achievements',
-        href: '/account/achievements',
-      },
-      {
-        label: 'Quests',
-        href: '/account/quests',
-      },
-      {
-        label: 'Public Profile',
-        href: '/account/public',
-      },
-    ],
-  },
   // {
   //   label: 'My Profile',
   //   icon: 'TicketIcon',

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Select } from 'antd';
 import { Link as RouterLink } from 'react-router-dom';
 import { itemData } from '@arken/node/data/items';
 import styled from 'styled-components';
@@ -181,6 +182,13 @@ export const RecipeInfo: React.FC<any> = ({
       .join(', ')} (the list will be updated with new runeforms, and retired runeforms will be removed)`;
   }
 
+  const gameOptions = [
+    { value: 0, label: 'Runic Raids' },
+    { value: 1, label: 'Evolution Isles' },
+    { value: 2, label: 'Infinite Arena' },
+    { value: 3, label: 'Heart of the Oasis' },
+  ];
+
   return (
     <Container>
       <ItemImage path={item.icon} />
@@ -338,12 +346,13 @@ export const RecipeInfo: React.FC<any> = ({
       ) : null}
       <Footer>
         {showBranches ? (
-          <ButtonMenu activeIndex={gameTabIndex} scale="xs" onItemClick={(index) => setGameTabIndex(index)}>
-            <ButtonMenuItem>{t('Raid')}</ButtonMenuItem>
-            <ButtonMenuItem>{t('Evolution')}</ButtonMenuItem>
-            <ButtonMenuItem>{t('Infinite')}</ButtonMenuItem>
-            <ButtonMenuItem>{t('Sanctuary')}</ButtonMenuItem>
-          </ButtonMenu>
+          <Select
+            prefix="Game: "
+            placeholder="Choose"
+            defaultValue={gameOptions.find((go) => go.value === gameTabIndex).label}
+            onChange={(value: string) => setGameTabIndex(value)}
+            options={gameOptions}
+          />
         ) : null}
         <br />
         {showStatus && (item.isCraftable || item.isRetired) ? (

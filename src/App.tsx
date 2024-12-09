@@ -27,7 +27,6 @@ import { NoticeProvider } from '~/hooks/useNotice';
 import { lightTheme, darkTheme } from '~/themes';
 import { trpc, trpcClient, queryClient } from '~/utils/trpc';
 import ResetStyles from '~/reset-styles';
-// import GlobalStyles from '~/global-styles';
 
 // <GlobalStyles />
 // import { trpc, trpcClient } from '~/utils/trpc'; // Adjust path as needed

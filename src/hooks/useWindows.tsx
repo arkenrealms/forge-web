@@ -1,7 +1,7 @@
 import { Button } from '~/components/Button';
 import React, { lazy, useState } from 'react';
 import history from '~/routerHistory';
-import AboutIcon from '../assets/images/icons/guardians.png';
+import AboutIcon from '../assets/images/icons/raid-desktop.png';
 import Home from '../views';
 import useWeb3 from './useWeb3';
 

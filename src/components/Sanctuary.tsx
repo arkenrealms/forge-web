@@ -578,7 +578,7 @@ const Home: React.FC<any> = () => {
           <SwiperSlide style={{height: '1000px !important'}}>{({ isActive }) =>  */}
           <ChampionWelcome
             title="Heart of the Oasis"
-            description={`With the power of the Arkenverse Cube in your hands, you are tasked with saving Haerra from inevitable destruction. Immerse yourself in Arken's groundbreaking fantasy RPG as you customize your unique character and class, craft unique NFTs, and rise against the forces which seek to overwhelm Haerra. In Sanctuary, every choice you make has consequences. Do you have what it takes to save your world, or will you fall to ruin at the feet of the gods?`}>
+            description={`With the power of the Arkenverse Cube in your hands, you are tasked with saving Haerra from inevitable destruction. Immerse yourself in Arken's groundbreaking fantasy RPG as you customize your unique character and class, craft unique NFTs, and rise against the forces which seek to overwhelm Haerra. In Heart of the Oasis, every choice you make has consequences. Do you have what it takes to save your world, or will you fall to ruin at the feet of the gods?`}>
             <div>
               {account && holders.find((p) => p.address.toLowerCase() === account.toLowerCase()) ? (
                 <Button as={RouterLink} scale="md" to="/download/infinite" style={{ zoom: 1.5 }}>
@@ -1042,7 +1042,7 @@ const Home: React.FC<any> = () => {
             <BigCard>
               {!isMobile ? (
                 <img
-                  src="/images/nfts/sorceress.png"
+                  src="/images/character-classes/sorceress.png"
                   alt="Your Blockchain Hero"
                   style={{ float: 'left', width: '280px', marginTop: '-20px' }}></img>
               ) : null}
@@ -1067,7 +1067,10 @@ const Home: React.FC<any> = () => {
               )}
             </p> */}
               {isMobile ? (
-                <img src="/images/nfts/sorceress.png" alt="Your Blockchain Hero" style={{ width: '240px' }}></img>
+                <img
+                  src="/images/character-classes/sorceress.png"
+                  alt="Your Blockchain Hero"
+                  style={{ width: '240px' }}></img>
               ) : null}
               {!isMobile ? (
                 <>
