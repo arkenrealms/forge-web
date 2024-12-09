@@ -2,7 +2,7 @@
   "name": "@arken/forge-web",
   "version": "1.5.0",
   "description": "Arken Forge Web",
-  "homepage": "https://forge.arken.gg",
+  "homepage": "https://arken.gg",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "npm-run-all clean build:*",
@@ -17,8 +17,8 @@
     "p:format": "prettier --write ./",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "release": "cd ../../../../sites/arken.gg && rm -rf docs && cp -R ../../packages/forge/packages/web/build . && mv build docs && touch docs/CNAME && echo 'arken-prod.asi.sh' > docs/CNAME && git add -A && git commit -m 'rebuild' && git push && cd ../../packages/forge/packages/web",
-    "release:beta": "cd ../../../../sites/beta.arken.gg && rm -rf docs && cp -R ../../packages/forge/packages/web/build . && mv build docs && touch docs/CNAME && echo 'arken-beta.asi.sh' > docs/CNAME && git add -A && git commit -m 'rebuild' && git push && cd ../../packages/forge/packages/web"
+    "release": "ARKEN_ENV=production react-app-rewired build && cd ../../../../sites/arken.gg && rm -rf docs && cp -R ../../packages/forge/packages/web/build . && mv build docs && touch docs/CNAME && echo 'arken-prod.asi.sh' > docs/CNAME && git add -A && git commit -m 'rebuild' && git push && cd ../../packages/forge/packages/web",
+    "release:beta": "ARKEN_ENV=beta react-app-rewired build && cd ../../../../sites/beta.arken.gg && rm -rf docs && cp -R ../../packages/forge/packages/web/build . && mv build docs && touch docs/CNAME && echo 'arken-beta.asi.sh' > docs/CNAME && git add -A && git commit -m 'rebuild' && git push && cd ../../packages/forge/packages/web"
   },
   "dependencies": {
     "@ant-design/icons": "^5",

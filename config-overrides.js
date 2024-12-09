@@ -149,6 +149,7 @@ module.exports = function (config, env) {
   config.plugins.push(
     new Dotenv({
       systemvars: true,
+      path: '.env.' + process.env.ARKEN_ENV,
     })
   );
 

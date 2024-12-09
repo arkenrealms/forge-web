@@ -5,8 +5,8 @@ import { trpc } from '~/utils/trpc';
 import * as Arken from '@arken/node';
 
 const Zones = function () {
-  const { data: npcs } = trpc.seer.core.getCharacters.useQuery({
-    type: 'NPC',
+  const { data: npcs } = trpc.seer.character.getCharacters.useQuery({
+    where: { isPrimary: { equals: true } },
   });
 
   return (

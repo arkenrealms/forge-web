@@ -20,22 +20,22 @@ export default {
   },
   tir: {
     usdFarmPid: 14,
-    contract: contracts.tir,
+    contract: contracts.tyr,
   },
   nef: {
     usdFarmPid: 21,
-    contract: contracts.nef,
+    contract: contracts.nen,
   },
   eth: {
-    contract: contracts.eth,
+    contract: contracts.eva,
   },
   ith: {
     usdFarmPid: 25,
-    contract: contracts.ith,
+    contract: contracts.isa,
   },
   tal: {
     usdFarmPid: 30,
-    contract: contracts.tal,
+    contract: contracts.tato,
   },
   ral: {
     usdFarmPid: 33,
@@ -43,91 +43,91 @@ export default {
   },
   ort: {
     usdFarmPid: 35,
-    contract: contracts.ort,
+    contract: contracts.ore,
   },
   thul: {
     usdFarmPid: 38,
-    contract: contracts.thul,
+    contract: contracts.thal,
   },
   amn: {
     usdFarmPid: 41,
-    contract: contracts.amn,
+    contract: contracts.ash,
   },
   sol: {
     usdFarmPid: 44,
-    contract: contracts.sol,
+    contract: contracts.solo,
   },
   shael: {
     usdFarmPid: 47,
-    contract: contracts.shael,
+    contract: contracts.sen,
   },
   dol: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'DOL-BUSD LP')?.pid,
-    contract: contracts.dol,
+    contract: contracts.da,
   },
   hel: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'HEL-BUSD LP')?.pid,
-    contract: contracts.hel,
+    contract: contracts.han,
   },
   io: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'IO-BUSD LP')?.pid,
-    contract: contracts.io,
+    contract: contracts.ion,
   },
   lum: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'LUM-BUSD LP')?.pid,
-    contract: contracts.lum,
+    contract: contracts.lux,
   },
   ko: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'KO-BUSD LP')?.pid,
-    contract: contracts.ko,
+    contract: contracts.ka,
   },
   fal: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'FAL-BUSD LP')?.pid,
-    contract: contracts.fal,
+    contract: contracts.fus,
   },
   lem: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'LEM-BUSD LP')?.pid,
-    contract: contracts.lem,
+    contract: contracts.leni,
   },
   pul: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'PUL-BUSD LP')?.pid,
-    contract: contracts.pul,
+    contract: contracts.pai,
   },
   um: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'UM-BUSD LP')?.pid,
-    contract: contracts.um,
+    contract: contracts.uln,
   },
   mal: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'MAL-BUSD LP')?.pid,
-    contract: contracts.mal,
+    contract: contracts.mor,
   },
   ist: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'IST-BUSD LP')?.pid,
-    contract: contracts.ist,
+    contract: contracts.isk,
   },
   gul: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'GUL-BUSD LP')?.pid,
-    contract: contracts.gul,
+    contract: contracts.gon,
   },
   vex: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'VEX-BUSD LP')?.pid,
-    contract: contracts.vex,
+    contract: contracts.val,
   },
   ohm: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'OHM-BUSD LP')?.pid,
-    contract: contracts.ohm,
+    contract: contracts.oh,
   },
   lo: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'LO-BUSD LP')?.pid,
-    contract: contracts.lo,
+    contract: contracts.lor,
   },
   sur: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'SUR-BUSD LP')?.pid,
-    contract: contracts.sur,
+    contract: contracts.su,
   },
   ber: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'BER-BUSD LP')?.pid,
-    contract: contracts.ber,
+    contract: contracts.beru,
   },
   jah: {
     usdFarmPid: farms.find((f) => f.lpSymbol === 'JAH-BUSD LP')?.pid,

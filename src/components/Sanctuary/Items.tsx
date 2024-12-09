@@ -5,7 +5,7 @@ import * as Arken from '@arken/node';
 
 const Items = function () {
   const { data: craftedItems } = trpc.seer.item.getItems.useQuery({
-    distribution: 'Crafted',
+    where: { distribution: { equals: 'Crafted' } },
   });
 
   // TODO: group by type

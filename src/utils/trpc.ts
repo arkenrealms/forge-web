@@ -60,8 +60,8 @@ type BackendConfig = {
 
 const backends: BackendConfig[] = [
   // { name: 'relay', url: 'http://localhost:8020' },
-  { name: 'evolution', url: 'http://localhost:4010' },
-  { name: 'seer', url: 'http://localhost:7060' },
+  { name: 'evolution', url: process.env.REACT_APP_EVOLUTION_SERVICE_URI },
+  { name: 'seer', url: process.env.REACT_APP_SEER_SERVICE_URI },
 ];
 
 // Initialize a single QueryClient shared across all backends
