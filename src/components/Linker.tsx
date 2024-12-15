@@ -451,7 +451,7 @@ const Linker = function ({
               fragments.splice(
                 i,
                 0,
-                <span onClick={() => history.push(`/npc/${npcId}`)} css={css``}>
+                <span onClick={() => history.push(`/games/oasis/npcs/${npcId}`)} css={css``}>
                   <Popover
                     isOpen={itemPreviewed === previewId}
                     align="start"

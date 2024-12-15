@@ -3,7 +3,7 @@ import utf8 from 'utf8';
 
 import { formatDistance } from 'date-fns';
 import { Link as RouterLink } from 'react-router-dom';
-import Unity, { UnityContext } from 'react-unity-webgl';
+// import Unity, { UnityContext } from 'react-unity-webgl';
 import io from 'socket.io-client';
 import styled, { createGlobalStyle, css } from 'styled-components';
 import Page from '~/components/layout/Page';
@@ -156,23 +156,23 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const startOldGame = async (account, setProgression) => {
-  unityInstance = new UnityContext({
-    loaderUrl: '/Build/RuneEvolution/RuneEvolution.loader.js',
-    dataUrl: '/Build/RuneEvolution/RuneEvolution.data',
-    frameworkUrl: '/Build/RuneEvolution/RuneEvolution.framework.js',
-    codeUrl: '/Build/RuneEvolution/RuneEvolution.wasm',
-    webglContextAttributes: {
-      alpha: false,
-      depth: false,
-      stencil: false, // also interesting to test 'false'
-      antialias: false,
-      premultipliedAlpha: false,
-      preserveDrawingBuffer: false,
-      powerPreference: 'high-performance',
-      failIfMajorPerformanceCaveat: false,
-      desynchronized: false,
-    },
-  });
+  // unityInstance = new UnityContext({
+  //   loaderUrl: '/Build/RuneEvolution/RuneEvolution.loader.js',
+  //   dataUrl: '/Build/RuneEvolution/RuneEvolution.data',
+  //   frameworkUrl: '/Build/RuneEvolution/RuneEvolution.framework.js',
+  //   codeUrl: '/Build/RuneEvolution/RuneEvolution.wasm',
+  //   webglContextAttributes: {
+  //     alpha: false,
+  //     depth: false,
+  //     stencil: false, // also interesting to test 'false'
+  //     antialias: false,
+  //     premultipliedAlpha: false,
+  //     preserveDrawingBuffer: false,
+  //     powerPreference: 'high-performance',
+  //     failIfMajorPerformanceCaveat: false,
+  //     desynchronized: false,
+  //   },
+  // });
   // unityInstance = new UnityContext({
   //   loaderUrl: '/Build/RuneEvolutionAlpha/RuneEvolution.loader.js',
   //   dataUrl: '/Build/RuneEvolutionAlpha/RuneEvolution.data',
@@ -332,190 +332,191 @@ const startGame = async (account, setProgression) => {
 };
 
 const Evolution: any = ({ open }) => {
-  const cache = useCache();
-  const [progression, setProgression] = useState(0);
-  const { account, library } = useWeb3();
-  const { web3 } = useWeb3();
-  const gameRef = useRef(null);
-  const [isInitialized, setIsInitialized] = useState(false);
+  return <></>;
+  // const cache = useCache();
+  // const [progression, setProgression] = useState(0);
+  // const { account, library } = useWeb3();
+  // const { web3 } = useWeb3();
+  // const gameRef = useRef(null);
+  // const [isInitialized, setIsInitialized] = useState(false);
 
-  const getSignature = useCallback(
-    async function (text = null) {
-      if (!library || !account) return;
-      const value = text || Math.floor(Math.random() * 999) + '';
-      const hash = library?.bnbSign
-        ? (await library.bnbSign(account, value))?.signature
-        : await web3.eth.personal.sign(value, account, null);
+  // const getSignature = useCallback(
+  //   async function (text = null) {
+  //     if (!library || !account) return;
+  //     const value = text || Math.floor(Math.random() * 999) + '';
+  //     const hash = library?.bnbSign
+  //       ? (await library.bnbSign(account, value))?.signature
+  //       : await web3.eth.personal.sign(value, account, null);
 
-      return {
-        value,
-        hash,
-      };
-    },
-    [library, account, web3.eth.personal]
-  );
+  //     return {
+  //       value,
+  //       hash,
+  //     };
+  //   },
+  //   [library, account, web3.eth.personal]
+  // );
 
-  useEffect(() => {
-    async function init() {
-      if (account && !signature) {
-        config.address = account;
-        config.signature = (await getSignature('evolution'))?.hash;
-      }
+  // useEffect(() => {
+  //   async function init() {
+  //     if (account && !signature) {
+  //       config.address = account;
+  //       config.signature = (await getSignature('evolution'))?.hash;
+  //     }
 
-      startOldGame(config.address, setProgression);
-      setTimeout(() => {
-        setIsInitialized(true);
-      });
-    }
+  //     startOldGame(config.address, setProgression);
+  //     setTimeout(() => {
+  //       setIsInitialized(true);
+  //     });
+  //   }
 
-    init();
-  }, [account, getSignature, setIsInitialized, setProgression]);
+  //   init();
+  // }, [account, getSignature, setIsInitialized, setProgression]);
 
-  const now = new Date().getTime() / 1000;
+  // const now = new Date().getTime() / 1000;
 
-  return cache.overview[account]?.isBanned && cache.overview[account]?.banExpireDate > now ? (
-    <Flex flexDirection="column" alignItems="center" justifyContent="center" p="20px">
-      <MainCard>
-        You have been restricted from playing Arken games. Time remaining:{' '}
-        {formatDistance(new Date(), new Date().setTime(cache.overview[account]?.banExpireDate * 1000), {
-          addSuffix: true,
-        })}
-      </MainCard>
-    </Flex>
-  ) : (
-    <div
-      css={css`
-        min-height: 300px;
-        max-width: 1400px;
-        margin: 0 auto 100px auto;
-        padding: 50px;
-      `}>
-      <GlobalStyles />
-      <Page style={{ padding: 0, maxWidth: 'none' }}>
-        <>
-          <Card
-            css={css`
-              padding: 0;
-              border-width: 8px;
-              border-style: solid;
-              border-color: transparent;
-              border-image: url(/images/frame.png) 80 / 80px / 0 repeat;
-              border-radius: 0px;
-              background: #000;
-              margin-bottom: 30px;
-              line-height: 0;
-            `}>
-            {progression !== 1 ? (
-              <StyledNotFound>
-                <Heading size="xxl">{(progression * 100).toFixed(0)}%</Heading>
-              </StyledNotFound>
-            ) : null}
-            {isInitialized ? (
-              /* @ts-ignore */
-              <Unity
-                ref={gameRef}
-                unityContext={unityInstance}
-                style={{ width: progression === 1 ? '100%' : '0%', height: progression === 1 ? '100%' : '0%' }}
-              />
-            ) : null}
-          </Card>
-          <Card>
-            <CardBody>
-              <Flex flexDirection={'row'} alignItems="center" justifyContent="space-around">
-                <div
-                  css={css`
-                    text-align: center;
-                  `}>
-                  <a
-                    href="https://arken.gg/evolution"
-                    target="_blank"
-                    rel="noreferrer"
-                    css={css`
-                      font-family: 'webfontexl', sans-serif !important;
-                      text-transform: uppercase;
-                    `}>
-                    HOME
-                  </a>
-                </div>
-                <div
-                  css={css`
-                    text-align: center;
-                  `}>
-                  <a
-                    href="https://arken.gg/account"
-                    target="_blank"
-                    rel="noreferrer"
-                    css={css`
-                      font-family: 'webfontexl', sans-serif !important;
-                      text-transform: uppercase;
-                    `}>
-                    CREATE ACCOUNT
-                  </a>
-                </div>
-                <div
-                  css={css`
-                    text-align: center;
-                  `}>
-                  <a
-                    href="https://telegram.arken.gg"
-                    target="_blank"
-                    rel="noreferrer"
-                    css={css`
-                      font-family: 'webfontexl', sans-serif !important;
-                      text-transform: uppercase;
-                    `}>
-                    CHAT
-                  </a>
-                </div>
-                <div
-                  css={css`
-                    text-align: center;
-                  `}>
-                  <a
-                    href="https://arken.gg/evolution/tutorial"
-                    target="_blank"
-                    rel="noreferrer"
-                    css={css`
-                      font-family: 'webfontexl', sans-serif !important;
-                      text-transform: uppercase;
-                    `}>
-                    HELP
-                  </a>
-                </div>
-                <div
-                  css={css`
-                    text-align: center;
-                  `}>
-                  <h3>Download</h3>
-                  <Button
-                    as={RouterLink}
-                    scale="sm"
-                    to="/download/evolution"
-                    style={{ marginBottom: 10, marginLeft: 10 }}>
-                    Mac
-                  </Button>
-                  <Button
-                    as={RouterLink}
-                    scale="sm"
-                    to="/download/evolution"
-                    style={{ marginBottom: 10, marginLeft: 10 }}>
-                    Windows
-                  </Button>
-                  <Button
-                    as={RouterLink}
-                    scale="sm"
-                    to="/download/evolution"
-                    style={{ marginBottom: 10, marginLeft: 10 }}>
-                    Android
-                  </Button>
-                </div>
-              </Flex>
-            </CardBody>
-          </Card>
-        </>
-      </Page>
-    </div>
-  );
+  // return cache.overview[account]?.isBanned && cache.overview[account]?.banExpireDate > now ? (
+  //   <Flex flexDirection="column" alignItems="center" justifyContent="center" p="20px">
+  //     <MainCard>
+  //       You have been restricted from playing Arken games. Time remaining:{' '}
+  //       {formatDistance(new Date(), new Date().setTime(cache.overview[account]?.banExpireDate * 1000), {
+  //         addSuffix: true,
+  //       })}
+  //     </MainCard>
+  //   </Flex>
+  // ) : (
+  //   <div
+  //     css={css`
+  //       min-height: 300px;
+  //       max-width: 1400px;
+  //       margin: 0 auto 100px auto;
+  //       padding: 50px;
+  //     `}>
+  //     <GlobalStyles />
+  //     <Page style={{ padding: 0, maxWidth: 'none' }}>
+  //       <>
+  //         <Card
+  //           css={css`
+  //             padding: 0;
+  //             border-width: 8px;
+  //             border-style: solid;
+  //             border-color: transparent;
+  //             border-image: url(/images/frame.png) 80 / 80px / 0 repeat;
+  //             border-radius: 0px;
+  //             background: #000;
+  //             margin-bottom: 30px;
+  //             line-height: 0;
+  //           `}>
+  //           {progression !== 1 ? (
+  //             <StyledNotFound>
+  //               <Heading size="xxl">{(progression * 100).toFixed(0)}%</Heading>
+  //             </StyledNotFound>
+  //           ) : null}
+  //           {isInitialized ? (
+  //             /* @ts-ignore */
+  //             <Unity
+  //               ref={gameRef}
+  //               unityContext={unityInstance}
+  //               style={{ width: progression === 1 ? '100%' : '0%', height: progression === 1 ? '100%' : '0%' }}
+  //             />
+  //           ) : null}
+  //         </Card>
+  //         <Card>
+  //           <CardBody>
+  //             <Flex flexDirection={'row'} alignItems="center" justifyContent="space-around">
+  //               <div
+  //                 css={css`
+  //                   text-align: center;
+  //                 `}>
+  //                 <a
+  //                   href="https://arken.gg/evolution"
+  //                   target="_blank"
+  //                   rel="noreferrer"
+  //                   css={css`
+  //                     font-family: 'webfontexl', sans-serif !important;
+  //                     text-transform: uppercase;
+  //                   `}>
+  //                   HOME
+  //                 </a>
+  //               </div>
+  //               <div
+  //                 css={css`
+  //                   text-align: center;
+  //                 `}>
+  //                 <a
+  //                   href="https://arken.gg/account"
+  //                   target="_blank"
+  //                   rel="noreferrer"
+  //                   css={css`
+  //                     font-family: 'webfontexl', sans-serif !important;
+  //                     text-transform: uppercase;
+  //                   `}>
+  //                   CREATE ACCOUNT
+  //                 </a>
+  //               </div>
+  //               <div
+  //                 css={css`
+  //                   text-align: center;
+  //                 `}>
+  //                 <a
+  //                   href="https://telegram.arken.gg"
+  //                   target="_blank"
+  //                   rel="noreferrer"
+  //                   css={css`
+  //                     font-family: 'webfontexl', sans-serif !important;
+  //                     text-transform: uppercase;
+  //                   `}>
+  //                   CHAT
+  //                 </a>
+  //               </div>
+  //               <div
+  //                 css={css`
+  //                   text-align: center;
+  //                 `}>
+  //                 <a
+  //                   href="https://arken.gg/evolution/tutorial"
+  //                   target="_blank"
+  //                   rel="noreferrer"
+  //                   css={css`
+  //                     font-family: 'webfontexl', sans-serif !important;
+  //                     text-transform: uppercase;
+  //                   `}>
+  //                   HELP
+  //                 </a>
+  //               </div>
+  //               <div
+  //                 css={css`
+  //                   text-align: center;
+  //                 `}>
+  //                 <h3>Download</h3>
+  //                 <Button
+  //                   as={RouterLink}
+  //                   scale="sm"
+  //                   to="/download/evolution"
+  //                   style={{ marginBottom: 10, marginLeft: 10 }}>
+  //                   Mac
+  //                 </Button>
+  //                 <Button
+  //                   as={RouterLink}
+  //                   scale="sm"
+  //                   to="/download/evolution"
+  //                   style={{ marginBottom: 10, marginLeft: 10 }}>
+  //                   Windows
+  //                 </Button>
+  //                 <Button
+  //                   as={RouterLink}
+  //                   scale="sm"
+  //                   to="/download/evolution"
+  //                   style={{ marginBottom: 10, marginLeft: 10 }}>
+  //                   Android
+  //                 </Button>
+  //               </div>
+  //             </Flex>
+  //           </CardBody>
+  //         </Card>
+  //       </>
+  //     </Page>
+  //   </div>
+  // );
 };
 
 export default Evolution;

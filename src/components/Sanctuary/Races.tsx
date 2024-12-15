@@ -56,7 +56,7 @@ const Races = function () {
                 `}>
                 <LoreBlock1
                   name={race.name}
-                  onClick={() => history.push('/game/oasis/races/' + race.name.toLowerCase().replace(/ /g, '-'))}>
+                  onClick={() => history.push('/games/oasis/races/' + race.name.toLowerCase().replace(/ /g, '-'))}>
                   <Flex flexDirection="row" alignItems="start" justifyContent="center">
                     <img
                       id="w-node-df400f55-31e6-1136-797f-230aa8853a1f-a4dd0c1b"
@@ -85,7 +85,7 @@ const Races = function () {
             ))}
             <p>‍</p>
             <p>‍</p>
-            <LoreBlock1 name="Alorium" onClick={() => history.push('/game/oasis/races/alorium')}>
+            <LoreBlock1 name="Alorium" onClick={() => history.push('/games/oasis/races/alorium')}>
               <p>
                 Astralytes of incredible power, these select few servants of Eledon have mastered themselves, the
                 principles of Eledon, and astra energy itself. Now they aid Eledon in the governance of his empire:
@@ -95,7 +95,7 @@ const Races = function () {
             </LoreBlock1>
             <p>‍</p>
             <p>‍</p>
-            <LoreBlock1 name="Demorium" onClick={() => history.push('/game/oasis/races/demorium')}>
+            <LoreBlock1 name="Demorium" onClick={() => history.push('/games/oasis/races/demorium')}>
               <p>
                 Demorium are the most vicious and powerful chaospawn in Azorag's realm. With an unfaltering thirst for
                 chaos, these few individuals have been handpicked by Azorag to help him oversee his nation, lead his
@@ -104,7 +104,7 @@ const Races = function () {
             </LoreBlock1>
             <p>‍</p>
             <p>‍</p>
-            <LoreBlock1 name="Astralyte" onClick={() => history.push('/game/oasis/races/astralyte')}>
+            <LoreBlock1 name="Astralyte" onClick={() => history.push('/games/oasis/races/astralyte')}>
               <p>
                 The celestial beings known as astralytes are servants of Eledon, and denote all those under his
                 dominion. Although typically thought of as beautiful humanoids with white feathered wings, astralytes
@@ -114,7 +114,7 @@ const Races = function () {
             </LoreBlock1>
             <p>‍</p>
             <p>‍</p>
-            <LoreBlock1 name="Chaospawn" onClick={() => history.push('/game/oasis/races/chaospawn')}>
+            <LoreBlock1 name="Chaospawn" onClick={() => history.push('/games/oasis/races/chaospawn')}>
               <p>
                 From horrifying to irresistibly beautiful, chaospawn adopt many forms depending on their origin. No
                 matter their appearance, however, they all swear allegiance to Azorag and the consuming power of chaos.
@@ -125,7 +125,7 @@ const Races = function () {
             </LoreBlock1>
             <p>‍</p>
             <p>‍</p>
-            <LoreBlock1 name="God" onClick={() => history.push('/game/oasis/races/god')}>
+            <LoreBlock1 name="God" onClick={() => history.push('/games/oasis/races/god')}>
               <p>
                 Beings of remarkable power, the gods mastered the energies, transcended into the cube, and survived the
                 collapse of eleven universes. Now they influence the people of Haerra, gathering followers and

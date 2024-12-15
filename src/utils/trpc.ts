@@ -54,13 +54,14 @@ export const handleTRPCError = (error: any, message = 'There was an error while 
 // ======================
 
 type BackendConfig = {
-  name: 'relay' | 'evolution' | 'seer';
+  name: 'relay' | 'evolution' | 'evolutionShard' | 'seer';
   url: string;
 };
 
 const backends: BackendConfig[] = [
   // { name: 'relay', url: 'http://localhost:8020' },
   { name: 'evolution', url: process.env.REACT_APP_EVOLUTION_SERVICE_URI },
+  { name: 'evolutionShard', url: process.env.REACT_APP_EVOLUTION_SHARD_URI },
   { name: 'seer', url: process.env.REACT_APP_SEER_SERVICE_URI },
 ];
 
@@ -88,7 +89,7 @@ type Client = {
   socket: ReturnType<typeof ioClient>;
 };
 
-const clients: Record<string, Client> = {};
+export const clients: Record<string, Client> = {};
 
 backends.forEach((backend) => {
   try {
@@ -205,7 +206,7 @@ const combinedLink: TRPCLink<any> =
           return;
         }
 
-        console.log(`[${routerName} Link] Emit Direct:`, op, client.socket);
+        console.log(`[${routerName} Link] Emit Direct:`, op);
 
         client.socket.emit('trpc', {
           id: uuid,

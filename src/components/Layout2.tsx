@@ -571,10 +571,10 @@ export default ({ children, pageState }) => {
             props.layout !== 'side' && document.body.clientWidth > 1400 ? <SearchInput /> : undefined,
             // <InfoCircleFilled key="InfoCircleFilled" />,
             // <QuestionCircleFilled key="QuestionCircleFilled" />,
-            <a href="https://github.arken.gg">
+            <a href="https://github.arken.gg" target="_blank">
               <GithubFilled key="GithubFilled" />
             </a>,
-            !auth?.profile ? <UserBlock login={() => {}} logout={() => {}} /> : null,
+            !auth?.profile?.name ? <UserBlock login={() => {}} logout={() => {}} /> : null,
           ];
         }}
         headerTitleRender={(logo, title, _) => {

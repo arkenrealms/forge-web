@@ -29,7 +29,7 @@ const Runeforms = function () {
               style of play. Equip your hero with <strong>Runeforms</strong> to make them powerful in battle, increase
               magic find, or improve farming and merchant abilities. <strong>Runeforms</strong> can be used between
               games in the Arken ecosystem, collected, shared, and traded in the{' '}
-              <a href="https://arken.gg/market">
+              <a href="/market">
                 <strong>Arken Market</strong>
               </a>
               . Soon you'll be able to lend your <strong>Runeforms</strong> to <strong>guild</strong> members or through
@@ -46,11 +46,10 @@ const Runeforms = function () {
             <p>
               To craft a <strong>Runeform</strong> you need to know the <strong>Runeform</strong> recipe, which is a
               specific combination of <strong>runes</strong>, used to mint the <strong>Runeform</strong>. Some{' '}
-              <strong>recipes</strong> are <a href="https://arken.gg/craft">known</a>, some are secret. Once you know
-              the <strong>recipe</strong> of a <strong>Runeform</strong> you need at least one of each{' '}
-              <strong>rune</strong> required for crafting that <strong>Runeform</strong>. When you are ready to craft
-              visit the{' '}
-              <a href="https://arken.gg/transmute">
+              <strong>recipes</strong> are <a href="/craft">known</a>, some are secret. Once you know the{' '}
+              <strong>recipe</strong> of a <strong>Runeform</strong> you need at least one of each <strong>rune</strong>{' '}
+              required for crafting that <strong>Runeform</strong>. When you are ready to craft visit the{' '}
+              <a href="/transmute">
                 <strong>Crafting Cube</strong>
               </a>{' '}
               and convert your <strong>runes</strong> into a <strong>Runeform</strong>.{' '}
@@ -131,11 +130,9 @@ const Runeforms = function () {
                           These NFT pets will be generated with random appearances and stats. The combinations are
                           nearly endless, with over 1 trillion possible variations. <br />
                           <br />
-                          Guardians Unleashed will be build into our unique Rune protocol, which generates the
+                          Guardians Unleashed will be build into our unique Arken protocol, which generates the
                           attributes of each NFT&nbsp;directly into the token ID, for further portability between chains
                           and games. <br />
-                          <br />
-                          Estimated launch for Guardians Unleashed is Q4, 2022 <br />
                         </strong>
                       </div>
                     </div>

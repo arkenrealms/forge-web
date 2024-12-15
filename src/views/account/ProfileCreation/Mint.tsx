@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BigNumber from 'bignumber.js';
-import { Button, Card, CardBody, Heading, Text } from '~/ui';
+import { Button, Card, Card2, Card3, CardBody, Heading, Text } from '~/ui';
 import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
 import useI18n from '~/hooks/useI18n';
 import { useTranslation } from 'react-i18next';
@@ -71,14 +71,15 @@ const Mint: React.FC<any> = () => {
   const walletNfts = nftList.filter((nft) => characterIds.includes(nft.characterId));
 
   return (
-    <>
-      <Text as="h4" fontSize="20px" color="textSubtle" bold>
-        {t(`Step ${1}`)}
-      </Text>
-      <Heading as="h3" size="xl" mb="24px">
-        {t(walletNfts.length ? 'Choose Character' : 'Create Character')}
-      </Heading>
-      {/* <Text as="p">{t('Every character starts by choosing a class.')}</Text>
+    <Card3>
+      <Card>
+        <Text as="h4" fontSize="20px" color="textSubtle" bold>
+          {t(`Step ${1}`)}
+        </Text>
+        <Heading as="h3" size="xl" mb="24px">
+          {t(walletNfts.length ? 'Choose Character' : 'Create Character')}
+        </Heading>
+        {/* <Text as="p">{t('Every character starts by choosing a class.')}</Text>
       <Text as="p">{t('This class will also become your avatar.')}</Text>
       <Text as="p" mb="24px">
         {t('You can change your avatar later.')}
@@ -88,76 +89,77 @@ const Mint: React.FC<any> = () => {
           <Heading as="h4" size="lg" mb="8px">
             {t('Choose Your Class!')}
           </Heading> */}
-      {/* <Text as="p" mb="24px" color="textSubtle">
+        {/* <Text as="p" mb="24px" color="textSubtle">
         {t('Choose wisely: one character per wallet!')}
       </Text> */}
-      {walletNfts.length
-        ? walletNfts.map((walletNft) => {
-            const [firstTokenId] = nftsInWallet[walletNft.characterId].tokenIds;
+        {walletNfts.length
+          ? walletNfts.map((walletNft) => {
+              const [firstTokenId] = nftsInWallet[walletNft.characterId].tokenIds;
 
-            return (
-              <SelectionCard
-                name="profilePicture"
-                key={walletNft.characterId}
-                value={firstTokenId}
-                image={`/images/character-classes/${walletNft.images.md}`}
-                isChecked={firstTokenId === tokenId}
-                onChange={(value: string) => actions.setTokenId(parseInt(value, 10))}
-                disabled={isApproving || isConfirming || isConfirmed}>
-                <Text bold>{walletNft.name}</Text>
-              </SelectionCard>
-            );
-          })
-        : null}
-      {!walletNfts.length ? (
-        <>
-          {nfts.map((nft) => {
-            const handleChange = (value: string) => setCharacterId(parseInt(value, 10));
+              return (
+                <SelectionCard
+                  name="profilePicture"
+                  key={walletNft.characterId}
+                  value={firstTokenId}
+                  image={`/images/character-classes/${walletNft.images.md}`}
+                  isChecked={firstTokenId === tokenId}
+                  onChange={(value: string) => actions.setTokenId(parseInt(value, 10))}
+                  disabled={isApproving || isConfirming || isConfirmed}>
+                  <Text bold>{walletNft.name}</Text>
+                </SelectionCard>
+              );
+            })
+          : null}
+        {!walletNfts.length ? (
+          <>
+            {nfts.map((nft) => {
+              const handleChange = (value: string) => setCharacterId(parseInt(value, 10));
 
-            return (
-              <SelectionCard
-                key={nft.characterId}
-                name="mintStarter"
-                value={nft.characterId}
-                image={`/images/character-classes/${nft.images.md}`}
-                isChecked={characterId === nft.characterId}
-                onChange={handleChange}
-                disabled={isApproving || isConfirming || isConfirmed || !hasMinimumRuneRequired}>
-                <Text bold>{nft.name}</Text>
-              </SelectionCard>
-            );
-          })}
-          {hasMinimumRuneRequired && (
-            <Text as="p" mb="16px" color="failure">
-              {t(`Cost: ${mintCost + registerCost} RXS`, { num: mintCost + registerCost })}
-            </Text>
-          )}
-          {!hasMinimumRuneRequired && (
-            <Text color="failure" mb="16px">
-              {t(`${mintCost + registerCost} RXS fee is required.`)}{' '}
-              <Button scale="sm" onClick={onPresentPurchaseModal}>
-                Buy RXS
-              </Button>
-            </Text>
-          )}
-          <ApproveConfirmButtons
-            isApproveDisabled={characterId === null || isConfirmed || isConfirming || isApproved}
-            isApproving={isApproving}
-            isConfirmDisabled={!isApproved || isConfirmed || !hasMinimumRuneRequired}
-            isConfirming={isConfirming}
-            onApprove={handleApprove}
-            onConfirm={handleConfirm}
-          />
-        </>
-      ) : null}
-      <br />
-      <br />
-      {/* </CardBody>
+              return (
+                <SelectionCard
+                  key={nft.characterId}
+                  name="mintStarter"
+                  value={nft.characterId}
+                  image={`/images/character-classes/${nft.images.md}`}
+                  isChecked={characterId === nft.characterId}
+                  onChange={handleChange}
+                  disabled={isApproving || isConfirming || isConfirmed || !hasMinimumRuneRequired}>
+                  <Text bold>{nft.name}</Text>
+                </SelectionCard>
+              );
+            })}
+            {hasMinimumRuneRequired && (
+              <Text as="p" mb="16px" color="failure">
+                {t(`Cost: ${mintCost + registerCost} RXS`, { num: mintCost + registerCost })}
+              </Text>
+            )}
+            {!hasMinimumRuneRequired && (
+              <Text color="failure" mb="16px">
+                {t(`${mintCost + registerCost} RXS fee is required.`)}{' '}
+                <Button scale="sm" onClick={onPresentPurchaseModal}>
+                  Buy RXS
+                </Button>
+              </Text>
+            )}
+            <ApproveConfirmButtons
+              isApproveDisabled={characterId === null || isConfirmed || isConfirming || isApproved}
+              isApproving={isApproving}
+              isConfirmDisabled={!isApproved || isConfirmed || !hasMinimumRuneRequired}
+              isConfirming={isConfirming}
+              onApprove={handleApprove}
+              onConfirm={handleConfirm}
+            />
+          </>
+        ) : null}
+        <br />
+        <br />
+        {/* </CardBody>
       </Card> */}
-      <NextStepButton onClick={actions.nextStep} disabled={!isConfirmed && !walletNfts.length}>
-        {t('Next Step')}
-      </NextStepButton>
-    </>
+        <NextStepButton onClick={actions.nextStep} disabled={!isConfirmed && !walletNfts.length}>
+          {t('Next Step')}
+        </NextStepButton>
+      </Card>
+    </Card3>
   );
 };
 

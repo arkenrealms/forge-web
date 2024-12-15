@@ -7,6 +7,7 @@ import { useModal } from '~/components/Modal';
 import { PurchaseModal } from '~/components/PurchaseModal';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import { BaseLayout, Card, Card3, Heading, Link } from '~/ui';
+import { useAuth } from '~/hooks/useAuth';
 
 const Img = styled.img`
   filter: contrast(1.1) drop-shadow(2px 4px 6px black);
@@ -123,6 +124,7 @@ const BottomCTA = () => {
   const [onPresentPurchaseModal] = useModal(<PurchaseModal onSuccess={() => {}} />);
   const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
   const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
+  const auth = useAuth();
 
   return (
     <Container>
@@ -167,9 +169,9 @@ const BottomCTA = () => {
                 sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
                 className="discord-widget"
                 title="Discord"></iframe> */}
-              <p style={{ color: '#fff', marginTop: 40 }}>
-                {t(`© ${new Date().getFullYear()} Arken Technologies, Inc.`)}
-              </p>
+              {/* <p style={{ color: '#fff', marginTop: 40 }}>
+                {t(`© ${new Date().getFullYear()} Arken Realms`)}
+              </p> */}
             </Column>
             <Column style={{ minWidth: 200 }}>
               <Heading size="md">Contact</Heading>
@@ -181,7 +183,7 @@ const BottomCTA = () => {
               <br />
               <p>
                 <RouterLink style={{ marginBottom: 20, display: 'inline-block' }} to="/games">
-                  Our Games
+                  Games
                 </RouterLink>
                 <br />
 
@@ -195,9 +197,11 @@ const BottomCTA = () => {
                 </RouterLink>
                 <br />
 
-                <RouterLink style={{ marginBottom: 20, display: 'inline-block' }} to="/tokenomics">
-                  Tokenomics
-                </RouterLink>
+                {auth?.isCryptoMode ? (
+                  <RouterLink style={{ marginBottom: 20, display: 'inline-block' }} to="/tokenomics">
+                    Tokenomics
+                  </RouterLink>
+                ) : null}
               </p>
             </Column>
             <Column>

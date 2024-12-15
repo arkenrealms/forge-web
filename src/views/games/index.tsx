@@ -174,7 +174,7 @@ const Rules = () => {
 
   return (
     <Page>
-      <TipCard npc="ramir" id="our-games" heading={t('Our Games')}>
+      <TipCard npc="ramir" id="our-games" heading={t('Games')}>
         <p>Hey, you!</p>
         <br />
         <p>

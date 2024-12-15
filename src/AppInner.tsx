@@ -1500,22 +1500,22 @@ const ToolbarNotification = () => {
       text: 'Play Evolution Isles Season Ladder',
       to: '/evolution',
     },
-    {
-      text: 'Check out the new leaderboard',
-      to: '/leaderboard',
-    },
-    {
-      text: 'Craft a new runeform',
-      to: '/craft',
-    },
+    // {
+    //   text: 'Check out the new leaderboard',
+    //   to: '/leaderboard',
+    // },
+    // {
+    //   text: 'Craft a new runeform',
+    //   to: '/craft',
+    // },
     {
       text: 'Catch up on the lore',
       to: '/lore',
     },
-    {
-      text: 'Check out the tokenomics',
-      to: '/tokenomics',
-    },
+    // {
+    //   text: 'Check out the tokenomics',
+    //   to: '/tokenomics',
+    // },
     {
       text: 'Do the latest quests',
       to: '/account/quests',
@@ -1652,6 +1652,8 @@ const DraggableWindow: React.FC<any> = React.memo(
     };
 
     const goFullscreen = (_pageElement) => {
+      //  if (!window.screenTop && !window.screenY) goFullscreen
+
       if (!_pageElement) return;
       // const ActivateFullscreen = function()
       // {
@@ -1829,9 +1831,7 @@ const DraggableWindow: React.FC<any> = React.memo(
                     <Button
                       scale="sm"
                       variant="text"
-                      onClick={() =>
-                        !window.screenTop && !window.screenY ? exitFullscreen() : goFullscreen(pageElement.current)
-                      }
+                      onClick={() => (isFullscreen ? exitFullscreen() : goFullscreen(pageElement.current))}
                       style={{ padding: '0 5px' }}>
                       {isFullscreen ? <FiMinimize2 style={{ zoom: 0.9 }} /> : <FiMaximize2 style={{ zoom: 0.9 }} />}
                     </Button>

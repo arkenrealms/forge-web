@@ -36,6 +36,10 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
     font-style: normal;
   }
 
+  html, body {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
 
   body {
     --safe-area-inset-bottom: constant(safe-area-inset-bottom); 
@@ -51,9 +55,7 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
       z-index: 9999999;
     }
     
-    background-size: stretch;
     line-height: 130%;
-    background-color: #000;
 
     img {
       height: auto;
@@ -151,7 +153,7 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
     .app__styled-card2 {
     overflow: visible;
     position: relative;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #1c1c2f;
     background-image: linear-gradient(180deg, rgb(134 123 251 / 6%), rgb(207 144 255 / 6%));
     // padding: 20px;
     box-shadow: rgb(0 0 0 / 50%) 0px 2px 25px 10px, rgb(0 0 0 / 10%) 0px -1px 0px 0px inset, rgb(0 0 0 / 10%) 0px 0px 66px 66px;
@@ -161,7 +163,7 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
         position: absolute;
         top: -5px;
         left: -5px;
-        right: -4px;
+        right: -5px;
         bottom: -5px;
         z-index: 0; /* Ensures it sits behind the element */
         pointer-events: none; /* Optional: Prevent interaction */
@@ -198,10 +200,10 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
       &::after {
         content: "";
         position: absolute;
-        top: -5px;
-        left: -5px;
-        right: -5px;
-        bottom: -5px;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
         z-index: 0; /* Ensures it sits behind the element */
         pointer-events: none; /* Optional: Prevent interaction */
         border-width: 0;

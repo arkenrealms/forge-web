@@ -18,7 +18,6 @@ const MarketTrade = lazy(() => import('../views/trade'));
 const Guilds = lazy(() => import('../views/about/guilds'));
 const Cube = lazy(() => import('../views/cube'));
 const Creature = lazy(() => import('../views/creature'));
-const News = lazy(() => import('../views/news'));
 const Bounties = lazy(() => import('../views/bounties'));
 const Support = lazy(() => import('../views/support'));
 const ClassDesigner = lazy(() => import('../views/class-designer'));
@@ -85,7 +84,6 @@ const Infinite = lazy(() => import('../views/games/infinite'));
 const InfiniteTutorial = lazy(() => import('../views/games/infinite/tutorial'));
 const Evolution = lazy(() => import('../views/games/evolution'));
 const EvolutionTutorial = lazy(() => import('../views/games/evolution/tutorial'));
-const MemeIsles = lazy(() => import('../views/games/isles'));
 const Raid = lazy(() => import('../views/raid'));
 const RaidTutorial = lazy(() => import('../views/raid'));
 const Oasis = lazy(() => import('../views/games/oasis'));
@@ -773,7 +771,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/raid',
+      path: '/games/raids',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -795,7 +793,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/isles',
+      path: '/games/isles',
       icon: AboutIcon,
       exact: true,
       strict: false,
@@ -813,7 +811,7 @@ const useWindows = () => {
         },
       },
       navPosition: undefined, //500,
-      component: MemeIsles,
+      component: lazy(() => import('../views/games/isles')),
       showable: true,
     },
     {
@@ -1266,7 +1264,95 @@ const useWindows = () => {
         },
       },
       navPosition: undefined,
-      component: News,
+      component: lazy(() => import('../views/news')),
+      showable: true,
+    },
+    {
+      path: '/news/new-age-of-game-items',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'New Age of Game Items',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined,
+      component: lazy(() => import('../views/news/new-age-of-game-items')),
+      showable: true,
+    },
+    {
+      path: '/news/arken-dao-update',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'News',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined,
+      component: lazy(() => import('../views/news/arken-dao-update')),
+      showable: true,
+    },
+    {
+      path: '/news/arken-realms-1-8-1',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'News',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined,
+      component: lazy(() => import('../views/news/arken-realms-1-8-1')),
+      showable: true,
+    },
+    {
+      path: '/news/arken-realms-dao',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'News',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      navPosition: undefined,
+      component: lazy(() => import('../views/news/arken-realms-dao')),
       showable: true,
     },
     {
@@ -1976,36 +2062,7 @@ const useWindows = () => {
       showable: false,
     },
     {
-      path: '/games/oasis/npcs',
-      icon: AboutIcon,
-      exact: true,
-      strict: false,
-      persist: false,
-      props: {
-        title: 'NPCs',
-        routeIndex: 1000,
-        open: false,
-        minimized: false,
-        active: false,
-        windowSize: { width: '100%', height: '100%' },
-        windowPosition: { x: 0, y: 0 },
-        location: {
-          search: null,
-        },
-      },
-      toolbarNav: (subnav, setSubnav) => (
-        <>
-          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
-            Lore
-          </Button>
-        </>
-      ),
-      navPosition: undefined,
-      component: NPCs,
-      showable: true,
-    },
-    {
-      path: '/games/oasis/npc/:id',
+      path: '/games/oasis/npcs/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2037,6 +2094,35 @@ const useWindows = () => {
       showable: false,
     },
     {
+      path: '/games/oasis/npcs',
+      icon: AboutIcon,
+      exact: true,
+      strict: false,
+      persist: false,
+      props: {
+        title: 'NPCs',
+        routeIndex: 1000,
+        open: false,
+        minimized: false,
+        active: false,
+        windowSize: { width: '100%', height: '100%' },
+        windowPosition: { x: 0, y: 0 },
+        location: {
+          search: null,
+        },
+      },
+      toolbarNav: (subnav, setSubnav) => (
+        <>
+          <Button scale="sm" variant="text" onClick={() => history.push('/games/oasis/lore')}>
+            Lore
+          </Button>
+        </>
+      ),
+      navPosition: undefined,
+      component: NPCs,
+      showable: true,
+    },
+    {
       path: '/games/oasis/eras',
       icon: AboutIcon,
       exact: true,
@@ -2066,7 +2152,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/games/oasis/era/:id',
+      path: '/games/oasis/eras/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2127,7 +2213,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/games/oasis/act/:id',
+      path: '/games/oasis/acts/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2188,7 +2274,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/games/oasis/boss/:id',
+      path: '/games/oasis/bosses/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2249,7 +2335,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/games/oasis/monster/:id',
+      path: '/games/oasis/monsters/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2310,7 +2396,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/games/oasis/race/:id',
+      path: '/games/oasis/races/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2371,7 +2457,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/games/oasis/faction/:id',
+      path: '/games/oasis/factions/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,
@@ -2432,7 +2518,7 @@ const useWindows = () => {
       showable: true,
     },
     {
-      path: '/games/oasis/class/:id',
+      path: '/games/oasis/classes/:id',
       icon: AboutIcon,
       exact: false,
       strict: false,

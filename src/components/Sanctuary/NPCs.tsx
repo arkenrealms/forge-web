@@ -37,60 +37,60 @@ const Zones = function () {
             <ul role="list">
               <li>
                 <a
-                  data-load-page="/game/oasis/npcs/zeno"
+                  data-load-page="/games/oasis/npcs/zeno"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/game/oasis/npcs/zeno');
+                    history.push('/games/oasis/npcs/zeno');
                   }}
-                  href="/game/oasis/npcs/zeno"
+                  href="/games/oasis/npcs/zeno"
                   className="w-inline-block">
                   <div>Zeno</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/game/oasis/npcs/azorag"
+                  data-load-page="/games/oasis/npcs/azorag"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/game/oasis/npcs/azorag');
+                    history.push('/games/oasis/npcs/azorag');
                   }}
-                  href="/game/oasis/npcs/azorag"
+                  href="/games/oasis/npcs/azorag"
                   className="w-inline-block">
                   <div>Azorag</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/game/oasis/npcs/eledon"
+                  data-load-page="/games/oasis/npcs/eledon"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/game/oasis/npcs/eledon');
+                    history.push('/games/oasis/npcs/eledon');
                   }}
-                  href="/game/oasis/npcs/eledon"
+                  href="/games/oasis/npcs/eledon"
                   className="w-inline-block">
                   <div>Eledon</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/game/oasis/npcs/logos"
+                  data-load-page="/games/oasis/npcs/logos"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/game/oasis/npcs/logos');
+                    history.push('/games/oasis/npcs/logos');
                   }}
-                  href="/game/oasis/npcs/logos"
+                  href="/games/oasis/npcs/logos"
                   className="w-inline-block">
                   <div>Logos</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/game/oasis/npcs/deleran"
+                  data-load-page="/games/oasis/npcs/deleran"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/game/oasis/npcs/deleran');
+                    history.push('/games/oasis/npcs/deleran');
                   }}
-                  href="/game/oasis/npcs/deleran"
+                  href="/games/oasis/npcs/deleran"
                   className="w-inline-block">
                   <div>Deleran</div>
                 </a>
@@ -103,24 +103,24 @@ const Zones = function () {
             <ul role="list">
               <li>
                 <a
-                  data-load-page="/game/oasis/npcs/ghosharak"
+                  data-load-page="/games/oasis/npcs/ghosharak"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/game/oasis/npcs/ghosharak');
+                    history.push('/games/oasis/npcs/ghosharak');
                   }}
-                  href="/game/oasis/npcs/ghosharak"
+                  href="/games/oasis/npcs/ghosharak"
                   className="w-inline-block">
                   <div>Ghosharak</div>
                 </a>
               </li>
               <li>
                 <a
-                  data-load-page="/game/oasis/npcs/miraqesh"
+                  data-load-page="/games/oasis/npcs/miraqesh"
                   onClick={(e) => {
                     e.preventDefault();
-                    history.push('/game/oasis/npcs/miraqesh');
+                    history.push('/games/oasis/npcs/miraqesh');
                   }}
-                  href="/game/oasis/npcs/miraqesh"
+                  href="/games/oasis/npcs/miraqesh"
                   className="w-inline-block">
                   <div>Miraqesh</div>
                 </a>

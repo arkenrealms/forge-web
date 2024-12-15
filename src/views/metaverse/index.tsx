@@ -18,7 +18,6 @@ import {
   Link,
   BlockIcon,
 } from '~/ui';
-import Unity, { UnityContext } from 'react-unity-webgl';
 import useI18n from '~/hooks/useI18n';
 import { useTranslation } from 'react-i18next';
 import history from '~/routerHistory';

@@ -11,6 +11,7 @@ const BrandMap = {
   'oasis.localhost': 'oasis',
   'isles.localhost': 'isles',
   'binzy.localhost': 'binzy',
+  'foundation.localhost': 'foundation',
 
   'arken-prod.asi.sh': 'arken',
   'arken-beta.asi.sh': 'arken',
@@ -52,6 +53,8 @@ const BrandMap = {
   'isles.meme.now': 'return',
 
   'binzy.ai': 'binzy',
+
+  'game.foundation': 'foundation',
 };
 
 export const useBrand = () => {
