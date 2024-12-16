@@ -155,7 +155,7 @@ backends.forEach((backend) => {
 
             client.socket.emit('trpcResponse', { id, result: serialize(result) });
           } catch (e) {
-            client.socket.emit('trpcResponse', { id, result: {}, error: e.message });
+            client.socket.emit('trpcResponse', { id, result: {}, error: e.stack + '' });
           }
         }
       } catch (e) {

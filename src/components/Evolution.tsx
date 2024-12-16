@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import { Unity, useUnityContext } from 'react-unity-webgl';
 import { rewardTokenIdMap } from '@arken/node/data/items';
+import { generateShortId } from '@arken/node/util/db';
 import { decodeItem } from '@arken/node/util/decoder';
 import io from 'socket.io-client';
 import styled, { createGlobalStyle, css } from 'styled-components';
@@ -518,25 +519,25 @@ const RewardCardItem = ({ reward }) => {
 //   }
 // };
 
-let gameCanvas;
+// let gameCanvas;
 
 const config = {
-  username: 'Guest' + Math.floor(Math.random() * 999),
-  address: '0xc84ce216fef4EC8957bD0Fb966Bb3c3E2c938082',
+  username: 'Testman', // || 'Guest' + Math.floor(Math.random() * 999),
+  address: '0x1a367CA7bD311F279F1dfAfF1e60c4d797Faa6eb',
   isMobile: false,
 };
 
-const formatCountdown = (secs) => {
-  function pad(n) {
-    return n < 10 ? '0' + n : n;
-  }
+// const formatCountdown = (secs) => {
+//   function pad(n) {
+//     return n < 10 ? '0' + n : n;
+//   }
 
-  const h = Math.floor(secs / 3600);
-  const m = Math.floor(secs / 60) - h * 60;
-  const s = Math.floor(secs - h * 3600 - m * 60);
+//   const h = Math.floor(secs / 3600);
+//   const m = Math.floor(secs / 60) - h * 60;
+//   const s = Math.floor(secs - h * 3600 - m * 60);
 
-  return pad(m) + ':' + pad(s); // pad(h) +":"+
-};
+//   return pad(m) + ':' + pad(s); // pad(h) +":"+
+// };
 
 const parseMatch = (location) => {
   const match = {
@@ -566,44 +567,44 @@ const BoxHeading = styled(Heading)`
   margin-bottom: 16px;
 `;
 
-const LogoImg = styled.img``;
-const BigCard = styled.div<{ align?: string }>`
-  color: ${({ theme }) => theme.colors.text};
-  position: relative;
+// const LogoImg = styled.img``;
+// const BigCard = styled.div<{ align?: string }>`
+//   color: ${({ theme }) => theme.colors.text};
+//   position: relative;
 
-  border-width: 10px 10px;
-  border-style: solid;
-  border-color: transparent;
+//   border-width: 10px 10px;
+//   border-style: solid;
+//   border-color: transparent;
 
-  border-image-width: 80px;
-  background-color: rgba(0, 0, 0, 0.4);
+//   border-image-width: 80px;
+//   background-color: rgba(0, 0, 0, 0.4);
 
-  background-size: 400px;
-  // background-color: rgba(0,0,0,0.4);
-  line-height: 1.6rem;
-  font-size: 1rem;
-  text-shadow: 1px 1px 1px #000;
-  p,
-  a,
-  span {
-    font-family: 'Alegreya Sans', sans-serif, monospace !important;
-    text-transform: none;
-    color: #ddd;
-  }
-  & > div > p {
-    line-height: 1.7rem;
-  }
-  ${({ theme }) => theme.mediaQueries.sm} {
-    border-width: 40px 40px;
-  }
+//   background-size: 400px;
+//   // background-color: rgba(0,0,0,0.4);
+//   line-height: 1.6rem;
+//   font-size: 1rem;
+//   text-shadow: 1px 1px 1px #000;
+//   p,
+//   a,
+//   span {
+//     font-family: 'Alegreya Sans', sans-serif, monospace !important;
+//     text-transform: none;
+//     color: #ddd;
+//   }
+//   & > div > p {
+//     line-height: 1.7rem;
+//   }
+//   ${({ theme }) => theme.mediaQueries.sm} {
+//     border-width: 40px 40px;
+//   }
 
-  ${({ align }) =>
-    align === 'right'
-      ? `
-    text-align: right;
-  `
-      : ''}
-`;
+//   ${({ align }) =>
+//     align === 'right'
+//       ? `
+//     text-align: right;
+//   `
+//       : ''}
+// `;
 const average = (arr) => arr.reduce((p, c) => p + c, 0) / arr.length;
 
 let realm2;
@@ -653,7 +654,8 @@ const Isles: any = ({ open }) => {
       desynchronized: false,
     },
   });
-  unityInstance = UNSAFE__unityInstance;
+  // @ts-ignore
+  window.unityInstance = unityInstance = UNSAFE__unityInstance;
   const [isGameStarted, setIsGameStarted] = useState(loadingProgression !== 1);
   const [_realm, setRealm] = useState(null);
   const [username, setUsername] = useState(config.username);
@@ -669,42 +671,42 @@ const Isles: any = ({ open }) => {
   const [onPresentRulesModal] = useModal(<RulesModal onResume={() => {}} onDismiss={() => {}} />);
   const [onPresentWarningsModal] = useModal(<WarningsModal onResume={() => {}} onDismiss={() => {}} />);
 
-  useEffect(
-    function () {
-      if (!account) return;
+  // useEffect(
+  //   function () {
+  //     if (!account) return;
 
-      // accountInitialized = true
+  //     // accountInitialized = true
 
-      async function init() {
-        try {
-          const res = await getUsername(account);
-          // @ts-ignore
-          if (res) {
-            setUsername(res);
-            config.username = res;
-            config.address = account;
+  //     async function init() {
+  //       try {
+  //         const res = await getUsername(account);
+  //         // @ts-ignore
+  //         if (res) {
+  //           setUsername(res);
+  //           config.username = res;
+  //           config.address = account;
 
-            if (playerWhitelist.includes(res)) {
-              setIsAdmin(true);
-            }
-          } else {
-            // setUsername(account.slice(0, 5))
-          }
-        } catch (e) {
-          // @ts-ignore
-          // setUsername(account.slice(0, 5))
-        }
-      }
+  //           if (playerWhitelist.includes(res)) {
+  //             setIsAdmin(true);
+  //           }
+  //         } else {
+  //           // setUsername(account.slice(0, 5))
+  //         }
+  //       } catch (e) {
+  //         // @ts-ignore
+  //         // setUsername(account.slice(0, 5))
+  //       }
+  //     }
 
-      const inter = setInterval(init, 1 * 60 * 1000);
-      init();
+  //     const inter = setInterval(init, 1 * 60 * 1000);
+  //     init();
 
-      return () => {
-        clearInterval(inter);
-      };
-    },
-    [account, setUsername, setAddress]
-  );
+  //     return () => {
+  //       clearInterval(inter);
+  //     };
+  //   },
+  //   [account, setUsername, setAddress]
+  // );
 
   const { data: realms } = trpc.seer.core.getRealms.useQuery<Arken.Core.Types.Realm[]>();
   console.log('Realms', realms);
@@ -882,19 +884,38 @@ const Isles: any = ({ open }) => {
         // socket = getSocket('https://' + realm2.endpoint);
 
         const OnLoaded = () => {
-          config.username = 'aaa';
-          config.address = '0xasdsada';
-          log('Loaded');
-          const network = 'bsc';
-          const pack =
-            config.username + ':' + network + ':' + config.address + ':' + (config.isMobile ? 'mobile' : 'desktop');
+          // config.username = 'aaa';
+          // config.address = '0xasdsada';
+          // log('Loaded');
+          // const network = 'bsc';
+          // const pack =
+          //   config.username + ':' + network + ':' + config.address + ':' + (config.isMobile ? 'mobile' : 'desktop');
           //  +
           // ':' +
           // sig2;
-          console.log(pack);
-          unityInstance.SendMessage('NetworkManager', 'EmitSetInfo', pack);
+          // console.log(pack);
+          // unityInstance.SendMessage('NetworkManager', 'emitSetInfo', pack);
           // unityInstance.SendMessage('NetworkManager', 'onReadyToJoinGame')
           // setLoaded(true);
+
+          const network = 'bsc';
+
+          // @ts-ignore
+          window.socket.emit('trpc', {
+            id: generateShortId(),
+            method: 'login',
+            type: 'mutate',
+            params: {
+              name: config.username || 'Testman',
+              network: network,
+              address: config.address,
+              device: config.isMobile ? 'mobile' : 'desktop',
+              version: '1.9.0',
+              signature:
+                sig2 ||
+                '0x0eca1dd7511e0e74db9cf89899cf50f66768510a80195b8e338926fdd5f377b705eec7a311f5ac7b3adf6b8d21a3c3db6956476a103f63f671b877a81cfb193f1b',
+            },
+          });
         };
 
         clients.evolutionShard.socket.on('trpc', function (msg) {
@@ -909,27 +930,36 @@ const Isles: any = ({ open }) => {
             console.log('onEvents events', data.params);
 
             for (const event of data.params) {
-              const eventName = event[0][0].toUpperCase() + event[0].slice(1);
+              const eventName = event[0];
 
               if (
                 logCommonEvents ||
-                (eventName !== 'OnUpdatePickup' && eventName !== 'OnUpdateMyself' && eventName !== 'OnUpdatePlayer')
+                (eventName !== 'onUpdatePickup' && eventName !== 'onUpdateMyself' && eventName !== 'onUpdatePlayer')
               ) {
                 log('Event', event);
               }
 
-              if (eventName === 'OnLoaded') {
+              if (eventName === 'onLoaded') {
                 OnLoaded();
                 continue;
-              } else if (eventName === 'OnJoinGame') {
+              } else if (eventName === 'onLogin') {
+                // @ts-ignore
+                window.socket.emit('trpc', {
+                  id: generateShortId(),
+                  method: 'join',
+                  type: 'mutate',
+                });
+
+                continue;
+              } else if (eventName === 'onJoinGame') {
                 currentPlayerId = event[1].split(':')[0];
 
                 setState('joined');
-              } else if (eventName === 'OnSpawnPlayer') {
+              } else if (eventName === 'onSpawnPlayer') {
                 userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
-              } else if (eventName === 'OnSetInfo') {
+              } else if (eventName === 'onSetInfo') {
                 userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
-              } else if (eventName === 'OnGameOver' || eventName === 'OnUserDisconnected') {
+              } else if (eventName === 'onGameOver' || eventName === 'onUserDisconnected') {
                 const playerId = event[1].split(':')[0];
                 if (playerId === currentPlayerId) {
                   if (userIdToName[event[1].split(':')[1]]) {
@@ -943,9 +973,9 @@ const Isles: any = ({ open }) => {
                   setState('joined');
                   // setUsers([]);
                 }
-              } else if (eventName === 'OnSetRoundInfo') {
+              } else if (eventName === 'onSetRoundInfo') {
                 // toastInfo('Game mode is now ' + event[1].split(':')[22])
-              } else if (state !== 'loading' && eventName === 'OnUpdatePlayer') {
+              } else if (state !== 'loading' && eventName === 'onUpdatePlayer') {
                 if (!assumedTimeDiff) {
                   assumedTimeDiffList.push(new Date().getTime() - parseInt(event[1].split(':')[8]));
                   if (assumedTimeDiffList.length >= 50) {
@@ -953,9 +983,8 @@ const Isles: any = ({ open }) => {
                   }
                 }
               }
-
-              // @ts-ignore
-              unityInstance.SendMessage('NetworkManager', eventName, ...event.slice(1));
+              console.log('ZZZZ', eventName, event[1]);
+              unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
             }
           } catch (err) {
             // ...
@@ -963,10 +992,42 @@ const Isles: any = ({ open }) => {
           }
         });
 
-        // unityInstance.SendMessage('NetworkManager', 'OnWebInit', account2 + ':' + sig2);
+        // unityInstance.SendMessage('NetworkManager', 'onWebInit', account2 + ':' + sig2);
       }
 
-      console.log(clients.evolutionShard.socket, 'zz');
+      if (args.length > 1 && typeof args[1] === 'string') {
+        console.log(args[1]);
+        // Step 1: Split the binary string into bytes
+        const binaryArray = args[1].split(' ');
+
+        // Step 2: Convert each byte to its ASCII character
+        const jsonString = binaryArray
+          .filter((item) => !!item)
+          .map((byte) => String.fromCharCode(parseInt(byte, 2)))
+          .join('');
+
+        // Step 3: Parse the resulting string into JSON
+        try {
+          const jsonObject = JSON.parse(jsonString.trim());
+          console.log(jsonObject);
+
+          const encoder = new TextEncoder();
+
+          clients.evolutionShard.socket.emit(
+            'trpc',
+            encoder.encode(
+              JSON.stringify({
+                id: generateShortId(),
+                method: args[0],
+                type: 'mutate',
+                params: jsonObject,
+              })
+            )
+          );
+        } catch (error) {
+          console.error('Invalid JSON format:', error);
+        }
+      }
 
       if (clients.evolutionShard.socket) clients.evolutionShard.socket.emit(args[0], ...args.slice(1));
     },
@@ -1125,7 +1186,7 @@ const Isles: any = ({ open }) => {
                         onClick={() => {
                           // @ts-ignore
                           window.socket.emit('trpc', {
-                            id: 'adsad',
+                            id: generateShortId(),
                             method: 'load',
                             type: 'mutate',
                             params: serialize([]),
