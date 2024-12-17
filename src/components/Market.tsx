@@ -40,8 +40,8 @@ import {
 } from '~/ui';
 // @ts-ignore
 // @ts-ignore
-import { itemData, ItemType } from '@arken/node/data/items';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { itemData, ItemType } from '@arken/node/legacy/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 
 interface SearchProps {
   value: string;

@@ -1,4 +1,4 @@
-import { achievementData } from '@arken/node/data/achievements';
+import { achievementData } from '@arken/node/legacy/data/achievements';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';

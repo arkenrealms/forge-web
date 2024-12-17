@@ -53,7 +53,10 @@ const Rules = () => {
           </Heading>
           <hr />
           <CardBody>
-            <p>Arken was launched March 28, 2021. It has evolved and will continue to evolve over the years.</p>
+            <h3>
+              Runic Raids was launched March 28, 2021. Evolution Isles was launched July 3, 2021. They have evolved into
+              the Arken Realms, and will continue to evolve over the years.
+            </h3>
             <br />
             <br />
 
@@ -69,7 +72,7 @@ const Rules = () => {
                 <p>
                   <Linker id="about-1">
                     Explore the depths of the Arken Realms. Immerse yourself in our fantasy games, winning tokens and
-                    NFTs, trade them on our NFT Marketplace and participate in NFT farms and pools.
+                    NFTs, trade them on our NFT Marketplace.
                     <br />
                     <br />
                     We build fun games, and incorporate blockchain gaming so you own your character and items for life,
@@ -82,11 +85,11 @@ const Rules = () => {
                     a high integrity for fun factor.
                     <br />
                     <br />
-                    Components of Arken architecture include:
+                    Components of Arken architecture will include:
                     <br />
                     <ul>
                       <li>NFT Service (token IDs + metadata)</li>
-                      <li>P2E Service (secure rewards)</li>
+                      <li>Reward Service (secure rewards)</li>
                       <li>RNG Service (transparency)</li>
                       <li>Lend Service (boost + consume items)</li>
                       <li>Gear Service (access to multiple character inventory)</li>
@@ -111,18 +114,13 @@ const Rules = () => {
                 <p>
                   <Linker id="about-2">
                     Imagine a digital world where you are your own boss. You have developed your skill &amp; knowledge,
-                    and are now rewarded for your effort. Our goal is to provide an income for at least 1% of our most
-                    talented/hard working players.
+                    and are now rewarded for your effort. We've designed the economy in a way that it rewards the most
+                    talented players.
                     <br />
                     <br />
-                    We don't believe it is viable to pay everybody a full income to play a game. However, players should
-                    still own what they pwn. In addition to that, we've designed the economy in a way that it rewards
-                    the most talented players.
-                    <br />
-                    <br />
-                    Each of our 33 runes have utility built into them, and can also be used for crafting. When rune
-                    tokens are used for crafting, they are redistributed to players winning games or finding them
-                    randomly in the game.
+                    Each of our 33 runes have utility built into them, and can also be used for crafting. When runes are
+                    used for crafting, they are redistributed to players winning games or finding them randomly in the
+                    game.
                     <br />
                     <br />
                     This is balanced to support economic inflows and outflows. For example, disenchanting an item will

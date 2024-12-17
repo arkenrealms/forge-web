@@ -1,6 +1,6 @@
 import React from 'react';
 import BonusIcon from './BonusIcon';
-import { ItemsBonusType } from '@arken/node/data/items.type';
+import { ItemsBonusType } from '@arken/node/legacy/data/items.type';
 
 type Props = {
   bonusType: ItemsBonusType;

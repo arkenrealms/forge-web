@@ -1,5 +1,5 @@
-import farms from '@arken/node/farmInfo';
-import contracts from '@arken/node/contractInfo';
+import farms from '@arken/node/legacy/farmInfo';
+import contracts from '@arken/node/legacy/contractInfo';
 
 export default {
   rune: {

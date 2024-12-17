@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import farmsConfig from '@arken/node/farmInfo';
+import farmsConfig from '@arken/node/legacy/farmInfo';
 import fetchFarms from './fetchFarms';
 import {
   fetchFarmUserEarnings,

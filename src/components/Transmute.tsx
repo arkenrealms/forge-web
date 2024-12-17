@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { getFilteredItems, itemData } from '@arken/node/data/items';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { getFilteredItems, itemData } from '@arken/node/legacy/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 import { decodeItem } from '@arken/node/util/decoder';
 import styled, { css } from 'styled-components';
 import useSound from 'use-sound';

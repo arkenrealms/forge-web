@@ -1,4 +1,4 @@
-import addresses from '@arken/node/contractInfo';
+import addresses from '@arken/node/legacy/contractInfo';
 import { Address } from '~/config/constants/types';
 
 export const getAddress = (address: Address): string => {

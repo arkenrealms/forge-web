@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import farmsConfig from '@arken/node/farmInfo';
+import farmsConfig from '@arken/node/legacy/farmInfo';
 import styled from 'styled-components';
 import Page from '~/components/layout/Page';
 import { useModal } from '~/components/Modal';

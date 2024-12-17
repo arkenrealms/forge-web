@@ -14,7 +14,7 @@ import useWeb3 from '~/hooks/useWeb3';
 import { getUsername } from '~/state/profiles/getProfile';
 
 import { ItemInfo } from '~/components/ItemInfo';
-import { ItemCategoriesType } from '@arken/node/data/items.type';
+import { ItemCategoriesType } from '@arken/node/legacy/data/items.type';
 import useCache from '~/hooks/useCache';
 import craftersData from './crafters.json';
 import craftingCompetition1Data from './competition1.json';

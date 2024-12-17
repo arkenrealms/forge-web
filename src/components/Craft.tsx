@@ -23,8 +23,8 @@ import useWeb3 from '~/hooks/useWeb3';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import TipCard from '~/components/TipCard';
-import { itemData, getFilteredItems } from '@arken/node/data/items';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { itemData, getFilteredItems } from '@arken/node/legacy/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 import { RecipeInfo } from '~/components/RecipeInfo';
 
 const ItemContainer = styled.div`

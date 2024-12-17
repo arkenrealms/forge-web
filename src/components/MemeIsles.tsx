@@ -6,7 +6,7 @@ import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import { Unity, useUnityContext } from 'react-unity-webgl';
-import { rewardTokenIdMap } from '@arken/node/data/items';
+import { rewardTokenIdMap } from '@arken/node/legacy/data/items';
 import { decodeItem } from '@arken/node/util/decoder';
 import io from 'socket.io-client';
 import styled, { createGlobalStyle, css } from 'styled-components';
@@ -43,7 +43,7 @@ import {
 import { trpc } from '~/utils/trpc';
 import type * as Arken from '@arken/node/types';
 
-import addresses from '@arken/node/contractInfo';
+import addresses from '@arken/node/legacy/contractInfo';
 
 // var unityProvider = UnityLoader.instantiate("unityContainer", "Build/public.json", {onProgress: UnityProgress});
 let unityProvider;

@@ -1,5 +1,5 @@
-import { ItemCategoriesType, ItemsPage } from '@arken/node/data/items.type';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { ItemCategoriesType, ItemsPage } from '@arken/node/legacy/data/items.type';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 
 export const emptyItem = {
   name: '',

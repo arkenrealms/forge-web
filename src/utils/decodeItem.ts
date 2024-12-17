@@ -5,8 +5,8 @@
 //   ItemType,
 //   ItemRarity,
 //   ItemRarityNameById,
-// } from '@arken/node/data/items'
-// import { ItemsMainCategoriesType } from '@arken/node/data/items.type'
+// } from '@arken/node/legacy/data/items'
+// import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type'
 
 // const average = (arr: any) => arr.reduce((p: any, c: any) => p + c, 0) / arr.length
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 import { Flex, Button, CardBody } from '~/ui';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import CategoriesMenuItem from './CategoriesMenuItem';

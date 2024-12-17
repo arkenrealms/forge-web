@@ -3,7 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Link as RouterLink } from 'react-router-dom';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
-import { ClassNames, ItemAttributesByName, itemData, ItemSlotToText, ItemTypeNames } from '@arken/node/data/items';
+import {
+  ClassNames,
+  ItemAttributesByName,
+  itemData,
+  ItemSlotToText,
+  ItemTypeNames,
+} from '@arken/node/legacy/data/items';
 import { toFixed } from '@arken/node/util/math';
 import styled from 'styled-components';
 import Linker from '~/components/Linker';

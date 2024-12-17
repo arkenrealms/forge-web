@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js';
 import erc20ABI from '~/config/abi/erc20.json';
 import masterchefABI from '~/config/abi/masterchef.json';
 import multicall from '~/utils/multicall';
-import farmsConfig from '@arken/node/farmInfo';
+import farmsConfig from '@arken/node/legacy/farmInfo';
 import { getAddress, getMasterChefAddress, getRuneAddress } from '~/utils/addressHelpers';
 import { CURRENT_FARM_SYMBOL } from '~/config';
 

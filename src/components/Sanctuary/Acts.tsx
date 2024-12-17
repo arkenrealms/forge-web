@@ -4,7 +4,7 @@ import remarkGfm from 'remark-gfm';
 import useFetch from '~/hooks/useFetch';
 import history from '~/routerHistory';
 import { Skeleton, Card, Card3 } from '~/ui';
-import acts from '@arken/node/data/generated/acts.json';
+import acts from '@arken/node/legacy/data/generated/acts.json';
 
 const Acts = function () {
   // const url = `https://s1.envoy.arken.asi.sh/acts.json`

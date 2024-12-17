@@ -13,7 +13,7 @@ import { useArcaneItems, useMasterchef, useBarracks } from '~/hooks/useContract'
 import { useProfile } from '~/state/hooks';
 import { getContractAddress } from '~/utils/addressHelpers';
 import useGetWalletItems from '~/hooks/useGetWalletItems';
-import { ItemAttributesByName, ItemSlot, ItemType } from '@arken/node/data/items';
+import { ItemAttributesByName, ItemSlot, ItemType } from '@arken/node/legacy/data/items';
 import ApproveConfirmButtons from './account/ApproveConfirmButtons';
 
 interface EquipModalProps extends InjectedModalProps {

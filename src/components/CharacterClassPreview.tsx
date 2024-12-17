@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useFetch from '~/hooks/useFetch';
 import { useTranslation } from 'react-i18next';
-import classes from '@arken/node/data/generated/characterClasses.json';
+import classes from '@arken/node/legacy/data/generated/characterClasses.json';
 import {
   Image,
   Heading,
@@ -31,18 +31,18 @@ const Classes = function ({ id }) {
     classs.name === 'Warrior'
       ? classs.shortDescription.replace('HE_SHE', 'He').replace('HIS_HER', 'Him')
       : classs.name === 'Assassin'
-      ? classs.shortDescription.replace('HE_SHE', 'she').replace('HIS_HER', 'Her')
-      : classs.name === 'Druid'
-      ? classs.shortDescription.replace('HE_SHE', 'he').replace('HIS_HER', 'Him')
-      : classs.name === 'Necromancer'
-      ? classs.shortDescription.replace('HE_SHE', 'He').replace('HIS_HER', 'His')
-      : classs.name === 'Ranger'
-      ? classs.shortDescription.replace('HE_SHE', 'she').replace('HIS_HER', 'Him')
-      : classs.name === 'Mage'
-      ? classs.shortDescription.replace('HE_SHE', 'She').replace('HIS_HER', 'Her')
-      : classs.name === 'Paladin'
-      ? classs.shortDescription.replace('HE_SHE', 'He').replace('HIS_HER', 'Him')
-      : classs.shortDescription;
+        ? classs.shortDescription.replace('HE_SHE', 'she').replace('HIS_HER', 'Her')
+        : classs.name === 'Druid'
+          ? classs.shortDescription.replace('HE_SHE', 'he').replace('HIS_HER', 'Him')
+          : classs.name === 'Necromancer'
+            ? classs.shortDescription.replace('HE_SHE', 'He').replace('HIS_HER', 'His')
+            : classs.name === 'Ranger'
+              ? classs.shortDescription.replace('HE_SHE', 'she').replace('HIS_HER', 'Him')
+              : classs.name === 'Mage'
+                ? classs.shortDescription.replace('HE_SHE', 'She').replace('HIS_HER', 'Her')
+                : classs.name === 'Paladin'
+                  ? classs.shortDescription.replace('HE_SHE', 'He').replace('HIS_HER', 'Him')
+                  : classs.shortDescription;
 
   return (
     <div
@@ -109,10 +109,10 @@ const Classes = function ({ id }) {
                     gameTabIndex === 0
                       ? classs.raidImage
                       : gameTabIndex === 1
-                      ? classs.infiniteImage
-                      : gameTabIndex === 2
-                      ? classs.raidImage
-                      : ''
+                        ? classs.infiniteImage
+                        : gameTabIndex === 2
+                          ? classs.raidImage
+                          : ''
                   }
                   alt=""
                   className="image-18"
@@ -123,10 +123,10 @@ const Classes = function ({ id }) {
                     image-rendering: ${gameTabIndex === 0
                       ? 'auto'
                       : gameTabIndex === 1
-                      ? 'pixelated'
-                      : gameTabIndex === 2
-                      ? 'auto'
-                      : 'auto'};
+                        ? 'pixelated'
+                        : gameTabIndex === 2
+                          ? 'auto'
+                          : 'auto'};
                   `}
                 />
                 {/* <ButtonMenu activeIndex={gameTabIndex} scale="xs" onItemClick={(index) => setGameTabIndex(index)}>

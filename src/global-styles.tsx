@@ -141,20 +141,21 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
     }
 
     .app__styled-card {
+    background: #09090e;
+      // background-color: #1c1c2f;
       // box-shadow: rgb(0 0 0 / 50%) 0px 2px 25px 10px, rgb(0 0 0 / 10%) 0px -1px 0px 0px inset,
       //   rgb(0 0 0 / 10%) 0px 0px 66px 66px;
       position: relative;
-      border-radius: 3px;
+      // border-radius: 3px;
       overflow: hidden;
       padding: 10px;
     }
     // stuff
 
     .app__styled-card2 {
+    background: #09090e;
     overflow: visible;
     position: relative;
-    background-color: #1c1c2f;
-    background-image: linear-gradient(180deg, rgb(134 123 251 / 6%), rgb(207 144 255 / 6%));
     // padding: 20px;
     box-shadow: rgb(0 0 0 / 50%) 0px 2px 25px 10px, rgb(0 0 0 / 10%) 0px -1px 0px 0px inset, rgb(0 0 0 / 10%) 0px 0px 66px 66px;
 

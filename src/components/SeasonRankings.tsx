@@ -11,8 +11,8 @@ import useSettings from '~/hooks/useSettings2';
 import Paragraph from '~/components/Paragraph';
 import Linker from '~/components/Linker';
 import { normalizeItem, decodeItem } from '@arken/node/util/decoder';
-import { ItemType, itemData } from '@arken/node/data/items';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { ItemType, itemData } from '@arken/node/legacy/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 
 const isLocal = process.env.REACT_APP_RUNE_ENV === 'local';
 

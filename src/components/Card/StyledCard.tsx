@@ -65,7 +65,7 @@ export default function Card(props: StyledCardProps) {
           top: 8px;
           right: 8px;
           bottom: 8px;
-          z-index: -1;
+          z-index: 0;
           pointer-events: none;
         `}
       />

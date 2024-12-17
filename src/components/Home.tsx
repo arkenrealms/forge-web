@@ -698,7 +698,7 @@ const Home: React.FC<any> = ({ match }) => {
       title: 'Runic Raids Launched',
       image: 'https://pbs.twimg.com/media/FMkoMBAVcAIGXC3?format=jpg&name=large',
       date: 'Q1 2021',
-      description: `Runic Raids launched March 30, 2021`,
+      description: `Runic Raids launched March 28, 2021`,
     },
     {
       title: 'Evolution Isles Launched',

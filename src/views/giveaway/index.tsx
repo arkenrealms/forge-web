@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import PageWindow from '~/components/PageWindow';
 
 import { ItemInfo } from '~/components/ItemInfo';
-import { ItemCategoriesType } from '@arken/node/data/items.type';
+import { ItemCategoriesType } from '@arken/node/legacy/data/items.type';
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;

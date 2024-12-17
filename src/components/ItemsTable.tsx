@@ -1,6 +1,6 @@
 import React from 'react';
-import { itemData } from '@arken/node/data/items';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { itemData } from '@arken/node/legacy/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 
 const items = {
   Wands: [itemData[ItemsMainCategoriesType.OTHER].find((r) => r.name === 'The Oculus')],

@@ -4,7 +4,7 @@ import { Button, Flex, Card, Heading, CardBody, BaseLayout } from '~/ui';
 import Page from '~/components/layout/Page';
 
 import { ItemInfo } from '~/components/ItemInfo';
-import { ItemCategoriesType } from '@arken/node/data/items.type';
+import { ItemCategoriesType } from '@arken/node/legacy/data/items.type';
 
 const Container = styled.div``;
 

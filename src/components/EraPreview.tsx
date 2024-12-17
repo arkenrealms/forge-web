@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useFetch from '~/hooks/useFetch';
 import { useTranslation } from 'react-i18next';
-import eras from '@arken/node/data/generated/eras.json';
+import eras from '@arken/node/legacy/data/generated/eras.json';
 import {
   Image,
   Heading,

@@ -1,4 +1,4 @@
-import contracts, { MAINNET, TESTNET } from '@arken/node/contractInfo';
+import contracts, { MAINNET, TESTNET } from '@arken/node/legacy/contractInfo';
 import { PoolConfig, QuoteToken, PoolCategory } from './types';
 
 const pools: PoolConfig[] = [

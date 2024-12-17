@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { itemData } from '@arken/node/data/items';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { itemData } from '@arken/node/legacy/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 import Inventory from '~/components/Inventory';
 import { useAuth } from '~/hooks/useAuth';
 import Page from '~/components/layout/Page';

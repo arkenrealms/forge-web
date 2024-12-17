@@ -1,9 +1,9 @@
-import itemAttributes from '@arken/node/data/generated/itemAttributes.json';
-import itemData from '@arken/node/data/generated/items.json';
-import itemSpecificTypes from '@arken/node/data/generated/itemSpecificTypes.json';
-import itemTypes from '@arken/node/data/generated/itemTypes.json';
-import items, { ItemRarity, RuneNames } from '@arken/node/data/items';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import itemAttributes from '@arken/node/legacy/data/generated/itemAttributes.json';
+import itemData from '@arken/node/legacy/data/generated/items.json';
+import itemSpecificTypes from '@arken/node/legacy/data/generated/itemSpecificTypes.json';
+import itemTypes from '@arken/node/legacy/data/generated/itemTypes.json';
+import items, { ItemRarity, RuneNames } from '@arken/node/legacy/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 import { normalizeItem } from '@arken/node/util/decoder';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';

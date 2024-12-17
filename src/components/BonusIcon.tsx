@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { ItemsBonusType } from '@arken/node/data/items.type';
+import { ItemsBonusType } from '@arken/node/legacy/data/items.type';
 import Fire from './Icons/Fire';
 import Mountain from './Icons/Mountain';
 import Water from './Icons/Water';

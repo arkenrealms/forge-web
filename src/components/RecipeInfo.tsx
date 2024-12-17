@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Select } from 'antd';
 import { Link as RouterLink } from 'react-router-dom';
-import { itemData } from '@arken/node/data/items';
+import { itemData } from '@arken/node/legacy/data/items';
 import styled from 'styled-components';
 import Tooltip from '~/components/Tooltip/Tooltip';
 import useCache from '~/hooks/useCache';

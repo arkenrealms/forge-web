@@ -1,4 +1,4 @@
-import contracts from '@arken/node/contractInfo';
+import contracts from '@arken/node/legacy/contractInfo';
 import BigNumber from 'bignumber.js';
 import { ethers } from 'ethers';
 import React, { useEffect, useMemo, useState } from 'react';

@@ -37,7 +37,7 @@ import SearchInput from '~/components/SearchInput';
 import Select, { OptionProps } from '~/components/Select/Select';
 import useInventory from '~/hooks/useInventory';
 import { useProfile } from '~/state/hooks';
-import { ClassNames } from '@arken/node/data/items';
+import { ClassNames } from '@arken/node/legacy/data/items';
 import { DesktopColumnSchema, ViewMode } from '../../types';
 
 const ControlContainer = styled.div`

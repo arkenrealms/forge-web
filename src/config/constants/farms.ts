@@ -1,5 +1,5 @@
 import { CURRENT_FARM_SYMBOL } from '~/config';
-import contracts from '@arken/node/contractInfo';
+import contracts from '@arken/node/legacy/contractInfo';
 import { FarmConfig, QuoteToken } from './types';
 
 export const MAINNET = 56;

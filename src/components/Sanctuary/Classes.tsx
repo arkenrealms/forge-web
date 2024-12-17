@@ -6,7 +6,7 @@ import useFetch from '~/hooks/useFetch';
 import history from '~/routerHistory';
 import LoreBlock1 from '~/components/LoreBlock1';
 import { Flex, Skeleton, Card3 } from '~/ui';
-import classes from '@arken/node/data/generated/characterClasses.json';
+import classes from '@arken/node/legacy/data/generated/characterClasses.json';
 
 const Abc = styled.div``;
 

@@ -16,8 +16,8 @@ import { getBlacksmithAddress } from '~/utils/addressHelpers';
 import { Button, Flex, Heading } from '~/ui';
 import ApproveConfirmButtons from '~/components/account/ApproveConfirmButtons';
 import useGetWalletItems from '~/hooks/useGetWalletItems';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
-import { itemData } from '@arken/node/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
+import { itemData } from '@arken/node/legacy/data/items';
 import Slider from '~/components/Slider';
 import useDebouncedChangeHandler from '~/utils/useDebouncedChangeHandler';
 
@@ -235,8 +235,8 @@ const Transmute: React.FC<TransmuteProps> = ({ runes, balances, onDismiss }) => 
           const events = Array.isArray(payload?.events?.ItemMint)
             ? payload?.events?.ItemMint
             : payload?.events?.ItemMint
-            ? [payload?.events?.ItemMint]
-            : [];
+              ? [payload?.events?.ItemMint]
+              : [];
 
           onDismiss(events.map((e) => e.returnValues[1]) || []);
         } catch (e) {

@@ -11,7 +11,7 @@ import { Nft } from '~/config/constants/types';
 import useApproveConfirmTransaction from '~/hooks/useApproveConfirmTransaction';
 import useI18n from '~/hooks/useI18n';
 import { useTranslation } from 'react-i18next';
-import { ItemCategoriesType, ItemType } from '@arken/node/data/items.type';
+import { ItemCategoriesType, ItemType } from '@arken/node/legacy/data/items.type';
 import useGetWalletItems from '~/hooks/useGetWalletItems';
 import useWeb3 from '~/hooks/useWeb3';
 import { getContractAddress } from '~/utils/addressHelpers';

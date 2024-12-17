@@ -2,7 +2,7 @@ import { BigNumber } from 'bignumber.js';
 import cx from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ItemType } from '@arken/node/data/items.type';
+import { ItemType } from '@arken/node/legacy/data/items.type';
 import styled from 'styled-components';
 import CraftModal from '~/components/CraftModal';
 import EquipModal from '~/components/EquipModal';
@@ -125,7 +125,11 @@ const StyledCardAccent = styled.div`
 `;
 const StyledCardAccentTop = styled.div`
   background: #d0f0dd;
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   border-radius: 4px;
   position: absolute;
   height: 4px;
@@ -135,7 +139,11 @@ const StyledCardAccentTop = styled.div`
 `;
 const StyledCardAccentLeft = styled.div`
   background: #d0f0dd;
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   border-radius: 4px;
   position: absolute;
   top: 0;
@@ -145,7 +153,11 @@ const StyledCardAccentLeft = styled.div`
 `;
 const StyledCardAccentRight = styled.div`
   background: #d0f0dd;
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   border-radius: 4px;
   position: absolute;
   width: 4px;
@@ -155,7 +167,11 @@ const StyledCardAccentRight = styled.div`
 `;
 const StyledCardAccentBottom = styled.div`
   background: #d0f0dd;
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   border-radius: 4px;
   position: absolute;
   height: 4px;
@@ -165,131 +181,259 @@ const StyledCardAccentBottom = styled.div`
 `;
 
 const StyledCardAccentTopNormal = styled(StyledCardAccentTop)`
-  box-shadow: 0px 0px 0 #fff, 0px 0px 4px #fff, 0px 0px 8px #fff, 0px 0px 16px #fff;
+  box-shadow:
+    0px 0px 0 #fff,
+    0px 0px 4px #fff,
+    0px 0px 8px #fff,
+    0px 0px 16px #fff;
   filter: hue-rotate(305deg);
 `;
 const StyledCardAccentLeftNormal = styled(StyledCardAccentLeft)`
-  box-shadow: 0px 0px 0 #fff, 0px 0px 4px #fff, 0px 0px 8px #fff, 0px 0px 16px #fff;
+  box-shadow:
+    0px 0px 0 #fff,
+    0px 0px 4px #fff,
+    0px 0px 8px #fff,
+    0px 0px 16px #fff;
   filter: hue-rotate(305deg);
 `;
 const StyledCardAccentRightNormal = styled(StyledCardAccentRight)`
-  box-shadow: 0px 0px 0 #fff, 0px 0px 4px #fff, 0px 0px 8px #fff, 0px 0px 16px #fff;
+  box-shadow:
+    0px 0px 0 #fff,
+    0px 0px 4px #fff,
+    0px 0px 8px #fff,
+    0px 0px 16px #fff;
   filter: hue-rotate(305deg);
 `;
 const StyledCardAccentBottomNormal = styled(StyledCardAccentBottom)`
-  box-shadow: 0px 0px 0 #fff, 0px 0px 4px #fff, 0px 0px 8px #fff, 0px 0px 16px #fff;
+  box-shadow:
+    0px 0px 0 #fff,
+    0px 0px 4px #fff,
+    0px 0px 8px #fff,
+    0px 0px 16px #fff;
   filter: hue-rotate(305deg);
 `;
 const StyledCardAccentTopMythic = styled(StyledCardAccentTop)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(305deg);
 `;
 const StyledCardAccentLeftMythic = styled(StyledCardAccentLeft)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(305deg);
 `;
 const StyledCardAccentRightMythic = styled(StyledCardAccentRight)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(305deg);
 `;
 const StyledCardAccentBottomMythic = styled(StyledCardAccentBottom)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(305deg);
 `;
 const StyledCardAccentTopLegendary = styled(StyledCardAccentTop)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
 `;
 const StyledCardAccentLeftLegendary = styled(StyledCardAccentLeft)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
 `;
 const StyledCardAccentRightLegendary = styled(StyledCardAccentRight)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
 `;
 const StyledCardAccentBottomLegendary = styled(StyledCardAccentBottom)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
 `;
 const StyledCardAccentTopUnique = styled(StyledCardAccentTop)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(340deg);
 `;
 const StyledCardAccentLeftUnique = styled(StyledCardAccentLeft)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(340deg);
 `;
 const StyledCardAccentRightUnique = styled(StyledCardAccentRight)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(340deg);
 `;
 const StyledCardAccentBottomUnique = styled(StyledCardAccentBottom)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(340deg);
 `;
 
 const StyledCardAccentTopEpic = styled(StyledCardAccentTop)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(235deg);
 `;
 const StyledCardAccentLeftEpic = styled(StyledCardAccentLeft)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(235deg);
 `;
 const StyledCardAccentRightEpic = styled(StyledCardAccentRight)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(235deg);
 `;
 const StyledCardAccentBottomEpic = styled(StyledCardAccentBottom)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(235deg);
 `;
 
 const StyledCardAccentTopRare = styled(StyledCardAccentTop)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
 `;
 const StyledCardAccentLeftRare = styled(StyledCardAccentLeft)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
 `;
 const StyledCardAccentRightRare = styled(StyledCardAccentRight)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
 `;
 const StyledCardAccentBottomRare = styled(StyledCardAccentBottom)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
 `;
 
 const StyledCardAccentTopMagical = styled(StyledCardAccentTop)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(140deg);
 `;
 const StyledCardAccentLeftMagical = styled(StyledCardAccentLeft)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(140deg);
 `;
 const StyledCardAccentRightMagical = styled(StyledCardAccentRight)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(140deg);
 `;
 const StyledCardAccentBottomMagical = styled(StyledCardAccentBottom)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(140deg);
 `;
 
 const StyledCardAccentTopSet = styled(StyledCardAccentTop)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
 `;
 const StyledCardAccentLeftSet = styled(StyledCardAccentLeft)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
 `;
 const StyledCardAccentRightSet = styled(StyledCardAccentRight)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
 `;
 const StyledCardAccentBottomSet = styled(StyledCardAccentBottom)`
-  box-shadow: 0px 0px 0 #40ff22, 0px 0px 4px #30ff1f, 0px 0px 8px #20ff1b, 0px 0px 16px #10ff18;
+  box-shadow:
+    0px 0px 0 #40ff22,
+    0px 0px 4px #30ff1f,
+    0px 0px 8px #20ff1b,
+    0px 0px 16px #10ff18;
   filter: hue-rotate(15deg);
 `;
 

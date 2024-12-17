@@ -1,5 +1,5 @@
 import React from 'react';
-import { ItemCategoriesType } from '@arken/node/data/items.type';
+import { ItemCategoriesType } from '@arken/node/legacy/data/items.type';
 import Shield from './Icons/Shield';
 import Sword from './Icons/Sword';
 import Armor from './Icons/Armor';

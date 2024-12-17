@@ -30,10 +30,10 @@ import CategoriesMenu from '~/components/CategoriesMenu';
 import NavigationArrow from '~/components/NavigationArrow';
 import { NavigationArrowVariant } from '~/components/NavigationArrow';
 import navigateToDirection from '~/utils/navigateToDirection';
-import { ItemsBonusType, ItemType } from '@arken/node/data/items.type';
+import { ItemsBonusType, ItemType } from '@arken/node/legacy/data/items.type';
 import EnduranceGauge from '~/components/EnduranceGauge';
-import { itemData as itemDataJson } from '@arken/node/data/items';
-import { ItemsMainCategoriesType, ItemCategoriesType } from '@arken/node/data/items.type';
+import { itemData as itemDataJson } from '@arken/node/legacy/data/items';
+import { ItemsMainCategoriesType, ItemCategoriesType } from '@arken/node/legacy/data/items.type';
 import BonusList from './BonusList';
 
 const NoItems = styled.div`

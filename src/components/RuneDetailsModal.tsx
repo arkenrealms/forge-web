@@ -5,7 +5,7 @@ import { Button, Text, Flex, LinkExternal } from '~/ui';
 import { Modal, useModal, InjectedModalProps } from '~/components/Modal';
 import useWeb3 from '~/hooks/useWeb3';
 import { useTranslation } from 'react-i18next';
-import { ItemCategoriesType, ItemDetails, ItemType } from '@arken/node/data/items.type';
+import { ItemCategoriesType, ItemDetails, ItemType } from '@arken/node/legacy/data/items.type';
 
 interface RuneDetailsModalProps extends InjectedModalProps {
   tokenAddress: string;

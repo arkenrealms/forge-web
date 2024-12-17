@@ -7,7 +7,7 @@ import useWeb3 from '~/hooks/useWeb3';
 import { parseISO, formatDistance } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import queryString from 'query-string';
-import addresses from '@arken/node/contractInfo';
+import addresses from '@arken/node/legacy/contractInfo';
 import { ConnectNetwork } from '~/components/ConnectNetwork';
 import Select, { OptionProps } from '~/components/Select/Select';
 import { getUserAddressByUsername } from '~/state/profiles/getProfile';

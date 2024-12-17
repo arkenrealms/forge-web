@@ -1,7 +1,7 @@
 import React from 'react';
-import addresses from '@arken/node/contractInfo';
-import { itemData, rewardTokenIdMap, RuneNames } from '@arken/node/data/items';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import addresses from '@arken/node/legacy/contractInfo';
+import { itemData, rewardTokenIdMap, RuneNames } from '@arken/node/legacy/data/items';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 import { decodeItem } from '@arken/node/util/decoder';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';

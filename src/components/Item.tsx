@@ -7,7 +7,7 @@ import useSettings from '~/hooks/useSettings2';
 import { Popover } from 'react-tiny-popover';
 import ItemsContext from '~/contexts/ItemsContext';
 import symbolMap from '~/utils/symbolMap';
-import { ItemCategoriesType, ItemDetails, ItemsBonusType, ItemType } from '@arken/node/data/items.type';
+import { ItemCategoriesType, ItemDetails, ItemsBonusType, ItemType } from '@arken/node/legacy/data/items.type';
 import { toFixed } from '@arken/node/util/math';
 import useCache from '~/hooks/useCache';
 import BonusIcon from '~/components/BonusIcon';

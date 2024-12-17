@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import areas from '@arken/node/data/generated/areas.json';
+import areas from '@arken/node/legacy/data/generated/areas.json';
 import styled, { css } from 'styled-components';
 import { Heading } from '~/ui';
 

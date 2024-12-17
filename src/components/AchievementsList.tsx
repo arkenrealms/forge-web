@@ -1,5 +1,5 @@
 import React from 'react';
-import { achievementData } from '@arken/node/data/achievements';
+import { achievementData } from '@arken/node/legacy/data/achievements';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import useCache from '~/hooks/useCache';

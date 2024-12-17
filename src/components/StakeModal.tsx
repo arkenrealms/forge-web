@@ -12,7 +12,7 @@ import { useArcaneItems, useMasterchef, useRouterV2, useRune } from '~/hooks/use
 import { getAddress, getMasterChefAddress, getRuneAddress } from '~/utils/addressHelpers';
 import styled from 'styled-components';
 import { toFixed } from '@arken/node/util/math';
-import contracts from '@arken/node/contractInfo';
+import contracts from '@arken/node/legacy/contractInfo';
 import { getBalanceNumber } from '~/utils/formatBalance';
 import useWeb3 from '~/hooks/useWeb3';
 import { getContract } from '~/utils/contractHelpers';

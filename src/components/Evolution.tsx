@@ -6,7 +6,7 @@ import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import { Unity, useUnityContext } from 'react-unity-webgl';
-import { rewardTokenIdMap } from '@arken/node/data/items';
+import { rewardTokenIdMap } from '@arken/node/legacy/data/items';
 import { generateShortId } from '@arken/node/util/db';
 import { decodeItem } from '@arken/node/util/decoder';
 import io from 'socket.io-client';
@@ -45,7 +45,7 @@ import {
 import { trpc, clients } from '~/utils/trpc';
 import type * as Arken from '@arken/node/types';
 
-import addresses from '@arken/node/contractInfo';
+import addresses from '@arken/node/legacy/contractInfo';
 
 // var unityProvider = UnityLoader.instantiate("unityContainer", "Build/public.json", {onProgress: UnityProgress});
 let unityProvider;
@@ -1064,73 +1064,75 @@ const Isles: any = ({ open }) => {
         <>
           <Page>
             <Card2 style={{ marginTop: 20 }}>
-              <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-                {t('Play Now')}
-              </BoxHeading>
-              <hr />
-              <CardBody>
-                <Cards>
-                  <div style={{ position: 'relative' }}></div>
-                  <div style={{ position: 'relative', minHeight: 300 }}>
-                    <Flex flexDirection="column" alignItems="center" justifyContent="start">
-                      {realms ? (
-                        <ControlContainer>
-                          <ViewControls>
-                            {realms.map((r) => {
-                              return (
-                                <ToggleWrapper key={r.key}>
-                                  <Toggle
-                                    checked={realm?.key === r.key}
-                                    disabled={!isAdmin && r.status !== 'online'}
-                                    onChange={() => updateRealm(r)}
-                                    scale="sm"
-                                  />
-                                  <Text style={{ textAlign: 'left' }}>
-                                    {' '}
-                                    {t(r.name)} {r.regionCode}
-                                    {(!realm || (realm.key === r.key && !isServerOffline) || realm.key !== r.key) &&
-                                    r.status === 'online'
-                                      ? ` (${r.clientCount} online)`
-                                      : t(` (offline)`)}
-                                  </Text>
-                                </ToggleWrapper>
-                              );
-                            })}
-                            <div style={{ width: '100%', height: '20px' }} onClick={addLocalRealm}></div>
-                          </ViewControls>
-                        </ControlContainer>
-                      ) : null}
-                      {!realms ? <p>Loading realms...</p> : null}
-                      {realms?.length === 0 ? <p>No realms online</p> : null}
-                    </Flex>
-                    <div
-                      css={css`
-                        position: absolute;
-                        left: 0;
-                        bottom: 0;
-                        text-align: center;
-                        width: 100%;
-                        padding: 20px;
-                      `}>
-                      <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
-                        <SpecialButton title="ENTER WORLD" onClick={startOldGame} />
-                      </HeadingFire>
+              <Card>
+                <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+                  {t('Play Now')}
+                </BoxHeading>
+                <hr />
+                <CardBody>
+                  <Cards>
+                    <div style={{ position: 'relative' }}></div>
+                    <div style={{ position: 'relative', minHeight: 300 }}>
+                      <Flex flexDirection="column" alignItems="center" justifyContent="start">
+                        {realms ? (
+                          <ControlContainer>
+                            <ViewControls>
+                              {realms.map((r) => {
+                                return (
+                                  <ToggleWrapper key={r.key}>
+                                    <Toggle
+                                      checked={realm?.key === r.key}
+                                      disabled={!isAdmin && r.status !== 'online'}
+                                      onChange={() => updateRealm(r)}
+                                      scale="sm"
+                                    />
+                                    <Text style={{ textAlign: 'left' }}>
+                                      {' '}
+                                      {t(r.name)} {r.regionCode}
+                                      {(!realm || (realm.key === r.key && !isServerOffline) || realm.key !== r.key) &&
+                                      r.status === 'online'
+                                        ? ` (${r.clientCount} online)`
+                                        : t(` (offline)`)}
+                                    </Text>
+                                  </ToggleWrapper>
+                                );
+                              })}
+                              <div style={{ width: '100%', height: '20px' }} onClick={addLocalRealm}></div>
+                            </ViewControls>
+                          </ControlContainer>
+                        ) : null}
+                        {!realms ? <p>Loading realms...</p> : null}
+                        {realms?.length === 0 ? <p>No realms online</p> : null}
+                      </Flex>
+                      <div
+                        css={css`
+                          position: absolute;
+                          left: 0;
+                          bottom: 0;
+                          text-align: center;
+                          width: 100%;
+                          padding: 20px;
+                        `}>
+                        <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
+                          <SpecialButton title="ENTER WORLD" onClick={startOldGame} />
+                        </HeadingFire>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <p style={{ fontSize: '0.9em' }}>
-                      <Button scale="sm" variant="text" onClick={onPresentRulesModal}>
-                        View Rules
-                      </Button>
-                    </p>
-                    <p style={{ fontSize: '0.9em' }}>
-                      <Button scale="sm" variant="text" onClick={onPresentWarningsModal}>
-                        View Warnings
-                      </Button>
-                    </p>
-                  </div>
-                </Cards>
-              </CardBody>
+                    <div>
+                      <p style={{ fontSize: '0.9em' }}>
+                        <Button scale="sm" variant="text" onClick={onPresentRulesModal}>
+                          View Rules
+                        </Button>
+                      </p>
+                      <p style={{ fontSize: '0.9em' }}>
+                        <Button scale="sm" variant="text" onClick={onPresentWarningsModal}>
+                          View Warnings
+                        </Button>
+                      </p>
+                    </div>
+                  </Cards>
+                </CardBody>
+              </Card>
             </Card2>
             <br />
 

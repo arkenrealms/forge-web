@@ -36,9 +36,9 @@ import PageWindow from '~/components/PageWindow';
 import CardHeader from '~/components/account/CardHeader';
 import useGetWalletNfts from '~/hooks/useGetWalletNfts';
 import { getNativeAddress, getRuneAddress } from '~/utils/addressHelpers';
-import { itemData } from '@arken/node/data/items';
+import { itemData } from '@arken/node/legacy/data/items';
 import CardValueUnstyled from '~/components/raid/CardValueUnstyled';
-import { ItemsMainCategoriesType } from '@arken/node/data/items.type';
+import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 import { RecipeInfo } from '~/components/RecipeInfo';
 import { ProfileInfo } from '~/components/ProfileInfo';
 import { PurchaseModal } from '~/components/PurchaseModal';
@@ -146,7 +146,10 @@ const BigCard = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   background-image: url(/images/background.jpeg);
   background-size: 400px;
-  box-shadow: 0 2px 0 0 rgb(0 0 0 / 80%), inset 0 -1px 0 0 rgb(0 0 0 / 10%), 0 0 66px 66px rgb(0 0 0 / 10%);
+  box-shadow:
+    0 2px 0 0 rgb(0 0 0 / 80%),
+    inset 0 -1px 0 0 rgb(0 0 0 / 10%),
+    0 0 66px 66px rgb(0 0 0 / 10%);
   // background-color: rgba(0,0,0,0.4);
   line-height: 1.6rem;
   font-size: 1rem;

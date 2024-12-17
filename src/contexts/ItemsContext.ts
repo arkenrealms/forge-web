@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { ItemType } from '@arken/node/data/items.type';
+import { ItemType } from '@arken/node/legacy/data/items.type';
 
 type ContextProps = {
   setItemPreviewed: React.Dispatch<React.SetStateAction<string>>;

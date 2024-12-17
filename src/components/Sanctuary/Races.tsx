@@ -6,7 +6,7 @@ import useFetch from '~/hooks/useFetch';
 import history from '~/routerHistory';
 import LoreBlock1 from '~/components/LoreBlock1';
 import { Flex, Card3, Skeleton } from '~/ui';
-import races from '@arken/node/data/generated/characterRaces.json';
+import races from '@arken/node/legacy/data/generated/characterRaces.json';
 
 const Abc = styled.div``;
 

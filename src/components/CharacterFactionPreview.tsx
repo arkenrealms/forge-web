@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import useFetch from '~/hooks/useFetch';
 import { useTranslation } from 'react-i18next';
-import factions from '@arken/node/data/generated/characterFactions.json';
+import factions from '@arken/node/legacy/data/generated/characterFactions.json';
 import {
   Image,
   Heading,

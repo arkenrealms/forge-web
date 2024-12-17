@@ -3,7 +3,7 @@ import erc20 from '~/config/abi/erc20.json';
 import masterchefABI from '~/config/abi/masterchef.json';
 import multicall from '~/utils/multicall';
 import { getMasterChefAddress } from '~/utils/addressHelpers';
-import farmsConfig from '@arken/node/farmInfo';
+import farmsConfig from '@arken/node/legacy/farmInfo';
 import { getBalanceNumber } from '~/utils/formatBalance';
 import { QuoteToken } from '~/config/constants/types';
 

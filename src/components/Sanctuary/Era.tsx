@@ -4,7 +4,7 @@ import remarkGfm from 'remark-gfm';
 import useFetch from '~/hooks/useFetch';
 import { Skeleton } from '~/ui';
 import Linker from '~/components/Linker';
-import eras from '@arken/node/data/generated/eras.json';
+import eras from '@arken/node/legacy/data/generated/eras.json';
 
 const Era = function ({ id }) {
   // const url = `https://s1.envoy.arken.asi.sh/eras.json`

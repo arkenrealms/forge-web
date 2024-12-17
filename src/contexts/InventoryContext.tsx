@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import contracts from '@arken/node/contractInfo';
-import { ItemSlot } from '@arken/node/data/items';
+import contracts from '@arken/node/legacy/contractInfo';
+import { ItemSlot } from '@arken/node/legacy/data/items';
 import { decodeItem } from '@arken/node/util/decoder';
 import { allRuneList } from '~/config';
 import { useCurrency } from '~/hooks/Tokens';

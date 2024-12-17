@@ -7,8 +7,8 @@ import ItemInformation from '~/components/ItemInformation';
 import useWeb3 from '~/hooks/useWeb3';
 import SoundContext from '~/contexts/SoundContext';
 import useInventory from '~/hooks/useInventory';
-import { ClassNames, GamesById, itemData, ItemSlot, ItemType, ItemAttributesById } from '@arken/node/data/items';
-import { ItemsMainCategoriesType, ItemCategoriesType } from '@arken/node/data/items.type';
+import { ClassNames, GamesById, itemData, ItemSlot, ItemType, ItemAttributesById } from '@arken/node/legacy/data/items';
+import { ItemsMainCategoriesType, ItemCategoriesType } from '@arken/node/legacy/data/items.type';
 
 const Container = styled.div`
   // margin-bottom: 30px;

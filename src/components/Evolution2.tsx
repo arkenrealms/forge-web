@@ -11,7 +11,7 @@ import useCache from '~/hooks/useCache';
 import useWeb3 from '~/hooks/useWeb3';
 import { Button, Card, CardBody, Flex, Heading } from '~/ui';
 
-import addresses from '@arken/node/contractInfo';
+import addresses from '@arken/node/legacy/contractInfo';
 
 let unityInstance;
 
