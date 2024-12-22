@@ -119,11 +119,11 @@ backends.forEach((backend) => {
     });
 
     // Handle incoming socket events
-    client.socket.onAny((eventName, res) => {
+    client.socket.on('trpcResponse', (res) => {
       try {
-        console.log(`[${backend.name} Socket] Event:`, eventName, res);
+        console.log(`[${backend.name} Socket] Event:`, res);
 
-        if (eventName === 'Events') return;
+        // if (eventName === 'trpc') return;
 
         const { id } = res;
 

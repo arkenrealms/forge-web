@@ -58,7 +58,7 @@ window.unityBridge = {
 let focusInterval;
 let originalAlert;
 
-const testMode = true;
+const testMode = false;
 const logCommonEvents = testMode;
 let gameInitialized = false;
 // let accountInitialized = false
@@ -638,10 +638,10 @@ const Isles: any = ({ open }) => {
   const { web3 } = useWeb3();
   const gameRef = useRef(null);
   const { unityProvider, UNSAFE__unityInstance, loadingProgression } = useUnityContext({
-    loaderUrl: '/Build/MemeIsles/MemeIsles.loader.js',
-    dataUrl: '/Build/MemeIsles/MemeIsles.data',
-    frameworkUrl: '/Build/MemeIsles/MemeIsles.framework.js',
-    codeUrl: '/Build/MemeIsles/MemeIsles.wasm',
+    loaderUrl: '/Build/EvolutionIsles/EvolutionIsles.loader.js',
+    dataUrl: '/Build/EvolutionIsles/EvolutionIsles.data',
+    frameworkUrl: '/Build/EvolutionIsles/EvolutionIsles.framework.js',
+    codeUrl: '/Build/EvolutionIsles/EvolutionIsles.wasm',
     webglContextAttributes: {
       alpha: false,
       depth: false,
@@ -724,10 +724,10 @@ const Isles: any = ({ open }) => {
 
   const startOldGame = async () => {
     // unityProvider = new UnityContext({
-    //   loaderUrl: '/Build/MemeIsles/MemeIsles.loader.js',
-    //   dataUrl: '/Build/MemeIsles/MemeIsles.data',
-    //   frameworkUrl: '/Build/MemeIsles/MemeIsles.framework.js',
-    //   codeUrl: '/Build/MemeIsles/MemeIsles.wasm',
+    //   loaderUrl: '/Build/EvolutionIsles/EvolutionIsles.loader.js',
+    //   dataUrl: '/Build/EvolutionIsles/EvolutionIsles.data',
+    //   frameworkUrl: '/Build/EvolutionIsles/EvolutionIsles.framework.js',
+    //   codeUrl: '/Build/EvolutionIsles/EvolutionIsles.wasm',
     //   webglContextAttributes: {
     //     alpha: false,
     //     depth: false,
@@ -849,189 +849,206 @@ const Isles: any = ({ open }) => {
 
   const now = new Date().getTime() / 1000;
 
-  // @ts-ignore
-  window.socket = {
-    on: (...args) => {
-      log('socket.on', !!clients.evolutionShard.socket, args);
+  useEffect(function () {
+    const OnLoaded = () => {
+      // config.username = 'aaa';
+      // config.address = '0xasdsada';
+      // log('Loaded');
+      // const network = 'bsc';
+      // const pack =
+      //   config.username + ':' + network + ':' + config.address + ':' + (config.isMobile ? 'mobile' : 'desktop');
+      //  +
+      // ':' +
+      // sig2;
+      // console.log(pack);
+      // unityInstance.SendMessage('NetworkManager', 'emitSetInfo', pack);
+      // unityInstance.SendMessage('NetworkManager', 'onReadyToJoinGame')
+      // setLoaded(true);
 
-      if (clients.evolutionShard.socket)
-        clients.evolutionShard.socket.on(args[0], function (...args2) {
+      const network = 'bsc';
+
+      // @ts-ignore
+      clients.evolutionShard.socket.emit('trpc', {
+        id: generateShortId(),
+        method: 'login',
+        type: 'mutate',
+        params: {
+          name: config.username || 'Testman',
+          network: network,
+          address: config.address,
+          device: config.isMobile ? 'mobile' : 'desktop',
+          version: '1.9.0',
+          signature:
+            sig2 ||
+            '0x0eca1dd7511e0e74db9cf89899cf50f66768510a80195b8e338926fdd5f377b705eec7a311f5ac7b3adf6b8d21a3c3db6956476a103f63f671b877a81cfb193f1b',
+        },
+      });
+    };
+
+    clients.evolutionShard.socket.on('trpc', function (msg) {
+      // @ts-ignore
+      // let json = String.fromCharCode.apply(null, new Uint8Array(msg));
+      try {
+        // explicitly decode the String as UTF-8 for Unicode
+        //   https://github.com/mathiasbynens/utf8.js
+        // json = utf8.decode(json);
+        // console.log('onEvents msg', msg);
+        const data = deserialize(msg);
+        // console.log('onEvents events', data.params);
+
+        for (const event of data.params) {
+          const eventName = event[0];
+
           if (
             logCommonEvents ||
-            (args[0] !== 'onUpdatePickup' && args[0] !== 'onUpdateMyself' && args[0] !== 'onUpdatePlayer')
+            (eventName !== 'onUpdatePickup' &&
+              eventName !== 'onUpdateMyself' &&
+              eventName !== 'onSpawnPowerUp' &&
+              eventName !== 'onClearLeaderboard' &&
+              eventName !== 'onUpdatePlayer')
           ) {
-            log('socket.on called', !!clients.evolutionShard.socket, args[0], args2);
+            log('Shard Event', event);
           }
 
-          args[1](...args2);
-        });
-    },
-    emit: (...args) => {
-      if (logCommonEvents || (args[0] !== 'UpdateMyself' && args[0] !== 'Pickup')) {
-        log('socket.emit', !!clients.evolutionShard.socket, args);
-      }
+          if (eventName === 'onLoaded') {
+            OnLoaded();
+            continue;
+          } else if (eventName === 'onLogin') {
+            // @ts-ignore
+            clients.evolutionShard.socket.emit('trpc', {
+              id: generateShortId(),
+              method: 'join',
+              type: 'mutate',
+            });
 
-      if (args?.[1]?.method === 'load' && state === 'loading') return;
+            continue;
+          } else if (eventName === 'onJoinGame') {
+            currentPlayerId = event[1].split(':')[0];
 
-      if (args?.[1]?.method === 'load') {
-        setState('loading');
+            setState('joined');
+          } else if (eventName === 'onSpectate') {
+            const clientId = event[1].split(':')[0];
 
-        // if (socket) {
-        //   socket.disconnect();
-        //   socket = null;
-        // }
-
-        // socket = getSocket('https://' + realm2.endpoint);
-
-        const OnLoaded = () => {
-          // config.username = 'aaa';
-          // config.address = '0xasdsada';
-          // log('Loaded');
-          // const network = 'bsc';
-          // const pack =
-          //   config.username + ':' + network + ':' + config.address + ':' + (config.isMobile ? 'mobile' : 'desktop');
-          //  +
-          // ':' +
-          // sig2;
-          // console.log(pack);
-          // unityInstance.SendMessage('NetworkManager', 'emitSetInfo', pack);
-          // unityInstance.SendMessage('NetworkManager', 'onReadyToJoinGame')
-          // setLoaded(true);
-
-          const network = 'bsc';
-
-          // @ts-ignore
-          window.socket.emit('trpc', {
-            id: generateShortId(),
-            method: 'login',
-            type: 'mutate',
-            params: {
-              name: config.username || 'Testman',
-              network: network,
-              address: config.address,
-              device: config.isMobile ? 'mobile' : 'desktop',
-              version: '1.9.0',
-              signature:
-                sig2 ||
-                '0x0eca1dd7511e0e74db9cf89899cf50f66768510a80195b8e338926fdd5f377b705eec7a311f5ac7b3adf6b8d21a3c3db6956476a103f63f671b877a81cfb193f1b',
-            },
-          });
-        };
-
-        clients.evolutionShard.socket.on('trpc', function (msg) {
-          // @ts-ignore
-          // let json = String.fromCharCode.apply(null, new Uint8Array(msg));
-          try {
-            // explicitly decode the String as UTF-8 for Unicode
-            //   https://github.com/mathiasbynens/utf8.js
-            // json = utf8.decode(json);
-            console.log('onEvents msg', msg);
-            const data = deserialize(msg);
-            console.log('onEvents events', data.params);
-
-            for (const event of data.params) {
-              const eventName = event[0];
-
-              if (
-                logCommonEvents ||
-                (eventName !== 'onUpdatePickup' && eventName !== 'onUpdateMyself' && eventName !== 'onUpdatePlayer')
-              ) {
-                log('Event', event);
+            if (clientId === currentPlayerId) setState('spectating');
+          } else if (eventName === 'onSpawnPlayer') {
+            userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
+          } else if (eventName === 'onSetInfo') {
+            userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
+          } else if (eventName === 'onGameOver' || eventName === 'onUserDisconnected') {
+            const playerId = event[1].split(':')[0];
+            if (playerId === currentPlayerId) {
+              if (userIdToName[event[1].split(':')[1]]) {
+                // toastInfo('You were killed by ' + userIdToName[event[1].split(':')[1]]);
+              } else {
+                // toastInfo('You died');
               }
 
-              if (eventName === 'onLoaded') {
-                OnLoaded();
-                continue;
-              } else if (eventName === 'onLogin') {
-                // @ts-ignore
-                window.socket.emit('trpc', {
-                  id: generateShortId(),
-                  method: 'join',
-                  type: 'mutate',
-                });
-
-                continue;
-              } else if (eventName === 'onJoinGame') {
-                currentPlayerId = event[1].split(':')[0];
-
-                setState('joined');
-              } else if (eventName === 'onSpawnPlayer') {
-                userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
-              } else if (eventName === 'onSetInfo') {
-                userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
-              } else if (eventName === 'onGameOver' || eventName === 'onUserDisconnected') {
-                const playerId = event[1].split(':')[0];
-                if (playerId === currentPlayerId) {
-                  if (userIdToName[event[1].split(':')[1]]) {
-                    // toastInfo('You were killed by ' + userIdToName[event[1].split(':')[1]]);
-                  } else {
-                    // toastInfo('You died');
-                  }
-
-                  // socket.disconnect();
-                  // socket = null;
-                  setState('joined');
-                  // setUsers([]);
-                }
-              } else if (eventName === 'onSetRoundInfo') {
-                // toastInfo('Game mode is now ' + event[1].split(':')[22])
-              } else if (state !== 'loading' && eventName === 'onUpdatePlayer') {
-                if (!assumedTimeDiff) {
-                  assumedTimeDiffList.push(new Date().getTime() - parseInt(event[1].split(':')[8]));
-                  if (assumedTimeDiffList.length >= 50) {
-                    assumedTimeDiff = average(assumedTimeDiffList);
-                  }
-                }
-              }
-              console.log('ZZZZ', eventName, event[1]);
-              unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
+              // socket.disconnect();
+              // socket = null;
+              setState('disconnected');
+              // setUsers([]);
             }
-          } catch (err) {
-            // ...
-            console.log(err);
+          } else if (eventName === 'onSetRoundInfo') {
+            // toastInfo('Game mode is now ' + event[1].split(':')[22])
+          } else if (state !== 'loading' && eventName === 'onUpdatePlayer') {
+            if (!assumedTimeDiff) {
+              assumedTimeDiffList.push(new Date().getTime() - parseInt(event[1].split(':')[8]));
+              if (assumedTimeDiffList.length >= 50) {
+                assumedTimeDiff = average(assumedTimeDiffList);
+              }
+            }
           }
-        });
-
-        // unityInstance.SendMessage('NetworkManager', 'onWebInit', account2 + ':' + sig2);
-      }
-
-      if (args.length > 1 && typeof args[1] === 'string') {
-        console.log(args[1]);
-        // Step 1: Split the binary string into bytes
-        const binaryArray = args[1].split(' ');
-
-        // Step 2: Convert each byte to its ASCII character
-        const jsonString = binaryArray
-          .filter((item) => !!item)
-          .map((byte) => String.fromCharCode(parseInt(byte, 2)))
-          .join('');
-
-        // Step 3: Parse the resulting string into JSON
-        try {
-          const jsonObject = JSON.parse(jsonString.trim());
-          console.log(jsonObject);
-
-          const encoder = new TextEncoder();
-
-          clients.evolutionShard.socket.emit(
-            'trpc',
-            encoder.encode(
-              JSON.stringify({
-                id: generateShortId(),
-                method: args[0],
-                type: 'mutate',
-                params: jsonObject,
-              })
-            )
-          );
-        } catch (error) {
-          console.error('Invalid JSON format:', error);
+          // console.log('ZZZZ', eventName, event[1]);
+          unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
         }
+      } catch (err) {
+        // ...
+        console.log(err);
       }
+    });
 
-      if (clients.evolutionShard.socket) clients.evolutionShard.socket.emit(args[0], ...args.slice(1));
-    },
-  };
+    // @ts-ignore
+    window.socket = {
+      // on: (...args) => {
+      //   log('socket.on', !!clients.evolutionShard.socket, args);
+
+      //   if (clients.evolutionShard.socket)
+      //     clients.evolutionShard.socket.on(args[0], function (...args2) {
+      //       if (
+      //         logCommonEvents ||
+      //         (args[0] !== 'onUpdatePickup' && args[0] !== 'onUpdateMyself' && args[0] !== 'onUpdatePlayer')
+      //       ) {
+      //         log('socket.on called', !!clients.evolutionShard.socket, args[0], args2);
+      //       }
+
+      //       args[1](...args2);
+      //     });
+      // },
+      emit: (...args) => {
+        if (logCommonEvents || (args[0] !== 'UpdateMyself' && args[0] !== 'Pickup')) {
+          log('socket.emit', !!clients.evolutionShard.socket, args);
+        }
+
+        if (args?.[1]?.method === 'load' && state === 'loading') return;
+
+        if (args?.[1]?.method === 'load') {
+          setState('loading');
+
+          // if (socket) {
+          //   socket.disconnect();
+          //   socket = null;
+          // }
+
+          // socket = getSocket('https://' + realm2.endpoint);
+
+          // unityInstance.SendMessage('NetworkManager', 'onWebInit', account2 + ':' + sig2);
+        }
+
+        if (args.length > 1 && typeof args[1] === 'string') {
+          console.log(args[1]);
+          // Step 1: Split the binary string into bytes
+          const binaryArray = args[1].split(' ');
+
+          // Step 2: Convert each byte to its ASCII character
+          const jsonString = binaryArray
+            .filter((item) => !!item)
+            .map((byte) => String.fromCharCode(parseInt(byte, 2)))
+            .join('');
+
+          // Step 3: Parse the resulting string into JSON
+          try {
+            const jsonObject = JSON.parse(jsonString.trim());
+            if (
+              logCommonEvents ||
+              (jsonObject.method !== 'onUpdatePickup' &&
+                jsonObject.method !== 'onUpdateMyself' &&
+                jsonObject.method !== 'onUpdatePlayer')
+            ) {
+              log('Unity Event', jsonObject);
+            }
+
+            // const encoder = new TextEncoder();
+
+            // clients.evolutionShard.socket.emit(
+            //   'trpc',
+            //   encoder.encode(
+            //     JSON.stringify({
+            //       id: jsonObject.id, // generateShortId(),
+            //       method: jsonObject.method,//args[0],
+            //       type: 'mutate',
+            //       params: jsonObject.params,
+            //     })
+            //   )
+            // );
+          } catch (error) {
+            console.error('Invalid JSON format:', error);
+          }
+        }
+
+        if (clients.evolutionShard.socket) clients.evolutionShard.socket.emit(args[0], ...args.slice(1));
+      },
+    };
+  }, []);
 
   return cache.overview[account]?.isBanned && cache.overview[account]?.banExpireDate > now ? (
     <Flex flexDirection="column" alignItems="center" justifyContent="center" p="20px">
@@ -1176,6 +1193,43 @@ const Isles: any = ({ open }) => {
                   box-shadow: none !important;
                 }
               `}>
+              {state === 'spectating' ? (
+                <div
+                  css={css`
+                    position: absolute;
+                    top: 20px;
+                    left: 20px;
+                  `}>
+                  <Card2>
+                    <Card>
+                      {/* <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+                      UI
+                    </BoxHeading>
+                    <hr /> */}
+                      <CardBody>
+                        <Button
+                          onClick={() => {
+                            // @ts-ignore
+                            window.socket.emit('trpc', {
+                              id: generateShortId(),
+                              method: 'load',
+                              type: 'mutate',
+                              params: serialize([]),
+                            });
+                            // unityInstance.SendMessage(
+                            //   'NetworkManager',
+                            //   'onJoinGame',
+                            //   'qUcc5CvuMEoJmoOiAAD6:Guest420:3:false:600:-12.6602:-10.33721'
+                            // );
+                            // unityInstance.SendMessage('NetworkManager', 'onJoinGame', 'VL570mqtH6h33SWWAAAc:Killer:3:6');
+                          }}>
+                          Revive
+                        </Button>
+                      </CardBody>
+                    </Card>
+                  </Card2>
+                </div>
+              ) : null}
               {state === 'disconnected' ? (
                 <Card2>
                   <Card>

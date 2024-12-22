@@ -580,10 +580,10 @@ const Home: React.FC<any> = () => {
           <SwiperSlide style={{height: '1000px !important'}}>{({ isActive }) =>  */}
           <ChampionWelcome
             title="Heart of the Oasis"
-            description={`With the power of the Arkencube in your hands, you are tasked with saving Haerra from inevitable destruction. Immerse yourself in Arken's groundbreaking fantasy RPG as you customize your unique character and class, craft unique NFTs, and rise against the forces which seek to overwhelm Haerra. In Heart of the Oasis, every choice you make has consequences. Do you have what it takes to save your world, or will you fall to ruin at the feet of the gods?`}>
+            description={`With the power of the Arkencube in your hands, you are tasked with saving Haerra from inevitable destruction. Immerse yourself in Arken's groundbreaking fantasy RPG as you customize your unique character and class, craft unique items, and rise against the forces which seek to overwhelm Haerra. In Heart of the Oasis, every choice you make has consequences. Do you have what it takes to save your world, or will you fall to ruin at the feet of the gods?`}>
             <div>
               {account && holders.find((p) => p.address.toLowerCase() === account.toLowerCase()) ? (
-                <Button as={RouterLink} scale="md" to="/download/infinite" style={{ zoom: 1.5 }}>
+                <Button as={RouterLink} scale="md" to="/download/oasis" style={{ zoom: 1.5 }}>
                   {t('Download for Windows')}
                 </Button>
               ) : (
@@ -595,9 +595,9 @@ const Home: React.FC<any> = () => {
                     onClick={() => {
                       window.scrollTo(0, 0);
                     }}>
-                    Get Earliest Access
+                    Purchase Founder's Edition
                   </Button>
-                  <br />
+                  {/* <br />
                   <br />
                   <Flex flexDirection="row" alignItems="center" justifyContent="space-between">
                     <Button
@@ -609,7 +609,7 @@ const Home: React.FC<any> = () => {
                       }}>
                       Digital Pre-Purchase
                     </Button>
-                  </Flex>
+                  </Flex> */}
                 </>
               )}
             </div>

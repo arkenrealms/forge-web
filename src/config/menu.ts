@@ -7,7 +7,7 @@ const arkenConfig: MenuEntry[] = [
   //   href: '/',
   // },
   {
-    label: 'About',
+    label: 'Beta',
     icon: 'AccountIcon',
     href: '/about',
     items: [

@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 import BottomCTA from '~/components/BottomCTA';
 import Page from '~/components/layout/Page';
 import useWeb3 from '~/hooks/useWeb3';
-import { BaseLayout, Card, Card2, Card3, Flex, Heading } from '~/ui';
+import { BaseLayout, Card, Card2, CardBody, Card3, Flex, Heading } from '~/ui';
 
 const Cards = styled(BaseLayout)`
   align-items: flex-start;
@@ -254,19 +254,20 @@ const Evolution: React.FC<any> = () => {
     <Page>
       <Card2 style={{ maxWidth: 600 }}>
         <Card>
-          {/* <MainCard> */}
-          <Promo1
-            onClick={() => {
-              navigate('/fundraiser');
-            }}>
-            <Heading
-              as="h2"
-              size="lg"
-              mb="8px"
-              style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)', lineHeight: '1.6rem' }}>
-              Earliest Access Founder's Cube
-            </Heading>
-            {/* <Heading
+          <CardBody>
+            {/* <MainCard> */}
+            <Promo1
+              onClick={() => {
+                navigate('/market');
+              }}>
+              <Heading
+                as="h2"
+                size="lg"
+                mb="8px"
+                style={{ textAlign: 'center', filter: 'drop-shadow(2px 4px 6px black)', lineHeight: '1.6rem' }}>
+                Founder's Edition
+              </Heading>
+              {/* <Heading
             as="h2"
             size="md"
             mb="8px"
@@ -274,57 +275,58 @@ const Evolution: React.FC<any> = () => {
           >
             Available Now
           </Heading> */}
-            <Video
-              loop
-              autoPlay
-              muted
-              css={css`
-                mix-blend-mode: difference;
-              `}>
-              <source src={videoUrl} type="video/mp4" />
-            </Video>
-          </Promo1>
-          <br />
-          <br />
-          <p>These will be redeemable for multiple benefits. Including:</p>
-          <br />
-          <p>
-            - Heart of the Oasis: Collector's Edition
+              <Video
+                loop
+                autoPlay
+                muted
+                css={css`
+                  mix-blend-mode: difference;
+                `}>
+                <source src={videoUrl} type="video/mp4" />
+              </Video>
+            </Promo1>
             <br />
-            - Earliest Access to Arken games
             <br />
-            - Access to Founder's Tavern in the End of Time
+            <p>These will be redeemable for multiple benefits. Including:</p>
             <br />
-            - Every Rune in Heart of the Oasis release (1 EX-ZENO)
+            <p>
+              - Heart of the Oasis: Founder's Edition (unreleased)
+              <br />
+              - Earliest Access to Arken games
+              <br />
+              - Access to Founder's Tavern in the End of Time
+              <br />
+              - Every Rune in Heart of the Oasis release (1 EX-ZENO)
+              <br />
+              - Golden Cube Skin
+              <br />
+              - Angel Skin + Wings
+              <br />
+              - Discord Badge + Private Channel
+              <br />
+              - Exclusive T-shirt
+              <br />
+            </p>
             <br />
-            - Golden Cube Skin
             <br />
-            - Angel Skin + Wings
+            <Flex flexDirection="row" alignItems="center" justifyContent="center">
+              <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
+                <SpecialButton
+                  title="Buy Now"
+                  onClick={() => {
+                    navigate('/market');
+                  }}>
+                  {/* <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">Sss</HeadingFire> */}
+                </SpecialButton>
+              </HeadingFire>
+            </Flex>
             <br />
-            - Discord Badge + Private Channel
             <br />
-            - Exclusive T-shirt
-            <br />
-          </p>
-          <br />
-          <br />
-          <Flex flexDirection="row" alignItems="center" justifyContent="center">
-            <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
-              <SpecialButton
-                title="Buy Now"
-                onClick={() => {
-                  navigate('/fundraiser');
-                }}>
-                {/* <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">Sss</HeadingFire> */}
-              </SpecialButton>
-            </HeadingFire>
-          </Flex>
-          <br />
-          <br />
-          <p style={{ fontSize: '0.8rem' }}>
-            <em>Certain benefits will only be unlocked when available.</em>
-          </p>
-          {/* </MainCard> */}
+            <p style={{ fontSize: '0.8rem' }}>
+              <em>Certain benefits will only be unlocked when available.</em>
+            </p>
+            {/* </MainCard> */}
+          </CardBody>
         </Card>
       </Card2>
       <br />
