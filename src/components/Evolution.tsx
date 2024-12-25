@@ -1187,7 +1187,7 @@ const Isles: any = ({ open }) => {
         }
       `}>
       <GlobalStyles />
-      {!isGameStarted ? (
+      {!auth?.address || !auth?.token ? (
         <>
           <Page>
             <Card3 style={{ marginTop: 20 }}>
