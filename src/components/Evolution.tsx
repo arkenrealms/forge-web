@@ -1414,7 +1414,7 @@ const Isles: any = ({ open }) => {
                 onClick={onPresentRewardModal}
                 css={css`
                   position: absolute;
-                  bottom: 70px;
+                  bottom: 300px;
                   left: 20px;
                 `}>
                 <Card style={{ textAlign: 'center', zoom: '0.6' }}>
