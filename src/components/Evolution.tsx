@@ -13,6 +13,7 @@ import io from 'socket.io-client';
 import styled, { createGlobalStyle, css } from 'styled-components';
 import ItemInformation from '~/components/ItemInformation';
 import Page from '~/components/layout/Page';
+import { useAuth } from '~/hooks/useAuth';
 import Linker from '~/components/Linker';
 import { Modal, useModal } from '~/components/Modal';
 import Paragraph from '~/components/Paragraph';
@@ -26,7 +27,7 @@ import useSettings from '~/hooks/useSettings2';
 import { serialize, deserialize } from '@arken/node/util/rpc';
 import useWeb3 from '~/hooks/useWeb3';
 import { useProfile, useToast } from '~/state/hooks';
-import { getUsername } from '~/state/profiles/getProfile';
+import config from '../config';
 import {
   BaseLayout,
   Button,
@@ -203,6 +204,72 @@ const RulesModal = ({ onResume, onDismiss }) => {
   );
 };
 
+const TokenModal = ({ onResume, onDismiss, reward }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Modal
+      title={reward.rewardItemName}
+      onDismiss={() => {
+        onResume();
+        onDismiss();
+      }}>
+      <ModalContent>
+        <Flex flexDirection="column" alignItems="left" mb="8px" justifyContent="start">
+          {/* <Heading as="h2" size="xl" color="#fff" mb="24px">
+              How To Play
+            </Heading> */}
+          <HelpText>{reward.shortDescription}</HelpText>
+          <br />
+          <HelpText>{reward.longDescription}</HelpText>
+          <br />
+          <br />
+        </Flex>
+      </ModalContent>
+      <Actions>
+        <Button
+          width="100%"
+          variant="secondary"
+          onClick={() => {
+            onResume();
+            onDismiss();
+          }}>
+          Back
+        </Button>
+      </Actions>
+    </Modal>
+  );
+};
+const RewardModal = ({ onResume, onDismiss }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Modal
+      title="Rewards"
+      onDismiss={() => {
+        onResume();
+        onDismiss();
+      }}>
+      <ModalContent>
+        <Flex flexDirection="column" alignItems="left" mb="8px" justifyContent="start">
+          <HelpText>Rewards</HelpText>
+          <br />
+        </Flex>
+      </ModalContent>
+      <Actions>
+        <Button
+          width="100%"
+          variant="secondary"
+          onClick={() => {
+            onResume();
+            onDismiss();
+          }}>
+          Back
+        </Button>
+      </Actions>
+    </Modal>
+  );
+};
 const WarningsModal = ({ onResume, onDismiss }) => {
   const { t } = useTranslation();
 
@@ -311,6 +378,7 @@ const HeadingFire = styled.div<{
   color3: string;
   color4: string;
 }>`
+  text-align: center;
   background-image: -webkit-linear-gradient(
     top,
     #bcbcbc 0%,
@@ -402,7 +470,7 @@ const SpecialButton = styled.div<{ title: string }>`
   // border-image-slice: 110 330 fill;
   padding: 0 0 50px 0;
   cursor: url('/images/cursor3.png'), pointer;
-  font-family: 'webfontexl', sans-serif !important;
+  font-family: 'webfontexl', 'Palatino Linotype', 'Times', serif !important;
   text-transform: uppercase;
   background-color: #642c08;
   border-radius: 10px;
@@ -521,7 +589,7 @@ const RewardCardItem = ({ reward }) => {
 
 // let gameCanvas;
 
-const config = {
+const localConfig = {
   username: 'Testman', // || 'Guest' + Math.floor(Math.random() * 999),
   address: '0x1a367CA7bD311F279F1dfAfF1e60c4d797Faa6eb',
   isMobile: false,
@@ -612,30 +680,17 @@ let unityInstance;
 let account2;
 let sig2;
 
-// @ts-ignore
-window.socket = {
-  on: (...args) => {},
-  emit: (...args) => {},
-};
+// // @ts-ignore
+// window.socket = {
+//   on: (...args) => {},
+//   emit: (...args) => {},
+// };
 
 const userIdToName = {};
 let assumedTimeDiff = 0;
 const assumedTimeDiffList = [];
 
-const Isles: any = ({ open }) => {
-  const location = useLocation();
-  // const history = useNavigate();
-  // const settings = useSettings();
-  const cache = useCache();
-  const match = parseMatch(location);
-  const { t } = useTranslation();
-  // const [didError, setDidError] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState('');
-  const [signature, setSignature] = useState('');
-  // const [progression, setProgression] = useState(0);
-  const { account, library } = useWeb3();
-  account2 = account;
-  const { web3 } = useWeb3();
+const GameWrapper = ({ setIsGameStarted }) => {
   const gameRef = useRef(null);
   const { unityProvider, UNSAFE__unityInstance, loadingProgression } = useUnityContext({
     loaderUrl: '/Build/EvolutionIsles/EvolutionIsles.loader.js',
@@ -654,22 +709,71 @@ const Isles: any = ({ open }) => {
       desynchronized: false,
     },
   });
-  // @ts-ignore
+  //@ts-ignore
   window.unityInstance = unityInstance = UNSAFE__unityInstance;
-  const [isGameStarted, setIsGameStarted] = useState(loadingProgression !== 1);
+
+  useEffect(
+    function () {
+      if (loadingProgression === 1) setIsGameStarted(true);
+    },
+    [loadingProgression, setIsGameStarted]
+  );
+
+  // const [isGameStarted, setIsGameStarted] = useState(loadingProgression !== 1);
+
+  return (
+    <>
+      {loadingProgression !== 1 ? (
+        <StyledNotFound>
+          <Heading size="xxl">{(loadingProgression * 100).toFixed(0)}%</Heading>
+        </StyledNotFound>
+      ) : null}
+      <Unity
+        ref={gameRef}
+        unityProvider={unityProvider}
+        // matchWebGLToCanvasSize={false}
+        style={{
+          width: loadingProgression === 1 ? '100%' : '0%',
+          height: loadingProgression === 1 ? 'calc(100% - 99px)' : '0%',
+        }}
+      />
+    </>
+  );
+};
+
+const Isles: any = ({ open }) => {
+  const location = useLocation();
+  // const history = useNavigate();
+  // const settings = useSettings();
+  const cache = useCache();
+  const match = parseMatch(location);
+  const { t } = useTranslation();
+  // const [didError, setDidError] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState('');
+  const [signature, setSignature] = useState('');
+  // const [progression, setProgression] = useState(0);
+  const { account, library, web3 } = useWeb3();
+  account2 = account;
+  const auth = useAuth();
+  // const { data: profile } = trpc.seer.profile.getProfile.useQuery<Arken.Profile.Types.Profile>({
+  //   where: { address: { equals: account || '0x1a367CA7bD311F279F1dfAfF1e60c4d797Faa6eb' } },
+  // });
+  // @ts-ignore
   const [_realm, setRealm] = useState(null);
-  const [username, setUsername] = useState(config.username);
-  const [address, setAddress] = useState(config.address);
-  const [loaded, setLoaded] = useState(false);
+  // const [username, setUsername] = useState(localConfig.username);
+  // const [address, setAddress] = useState(localConfig.address);
+  // const [loaded, setLoaded] = useState(false);
   const [state, setState] = useState('disconnected');
   const [tab, setTab] = useState(match?.params?.realm ? parseInt(match?.params?.realm + '') : 0);
   const [isServerOffline, setIsServerOffline] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(
-    window.location.hostname === 'dev.arken.gg' || playerWhitelist.includes(username)
-  );
+  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [isSigned, setIsSigned] = useState(false);
   const { toastError, toastSuccess, toastInfo } = useToast();
+  const [reward, setReward] = useState(null);
   const [onPresentRulesModal] = useModal(<RulesModal onResume={() => {}} onDismiss={() => {}} />);
   const [onPresentWarningsModal] = useModal(<WarningsModal onResume={() => {}} onDismiss={() => {}} />);
+  const [onPresentRewardModal] = useModal(<RewardModal onResume={() => {}} onDismiss={() => {}} />);
+  const [onPresentTokenModal] = useModal(<TokenModal onResume={() => {}} onDismiss={() => {}} reward={reward} />);
 
   // useEffect(
   //   function () {
@@ -683,8 +787,8 @@ const Isles: any = ({ open }) => {
   //         // @ts-ignore
   //         if (res) {
   //           setUsername(res);
-  //           config.username = res;
-  //           config.address = account;
+  //           localConfig.username = res;
+  //           localConfig.address = account;
 
   //           if (playerWhitelist.includes(res)) {
   //             setIsAdmin(true);
@@ -720,32 +824,7 @@ const Isles: any = ({ open }) => {
   const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
   const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
 
-  config.isMobile = isMobile;
-
-  const startOldGame = async () => {
-    // unityProvider = new UnityContext({
-    //   loaderUrl: '/Build/EvolutionIsles/EvolutionIsles.loader.js',
-    //   dataUrl: '/Build/EvolutionIsles/EvolutionIsles.data',
-    //   frameworkUrl: '/Build/EvolutionIsles/EvolutionIsles.framework.js',
-    //   codeUrl: '/Build/EvolutionIsles/EvolutionIsles.wasm',
-    //   webglContextAttributes: {
-    //     alpha: false,
-    //     depth: false,
-    //     stencil: false, // also interesting to test 'false'
-    //     antialias: false,
-    //     premultipliedAlpha: false,
-    //     preserveDrawingBuffer: false,
-    //     powerPreference: 'high-performance',
-    //     failIfMajorPerformanceCaveat: false,
-    //     desynchronized: false,
-    //   },
-    // });
-
-    // // @ts-ignore
-    // window.unityProvider = unityProvider;
-
-    startGame();
-  };
+  localConfig.isMobile = isMobile;
 
   const startGame = async () => {
     let sig = signature;
@@ -753,11 +832,13 @@ const Isles: any = ({ open }) => {
       sig = (await getSignature('evolution')).hash;
       setSignature(sig);
       sig2 = sig;
+      window.localStorage.setItem(config.addressKey, account);
+      window.localStorage.setItem(config.tokenKey, sig);
     }
 
     document.body.classList.add(`override-bad-quality`);
 
-    setIsGameStarted(true);
+    setIsSigned(true);
 
     gameInitialized = true;
 
@@ -838,10 +919,6 @@ const Isles: any = ({ open }) => {
     };
   }
 
-  const addLocalRealm = () => {
-    setIsAdmin(true);
-  };
-
   const updateRealm = (r) => {
     if (!r) return;
     setRealm(r);
@@ -849,217 +926,250 @@ const Isles: any = ({ open }) => {
 
   const now = new Date().getTime() / 1000;
 
-  useEffect(function () {
-    const OnLoaded = () => {
-      // config.username = 'aaa';
-      // config.address = '0xasdsada';
-      // log('Loaded');
-      // const network = 'bsc';
-      // const pack =
-      //   config.username + ':' + network + ':' + config.address + ':' + (config.isMobile ? 'mobile' : 'desktop');
-      //  +
-      // ':' +
-      // sig2;
-      // console.log(pack);
-      // unityInstance.SendMessage('NetworkManager', 'emitSetInfo', pack);
-      // unityInstance.SendMessage('NetworkManager', 'onReadyToJoinGame')
-      // setLoaded(true);
-
-      const network = 'bsc';
-
+  useEffect(
+    function () {
       // @ts-ignore
-      clients.evolutionShard.socket.emit('trpc', {
-        id: generateShortId(),
-        method: 'login',
-        type: 'mutate',
-        params: {
-          name: config.username || 'Testman',
-          network: network,
-          address: config.address,
-          device: config.isMobile ? 'mobile' : 'desktop',
-          version: '1.9.0',
-          signature:
-            sig2 ||
-            '0x0eca1dd7511e0e74db9cf89899cf50f66768510a80195b8e338926fdd5f377b705eec7a311f5ac7b3adf6b8d21a3c3db6956476a103f63f671b877a81cfb193f1b',
-        },
+      if (window.socket || !auth?.address || !auth.token) return;
+
+      const OnLoaded = () => {
+        // localConfig.username = 'aaa';
+        // localConfig.address = '0xasdsada';
+        // log('Loaded');
+        // const network = 'bsc';
+        // const pack =
+        //   localConfig.username + ':' + network + ':' + localConfig.address + ':' + (localConfig.isMobile ? 'mobile' : 'desktop');
+        //  +
+        // ':' +
+        // sig2;
+        // console.log(pack);
+        // unityInstance.SendMessage('NetworkManager', 'emitSetInfo', pack);
+        // unityInstance.SendMessage('NetworkManager', 'onReadyToJoinGame')
+        // setLoaded(true);
+
+        const network = 'bsc';
+
+        // if (!account) return;
+
+        // @ts-ignore
+        clients.evolutionShard.socket.emit('trpc', {
+          id: generateShortId(),
+          method: 'login',
+          type: 'mutate',
+          params: {
+            name: auth?.profile?.name || 'Unknown',
+            network: network,
+            address: auth?.address,
+            device: localConfig.isMobile ? 'mobile' : 'desktop',
+            version: '1.9.0',
+            signature: auth?.token,
+          },
+        });
+      };
+
+      clients.evolutionShard.socket.on('disconnect', function () {
+        setState('disconnected');
       });
-    };
 
-    clients.evolutionShard.socket.on('trpc', function (msg) {
-      // @ts-ignore
-      // let json = String.fromCharCode.apply(null, new Uint8Array(msg));
-      try {
-        // explicitly decode the String as UTF-8 for Unicode
-        //   https://github.com/mathiasbynens/utf8.js
-        // json = utf8.decode(json);
-        // console.log('onEvents msg', msg);
-        const data = deserialize(msg);
-        // console.log('onEvents events', data.params);
+      clients.evolutionShard.socket.on('trpc', function (msg) {
+        // @ts-ignore
+        if (!window.unityInstance) return;
 
-        for (const event of data.params) {
-          const eventName = event[0];
+        // @ts-ignore
+        // let json = String.fromCharCode.apply(null, new Uint8Array(msg));
+        try {
+          // explicitly decode the String as UTF-8 for Unicode
+          //   https://github.com/mathiasbynens/utf8.js
+          // json = utf8.decode(json);
+          // console.log('onEvents msg', msg);
+          const data = deserialize(msg);
+          // console.log('onEvents events', data.params);
 
-          if (
-            logCommonEvents ||
-            (eventName !== 'onUpdatePickup' &&
-              eventName !== 'onUpdateMyself' &&
-              eventName !== 'onSpawnPowerUp' &&
-              eventName !== 'onClearLeaderboard' &&
-              eventName !== 'onUpdatePlayer')
-          ) {
-            log('Shard Event', event);
-          }
+          for (const event of data.params) {
+            const eventName = event[0];
 
-          if (eventName === 'onLoaded') {
-            OnLoaded();
-            continue;
-          } else if (eventName === 'onLogin') {
-            // @ts-ignore
-            clients.evolutionShard.socket.emit('trpc', {
-              id: generateShortId(),
-              method: 'join',
-              type: 'mutate',
-            });
-
-            continue;
-          } else if (eventName === 'onJoinGame') {
-            currentPlayerId = event[1].split(':')[0];
-
-            setState('joined');
-          } else if (eventName === 'onSpectate') {
-            const clientId = event[1].split(':')[0];
-
-            if (clientId === currentPlayerId) setState('spectating');
-          } else if (eventName === 'onSpawnPlayer') {
-            userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
-          } else if (eventName === 'onSetInfo') {
-            userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
-          } else if (eventName === 'onGameOver' || eventName === 'onUserDisconnected') {
-            const playerId = event[1].split(':')[0];
-            if (playerId === currentPlayerId) {
-              if (userIdToName[event[1].split(':')[1]]) {
-                // toastInfo('You were killed by ' + userIdToName[event[1].split(':')[1]]);
-              } else {
-                // toastInfo('You died');
-              }
-
-              // socket.disconnect();
-              // socket = null;
-              setState('disconnected');
-              // setUsers([]);
-            }
-          } else if (eventName === 'onSetRoundInfo') {
-            // toastInfo('Game mode is now ' + event[1].split(':')[22])
-          } else if (state !== 'loading' && eventName === 'onUpdatePlayer') {
-            if (!assumedTimeDiff) {
-              assumedTimeDiffList.push(new Date().getTime() - parseInt(event[1].split(':')[8]));
-              if (assumedTimeDiffList.length >= 50) {
-                assumedTimeDiff = average(assumedTimeDiffList);
-              }
-            }
-          }
-          // console.log('ZZZZ', eventName, event[1]);
-          unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
-        }
-      } catch (err) {
-        // ...
-        console.log(err);
-      }
-    });
-
-    // @ts-ignore
-    window.socket = {
-      // on: (...args) => {
-      //   log('socket.on', !!clients.evolutionShard.socket, args);
-
-      //   if (clients.evolutionShard.socket)
-      //     clients.evolutionShard.socket.on(args[0], function (...args2) {
-      //       if (
-      //         logCommonEvents ||
-      //         (args[0] !== 'onUpdatePickup' && args[0] !== 'onUpdateMyself' && args[0] !== 'onUpdatePlayer')
-      //       ) {
-      //         log('socket.on called', !!clients.evolutionShard.socket, args[0], args2);
-      //       }
-
-      //       args[1](...args2);
-      //     });
-      // },
-      emit: (...args) => {
-        if (logCommonEvents || (args[0] !== 'UpdateMyself' && args[0] !== 'Pickup')) {
-          log('socket.emit', !!clients.evolutionShard.socket, args);
-        }
-
-        if (args?.[1]?.method === 'load' && state === 'loading') return;
-
-        if (args?.[1]?.method === 'load') {
-          setState('loading');
-
-          // if (socket) {
-          //   socket.disconnect();
-          //   socket = null;
-          // }
-
-          // socket = getSocket('https://' + realm2.endpoint);
-
-          // unityInstance.SendMessage('NetworkManager', 'onWebInit', account2 + ':' + sig2);
-        }
-
-        if (args.length > 1 && typeof args[1] === 'string') {
-          console.log(args[1]);
-          // Step 1: Split the binary string into bytes
-          const binaryArray = args[1].split(' ');
-
-          // Step 2: Convert each byte to its ASCII character
-          const jsonString = binaryArray
-            .filter((item) => !!item)
-            .map((byte) => String.fromCharCode(parseInt(byte, 2)))
-            .join('');
-
-          // Step 3: Parse the resulting string into JSON
-          try {
-            const jsonObject = JSON.parse(jsonString.trim());
             if (
               logCommonEvents ||
-              (jsonObject.method !== 'onUpdatePickup' &&
-                jsonObject.method !== 'onUpdateMyself' &&
-                jsonObject.method !== 'onUpdatePlayer')
+              (eventName !== 'onUpdatePickup' &&
+                eventName !== 'onUpdateMyself' &&
+                eventName !== 'onSpawnPowerUp' &&
+                eventName !== 'onClearLeaderboard' &&
+                eventName !== 'onUpdatePlayer')
             ) {
-              log('Unity Event', jsonObject);
+              log('Shard Event', event);
             }
 
-            // const encoder = new TextEncoder();
+            if (eventName === 'onLoaded') {
+              OnLoaded();
+              continue;
+            } else if (eventName === 'onLogin') {
+              // @ts-ignore
+              clients.evolutionShard.socket.emit('trpc', {
+                id: generateShortId(),
+                method: 'join',
+                type: 'mutate',
+              });
 
-            // clients.evolutionShard.socket.emit(
-            //   'trpc',
-            //   encoder.encode(
-            //     JSON.stringify({
-            //       id: jsonObject.id, // generateShortId(),
-            //       method: jsonObject.method,//args[0],
-            //       type: 'mutate',
-            //       params: jsonObject.params,
-            //     })
-            //   )
-            // );
-          } catch (error) {
-            console.error('Invalid JSON format:', error);
+              continue;
+            } else if (eventName === 'onJoinGame') {
+              currentPlayerId = event[1].split(':')[0];
+
+              setState('joined');
+            } else if (eventName === 'onSpectate') {
+              const clientId = event[1].split(':')[0];
+
+              if (clientId === currentPlayerId) setState('spectating');
+            } else if (eventName === 'onSpawnPlayer') {
+              userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
+            } else if (eventName === 'onSetInfo') {
+              userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
+            } else if (eventName === 'onGameOver' || eventName === 'onDisconnected') {
+              const playerId = event[1].split(':')[0];
+              if (playerId === currentPlayerId) {
+                if (userIdToName[event[1].split(':')[1]]) {
+                  // toastInfo('You were killed by ' + userIdToName[event[1].split(':')[1]]);
+                } else {
+                  // toastInfo('You died');
+                }
+
+                // socket.disconnect();
+                // socket = null;
+                setState('disconnected');
+                // setUsers([]);
+              }
+            } else if (eventName === 'onSetRoundInfo') {
+              // toastInfo('Game mode is now ' + event[1].split(':')[22])
+            } else if (eventName === 'onSpawnReward') {
+              const data = event[1].split(':');
+              setReward({
+                id: data[0],
+                rewardItemType: data[1],
+                rewardItemName: data[2],
+                quantity: data[3],
+                position: { x: data[4], y: data[5] },
+                shortDescription:
+                  data[2] === 'harold'
+                    ? 'HAROLD token is based on the Hide The Pain meme.'
+                    : data[2] === 'pepe'
+                      ? 'Pepe is a well known meme.'
+                      : 'DOGE is a shiba inu.',
+                longDescription:
+                  data[2] === 'harold'
+                    ? 'It was rugged by the original creator and is has been adopted by the community and a very big whale.'
+                    : data[2] === 'pepe'
+                      ? 'Pepe stuff'
+                      : 'Doge stuff',
+              });
+            } else if (eventName === 'onUpdateReward') {
+              setReward(null);
+            } else if (state !== 'loading' && eventName === 'onUpdatePlayer') {
+              if (!assumedTimeDiff) {
+                assumedTimeDiffList.push(new Date().getTime() - parseInt(event[1].split(':')[8]));
+                if (assumedTimeDiffList.length >= 50) {
+                  assumedTimeDiff = average(assumedTimeDiffList);
+                }
+              }
+            }
+            // console.log('ZZZZ', eventName, event[1]);
+            unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
           }
+        } catch (err) {
+          // ...
+          console.log(err);
         }
+      });
 
-        if (clients.evolutionShard.socket) clients.evolutionShard.socket.emit(args[0], ...args.slice(1));
-      },
-    };
-  }, []);
+      // @ts-ignore
+      window.socket = {
+        // on: (...args) => {
+        //   log('socket.on', !!clients.evolutionShard.socket, args);
 
-  return cache.overview[account]?.isBanned && cache.overview[account]?.banExpireDate > now ? (
-    <Flex flexDirection="column" alignItems="center" justifyContent="center" p="20px">
-      <Card4>
-        You have been restricted from playing Arken games. Time remaining:{' '}
-        {formatDistance(new Date(), new Date().setTime(cache.overview[account]?.banExpireDate * 1000), {
-          addSuffix: true,
-        })}
-      </Card4>
-    </Flex>
-  ) : (
+        //   if (clients.evolutionShard.socket)
+        //     clients.evolutionShard.socket.on(args[0], function (...args2) {
+        //       if (
+        //         logCommonEvents ||
+        //         (args[0] !== 'onUpdatePickup' && args[0] !== 'onUpdateMyself' && args[0] !== 'onUpdatePlayer')
+        //       ) {
+        //         log('socket.on called', !!clients.evolutionShard.socket, args[0], args2);
+        //       }
+
+        //       args[1](...args2);
+        //     });
+        // },
+        emit: (...args) => {
+          if (logCommonEvents || (args[0] !== 'UpdateMyself' && args[0] !== 'Pickup')) {
+            log('socket.emit', !!clients.evolutionShard.socket, args);
+          }
+
+          if (args?.[1]?.method === 'load' && state === 'loading') return;
+
+          if (args?.[1]?.method === 'load') {
+            setState('loading');
+
+            // if (socket) {
+            //   socket.disconnect();
+            //   socket = null;
+            // }
+
+            // socket = getSocket('https://' + realm2.endpoint);
+
+            // unityInstance.SendMessage('NetworkManager', 'onWebInit', account2 + ':' + sig2);
+          }
+
+          if (args.length > 1 && typeof args[1] === 'string') {
+            console.log(args[1]);
+            // Step 1: Split the binary string into bytes
+            const binaryArray = args[1].split(' ');
+
+            // Step 2: Convert each byte to its ASCII character
+            const jsonString = binaryArray
+              .filter((item) => !!item)
+              .map((byte) => String.fromCharCode(parseInt(byte, 2)))
+              .join('');
+
+            // Step 3: Parse the resulting string into JSON
+            try {
+              const jsonObject = JSON.parse(jsonString.trim());
+              if (
+                logCommonEvents ||
+                (jsonObject.method !== 'onUpdatePickup' &&
+                  jsonObject.method !== 'onUpdateMyself' &&
+                  jsonObject.method !== 'onUpdatePlayer')
+              ) {
+                log('Unity Event', jsonObject);
+              }
+
+              // const encoder = new TextEncoder();
+
+              // clients.evolutionShard.socket.emit(
+              //   'trpc',
+              //   encoder.encode(
+              //     JSON.stringify({
+              //       id: jsonObject.id, // generateShortId(),
+              //       method: jsonObject.method,//args[0],
+              //       type: 'mutate',
+              //       params: jsonObject.params,
+              //     })
+              //   )
+              // );
+            } catch (error) {
+              console.error('Invalid JSON format:', error);
+            }
+          }
+
+          if (clients.evolutionShard.socket) clients.evolutionShard.socket.emit(args[0], ...args.slice(1));
+        },
+      };
+    },
+    [auth]
+  );
+
+  // unityInstance.SendMessage(
+  //   'NetworkManager',
+  //   'onJoinGame',
+  //   'qUcc5CvuMEoJmoOiAAD6:Guest420:3:false:600:-12.6602:-10.33721'
+  // );
+  // unityInstance.SendMessage('NetworkManager', 'onJoinGame', 'VL570mqtH6h33SWWAAAc:Killer:3:6');
+  return (
     <div
       css={css`
         &::before {
@@ -1080,7 +1190,27 @@ const Isles: any = ({ open }) => {
       {!isGameStarted ? (
         <>
           <Page>
-            <Card2 style={{ marginTop: 20 }}>
+            <Card3 style={{ marginTop: 20 }}>
+              <CardBody>
+                Evolution Isles is a web-based arena style game, comprised of 10+ game modes rotating every 5 minutes.
+                You collect sprites to evolve your character to be able to beat other players, while trying to collect
+                rewards scattered on the map. Each game mode puts a spin on the game play. Although it's easy to get
+                started, the battle for glory is more difficult.
+                <br />
+                <br />
+                <Button as={RouterLink} to="/evolution/tutorial">
+                  View Tutorial
+                </Button>
+                {/* <p>
+                  {t(
+                    `Arken is the next evolution of DeFi farming. Farming is when you use your tokens to earn bonus tokens by staking them. Every week a new token is created (called a rune). It's farmed until the max supply of 50,000. That rune can then be combined with other runes to create NFTs. Those NFTs can be used to improve your earnings.`,
+                  )}
+                </p> */}
+              </CardBody>
+            </Card3>
+            <br />
+
+            <Card2>
               <Card>
                 <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
                   {t('Play Now')}
@@ -1099,7 +1229,7 @@ const Isles: any = ({ open }) => {
                                   <ToggleWrapper key={r.key}>
                                     <Toggle
                                       checked={realm?.key === r.key}
-                                      disabled={!isAdmin && r.status !== 'online'}
+                                      disabled={r.status !== 'online'}
                                       onChange={() => updateRealm(r)}
                                       scale="sm"
                                     />
@@ -1109,12 +1239,11 @@ const Isles: any = ({ open }) => {
                                       {(!realm || (realm.key === r.key && !isServerOffline) || realm.key !== r.key) &&
                                       r.status === 'online'
                                         ? ` (${r.clientCount} online)`
-                                        : t(` (offline)`)}
+                                        : t(` (online)`)}
                                     </Text>
                                   </ToggleWrapper>
                                 );
                               })}
-                              <div style={{ width: '100%', height: '20px' }} onClick={addLocalRealm}></div>
                             </ViewControls>
                           </ControlContainer>
                         ) : null}
@@ -1131,7 +1260,12 @@ const Isles: any = ({ open }) => {
                           padding: 20px;
                         `}>
                         <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
-                          <SpecialButton title="ENTER WORLD" onClick={startOldGame} />
+                          <SpecialButton
+                            title="ENTER ISLES"
+                            onClick={() => {
+                              startGame();
+                            }}
+                          />
                         </HeadingFire>
                       </div>
                     </div>
@@ -1151,32 +1285,11 @@ const Isles: any = ({ open }) => {
                 </CardBody>
               </Card>
             </Card2>
-            <br />
-
-            <Card3>
-              <CardBody>
-                <br />
-                <br />
-                <Button as={RouterLink} to="/evolution/tutorial">
-                  View Tutorial
-                </Button>
-                {/* <p>
-                  {t(
-                    `Arken is the next evolution of DeFi farming. Farming is when you use your tokens to earn bonus tokens by staking them. Every week a new token is created (called a rune). It's farmed until the max supply of 50,000. That rune can then be combined with other runes to create NFTs. Those NFTs can be used to improve your earnings.`,
-                  )}
-                </p> */}
-              </CardBody>
-            </Card3>
           </Page>
         </>
       ) : null}
-      {isGameStarted ? (
-        <Page style={{ padding: 0, maxWidth: 'none', lineHeight: 0, position: 'relative' }}>
-          {loadingProgression !== 1 ? (
-            <StyledNotFound>
-              <Heading size="xxl">{(loadingProgression * 100).toFixed(0)}%</Heading>
-            </StyledNotFound>
-          ) : null}
+      <Page style={{ padding: 0, maxWidth: 'none', lineHeight: 0, position: 'relative' }}>
+        {isGameStarted ? (
           <div
             css={css`
               position: absolute;
@@ -1197,7 +1310,7 @@ const Isles: any = ({ open }) => {
                 <div
                   css={css`
                     position: absolute;
-                    top: 20px;
+                    bottom: 50px;
                     left: 20px;
                   `}>
                   <Card2>
@@ -1230,13 +1343,9 @@ const Isles: any = ({ open }) => {
                   </Card2>
                 </div>
               ) : null}
-              {state === 'disconnected' ? (
+              {/* {state === 'disconnected' ? (
                 <Card2>
                   <Card>
-                    {/* <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-                    UI
-                  </BoxHeading>
-                  <hr /> */}
                     <CardBody>
                       <Button
                         onClick={() => {
@@ -1247,23 +1356,17 @@ const Isles: any = ({ open }) => {
                             type: 'mutate',
                             params: serialize([]),
                           });
-                          // unityInstance.SendMessage(
-                          //   'NetworkManager',
-                          //   'onJoinGame',
-                          //   'qUcc5CvuMEoJmoOiAAD6:Guest420:3:false:600:-12.6602:-10.33721'
-                          // );
-                          // unityInstance.SendMessage('NetworkManager', 'onJoinGame', 'VL570mqtH6h33SWWAAAc:Killer:3:6');
                         }}>
                         Enter World
                       </Button>
                     </CardBody>
                   </Card>
                 </Card2>
-              ) : null}
+              ) : null} */}
               {state === 'loading' ? (
                 <Card2>
                   <Card style={{ textAlign: 'center' }}>
-                    <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+                    <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, padding: '0 20px' }}>
                       Connecting
                     </BoxHeading>
                     <hr />
@@ -1278,19 +1381,104 @@ const Isles: any = ({ open }) => {
                   </Card>
                 </Card2>
               ) : null}
+              {reward ? (
+                <Card2
+                  onClick={onPresentTokenModal}
+                  css={css`
+                    position: absolute;
+                    bottom: 70px;
+                    right: 20px;
+                  `}>
+                  <Card style={{ textAlign: 'center' }}>
+                    <CardBody>
+                      <img
+                        src={'/images/rewards/' + reward.rewardItemName + '.png'}
+                        css={css`
+                          width: 40px;
+                          height: 40px;
+                          margin-bottom: 10px;
+                        `}
+                      />
+                      <div
+                        css={css`
+                          font-weight: bold;
+                          font-size: 1.1rem;
+                        `}>
+                        {reward.quantity} {reward.rewardItemName.toUpperCase()}
+                      </div>
+                    </CardBody>
+                  </Card>
+                </Card2>
+              ) : null}
+              <Card2
+                onClick={onPresentRewardModal}
+                css={css`
+                  position: absolute;
+                  bottom: 70px;
+                  left: 20px;
+                `}>
+                <Card style={{ textAlign: 'center', zoom: '0.6' }}>
+                  <CardBody>
+                    <h2>Inventory</h2>
+                  </CardBody>
+                  <CardBody>
+                    <img
+                      src={'/images/santahat.png'}
+                      css={css`
+                        width: 40px;
+                        height: 40px;
+                        margin-bottom: 10px;
+                      `}
+                    />
+                    <div
+                      css={css`
+                        font-weight: bold;
+                        font-size: 1.1rem;
+                      `}>
+                      0 Hats
+                    </div>
+                  </CardBody>
+                  <CardBody>
+                    <img
+                      src={'/images/rewards/doge.png'}
+                      css={css`
+                        width: 40px;
+                        height: 40px;
+                        margin-bottom: 10px;
+                      `}
+                    />
+                    <div
+                      css={css`
+                        font-weight: bold;
+                        font-size: 1.1rem;
+                      `}>
+                      0 DOGE
+                    </div>
+                  </CardBody>
+                  <CardBody>
+                    <img
+                      src={'/images/rewards/pepe.png'}
+                      css={css`
+                        width: 40px;
+                        height: 40px;
+                        margin-bottom: 10px;
+                      `}
+                    />
+                    <div
+                      css={css`
+                        font-weight: bold;
+                        font-size: 1.1rem;
+                      `}>
+                      0 PEPE
+                    </div>
+                  </CardBody>
+                </Card>
+              </Card2>
             </div>
           </div>
-          <Unity
-            ref={gameRef}
-            unityProvider={unityProvider}
-            // matchWebGLToCanvasSize={false}
-            style={{
-              width: loadingProgression === 1 ? '100%' : '0%',
-              height: loadingProgression === 1 ? '100%' : '0%',
-            }}
-          />
-        </Page>
-      ) : null}
+        ) : null}
+        {auth?.address && auth?.token ? <GameWrapper setIsGameStarted={setIsGameStarted} /> : null}
+      </Page>
     </div>
   );
 };

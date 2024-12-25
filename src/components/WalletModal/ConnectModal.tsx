@@ -95,22 +95,17 @@ const ConnectModal: React.FC<Props> = function ({ login, onDismiss = () => null 
 
   return (
     <Modal title="Connect to a wallet" onDismiss={onDismiss}>
-      {error ? (
-        <StyledCard>
-          <CardBody>
-            <Flex flexDirection="column" alignItems="center" justifyContent="center">
-              <Heading as="h3" size="lg" color="#fff" mb="24px">
-                Notice
-              </Heading>
-              <p>Arken requires using the Binance Smart Chain network (BSC) with Metamask.</p>
-              <br />
-              <Button scale="md" onClick={addBscToMetamask} style={{ marginRight: 10 }}>
-                Switch to BSC
-              </Button>
-            </Flex>
-          </CardBody>
-        </StyledCard>
-      ) : null}
+      <Flex flexDirection="column" alignItems="center" justifyContent="center">
+        <Heading as="h3" size="lg" color="#fff" mb="24px">
+          Notice
+        </Heading>
+        <p style={{ color: 'white' }}>Arken requires using the Binance Smart Chain network (BSC) with Metamask.</p>
+        <br />
+        <Button scale="md" onClick={addBscToMetamask} style={{ marginRight: 10 }}>
+          Switch to BSC
+        </Button>
+        <br />
+      </Flex>
       {config.map((entry, index) => (
         <WalletCard
           key={entry.title}

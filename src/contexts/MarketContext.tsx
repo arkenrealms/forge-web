@@ -146,7 +146,7 @@ const MarketContextProvider = ({ children }) => {
           rand: rand.toString(),
         });
 
-        console.log('vnvnvnv', res);
+        // console.log('vnvnvnv', res);
 
         setTrades((t) => ({
           ...t,

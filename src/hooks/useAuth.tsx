@@ -16,23 +16,23 @@ interface AuthProviderProps {
 }
 
 const AuthContext = createContext({
+  address: null,
   profile: null,
+  token: null,
   permissions: {} as any,
   isLoading: true,
   isCryptoMode: false,
   isExpertMode: false,
+  sign: (address: string) => {},
   login: () => {},
   logout: () => {},
   setProfileMode: (mode: string) => {},
 });
 
-const pca = null;
-
-// const scopes = ['profile', 'openid', 'email', 'User.Read'];
-
 const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
   // const { settings } = useSettings();
   const { prompt } = usePrompt();
+  const { account, library, web3 } = useWeb3();
 
   const [token, setToken] = useState(
     config.isAuthorizationEnabled ? window.localStorage.getItem(config.tokenKey) : undefined
@@ -45,10 +45,16 @@ const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
   const { mutateAsync: setProfileMode } = trpc.seer.profile.setProfileMode.useMutation();
 
   async function authSilent() {
-    console.log('Refreshing auth');
+    const address = account || window.localStorage.getItem(config.addressKey);
+    const token = window.localStorage.getItem(config.tokenKey);
+
+    console.log('Refreshing auth', address, token);
+
+    if (!address || !token) return;
 
     const res = await authorize({
-      token: window.localStorage.getItem(config.tokenKey) || undefined,
+      address,
+      token,
       loginAs: window.localStorage.getItem('LoginAs') || undefined,
     });
 
@@ -70,9 +76,12 @@ const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
     setIsLoading(false);
   }
 
-  useEffect(function () {
-    authSilent();
-  }, []);
+  useEffect(
+    function () {
+      authSilent();
+    },
+    [account]
+  );
 
   async function login() {
     window.localStorage.removeItem(config.tokenKey);
@@ -86,11 +95,26 @@ const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
     window.localStorage.removeItem('LoginAs');
   }
 
+  async function sign(address: string) {
+    const value = 'evolution';
+    const hash = library?.bnbSign
+      ? (await library.bnbSign(address, value))?.signature
+      : await web3.eth.personal.sign(value, address, null);
+
+    setToken(hash);
+    window.localStorage.setItem(config.tokenKey, hash);
+
+    authSilent();
+  }
+
   return (
     <AuthContext.Provider
       value={{
+        address: account,
+        token: window.localStorage.getItem(config.tokenKey),
         profile,
         permissions,
+        sign,
         login,
         logout,
         isLoading,

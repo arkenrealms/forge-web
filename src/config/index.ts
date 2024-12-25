@@ -10,6 +10,7 @@ const config = {
   remotes: {},
   serviceUri: process.env.REACT_APP_SERVICE_URI,
   isAuthorizationEnabled: process.env.REACT_APP_AUTHORIZATION_ENABLED === 'true',
+  addressKey: process.env.REACT_APP_ADDRESS_KEY || 'Address',
   tokenKey: process.env.REACT_APP_TOKEN_KEY || 'Token',
   accountKey: process.env.REACT_APP_ACCOUNT_KEY || 'Account',
   loginAsAccountKey: process.env.REACT_APP_TOKEN_KEY || 'LoginAsAccount',

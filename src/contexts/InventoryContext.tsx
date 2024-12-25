@@ -406,7 +406,7 @@ const InventoryContextProvider = ({ children }) => {
     },
     [tokenIdsRef, setTokenIds]
   );
-  console.log(555, totalMeta);
+  // console.log(555, totalMeta);
   // console.log(4444, equipment, tokenIds)
   return (
     <InventoryContext.Provider

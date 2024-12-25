@@ -574,7 +574,16 @@ export default ({ children, pageState }) => {
             <a href="https://github.arken.gg" target="_blank">
               <GithubFilled key="GithubFilled" />
             </a>,
-            !auth?.profile?.name ? <UserBlock login={() => {}} logout={() => {}} /> : null,
+            !auth?.profile?.name ? (
+              <UserBlock
+                token={auth?.token}
+                address={auth?.address}
+                name={auth?.profile?.name}
+                sign={auth?.sign}
+                login={() => {}}
+                logout={() => {}}
+              />
+            ) : null,
           ];
         }}
         headerTitleRender={(logo, title, _) => {

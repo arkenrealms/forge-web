@@ -7,15 +7,17 @@ import Button from '../../Button/Button';
 import { Login } from '../../WalletModal/types';
 
 interface Props {
-  username?: string;
-  account?: string;
+  name?: string;
+  address?: string;
+  token?: string;
   login: Login;
   logout: () => void;
+  sign: (address: string) => void;
 }
 
-const UserBlock: React.FC<Props> = ({ username, account, login, logout }) => {
+const UserBlock: React.FC<Props> = ({ name, address, token, sign, login, logout }) => {
   const [onPresentConnectModal] = useModal(<ConnectModal login={login} />);
-  const [onPresentAccountModal] = useModal(<AccountModal account={account || ''} logout={logout} />);
+  const [onPresentAccountModal] = useModal(<AccountModal account={address || ''} logout={logout} />);
   const settings = useSettings();
 
   // @ts-ignore
@@ -23,15 +25,16 @@ const UserBlock: React.FC<Props> = ({ username, account, login, logout }) => {
 
   if (isFlame) return <></>;
 
-  const accountEllipsis = username
-    ? username
-    : account
-      ? `${account.substring(0, 2)}...${account.substring(account.length - 4)}`
+  const accountEllipsis = name
+    ? name
+    : address
+      ? `${address.substring(0, 2)}...${address.substring(address.length - 4)}`
       : null;
-  // console.log(9999, username)
+
+  // console.log(9999, name)
   return (
     <div>
-      {account ? (
+      {address && token ? (
         <Button
           scale="sm"
           variant="tertiary"
@@ -40,7 +43,11 @@ const UserBlock: React.FC<Props> = ({ username, account, login, logout }) => {
           }}>
           {accountEllipsis}
         </Button>
-      ) : settings.isCrypto ? (
+      ) : settings.isCrypto && address && !token ? (
+        <Button scale="sm" onClick={() => sign(address)}>
+          Sign
+        </Button>
+      ) : settings.isCrypto && !address && !token ? (
         <Button
           scale="sm"
           onClick={() => {
@@ -62,4 +69,4 @@ const UserBlock: React.FC<Props> = ({ username, account, login, logout }) => {
   );
 };
 
-export default React.memo(UserBlock, (prevProps, nextProps) => prevProps.account === nextProps.account);
+export default React.memo(UserBlock, (prevProps, nextProps) => prevProps.address === nextProps.address);

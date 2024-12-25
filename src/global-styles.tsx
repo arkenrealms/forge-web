@@ -79,6 +79,10 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
       text-transform: none;
     }
 
+    .app__fullpage-window__content {
+      // height: calc(100% - 99px);
+    }
+
     hr {
       border: none;
       height: 2px;
