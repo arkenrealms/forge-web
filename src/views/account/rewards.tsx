@@ -761,7 +761,7 @@ const Rewards = ({ match }) => {
                           </Tag2>
                         </h3>
                         <hr style={{ margin: '10px 0' }} />
-                        {Object.keys(payment.meta?.tokenKeys || {}).length ? (
+                        {payment.meta?.tokenKeys && Object.keys(payment.meta?.tokenKeys).length ? (
                           <div style={{ marginBottom: 0 }}>
                             {Object.keys(payment.meta?.tokenKeys).map((index) => {
                               return (
@@ -773,7 +773,7 @@ const Rewards = ({ match }) => {
                             })}
                           </div>
                         ) : null}
-                        {Object.keys(payment.meta?.itemIds).length ? (
+                        {payment.meta?.itemIds && Object.keys(payment.meta?.itemIds).length ? (
                           <div style={{ marginTop: 0 }}>
                             {Object.keys(payment.meta?.itemIds).map((index) => {
                               return (

@@ -821,7 +821,7 @@ const Isles: any = ({ open }) => {
   // );
 
   const { data: merchant } = trpc.seer.character.getCharacter.useQuery<Arken.Character.Types.Character>({
-    where: { key: 'harold' },
+    where: { key: { equals: 'harold' } },
   });
   const { mutateAsync: exchangeCharacterItem } = trpc.seer.character.exchangeCharacterItem.useMutation();
   const { data: realms } = trpc.seer.core.getRealms.useQuery<Arken.Core.Types.Realm[]>();
