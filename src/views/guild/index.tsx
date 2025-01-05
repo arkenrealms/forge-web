@@ -14,10 +14,13 @@ import { trpc } from '~/utils/trpc';
 import type * as Arken from '@arken/node';
 
 const Team = ({ match }) => {
-  const { id: idStr }: { id: string } = match.params;
-  const id = Number(idStr);
+  const { id }: { id: string } = match.params;
   const { t } = useTranslation();
-  const { data: team, error, isLoading } = trpc.seer.core.getTeam.useQuery<Arken.Core.Types.Team>({});
+  const {
+    data: team,
+    error,
+    isLoading,
+  } = trpc.seer.core.getTeam.useQuery<Arken.Core.Types.Team>({ where: { id: { equals: id } } });
 
   if (error) return <Navigate to="/500" />;
   if (!team && !isLoading) return <Navigate to="/404" />;

@@ -128,23 +128,24 @@ const MarketContextProvider = ({ children }) => {
         //   await fetch('https://s1.envoy.arken.asi.sh/trades?' + searchParams.toString())
         // ).json()) as any;
         // @ts-ignore
-        const res: Arken.Core.Types.Trade[] = await trpcClient.query('seer.core.getTrades', {
-          account: account || '',
-          seller,
-          buyer,
-          sort,
-          status,
-          rarity,
-          perfectOnly: perfectOnly ? 'true' : '',
-          meOnly: meOnly ? 'true' : '',
-          myListingsOnly: myListingsOnly ? 'true' : '',
-          advanced: advanced ? 'true' : '',
-          tab: tab.toString(),
-          count: count.toString(),
-          page: '1', //page.toString(),
-          branch,
-          rand: rand.toString(),
-        });
+        const res: Arken.Core.Types.Trade[] = [];
+        // await trpcClient.query('seer.core.getTrades', {
+        //   account: account || '',
+        //   seller,
+        //   buyer,
+        //   sort,
+        //   status,
+        //   rarity,
+        //   perfectOnly: perfectOnly ? 'true' : '',
+        //   meOnly: meOnly ? 'true' : '',
+        //   myListingsOnly: myListingsOnly ? 'true' : '',
+        //   advanced: advanced ? 'true' : '',
+        //   tab: tab.toString(),
+        //   count: count.toString(),
+        //   page: '1', //page.toString(),
+        //   branch,
+        //   rand: rand.toString(),
+        // });
 
         // console.log('vnvnvnv', res);
 

@@ -79,7 +79,7 @@ const ConnectModal: React.FC<Props> = function ({ login, onDismiss = () => null 
           ], // you must have access to the specified account
         })
         .then((result: any) => {
-          window.location.reload();
+          // window.location.reload();
         })
         .catch((e: any) => {
           alert('An error occurred. Please seek help in Telegram chat. Error code: ' + e.code);

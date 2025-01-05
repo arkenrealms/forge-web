@@ -20,7 +20,7 @@ import ArcaneBarracksV1 from '@arken/node/legacy/contracts/ArcaneBarracksV1.json
 import ArcaneItemStorageV1 from '@arken/node/legacy/contracts/ArcaneItemStorageV1.json';
 import ArcaneWorldstoneMinterV1 from '@arken/node/legacy/contracts/ArcaneWorldstoneMinterV1.json';
 import ArcaneBlacksmithV4 from '@arken/node/legacy/contracts/ArcaneBlacksmithV4.json';
-import RuneSenderV1 from '@arken/node/legacy/contracts/RuneSenderV1.json';
+import ArkenChest from '@arken/node/legacy/contracts/ArkenChest.json';
 import RuneShards from '@arken/node/legacy/contracts/RuneShards.json';
 import ArcaneTraderV1 from '@arken/node/legacy/contracts/ArcaneTraderV1.json';
 import RxsMarketplace from '@arken/node/legacy/contracts/RXSMarketplace.json';
@@ -102,10 +102,10 @@ export const useBlacksmith = () => {
   }, [web3]);
 };
 
-export const useRuneSender = () => {
+export const useArkenChest = () => {
   const { web3 } = useWeb3();
   return useMemo(() => {
-    return getContract(RuneSenderV1.abi, getAddress(addresses.sender), web3);
+    return getContract(ArkenChest.abi, getAddress(addresses.chest), web3);
   }, [web3]);
 };
 

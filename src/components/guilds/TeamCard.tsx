@@ -49,7 +49,7 @@ const Avatar = styled.img`
 
   ${({ theme }) => theme.mediaQueries.md} {
     height: 128px;
-    margin-top: -24px;
+    margin-top: 24px;
     width: 128px;
   }
 `;

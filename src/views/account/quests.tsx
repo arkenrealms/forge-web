@@ -63,7 +63,7 @@ const TaskCenter = ({ match }) => {
         </CardHeader>
         <CardBody>
           <QuestsContainer>
-            {account ? (
+            {/* {account ? (
               <>
                 <a href="https://www.google.com/search?q=rune+metaverse" target="_blank" rel="noreferrer noopener">
                   Rune on Google
@@ -166,7 +166,7 @@ const TaskCenter = ({ match }) => {
               </>
             ) : (
               <WalletNotConnected />
-            )}
+            )} */}
           </QuestsContainer>
         </CardBody>
       </Card>

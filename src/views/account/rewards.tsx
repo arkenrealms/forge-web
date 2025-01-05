@@ -5,20 +5,21 @@ import { ItemsMainCategoriesType } from '@arken/node/legacy/data/items.type';
 import { decodeItem } from '@arken/node/util/decoder';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '~/hooks/useAuth';
 import { Link as RouterLink } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Item from '~/components/Item';
 import ItemInformation from '~/components/ItemInformation';
 import Page from '~/components/layout/Page';
-import useCache from '~/hooks/useCache';
 import useWeb3 from '~/hooks/useWeb3';
+import { trpc } from '~/utils/trpc';
 import { useFetchProfile, useProfile, useToast } from '~/state/hooks';
 import { getUserAddressByUsername, getUsername } from '~/state/profiles/getProfile';
-import { AutoRenewIcon, BaseLayout, Button, Card, CardBody, CardHeader, Flex, Heading, Tag, Text } from '~/ui';
+import { AutoRenewIcon, BaseLayout, Button, Card, Card3, CardBody, CardHeader, Flex, Heading, Tag, Text } from '~/ui';
 import Header from '~/components/account/Header';
 import Menu from '~/components/account/Menu';
 import WalletNotConnected from '~/components/account/WalletNotConnected';
-import ProfileCreation from './ProfileCreation';
+import { getAddress } from '~/utils/addressHelpers';
 
 const allowedItemIds = [
   // itemDatabase.runeword.find(r => r.name === "Black Drake Scale").id,
@@ -194,6 +195,7 @@ const Rewards = ({ match }) => {
   const { id }: { id: string } = match.params;
   const { address: _account, library } = useWeb3();
   const [account, setAccount] = useState(id ? id : _account);
+  const auth = useAuth();
 
   useFetchProfile(account);
 
@@ -201,9 +203,7 @@ const Rewards = ({ match }) => {
   const [rewards, setRewards] = useState({});
   const [username, setUsername] = useState('');
   const [payoutHistory, setPayoutHistory] = useState(null);
-  const [playerRewards, setPlayerRewards] = useState({});
   const { profile, hasProfile } = useProfile(account);
-  const cache = useCache();
   const [itemsRewardCraftable, setItemsRewardCraftable] = useState([]);
   const [clickedClaim, setClickedClaim] = useState(false);
 
@@ -227,50 +227,50 @@ const Rewards = ({ match }) => {
   //     return <Page><WalletNotConnected /></Page>
   //   }
 
-  useEffect(
-    function () {
-      if (!account) return;
-      if (!window) return;
+  // useEffect(
+  //   function () {
+  //     if (!account) return;
+  //     if (!window) return;
 
-      async function init() {
-        try {
-          // const account2 = '0x0d835cEa2c866B2be91E82e0b5FBfE6f64eD14cd' // pet account on asia1
-          // const account2 = '0xa6d1e757cE8de4341371a8e225f0bBB417D47E31' // rune account on asia1
-          const response = await fetch(`${endpoints.cache}/users/${account}/overview.json`);
-          const responseData = await response.json();
+  //     async function init() {
+  //       try {
+  //         // const account2 = '0x0d835cEa2c866B2be91E82e0b5FBfE6f64eD14cd' // pet account on asia1
+  //         // const account2 = '0xa6d1e757cE8de4341371a8e225f0bBB417D47E31' // Arken account on asia1
+  //         const response = await fetch(`${endpoints.cache}/users/${account}/overview.json`);
+  //         const responseData = await response.json();
 
-          if (responseData) {
-            setPlayerRewards(responseData.rewards?.runes || {});
-            setRewards(responseData.rewards?.items || {});
-          }
-        } catch (e) {
-          console.log(e);
-          setPlayerRewards({});
-          setRewards({});
-        }
-      }
+  //         if (responseData) {
+  //           setPlayerRewards(responseData.rewards?.runes || {});
+  //           setRewards(responseData.rewards?.items || {});
+  //         }
+  //       } catch (e) {
+  //         console.log(e);
+  //         setPlayerRewards({});
+  //         setRewards({});
+  //       }
+  //     }
 
-      init();
+  //     init();
 
-      const inter = setInterval(init, 1 * 60 * 1000);
+  //     const inter = setInterval(init, 1 * 60 * 1000);
 
-      return () => {
-        clearInterval(inter);
-      };
-    },
-    [account]
-  );
+  //     return () => {
+  //       clearInterval(inter);
+  //     };
+  //   },
+  //   [account]
+  // );
 
-  useEffect(
-    function () {
-      async function main() {
-        setItemsRewardCraftable(await getCraftableItemsFromRunes(playerRewards));
-      }
+  // useEffect(
+  //   function () {
+  //     async function main() {
+  //       setItemsRewardCraftable(await getCraftableItemsFromRunes(playerRewards));
+  //     }
 
-      main();
-    },
-    [playerRewards]
-  );
+  //     main();
+  //   },
+  //   [playerRewards]
+  // );
 
   useEffect(
     function () {
@@ -319,102 +319,129 @@ const Rewards = ({ match }) => {
     };
   }
 
-  const claimRuneRewards = async (_username) => {
+  const { data: payments, refetch: refetchPayments } = trpc.seer.evolution.getPayments.useQuery();
+  const { mutateAsync: createPaymentRequest } = trpc.seer.evolution.createPaymentRequest.useMutation();
+
+  useEffect(
+    function () {
+      refetchPayments();
+    },
+    [auth]
+  );
+
+  // const createPaymentRequest = async (_username) => {
+  //   try {
+  //     if (!_username) {
+  //       toastError('Username not set');
+  //       return;
+  //     }
+
+  //     setClickedClaim(true);
+
+  //     const sig = (await getSignature(`Claim rewards for ${account}`)).hash;
+
+  //     const rewardRunes = Object.keys(playerRewards).filter((r) => playerRewards[r] > 0);
+  //     const rewardAmounts = rewardRunes.map((r) => playerRewards[r]);
+  //     const itemIds = [];
+
+  //     // const requestOptions = {
+  //     //   method: 'POST',
+  //     //   headers: { 'Content-Type': 'application/json' },
+  //     //   body: JSON.stringify({ runes: rewardRunes, amounts: rewardAmounts, itemIds, to: account }),
+  //     // };
+
+  //     // const res = (await (
+  //     //   await fetch(`${endpoints.coordinator}/claim/request/${account}/${_username}/${sig}`, requestOptions)
+  //     // ).json()) as any;
+  //   } catch (e) {
+  //     toastError(e.message || 'Error');
+  //     // alert('Referral error. Please report in Telegram or Discord.')
+  //   }
+
+  //   const res3 = (await (await fetch(`${endpoints.coordinator}/claim/history/${account}`)).json()) as any;
+
+  //   setPayoutHistory(res3.result.sort((a, b) => b.createdAt - a.createdAt));
+  // };
+
+  // const claimItemRewards = async (_username) => {
+  //   try {
+  //     if (!_username) {
+  //       toastError('Username not set');
+  //       return;
+  //     }
+
+  //     const sig = (await getSignature(`Request evolution rewards to ${account}`)).hash;
+
+  //     const rewardRunes = [];
+  //     const rewardAmounts = [];
+  //     const itemIds = [];
+
+  //     if (whitelistedAccounts.includes(account)) {
+  //       for (const rewardId of Object.keys(rewards)) {
+  //         const item = decodeItem(rewards[rewardId].tokenId);
+  //         if (!allowedItemIds.includes(item.id)) continue;
+
+  //         itemIds.push({
+  //           id: item.id,
+  //           rewardRarity: rewards[rewardId].rarity,
+  //           rewardName: rewards[rewardId].name,
+  //           rewardId,
+  //         });
+  //       }
+  //     }
+
+  //     const requestOptions = {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({ runes: rewardRunes, amounts: rewardAmounts, itemIds, to: account }),
+  //     };
+
+  //     const res = (await (
+  //       await fetch(`${endpoints.coordinator}/claim/request/${account}/${_username}/${sig}`, requestOptions)
+  //     ).json()) as any;
+
+  //     if (res.status === 0) {
+  //       toastError(res.message || 'Error');
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //     // alert('Referral error. Please report in Telegram or Discord.')
+  //   }
+
+  //   const res3 = (await (await fetch(`${endpoints.coordinator}/claim/history/${account}`)).json()) as any;
+
+  //   setPayoutHistory(res3.result.sort((a, b) => b.createdAt - a.createdAt));
+  // };
+
+  const finalizeClaim = async (payment) => {
     try {
-      if (!_username) {
-        toastError('Username not set');
-        return;
+      // console.log(payment.result.data, payment.result.signedData, account)
+      if (payment.meta.chain === 'bsc') {
+        web3.eth.sendTransaction({
+          to: getAddress(addresses.chest),
+          from: account,
+          data: payment.meta.signedData,
+        });
+      } else if (payment.meta.chain === 'solana') {
+        // const signature = Uint8Array.from(response.data.signature);
+        // const toToken = await deriveATA(publicKey, tokenMint, connection);
+        // const txInstruction = await program.methods
+        //   .sendItems(itemData, Array.from(signature))
+        //   .accounts({
+        //     state: statePubkey,
+        //     admin: authorizedSignerPubkey,
+        //     authority: authorizedSignerPubkey,
+        //     nonceAccount: noncePDA,
+        //     fromToken: fromToken,
+        //     toToken: toToken,
+        //     tokenProgram: TOKEN_PROGRAM_ID,
+        //   })
+        //   .instruction();
+        // const transaction = new Transaction().add(txInstruction);
+        // const signedTransaction = await signTransaction(transaction);
+        // const signatureTx = await connection.sendRawTransaction(signedTransaction.serialize());
+        // await connection.confirmTransaction(signatureTx, 'confirmed');
       }
-
-      setClickedClaim(true);
-
-      const sig = (await getSignature(`Request evolution rewards to ${account}`)).hash;
-
-      const rewardRunes = Object.keys(playerRewards).filter((r) => playerRewards[r] > 0);
-      const rewardAmounts = rewardRunes.map((r) => playerRewards[r]);
-      const itemIds = [];
-
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ runes: rewardRunes, amounts: rewardAmounts, itemIds, to: account }),
-      };
-
-      const res = (await (
-        await fetch(`${endpoints.coordinator}/claim/request/${account}/${_username}/${sig}`, requestOptions)
-      ).json()) as any;
-
-      if (res.status === 0) {
-        toastError(res.message || 'Error');
-      }
-    } catch (e) {
-      // alert('Referral error. Please report in Telegram or Discord.')
-    }
-
-    const res3 = (await (await fetch(`${endpoints.coordinator}/claim/history/${account}`)).json()) as any;
-
-    setPayoutHistory(res3.result.sort((a, b) => b.createdAt - a.createdAt));
-  };
-
-  const claimItemRewards = async (_username) => {
-    try {
-      if (!_username) {
-        toastError('Username not set');
-        return;
-      }
-
-      const sig = (await getSignature(`Request evolution rewards to ${account}`)).hash;
-
-      const rewardRunes = [];
-      const rewardAmounts = [];
-      const itemIds = [];
-
-      if (whitelistedAccounts.includes(account)) {
-        for (const rewardId of Object.keys(rewards)) {
-          const item = decodeItem(rewards[rewardId].tokenId);
-          if (!allowedItemIds.includes(item.id)) continue;
-
-          itemIds.push({
-            id: item.id,
-            rewardRarity: rewards[rewardId].rarity,
-            rewardName: rewards[rewardId].name,
-            rewardId,
-          });
-        }
-      }
-
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ runes: rewardRunes, amounts: rewardAmounts, itemIds, to: account }),
-      };
-
-      const res = (await (
-        await fetch(`${endpoints.coordinator}/claim/request/${account}/${_username}/${sig}`, requestOptions)
-      ).json()) as any;
-
-      if (res.status === 0) {
-        toastError(res.message || 'Error');
-      }
-    } catch (e) {
-      console.log(e);
-      // alert('Referral error. Please report in Telegram or Discord.')
-    }
-
-    const res3 = (await (await fetch(`${endpoints.coordinator}/claim/history/${account}`)).json()) as any;
-
-    setPayoutHistory(res3.result.sort((a, b) => b.createdAt - a.createdAt));
-  };
-
-  const finalizeClaim = async (payoutInfo) => {
-    try {
-      // console.log(payoutInfo.result.data, payoutInfo.result.signedData, account)
-
-      web3.eth.sendTransaction({
-        to: '0xEC8e4F50A5EDc7aD5e567E747F2c8056F1A0723b',
-        from: account,
-        data: payoutInfo.signedData,
-      });
     } catch (e) {
       console.log(e);
       toastError('Error claiming: ' + e);
@@ -424,9 +451,9 @@ const Rewards = ({ match }) => {
     //   const res2 = (await (await fetch(`${endpoints.coordinator}/claim/check/${account}`)).json()) as any
 
     //   if (res2.status === 2) {
-    //     setPayoutInfo(false)
+    //     setpayment(false)
     //   } else {
-    //     setPayoutInfo(res2)
+    //     setpayment(res2)
 
     //     if (res2.result?.status === 'completed' || res2.result?.status !== 'failed') {
     //       setTimeout(checkClaim, 10 * 1000)
@@ -437,23 +464,49 @@ const Rewards = ({ match }) => {
     // setTimeout(checkClaim, 10 * 1000)
   };
 
-  if (account && !hasProfile) {
+  if (!auth?.profile) {
     return (
-      <Page>
-        <ProfileCreation />
-      </Page>
+      <Card3>
+        <CardBody>
+          <p
+            style={{
+              textAlign: 'left',
+              fontWeight: 'normal',
+              fontFamily: 'Cambria, Verdana, Arial, Helvetica, sans-serif',
+              textTransform: 'none',
+              fontSize: '0.9rem',
+            }}>
+            {t('You cannot claim rewards until you have created an account.')}
+          </p>
+          <br />
+          <br />
+          <Button
+            scale="sm"
+            as={RouterLink}
+            to="/register"
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}>
+            {t('Create Account')}
+          </Button>
+          <br />
+          <br />
+        </CardBody>
+      </Card3>
     );
   }
 
-  let totalRewardValue = 0;
+  const playerRewards = auth?.profile?.meta?.rewards?.tokens || {};
 
-  Object.keys(playerRewards).forEach((id2) => {
-    if (id2 === 'usd') totalRewardValue += playerRewards[id2];
-    else totalRewardValue += playerRewards[id2] ? playerRewards[id2] * 0.99 * cache.runes[id2].price : 0;
-  });
+  // let totalRewardValue = 0;
+
+  // Object.keys(playerRewards).forEach((id2) => {
+  //   if (id2 === 'usd') totalRewardValue += playerRewards[id2];
+  //   else totalRewardValue += playerRewards[id2] ? playerRewards[id2] * 0.99 * cache.runes[id2].price : 0;
+  // });
 
   const unconfirmedClaim =
-    payoutHistory?.filter((item) => item.status === 'processed' || item.status === 'sent').length > 0 || false;
+    payments?.filter((item) => item.status === 'Processed' || item.status === 'Processing').length > 0 || false;
 
   return (
     <Page>
@@ -464,124 +517,115 @@ const Rewards = ({ match }) => {
       {account ? (
         <VerticalCards>
           <div>
-            <Card style={{ overflow: 'visible' }}>
-              <CardHeader>
-                <Flex alignItems="center" justifyContent="space-between">
-                  <div>
-                    <Heading size="lg" mb="8px">
-                      {t('Runes')}
-                    </Heading>
-                    <Text as="p">{t('Unclaimed runes from your adventures')}</Text>
-                    {/* <Text as="p">{t('Collecting points for these quests makes them available again.')}</Text> */}
-                  </div>
-                </Flex>
-              </CardHeader>
-              <CardBody>
-                <Flex flexDirection="row" alignItems="center" justifyContent="center">
-                  <Button
-                    disabled={
-                      Object.keys(playerRewards).filter((id2) => playerRewards[id2] > 0).length === 0 ||
-                      unconfirmedClaim ||
-                      clickedClaim
-                    }
-                    onClick={() => claimRuneRewards(username)}>
-                    Claim Runes
-                  </Button>
-                </Flex>
-                <br />
-                <br />
-                {!profile?.nft ? (
-                  <>
-                    <br />
-                    <br />
-                    <p
-                      style={{
-                        textAlign: 'left',
-                        fontWeight: 'normal',
-                        fontFamily: 'Cambria, Verdana, Arial, Helvetica, sans-serif',
-                        textTransform: 'none',
-                        fontSize: '0.9rem',
-                      }}>
-                      {t('You cannot claim rewards until you have created a Rune account.')}
-                    </p>
-                    <br />
-                    <br />
-                    <Button
-                      scale="sm"
-                      as={RouterLink}
-                      to="/account"
-                      onClick={() => {
-                        window.scrollTo(0, 0);
-                      }}>
-                      {t('Create Account')}
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    {Object.keys(playerRewards).filter((id2) => playerRewards[id2] > 0).length
-                      ? Object.keys(playerRewards).map((id2) => {
-                          if (!playerRewards[id2]) return null;
+            <Card3>
+              <Card style={{ overflow: 'visible' }}>
+                <CardHeader>
+                  <Flex alignItems="center" justifyContent="space-between">
+                    <div>
+                      <Heading size="lg" mb="8px">
+                        {t('Rewards')}
+                      </Heading>
+                      <Text as="p">{t('Unclaimed tokens from your adventures')}</Text>
+                      {/* <Text as="p">{t('Collecting points for these quests makes them available again.')}</Text> */}
+                    </div>
+                  </Flex>
+                </CardHeader>
+                <CardBody>
+                  {Object.keys(playerRewards).filter((id2) => playerRewards[id2] > 0).length
+                    ? Object.keys(playerRewards).map((id2) => {
+                        if (!playerRewards[id2]) return null;
 
-                          return (
-                            <div key={id2}>
-                              {(playerRewards[id2] > 0 ? playerRewards[id2] : 0).toFixed(3)} {id2} <br />
-                            </div>
-                          );
-                        })
-                      : null}
-                    <br />
-                    <Heading as="h2" size="lg" style={{ textAlign: 'center', marginTop: 15 }}>
-                      {t(' Craft from Rewards')}
-                    </Heading>
-                    <hr />
-                    {itemsRewardCraftable.length ? (
-                      <Grid>
-                        {itemsRewardCraftable.map((item) => {
-                          return (
-                            <GridItem>
-                              <CraftItem item={item} />
-                            </GridItem>
-                          );
-                        })}
-                      </Grid>
-                    ) : (
-                      <>None craftable</>
-                    )}
-                  </>
-                )}
-              </CardBody>
-            </Card>
+                        return (
+                          <div key={id2}>
+                            {(playerRewards[id2] > 0 ? playerRewards[id2] : 0).toFixed(3)} {id2} <br />
+                          </div>
+                        );
+                      })
+                    : null}
+                  <br />
+                  <br />
+                  <br />
+                  <Flex flexDirection="row" alignItems="center" justifyContent="center">
+                    <Button
+                      disabled={
+                        Object.keys(playerRewards).filter((id2) => playerRewards[id2] > 0).length === 0 ||
+                        unconfirmedClaim ||
+                        clickedClaim
+                      }
+                      onClick={async () => {
+                        setClickedClaim(true);
+
+                        const tokenKeys = Object.keys(playerRewards)
+                          .filter((r) => playerRewards[r] > 0)
+                          .filter((t) => ['doge', 'pepe'].includes(t));
+
+                        await createPaymentRequest({
+                          chain: 'bsc',
+                          // sig: (await getSignature(`Claim rewards for ${account}`)).hash,
+                          tokenKeys,
+                          tokenAmounts: tokenKeys.map((r) => playerRewards[r]),
+                          // itemIds: [],
+                          // tokenIds: [],
+                          to: auth.profile.address,
+                        });
+
+                        await refetchPayments();
+                      }}>
+                      Claim Rewards
+                    </Button>
+                  </Flex>
+                  {/* <Heading as="h2" size="lg" style={{ textAlign: 'center', marginTop: 15 }}>
+                    {t('Craft from Rewards')}
+                  </Heading>
+                  <hr />
+                  {itemsRewardCraftable.length ? (
+                    <Grid>
+                      {itemsRewardCraftable.map((item) => {
+                        return (
+                          <GridItem>
+                            <CraftItem item={item} />
+                          </GridItem>
+                        );
+                      })}
+                    </Grid>
+                  ) : (
+                    <>None craftable</>
+                  )} */}
+                </CardBody>
+              </Card>
+            </Card3>
             <br />
-            <Card>
-              <CardHeader>
-                <Flex alignItems="center" justifyContent="space-between">
-                  <div>
-                    <Heading size="lg" mb="8px">
-                      {t('Items')}
-                    </Heading>
-                    <Text as="p">{t(`Unclaimed items from your adventures`)}</Text>
-                    {/* <Text as="p">{t('Collecting points for these quests makes them available again.')}</Text> */}
-                  </div>
-                </Flex>
-              </CardHeader>
-              <CardBody>
-                <Flex flexDirection="row" alignItems="center" justifyContent="center">
-                  <Button
-                    disabled={!whitelistedAccounts.includes(account) || Object.keys(rewards).length === 0}
-                    onClick={() => claimItemRewards(username)}>
-                    Claim Items
-                  </Button>
-                </Flex>
-                <br />
-                <br />
-                {Object.keys(rewards).length !== 0 ? (
-                  <>
-                    {Object.keys(rewards).map((reward, index) => (
-                      <RewardCard key={index} reward={rewards[reward]} />
-                    ))}
-                    <br />
-                    <br />
-                    {/* {payoutInfo === false ? (
+            <Card3>
+              <Card>
+                <CardHeader>
+                  <Flex alignItems="center" justifyContent="space-between">
+                    <div>
+                      <Heading size="lg" mb="8px">
+                        {t('Items')}
+                      </Heading>
+                      <Text as="p">{t(`Unclaimed items from your adventures`)}</Text>
+                      {/* <Text as="p">{t('Collecting points for these quests makes them available again.')}</Text> */}
+                    </div>
+                  </Flex>
+                </CardHeader>
+                <CardBody>
+                  {/* <Flex flexDirection="row" alignItems="center" justifyContent="center">
+                    <Button
+                      disabled={!whitelistedAccounts.includes(account) || Object.keys(rewards).length === 0}
+                      onClick={() => claimItemRewards(username)}>
+                      Claim Items
+                    </Button>
+                  </Flex>
+                  <br />
+                  <br /> */}
+                  {Object.keys(rewards).length !== 0 ? (
+                    <>
+                      {Object.keys(rewards).map((reward, index) => (
+                        <RewardCard key={index} reward={rewards[reward]} />
+                      ))}
+                      <br />
+                      <br />
+                      {/* {payoutInfo === false ? (
                         <p
                           style={{
                             textAlign: 'left',
@@ -591,7 +635,7 @@ const Rewards = ({ match }) => {
                             fontSize: '0.9rem',
                           }}
                         >
-                          <Button onClick={claimRewards}>Claim Rewards</Button>
+                          <Button onClick={createPaymentRequest}>Claim Rewards</Button>
                         </p>
                       ) : payoutInfo?.message !== undefined ? (
                         <p
@@ -665,7 +709,7 @@ const Rewards = ({ match }) => {
                             fontSize: '0.9rem',
                           }}
                         >
-                          <Button onClick={claimRewards}>Claim Failed. Retry?</Button>
+                          <Button onClick={createPaymentRequest}>Claim Failed. Retry?</Button>
                         </p>
                       ) : (
                         <p
@@ -680,133 +724,85 @@ const Rewards = ({ match }) => {
                           Checking payout status...
                         </p>
                       )} */}
+                    </>
+                  ) : null}
+                </CardBody>
+              </Card>
+            </Card3>
+          </div>
+
+          <Card3>
+            <Card>
+              <CardHeader>
+                <Flex alignItems="center" justifyContent="space-between">
+                  <div>
+                    <Heading size="lg" mb="8px">
+                      {t('Reward History')}
+                    </Heading>
+                    <Text as="p">{t('Make sure to finalize the payments!')}</Text>
+                    {/* <Text as="p">{t('Collecting points for these quests makes them available again.')}</Text> */}
+                  </div>
+                </Flex>
+              </CardHeader>
+              <CardBody style={{ padding: '25px 10px 10px' }}>
+                {payments ? (
+                  <>
+                    {payments.map((payment) => (
+                      <ClaimBox key={payment.id}>
+                        <h3>
+                          Payment {payment.id}
+                          <Tag2
+                            outline
+                            variant="textDisabled"
+                            css={css`
+                              float: right;
+                            `}>
+                            {t(payment.status)}
+                          </Tag2>
+                        </h3>
+                        <hr style={{ margin: '10px 0' }} />
+                        {Object.keys(payment.meta?.tokenKeys || {}).length ? (
+                          <div style={{ marginBottom: 0 }}>
+                            {Object.keys(payment.meta?.tokenKeys).map((index) => {
+                              return (
+                                <small key={index} style={{ fontSize: '0.8rem' }}>
+                                  {payment.meta?.tokenKeys[index]?.toUpperCase() || 'UNKNOWN'}=
+                                  {payment.meta?.tokenAmounts[index].toFixed(3)},{' '}
+                                </small>
+                              );
+                            })}
+                          </div>
+                        ) : null}
+                        {Object.keys(payment.meta?.itemIds).length ? (
+                          <div style={{ marginTop: 0 }}>
+                            {Object.keys(payment.meta?.itemIds).map((index) => {
+                              return (
+                                <small key={index} style={{ fontSize: '0.8rem' }}>
+                                  {payment.meta?.itemIds[index]?.rewardName}
+                                  <br />
+                                </small>
+                              );
+                            })}
+                          </div>
+                        ) : null}
+                        <div style={{ textAlign: 'right' }}>
+                          {payment.status === 'Processed' ? (
+                            <Button scale="sm" onClick={() => finalizeClaim(payment)} style={{ marginLeft: 10 }}>
+                              Finalize Payment
+                            </Button>
+                          ) : payment.status === 'Processing' ? (
+                            <Button scale="sm" disabled style={{ marginLeft: 10 }}>
+                              Wait: 24-48H <AutoRenewIcon spin color="currentColor" />
+                            </Button>
+                          ) : null}
+                        </div>
+                      </ClaimBox>
+                    ))}
                   </>
                 ) : null}
               </CardBody>
             </Card>
-          </div>
-
-          <Card>
-            <CardHeader>
-              <Flex alignItems="center" justifyContent="space-between">
-                <div>
-                  <Heading size="lg" mb="8px">
-                    {t('Reward History')}
-                  </Heading>
-                  <Text as="p">{t('Make sure to finalize the claims!')}</Text>
-                  {/* <Text as="p">{t('Collecting points for these quests makes them available again.')}</Text> */}
-                </div>
-              </Flex>
-            </CardHeader>
-            <CardBody style={{ padding: '25px 10px 10px' }}>
-              {payoutHistory ? (
-                <>
-                  {payoutHistory.map((payoutItem) => (
-                    <ClaimBox key={payoutItem.id}>
-                      <h3>
-                        Claim #{payoutItem.id}
-                        {payoutItem.status === 'submitted' ? (
-                          <Tag2
-                            outline
-                            variant="textDisabled"
-                            css={css`
-                              float: right;
-                            `}>
-                            {t('Sent')}
-                          </Tag2>
-                        ) : payoutItem.status === 'processing' ? (
-                          <Tag2
-                            outline
-                            variant="textDisabled"
-                            css={css`
-                              float: right;
-                            `}>
-                            {t('Processing')}
-                          </Tag2>
-                        ) : payoutItem.status === 'processed' ? (
-                          <>
-                            <Button scale="sm" onClick={() => finalizeClaim(payoutItem)} style={{ marginLeft: 10 }}>
-                              Confirm Claim
-                            </Button>
-                            <Tag2
-                              outline
-                              variant="textDisabled"
-                              css={css`
-                                float: right;
-                              `}>
-                              {t('Unconfirmed')}
-                            </Tag2>
-                          </>
-                        ) : payoutItem.status === 'voided' ? (
-                          <Tag2
-                            outline
-                            variant="textDisabled"
-                            css={css`
-                              float: right;
-                            `}>
-                            Voided
-                          </Tag2>
-                        ) : payoutItem.status === 'completed' ? (
-                          <Tag2
-                            outline
-                            variant="textDisabled"
-                            css={css`
-                              float: right;
-                            `}>
-                            {t('Completed')}
-                          </Tag2>
-                        ) : payoutItem.status === 'failed' ? (
-                          <Tag2
-                            outline
-                            variant="textDisabled"
-                            css={css`
-                              float: right;
-                            `}>
-                            {t('Failed')}
-                          </Tag2>
-                        ) : (
-                          <>
-                            <Button scale="sm" disabled style={{ marginLeft: 10 }}>
-                              <AutoRenewIcon spin color="currentColor" />
-                            </Button>
-                          </>
-                        )}
-                      </h3>
-                      <hr />
-                      {Object.keys(payoutItem.tokenAddresses).length ? (
-                        <div style={{ marginBottom: 0 }}>
-                          {Object.keys(payoutItem.tokenAddresses).map((index) => {
-                            return (
-                              <small key={index} style={{ fontSize: '0.8rem' }}>
-                                {contractAddressToKey[payoutItem.tokenAddresses[index]].toUpperCase()}=
-                                {payoutItem.tokenAmounts[index].toFixed(3)},{' '}
-                              </small>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                      {Object.keys(payoutItem.itemIds).length ? (
-                        <div style={{ marginTop: 0 }}>
-                          {Object.keys(payoutItem.itemIds).map((index) => {
-                            return (
-                              <small key={index} style={{ fontSize: '0.8rem' }}>
-                                {payoutItem.itemIds[index]?.rewardName}
-                                <br />
-                              </small>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </ClaimBox>
-                  ))}
-                </>
-              ) : null}
-            </CardBody>
-          </Card>
+          </Card3>
         </VerticalCards>
       ) : (
         <Card>

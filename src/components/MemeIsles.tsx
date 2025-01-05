@@ -18,7 +18,7 @@ import Paragraph from '~/components/Paragraph';
 import SeasonRankings from '~/components/SeasonRankings';
 import useBrand from '~/hooks/useBrand';
 import useCache from '~/hooks/useCache';
-import { useRuneSender } from '~/hooks/useContract';
+import { useArkenChest } from '~/hooks/useContract';
 import useFetch from '~/hooks/useFetch';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import useSettings from '~/hooks/useSettings2';
@@ -691,7 +691,7 @@ window.socket = {
               currentPlayerId = event[1].split(':')[0];
 
               loadingGame = false;
-            } else if (eventName === 'OnSpawnPlayer') {
+            } else if (eventName === 'onSpawnClient') {
               userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
             } else if (eventName === 'OnSetInfo') {
               userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];

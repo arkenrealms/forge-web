@@ -5,6 +5,7 @@ export type CardHeaderProps = SpaceProps;
 
 const CardHeader = styled.div<CardHeaderProps>`
   background: ${({ theme }) => theme.card.cardHeaderBackground};
+  padding: 5px 10px;
 
   h2 {
     filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));

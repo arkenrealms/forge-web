@@ -108,7 +108,7 @@ export const ConnectNetwork = ({ showConnect = true, ...rest }) => {
           ], // you must have access to the specified account
         })
         .then((result: any) => {
-          window.location.reload();
+          // window.location.reload();
         })
         .catch((e: any) => {
           alert('An error occurred. Please seek help in Telegram chat. Error code: ' + e.code);
@@ -144,7 +144,7 @@ export const ConnectNetwork = ({ showConnect = true, ...rest }) => {
           ], // you must have access to the specified account
         })
         .then((result: any) => {
-          window.location.reload();
+          // window.location.reload();
         })
         .catch((e: any) => {
           alert('An error occurred. Please seek help in Telegram chat. Error code: ' + e.code);
@@ -198,24 +198,23 @@ export const ConnectNetwork = ({ showConnect = true, ...rest }) => {
   );
 
   const Options = ({ isError, ...rest2 }) => (
-    <StyledCard {...rest2}>
-      <CardBody>
-        <Flex flexDirection="column" alignItems="center" justifyContent="center">
-          <Heading as="h2" size="xl" color="#fff" mb="24px">
-            Notice
-          </Heading>
-          <p>Arken requires using the Binance Smart Chain network (BSC) with Metamask.</p>
-          <br />
-          {/* <p>Support for other networks will be added soon.</p>
+    <div {...rest2}>
+      <Flex flexDirection="column" alignItems="center" justifyContent="center">
+        {/* <Heading as="h2" size="xl" color="#fff" mb="24px">
+          Notice
+        </Heading> */}
+        <p>Arken requires using the Binance Smart Chain network (BSC) with Metamask.</p>
+        <br />
+        {/* <p>Support for other networks will be added soon.</p>
           <br /> */}
-          {isError ? (
-            <Flex flexDirection="row" alignItems="center" justifyContent="center" style={{ marginBottom: 10 }}>
-              {ethereum && ethereum.isMetaMask && Number(ethereum.chainId) !== 67 ? (
-                <Button scale="md" onClick={addBscToMetamask} style={{ marginRight: 10 }}>
-                  Switch to BSC
-                </Button>
-              ) : null}
-              {/* {ethereum && ethereum.isMetaMask && Number(ethereum.chainId) !== 1 ? (
+        {isError ? (
+          <Flex flexDirection="row" alignItems="center" justifyContent="center" style={{ marginBottom: 10 }}>
+            {ethereum && ethereum.isMetaMask && Number(ethereum.chainId) !== 67 ? (
+              <Button scale="md" onClick={addBscToMetamask} style={{ marginRight: 10 }}>
+                Switch to BSC
+              </Button>
+            ) : null}
+            {/* {ethereum && ethereum.isMetaMask && Number(ethereum.chainId) !== 1 ? (
                 <Button scale="sm" disabled style={{ marginRight: 10 }}>
                   Switch to Ethereum
                 </Button>
@@ -225,26 +224,25 @@ export const ConnectNetwork = ({ showConnect = true, ...rest }) => {
                   Switch to Polygon
                 </Button>
               ) : null} */}
-            </Flex>
-          ) : showConnect ? (
-            <Flex flexDirection="row" alignItems="center" justifyContent="center" style={{ marginBottom: 10 }}>
-              <Button scale="md" onClick={onPresentConnectModal} style={{ marginRight: 10 }}>
-                Connect
-              </Button>
-              {/* <Button scale="sm" onClick={addPolygonToMetamask} disabled>
+          </Flex>
+        ) : showConnect ? (
+          <Flex flexDirection="row" alignItems="center" justifyContent="center" style={{ marginBottom: 10 }}>
+            <Button scale="md" onClick={onPresentConnectModal} style={{ marginRight: 10 }}>
+              Connect
+            </Button>
+            {/* <Button scale="sm" onClick={addPolygonToMetamask} disabled>
                 Connect Polygon
               </Button> */}
-            </Flex>
-          ) : null}
-          <p>
-            <Button variant="text" onClick={() => setShowLearnMore(!showLearnMore)}>
-              Learn More
-            </Button>
-          </p>
-          {showLearnMore ? <LearnMore /> : null}
-        </Flex>
-      </CardBody>
-    </StyledCard>
+          </Flex>
+        ) : null}
+        <p>
+          <Button variant="text" onClick={() => setShowLearnMore(!showLearnMore)}>
+            Learn More
+          </Button>
+        </p>
+        {showLearnMore ? <LearnMore /> : null}
+      </Flex>
+    </div>
   );
 
   if (account) {
@@ -259,11 +257,7 @@ export const ConnectNetwork = ({ showConnect = true, ...rest }) => {
         ) : error instanceof UnsupportedChainIdError && ethereum && ethereum.isMetaMask ? (
           <Options {...rest} isError />
         ) : (
-          <StyledCard>
-            <CardBody>
-              <p>Could not connect. Arken can only be used with Binance Smart Chain.</p>
-            </CardBody>
-          </StyledCard>
+          <p>Could not connect. Arken can only be used with Binance Smart Chain.</p>
         )}
       </div>
     );

@@ -304,7 +304,7 @@ const Home: React.FC<any> = () => {
   //     async function init() {
   //       try {
   //         // const account2 = '0x0d835cEa2c866B2be91E82e0b5FBfE6f64eD14cd' // pet account on asia1
-  //         // const account2 = '0xa6d1e757cE8de4341371a8e225f0bBB417D47E31' // rune account on asia1
+  //         // const account2 = '0xa6d1e757cE8de4341371a8e225f0bBB417D47E31' // Arken account on asia1
   //         const response = await fetch(`${endpoints.cache}/users/${account}/overview.json`);
   //         const responseData = await response.json();
 
@@ -636,7 +636,7 @@ const Home: React.FC<any> = () => {
                       fontSize: '0.9rem',
                     }}
                   >
-                    You cannot claim rewards until you have created a Rune account.
+                    You cannot claim rewards until you have created a Arken account.
                   </p>
                   <br />
                   <br />

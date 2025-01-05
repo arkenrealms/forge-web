@@ -121,7 +121,7 @@ backends.forEach((backend) => {
     // Handle incoming socket events
     client.socket.on('trpcResponse', (res) => {
       try {
-        console.log(`[${backend.name} Socket] Event:`, res);
+        console.info(`[${backend.name} Socket] Event:`, res);
 
         // if (eventName === 'trpc') return;
 
@@ -129,14 +129,14 @@ backends.forEach((backend) => {
 
         if (id) {
           if (client.ioCallbacks[id]) {
-            console.log(`[${backend.name} Socket] Callback exists for ID:`, id);
+            console.info(`[${backend.name} Socket] Callback exists for ID:`, id);
 
             clearTimeout(client.ioCallbacks[id].timeout);
 
             try {
               client.ioCallbacks[id].resolve(res);
             } catch (e) {
-              console.log(`[${backend.name} Socket] Callback error:`, e);
+              console.info(`[${backend.name} Socket] Callback error:`, e);
               client.ioCallbacks[id].reject(e);
             }
 
@@ -147,7 +147,7 @@ backends.forEach((backend) => {
         } else {
           const { method, params } = res;
 
-          console.log(`[${backend.name} Socket] TRPC method called:`, method, params);
+          console.info(`[${backend.name} Socket] TRPC method called:`, method, params);
 
           try {
             // Implement your method handling logic here
@@ -165,7 +165,7 @@ backends.forEach((backend) => {
 
     clients[backend.name] = client;
   } catch (e) {
-    console.log('Failed to setup trpc backend', backend.url);
+    console.error('Failed to setup trpc backend', backend.url);
   }
 });
 

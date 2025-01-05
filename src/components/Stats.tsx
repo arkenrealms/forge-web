@@ -64,13 +64,19 @@ const Stats = () => {
   const { t } = useTranslation();
   const auth = useAuth();
 
-  const { data: game } = trpc.seer.game.getGame.useQuery<Arken.Game.Types.Game>({
+  const { data: runicRaids } = trpc.seer.game.getGame.useQuery<Arken.Game.Types.Game>({
     where: {
       name: { equals: 'Runic Raids' },
     },
   });
 
-  if (!game?.stat)
+  const { data: evolutionIsles } = trpc.seer.game.getGame.useQuery<Arken.Game.Types.Game>({
+    where: {
+      name: { equals: 'Evolution Isles' },
+    },
+  });
+
+  if (!runicRaids?.stat || !evolutionIsles?.stat)
     return (
       <div style={{ padding: 10 }}>
         <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" />
@@ -99,34 +105,34 @@ const Stats = () => {
   //   init();
   // }, []);
 
-  const totalWarrior = game.stat.meta.characters[1].total;
-  const totalMage = game.stat.meta.characters[2].total;
-  const totalRanger = game.stat.meta.characters[3].total;
-  const totalNecromancer = game.stat.meta.characters[4].total;
-  const totalPaladin = game.stat.meta.characters[5].total;
-  const totalAssassin = game.stat.meta.characters[6].total;
-  const totalDruid = game.stat.meta.characters[7].total;
-  const totalBards = game.stat.meta.characters[8]?.total || 0;
-  const characterCount = game.stat.meta.totalCharacters;
+  const totalWarrior = runicRaids.stat.meta.characters[1].total;
+  const totalMage = runicRaids.stat.meta.characters[2].total;
+  const totalRanger = runicRaids.stat.meta.characters[3].total;
+  const totalNecromancer = runicRaids.stat.meta.characters[4].total;
+  const totalPaladin = runicRaids.stat.meta.characters[5].total;
+  const totalAssassin = runicRaids.stat.meta.characters[6].total;
+  const totalDruid = runicRaids.stat.meta.characters[7].total;
+  const totalBards = runicRaids.stat.meta.characters[8]?.total || 0;
+  const characterCount = runicRaids.stat.meta.totalCharacters;
 
-  const totalSteel = game.stat.meta.items[1].total;
-  const totalFury = game.stat.meta.items[2].total;
-  const totalLorekeeper = game.stat.meta.items[3].total;
-  const totalWorldstone = game.stat.meta.items[4].total;
-  const totalFlash = game.stat.meta.items[5].total;
-  const totalTitan = game.stat.meta.items[6].total;
-  const totalSmoke = game.stat.meta.items[7].total;
-  const totalGlory = game.stat.meta.items[10].total;
-  const totalGrace = game.stat.meta.items[11].total;
-  const totalGenesis = game.stat.meta.items[12].total;
-  const totalDestiny = game.stat.meta.items[13].total;
-  const totalWrath = game.stat.meta.items[14].total;
-  const totalPledge = game.stat.meta.items[19].total;
-  const totalInstinct = game.stat.meta.items[27]?.total || 0;
-  const totalBeacon = game.stat.meta.items[28]?.total || 0;
-  const totalGuidingLight = game.stat.meta.items[21]?.total || 0;
-  const totalDragonlight = game.stat.meta.items[29]?.total || 0;
-  const itemCount = game.stat.meta.totalItems;
+  const totalSteel = runicRaids.stat.meta.items[1].total;
+  const totalFury = runicRaids.stat.meta.items[2].total;
+  const totalLorekeeper = runicRaids.stat.meta.items[3].total;
+  const totalWorldstone = runicRaids.stat.meta.items[4].total;
+  const totalFlash = runicRaids.stat.meta.items[5].total;
+  const totalTitan = runicRaids.stat.meta.items[6].total;
+  const totalSmoke = runicRaids.stat.meta.items[7].total;
+  const totalGlory = runicRaids.stat.meta.items[10].total;
+  const totalGrace = runicRaids.stat.meta.items[11].total;
+  const totalGenesis = runicRaids.stat.meta.items[12].total;
+  const totalDestiny = runicRaids.stat.meta.items[13].total;
+  const totalWrath = runicRaids.stat.meta.items[14].total;
+  const totalPledge = runicRaids.stat.meta.items[19].total;
+  const totalInstinct = runicRaids.stat.meta.items[27]?.total || 0;
+  const totalBeacon = runicRaids.stat.meta.items[28]?.total || 0;
+  const totalGuidingLight = runicRaids.stat.meta.items[21]?.total || 0;
+  const totalDragonlight = runicRaids.stat.meta.items[29]?.total || 0;
+  const itemCount = runicRaids.stat.meta.totalItems;
 
   const runes =
     window?.location?.hostname === 'localhost' ? ['rxs', 'rune', ...safeRuneList] : ['rxs', 'rune', ...safeRuneList];
@@ -139,13 +145,18 @@ const Stats = () => {
           <Card3>
             <CardBody>
               <Heading size="xl" mb="24px">
+                {t('Payments')}
+              </Heading>
+              Pending Payments: Processed Paymented: Finalized Payments: Completed Payments: Token: $DOGE Token: $PEPE
+              Token: $HAROLD
+              <Heading size="xl" mb="24px">
                 {t('Token Stats')}
               </Heading>
               {runes.map((rune) => {
-                const price = game.stat.meta.runes[rune].price || 0;
-                const totalSupply = game.stat.meta.runes[rune].totalSupply || 0;
-                const totalBurned = game.stat.meta.runes[rune].totalBurned || 0;
-                const circulatingSupply = game.stat.meta.runes[rune].circulatingSupply || 0;
+                const price = runicRaids.stat.meta.runes[rune].price || 0;
+                const totalSupply = runicRaids.stat.meta.runes[rune].totalSupply || 0;
+                const totalBurned = runicRaids.stat.meta.runes[rune].totalBurned || 0;
+                const circulatingSupply = runicRaids.stat.meta.runes[rune].circulatingSupply || 0;
                 const marketCap = price * circulatingSupply || 0;
 
                 if (rune !== runes[runes.length - 1] && rune !== 'rune') {
@@ -302,14 +313,14 @@ const Stats = () => {
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Fortress (Ultra Secret)')}</Text>
-              {game.stat.meta.items[15]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[15]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[15]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[15]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Flow (Retired)')}</Text>
-              {game.stat.meta.items[20]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[20]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[20]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[20]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
@@ -318,32 +329,32 @@ const Stats = () => {
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Lionheart (Ultra Secret Retired)')}</Text>
-              {game.stat.meta.items[22]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[22]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[22]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[22]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Pressure (Retired)')}</Text>
-              {game.stat.meta.items[23]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[23]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[23]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[23]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Zeal (Ultra Secret Retired)')}</Text>
-              {game.stat.meta.items[24]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[24]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[24]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[24]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Balance (Retired)')}</Text>
-              {game.stat.meta.items[25]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[25]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[25]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[25]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Eternity (Ultra Secret Retired)')}</Text>
-              {game.stat.meta.items[26]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[26]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[26]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[26]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
@@ -356,68 +367,68 @@ const Stats = () => {
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Haze (Ultra Secret Retired)')}</Text>
-              {game.stat.meta.items[30]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[30]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[30]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[30]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Mercy (Ultra Secret Retired)')}</Text>
-              {game.stat.meta.items[35]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[35]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[35]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[35]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Burial (Retired)')}</Text>
-              {game.stat.meta.items[37]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[37]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[37]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[37]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Blur')}</Text>
-              {game.stat.meta.items[34]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[34]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[34]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[34]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Reave (Retired)')}</Text>
-              {game.stat.meta.items[55]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[55]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[55]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[55]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Exile')}</Text>
-              {game.stat.meta.items[182]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[182]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[182]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[182]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Elder')}</Text>
-              {game.stat.meta.items[16]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[16]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[16]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[16]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Hellfire')}</Text>
-              {game.stat.meta.items[31]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[31]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[31]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[31]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Hellreaver')}</Text>
-              {game.stat.meta.items[44]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[44]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[44]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[44]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Flare')}</Text>
-              {game.stat.meta.items[56]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[56]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[56]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[56]?.total || 0} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Ignition (Secret)')}</Text>
-              {game.stat.meta.items[46]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[46]?.total || 0} decimals={0} />
+              {runicRaids.stat.meta.items[46]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[46]?.total || 0} decimals={0} />
               )}
             </Row>
             <br />
@@ -434,44 +445,44 @@ const Stats = () => {
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Luminous Flywings (Airdrop)')}</Text>
-              {game.stat.meta.items[32]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[32]?.total} decimals={0} />
+              {runicRaids.stat.meta.items[32]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[32]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Black Drake Scale (Reward)')}</Text>
-              {game.stat.meta.items[1207]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[1207]?.total} decimals={0} />
+              {runicRaids.stat.meta.items[1207]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[1207]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Black Drake Talon (Reward)')}</Text>
-              {game.stat.meta.items[1208]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[1208]?.total} decimals={0} />
+              {runicRaids.stat.meta.items[1208]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[1208]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Glow Fly Powder (Reward)')}</Text>
-              {game.stat.meta.items[1209]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[1209]?.total} decimals={0} />
+              {runicRaids.stat.meta.items[1209]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[1209]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t("Founder's Cube (Fundraiser)")}</Text>
-              {game.stat.meta.items[1205]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[1205]?.total} decimals={0} />
+              {runicRaids.stat.meta.items[1205]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[1205]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Crafting Competition Certificate (Competition)')}</Text>
-              {game.stat.meta.items[1201]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[1201]?.total} decimals={0} />
+              {runicRaids.stat.meta.items[1201]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[1201]?.total} decimals={0} />
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Rune Royale Ticket')}</Text>
-              {game.stat.meta.items[1211]?.total && (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[1211]?.total} decimals={0} />
+              {runicRaids.stat.meta.items[1211]?.total && (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[1211]?.total} decimals={0} />
               )}
             </Row>
             <br />
@@ -480,56 +491,56 @@ const Stats = () => {
             <br />
             <Row>
               <Text fontSize="1rem">{t('Stone of Jordan (Fundraiser)')}</Text>
-              {game.stat.meta.items[2001]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[2001].total} decimals={0} />
+              {runicRaids.stat.meta.items[2001]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[2001].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Vampire Gaze (Fundraiser)')}</Text>
-              {game.stat.meta.items[2002]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[2002].total} decimals={0} />
+              {runicRaids.stat.meta.items[2002]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[2002].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Harlequin Crest (Fundraiser)')}</Text>
-              {game.stat.meta.items[2003]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[2003].total} decimals={0} />
+              {runicRaids.stat.meta.items[2003]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[2003].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('The Oculus (Fundraiser)')}</Text>
-              {game.stat.meta.items[2004]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[2004].total} decimals={0} />
+              {runicRaids.stat.meta.items[2004]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[2004].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('War Traveler (Fundraiser)')}</Text>
-              {game.stat.meta.items[2005]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[2005].total} decimals={0} />
+              {runicRaids.stat.meta.items[2005]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[2005].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Lightsabre (Fundraiser)')}</Text>
-              {game.stat.meta.items[2047]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[2047].total} decimals={0} />
+              {runicRaids.stat.meta.items[2047]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[2047].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Crown of Ages (Fundraiser)')}</Text>
-              {game.stat.meta.items[2052]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[2052].total} decimals={0} />
+              {runicRaids.stat.meta.items[2052]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[2052].total} decimals={0} />
               ) : (
                 0
               )}
@@ -540,16 +551,16 @@ const Stats = () => {
             <br />
             <Row>
               <Text fontSize="1rem">{t("Scholar's Codex (Airdrop)")}</Text>
-              {game.stat.meta.items[1200]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[1200].total} decimals={0} />
+              {runicRaids.stat.meta.items[1200]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[1200].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t("General's Medallion (Airdrop)")}</Text>
-              {game.stat.meta.items[1201]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[1201].total} decimals={0} />
+              {runicRaids.stat.meta.items[1201]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[1201].total} decimals={0} />
               ) : (
                 0
               )}
@@ -561,72 +572,72 @@ const Stats = () => {
             <br />
             <Row>
               <Text fontSize="1rem">{t('Golden Lion Cub (Fundraiser)')}</Text>
-              {game.stat.meta.items[3000]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[3000].total} decimals={0} />
+              {runicRaids.stat.meta.items[3000]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[3000].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Blue-Eyes White Drake (Fundraiser)')}</Text>
-              {game.stat.meta.items[3001]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[3001].total} decimals={0} />
+              {runicRaids.stat.meta.items[3001]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[3001].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Red-Eyes Black Drake (Fundraiser)')}</Text>
-              {game.stat.meta.items[3002]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[3002].total} decimals={0} />
+              {runicRaids.stat.meta.items[3002]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[3002].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Fairy Drake (Fundraiser)')}</Text>
-              {game.stat.meta.items[3003]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[3003].total} decimals={0} />
+              {runicRaids.stat.meta.items[3003]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[3003].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Goblin Drake (Fundraiser)')}</Text>
-              {game.stat.meta.items[3004]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[3004].total} decimals={0} />
+              {runicRaids.stat.meta.items[3004]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[3004].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Hippogryph (Fundraiser)')}</Text>
-              {game.stat.meta.items[3005]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[3005].total} decimals={0} />
+              {runicRaids.stat.meta.items[3005]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[3005].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Wyvern (Fundraiser)')}</Text>
-              {game.stat.meta.items[3006]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[3006].total} decimals={0} />
+              {runicRaids.stat.meta.items[3006]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[3006].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Forest Turtle (Fundraiser)')}</Text>
-              {game.stat.meta.items[3007]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[3007].total} decimals={0} />
+              {runicRaids.stat.meta.items[3007]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[3007].total} decimals={0} />
               ) : (
                 0
               )}
             </Row>
             <Row>
               <Text fontSize="1rem">{t('Skeleton Drake (Fundraiser)')}</Text>
-              {game.stat.meta.items[3008]?.total ? (
-                <CardValue fontSize="1rem" value={game.stat.meta.items[3008].total} decimals={0} />
+              {runicRaids.stat.meta.items[3008]?.total ? (
+                <CardValue fontSize="1rem" value={runicRaids.stat.meta.items[3008].total} decimals={0} />
               ) : (
                 0
               )}

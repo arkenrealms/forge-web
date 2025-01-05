@@ -131,16 +131,16 @@ const TeamCard: React.FC<TeamCardProps> = ({ rank, team }) => {
           <Flex>
             <Flex>
               {/* alignSelf for Safari fix */}
-              <PrizeIcon width="24px" mr="8px" style={{ alignSelf: 'center' }} />
+              <PrizeIcon width="24px" style={{ alignSelf: 'center', marginRight: 6 }} />
               <Text fontSize="24px" bold>
                 {team.points || 0}
               </Text>
             </Flex>
             <Flex ml="24px">
               {/* alignSelf for Safari fix */}
-              <CommunityIcon width="24px" mr="8px" style={{ alignSelf: 'center' }} />
+              <CommunityIcon width="24px" style={{ alignSelf: 'center', marginRight: 8 }} />
               <Text fontSize="24px" bold>
-                {team.profiles?.length || 0}
+                {team.memberCount || 0}
               </Text>
             </Flex>
           </Flex>

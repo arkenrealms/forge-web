@@ -143,7 +143,7 @@ const Evolution: React.FC<any> = () => {
               <hr />
               <CardBody>
                 <Flex flexDirection="column" alignItems="center" justifyContent="center">
-                  <p>Please connect your wallet with your Rune account.</p>
+                  <p>Please connect your wallet with your Arken account.</p>
                   <br />
                   <br />
                   <Button

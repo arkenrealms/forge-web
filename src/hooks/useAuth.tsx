@@ -1,6 +1,7 @@
 import { ConnectorNames } from '~/components/WalletModal/types';
 import { useToast } from '~/state/hooks';
 import useWeb3 from '~/hooks/useWeb3';
+import LogRocket from 'logrocket';
 import { connectorsByName } from '~/utils/web3React';
 import React, { useContext, useState, useCallback, useEffect, createContext } from 'react';
 import _ from 'lodash';
@@ -24,6 +25,7 @@ const AuthContext = createContext({
   isCryptoMode: false,
   isExpertMode: false,
   sign: (address: string) => {},
+  reauth: () => {},
   login: () => {},
   logout: () => {},
   setProfileMode: (mode: string) => {},
@@ -64,6 +66,18 @@ const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
       setToken(res.token);
       setProfile(res.profile);
       setPermissions(res.permissions);
+      console.log('zzzzzz', res.profile?.id, {
+        name: res.profile?.name,
+        email: res.profile?.address + '@bsc.arken.gg',
+
+        token: res.token,
+      });
+      LogRocket.identify(res.profile?.id, {
+        name: res.profile?.name,
+        email: res.profile?.address + '@bsc.arken.gg',
+
+        token: res.token,
+      });
     } else {
       prompt.error({
         message: 'Error',
@@ -107,6 +121,10 @@ const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
     authSilent();
   }
 
+  async function reauth() {
+    authSilent();
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -118,6 +136,7 @@ const AuthProvider = ({ trpc, children }: AuthProviderProps) => {
         login,
         logout,
         isLoading,
+        reauth,
         setProfileMode: async function (value: string) {
           await setProfileMode(value);
           authSilent();
@@ -161,7 +180,7 @@ const addBscToMetamask = () => {
         ], // you must have access to the specified account
       })
       .then((result: any) => {
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((e: any) => {
         alert('An error occurred. Please seek help in Telegram chat. Error code: ' + e.code);

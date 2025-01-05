@@ -1002,7 +1002,7 @@ const Leaderboard = () => {
                   <br />
                   <br />
                   <p>
-                    <em>Note: Only counts Rune accounts.</em>
+                    <em>Note: Only counts Arken accounts.</em>
                   </p>
                 </Flex>
               ) : null}
@@ -1073,7 +1073,7 @@ const Leaderboard = () => {
             <br />
             <br />
             <p>
-              <em>Note: Only counts Rune accounts.</em>
+              <em>Note: Only counts Arken accounts.</em>
             </p>
             <br />
             <br />

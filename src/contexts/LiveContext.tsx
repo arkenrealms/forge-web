@@ -582,7 +582,7 @@ const LiveContextProvider = ({ children }) => {
   //   }
   // };
 
-  const call = trpcClient.query;
+  const call = function () {};
 
   return (
     <LiveContext.Provider

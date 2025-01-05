@@ -474,7 +474,7 @@ export default ({ children, pageState }) => {
 
   const headingText = brandHeading[brand] || brandHeading.rune;
   const subheadingText = brandSubheading[brand] || brandSubheading.rune;
-  console.log(289398289, auth?.profile?.mode);
+
   return (
     <div
       id="main-layout"

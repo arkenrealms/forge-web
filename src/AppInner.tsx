@@ -2002,7 +2002,7 @@ const AppContent = ({
   setPageSort,
   onChangePage,
 }) => {
-  // const history2 = useNavigate()
+  const history2 = useNavigate();
   // const location = useLocation()
   // const { user } = useFeathers()
   const { address } = useWeb3();
@@ -2035,9 +2035,9 @@ const AppContent = ({
   const routes = pageState;
 
   const [refresh, setRefresh] = useState(false);
-  // const [lastPageActive, setLastPageActive] = useState('') //useState(undefined);
+  const [lastPageActive, setLastPageActive] = useState(''); //useState(undefined);
 
-  // const [currentLocationPath, setCurrentLocationPath] = useState(location.pathname)
+  const [currentLocationPath, setCurrentLocationPath] = useState(location.pathname);
 
   // const { address: account } = useWeb3()
 
@@ -2070,7 +2070,7 @@ const AppContent = ({
 
   // useEffect(() => {
   //   if (pendingPageUpdate) {
-  //     console.log("Running pending page update: ", pendingPageUpdate);
+  //     console.log('Running pending page update: ', pendingPageUpdate);
 
   //     const { page, data, path, close } = pendingPageUpdate;
   //     if (lastPageActive !== page) {
@@ -2078,9 +2078,9 @@ const AppContent = ({
   //     }
 
   //     // @ts-ignore
-  //     window.mixpanel?.track("Change Page", {
-  //       page
-  //     });
+  //     // window.mixpanel?.track("Change Page", {
+  //     //   page
+  //     // });
 
   //     // if (!pageState[page].open) {
   //     //   UpdatePage(page, { open: true });
@@ -2114,7 +2114,7 @@ const AppContent = ({
   //       ...data,
   //     };
 
-  //     console.log('Updating page state', page, pageState)
+  //     console.log('Updating page state', page, pageState);
 
   //     setPageState(pageState);
 
@@ -2122,21 +2122,13 @@ const AppContent = ({
 
   //     const currentUrl = location.pathname + location.search;
 
-  //     setCurrentLocationPath(currentUrl)
+  //     setCurrentLocationPath(currentUrl);
 
   //     if (path !== currentUrl) {
-  //       setTimeout(() => history2.push(path), 500);
+  //       setTimeout(() => history2(path), 500);
   //     }
   //   }
-  // }, [
-  //   history2,
-  //   lastPageActive,
-  //   location.pathname,
-  //   location.search,
-  //   pageSort,
-  //   pageState,
-  //   pendingPageUpdate,
-  // ]);
+  // }, [history2, lastPageActive, location.pathname, location.search, pageSort, pageState, pendingPageUpdate]);
 
   // useEffect(() => {
   //   const page = currentLocationPath
@@ -2190,11 +2182,21 @@ const AppContent = ({
     const { setTab } = useMarket();
     const settings = useSettings();
 
+    console.log('Route change', location2.pathname);
+
     const route = query.routes.find((r) => matchPath(r.path, location2.pathname));
 
     if (!route) {
       console.log('Page not found', location2, query);
       return null;
+    }
+
+    // @ts-ignore
+    if (window.unityInstance && route.path !== '/') {
+      // @ts-ignore
+      window.unityInstance.Quit();
+      // @ts-ignore
+      window.unityInstance = null;
     }
 
     // Updated matchPath usage
@@ -2474,7 +2476,7 @@ const AppContent = ({
         {/* <Route path={baseRouteUrl + '/fundraiser'}>
             <Navigate to="/market?query=0x191727d22f2693100acef8e48F8FeaEaa06d30b1&advanced=false" />
           </Route> */}
-        {routes.map((route: any) => {
+        {/* {routes.map((route: any) => {
           if (window.localStorage.getItem(`WindowStatus-${route.path}`) !== 'opened') return null;
 
           route.props.open = true;
@@ -2486,23 +2488,9 @@ const AppContent = ({
           route.props.windowSize = window.localStorage.getItem(`WindowSize-${route.path}`)
             ? JSON.parse(window.localStorage.getItem(`WindowSize-${route.path}`))
             : { width: '100%', height: '100%' };
-          // location: location2,
-          // title: route.title,
-          // toolbarNav: route.toolbarNav,
           route.props.routePath = route.path;
-          // routeIndex: currentRouteIndex + 1,
 
           route.props.onClose = (path) => {
-            // @ts-ignore
-            // const previousLocation = location.state ? location.state.from! : "/";
-            // setPendingPageUpdate({
-            //   path: previousLocation,
-            //   page,
-            //   close: true,
-            //   data: { focused: false, open: false },
-            // });
-            //setTimeout(() => history.push(previousLocation), 1000);
-
             const r2 = routes.find((r) => r.path === path);
 
             r2.props.open = false;
@@ -2517,24 +2505,6 @@ const AppContent = ({
               history.push('/desktop');
             }
           };
-
-          // const location2 = useLocation()
-          // const { setTab } = useMarket()
-
-          // const route = routes.find((r) =>
-          //   matchPath(location2.pathname, {
-          //     path: r.path,
-          //     exact: r.exact,
-          //     strict: r.strict,
-          //   }),
-          // )
-
-          // if (window.localStorage.getItem(`WindowStatus-${route.path}`) === 'opened') return null // We can assume its already opened by the other logic
-
-          // if (!route) {
-          //   console.log('Page not found', location2)
-          //   return <NotFound key="approutes2" defaultNotFoundValue />
-          // }
 
           const pathToMatch = window.localStorage.getItem(`WindowPath-${route.path}`) || route.path;
 
@@ -2574,9 +2544,7 @@ const AppContent = ({
               <Suspense fallback={<></>}>{route.props.open ? <route.component {...route.props} /> : null}</Suspense>
             </DraggableWindow>
           );
-          // <Route exact={route.exact} path={baseRouteUrl + route.path} key={route.matchUrl || route.path}>
-          // </Route>
-        })}
+        })} */}
         {useMemo(
           () => (
             <RouteHandler routes={routes} />

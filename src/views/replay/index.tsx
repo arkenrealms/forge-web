@@ -303,7 +303,7 @@ import { Link as RouterLink, NavLink, useLocation, useNavigate } from 'react-rou
 //                   if (
 //                     eventName === 'OnSetRoundInfo' ||
 //                     eventName === 'OnOpenLevel2' ||
-//                     eventName === 'OnSpawnPlayer' ||
+//                     eventName === 'onSpawnClient' ||
 //                     eventName === 'OnSpawnPowerUp'
 //                   ) {
 //                     // @ts-ignore
@@ -335,7 +335,7 @@ import { Link as RouterLink, NavLink, useLocation, useNavigate } from 'react-rou
 //               } else if (eventName === 'onSetPositionMonitor') {
 //                 // unityInstance.send('NetworkManager', 'onSetPositionMonitor', '40:60:60')
 //                 continue;
-//               } else if (eventName === 'OnSpawnPlayer') {
+//               } else if (eventName === 'onSpawnClient') {
 //                 // if (currentPlayerId === event[1].split(':')[0]) continue
 
 //                 userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];

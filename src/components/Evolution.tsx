@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import utf8 from 'utf8';
 
-import { formatDistance } from 'date-fns';
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
@@ -9,7 +8,6 @@ import { Unity, useUnityContext } from 'react-unity-webgl';
 import { rewardTokenIdMap } from '@arken/node/legacy/data/items';
 import { generateShortId } from '@arken/node/util/db';
 import { decodeItem } from '@arken/node/util/decoder';
-import io from 'socket.io-client';
 import styled, { createGlobalStyle, css } from 'styled-components';
 import ItemInformation from '~/components/ItemInformation';
 import Page from '~/components/layout/Page';
@@ -20,13 +18,14 @@ import Paragraph from '~/components/Paragraph';
 import SeasonRankings from '~/components/SeasonRankings';
 import useBrand from '~/hooks/useBrand';
 import useCache from '~/hooks/useCache';
-import { useRuneSender } from '~/hooks/useContract';
+import { useArkenChest } from '~/hooks/useContract';
 import useFetch from '~/hooks/useFetch';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import useSettings from '~/hooks/useSettings2';
 import { serialize, deserialize } from '@arken/node/util/rpc';
 import useWeb3 from '~/hooks/useWeb3';
 import { useProfile, useToast } from '~/state/hooks';
+import { ConnectNetwork } from '~/components/ConnectNetwork';
 import config from '../config';
 import {
   BaseLayout,
@@ -47,6 +46,7 @@ import { trpc, clients } from '~/utils/trpc';
 import type * as Arken from '@arken/node/types';
 
 import addresses from '@arken/node/legacy/contractInfo';
+import Item from 'antd/es/list/Item';
 
 // var unityProvider = UnityLoader.instantiate("unityContainer", "Build/public.json", {onProgress: UnityProgress});
 let unityProvider;
@@ -59,7 +59,7 @@ window.unityBridge = {
 let focusInterval;
 let originalAlert;
 
-const testMode = false;
+const testMode = true;
 const logCommonEvents = testMode;
 let gameInitialized = false;
 // let accountInitialized = false
@@ -515,7 +515,7 @@ const StyledNotFound = styled.div`
 `;
 
 const log = (...args) => {
-  if (debug) console.log(...args);
+  if (debug) console.info(...args);
 };
 
 const RewardCardContainer = styled(Flex)`
@@ -692,7 +692,7 @@ const assumedTimeDiffList = [];
 
 const GameWrapper = ({ setIsGameStarted }) => {
   const gameRef = useRef(null);
-  const { unityProvider, UNSAFE__unityInstance, loadingProgression } = useUnityContext({
+  const { unityProvider, UNSAFE__unityInstance, loadingProgression, unload } = useUnityContext({
     loaderUrl: '/Build/EvolutionIsles/EvolutionIsles.loader.js',
     dataUrl: '/Build/EvolutionIsles/EvolutionIsles.data',
     frameworkUrl: '/Build/EvolutionIsles/EvolutionIsles.framework.js',
@@ -712,9 +712,17 @@ const GameWrapper = ({ setIsGameStarted }) => {
   //@ts-ignore
   window.unityInstance = unityInstance = UNSAFE__unityInstance;
 
+  // const handleUnityUnmounting = async () => {
+  //   await unload().catch((err) => console.log('err===>', err));
+  // };
+
   useEffect(
     function () {
       if (loadingProgression === 1) setIsGameStarted(true);
+
+      // return () => {
+      //   handleUnityUnmounting();
+      // };
     },
     [loadingProgression, setIsGameStarted]
   );
@@ -743,7 +751,7 @@ const GameWrapper = ({ setIsGameStarted }) => {
 
 const Isles: any = ({ open }) => {
   const location = useLocation();
-  // const history = useNavigate();
+  const history = useNavigate();
   // const settings = useSettings();
   const cache = useCache();
   const match = parseMatch(location);
@@ -767,7 +775,7 @@ const Isles: any = ({ open }) => {
   const [tab, setTab] = useState(match?.params?.realm ? parseInt(match?.params?.realm + '') : 0);
   const [isServerOffline, setIsServerOffline] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
-  const [isSigned, setIsSigned] = useState(false);
+  const [showShop, setShowShop] = useState(false);
   const { toastError, toastSuccess, toastInfo } = useToast();
   const [reward, setReward] = useState(null);
   const [onPresentRulesModal] = useModal(<RulesModal onResume={() => {}} onDismiss={() => {}} />);
@@ -812,8 +820,13 @@ const Isles: any = ({ open }) => {
   //   [account, setUsername, setAddress]
   // );
 
+  const { data: merchant } = trpc.seer.character.getCharacter.useQuery<Arken.Character.Types.Character>({
+    where: { key: 'harold' },
+  });
+  const { mutateAsync: exchangeCharacterItem } = trpc.seer.character.exchangeCharacterItem.useMutation();
   const { data: realms } = trpc.seer.core.getRealms.useQuery<Arken.Core.Types.Realm[]>();
-  console.log('Realms', realms);
+
+  console.info('Realms', realms);
   // @ts-ignore
   const servers = realms?.[0].realmShards?.filter((s) => s.status === 'online' || s.status === 'Offline') || [];
 
@@ -827,18 +840,18 @@ const Isles: any = ({ open }) => {
   localConfig.isMobile = isMobile;
 
   const startGame = async () => {
-    let sig = signature;
-    if (!sig) {
-      sig = (await getSignature('evolution')).hash;
-      setSignature(sig);
-      sig2 = sig;
-      window.localStorage.setItem(config.addressKey, account);
-      window.localStorage.setItem(config.tokenKey, sig);
-    }
+    // let sig = signature;
+    // if (!sig) {
+    //   sig = (await getSignature('evolution')).hash;
+    //   setSignature(sig);
+    //   sig2 = sig;
+    //   window.localStorage.setItem(config.addressKey, account);
+    //   window.localStorage.setItem(config.tokenKey, sig);
+    // }
 
-    document.body.classList.add(`override-bad-quality`);
+    // document.body.classList.add(`override-bad-quality`);
 
-    setIsSigned(true);
+    // setIsSigned(true);
 
     gameInitialized = true;
 
@@ -1018,8 +1031,20 @@ const Isles: any = ({ open }) => {
               const clientId = event[1].split(':')[0];
 
               if (clientId === currentPlayerId) setState('spectating');
-            } else if (eventName === 'onSpawnPlayer') {
+            } else if (eventName === 'onSpawnClient') {
               userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
+            } else if (eventName === 'onShowUI') {
+              const key = event[1].split(':')[0];
+
+              if (key === 'shop') {
+                setShowShop(true);
+              }
+            } else if (eventName === 'onHideUI') {
+              const key = event[1].split(':')[0];
+
+              if (key === 'shop') {
+                setShowShop(false);
+              }
             } else if (eventName === 'onSetInfo') {
               userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
             } else if (eventName === 'onGameOver' || eventName === 'onDisconnected') {
@@ -1038,6 +1063,7 @@ const Isles: any = ({ open }) => {
               }
             } else if (eventName === 'onSetRoundInfo') {
               // toastInfo('Game mode is now ' + event[1].split(':')[22])
+              auth?.reauth();
             } else if (eventName === 'onSpawnReward') {
               const data = event[1].split(':');
               setReward({
@@ -1069,12 +1095,14 @@ const Isles: any = ({ open }) => {
                 }
               }
             }
-            // console.log('ZZZZ', eventName, event[1]);
+
+            console.info('WEB => UNITY', eventName, event[1]);
+
             unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
           }
         } catch (err) {
           // ...
-          console.log(err);
+          console.error(err);
         }
       });
 
@@ -1097,7 +1125,7 @@ const Isles: any = ({ open }) => {
         // },
         emit: (...args) => {
           if (logCommonEvents || (args[0] !== 'UpdateMyself' && args[0] !== 'Pickup')) {
-            log('socket.emit', !!clients.evolutionShard.socket, args);
+            // log('socket.emit', !!clients.evolutionShard.socket, args);
           }
 
           if (args?.[1]?.method === 'load' && state === 'loading') return;
@@ -1116,7 +1144,7 @@ const Isles: any = ({ open }) => {
           }
 
           if (args.length > 1 && typeof args[1] === 'string') {
-            console.log(args[1]);
+            // console.log(args[1]);
             // Step 1: Split the binary string into bytes
             const binaryArray = args[1].split(' ');
 
@@ -1206,6 +1234,23 @@ const Isles: any = ({ open }) => {
                     `Arken is the next evolution of DeFi farming. Farming is when you use your tokens to earn bonus tokens by staking them. Every week a new token is created (called a rune). It's farmed until the max supply of 50,000. That rune can then be combined with other runes to create NFTs. Those NFTs can be used to improve your earnings.`,
                   )}
                 </p> */}
+                <br />
+                <br />
+                <br />
+                Interested in airdropping memecoins? 95% of tokens donated to these contracts will be dropped in-game
+                over the next 90 days (with highest balance getting priority)
+                <br />
+                BSC:{' '}
+                <a href="https://bscscan.com/address/0xad5faa6e1a8991C67DB1C3f7212729Cf6ba5118c">
+                  0xad5faa6e1a8991C67DB1C3f7212729Cf6ba5118c
+                </a>
+                <br />
+                Polygon: coming soon
+                <br />
+                Solana: coming soon
+                <br />
+                <br />
+                If your memecoin doesn't appear in-game, report it in telegram.arken.gg
               </CardBody>
             </Card3>
             <br />
@@ -1250,24 +1295,34 @@ const Isles: any = ({ open }) => {
                         {!realms ? <p>Loading realms...</p> : null}
                         {realms?.length === 0 ? <p>No realms online</p> : null}
                       </Flex>
-                      <div
-                        css={css`
-                          position: absolute;
-                          left: 0;
-                          bottom: 0;
-                          text-align: center;
-                          width: 100%;
-                          padding: 20px;
-                        `}>
-                        <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
-                          <SpecialButton
-                            title="ENTER ISLES"
-                            onClick={() => {
-                              startGame();
-                            }}
-                          />
-                        </HeadingFire>
-                      </div>
+                      {auth?.address && auth?.token ? (
+                        <div
+                          css={css`
+                            position: absolute;
+                            left: 0;
+                            bottom: 0;
+                            text-align: center;
+                            width: 100%;
+                            padding: 20px;
+                          `}>
+                          <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
+                            <SpecialButton
+                              title="ENTER ISLES"
+                              onClick={() => {
+                                startGame();
+                              }}
+                            />
+                          </HeadingFire>
+                        </div>
+                      ) : auth?.address && !auth?.token ? (
+                        <>
+                          <Button scale="sm" onClick={() => auth?.sign(auth?.address)}>
+                            Sign
+                          </Button>
+                        </>
+                      ) : (
+                        <ConnectNetwork />
+                      )}
                     </div>
                     <div>
                       <p style={{ fontSize: '0.9em' }}>
@@ -1411,7 +1466,6 @@ const Isles: any = ({ open }) => {
                 </Card2>
               ) : null}
               <Card2
-                onClick={onPresentRewardModal}
                 css={css`
                   position: absolute;
                   bottom: 300px;
@@ -1423,7 +1477,7 @@ const Isles: any = ({ open }) => {
                   </CardBody>
                   <CardBody>
                     <img
-                      src={'/images/santahat.png'}
+                      src={'/images/rewards/Santa Christmas 2024 Ticket.png'}
                       css={css`
                         width: 40px;
                         height: 40px;
@@ -1435,7 +1489,7 @@ const Isles: any = ({ open }) => {
                         font-weight: bold;
                         font-size: 1.1rem;
                       `}>
-                      0 Hats
+                      {auth?.profile?.meta?.rewards?.tokens?.['christmas2024'] || 0} Hats
                     </div>
                   </CardBody>
                   <CardBody>
@@ -1452,7 +1506,7 @@ const Isles: any = ({ open }) => {
                         font-weight: bold;
                         font-size: 1.1rem;
                       `}>
-                      0 DOGE
+                      {auth?.profile?.meta?.rewards?.tokens?.['doge'] || 0} DOGE
                     </div>
                   </CardBody>
                   <CardBody>
@@ -1469,11 +1523,93 @@ const Isles: any = ({ open }) => {
                         font-weight: bold;
                         font-size: 1.1rem;
                       `}>
-                      0 PEPE
+                      {auth?.profile?.meta?.rewards?.tokens?.['pepe'] || 0} PEPE
                     </div>
+                  </CardBody>
+                  <CardBody>
+                    <img
+                      src={'/images/rewards/harold.png'}
+                      css={css`
+                        width: 40px;
+                        height: 40px;
+                        margin-bottom: 10px;
+                      `}
+                    />
+                    <div
+                      css={css`
+                        font-weight: bold;
+                        font-size: 1.1rem;
+                      `}>
+                      {auth?.profile?.meta?.rewards?.tokens?.['harold'] || 0} HAROLD
+                    </div>
+                  </CardBody>
+                  <CardBody>
+                    <Button size="sm" onClick={() => history('/account/rewards')}>
+                      Claim
+                    </Button>
                   </CardBody>
                 </Card>
               </Card2>
+              {showShop && merchant?.[merchant?.inventoryIndex]?.items ? (
+                <Card2
+                  css={css`
+                    position: absolute;
+                    bottom: 300px;
+                    left: 20px;
+                  `}>
+                  <Card style={{ textAlign: 'center', zoom: '0.6' }}>
+                    <CardBody>
+                      <h2>Harold's Shop</h2>
+                    </CardBody>
+                    <CardBody>
+                      {merchant.inventory[merchant.inventoryIndex].items.map((item: any) => (
+                        <div
+                          css={css`
+                            font-weight: bold;
+                            font-size: 1.1rem;
+                          `}>
+                          <img
+                            src={'/images/rewards/doge.png'}
+                            css={css`
+                              width: 40px;
+                              height: 40px;
+                              margin-bottom: 10px;
+                            `}
+                          />
+                          {item.quantity} {item.name}{' '}
+                          <Button
+                            size="sm"
+                            onClick={() => exchangeCharacterItem({ characterId: merchant.id + '', itemId: item.id })}>
+                            {item.exchange.item.quantity} {item.exchange.item.name}
+                          </Button>
+                        </div>
+                      ))}
+                    </CardBody>
+                    <CardBody>
+                      <img
+                        src={'/images/rewards/sprite-dust.png'}
+                        css={css`
+                          width: 40px;
+                          height: 40px;
+                          margin-bottom: 10px;
+                        `}
+                      />
+                      <div
+                        css={css`
+                          font-weight: bold;
+                          font-size: 1.1rem;
+                        `}>
+                        Your balance:{' '}
+                        {auth?.profile?.character?.items.find((item: any) => item.name === 'Sprite Dust').quantity || 0}{' '}
+                        Sprite Dust
+                      </div>
+                    </CardBody>
+                    <CardBody>
+                      <Button size="sm">Purchase</Button>
+                    </CardBody>
+                  </Card>
+                </Card2>
+              ) : null}
             </div>
           </div>
         ) : null}

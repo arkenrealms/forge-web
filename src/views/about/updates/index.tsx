@@ -129,6 +129,7 @@ const Updates = () => {
                 <ButtonMenuItem>Infinite Arena</ButtonMenuItem>
                 {/* <ButtonMenuItem>Guardians</ButtonMenuItem> */}
                 <ButtonMenuItem>Heart of the Oasis</ButtonMenuItem>
+                <ButtonMenuItem>Meme Isles</ButtonMenuItem>
               </ButtonMenu>
 
               {tabIndex === 0 /* arken.gg */ ? (
@@ -1009,7 +1010,7 @@ const Updates = () => {
                 </>
               ) : null}
 
-              {tabIndex === 4 /* Guardians */ ? (
+              {tabIndex === 111 /* Guardians */ ? (
                 <>
                   <Heading size="xl" mb="24px" mt="30px">
                     Current Build
@@ -1036,7 +1037,7 @@ const Updates = () => {
                 </>
               ) : null}
 
-              {tabIndex === 5 /* Sanctuary */ ? (
+              {tabIndex === 4 /* Sanctuary */ ? (
                 <>
                   <Heading size="xl" mb="24px" mt="30px">
                     Current Build
@@ -1059,6 +1060,25 @@ const Updates = () => {
                     <Heading size="lg" mb="10px">
                       None
                     </Heading>
+                  </PatchNote>
+                </>
+              ) : null}
+
+              {tabIndex === 5 /* Meme Isles */ ? (
+                <>
+                  <Heading size="xl" mb="24px" mt="30px">
+                    Current Build
+                  </Heading>
+
+                  <PatchNote>
+                    <Heading size="lg" mb="10px">
+                      1.0.0 <Date>2024-12-25</Date>
+                    </Heading>
+                    <ol>
+                      <li>
+                        Initial release of the Meme Isles. <Game />
+                      </li>
+                    </ol>
                   </PatchNote>
                 </>
               ) : null}
