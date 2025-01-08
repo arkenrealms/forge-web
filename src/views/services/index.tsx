@@ -259,12 +259,12 @@ export default function AdminDashboard() {
     refetchOnWindowFocus: false, // Do not refetch on window focus
   });
 
-  const { mutate: updateMetrics } = trpc.seer.job.updateMetrics.useMutation();
+  // const { mutate: updateMetrics } = trpc.seer.job.updateMetrics.useMutation();
 
-  useEffect(() => {
-    console.log('Updating metrics');
-    updateMetrics();
-  }, [updateMetrics]);
+  // useEffect(() => {
+  //   console.log('Updating metrics');
+  //   updateMetrics();
+  // }, [updateMetrics]);
 
   const {
     data: metrics,

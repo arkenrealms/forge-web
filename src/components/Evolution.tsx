@@ -997,6 +997,7 @@ const Isles: any = ({ open }) => {
           const data = deserialize(msg);
           // console.log('onEvents events', data.params);
 
+          // @ts-ignore
           for (const event of data.params) {
             const eventName = event[0];
 

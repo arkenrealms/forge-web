@@ -60,9 +60,35 @@ const Cards = styled(BaseLayout)`
 
 // const isLocal = process.env.REACT_APP_RUNE_ENV === 'local';
 
+const oneWeekAgo = new Date();
+oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
 const Stats = () => {
   const { t } = useTranslation();
   const auth = useAuth();
+
+  const {
+    data: metrics,
+    refetch: refreshStats,
+    isLoading: isLoadingStats,
+    isFetching: isRefreshingStats,
+    error,
+  } = trpc.seer.core.stats.useQuery(
+    {
+      where: {
+        createdDate: { gte: oneWeekAgo },
+      },
+      orderBy: {
+        number: 'desc',
+      },
+    },
+    {
+      // queryKey: 'metrics',
+      enabled: true, // Automatically fetch data on mount
+      staleTime: 1000 * 60 * 5, // Data is considered fresh for 5 minutes
+      refetchOnWindowFocus: false, // Do not refetch on window focus
+    }
+  );
 
   const { data: runicRaids } = trpc.seer.game.getGame.useQuery<Arken.Game.Types.Game>({
     where: {
@@ -76,7 +102,9 @@ const Stats = () => {
     },
   });
 
-  if (!runicRaids?.stat || !evolutionIsles?.stat)
+  const todayStat = metrics?.[0];
+  console.log(222222, todayStat, runicRaids, evolutionIsles);
+  if (!todayStat || !runicRaids?.stat)
     return (
       <div style={{ padding: 10 }}>
         <Skeleton height="80px" mb="16px" mt="16px" ml="16px" mr="16px" />
@@ -147,8 +175,62 @@ const Stats = () => {
               <Heading size="xl" mb="24px">
                 {t('Payments')}
               </Heading>
-              Pending Payments: Processed Paymented: Finalized Payments: Completed Payments: Token: $DOGE Token: $PEPE
-              Token: $HAROLD
+              <Row>
+                <Text fontSize="1rem" bold>
+                  {t('Status')}
+                  {/* ({todayStat?.meta?.payments?.completedCount || 0}/{(todayStat?.meta?.payments?.pendingCount || 0) + (todayStat?.meta?.payments?.completedCount || 0)}) */}
+                </Text>
+                <Text fontSize="1rem" bold style={{ textAlign: 'right' }}>
+                  {Object.keys(todayStat?.meta?.payments?.status || {}).map((key) => (
+                    <>
+                      {key.toUpperCase()}: {todayStat?.meta?.payments?.status[key]}
+                      <br />
+                    </>
+                  ))}
+                </Text>
+              </Row>
+              <Row>
+                <Text fontSize="1rem" bold>
+                  {t('Distributed Tokens')}
+                </Text>
+                <Text fontSize="1rem" bold style={{ textAlign: 'right' }}>
+                  {Object.keys(todayStat?.meta?.payments?.distributedTokens || {}).map((key) => (
+                    <>
+                      {key.toUpperCase()}: {todayStat?.meta?.payments?.distributedTokens[key]}
+                      <br />
+                    </>
+                  ))}
+                </Text>
+              </Row>
+              <Row>
+                <Text fontSize="1rem" bold>
+                  {t('Pending Tokens')}
+                </Text>
+                <Text fontSize="1rem" bold style={{ textAlign: 'right' }}>
+                  {Object.keys(todayStat?.meta?.payments?.pendingTokens || {}).map((tokenKey) => (
+                    <>
+                      {tokenKey.toUpperCase()}: {todayStat?.meta?.payments?.pendingTokens[tokenKey]}
+                      <br />
+                    </>
+                  ))}
+                </Text>
+              </Row>
+              <Row>
+                <Text fontSize="1rem" bold>
+                  {t('Pending Rewards')}
+                </Text>
+                <Text fontSize="1rem" bold style={{ textAlign: 'right' }}>
+                  {Object.keys(todayStat?.meta?.rewards?.pendingRewardTokens || {}).map((tokenKey) => (
+                    <>
+                      {tokenKey.toUpperCase()}: {todayStat?.meta?.rewards?.pendingRewardTokens[tokenKey]}
+                      <br />
+                    </>
+                  ))}
+                </Text>
+              </Row>
+              <br />
+              <br />
+              <br />
               <Heading size="xl" mb="24px">
                 {t('Token Stats')}
               </Heading>
