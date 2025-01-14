@@ -233,6 +233,7 @@ const combinedLink: TRPCLink<any> =
               const result = deserialize(response.result);
               // console.log(443332, result);
               observer.next({
+                // @ts-ignore
                 result,
               });
               observer.complete();

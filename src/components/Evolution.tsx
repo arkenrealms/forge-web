@@ -13,7 +13,13 @@ import ItemInformation from '~/components/ItemInformation';
 import Page from '~/components/layout/Page';
 import { useAuth } from '~/hooks/useAuth';
 import Linker from '~/components/Linker';
+import { GiCrossedSwords } from 'react-icons/gi';
+import { GiDiceEightFacesEight } from 'react-icons/gi';
+import { Navigation, Pagination, Scrollbar } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { MdLocationPin } from 'react-icons/md';
 import { Modal, useModal } from '~/components/Modal';
+import ActionBar from '~/components/ActionBar';
 import Paragraph from '~/components/Paragraph';
 import SeasonRankings from '~/components/SeasonRankings';
 import useBrand from '~/hooks/useBrand';
@@ -26,6 +32,7 @@ import { serialize, deserialize } from '@arken/node/util/rpc';
 import useWeb3 from '~/hooks/useWeb3';
 import { useProfile, useToast } from '~/state/hooks';
 import { ConnectNetwork } from '~/components/ConnectNetwork';
+import { Var } from '~/components/Var';
 import config from '../config';
 import {
   BaseLayout,
@@ -47,6 +54,10 @@ import type * as Arken from '@arken/node/types';
 
 import addresses from '@arken/node/legacy/contractInfo';
 import Item from 'antd/es/list/Item';
+import { Col, Row } from 'antd';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 // var unityProvider = UnityLoader.instantiate("unityContainer", "Build/public.json", {onProgress: UnityProgress});
 let unityProvider;
@@ -78,13 +89,17 @@ const ModalContent = styled.div`
   color: #bb955e;
   text-shadow: 1px 1px 1px black;
   font-weight: bold;
-  max-width: 600px;
 `;
 
 const Actions = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 8px;
+  display: flex;
+  justify-content: flex-end; /* Align children to the right */
+  gap: 8px;
+
+  > * {
+    max-width: 200px; /* Limit each child's width to 100px */
+    flex: 0 0 auto; /* Prevent children from growing */
+  }
 `;
 
 const BreakModal = ({ onResume, onDismiss }) => {
@@ -198,6 +213,365 @@ const RulesModal = ({ onResume, onDismiss }) => {
             onDismiss();
           }}>
           Back
+        </Button>
+      </Actions>
+    </Modal>
+  );
+};
+
+const PartyMember = ({ data }) => {
+  return (
+    <div>
+      {data.level}
+      <br />
+      {data.name}
+      <br />
+      {data.power}
+      <br />
+      {data.area?.name}
+      <br />
+      {data.area?.channel}
+    </div>
+  );
+};
+
+const PartyModal = () => {
+  const { t } = useTranslation();
+
+  const party = {
+    name: 'Party Name',
+    targetArea: {
+      name: 'Mage Isles',
+    },
+    itemDistribution: 'Random',
+  };
+  const members = [
+    {
+      name: 'AAA',
+      power: 12000000,
+      level: 97,
+      isLeader: true,
+      team: {
+        icon: 'aaaa.png',
+      },
+      area: {
+        name: 'Mage Isles',
+        channel: 'CH 1',
+      },
+    },
+    {
+      name: 'AAA',
+      power: 12000000,
+      level: 97,
+      isLeader: true,
+      team: {
+        icon: 'aaaa.png',
+      },
+      area: {
+        name: 'Mage Isles',
+        channel: 'CH 1',
+      },
+    },
+    {
+      name: 'AAA',
+      power: 12000000,
+      level: 97,
+      isLeader: true,
+      team: {
+        icon: 'aaaa.png',
+      },
+      area: {
+        name: 'Mage Isles',
+        channel: 'CH 1',
+      },
+    },
+    {
+      name: 'AAA',
+      power: 12000000,
+      level: 97,
+      isLeader: true,
+      team: {
+        icon: 'aaaa.png',
+      },
+      area: {
+        name: 'Mage Isles',
+        channel: 'CH 1',
+      },
+    },
+    {
+      name: 'AAA',
+      power: 12000000,
+      level: 97,
+      isLeader: true,
+      team: {
+        icon: 'aaaa.png',
+      },
+      area: {
+        name: 'Mage Isles',
+        channel: 'CH 1',
+      },
+    },
+  ];
+  const [isEditingSettings, setIsEditingSettings] = useState(false);
+
+  const isLeader = true;
+
+  return (
+    <Modal title="Manage Party" onDismiss={() => {}} style={{ minWidth: 900 }}>
+      <ModalContent>
+        {isEditingSettings ? (
+          <>Editing</>
+        ) : (
+          <>
+            <Row
+              gutter={[16, 16]}
+              css={css`
+                margin-bottom: 20px;
+                span {
+                  font-size: 1.1rem;
+                }
+              `}>
+              <Col span={8}>
+                <Var icon={<GiCrossedSwords />} title="Party Name">
+                  {party.name}
+                </Var>
+              </Col>
+              <Col span={8}>
+                <Var icon={<MdLocationPin />} title="Target Area">
+                  {party.targetArea.name}
+                </Var>
+              </Col>
+              <Col span={8}>
+                <Var icon={<GiDiceEightFacesEight />} title="Item Distribution">
+                  {party.itemDistribution}
+                </Var>
+              </Col>
+            </Row>
+            <Swiper
+              modules={[Navigation, Pagination, Scrollbar]}
+              spaceBetween={30}
+              slidesPerView={5}
+              navigation
+              style={{ maxWidth: 1200, margin: '0 auto 30px auto', padding: '0 20px' }}>
+              {members.map((item) => (
+                <SwiperSlide style={{ maxWidth: 1200, margin: '0 auto', height: 'auto' }}>
+                  <PartyMember data={item} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </>
+        )}
+      </ModalContent>
+      <Actions>
+        <Button width="100%" variant="secondary" onClick={() => setIsEditingSettings(!isEditingSettings)}>
+          {isEditingSettings ? 'Save Settings' : 'Edit Settings'}
+        </Button>
+        {!isEditingSettings && isLeader ? (
+          <Button width="100%" variant="secondary" onClick={() => {}}>
+            Disband Party
+          </Button>
+        ) : null}
+        {!isEditingSettings ? (
+          <Button width="100%" variant="secondary" onClick={() => {}}>
+            Leave Party
+          </Button>
+        ) : null}
+      </Actions>
+    </Modal>
+  );
+};
+
+const GuildModal = () => {
+  const { t } = useTranslation();
+
+  const guild = {
+    name: 'Guild Name',
+  };
+  const members = [
+    {
+      name: 'AAA',
+      power: 12000000,
+      level: 97,
+      isLeader: true,
+      team: {
+        icon: 'aaaa.png',
+      },
+      area: {
+        name: 'Mage Isles',
+        channel: 'CH 1',
+      },
+    },
+    {
+      name: 'AAA',
+      power: 12000000,
+      level: 97,
+      isLeader: true,
+      team: {
+        icon: 'aaaa.png',
+      },
+      area: {
+        name: 'Mage Isles',
+        channel: 'CH 1',
+      },
+    },
+    {
+      name: 'AAA',
+      power: 12000000,
+      level: 97,
+      isLeader: true,
+      team: {
+        icon: 'aaaa.png',
+      },
+      area: {
+        name: 'Mage Isles',
+        channel: 'CH 1',
+      },
+    },
+    {
+      name: 'AAA',
+      power: 12000000,
+      level: 97,
+      isLeader: true,
+      team: {
+        icon: 'aaaa.png',
+      },
+      area: {
+        name: 'Mage Isles',
+        channel: 'CH 1',
+      },
+    },
+    {
+      name: 'AAA',
+      power: 12000000,
+      level: 97,
+      isLeader: true,
+      team: {
+        icon: 'aaaa.png',
+      },
+      area: {
+        name: 'Mage Isles',
+        channel: 'CH 1',
+      },
+    },
+  ];
+  const [isEditingSettings, setIsEditingSettings] = useState(false);
+
+  const isLeader = true;
+
+  return (
+    <Modal title="Guild Information" onDismiss={() => {}} style={{ minWidth: 900 }}>
+      <ModalContent>
+        {isEditingSettings ? (
+          <>Editing</>
+        ) : (
+          <>
+            <Row
+              gutter={[16, 16]}
+              css={css`
+                margin-bottom: 20px;
+                span {
+                  font-size: 1.1rem;
+                }
+              `}>
+              <Col span={8}>
+                <Var icon={<GiCrossedSwords />} title="Guild Name">
+                  {guild.name}
+                </Var>
+              </Col>
+            </Row>
+            <Swiper
+              modules={[Navigation, Pagination, Scrollbar]}
+              spaceBetween={30}
+              slidesPerView={5}
+              navigation
+              style={{ maxWidth: 1200, margin: '0 auto 30px auto', padding: '0 20px' }}>
+              {members.map((item) => (
+                <SwiperSlide style={{ maxWidth: 1200, margin: '0 auto', height: 'auto' }}>
+                  <PartyMember data={item} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </>
+        )}
+      </ModalContent>
+      <Actions>
+        <Button width="100%" variant="secondary" onClick={() => setIsEditingSettings(!isEditingSettings)}>
+          {isEditingSettings ? 'Save Settings' : 'Edit Settings'}
+        </Button>
+        {!isEditingSettings && isLeader ? (
+          <Button width="100%" variant="secondary" onClick={() => {}}>
+            Disband Guild
+          </Button>
+        ) : null}
+        {!isEditingSettings ? (
+          <Button width="100%" variant="secondary" onClick={() => {}}>
+            Leave Guild
+          </Button>
+        ) : null}
+      </Actions>
+    </Modal>
+  );
+};
+
+const MarketModal = () => {
+  return (
+    <Modal title="Market" onDismiss={() => {}} style={{ minWidth: 900 }}>
+      <ModalContent>Coming soon</ModalContent>
+      <Actions>
+        <Button width="100%" variant="secondary">
+          Close
+        </Button>
+      </Actions>
+    </Modal>
+  );
+};
+
+const InventoryModal = () => {
+  return (
+    <Modal title="Inventory" onDismiss={() => {}} style={{ minWidth: 900 }}>
+      <ModalContent>Coming soon</ModalContent>
+      <Actions>
+        <Button width="100%" variant="secondary">
+          Close
+        </Button>
+      </Actions>
+    </Modal>
+  );
+};
+
+const PVPModal = () => {
+  return (
+    <Modal title="PVP" onDismiss={() => {}} style={{ minWidth: 900 }}>
+      <ModalContent>Coming soon</ModalContent>
+      <Actions>
+        <Button width="100%" variant="secondary">
+          Close
+        </Button>
+      </Actions>
+    </Modal>
+  );
+};
+
+const ChestModal = () => {
+  return (
+    <Modal title="Chest" onDismiss={() => {}} style={{ minWidth: 900 }}>
+      <ModalContent>Coming soon</ModalContent>
+      <Actions>
+        <Button width="100%" variant="secondary">
+          Close
+        </Button>
+      </Actions>
+    </Modal>
+  );
+};
+
+const QuestModal = () => {
+  return (
+    <Modal title="Quests" onDismiss={() => {}} style={{ minWidth: 900 }}>
+      <ModalContent>Coming soon</ModalContent>
+      <Actions>
+        <Button width="100%" variant="secondary">
+          Close
         </Button>
       </Actions>
     </Modal>
@@ -718,7 +1092,8 @@ const GameWrapper = ({ setIsGameStarted }) => {
 
   useEffect(
     function () {
-      if (loadingProgression === 1) setIsGameStarted(true);
+      // if (loadingProgression === 1)
+      setIsGameStarted(true);
 
       // return () => {
       //   handleUnityUnmounting();
@@ -733,10 +1108,12 @@ const GameWrapper = ({ setIsGameStarted }) => {
     <>
       {loadingProgression !== 1 ? (
         <StyledNotFound>
-          <Heading size="xxl">{(loadingProgression * 100).toFixed(0)}%</Heading>
+          <Heading size="xxl" style={{ margin: '0 auto' }}>
+            {(loadingProgression * 100).toFixed(0)}%
+          </Heading>
         </StyledNotFound>
       ) : null}
-      <Unity
+      {/* <Unity
         ref={gameRef}
         unityProvider={unityProvider}
         // matchWebGLToCanvasSize={false}
@@ -744,7 +1121,7 @@ const GameWrapper = ({ setIsGameStarted }) => {
           width: loadingProgression === 1 ? '100%' : '0%',
           height: loadingProgression === 1 ? 'calc(100% - 99px)' : '0%',
         }}
-      />
+      /> */}
     </>
   );
 };
@@ -753,12 +1130,10 @@ const Isles: any = ({ open }) => {
   const location = useLocation();
   const history = useNavigate();
   // const settings = useSettings();
-  const cache = useCache();
   const match = parseMatch(location);
   const { t } = useTranslation();
   // const [didError, setDidError] = useState(false);
   // const [errorMessage, setErrorMessage] = useState('');
-  const [signature, setSignature] = useState('');
   // const [progression, setProgression] = useState(0);
   const { account, library, web3 } = useWeb3();
   account2 = account;
@@ -778,10 +1153,19 @@ const Isles: any = ({ open }) => {
   const [showShop, setShowShop] = useState(false);
   const { toastError, toastSuccess, toastInfo } = useToast();
   const [reward, setReward] = useState(null);
+  const [isMenuOpened, setIsMenuOpened] = useState(null);
+  const [activeMenu, setActiveMenu] = useState('party');
   const [onPresentRulesModal] = useModal(<RulesModal onResume={() => {}} onDismiss={() => {}} />);
   const [onPresentWarningsModal] = useModal(<WarningsModal onResume={() => {}} onDismiss={() => {}} />);
   const [onPresentRewardModal] = useModal(<RewardModal onResume={() => {}} onDismiss={() => {}} />);
   const [onPresentTokenModal] = useModal(<TokenModal onResume={() => {}} onDismiss={() => {}} reward={reward} />);
+  const [onPresentPartyModal] = useModal(<PartyModal />);
+  const [onPresentGuildModal] = useModal(<GuildModal />);
+  const [onPresentMarketModal] = useModal(<MarketModal />);
+  const [onPresentInventoryModal] = useModal(<InventoryModal />);
+  const [onPresentPVPModal] = useModal(<PVPModal />);
+  const [onPresentChestModal] = useModal(<ChestModal />);
+  const [onPresentQuestModal] = useModal(<QuestModal />);
 
   // useEffect(
   //   function () {
@@ -1346,60 +1730,273 @@ const Isles: any = ({ open }) => {
       ) : null}
       <Page style={{ padding: 0, maxWidth: 'none', lineHeight: 0, position: 'relative' }}>
         {isGameStarted ? (
-          <div
-            css={css`
-              position: absolute;
-              top: 0;
-              left: 0;
-              display: grid;
-              place-items: center; /* Centers both vertically and horizontally */
-              height: 100%;
-              width: 100%;
-            `}>
+          <>
             <div
               css={css`
-                .app__styled-card2 {
-                  box-shadow: none !important;
+                position: absolute;
+                bottom: 0px;
+                left: 10px;
+                width: 500px;
+              `}>
+              <ActionBar />
+            </div>
+            <div
+              css={css`
+                position: absolute;
+                top: 120px;
+                right: 10px;
+                display: grid;
+                width: 300px;
+                display: flex;
+                justify-content: flex-end; /* Align children to the right */
+                gap: 8px;
+
+                > div {
+                  max-width: 200px; /* Limit each child's width to 100px */
+                  flex: 0 0 auto; /* Prevent children from growing */
                 }
               `}>
-              {state === 'spectating' ? (
-                <div
-                  css={css`
-                    position: absolute;
-                    bottom: 50px;
-                    left: 20px;
-                  `}>
-                  <Card2>
-                    <Card>
-                      {/* <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
+              <div
+                css={css`
+                  padding: 30px 15px;
+                `}>
+                {activeMenu === 'party' ? <>PARTY HERE</> : null}
+                {activeMenu === 'quest' ? <>QUEST HERE</> : null}
+                {activeMenu === 'target' ? <>TARGET HERE</> : null}
+              </div>
+              <div
+                css={css`
+                  filter: drop-shadow(2px 4px 6px black);
+                  display: grid;
+                  grid-template-columns: repeat(1, 1fr); /* 7 columns */
+                  grid-template-rows: repeat(3, 1fr); /* 5 rows */
+                  gap: 30px 20px; /* Adjust spacing between grid items */
+                  padding: 10px 15px;
+                  text-align: center;
+
+                  span {
+                    display: block;
+                    font-weight: bold;
+                    font-size: 1rem;
+                    color: #fff;
+                    margin-top: 9px;
+                    text-shadow: 2px 2px #000;
+                  }
+
+                  img {
+                    width: 60px;
+                    height: 60px;
+                    filter: brightness(1.5) grayscale(1) sepia(1.5);
+                  }
+
+                  div {
+                    opacity: 0.5;
+
+                    &:hover {
+                      opacity: 1 !important;
+                    }
+                  }
+                `}>
+                <div style={{ opacity: activeMenu === 'quest' ? 0.8 : 0.5 }}>
+                  <img src="/evolution/images/quest.png" onClick={() => setActiveMenu('quest')} />
+                </div>
+                <div style={{ opacity: activeMenu === 'party' ? 0.8 : 0.5 }}>
+                  <img src="/evolution/images/party.png" onClick={() => setActiveMenu('party')} />
+                </div>
+                {/* <div style={{ opacity: activeMenu === 'target' ? 0.8 : 0.5 }}>
+                  <img src="/evolution/images/target.png" onClick={() => setActiveMenu('target')} />
+                </div> */}
+              </div>
+            </div>
+            <div
+              css={css`
+                position: absolute;
+                top: 0;
+                right: 10px;
+                background: ${isMenuOpened ? '#1c1c2e' : 'none'};
+                border: ${isMenuOpened ? '2px solid #666' : '2px solid transparent'};
+                border-top: none;
+                filter: drop-shadow(2px 4px 6px black);
+                display: grid;
+                grid-template-columns: repeat(5, 1fr); /* 7 columns */
+                grid-template-rows: repeat(${isMenuOpened ? 3 : 1}, 1fr); /* 5 rows */
+                gap: 30px 20px; /* Adjust spacing between grid items */
+                padding: 10px 15px 20px;
+                text-align: center;
+
+                span {
+                  display: block;
+                  font-weight: bold;
+                  font-size: 1rem;
+                  color: #fff;
+                  margin-top: 9px;
+                  text-shadow: 2px 2px #000;
+                }
+
+                img {
+                  width: 60px;
+                  height: 60px;
+                  filter: ${isMenuOpened ? 'none' : 'brightness(1.5) grayscale(1) sepia(1.5)'};
+                }
+
+                span {
+                  opacity: ${isMenuOpened ? '1' : '0'};
+                }
+
+                div {
+                  opacity: ${isMenuOpened ? '0.8' : '0.5'};
+                  width: 65px;
+
+                  &:hover {
+                    opacity: 1;
+                  }
+                }
+              `}>
+              <div>
+                <img src="/evolution/images/events.png" onClick={onPresentQuestModal} />
+                <span>Events</span>
+              </div>
+              <div>
+                <img src="/evolution/images/chest.png" onClick={onPresentChestModal} />
+                <span>Chest</span>
+              </div>
+              <div>
+                <img src="/evolution/images/inventory.png" onClick={onPresentInventoryModal} />
+                <span>Inventory</span>
+              </div>
+              <div>
+                <img src="/evolution/images/market.png" onClick={onPresentMarketModal} />
+                <span>Market</span>
+              </div>
+              <div onClick={() => setIsMenuOpened(!isMenuOpened)}>
+                <img src="/evolution/images/settings.png" />
+                <span>Close</span>
+              </div>
+              {isMenuOpened ? (
+                <>
+                  <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/craft.png" />
+                    <span>Craft</span>
+                  </div>
+                  <div onClick={onPresentGuildModal}>
+                    <img src="/evolution/images/guild.png" />
+                    <span>Guild</span>
+                  </div>
+                  <div onClick={onPresentPartyModal}>
+                    <img src="/evolution/images/party.png" />
+                    <span>Party</span>
+                  </div>
+                  <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/pvp.png" />
+                    <span>PVP</span>
+                  </div>
+                  {/* <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/runes.png" />
+                    <span>Runes</span>
+                  </div> */}
+                  <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/leaderboard.png" />
+                    <span>Leaderboard</span>
+                  </div>
+                  {/* <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/boss.png" />
+                    <span>Boss</span>
+                  </div> */}
+                  {/* <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/dungeon.png" />
+                    <span>Dungeon</span>
+                  </div> */}
+                  {/* <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/wings.png" />
+                    <span>Wings</span>
+                  </div> */}
+                  {/* <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/friends.png" />
+                    <span>Friends</span>
+                  </div> */}
+                  {/* <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/crystals.png" />
+                    <span>Crystals</span>
+                  </div> */}
+                  {/* <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/growth.png" />
+                    <span>Growth</span>
+                  </div> */}
+                  {/* <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/skills.png" />
+                    <span>Skills</span>
+                  </div> */}
+                  {/* <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/transform.png" />
+                    <span>Transform</span>
+                  </div> */}
+                  {/* <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/expedition.png" />
+                    <span>Expedition</span>
+                  </div> */}
+                  {/* <div onClick={onPresentPVPModal}>
+                    <img src="/evolution/images/settings.png" />
+                    <span>Settings</span>
+                  </div> */}
+                </>
+              ) : null}
+            </div>
+            <div
+              css={css`
+                position: absolute;
+                top: 0;
+                left: 0;
+                pointer-events: none;
+                display: grid;
+                place-items: center; /* Centers both vertically and horizontally */
+                height: 100%;
+                width: 100%;
+              `}>
+              <div
+                css={css`
+                  .app__styled-card2 {
+                    box-shadow: none !important;
+                  }
+                `}>
+                {state === 'spectating' ? (
+                  <div
+                    css={css`
+                      position: absolute;
+                      bottom: 50px;
+                      left: 20px;
+                      pointer-events: all;
+                    `}>
+                    <Card2>
+                      <Card>
+                        {/* <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
                       UI
                     </BoxHeading>
                     <hr /> */}
-                      <CardBody>
-                        <Button
-                          onClick={() => {
-                            // @ts-ignore
-                            window.socket.emit('trpc', {
-                              id: generateShortId(),
-                              method: 'load',
-                              type: 'mutate',
-                              params: serialize([]),
-                            });
-                            // unityInstance.SendMessage(
-                            //   'NetworkManager',
-                            //   'onJoinGame',
-                            //   'qUcc5CvuMEoJmoOiAAD6:Guest420:3:false:600:-12.6602:-10.33721'
-                            // );
-                            // unityInstance.SendMessage('NetworkManager', 'onJoinGame', 'VL570mqtH6h33SWWAAAc:Killer:3:6');
-                          }}>
-                          Revive
-                        </Button>
-                      </CardBody>
-                    </Card>
-                  </Card2>
-                </div>
-              ) : null}
-              {/* {state === 'disconnected' ? (
+                        <CardBody>
+                          <Button
+                            onClick={() => {
+                              // @ts-ignore
+                              window.socket.emit('trpc', {
+                                id: generateShortId(),
+                                method: 'load',
+                                type: 'mutate',
+                                params: serialize([]),
+                              });
+                              // unityInstance.SendMessage(
+                              //   'NetworkManager',
+                              //   'onJoinGame',
+                              //   'qUcc5CvuMEoJmoOiAAD6:Guest420:3:false:600:-12.6602:-10.33721'
+                              // );
+                              // unityInstance.SendMessage('NetworkManager', 'onJoinGame', 'VL570mqtH6h33SWWAAAc:Killer:3:6');
+                            }}>
+                            Revive
+                          </Button>
+                        </CardBody>
+                      </Card>
+                    </Card2>
+                  </div>
+                ) : null}
+                {/* {state === 'disconnected' ? (
                 <Card2>
                   <Card>
                     <CardBody>
@@ -1419,176 +2016,67 @@ const Isles: any = ({ open }) => {
                   </Card>
                 </Card2>
               ) : null} */}
-              {state === 'loading' ? (
-                <Card2>
-                  <Card style={{ textAlign: 'center' }}>
-                    <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, padding: '0 20px' }}>
-                      Connecting
-                    </BoxHeading>
-                    <hr />
-                    <CardBody>
-                      <Button
-                        onClick={() => {
-                          setState('disconnected');
-                        }}>
-                        Cancel
-                      </Button>
-                    </CardBody>
-                  </Card>
-                </Card2>
-              ) : null}
-              {reward ? (
-                <Card2
-                  onClick={onPresentTokenModal}
-                  css={css`
-                    position: absolute;
-                    bottom: 70px;
-                    right: 20px;
-                  `}>
-                  <Card style={{ textAlign: 'center' }}>
-                    <CardBody>
-                      <img
-                        src={'/images/rewards/' + reward.rewardItemName + '.png'}
-                        css={css`
-                          width: 40px;
-                          height: 40px;
-                          margin-bottom: 10px;
-                        `}
-                      />
-                      <div
-                        css={css`
-                          font-weight: bold;
-                          font-size: 1.1rem;
-                        `}>
-                        {reward.quantity} {reward.rewardItemName.toUpperCase()}
-                      </div>
-                    </CardBody>
-                  </Card>
-                </Card2>
-              ) : null}
-              <Card2
-                css={css`
-                  position: absolute;
-                  bottom: 300px;
-                  left: 20px;
-                `}>
-                <Card style={{ textAlign: 'center', zoom: '0.6' }}>
-                  <CardBody>
-                    <h2>Inventory</h2>
-                  </CardBody>
-                  <CardBody>
-                    <img
-                      src={'/images/rewards/Santa Christmas 2024 Ticket.png'}
-                      css={css`
-                        width: 40px;
-                        height: 40px;
-                        margin-bottom: 10px;
-                      `}
-                    />
-                    <div
-                      css={css`
-                        font-weight: bold;
-                        font-size: 1.1rem;
-                      `}>
-                      {auth?.profile?.meta?.rewards?.tokens?.['christmas2024'] || 0} Hats
-                    </div>
-                  </CardBody>
-                  <CardBody>
-                    <img
-                      src={'/images/rewards/doge.png'}
-                      css={css`
-                        width: 40px;
-                        height: 40px;
-                        margin-bottom: 10px;
-                      `}
-                    />
-                    <div
-                      css={css`
-                        font-weight: bold;
-                        font-size: 1.1rem;
-                      `}>
-                      {auth?.profile?.meta?.rewards?.tokens?.['doge'] || 0} DOGE
-                    </div>
-                  </CardBody>
-                  <CardBody>
-                    <img
-                      src={'/images/rewards/pepe.png'}
-                      css={css`
-                        width: 40px;
-                        height: 40px;
-                        margin-bottom: 10px;
-                      `}
-                    />
-                    <div
-                      css={css`
-                        font-weight: bold;
-                        font-size: 1.1rem;
-                      `}>
-                      {auth?.profile?.meta?.rewards?.tokens?.['pepe'] || 0} PEPE
-                    </div>
-                  </CardBody>
-                  <CardBody>
-                    <img
-                      src={'/images/rewards/harold.png'}
-                      css={css`
-                        width: 40px;
-                        height: 40px;
-                        margin-bottom: 10px;
-                      `}
-                    />
-                    <div
-                      css={css`
-                        font-weight: bold;
-                        font-size: 1.1rem;
-                      `}>
-                      {auth?.profile?.meta?.rewards?.tokens?.['harold'] || 0} HAROLD
-                    </div>
-                  </CardBody>
-                  <CardBody>
-                    <Button size="sm" onClick={() => history('/account/rewards')}>
-                      Claim
-                    </Button>
-                  </CardBody>
-                </Card>
-              </Card2>
-              {showShop && merchant?.[merchant?.inventoryIndex]?.items ? (
-                <Card2
-                  css={css`
-                    position: absolute;
-                    bottom: 300px;
-                    left: 20px;
-                  `}>
-                  <Card style={{ textAlign: 'center', zoom: '0.6' }}>
-                    <CardBody>
-                      <h2>Harold's Shop</h2>
-                    </CardBody>
-                    <CardBody>
-                      {merchant.inventory[merchant.inventoryIndex].items.map((item: any) => (
+                {state === 'loading' ? (
+                  <Card2>
+                    <Card style={{ textAlign: 'center' }}>
+                      <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, padding: '0 20px' }}>
+                        Connecting
+                      </BoxHeading>
+                      <hr />
+                      <CardBody>
+                        <Button
+                          onClick={() => {
+                            setState('disconnected');
+                          }}>
+                          Cancel
+                        </Button>
+                      </CardBody>
+                    </Card>
+                  </Card2>
+                ) : null}
+                {reward ? (
+                  <Card2
+                    onClick={onPresentTokenModal}
+                    css={css`
+                      position: absolute;
+                      bottom: 70px;
+                      right: 20px;
+                    `}>
+                    <Card style={{ textAlign: 'center' }}>
+                      <CardBody>
+                        <img
+                          src={'/images/rewards/' + reward.rewardItemName + '.png'}
+                          css={css`
+                            width: 40px;
+                            height: 40px;
+                            margin-bottom: 10px;
+                          `}
+                        />
                         <div
                           css={css`
                             font-weight: bold;
                             font-size: 1.1rem;
                           `}>
-                          <img
-                            src={'/images/rewards/doge.png'}
-                            css={css`
-                              width: 40px;
-                              height: 40px;
-                              margin-bottom: 10px;
-                            `}
-                          />
-                          {item.quantity} {item.name}{' '}
-                          <Button
-                            size="sm"
-                            onClick={() => exchangeCharacterItem({ characterId: merchant.id + '', itemId: item.id })}>
-                            {item.exchange.item.quantity} {item.exchange.item.name}
-                          </Button>
+                          {reward.quantity} {reward.rewardItemName.toUpperCase()}
                         </div>
-                      ))}
+                      </CardBody>
+                    </Card>
+                  </Card2>
+                ) : null}
+                <Card2
+                  css={css`
+                    position: absolute;
+                    bottom: 300px;
+                    left: 20px;
+                    pointer-events: all;
+                  `}>
+                  <Card style={{ textAlign: 'center', zoom: '0.6' }}>
+                    <CardBody>
+                      <h2>Inventory</h2>
                     </CardBody>
                     <CardBody>
                       <img
-                        src={'/images/rewards/sprite-dust.png'}
+                        src={'/images/rewards/Santa Christmas 2024 Ticket.png'}
                         css={css`
                           width: 40px;
                           height: 40px;
@@ -1600,19 +2088,131 @@ const Isles: any = ({ open }) => {
                           font-weight: bold;
                           font-size: 1.1rem;
                         `}>
-                        Your balance:{' '}
-                        {auth?.profile?.character?.items.find((item: any) => item.name === 'Sprite Dust').quantity || 0}{' '}
-                        Sprite Dust
+                        {auth?.profile?.meta?.rewards?.tokens?.['christmas2024'] || 0} Hats
                       </div>
                     </CardBody>
                     <CardBody>
-                      <Button size="sm">Purchase</Button>
+                      <img
+                        src={'/images/rewards/doge.png'}
+                        css={css`
+                          width: 40px;
+                          height: 40px;
+                          margin-bottom: 10px;
+                        `}
+                      />
+                      <div
+                        css={css`
+                          font-weight: bold;
+                          font-size: 1.1rem;
+                        `}>
+                        {auth?.profile?.meta?.rewards?.tokens?.['doge'] || 0} DOGE
+                      </div>
+                    </CardBody>
+                    <CardBody>
+                      <img
+                        src={'/images/rewards/pepe.png'}
+                        css={css`
+                          width: 40px;
+                          height: 40px;
+                          margin-bottom: 10px;
+                        `}
+                      />
+                      <div
+                        css={css`
+                          font-weight: bold;
+                          font-size: 1.1rem;
+                        `}>
+                        {auth?.profile?.meta?.rewards?.tokens?.['pepe'] || 0} PEPE
+                      </div>
+                    </CardBody>
+                    <CardBody>
+                      <img
+                        src={'/images/rewards/harold.png'}
+                        css={css`
+                          width: 40px;
+                          height: 40px;
+                          margin-bottom: 10px;
+                        `}
+                      />
+                      <div
+                        css={css`
+                          font-weight: bold;
+                          font-size: 1.1rem;
+                        `}>
+                        {auth?.profile?.meta?.rewards?.tokens?.['harold'] || 0} HAROLD
+                      </div>
+                    </CardBody>
+                    <CardBody>
+                      <Button size="sm" onClick={() => history('/account/rewards')}>
+                        Claim
+                      </Button>
                     </CardBody>
                   </Card>
                 </Card2>
-              ) : null}
+                {showShop && merchant?.[merchant?.inventoryIndex]?.items ? (
+                  <Card2
+                    css={css`
+                      position: absolute;
+                      bottom: 300px;
+                      left: 20px;
+                    `}>
+                    <Card style={{ textAlign: 'center', zoom: '0.6' }}>
+                      <CardBody>
+                        <h2>Harold's Shop</h2>
+                      </CardBody>
+                      <CardBody>
+                        {merchant.inventory[merchant.inventoryIndex].items.map((item: any) => (
+                          <div
+                            css={css`
+                              font-weight: bold;
+                              font-size: 1.1rem;
+                            `}>
+                            <img
+                              src={'/images/rewards/doge.png'}
+                              css={css`
+                                width: 40px;
+                                height: 40px;
+                                margin-bottom: 10px;
+                              `}
+                            />
+                            {item.quantity} {item.name}{' '}
+                            <Button
+                              size="sm"
+                              onClick={() => exchangeCharacterItem({ characterId: merchant.id + '', itemId: item.id })}>
+                              {item.exchange.item.quantity} {item.exchange.item.name}
+                            </Button>
+                          </div>
+                        ))}
+                      </CardBody>
+                      <CardBody>
+                        <img
+                          src={'/images/rewards/sprite-dust.png'}
+                          css={css`
+                            width: 40px;
+                            height: 40px;
+                            margin-bottom: 10px;
+                          `}
+                        />
+                        <div
+                          css={css`
+                            font-weight: bold;
+                            font-size: 1.1rem;
+                          `}>
+                          Your balance:{' '}
+                          {auth?.profile?.character?.items.find((item: any) => item.name === 'Sprite Dust').quantity ||
+                            0}{' '}
+                          Sprite Dust
+                        </div>
+                      </CardBody>
+                      <CardBody>
+                        <Button size="sm">Purchase</Button>
+                      </CardBody>
+                    </Card>
+                  </Card2>
+                ) : null}
+              </div>
             </div>
-          </div>
+          </>
         ) : null}
         {auth?.address && auth?.token ? <GameWrapper setIsGameStarted={setIsGameStarted} /> : null}
       </Page>
