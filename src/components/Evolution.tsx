@@ -10,16 +10,20 @@ import { generateShortId } from '@arken/node/util/db';
 import { decodeItem } from '@arken/node/util/decoder';
 import styled, { createGlobalStyle, css } from 'styled-components';
 import ItemInformation from '~/components/ItemInformation';
+import history from '~/routerHistory';
 import Page from '~/components/layout/Page';
 import { useAuth } from '~/hooks/useAuth';
 import Linker from '~/components/Linker';
 import { GiCrossedSwords } from 'react-icons/gi';
+import Market from '~/components/Market';
 import { GiDiceEightFacesEight } from 'react-icons/gi';
 import { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { MdLocationPin } from 'react-icons/md';
 import { Modal, useModal } from '~/components/Modal';
 import ActionBar from '~/components/ActionBar';
+import Inventory from '~/components/Inventory';
+import Rewards from '~/components/Rewards';
 import Paragraph from '~/components/Paragraph';
 import SeasonRankings from '~/components/SeasonRankings';
 import useBrand from '~/hooks/useBrand';
@@ -55,9 +59,11 @@ import type * as Arken from '@arken/node/types';
 import addresses from '@arken/node/legacy/contractInfo';
 import Item from 'antd/es/list/Item';
 import { Col, Row } from 'antd';
+import { Avatar, Divider, List, Skeleton } from 'antd';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/scrollbar';
 
 // var unityProvider = UnityLoader.instantiate("unityContainer", "Build/public.json", {onProgress: UnityProgress});
 let unityProvider;
@@ -516,25 +522,99 @@ const GuildModal = () => {
 const MarketModal = () => {
   return (
     <Modal title="Market" onDismiss={() => {}} style={{ minWidth: 900 }}>
-      <ModalContent>Coming soon</ModalContent>
-      <Actions>
-        <Button width="100%" variant="secondary">
-          Close
-        </Button>
-      </Actions>
+      <ModalContent>
+        <Market />
+      </ModalContent>
+      <Actions></Actions>
     </Modal>
   );
 };
 
-const InventoryModal = () => {
+const InventoryModal = ({ auth }) => {
   return (
     <Modal title="Inventory" onDismiss={() => {}} style={{ minWidth: 900 }}>
-      <ModalContent>Coming soon</ModalContent>
-      <Actions>
-        <Button width="100%" variant="secondary">
-          Close
-        </Button>
-      </Actions>
+      <ModalContent>
+        {/* <Card style={{ textAlign: 'center', zoom: '0.6' }}>
+          <CardBody>
+            <h2>Inventory</h2>
+          </CardBody>
+          <CardBody>
+            <img
+              src={'/images/rewards/Santa Christmas 2024 Ticket.png'}
+              css={css`
+                width: 40px;
+                height: 40px;
+                margin-bottom: 10px;
+              `}
+            />
+            <div
+              css={css`
+                font-weight: bold;
+                font-size: 1.1rem;
+              `}>
+              {auth?.profile?.meta?.rewards?.tokens?.['christmas2024'] || 0} Hats
+            </div>
+          </CardBody>
+          <CardBody>
+            <img
+              src={'/images/rewards/doge.png'}
+              css={css`
+                width: 40px;
+                height: 40px;
+                margin-bottom: 10px;
+              `}
+            />
+            <div
+              css={css`
+                font-weight: bold;
+                font-size: 1.1rem;
+              `}>
+              {auth?.profile?.meta?.rewards?.tokens?.['doge'] || 0} DOGE
+            </div>
+          </CardBody>
+          <CardBody>
+            <img
+              src={'/images/rewards/pepe.png'}
+              css={css`
+                width: 40px;
+                height: 40px;
+                margin-bottom: 10px;
+              `}
+            />
+            <div
+              css={css`
+                font-weight: bold;
+                font-size: 1.1rem;
+              `}>
+              {auth?.profile?.meta?.rewards?.tokens?.['pepe'] || 0} PEPE
+            </div>
+          </CardBody>
+          <CardBody>
+            <img
+              src={'/images/rewards/harold.png'}
+              css={css`
+                width: 40px;
+                height: 40px;
+                margin-bottom: 10px;
+              `}
+            />
+            <div
+              css={css`
+                font-weight: bold;
+                font-size: 1.1rem;
+              `}>
+              {auth?.profile?.meta?.rewards?.tokens?.['harold'] || 0} HAROLD
+            </div>
+          </CardBody>
+          <CardBody>
+            <Button size="sm" onClick={() => history.push('/account/rewards')}>
+              Claim
+            </Button>
+          </CardBody>
+        </Card> */}
+        <Inventory columns={6} rows={7} showFull hideExtras />
+      </ModalContent>
+      <Actions></Actions>
     </Modal>
   );
 };
@@ -543,24 +623,18 @@ const PVPModal = () => {
   return (
     <Modal title="PVP" onDismiss={() => {}} style={{ minWidth: 900 }}>
       <ModalContent>Coming soon</ModalContent>
-      <Actions>
-        <Button width="100%" variant="secondary">
-          Close
-        </Button>
-      </Actions>
+      <Actions></Actions>
     </Modal>
   );
 };
 
 const ChestModal = () => {
   return (
-    <Modal title="Chest" onDismiss={() => {}} style={{ minWidth: 900 }}>
-      <ModalContent>Coming soon</ModalContent>
-      <Actions>
-        <Button width="100%" variant="secondary">
-          Close
-        </Button>
-      </Actions>
+    <Modal title="Rewards" onDismiss={() => {}} style={{ minWidth: 900 }}>
+      <ModalContent>
+        <Rewards />
+      </ModalContent>
+      <Actions></Actions>
     </Modal>
   );
 };
@@ -574,6 +648,361 @@ const QuestModal = () => {
           Close
         </Button>
       </Actions>
+    </Modal>
+  );
+};
+
+const EventsModal = () => {
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  return (
+    <Modal title="Events" onDismiss={() => {}} style={{ minWidth: 900, maxWidth: '90%' }}>
+      <ModalContent>
+        <div
+          id="scrollableDiv"
+          style={{
+            height: 400,
+            overflow: 'auto',
+            padding: '0 16px',
+            border: '1px solid rgba(140, 140, 140, 0.35)',
+          }}>
+          <List
+            dataSource={[
+              {
+                name: 'January Calendar',
+                description: 'asdas',
+                type: 'Calendar',
+                id: 'adas',
+                startDate: '',
+                endDate: '',
+                hideDate: '',
+                groups: [
+                  {
+                    name: 'Adventure',
+                    items: [
+                      {
+                        id: 'asdasd',
+                        name: '1',
+                        image: '',
+                        quantity: 1,
+                        isClaimed: true,
+                        isLocked: false,
+                        unlockDate: '',
+                      },
+                      {
+                        id: 'asdasd',
+                        name: '2',
+                        image: '',
+                        quantity: 1,
+                        isClaimed: false,
+                        isLocked: false,
+                        unlockDate: '',
+                      },
+                      {
+                        id: 'asdasd',
+                        name: '3',
+                        image: '',
+                        quantity: 1,
+                        isClaimed: false,
+                        isLocked: true,
+                        unlockDate: '',
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Collector Points',
+                    requiredPoints: 150,
+                    items: [
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'CP',
+                        pointsRequired: 150,
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Collector Points',
+                    requiredPoints: 300,
+                    items: [
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'CP',
+                        pointsRequired: 300,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: 'Daily Collector',
+                description: '',
+                type: 'Collector',
+                id: 'adas2',
+                startDate: '',
+                endDate: '',
+                hideDate: '',
+                groups: [
+                  {
+                    name: 'Collector Points',
+                    requiredPoints: 100,
+                    items: [
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'CP',
+                        pointsRequired: 100,
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Collector Points',
+                    requiredPoints: 150,
+                    items: [
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'CP',
+                        pointsRequired: 150,
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Collector Points',
+                    requiredPoints: 300,
+                    items: [
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'CP',
+                        pointsRequired: 300,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: 'Weekly Collector',
+                description: '',
+                type: 'Collector',
+                id: 'adas23',
+                startDate: '',
+                endDate: '',
+                hideDate: '',
+                groups: [
+                  {
+                    name: 'Collector Points',
+                    requiredPoints: 100,
+                    items: [
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'CP',
+                        pointsRequired: 100,
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Collector Points',
+                    requiredPoints: 150,
+                    items: [
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'CP',
+                        pointsRequired: 150,
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Collector Points',
+                    requiredPoints: 300,
+                    items: [
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'CP',
+                        pointsRequired: 300,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: 'Evolution Pass 1',
+                description: 'asdas',
+                type: 'Battlepass',
+                subtype: 'Season Pass',
+                id: 'asdsa',
+                startDate: '',
+                endDate: '',
+                hideDate: '',
+                groups: [
+                  {
+                    name: 'Battle',
+                    isLocked: false,
+                    items: [
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'BP',
+                        pointsRequired: 100,
+                      },
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'BP',
+                        pointsRequired: 100,
+                      },
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'BP',
+                        pointsRequired: 100,
+                      },
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'BP',
+                        pointsRequired: 100,
+                      },
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'BP',
+                        pointsRequired: 100,
+                      },
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'BP',
+                        pointsRequired: 100,
+                      },
+                    ],
+                  },
+                  {
+                    name: 'Exalted',
+                    isLocked: true,
+                    items: [
+                      {
+                        id: 'asdasd',
+                        name: '',
+                        image: '',
+                        quantity: 1,
+                        isLocked: true,
+                        pointsType: 'AP',
+                        pointsRequired: 100000,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ]}
+            renderItem={(item) => (
+              <List.Item key={item.id}>
+                <List.Item.Meta
+                  title={
+                    <div
+                      onClick={() => {
+                        setSelectedItem(item);
+                      }}>
+                      {item.name}
+                    </div>
+                  }
+                  description={item.description}
+                />
+              </List.Item>
+            )}
+          />
+        </div>
+        {selectedItem?.type === 'Calendar' ? (
+          <div>
+            <h2>Wisp Festival</h2>
+            <h3>The </h3>
+          </div>
+        ) : selectedItem?.type === 'Collector' ? (
+          <div>
+            <h2>Wisp Festival</h2>
+            <h3>The </h3>
+          </div>
+        ) : selectedItem?.type === 'Collector' ? (
+          <div>
+            <h2>Wisp Festival</h2>
+            <h3>The </h3>
+          </div>
+        ) : selectedItem?.type === 'Battlepass' ? (
+          <div>
+            <h3>{selectedItem.subtype}</h3>
+            <h2>{selectedItem.name}</h2>
+            {selectedItem.groups.map((group: any) => (
+              <>
+                <>{group.name}</>
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  slidesPerView={5}
+                  slidesPerGroup={5}
+                  spaceBetween={30}
+                  style={{ margin: '0 auto 30px auto', padding: '0 20px' }}>
+                  {group.items.map((item: any) => (
+                    <SwiperSlide style={{ width: 75, margin: '0 auto', height: 75 }}>
+                      {item.name}
+                      {item.quantity}
+                      {item.image}
+                      {item.isLocked}
+                      {item.pointsType}
+                      {item.pointsRequired}
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </>
+            ))}
+          </div>
+        ) : null}
+      </ModalContent>
+      <Actions></Actions>
     </Modal>
   );
 };
@@ -1113,7 +1542,7 @@ const GameWrapper = ({ setIsGameStarted }) => {
           </Heading>
         </StyledNotFound>
       ) : null}
-      {/* <Unity
+      <Unity
         ref={gameRef}
         unityProvider={unityProvider}
         // matchWebGLToCanvasSize={false}
@@ -1121,14 +1550,13 @@ const GameWrapper = ({ setIsGameStarted }) => {
           width: loadingProgression === 1 ? '100%' : '0%',
           height: loadingProgression === 1 ? 'calc(100% - 99px)' : '0%',
         }}
-      /> */}
+      />
     </>
   );
 };
 
 const Isles: any = ({ open }) => {
   const location = useLocation();
-  const history = useNavigate();
   // const settings = useSettings();
   const match = parseMatch(location);
   const { t } = useTranslation();
@@ -1162,8 +1590,9 @@ const Isles: any = ({ open }) => {
   const [onPresentPartyModal] = useModal(<PartyModal />);
   const [onPresentGuildModal] = useModal(<GuildModal />);
   const [onPresentMarketModal] = useModal(<MarketModal />);
-  const [onPresentInventoryModal] = useModal(<InventoryModal />);
+  const [onPresentInventoryModal] = useModal(<InventoryModal auth={auth} />);
   const [onPresentPVPModal] = useModal(<PVPModal />);
+  const [onPresentEventsModal] = useModal(<EventsModal />);
   const [onPresentChestModal] = useModal(<ChestModal />);
   const [onPresentQuestModal] = useModal(<QuestModal />);
 
@@ -1379,111 +1808,114 @@ const Isles: any = ({ open }) => {
           // json = utf8.decode(json);
           // console.log('onEvents msg', msg);
           const data = deserialize(msg);
-          // console.log('onEvents events', data.params);
+          console.log('onEvents events', msg, msg.byteLength, data);
 
           // @ts-ignore
-          for (const event of data.params) {
-            const eventName = event[0];
+          if (data.params) {
+            // @ts-ignore
+            for (const event of data.params) {
+              const eventName = event[0];
 
-            if (
-              logCommonEvents ||
-              (eventName !== 'onUpdatePickup' &&
-                eventName !== 'onUpdateMyself' &&
-                eventName !== 'onSpawnPowerUp' &&
-                eventName !== 'onClearLeaderboard' &&
-                eventName !== 'onUpdatePlayer')
-            ) {
-              log('Shard Event', event);
-            }
-
-            if (eventName === 'onLoaded') {
-              OnLoaded();
-              continue;
-            } else if (eventName === 'onLogin') {
-              // @ts-ignore
-              clients.evolutionShard.socket.emit('trpc', {
-                id: generateShortId(),
-                method: 'join',
-                type: 'mutate',
-              });
-
-              continue;
-            } else if (eventName === 'onJoinGame') {
-              currentPlayerId = event[1].split(':')[0];
-
-              setState('joined');
-            } else if (eventName === 'onSpectate') {
-              const clientId = event[1].split(':')[0];
-
-              if (clientId === currentPlayerId) setState('spectating');
-            } else if (eventName === 'onSpawnClient') {
-              userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
-            } else if (eventName === 'onShowUI') {
-              const key = event[1].split(':')[0];
-
-              if (key === 'shop') {
-                setShowShop(true);
+              if (
+                logCommonEvents ||
+                (eventName !== 'onUpdatePickup' &&
+                  eventName !== 'onUpdateMyself' &&
+                  eventName !== 'onSpawnPowerUp' &&
+                  eventName !== 'onClearLeaderboard' &&
+                  eventName !== 'onUpdatePlayer')
+              ) {
+                log('Shard Event', event);
               }
-            } else if (eventName === 'onHideUI') {
-              const key = event[1].split(':')[0];
 
-              if (key === 'shop') {
-                setShowShop(false);
-              }
-            } else if (eventName === 'onSetInfo') {
-              userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
-            } else if (eventName === 'onGameOver' || eventName === 'onDisconnected') {
-              const playerId = event[1].split(':')[0];
-              if (playerId === currentPlayerId) {
-                if (userIdToName[event[1].split(':')[1]]) {
-                  // toastInfo('You were killed by ' + userIdToName[event[1].split(':')[1]]);
-                } else {
-                  // toastInfo('You died');
+              if (eventName === 'onLoaded') {
+                OnLoaded();
+                continue;
+              } else if (eventName === 'onLogin') {
+                // @ts-ignore
+                clients.evolutionShard.socket.emit('trpc', {
+                  id: generateShortId(),
+                  method: 'join',
+                  type: 'mutate',
+                });
+
+                continue;
+              } else if (eventName === 'onJoinGame') {
+                currentPlayerId = event[1].split(':')[0];
+
+                setState('joined');
+              } else if (eventName === 'onSpectate') {
+                const clientId = event[1].split(':')[0];
+
+                if (clientId === currentPlayerId) setState('spectating');
+              } else if (eventName === 'onSpawnClient') {
+                userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
+              } else if (eventName === 'onShowUI') {
+                const key = event[1].split(':')[0];
+
+                if (key === 'shop') {
+                  setShowShop(true);
                 }
+              } else if (eventName === 'onHideUI') {
+                const key = event[1].split(':')[0];
 
-                // socket.disconnect();
-                // socket = null;
-                setState('disconnected');
-                // setUsers([]);
-              }
-            } else if (eventName === 'onSetRoundInfo') {
-              // toastInfo('Game mode is now ' + event[1].split(':')[22])
-              auth?.reauth();
-            } else if (eventName === 'onSpawnReward') {
-              const data = event[1].split(':');
-              setReward({
-                id: data[0],
-                rewardItemType: data[1],
-                rewardItemName: data[2],
-                quantity: data[3],
-                position: { x: data[4], y: data[5] },
-                shortDescription:
-                  data[2] === 'harold'
-                    ? 'HAROLD token is based on the Hide The Pain meme.'
-                    : data[2] === 'pepe'
-                      ? 'Pepe is a well known meme.'
-                      : 'DOGE is a shiba inu.',
-                longDescription:
-                  data[2] === 'harold'
-                    ? 'It was rugged by the original creator and is has been adopted by the community and a very big whale.'
-                    : data[2] === 'pepe'
-                      ? 'Pepe stuff'
-                      : 'Doge stuff',
-              });
-            } else if (eventName === 'onUpdateReward') {
-              setReward(null);
-            } else if (state !== 'loading' && eventName === 'onUpdatePlayer') {
-              if (!assumedTimeDiff) {
-                assumedTimeDiffList.push(new Date().getTime() - parseInt(event[1].split(':')[8]));
-                if (assumedTimeDiffList.length >= 50) {
-                  assumedTimeDiff = average(assumedTimeDiffList);
+                if (key === 'shop') {
+                  setShowShop(false);
+                }
+              } else if (eventName === 'onSetInfo') {
+                userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
+              } else if (eventName === 'onGameOver' || eventName === 'onDisconnected') {
+                const playerId = event[1].split(':')[0];
+                if (playerId === currentPlayerId) {
+                  if (userIdToName[event[1].split(':')[1]]) {
+                    // toastInfo('You were killed by ' + userIdToName[event[1].split(':')[1]]);
+                  } else {
+                    // toastInfo('You died');
+                  }
+
+                  // socket.disconnect();
+                  // socket = null;
+                  setState('disconnected');
+                  // setUsers([]);
+                }
+              } else if (eventName === 'onSetRoundInfo') {
+                // toastInfo('Game mode is now ' + event[1].split(':')[22])
+                auth?.reauth();
+              } else if (eventName === 'onSpawnReward') {
+                const data = event[1].split(':');
+                setReward({
+                  id: data[0],
+                  rewardItemType: data[1],
+                  rewardItemName: data[2],
+                  quantity: data[3],
+                  position: { x: data[4], y: data[5] },
+                  shortDescription:
+                    data[2] === 'harold'
+                      ? 'HAROLD token is based on the Hide The Pain meme.'
+                      : data[2] === 'pepe'
+                        ? 'Pepe is a well known meme.'
+                        : 'DOGE is a shiba inu.',
+                  longDescription:
+                    data[2] === 'harold'
+                      ? 'It was rugged by the original creator and is has been adopted by the community and a very big whale.'
+                      : data[2] === 'pepe'
+                        ? 'Pepe stuff'
+                        : 'Doge stuff',
+                });
+              } else if (eventName === 'onUpdateReward') {
+                setReward(null);
+              } else if (state !== 'loading' && eventName === 'onUpdatePlayer') {
+                if (!assumedTimeDiff) {
+                  assumedTimeDiffList.push(new Date().getTime() - parseInt(event[1].split(':')[8]));
+                  if (assumedTimeDiffList.length >= 50) {
+                    assumedTimeDiff = average(assumedTimeDiffList);
+                  }
                 }
               }
+
+              console.info('WEB => UNITY', eventName, event[1]);
+
+              unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
             }
-
-            console.info('WEB => UNITY', eventName, event[1]);
-
-            unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
           }
         } catch (err) {
           // ...
@@ -1734,11 +2166,179 @@ const Isles: any = ({ open }) => {
             <div
               css={css`
                 position: absolute;
-                bottom: 0px;
-                left: 10px;
-                width: 500px;
+                bottom: 20px;
+                left: 0;
+                width: 100%;
+                text-align: center;
               `}>
-              <ActionBar />
+              <div
+                css={css`
+                  margin: 0 auto;
+                  width: 450px;
+                  zoom: 0.7;
+                `}>
+                <Button
+                  onClick={() => {
+                    clients.evolutionShard.socket.emit('trpc', {
+                      id: generateShortId(),
+                      method: 'emote',
+                      type: 'mutate',
+                      params: '1',
+                    });
+                  }}>
+                  EMOTE
+                </Button>
+                <ActionBar
+                  actions={[
+                    {
+                      id: 'adsada2',
+                      keybind: '1',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-red-1.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                    {
+                      id: 'adsada3',
+                      keybind: '2',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/evil-eye-eerie-3.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                    {
+                      id: 'adsada4',
+                      keybind: '3',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/protect-orange-3.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                    {
+                      id: 'adsada5',
+                      keybind: '4',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-acid-3.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                    {
+                      id: 'adsada6',
+                      keybind: '5',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                    {
+                      id: 'adsada7',
+                      keybind: '6',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                    {
+                      id: 'adsada8',
+                      keybind: '7',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                    {
+                      id: 'adsada9',
+                      keybind: '8',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                    {
+                      id: 'adsada11',
+                      keybind: '9',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                    {
+                      id: 'adsada12',
+                      keybind: 'a',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                    {
+                      id: 'adsada13',
+                      keybind: 'b',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                    {
+                      id: 'adsada14',
+                      keybind: 'c',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                      canvasRef: React.createRef<HTMLCanvasElement>(),
+                      isCooling: false,
+                      timerId: null,
+                      timerStart: 0,
+                    },
+                  ]}
+                  onUse={(actionId) => {
+                    clients.evolutionShard.socket.emit('trpc', {
+                      id: generateShortId(),
+                      method: 'action',
+                      type: 'mutate',
+                      params: actionId,
+                    });
+                  }}
+                />
+              </div>
+            </div>
+            <div
+              css={css`
+                position: absolute;
+                bottom: 20px;
+                right: 10px;
+                width: 450px;
+                zoom: 0.7;
+              `}>
+              <ActionBar
+                actions={[
+                  {
+                    id: 'adsada',
+                    keybind: '1',
+                    src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-red-1.png',
+                    canvasRef: React.createRef<HTMLCanvasElement>(),
+                    isCooling: false,
+                    timerId: null,
+                    timerStart: 0,
+                  },
+                ]}
+                onUse={(actionId) => {
+                  clients.evolutionShard.socket.emit('trpc', {
+                    id: generateShortId(),
+                    method: 'action',
+                    type: 'mutate',
+                    params: actionId,
+                  });
+                }}
+              />
             </div>
             <div
               css={css`
@@ -1813,6 +2413,7 @@ const Isles: any = ({ open }) => {
                 position: absolute;
                 top: 0;
                 right: 10px;
+                width: 500px;
                 background: ${isMenuOpened ? '#1c1c2e' : 'none'};
                 border: ${isMenuOpened ? '2px solid #666' : '2px solid transparent'};
                 border-top: none;
@@ -1845,15 +2446,13 @@ const Isles: any = ({ open }) => {
 
                 div {
                   opacity: ${isMenuOpened ? '0.8' : '0.5'};
-                  width: 65px;
-
                   &:hover {
                     opacity: 1;
                   }
                 }
               `}>
               <div>
-                <img src="/evolution/images/events.png" onClick={onPresentQuestModal} />
+                <img src="/evolution/images/events.png" onClick={onPresentEventsModal} />
                 <span>Events</span>
               </div>
               <div>
@@ -2063,92 +2662,6 @@ const Isles: any = ({ open }) => {
                     </Card>
                   </Card2>
                 ) : null}
-                <Card2
-                  css={css`
-                    position: absolute;
-                    bottom: 300px;
-                    left: 20px;
-                    pointer-events: all;
-                  `}>
-                  <Card style={{ textAlign: 'center', zoom: '0.6' }}>
-                    <CardBody>
-                      <h2>Inventory</h2>
-                    </CardBody>
-                    <CardBody>
-                      <img
-                        src={'/images/rewards/Santa Christmas 2024 Ticket.png'}
-                        css={css`
-                          width: 40px;
-                          height: 40px;
-                          margin-bottom: 10px;
-                        `}
-                      />
-                      <div
-                        css={css`
-                          font-weight: bold;
-                          font-size: 1.1rem;
-                        `}>
-                        {auth?.profile?.meta?.rewards?.tokens?.['christmas2024'] || 0} Hats
-                      </div>
-                    </CardBody>
-                    <CardBody>
-                      <img
-                        src={'/images/rewards/doge.png'}
-                        css={css`
-                          width: 40px;
-                          height: 40px;
-                          margin-bottom: 10px;
-                        `}
-                      />
-                      <div
-                        css={css`
-                          font-weight: bold;
-                          font-size: 1.1rem;
-                        `}>
-                        {auth?.profile?.meta?.rewards?.tokens?.['doge'] || 0} DOGE
-                      </div>
-                    </CardBody>
-                    <CardBody>
-                      <img
-                        src={'/images/rewards/pepe.png'}
-                        css={css`
-                          width: 40px;
-                          height: 40px;
-                          margin-bottom: 10px;
-                        `}
-                      />
-                      <div
-                        css={css`
-                          font-weight: bold;
-                          font-size: 1.1rem;
-                        `}>
-                        {auth?.profile?.meta?.rewards?.tokens?.['pepe'] || 0} PEPE
-                      </div>
-                    </CardBody>
-                    <CardBody>
-                      <img
-                        src={'/images/rewards/harold.png'}
-                        css={css`
-                          width: 40px;
-                          height: 40px;
-                          margin-bottom: 10px;
-                        `}
-                      />
-                      <div
-                        css={css`
-                          font-weight: bold;
-                          font-size: 1.1rem;
-                        `}>
-                        {auth?.profile?.meta?.rewards?.tokens?.['harold'] || 0} HAROLD
-                      </div>
-                    </CardBody>
-                    <CardBody>
-                      <Button size="sm" onClick={() => history('/account/rewards')}>
-                        Claim
-                      </Button>
-                    </CardBody>
-                  </Card>
-                </Card2>
                 {showShop && merchant?.[merchant?.inventoryIndex]?.items ? (
                   <Card2
                     css={css`
@@ -2163,6 +2676,7 @@ const Isles: any = ({ open }) => {
                       <CardBody>
                         {merchant.inventory[merchant.inventoryIndex].items.map((item: any) => (
                           <div
+                            key={item.id}
                             css={css`
                               font-weight: bold;
                               font-size: 1.1rem;

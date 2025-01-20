@@ -1,11 +1,13 @@
 import React, { useRef, useEffect, useCallback } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { css, createGlobalStyle } from 'styled-components';
 import { Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
+
+const zzz = styled.div``;
 
 /**
  * Global reset & basic page styling
@@ -28,10 +30,11 @@ const ActionsContainer = styled.div`
 const ActionWrapper = styled.div`
   border-radius: 7px;
   cursor: pointer;
-  margin: 0 1rem 2rem 0;
+  margin: 0;
   outline: 0;
   position: relative;
   transition: 100ms;
+  overflow: hidden;
   width: 75px;
   height: 75px;
 
@@ -255,7 +258,7 @@ type ActionData = {
   timerStart: number;
 };
 
-const CooldownExample: React.FC = () => {
+const ActionBar = ({ actions, onUse }: any) => {
   /**
    * Fixed cooldown of 1500 ms. No config UI anymore.
    */
@@ -264,104 +267,7 @@ const CooldownExample: React.FC = () => {
   /**
    * Store each action’s data in a ref so we can mutate it.
    */
-  const actionsRef = useRef<ActionData[]>([
-    {
-      keybind: '1',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-red-1.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-    {
-      keybind: '2',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/evil-eye-eerie-3.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-    {
-      keybind: '3',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/protect-orange-3.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-    {
-      keybind: '4',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-acid-3.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-    {
-      keybind: '5',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-    {
-      keybind: '6',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-    {
-      keybind: '7',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-    {
-      keybind: '8',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-    {
-      keybind: '9',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-    {
-      keybind: 'a',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-    {
-      keybind: 'b',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-    {
-      keybind: 'c',
-      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-      canvasRef: React.createRef<HTMLCanvasElement>(),
-      isCooling: false,
-      timerId: null,
-      timerStart: 0,
-    },
-  ]);
+  const actionsRef = useRef<ActionData[]>(actions);
 
   /**
    * Ends the cooldown for a single action
@@ -411,8 +317,9 @@ const CooldownExample: React.FC = () => {
    */
   const gaugeCooldown = useCallback(
     (action: ActionData) => {
-      if (action.isCooling) return;
+      if (action.isCooling) return false;
       initiateCooldown(action);
+      return true;
     },
     [initiateCooldown]
   );
@@ -522,23 +429,36 @@ const CooldownExample: React.FC = () => {
   }, [drawCooldown, gaugeCooldown]);
 
   return (
-    <>
+    <div
+      css={css`
+        .swiper-pagination {
+          top: revert !important;
+          bottom: 0 !important;
+        }
+
+        .swiper-pagination-bullet {
+          background: #bc955f;
+        }
+      `}>
       <GlobalStyles />
       <Swiper
         modules={[Navigation, Pagination]}
         slidesPerView={5}
         slidesPerGroup={5}
-        spaceBetween={30}
-        navigation
+        spaceBetween={0}
         pagination={{ clickable: true }}
-        style={{ margin: '0 auto 30px auto', padding: '0 20px' }}>
-        {actionsRef.current.map((action) => (
-          <SwiperSlide style={{ width: 75, margin: '0 auto', height: 75 }}>
+        style={{ padding: '10px 0 20px' }}>
+        {actionsRef.current.map((action: any) => (
+          <SwiperSlide key={action.id} style={{ width: 75, height: 75 }}>
             <ActionWrapper
               key={action.keybind}
               className="action"
               data-keybind={action.keybind}
-              onClick={() => gaugeCooldown(action)}>
+              onClick={() => {
+                if (gaugeCooldown(action)) {
+                  onUse(action.id);
+                }
+              }}>
               <KeyDiv>{action.keybind}</KeyDiv>
               <GlowContainer>
                 <AnimatedBorderBoxGlow />
@@ -556,8 +476,8 @@ const CooldownExample: React.FC = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   );
 };
 
-export default CooldownExample;
+export default ActionBar;

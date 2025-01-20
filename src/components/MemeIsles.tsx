@@ -966,16 +966,18 @@ const Isles: any = ({ open }) => {
 
   const now = new Date().getTime() / 1000;
 
-  return cache.overview[account]?.isBanned && cache.overview[account]?.banExpireDate > now ? (
-    <Flex flexDirection="column" alignItems="center" justifyContent="center" p="20px">
-      <Card4>
-        You have been restricted from playing Arken games. Time remaining:{' '}
-        {formatDistance(new Date(), new Date().setTime(cache.overview[account]?.banExpireDate * 1000), {
-          addSuffix: true,
-        })}
-      </Card4>
-    </Flex>
-  ) : (
+  // cache.overview[account]?.isBanned && cache.overview[account]?.banExpireDate > now ? (
+  //   <Flex flexDirection="column" alignItems="center" justifyContent="center" p="20px">
+  //     <Card4>
+  //       You have been restricted from playing Arken games. Time remaining:{' '}
+  //       {formatDistance(new Date(), new Date().setTime(cache.overview[account]?.banExpireDate * 1000), {
+  //         addSuffix: true,
+  //       })}
+  //     </Card4>
+  //   </Flex>
+  // ) : (
+
+  return (
     <div
       css={css`
         &::before {
