@@ -2166,7 +2166,7 @@ const Isles: any = ({ open }) => {
             <div
               css={css`
                 position: absolute;
-                bottom: 20px;
+                bottom: 30px;
                 left: 0;
                 width: 100%;
                 text-align: center;
