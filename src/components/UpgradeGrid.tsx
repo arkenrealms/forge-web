@@ -1,11 +1,5 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import styled, { css, createGlobalStyle } from 'styled-components';
-import { Navigation, Pagination, Scrollbar } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import 'swiper/css/scrollbar';
 
 const zzz = styled.div``;
 
@@ -35,8 +29,11 @@ const ActionWrapper = styled.div`
   position: relative;
   transition: 100ms;
   overflow: hidden;
-  width: 75px;
-  height: 75px;
+  width: 200px;
+  height: 300px;
+  background: rgba(0, 0, 0, 1);
+  align-self: vertical;
+  text-align: center;
 
   &:hover,
   &.active {
@@ -258,7 +255,7 @@ type ActionData = {
   timerStart: number;
 };
 
-const ActionBar = ({ actions, onUse }: any) => {
+const UpgradeGrid = ({ upgrades, onUse }: any) => {
   /**
    * Fixed cooldown of 1500 ms. No config UI anymore.
    */
@@ -267,8 +264,8 @@ const ActionBar = ({ actions, onUse }: any) => {
   /**
    * Store each action’s data in a ref so we can mutate it.
    */
-  const actionsRef = useRef<ActionData[]>(
-    actions.map((action: any) => ({
+  const upgradesRef = useRef<ActionData[]>(
+    upgrades.map((action: any) => ({
       ...action,
       canvasRef: React.createRef<HTMLCanvasElement>(),
       isCooling: false,
@@ -400,9 +397,9 @@ const ActionBar = ({ actions, onUse }: any) => {
   useEffect(() => {
     let animationId: number;
 
-    // Continuously animate any actions that are cooling down
+    // Continuously animate any upgrades that are cooling down
     const animate = () => {
-      actionsRef.current.forEach((action) => {
+      upgradesRef.current.forEach((action) => {
         if (action.isCooling) {
           drawCooldown(action);
         }
@@ -414,7 +411,7 @@ const ActionBar = ({ actions, onUse }: any) => {
     // Keydown listener for "1", "2", etc.
     const handleKeyDown = (e: KeyboardEvent) => {
       const hotKey = String.fromCharCode(e.keyCode);
-      actionsRef.current.forEach((action) => {
+      upgradesRef.current.forEach((action) => {
         if (action.keybind === hotKey) {
           // Flash the .active CSS
           const parent = action.canvasRef.current?.closest('.action');
@@ -439,55 +436,42 @@ const ActionBar = ({ actions, onUse }: any) => {
   return (
     <div
       css={css`
-        .swiper-pagination {
-          top: revert !important;
-          bottom: 0 !important;
-        }
-
-        .swiper-pagination-bullet {
-          background: #bc955f;
-        }
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 25px;
+        place-items: center;
       `}>
       <GlobalStyles />
-      <Swiper
-        modules={[Navigation, Pagination]}
-        slidesPerView={5}
-        slidesPerGroup={5}
-        spaceBetween={0}
-        pagination={{ clickable: true }}
-        style={{ padding: '10px 0 20px' }}>
-        {actionsRef.current.map((action: any) => (
-          <SwiperSlide key={action.id} style={{ width: 75, height: 75 }}>
-            <ActionWrapper
-              key={action.keybind}
-              className="action"
-              data-keybind={action.keybind}
-              onClick={() => {
-                if (gaugeCooldown(action)) {
-                  onUse(action.id);
-                }
-              }}>
-              <KeyDiv>{action.keybind}</KeyDiv>
-              {action.isActive ? (
-                <GlowContainer>
-                  <AnimatedBorderBoxGlow />
-                  <AnimatedBorderBox></AnimatedBorderBox>
-                </GlowContainer>
-              ) : null}
-              <ActionInternal>
-                <ActionOverflow>
-                  <Contents>
-                    <img src={action.src} alt="" />
-                  </Contents>
-                  <CanvasStatus ref={action.canvasRef} className="status" />
-                </ActionOverflow>
-              </ActionInternal>
-            </ActionWrapper>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {upgradesRef.current.map((upgrade: any) => (
+        <ActionWrapper
+          key={upgrade.id}
+          className="upgrade"
+          data-keybind={upgrade.keybind}
+          onClick={() => {
+            if (gaugeCooldown(upgrade)) {
+              onUse(upgrade.id);
+            }
+          }}>
+          <KeyDiv>{upgrade.keybind}</KeyDiv>
+          {upgrade.isActive ? (
+            <GlowContainer>
+              <AnimatedBorderBoxGlow />
+              <AnimatedBorderBox></AnimatedBorderBox>
+            </GlowContainer>
+          ) : null}
+          <ActionInternal>
+            <ActionOverflow>
+              <Contents>
+                <img src={upgrade.src} alt="" />
+              </Contents>
+              <CanvasStatus ref={upgrade.canvasRef} className="status" />
+            </ActionOverflow>
+          </ActionInternal>
+        </ActionWrapper>
+      ))}
     </div>
   );
 };
 
-export default ActionBar;
+export default UpgradeGrid;

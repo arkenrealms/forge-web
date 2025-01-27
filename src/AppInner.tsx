@@ -2193,10 +2193,10 @@ const AppContent = ({
 
     // @ts-ignore
     if (window.unityInstance && route.path !== '/') {
-      // @ts-ignore
-      window.unityInstance.Quit();
-      // @ts-ignore
-      window.unityInstance = null;
+      // // @ts-ignore
+      // window.unityInstance.Quit();
+      // // @ts-ignore
+      // window.unityInstance = null;
     }
 
     // Updated matchPath usage

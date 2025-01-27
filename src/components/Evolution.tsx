@@ -22,6 +22,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { MdLocationPin } from 'react-icons/md';
 import { Modal, useModal } from '~/components/Modal';
 import ActionBar from '~/components/ActionBar';
+import ActionGrid from '~/components/ActionGrid';
+import UpgradeGrid from '~/components/UpgradeGrid';
 import Inventory from '~/components/Inventory';
 import Rewards from '~/components/Rewards';
 import Paragraph from '~/components/Paragraph';
@@ -65,8 +67,124 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
-// var unityProvider = UnityLoader.instantiate("unityContainer", "Build/public.json", {onProgress: UnityProgress});
-let unityProvider;
+const perks = [
+  {
+    id: '10001',
+    weight: 0.1,
+    games: {
+      3: {
+        name: 'Fire Shield',
+        description: 'Acquire: Fire Shield. Chaotic fire surrounds you for 10 seconds.',
+      },
+      6: {
+        name: 'BLM Shield',
+        description:
+          'Acquire: BLM Shield. Chaotic fire surrounds you for 10 seconds. You feel compelled to burn it all down.',
+      },
+    },
+  },
+  {
+    id: '10002',
+    weight: 0.2,
+    games: {
+      3: {
+        name: 'Burst of Speed',
+        description: 'Acquire: Burst of Speed. You feel a sudden urge of energy, gaining +30% speed for 5 seconds.',
+      },
+      6: {
+        name: 'Montana Dash',
+        description: 'Acquire: Montana Dash. You feel a sudden urge of energy, gaining +30% speed for 5 seconds.',
+      },
+    },
+  },
+  {
+    id: '10003',
+    weight: 0.1,
+    games: {
+      3: {
+        name: 'Fleet Footed',
+        description: 'Acquire: Fleet Footed. You feel more energetic, gaining +10% speed for 30 seconds.',
+      },
+      6: {
+        name: "Forrest Bump's Blessing",
+        description: "Acquire: Forrest Bump's Blessing. You feel more energetic, gaining +10% speed for 30 seconds.",
+      },
+    },
+  },
+  {
+    id: '10004',
+    weight: 0.5,
+    games: {
+      3: {
+        name: 'Stone Form',
+        description: 'Acquire: Stone Form. You are unable to move, but you take no damage.',
+      },
+      6: {
+        name: 'Hide The Pain',
+        description: 'Acquire: Hide The Pain. You are unable to move, but you feel no pain.',
+      },
+    },
+  },
+  {
+    id: '10005',
+    weight: 0.1,
+    games: {
+      3: {
+        name: 'Final Encore',
+        description:
+          "Acquire: Final Encore. You become charged with the energy of ancestral Bard's, releasing a powerful wave of spirit damage.",
+      },
+      6: {
+        name: "Trump's Last Move",
+        description:
+          "Acquire: Trump's Last Move. You feel the spirit of Trump enter your body, and bust out a powerful wave of dance moves.",
+      },
+    },
+  },
+  {
+    id: '10006',
+    weight: 0.1,
+    games: {
+      3: {
+        name: 'Bone Wall',
+        description: 'Acquire: Bone Wall. You summon a wall of bones for protection.',
+      },
+      6: {
+        name: 'Ego Wall',
+        description: 'Acquire: Ego Wall. Blessed by Elon Tusk, you summon a wall to protect your ego.',
+      },
+    },
+  },
+  {
+    id: '10006',
+    weight: 0.1,
+    games: {
+      3: {
+        name: "Zeno's Blessing",
+        description: "Acquire: Zeno's Blessing.",
+      },
+      6: {
+        name: "Bald Man's Blessing",
+        description: "Acquire: Bald Man's Blessing. You cannot be stopped by Ego Walls.",
+      },
+    },
+  },
+];
+
+const drops = [
+  {
+    name: 'Cosmic Key',
+  },
+  {
+    name: '',
+  },
+];
+
+const houses = [
+  {
+    name: 'House of the Dragon',
+  },
+];
 
 // @ts-ignore
 window.unityBridge = {
@@ -77,12 +195,11 @@ let focusInterval;
 let originalAlert;
 
 const testMode = true;
-const logCommonEvents = testMode;
+const logCommonEvents = false;
 let gameInitialized = false;
 // let accountInitialized = false
 let currentPlayerId;
 const debug = process.env.NODE_ENV !== 'production';
-const playerWhitelist = ['Botter', 'Sdadasd'];
 
 const contractAddressToKey = {};
 
@@ -1574,7 +1691,7 @@ const Isles: any = ({ open }) => {
   // const [username, setUsername] = useState(localConfig.username);
   // const [address, setAddress] = useState(localConfig.address);
   // const [loaded, setLoaded] = useState(false);
-  const [state, setState] = useState('disconnected');
+  const state = useRef('disconnected');
   const [tab, setTab] = useState(match?.params?.realm ? parseInt(match?.params?.realm + '') : 0);
   const [isServerOffline, setIsServerOffline] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
@@ -1582,6 +1699,9 @@ const Isles: any = ({ open }) => {
   const { toastError, toastSuccess, toastInfo } = useToast();
   const [reward, setReward] = useState(null);
   const [isMenuOpened, setIsMenuOpened] = useState(null);
+  const [isEmoteOpened, setIsEmoteOpened] = useState(false);
+  const [isUpgradeOpened, setIsUpgradeOpened] = useState(false);
+  const [upgrades, setUpgrades] = useState([]);
   const [activeMenu, setActiveMenu] = useState('party');
   const [onPresentRulesModal] = useModal(<RulesModal onResume={() => {}} onDismiss={() => {}} />);
   const [onPresentWarningsModal] = useModal(<WarningsModal onResume={() => {}} onDismiss={() => {}} />);
@@ -1793,7 +1913,7 @@ const Isles: any = ({ open }) => {
       };
 
       clients.evolutionShard.socket.on('disconnect', function () {
-        setState('disconnected');
+        state.current = 'disconnected';
       });
 
       clients.evolutionShard.socket.on('trpc', function (msg) {
@@ -1842,11 +1962,13 @@ const Isles: any = ({ open }) => {
               } else if (eventName === 'onJoinGame') {
                 currentPlayerId = event[1].split(':')[0];
 
-                setState('joined');
+                state.current = 'joined';
+
+                unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
               } else if (eventName === 'onSpectate') {
                 const clientId = event[1].split(':')[0];
 
-                if (clientId === currentPlayerId) setState('spectating');
+                state.current = 'spectating';
               } else if (eventName === 'onSpawnClient') {
                 userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
               } else if (eventName === 'onShowUI') {
@@ -1874,9 +1996,48 @@ const Isles: any = ({ open }) => {
 
                   // socket.disconnect();
                   // socket = null;
-                  setState('disconnected');
+                  state.current = 'disconnected';
                   // setUsers([]);
                 }
+              } else if (eventName === 'onUpgrade') {
+                const updatesPending = event[1].split(':')[0];
+                const upgradeRorolls = event[1].split(':')[1];
+                const upgrades = event[1].split(',')[2];
+                const upgradeId1 = upgrades.split(',')[0];
+                const upgradeId2 = upgrades.split(',')[1];
+                const upgradeId3 = upgrades.split(',')[2];
+
+                console.log('onUpgrade', updatesPending, upgradeRorolls, upgradeId1, upgradeId2, upgradeId3);
+
+                // TODO: fetch server
+                setUpgrades([
+                  {
+                    id: '200',
+                    keybind: '1',
+                    name: 'BLM Shield',
+                    src: '/images/skills/200.png',
+                  },
+                  {
+                    id: '201',
+                    keybind: '2',
+                    name: 'Burst of Speed',
+                    src: '/images/skills/201.png',
+                  },
+                  {
+                    id: '202',
+                    keybind: '3',
+                    name: 'Fleet Footed',
+                    src: '/images/skills/202.png',
+                  },
+                  // {
+                  //   id: '203',
+                  //   keybind: '4',
+                  //   name: 'Stone Form',
+                  //   src: '/images/skills/203.png',
+                  // },
+                ]);
+
+                setIsUpgradeOpened(true);
               } else if (eventName === 'onSetRoundInfo') {
                 // toastInfo('Game mode is now ' + event[1].split(':')[22])
                 auth?.reauth();
@@ -1903,7 +2064,7 @@ const Isles: any = ({ open }) => {
                 });
               } else if (eventName === 'onUpdateReward') {
                 setReward(null);
-              } else if (state !== 'loading' && eventName === 'onUpdatePlayer') {
+              } else if (state.current !== 'loading' && eventName === 'onUpdatePlayer') {
                 if (!assumedTimeDiff) {
                   assumedTimeDiffList.push(new Date().getTime() - parseInt(event[1].split(':')[8]));
                   if (assumedTimeDiffList.length >= 50) {
@@ -1912,9 +2073,13 @@ const Isles: any = ({ open }) => {
                 }
               }
 
-              console.info('WEB => UNITY', eventName, event[1]);
+              if (state.current === 'joined' || state.current === 'spectating') {
+                console.info('WEB => UNITY', eventName, event[1]);
 
-              unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
+                unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
+              } else {
+                console.info('WEB -> UNITY IGNORED', state.current, eventName, event[1]);
+              }
             }
           }
         } catch (err) {
@@ -1945,10 +2110,10 @@ const Isles: any = ({ open }) => {
             // log('socket.emit', !!clients.evolutionShard.socket, args);
           }
 
-          if (args?.[1]?.method === 'load' && state === 'loading') return;
+          if (args?.[1]?.method === 'load' && state.current === 'loading') return;
 
           if (args?.[1]?.method === 'load') {
-            setState('loading');
+            state.current = 'loading';
 
             // if (socket) {
             //   socket.disconnect();
@@ -1976,9 +2141,9 @@ const Isles: any = ({ open }) => {
               const jsonObject = JSON.parse(jsonString.trim());
               if (
                 logCommonEvents ||
-                (jsonObject.method !== 'onUpdatePickup' &&
-                  jsonObject.method !== 'onUpdateMyself' &&
-                  jsonObject.method !== 'onUpdatePlayer')
+                (jsonObject.method !== 'updatePickup' &&
+                  jsonObject.method !== 'updateMyself' &&
+                  jsonObject.method !== 'updatePlayer')
               ) {
                 log('Unity Event', jsonObject);
               }
@@ -2163,142 +2328,179 @@ const Isles: any = ({ open }) => {
       <Page style={{ padding: 0, maxWidth: 'none', lineHeight: 0, position: 'relative' }}>
         {isGameStarted ? (
           <>
+            {isUpgradeOpened ? (
+              <div
+                css={css`
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  z-index: 10;
+                  display: grid;
+                  place-items: center; /* Centers both vertically and horizontally */
+                  height: 100%;
+                  width: 100%;
+                `}>
+                <UpgradeGrid
+                  onUse={(upgradeId) => {
+                    clients.evolutionShard.socket.emit('trpc', {
+                      id: generateShortId(),
+                      method: 'chooseUpgrade',
+                      type: 'mutate',
+                      params: upgradeId,
+                    });
+                  }}
+                  upgrades={upgrades}
+                />
+              </div>
+            ) : null}
+            <div
+              css={css`
+                position: absolute;
+                bottom: 40px;
+                right: 40px;
+                z-index: 10;
+                zoom: 0.7;
+              `}>
+              {isEmoteOpened ? (
+                <ActionGrid
+                  onUse={(actionId) => {
+                    clients.evolutionShard.socket.emit('trpc', {
+                      id: generateShortId(),
+                      method: 'emote',
+                      type: 'mutate',
+                      params: actionId,
+                    });
+                  }}
+                  actions={[
+                    {
+                      id: '10001',
+                      name: 'None',
+                      src: '/images/skills/10001.png',
+                    },
+                    {
+                      id: '10002',
+                      name: 'Sigh',
+                      src: '/images/skills/10002.png',
+                    },
+                    {
+                      id: '10003',
+                      name: 'Question',
+                      src: '/images/skills/10003.png',
+                    },
+                    {
+                      id: '10004',
+                      name: 'Sweat',
+                      src: '/images/skills/10004.png',
+                    },
+                    {
+                      id: '10005',
+                      name: 'Idea',
+                      src: '/images/skills/10005.png',
+                    },
+                    {
+                      id: '10006',
+                      name: 'Whisper',
+                      src: '/images/skills/10006.png',
+                    },
+                    {
+                      id: '10007',
+                      name: 'Happy',
+                      src: '/images/skills/10007.png',
+                    },
+                    {
+                      id: '10008',
+                      name: 'Anger',
+                      src: '/images/skills/10008.png',
+                    },
+                    {
+                      id: '10009',
+                      name: 'Sad',
+                      src: '/images/skills/10009.png',
+                    },
+                    {
+                      id: '10010',
+                      name: 'Laugh',
+                      src: '/images/skills/10010.png',
+                    },
+                    {
+                      id: '10011',
+                      name: 'Shock',
+                      src: '/images/skills/10011.png',
+                    },
+                    {
+                      id: '10012',
+                      name: 'Excited',
+                      src: '/images/skills/10012.png',
+                    },
+                    {
+                      id: '10013',
+                      name: 'Finger',
+                      src: '/images/skills/10013.png',
+                    },
+                    {
+                      id: '10014',
+                      name: 'Nervous',
+                      src: '/images/skills/10014.png',
+                    },
+                    {
+                      id: '10015',
+                      name: 'Greedy',
+                      src: '/images/skills/10015.png',
+                    },
+                    {
+                      id: '10016',
+                      name: 'Proud',
+                      src: '/images/skills/10016.png',
+                    },
+                    {
+                      id: '10017',
+                      name: 'Heart',
+                      src: '/images/skills/10017.png',
+                    },
+                    {
+                      id: '10018',
+                      name: 'Dispirit',
+                      src: '/images/skills/10018.png',
+                    },
+                    {
+                      id: '10019',
+                      name: 'Shy',
+                      src: '/images/skills/10019.png',
+                    },
+                  ]}
+                />
+              ) : null}
+              <div
+                css={css`
+                  width: 100%;
+                  text-align: right;
+                  cursor: pointer;
+                `}>
+                <img
+                  src="/images/skills/10001.png"
+                  css={css`
+                    width: 96px;
+                    height: 96px;
+                  `}
+                  onClick={() => setIsEmoteOpened(!isEmoteOpened)}
+                />
+              </div>
+            </div>
             <div
               css={css`
                 position: absolute;
                 bottom: 30px;
                 left: 0;
                 width: 100%;
-                text-align: center;
               `}>
               <div
                 css={css`
                   margin: 0 auto;
                   width: 450px;
                   zoom: 0.7;
+                  position: relative;
                 `}>
-                <Button
-                  onClick={() => {
-                    clients.evolutionShard.socket.emit('trpc', {
-                      id: generateShortId(),
-                      method: 'emote',
-                      type: 'mutate',
-                      params: '1',
-                    });
-                  }}>
-                  EMOTE
-                </Button>
                 <ActionBar
-                  actions={[
-                    {
-                      id: 'adsada2',
-                      keybind: '1',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-red-1.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                    {
-                      id: 'adsada3',
-                      keybind: '2',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/evil-eye-eerie-3.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                    {
-                      id: 'adsada4',
-                      keybind: '3',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/protect-orange-3.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                    {
-                      id: 'adsada5',
-                      keybind: '4',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-acid-3.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                    {
-                      id: 'adsada6',
-                      keybind: '5',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                    {
-                      id: 'adsada7',
-                      keybind: '6',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                    {
-                      id: 'adsada8',
-                      keybind: '7',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                    {
-                      id: 'adsada9',
-                      keybind: '8',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                    {
-                      id: 'adsada11',
-                      keybind: '9',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                    {
-                      id: 'adsada12',
-                      keybind: 'a',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                    {
-                      id: 'adsada13',
-                      keybind: 'b',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                    {
-                      id: 'adsada14',
-                      keybind: 'c',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                      canvasRef: React.createRef<HTMLCanvasElement>(),
-                      isCooling: false,
-                      timerId: null,
-                      timerStart: 0,
-                    },
-                  ]}
                   onUse={(actionId) => {
                     clients.evolutionShard.socket.emit('trpc', {
                       id: generateShortId(),
@@ -2307,6 +2509,68 @@ const Isles: any = ({ open }) => {
                       params: actionId,
                     });
                   }}
+                  actions={[
+                    {
+                      id: 'adsada2',
+                      keybind: '1',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-red-1.png',
+                    },
+                    {
+                      id: 'adsada3',
+                      keybind: '2',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/evil-eye-eerie-3.png',
+                    },
+                    {
+                      id: 'adsada4',
+                      keybind: '3',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/protect-orange-3.png',
+                    },
+                    {
+                      id: 'adsada5',
+                      keybind: '4',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-acid-3.png',
+                    },
+                    {
+                      id: 'adsada6',
+                      keybind: '5',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                    },
+                    {
+                      id: 'adsada7',
+                      keybind: '6',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                    },
+                    {
+                      id: 'adsada8',
+                      keybind: '7',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                    },
+                    {
+                      id: 'adsada9',
+                      keybind: '8',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                    },
+                    {
+                      id: 'adsada11',
+                      keybind: '9',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                    },
+                    {
+                      id: 'adsada12',
+                      keybind: 'a',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                    },
+                    {
+                      id: 'adsada13',
+                      keybind: 'b',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                    },
+                    {
+                      id: 'adsada14',
+                      keybind: 'c',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                    },
+                  ]}
                 />
               </div>
             </div>
@@ -2424,6 +2688,7 @@ const Isles: any = ({ open }) => {
                 gap: 30px 20px; /* Adjust spacing between grid items */
                 padding: 10px 15px 20px;
                 text-align: center;
+                zoom: 0.8;
 
                 span {
                   display: block;
@@ -2557,7 +2822,7 @@ const Isles: any = ({ open }) => {
                     box-shadow: none !important;
                   }
                 `}>
-                {state === 'spectating' ? (
+                {state.current === 'spectating' ? (
                   <div
                     css={css`
                       position: absolute;
@@ -2595,7 +2860,7 @@ const Isles: any = ({ open }) => {
                     </Card2>
                   </div>
                 ) : null}
-                {/* {state === 'disconnected' ? (
+                {/* {state.current === 'disconnected' ? (
                 <Card2>
                   <Card>
                     <CardBody>
@@ -2615,7 +2880,7 @@ const Isles: any = ({ open }) => {
                   </Card>
                 </Card2>
               ) : null} */}
-                {state === 'loading' ? (
+                {state.current === 'loading' ? (
                   <Card2>
                     <Card style={{ textAlign: 'center' }}>
                       <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, padding: '0 20px' }}>
@@ -2625,7 +2890,7 @@ const Isles: any = ({ open }) => {
                       <CardBody>
                         <Button
                           onClick={() => {
-                            setState('disconnected');
+                            state.current = 'disconnected';
                           }}>
                           Cancel
                         </Button>
