@@ -8,6 +8,7 @@ import { Unity, useUnityContext } from 'react-unity-webgl';
 import { rewardTokenIdMap } from '@arken/node/legacy/data/items';
 import { generateShortId } from '@arken/node/util/db';
 import { decodeItem } from '@arken/node/util/decoder';
+import { Slider } from 'antd';
 import styled, { createGlobalStyle, css } from 'styled-components';
 import ItemInformation from '~/components/ItemInformation';
 import history from '~/routerHistory';
@@ -32,6 +33,8 @@ import useBrand from '~/hooks/useBrand';
 import useCache from '~/hooks/useCache';
 import { useArkenChest } from '~/hooks/useContract';
 import useFetch from '~/hooks/useFetch';
+import { ProForm, ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
+import { message } from 'antd';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import useSettings from '~/hooks/useSettings2';
 import { serialize, deserialize } from '@arken/node/util/rpc';
@@ -731,6 +734,69 @@ const InventoryModal = ({ auth }) => {
         </Card> */}
         <Inventory columns={6} rows={7} showFull hideExtras />
       </ModalContent>
+      <Actions></Actions>
+    </Modal>
+  );
+};
+
+const SettingsModal = ({ auth }) => {
+  const { mutateAsync: updateSettings } = trpc.seer.evolution.updateSettings.useMutation();
+  const [values, setValues] = useState({});
+
+  return (
+    <Modal title="Settings" onDismiss={() => {}} style={{ minWidth: 900 }}>
+      <ModalContent>
+        <Heading>UI</Heading>
+        <h4>Zoom</h4>
+        <ProForm
+          onFinish={async () => {
+            console.log('onFinish', values);
+            updateSettings(values);
+
+            message.success('Settings saved');
+          }}
+          submitter={{
+            searchConfig: {
+              submitText: 'Save',
+            },
+          }}
+          initialValues={{
+            zoom: 0.7,
+            ...(auth?.profile?.meta?.evolution?.settings || {}),
+          }}
+          autoFocusFirstInput>
+          <Slider
+            step={0.05}
+            defaultValue={auth?.profile?.meta?.evolution?.settings?.zoom || 0.7}
+            min={0}
+            max={1}
+            onChange={(zoom: any) => {
+              setValues({
+                ...values,
+                zoom,
+              });
+            }}
+          />
+        </ProForm>
+      </ModalContent>
+      <Actions></Actions>
+    </Modal>
+  );
+};
+
+const CraftModal = () => {
+  return (
+    <Modal title="Craft" onDismiss={() => {}} style={{ minWidth: 900 }}>
+      <ModalContent>Coming soon</ModalContent>
+      <Actions></Actions>
+    </Modal>
+  );
+};
+
+const LeaderboardModal = () => {
+  return (
+    <Modal title="Leaderboard" onDismiss={() => {}} style={{ minWidth: 900 }}>
+      <ModalContent>Coming soon</ModalContent>
       <Actions></Actions>
     </Modal>
   );
@@ -1712,6 +1778,9 @@ const Isles: any = ({ open }) => {
   const [onPresentMarketModal] = useModal(<MarketModal />);
   const [onPresentInventoryModal] = useModal(<InventoryModal auth={auth} />);
   const [onPresentPVPModal] = useModal(<PVPModal />);
+  const [onPresentCraftModal] = useModal(<CraftModal />);
+  const [onPresentLeaderboardModal] = useModal(<LeaderboardModal />);
+  const [onPresentSettingsModal] = useModal(<SettingsModal auth={auth} />);
   const [onPresentEventsModal] = useModal(<EventsModal />);
   const [onPresentChestModal] = useModal(<ChestModal />);
   const [onPresentQuestModal] = useModal(<QuestModal />);
@@ -2359,7 +2428,7 @@ const Isles: any = ({ open }) => {
                 bottom: 40px;
                 right: 40px;
                 z-index: 10;
-                zoom: 0.7;
+                zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
               `}>
               {isEmoteOpened ? (
                 <ActionGrid
@@ -2497,7 +2566,7 @@ const Isles: any = ({ open }) => {
                 css={css`
                   margin: 0 auto;
                   width: 450px;
-                  zoom: 0.7;
+                  zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
                   position: relative;
                 `}>
                 <ActionBar
@@ -2580,7 +2649,7 @@ const Isles: any = ({ open }) => {
                 bottom: 20px;
                 right: 10px;
                 width: 450px;
-                zoom: 0.7;
+                zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
               `}>
               <ActionBar
                 actions={[
@@ -2688,7 +2757,7 @@ const Isles: any = ({ open }) => {
                 gap: 30px 20px; /* Adjust spacing between grid items */
                 padding: 10px 15px 20px;
                 text-align: center;
-                zoom: 0.8;
+                zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
 
                 span {
                   display: block;
@@ -2738,7 +2807,7 @@ const Isles: any = ({ open }) => {
               </div>
               {isMenuOpened ? (
                 <>
-                  <div onClick={onPresentPVPModal}>
+                  <div onClick={onPresentCraftModal}>
                     <img src="/evolution/images/craft.png" />
                     <span>Craft</span>
                   </div>
@@ -2758,9 +2827,13 @@ const Isles: any = ({ open }) => {
                     <img src="/evolution/images/runes.png" />
                     <span>Runes</span>
                   </div> */}
-                  <div onClick={onPresentPVPModal}>
+                  <div onClick={onPresentLeaderboardModal}>
                     <img src="/evolution/images/leaderboard.png" />
                     <span>Leaderboard</span>
+                  </div>
+                  <div onClick={onPresentSettingsModal}>
+                    <img src="/evolution/images/settings.png" />
+                    <span>Settings</span>
                   </div>
                   {/* <div onClick={onPresentPVPModal}>
                     <img src="/evolution/images/boss.png" />
