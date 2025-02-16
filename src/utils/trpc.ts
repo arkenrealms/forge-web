@@ -1,4 +1,5 @@
 import React from 'react';
+// @ts-ignore
 import { createTRPCReact, TRPCLink } from '@trpc/react-query';
 import { TRPCClientError } from '@trpc/client';
 import { QueryClient } from '@tanstack/react-query';
@@ -8,9 +9,7 @@ import { generateShortId } from '@arken/node/util/db';
 import { serialize, deserialize } from '@arken/node/util/rpc';
 import type { AppRouter } from './app.router';
 
-// ======================
-// Helper Functions
-// ======================
+const logging = false;
 
 /**
  * Wait until a predicate is true or timeout occurs.
@@ -121,7 +120,7 @@ backends.forEach((backend) => {
     // Handle incoming socket events
     client.socket.on('trpcResponse', (res) => {
       try {
-        console.info(`[${backend.name} Socket] Event:`, res);
+        if (logging) console.info(`[${backend.name} Socket] Event:`, res);
 
         // if (eventName === 'trpc') return;
 

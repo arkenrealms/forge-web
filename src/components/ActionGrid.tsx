@@ -408,28 +408,28 @@ const ActionGrid = ({ actions, onUse }: any) => {
     };
     animationId = requestAnimationFrame(animate);
 
-    // Keydown listener for "1", "2", etc.
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const hotKey = String.fromCharCode(e.keyCode);
-      actionsRef.current.forEach((action) => {
-        if (action.keybind === hotKey) {
-          // Flash the .active CSS
-          const parent = action.canvasRef.current?.closest('.action');
-          if (parent) {
-            parent.classList.add('active');
-            setTimeout(() => parent.classList.remove('active'), 100);
-          }
-          gaugeCooldown(action);
-        }
-      });
-    };
+    // // Keydown listener for "1", "2", etc.
+    // const handleKeyDown = (e: KeyboardEvent) => {
+    //   const hotKey = String.fromCharCode(e.keyCode);
+    //   actionsRef.current.forEach((action) => {
+    //     if (action.keybind === hotKey) {
+    //       // Flash the .active CSS
+    //       const parent = action.canvasRef.current?.closest('.action');
+    //       if (parent) {
+    //         parent.classList.add('active');
+    //         setTimeout(() => parent.classList.remove('active'), 100);
+    //       }
+    //       gaugeCooldown(action);
+    //     }
+    //   });
+    // };
 
-    document.addEventListener('keydown', handleKeyDown);
+    // document.addEventListener('keydown', handleKeyDown);
 
     // Cleanup
     return () => {
       cancelAnimationFrame(animationId);
-      document.removeEventListener('keydown', handleKeyDown);
+      // document.removeEventListener('keydown', handleKeyDown);
     };
   }, [drawCooldown, gaugeCooldown]);
 

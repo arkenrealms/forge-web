@@ -10,15 +10,6 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 /**
- * Actions layout
- * (We removed the panel, so only the actions remain.)
- */
-const ActionsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-/**
  * Outer container for each action, as before.
  */
 const ActionWrapper = styled.div`
@@ -28,12 +19,12 @@ const ActionWrapper = styled.div`
   outline: 0;
   position: relative;
   transition: 100ms;
-  overflow: hidden;
   width: 200px;
   height: 300px;
   background: rgba(0, 0, 0, 1);
   align-self: vertical;
   text-align: center;
+  line-height: normal;
 
   &:hover,
   &.active {
@@ -68,6 +59,7 @@ const GlowContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
 `;
 
 /**
@@ -147,7 +139,7 @@ const AnimatedBorderBox = styled.div`
     height: 99999px;
     background-repeat: no-repeat;
     background-position: 0 0;
-    background-image: conic-gradient(rgba(0, 0, 0, 0), rgb(214, 200, 78), rgba(0, 0, 0, 0) 25%);
+    background-image: conic-gradient(rgba(0, 0, 0, 0), rgb(214, 200, 78), rgba(0, 0, 0, 0) 55%);
     animation: rotate2 5s linear infinite;
   }
 
@@ -163,7 +155,7 @@ const AnimatedBorderBox = styled.div`
     height: 99999px;
     background-repeat: no-repeat;
     background-position: 0 0;
-    background-image: conic-gradient(rgba(0, 0, 0, 0), rgb(214, 200, 78), rgba(0, 0, 0, 0) 25%);
+    background-image: conic-gradient(rgba(0, 0, 0, 0), rgb(214, 200, 78), rgba(0, 0, 0, 0) 55%);
     animation: rotate 5s linear infinite;
   }
 
@@ -196,27 +188,39 @@ const ActionInternal = styled.div`
   width: 100%;
   height: 100%;
   padding: 2px;
-  /* We leave background transparent so the box behind it is visible. */
+  z-index: 2;
+  pointer-events: all;
 `;
 
 const ActionOverflow = styled.div`
   position: relative;
   border-radius: 7px;
-  overflow: hidden;
+  height: 100%;
 `;
 
 const Contents = styled.div`
   align-items: center;
   display: flex;
-  height: 100%;
+  flex-flow: column;
   justify-content: center;
   width: 100%;
+  height: 100%;
+  background: #000;
+  font-size: 1.1rem;
+  line-height: 1.3rem;
+  padding: 15px;
 
   img {
     display: block;
     margin: 0;
-    height: 100%;
-    width: 100%;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: -25px;
+    left: calc(50% - 25px);
+    border-radius: 4px;
+    border: 3px solid #000;
+    zoom: 1.4;
   }
 `;
 
@@ -408,28 +412,28 @@ const UpgradeGrid = ({ upgrades, onUse }: any) => {
     };
     animationId = requestAnimationFrame(animate);
 
-    // Keydown listener for "1", "2", etc.
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const hotKey = String.fromCharCode(e.keyCode);
-      upgradesRef.current.forEach((action) => {
-        if (action.keybind === hotKey) {
-          // Flash the .active CSS
-          const parent = action.canvasRef.current?.closest('.action');
-          if (parent) {
-            parent.classList.add('active');
-            setTimeout(() => parent.classList.remove('active'), 100);
-          }
-          gaugeCooldown(action);
-        }
-      });
-    };
+    // // Keydown listener for "1", "2", etc.
+    // const handleKeyDown = (e: KeyboardEvent) => {
+    //   const hotKey = String.fromCharCode(e.keyCode);
+    //   upgradesRef.current.forEach((action) => {
+    //     if (action.keybind === hotKey) {
+    //       // Flash the .active CSS
+    //       const parent = action.canvasRef.current?.closest('.action');
+    //       if (parent) {
+    //         parent.classList.add('active');
+    //         setTimeout(() => parent.classList.remove('active'), 100);
+    //       }
+    //       gaugeCooldown(action);
+    //     }
+    //   });
+    // };
 
-    document.addEventListener('keydown', handleKeyDown);
+    // document.addEventListener('keydown', handleKeyDown);
 
     // Cleanup
     return () => {
       cancelAnimationFrame(animationId);
-      document.removeEventListener('keydown', handleKeyDown);
+      // document.removeEventListener('keydown', handleKeyDown);
     };
   }, [drawCooldown, gaugeCooldown]);
 
@@ -437,8 +441,8 @@ const UpgradeGrid = ({ upgrades, onUse }: any) => {
     <div
       css={css`
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(1, 1fr);
         gap: 25px;
         place-items: center;
       `}>
@@ -449,23 +453,30 @@ const UpgradeGrid = ({ upgrades, onUse }: any) => {
           className="upgrade"
           data-keybind={upgrade.keybind}
           onClick={() => {
-            if (gaugeCooldown(upgrade)) {
-              onUse(upgrade.id);
-            }
+            onUse(upgrade.id);
           }}>
           <KeyDiv>{upgrade.keybind}</KeyDiv>
-          {upgrade.isActive ? (
-            <GlowContainer>
-              <AnimatedBorderBoxGlow />
-              <AnimatedBorderBox></AnimatedBorderBox>
-            </GlowContainer>
-          ) : null}
+          <GlowContainer>
+            <AnimatedBorderBoxGlow />
+            <AnimatedBorderBox></AnimatedBorderBox>
+          </GlowContainer>
           <ActionInternal>
             <ActionOverflow>
               <Contents>
                 <img src={upgrade.src} alt="" />
+                <div
+                  css={css`
+                    color: #fff;
+                    font-family: 'RobotoSlab Bold' !important;
+                    font-weight: 700;
+                    text-transform: uppercase !important;
+                    text-shadow: -1px 1px 0 rgba(0, 0, 0, 0.8);
+                    margin-bottom: 10px;
+                  `}>
+                  {upgrade.name}
+                </div>
+                <div css={css``}>{upgrade.description}</div>
               </Contents>
-              <CanvasStatus ref={upgrade.canvasRef} className="status" />
             </ActionOverflow>
           </ActionInternal>
         </ActionWrapper>

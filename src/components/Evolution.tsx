@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import utf8 from 'utf8';
-
+import type { ProFormInstance } from '@ant-design/pro-components';
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { Unity, useUnityContext } from 'react-unity-webgl';
 import { rewardTokenIdMap } from '@arken/node/legacy/data/items';
 import { generateShortId } from '@arken/node/util/db';
 import { decodeItem } from '@arken/node/util/decoder';
+import { presets } from '@arken/evolution-protocol/presets';
 import { Slider } from 'antd';
 import styled, { createGlobalStyle, css } from 'styled-components';
 import ItemInformation from '~/components/ItemInformation';
@@ -33,7 +34,15 @@ import useBrand from '~/hooks/useBrand';
 import useCache from '~/hooks/useCache';
 import { useArkenChest } from '~/hooks/useContract';
 import useFetch from '~/hooks/useFetch';
-import { ProForm, ProFormDatePicker, ProFormDateRangePicker, ProFormSelect } from '@ant-design/pro-components';
+import {
+  ProForm,
+  ProFormDatePicker,
+  ProFormDateRangePicker,
+  ProFormSelect,
+  ProFormMoney,
+  ProFormText,
+  ProFormSwitch,
+} from '@ant-design/pro-components';
 import { message } from 'antd';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import useSettings from '~/hooks/useSettings2';
@@ -198,7 +207,7 @@ let focusInterval;
 let originalAlert;
 
 const testMode = true;
-const logCommonEvents = false;
+const logCommonEvents = true;
 let gameInitialized = false;
 // let accountInitialized = false
 let currentPlayerId;
@@ -510,9 +519,10 @@ const PartyModal = () => {
 const GuildModal = () => {
   const { t } = useTranslation();
 
-  const guild = {
-    name: 'Guild Name',
-  };
+  const guild = null;
+  // {
+  //   name: 'Guild Name',
+  // };
   const members = [
     {
       name: 'AAA',
@@ -584,39 +594,86 @@ const GuildModal = () => {
 
   const isLeader = true;
 
+  const formRef = useRef();
+
   return (
     <Modal title="Guild Information" onDismiss={() => {}} style={{ minWidth: 900 }}>
       <ModalContent>
-        {isEditingSettings ? (
-          <>Editing</>
+        {guild ? (
+          <>
+            {isEditingSettings ? (
+              <>Editing</>
+            ) : (
+              <>
+                <Row
+                  gutter={[16, 16]}
+                  css={css`
+                    margin-bottom: 20px;
+                    span {
+                      font-size: 1.1rem;
+                    }
+                  `}>
+                  <Col span={8}>
+                    <Var icon={<GiCrossedSwords />} title="Guild Name">
+                      {guild.name}
+                    </Var>
+                  </Col>
+                </Row>
+                <Swiper
+                  modules={[Navigation, Pagination, Scrollbar]}
+                  spaceBetween={30}
+                  slidesPerView={5}
+                  navigation
+                  style={{ maxWidth: 1200, margin: '0 auto 30px auto', padding: '0 20px' }}>
+                  {members.map((item) => (
+                    <SwiperSlide style={{ maxWidth: 1200, margin: '0 auto', height: 'auto' }}>
+                      <PartyMember data={item} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </>
+            )}
+          </>
         ) : (
           <>
-            <Row
-              gutter={[16, 16]}
-              css={css`
-                margin-bottom: 20px;
-                span {
-                  font-size: 1.1rem;
-                }
-              `}>
-              <Col span={8}>
-                <Var icon={<GiCrossedSwords />} title="Guild Name">
-                  {guild.name}
-                </Var>
-              </Col>
-            </Row>
-            <Swiper
-              modules={[Navigation, Pagination, Scrollbar]}
-              spaceBetween={30}
-              slidesPerView={5}
-              navigation
-              style={{ maxWidth: 1200, margin: '0 auto 30px auto', padding: '0 20px' }}>
-              {members.map((item) => (
-                <SwiperSlide style={{ maxWidth: 1200, margin: '0 auto', height: 'auto' }}>
-                  <PartyMember data={item} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            Create guild
+            <ProForm
+              onFinish={async (values) => {
+                console.log('Submitted Values:', values);
+                // await waitTime(2000);
+                // console.log(values);
+                // const val1 = await formRef.current?.validateFields();
+                // console.log('validateFields:', val1);
+                // const val2 =
+                //   await formRef.current?.validateFieldsReturnFormatValue?.();
+                // console.log('validateFieldsReturnFormatValue:', val2);
+                message.success('提交成功');
+              }}
+              formRef={formRef}
+              params={{ id: '100' }}
+              formKey="base-form-use-demo"
+              initialValues={{
+                amount6: 2222222222.222222,
+              }}
+              // readonly={readonly}
+              request={async () => {
+                // await waitTime(100);
+                return {
+                  name: '蚂蚁设计有限公司',
+                  useMode: 'chapter',
+                };
+              }}
+              autoFocusFirstInput>
+              <ProFormText
+                name="name"
+                label="实验名称"
+                width="md"
+                tooltip="最长为 24 位，用于标定的唯一 id"
+                placeholder="请输入名称"
+                rules={[{ required: true }]}
+              />
+              <ProFormMoney label="小数点精度-0" name="amount6" customSymbol="💰" />
+            </ProForm>
           </>
         )}
       </ModalContent>
@@ -740,6 +797,7 @@ const InventoryModal = ({ auth }) => {
 };
 
 const SettingsModal = ({ auth }) => {
+  // @ts-ignore
   const { mutateAsync: updateSettings } = trpc.seer.evolution.updateSettings.useMutation();
   const [values, setValues] = useState({});
 
@@ -747,7 +805,6 @@ const SettingsModal = ({ auth }) => {
     <Modal title="Settings" onDismiss={() => {}} style={{ minWidth: 900 }}>
       <ModalContent>
         <Heading>UI</Heading>
-        <h4>Zoom</h4>
         <ProForm
           onFinish={async () => {
             console.log('onFinish', values);
@@ -762,9 +819,11 @@ const SettingsModal = ({ auth }) => {
           }}
           initialValues={{
             zoom: 0.7,
+            opacity: 1,
             ...(auth?.profile?.meta?.evolution?.settings || {}),
           }}
           autoFocusFirstInput>
+          <h4>Zoom</h4>
           <Slider
             step={0.05}
             defaultValue={auth?.profile?.meta?.evolution?.settings?.zoom || 0.7}
@@ -777,6 +836,35 @@ const SettingsModal = ({ auth }) => {
               });
             }}
           />
+          <h4>Opacity</h4>
+          <Slider
+            step={0.05}
+            defaultValue={auth?.profile?.meta?.evolution?.settings?.opacity || 1}
+            min={0}
+            max={1}
+            onChange={(opacity: any) => {
+              setValues({
+                ...values,
+                opacity,
+              });
+            }}
+          />
+          {auth?.profile?.address === '0x954246b18fee13712C48E5a7Da5b78D88e8891d5' ? (
+            <>
+              <Button
+                onClick={() => {
+                  // @ts-ignore
+                  window.socket.emit('trpc', {
+                    id: generateShortId(),
+                    method: 'initMaster',
+                    type: 'mutate',
+                    params: {},
+                  });
+                }}>
+                Claim Master
+              </Button>
+            </>
+          ) : null}
         </ProForm>
       </ModalContent>
       <Actions></Actions>
@@ -1757,18 +1845,20 @@ const Isles: any = ({ open }) => {
   // const [username, setUsername] = useState(localConfig.username);
   // const [address, setAddress] = useState(localConfig.address);
   // const [loaded, setLoaded] = useState(false);
-  const state = useRef('disconnected');
+  const state = useRef('loading');
   const [tab, setTab] = useState(match?.params?.realm ? parseInt(match?.params?.realm + '') : 0);
   const [isServerOffline, setIsServerOffline] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [showShop, setShowShop] = useState(false);
   const { toastError, toastSuccess, toastInfo } = useToast();
+  const [gameInfo, setGameInfo] = useState({} as any);
+  const [leaderboard, setLeaderboard] = useState({} as any);
   const [reward, setReward] = useState(null);
   const [isMenuOpened, setIsMenuOpened] = useState(null);
   const [isEmoteOpened, setIsEmoteOpened] = useState(false);
   const [isUpgradeOpened, setIsUpgradeOpened] = useState(false);
   const [upgrades, setUpgrades] = useState([]);
-  const [activeMenu, setActiveMenu] = useState('party');
+  const [activeMenu, setActiveMenu] = useState('mode');
   const [onPresentRulesModal] = useModal(<RulesModal onResume={() => {}} onDismiss={() => {}} />);
   const [onPresentWarningsModal] = useModal(<WarningsModal onResume={() => {}} onDismiss={() => {}} />);
   const [onPresentRewardModal] = useModal(<RewardModal onResume={() => {}} onDismiss={() => {}} />);
@@ -1997,7 +2087,7 @@ const Isles: any = ({ open }) => {
           // json = utf8.decode(json);
           // console.log('onEvents msg', msg);
           const data = deserialize(msg);
-          console.log('onEvents events', msg, msg.byteLength, data);
+          // console.log('onEvents events', msg, msg.byteLength, data);
 
           // @ts-ignore
           if (data.params) {
@@ -2033,6 +2123,7 @@ const Isles: any = ({ open }) => {
 
                 state.current = 'joined';
 
+                unityInstance.SendMessage('NetworkManager', 'onChangeGame', 'MemeIsles');
                 unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
               } else if (eventName === 'onSpectate') {
                 const clientId = event[1].split(':')[0];
@@ -2054,7 +2145,7 @@ const Isles: any = ({ open }) => {
                 }
               } else if (eventName === 'onSetInfo') {
                 userIdToName[event[1].split(':')[0]] = event[1].split(':')[1];
-              } else if (eventName === 'onGameOver' || eventName === 'onDisconnected') {
+              } else if (eventName === 'onGameOver') {
                 const playerId = event[1].split(':')[0];
                 if (playerId === currentPlayerId) {
                   if (userIdToName[event[1].split(':')[1]]) {
@@ -2062,11 +2153,14 @@ const Isles: any = ({ open }) => {
                   } else {
                     // toastInfo('You died');
                   }
-
+                  state.current = 'spectating';
+                }
+              } else if (eventName === 'onDisconnected') {
+                const playerId = event[1].split(':')[0];
+                if (playerId === currentPlayerId) {
                   // socket.disconnect();
                   // socket = null;
                   state.current = 'disconnected';
-                  // setUsers([]);
                 }
               } else if (eventName === 'onUpgrade') {
                 const updatesPending = event[1].split(':')[0];
@@ -2085,30 +2179,109 @@ const Isles: any = ({ open }) => {
                     keybind: '1',
                     name: 'BLM Shield',
                     src: '/images/skills/200.png',
+                    description: 'Chaotic fire surrounds you for 10 seconds. You feel compelled to burn it all down.',
                   },
                   {
                     id: '201',
                     keybind: '2',
-                    name: 'Burst of Speed',
+                    name: 'Montana Speed',
+                    description: 'You feel a sudden urge of energy, gaining +30% speed for 5 seconds.',
                     src: '/images/skills/201.png',
                   },
                   {
                     id: '202',
                     keybind: '3',
-                    name: 'Fleet Footed',
+                    name: "Forrest Bump's Blessing",
+                    description: 'You feel more energetic, gaining +10% speed for 30 seconds.',
                     src: '/images/skills/202.png',
                   },
                   // {
-                  //   id: '203',
-                  //   keybind: '4',
-                  //   name: 'Stone Form',
-                  //   src: '/images/skills/203.png',
+                  //   id: '202',
+                  //   keybind: '3',
+                  //   name: 'Hide The Pain',
+                  //   description: 'Acquire: Hide The Pain. You are unable to move, but you feel no pain.',
+                  //   src: '/images/skills/202.png',
                   // },
                 ]);
 
                 setIsUpgradeOpened(true);
+              } else if (eventName === 'onUpdateBestClient') {
+                const [name, position, points, kills, deaths, powerups, evolves, rewards, ping, rank] =
+                  event[1].split(':');
+
+                setLeaderboard({
+                  ...leaderboard,
+                  [position]: { name, points, kills, deaths, powerups, evolves, rewards, ping, rank },
+                });
               } else if (eventName === 'onSetRoundInfo') {
                 // toastInfo('Game mode is now ' + event[1].split(':')[22])
+                const [
+                  timer,
+                  antifeed1,
+                  avatarDecayPower0,
+                  avatarDecayPower1,
+                  avatarDecayPower2,
+                  avatarTouchDistance0,
+                  avatarTouchDistance1,
+                  avatarTouchDistance2,
+                  avatarSpeedMultiplier0,
+                  avatarSpeedMultiplier1,
+                  avatarSpeedMultiplier2,
+                  baseSpeed,
+                  cameraSize,
+                  checkConnectionLoopSeconds,
+                  checkInterval,
+                  checkPositionDistance,
+                  claimingRewards,
+                  decayPower,
+                  disconnectClientSeconds,
+                  disconnectPositionJumps,
+                  fastestLoopSeconds,
+                  fastLoopSeconds,
+                  gameMode,
+                  immunitySeconds,
+                  isMaintenance,
+                  leadercap,
+                  maxEvolves,
+                  noBoot,
+                  noDecay,
+                  orbCutoffSeconds,
+                  orbOnDeathPercent,
+                  orbTimeoutSeconds,
+                  pickupDistance,
+                  pointsPerEvolve,
+                  pointsPerKill,
+                  pointsPerOrb,
+                  pointsPerPowerup,
+                  pointsPerReward,
+                  powerupXp0,
+                  powerupXp1,
+                  powerupXp2,
+                  powerupXp3,
+                  resetInterval,
+                  rewardItemAmount,
+                  rewardItemName,
+                  rewardItemType,
+                  rewardSpawnLoopSeconds,
+                  rewardWinnerAmount,
+                  rewardWinnerName,
+                  roundLoopSeconds,
+                  sendUpdateLoopSeconds,
+                  slowLoopSeconds,
+                  spritesPerClientCount,
+                  spritesStartCount,
+                  spritesTotal,
+                ] = event[1].split(':');
+
+                setGameInfo({
+                  ...gameInfo,
+                  timer,
+                  rewardWinnerAmount,
+                  rewardWinnerName,
+                  rewardItemAmount,
+                  rewardItemName,
+                  preset: presets.find((preset: any) => preset.gameMode === gameMode),
+                });
                 auth?.reauth();
               } else if (eventName === 'onSpawnReward') {
                 const data = event[1].split(':');
@@ -2143,7 +2316,16 @@ const Isles: any = ({ open }) => {
               }
 
               if (state.current === 'joined' || state.current === 'spectating') {
-                console.info('WEB => UNITY', eventName, event[1]);
+                if (
+                  logCommonEvents ||
+                  (eventName !== 'onUpdatePickup' &&
+                    eventName !== 'onUpdateMyself' &&
+                    eventName !== 'onSpawnPowerUp' &&
+                    eventName !== 'onClearLeaderboard' &&
+                    eventName !== 'onUpdatePlayer')
+                ) {
+                  console.info('WEB => UNITY', eventName, event[1]);
+                }
 
                 unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
               } else {
@@ -2320,7 +2502,7 @@ const Isles: any = ({ open }) => {
                         {realms ? (
                           <ControlContainer>
                             <ViewControls>
-                              {realms.map((r) => {
+                              {realms?.map((r) => {
                                 return (
                                   <ToggleWrapper key={r.key}>
                                     <Toggle
@@ -2394,23 +2576,28 @@ const Isles: any = ({ open }) => {
           </Page>
         </>
       ) : null}
-      <Page style={{ padding: 0, maxWidth: 'none', lineHeight: 0, position: 'relative' }}>
+      <Page style={{ padding: 0, maxWidth: 'none', position: 'relative' }}>
         {isGameStarted ? (
           <>
-            {isUpgradeOpened ? (
+            {state.current === 'spectating' && isUpgradeOpened ? (
               <div
                 css={css`
                   position: absolute;
                   top: 0;
                   left: 0;
                   z-index: 10;
-                  display: grid;
-                  place-items: center; /* Centers both vertically and horizontally */
+                  display: flex;
+                  align-items: center; /* Vertical centering */
+                  justify-content: center; /* Horizontal centering */
+                  zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
+                  // opacity: ${auth?.profile?.meta?.evolution?.settings?.opacity || 1};
                   height: 100%;
                   width: 100%;
+                  pointer-events: none;
                 `}>
                 <UpgradeGrid
                   onUse={(upgradeId) => {
+                    setIsUpgradeOpened(false);
                     clients.evolutionShard.socket.emit('trpc', {
                       id: generateShortId(),
                       method: 'chooseUpgrade',
@@ -2422,154 +2609,303 @@ const Isles: any = ({ open }) => {
                 />
               </div>
             ) : null}
-            <div
-              css={css`
-                position: absolute;
-                bottom: 40px;
-                right: 40px;
-                z-index: 10;
-                zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
-              `}>
-              {isEmoteOpened ? (
-                <ActionGrid
-                  onUse={(actionId) => {
-                    clients.evolutionShard.socket.emit('trpc', {
-                      id: generateShortId(),
-                      method: 'emote',
-                      type: 'mutate',
-                      params: actionId,
-                    });
-                  }}
-                  actions={[
-                    {
-                      id: '10001',
-                      name: 'None',
-                      src: '/images/skills/10001.png',
-                    },
-                    {
-                      id: '10002',
-                      name: 'Sigh',
-                      src: '/images/skills/10002.png',
-                    },
-                    {
-                      id: '10003',
-                      name: 'Question',
-                      src: '/images/skills/10003.png',
-                    },
-                    {
-                      id: '10004',
-                      name: 'Sweat',
-                      src: '/images/skills/10004.png',
-                    },
-                    {
-                      id: '10005',
-                      name: 'Idea',
-                      src: '/images/skills/10005.png',
-                    },
-                    {
-                      id: '10006',
-                      name: 'Whisper',
-                      src: '/images/skills/10006.png',
-                    },
-                    {
-                      id: '10007',
-                      name: 'Happy',
-                      src: '/images/skills/10007.png',
-                    },
-                    {
-                      id: '10008',
-                      name: 'Anger',
-                      src: '/images/skills/10008.png',
-                    },
-                    {
-                      id: '10009',
-                      name: 'Sad',
-                      src: '/images/skills/10009.png',
-                    },
-                    {
-                      id: '10010',
-                      name: 'Laugh',
-                      src: '/images/skills/10010.png',
-                    },
-                    {
-                      id: '10011',
-                      name: 'Shock',
-                      src: '/images/skills/10011.png',
-                    },
-                    {
-                      id: '10012',
-                      name: 'Excited',
-                      src: '/images/skills/10012.png',
-                    },
-                    {
-                      id: '10013',
-                      name: 'Finger',
-                      src: '/images/skills/10013.png',
-                    },
-                    {
-                      id: '10014',
-                      name: 'Nervous',
-                      src: '/images/skills/10014.png',
-                    },
-                    {
-                      id: '10015',
-                      name: 'Greedy',
-                      src: '/images/skills/10015.png',
-                    },
-                    {
-                      id: '10016',
-                      name: 'Proud',
-                      src: '/images/skills/10016.png',
-                    },
-                    {
-                      id: '10017',
-                      name: 'Heart',
-                      src: '/images/skills/10017.png',
-                    },
-                    {
-                      id: '10018',
-                      name: 'Dispirit',
-                      src: '/images/skills/10018.png',
-                    },
-                    {
-                      id: '10019',
-                      name: 'Shy',
-                      src: '/images/skills/10019.png',
-                    },
-                  ]}
-                />
-              ) : null}
+            {state.current === 'joined' ? (
               <div
                 css={css`
-                  width: 100%;
-                  text-align: right;
-                  cursor: pointer;
+                  position: absolute;
+                  bottom: 40px;
+                  right: 40px;
+                  z-index: 10;
+                  zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
+                  opacity: ${auth?.profile?.meta?.evolution?.settings?.opacity || 1};
+                  background: ${isEmoteOpened ? '#000' : 'transparent'};
+                  border-radius: 10px;
+                  padding: 15px;
                 `}>
-                <img
-                  src="/images/skills/10001.png"
+                {isEmoteOpened ? (
+                  <ActionGrid
+                    onUse={(actionId) => {
+                      clients.evolutionShard.socket.emit('trpc', {
+                        id: generateShortId(),
+                        method: 'emote',
+                        type: 'mutate',
+                        params: actionId,
+                      });
+                    }}
+                    actions={[
+                      {
+                        id: '10001',
+                        name: 'None',
+                        src: '/images/skills/10001.png',
+                      },
+                      {
+                        id: '10002',
+                        name: 'Sigh',
+                        src: '/images/skills/10002.png',
+                      },
+                      {
+                        id: '10003',
+                        name: 'Question',
+                        src: '/images/skills/10003.png',
+                      },
+                      {
+                        id: '10004',
+                        name: 'Sweat',
+                        src: '/images/skills/10004.png',
+                      },
+                      {
+                        id: '10005',
+                        name: 'Idea',
+                        src: '/images/skills/10005.png',
+                      },
+                      {
+                        id: '10006',
+                        name: 'Whisper',
+                        src: '/images/skills/10006.png',
+                      },
+                      {
+                        id: '10007',
+                        name: 'Happy',
+                        src: '/images/skills/10007.png',
+                      },
+                      {
+                        id: '10008',
+                        name: 'Anger',
+                        src: '/images/skills/10008.png',
+                      },
+                      {
+                        id: '10009',
+                        name: 'Sad',
+                        src: '/images/skills/10009.png',
+                      },
+                      {
+                        id: '10010',
+                        name: 'Laugh',
+                        src: '/images/skills/10010.png',
+                      },
+                      {
+                        id: '10011',
+                        name: 'Shock',
+                        src: '/images/skills/10011.png',
+                      },
+                      {
+                        id: '10012',
+                        name: 'Excited',
+                        src: '/images/skills/10012.png',
+                      },
+                      {
+                        id: '10013',
+                        name: 'Finger',
+                        src: '/images/skills/10013.png',
+                      },
+                      {
+                        id: '10014',
+                        name: 'Nervous',
+                        src: '/images/skills/10014.png',
+                      },
+                      {
+                        id: '10015',
+                        name: 'Greedy',
+                        src: '/images/skills/10015.png',
+                      },
+                      {
+                        id: '10016',
+                        name: 'Proud',
+                        src: '/images/skills/10016.png',
+                      },
+                      {
+                        id: '10017',
+                        name: 'Heart',
+                        src: '/images/skills/10017.png',
+                      },
+                      {
+                        id: '10018',
+                        name: 'Dispirit',
+                        src: '/images/skills/10018.png',
+                      },
+                      {
+                        id: '10019',
+                        name: 'Shy',
+                        src: '/images/skills/10019.png',
+                      },
+                    ]}
+                  />
+                ) : null}
+                <div
                   css={css`
-                    width: 96px;
-                    height: 96px;
-                  `}
-                  onClick={() => setIsEmoteOpened(!isEmoteOpened)}
-                />
+                    width: 100%;
+                    text-align: right;
+                    cursor: pointer;
+                  `}>
+                  <img
+                    src="/images/skills/10001.png"
+                    css={css`
+                      width: 96px;
+                      height: 96px;
+                    `}
+                    onClick={() => setIsEmoteOpened(!isEmoteOpened)}
+                  />
+                </div>
               </div>
-            </div>
-            <div
-              css={css`
-                position: absolute;
-                bottom: 30px;
-                left: 0;
-                width: 100%;
-              `}>
+            ) : null}
+            {state.current === 'joined' ? (
               <div
                 css={css`
-                  margin: 0 auto;
+                  position: absolute;
+                  bottom: 30px;
+                  left: 0;
+                  width: 100%;
+                  z-index: 1;
+                `}>
+                <div
+                  css={css`
+                    margin: 0 auto;
+                    width: 450px;
+                    zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
+                    opacity: ${auth?.profile?.meta?.evolution?.settings?.opacity || 1};
+                    position: relative;
+                  `}>
+                  <ActionBar
+                    onUse={(actionId) => {
+                      clients.evolutionShard.socket.emit('trpc', {
+                        id: generateShortId(),
+                        method: 'action',
+                        type: 'mutate',
+                        params: actionId,
+                      });
+                    }}
+                    actions={[
+                      {
+                        id: 'adsada2',
+                        keybind: '1',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-red-1.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 10,
+                        isSelf: true,
+                      },
+                      {
+                        id: 'adsada3',
+                        keybind: '2',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/evil-eye-eerie-3.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 10,
+                        isSelf: true,
+                      },
+                      {
+                        id: 'adsada4',
+                        keybind: '3',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/protect-orange-3.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 10,
+                        isSelf: true,
+                      },
+                      {
+                        id: 'adsada5',
+                        keybind: '4',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-acid-3.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 10,
+                        isSelf: false,
+                      },
+                      {
+                        id: 'adsada6',
+                        keybind: '5',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 0,
+                        isSelf: false,
+                      },
+                      {
+                        id: 'adsada7',
+                        keybind: '6',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 0,
+                        isSelf: false,
+                      },
+                      {
+                        id: 'adsada8',
+                        keybind: '7',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 0,
+                        isSelf: false,
+                      },
+                      {
+                        id: 'adsada9',
+                        keybind: '8',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 0,
+                        isSelf: false,
+                      },
+                      {
+                        id: 'adsada11',
+                        keybind: '9',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 0,
+                        isSelf: false,
+                      },
+                      {
+                        id: 'adsada12',
+                        keybind: 'a',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 0,
+                        isSelf: false,
+                      },
+                      {
+                        id: 'adsada13',
+                        keybind: 'b',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 0,
+                        isSelf: false,
+                      },
+                      {
+                        id: 'adsada14',
+                        keybind: 'c',
+                        src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
+                        name: 'Fireball',
+                        description: 'A',
+                        cooldown: 0,
+                        isSelf: false,
+                      },
+                    ]}
+                  />
+                </div>
+              </div>
+            ) : null}
+            {state.current === 'joined' ? (
+              <div
+                css={css`
+                  position: absolute;
+                  bottom: 30px;
+                  right: 10px;
                   width: 450px;
                   zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
-                  position: relative;
+                  opacity: ${auth?.profile?.meta?.evolution?.settings?.opacity || 1};
                 `}>
                 <ActionBar
+                  actions={[
+                    {
+                      id: 'adsada',
+                      keybind: '1',
+                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-red-1.png',
+                    },
+                  ]}
                   onUse={(actionId) => {
                     clients.evolutionShard.socket.emit('trpc', {
                       id: generateShortId(),
@@ -2578,169 +2914,251 @@ const Isles: any = ({ open }) => {
                       params: actionId,
                     });
                   }}
-                  actions={[
-                    {
-                      id: 'adsada2',
-                      keybind: '1',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-red-1.png',
-                    },
-                    {
-                      id: 'adsada3',
-                      keybind: '2',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/evil-eye-eerie-3.png',
-                    },
-                    {
-                      id: 'adsada4',
-                      keybind: '3',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/protect-orange-3.png',
-                    },
-                    {
-                      id: 'adsada5',
-                      keybind: '4',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-acid-3.png',
-                    },
-                    {
-                      id: 'adsada6',
-                      keybind: '5',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                    },
-                    {
-                      id: 'adsada7',
-                      keybind: '6',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                    },
-                    {
-                      id: 'adsada8',
-                      keybind: '7',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                    },
-                    {
-                      id: 'adsada9',
-                      keybind: '8',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                    },
-                    {
-                      id: 'adsada11',
-                      keybind: '9',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                    },
-                    {
-                      id: 'adsada12',
-                      keybind: 'a',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                    },
-                    {
-                      id: 'adsada13',
-                      keybind: 'b',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                    },
-                    {
-                      id: 'adsada14',
-                      keybind: 'c',
-                      src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/enchant-acid-3.png',
-                    },
-                  ]}
                 />
               </div>
-            </div>
-            <div
-              css={css`
-                position: absolute;
-                bottom: 20px;
-                right: 10px;
-                width: 450px;
-                zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
-              `}>
-              <ActionBar
-                actions={[
-                  {
-                    id: 'adsada',
-                    keybind: '1',
-                    src: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/87792/fireball-red-1.png',
-                    canvasRef: React.createRef<HTMLCanvasElement>(),
-                    isCooling: false,
-                    timerId: null,
-                    timerStart: 0,
-                  },
-                ]}
-                onUse={(actionId) => {
-                  clients.evolutionShard.socket.emit('trpc', {
-                    id: generateShortId(),
-                    method: 'action',
-                    type: 'mutate',
-                    params: actionId,
-                  });
-                }}
-              />
-            </div>
-            <div
-              css={css`
-                position: absolute;
-                top: 120px;
-                right: 10px;
-                display: grid;
-                width: 300px;
-                display: flex;
-                justify-content: flex-end; /* Align children to the right */
-                gap: 8px;
-
-                > div {
-                  max-width: 200px; /* Limit each child's width to 100px */
-                  flex: 0 0 auto; /* Prevent children from growing */
-                }
-              `}>
+            ) : null}
+            {state.current === 'joined' ? (
               <div
                 css={css`
-                  padding: 30px 15px;
-                `}>
-                {activeMenu === 'party' ? <>PARTY HERE</> : null}
-                {activeMenu === 'quest' ? <>QUEST HERE</> : null}
-                {activeMenu === 'target' ? <>TARGET HERE</> : null}
-              </div>
-              <div
-                css={css`
-                  filter: drop-shadow(2px 4px 6px black);
-                  display: grid;
-                  grid-template-columns: repeat(1, 1fr); /* 7 columns */
-                  grid-template-rows: repeat(3, 1fr); /* 5 rows */
-                  gap: 30px 20px; /* Adjust spacing between grid items */
-                  padding: 10px 15px;
-                  text-align: center;
-
-                  span {
-                    display: block;
-                    font-weight: bold;
-                    font-size: 1rem;
-                    color: #fff;
-                    margin-top: 9px;
-                    text-shadow: 2px 2px #000;
-                  }
-
-                  img {
-                    width: 60px;
-                    height: 60px;
-                    filter: brightness(1.5) grayscale(1) sepia(1.5);
-                  }
+                  position: absolute;
+                  top: 20px;
+                  left: 10px;
+                  width: 600px;
+                  zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
+                  opacity: ${auth?.profile?.meta?.evolution?.settings?.opacity || 1};
 
                   div {
-                    opacity: 0.5;
-
-                    &:hover {
-                      opacity: 1 !important;
-                    }
+                    font-size: 1rem;
+                    margin-bottom: 2px;
+                    color: #fff;
+                    font-family: 'RobotoSlab Bold' !important;
+                    font-weight: 700;
+                    text-transform: uppercase !important;
+                    text-shadow: -1px 1px 0 rgba(0, 0, 0, 0.8);
                   }
                 `}>
-                <div style={{ opacity: activeMenu === 'quest' ? 0.8 : 0.5 }}>
-                  <img src="/evolution/images/quest.png" onClick={() => setActiveMenu('quest')} />
+                <div css={css``}>
+                  <div
+                    css={css`
+                      display: inline-block;
+                    `}>
+                    {gameInfo.timer}
+                  </div>
+                  <div
+                    css={css`
+                      display: inline-block;
+                      margin-left: 20px;
+                    `}>
+                    {gameInfo.rewardWinnerAmount} {gameInfo.rewardWinnerName}
+                  </div>
                 </div>
-                <div style={{ opacity: activeMenu === 'party' ? 0.8 : 0.5 }}>
-                  <img src="/evolution/images/party.png" onClick={() => setActiveMenu('party')} />
+                <div
+                  css={css`
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-rows: repeat(1, 1fr);
+                    background: rgba(0, 0, 0, 0.3);
+                  `}>
+                  <div>Player</div>
+                  <div>Rank</div>
+                  <div>Points</div>
+                  <div>Ping</div>
                 </div>
-                {/* <div style={{ opacity: activeMenu === 'target' ? 0.8 : 0.5 }}>
+                <div
+                  css={css`
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-rows: repeat(10, 1fr);
+                    grid-gap: 8px;
+                  `}>
+                  {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((index: any) =>
+                    leaderboard[index]?.name ? (
+                      <>
+                        <div>{leaderboard[index]?.name}</div>
+                        <div>{leaderboard[index]?.rank}</div>
+                        <div>{leaderboard[index]?.points}</div>
+                        <div>{leaderboard[index]?.ping}ms</div>
+                      </>
+                    ) : (
+                      <></>
+                    )
+                  )}
+                </div>
+              </div>
+            ) : null}
+            {state.current === 'joined' ? (
+              <div
+                css={css`
+                  position: absolute;
+                  top: 120px;
+                  right: 10px;
+                  display: grid;
+                  width: 400px;
+                  display: flex;
+                  justify-content: flex-end; /* Align children to the right */
+                  gap: 8px;
+                  zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
+                  opacity: ${auth?.profile?.meta?.evolution?.settings?.opacity || 1};
+
+                  > div {
+                    max-width: 300px; /* Limit each child's width to 100px */
+                    flex: 0 0 auto; /* Prevent children from growing */
+                  }
+                `}>
+                <div
+                  css={css`
+                    padding: 30px 15px;
+                  `}>
+                  {activeMenu === 'mode' ? (
+                    <div css={css``}>
+                      {/* <div
+                        css={css`
+                          font-size: 1.2rem;
+                          color: #fff;
+                          font-family: 'RobotoSlab Bold' !important;
+                          font-weight: 700;
+                          text-transform: uppercase !important;
+                          letter-spacing: -1px;
+                          text-shadow: -2px 2px 0 #000;
+                        `}>
+                        GAME MODE
+                      </div>
+                      <br /> */}
+                      {gameInfo ? (
+                        <div
+                          css={css`
+                            div {
+                              font-size: 1rem;
+                              margin-bottom: 2px;
+                              color: #fff;
+                              font-family: 'RobotoSlab Bold' !important;
+                              font-weight: 700;
+                              text-transform: uppercase !important;
+                              text-shadow: -1px 1px 0 rgba(0, 0, 0, 0.8);
+                            }
+                          `}>
+                          {gameInfo.preset.guide?.map((item: any) => (
+                            <div key={item} css={css``}>
+                              {item}
+                            </div>
+                          ))}
+                          {/* <div
+                            css={css`
+                              font-size: 1rem;
+                              margin-bottom: 2px;
+                              color: #fff;
+                              font-family: 'RobotoSlab Bold' !important;
+                              font-weight: 700;
+                              text-transform: uppercase !important;
+                              text-shadow: -2px 2px 0 #000;
+                            `}>
+                            Evolve: {gamePreset.pointsPerEvolve}
+                          </div>
+                          <div
+                            css={css`
+                              font-size: 1rem;
+                              margin-bottom: 2px;
+                              color: #fff;
+                              font-family: 'RobotoSlab Bold' !important;
+                              text-transform: uppercase !important;
+                              text-shadow: -2px 2px 0 #000;
+                            `}>
+                            Powerup: {gamePreset.pointsPerPowerup}
+                          </div>
+                          <div
+                            css={css`
+                              font-size: 1rem;
+                              margin-bottom: 2px;
+                              color: #fff;
+                              font-family: 'RobotoSlab Bold' !important;
+                              font-weight: 700;
+                              text-transform: uppercase !important;
+                              text-shadow: -2px 2px 0 #000;
+                            `}>
+                            Kill: {gamePreset.pointsPerKill}
+                          </div>
+                          <div
+                            css={css`
+                              font-size: 1rem;
+                              margin-bottom: 2px;
+                              color: #fff;
+                              font-family: 'RobotoSlab Bold' !important;
+                              font-weight: 700;
+                              text-transform: uppercase !important;
+                              text-shadow: -2px 2px 0 #000;
+                            `}>
+                            Reward: {gamePreset.pointsPerReward}
+                          </div>
+                          <div
+                            css={css`
+                              font-size: 1rem;
+                              margin-bottom: 2px;
+                              color: #fff;
+                              font-family: 'RobotoSlab Bold' !important;
+                              font-weight: 700;
+                              text-transform: uppercase !important;
+                              text-shadow: -2px 2px 0 #000;
+                            `}>
+                            Orb: {gamePreset.pointsPerOrb}
+                          </div> */}
+                        </div>
+                      ) : (
+                        <>None</>
+                      )}
+                    </div>
+                  ) : null}
+                  {activeMenu === 'party' ? <>PARTY HERE</> : null}
+                  {activeMenu === 'quest' ? <>QUEST HERE</> : null}
+                  {activeMenu === 'target' ? <>TARGET HERE</> : null}
+                </div>
+                <div
+                  css={css`
+                    filter: drop-shadow(2px 4px 6px black);
+                    display: grid;
+                    grid-template-columns: repeat(1, 1fr); /* 7 columns */
+                    grid-template-rows: repeat(3, 1fr); /* 5 rows */
+                    gap: 30px 20px; /* Adjust spacing between grid items */
+                    padding: 10px 15px;
+                    text-align: center;
+
+                    span {
+                      display: block;
+                      font-weight: bold;
+                      font-size: 1rem;
+                      color: #fff;
+                      margin-top: 9px;
+                      text-shadow: 2px 2px #000;
+                    }
+
+                    img {
+                      width: 60px;
+                      height: 60px;
+                      filter: brightness(1.5) grayscale(1) sepia(1.5);
+                    }
+
+                    div {
+                      opacity: 0.5;
+
+                      &:hover {
+                        opacity: 1 !important;
+                      }
+                    }
+                  `}>
+                  <div style={{ opacity: activeMenu === 'mode' ? 0.8 : 0.5 }}>
+                    <img src="/evolution/images/quest.png" onClick={() => setActiveMenu('mode')} />
+                  </div>
+                  <div style={{ opacity: activeMenu === 'quest' ? 0.8 : 0.5 }}>
+                    <img src="/evolution/images/quest.png" onClick={() => setActiveMenu('quest')} />
+                  </div>
+                  <div style={{ opacity: activeMenu === 'party' ? 0.8 : 0.5 }}>
+                    <img src="/evolution/images/party.png" onClick={() => setActiveMenu('party')} />
+                  </div>
+                  {/* <div style={{ opacity: activeMenu === 'target' ? 0.8 : 0.5 }}>
                   <img src="/evolution/images/target.png" onClick={() => setActiveMenu('target')} />
                 </div> */}
+                </div>
               </div>
-            </div>
+            ) : null}
             <div
               css={css`
                 position: absolute;
@@ -2758,6 +3176,7 @@ const Isles: any = ({ open }) => {
                 padding: 10px 15px 20px;
                 text-align: center;
                 zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
+                // opacity: ${auth?.profile?.meta?.evolution?.settings?.opacity || 1};
 
                 span {
                   display: block;
@@ -2833,7 +3252,7 @@ const Isles: any = ({ open }) => {
                   </div>
                   <div onClick={onPresentSettingsModal}>
                     <img src="/evolution/images/settings.png" />
-                    <span>Settings</span>
+                    <span>Settings ({state.current})</span>
                   </div>
                   {/* <div onClick={onPresentPVPModal}>
                     <img src="/evolution/images/boss.png" />
@@ -2888,6 +3307,7 @@ const Isles: any = ({ open }) => {
                 place-items: center; /* Centers both vertically and horizontally */
                 height: 100%;
                 width: 100%;
+                z-index: 3;
               `}>
               <div
                 css={css`
@@ -2900,8 +3320,10 @@ const Isles: any = ({ open }) => {
                     css={css`
                       position: absolute;
                       bottom: 50px;
-                      left: 20px;
+                      left: calc(50% - 60px);
                       pointer-events: all;
+                      zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
+                      // opacity: ${auth?.profile?.meta?.evolution?.settings?.opacity || 1};
                     `}>
                     <Card2>
                       <Card>
@@ -2925,8 +3347,39 @@ const Isles: any = ({ open }) => {
                               //   'qUcc5CvuMEoJmoOiAAD6:Guest420:3:false:600:-12.6602:-10.33721'
                               // );
                               // unityInstance.SendMessage('NetworkManager', 'onJoinGame', 'VL570mqtH6h33SWWAAAc:Killer:3:6');
-                            }}>
+                            }}
+                            style={{ width: 150 }}>
                             Revive
+                          </Button>
+                        </CardBody>
+                      </Card>
+                    </Card2>
+                  </div>
+                ) : null}
+                {state.current === 'disconnected' ? (
+                  <div
+                    css={css`
+                      position: absolute;
+                      bottom: 50px;
+                      left: calc(50% - 60px);
+                      pointer-events: all;
+                      zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
+                      // opacity: ${auth?.profile?.meta?.evolution?.settings?.opacity || 1};
+                    `}>
+                    <Card2>
+                      <Card>
+                        <CardBody>
+                          <Button
+                            onClick={() => {
+                              // @ts-ignore
+                              clients.evolutionShard.socket.emit('trpc', {
+                                id: generateShortId(),
+                                method: 'join',
+                                type: 'mutate',
+                              });
+                            }}
+                            style={{ width: 150 }}>
+                            Reconnect
                           </Button>
                         </CardBody>
                       </Card>
@@ -2959,7 +3412,7 @@ const Isles: any = ({ open }) => {
                       <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15, padding: '0 20px' }}>
                         Connecting
                       </BoxHeading>
-                      <hr />
+                      {/* <hr />
                       <CardBody>
                         <Button
                           onClick={() => {
@@ -2967,7 +3420,7 @@ const Isles: any = ({ open }) => {
                           }}>
                           Cancel
                         </Button>
-                      </CardBody>
+                      </CardBody> */}
                     </Card>
                   </Card2>
                 ) : null}
@@ -2976,8 +3429,11 @@ const Isles: any = ({ open }) => {
                     onClick={onPresentTokenModal}
                     css={css`
                       position: absolute;
-                      bottom: 70px;
-                      right: 20px;
+                      top: 20px;
+                      left: calc(50% - 20px);
+                      zoom: ${auth?.profile?.meta?.evolution?.settings?.zoom || 0.7};
+                      // opacity: ${auth?.profile?.meta?.evolution?.settings?.opacity || 1};
+                      z-index: 2;
                     `}>
                     <Card style={{ textAlign: 'center' }}>
                       <CardBody>

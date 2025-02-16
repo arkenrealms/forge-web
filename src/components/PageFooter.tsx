@@ -207,7 +207,7 @@ const BottomCTA = () => {
             <Column>
               <Heading>Social</Heading>
               <br />
-              {/* <p>
+              <p>
                 <a
                   style={{ marginBottom: 20, display: 'inline-block' }}
                   target="_blank"
@@ -239,25 +239,25 @@ const BottomCTA = () => {
                   style={{ marginBottom: 20, display: 'inline-block' }}
                   target="_blank"
                   rel="noreferrer noopener"
-                  href={`https://facebook.com/ArkenRealms`}>
+                  href={`https://facebook.arken.gg`}>
                   Facebook
                 </a>
 
-                <br />
+                {/* <br />
                 <a
                   style={{ marginBottom: 20, display: 'inline-block' }}
                   target="_blank"
                   rel="noreferrer noopener"
                   href={`https://ArkenRealms.medium.com/`}>
                   Medium
-                </a>
+                </a> */}
 
                 <br />
                 <a
                   style={{ marginBottom: 20, display: 'inline-block' }}
                   target="_blank"
                   rel="noreferrer noopener"
-                  href={`https://www.youtube.com/ArkenRealms`}>
+                  href={`https://youtube.arken.gg`}>
                   YouTube
                 </a>
 
@@ -275,18 +275,18 @@ const BottomCTA = () => {
                   style={{ marginBottom: 20, display: 'inline-block' }}
                   target="_blank"
                   rel="noreferrer noopener"
-                  href={`https://www.reddit.com/r/ArkenRealms`}>
+                  href={`https://reddit.arken.gg`}>
                   Reddit
                 </a>
 
-                <br />
+                {/* <br />
                 <a
                   style={{ marginBottom: 20, display: 'inline-block' }}
                   target="_blank"
                   rel="noreferrer noopener"
                   href={`https://www.linkedin.com/company/rune-games/people/?viewAsMember=true`}>
                   LinkedIn
-                </a>
+                </a> */}
 
                 <br />
                 <a
@@ -296,7 +296,7 @@ const BottomCTA = () => {
                   href={`https://github.arken.gg`}>
                   Github
                 </a>
-              </p> */}
+              </p>
             </Column>
           </Row>
         </Page2>
