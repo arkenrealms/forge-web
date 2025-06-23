@@ -352,7 +352,7 @@ export const ItemInfo: React.FC<any> = ({
   const cache = useCache();
   const { tokenSkins, userNotes } = useCache();
   const icon =
-    item.tokenId && tokenSkins[item.tokenId] ? `https://s1.envoy.arken.asi.sh${tokenSkins[item.tokenId]}` : item.icon;
+    item.tokenId && tokenSkins?.[item.tokenId] ? `https://s1.envoy.arken.asi.sh${tokenSkins[item.tokenId]}` : item.icon;
   const totalMinted = cache.stats.items[item.id]?.total || 0;
   const attributes =
     gameTabIndex === 0

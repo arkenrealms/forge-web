@@ -65,37 +65,37 @@ const Providers: React.FC<any> = ({ children }) => {
             },
           }}>
           <ReduxProvider store={store}>
-            <LiveContextProvider>
-              <CacheContextProvider>
-                <ItemCatalogContextProvider>
-                  <WalletItemsContextProvider>
-                    <MasterchefContextProvider>
-                      <ThemeContextProvider>
-                        <LanguageContextProvider>
-                          <BlockContextProvider>
-                            <InventoryContextProvider>
-                              <SettingsContextProvider>
-                                <MarketContextProvider>
-                                  <RefreshContextProvider>
-                                    <I18nextProvider i18n={i18n}>
-                                      <ThemeProvider theme={{ ...dark, brand }}>
-                                        <ItemsContext.Provider value={contextState}>
-                                          <ModalProvider>{children}</ModalProvider>
-                                        </ItemsContext.Provider>
-                                      </ThemeProvider>
-                                    </I18nextProvider>
-                                  </RefreshContextProvider>
-                                </MarketContextProvider>
-                              </SettingsContextProvider>
-                            </InventoryContextProvider>
-                          </BlockContextProvider>
-                        </LanguageContextProvider>
-                      </ThemeContextProvider>
-                    </MasterchefContextProvider>
-                  </WalletItemsContextProvider>
-                </ItemCatalogContextProvider>
-              </CacheContextProvider>
-            </LiveContextProvider>
+            {/* <LiveContextProvider> */}
+            {/* <CacheContextProvider> */}
+            <ItemCatalogContextProvider>
+              <WalletItemsContextProvider>
+                {/* <MasterchefContextProvider> */}
+                <ThemeContextProvider>
+                  <LanguageContextProvider>
+                    {/* <BlockContextProvider> */}
+                    <InventoryContextProvider>
+                      <SettingsContextProvider>
+                        <MarketContextProvider>
+                          <RefreshContextProvider>
+                            <I18nextProvider i18n={i18n}>
+                              <ThemeProvider theme={{ ...dark, brand }}>
+                                <ItemsContext.Provider value={contextState}>
+                                  <ModalProvider>{children}</ModalProvider>
+                                </ItemsContext.Provider>
+                              </ThemeProvider>
+                            </I18nextProvider>
+                          </RefreshContextProvider>
+                        </MarketContextProvider>
+                      </SettingsContextProvider>
+                    </InventoryContextProvider>
+                    {/* </BlockContextProvider> */}
+                  </LanguageContextProvider>
+                </ThemeContextProvider>
+                {/* </MasterchefContextProvider> */}
+              </WalletItemsContextProvider>
+            </ItemCatalogContextProvider>
+            {/* </CacheContextProvider> */}
+            {/* </LiveContextProvider> */}
           </ReduxProvider>
         </ConfigProvider>
         {/* </FeathersContext.Provider> */}

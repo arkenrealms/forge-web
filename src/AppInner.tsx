@@ -3,7 +3,7 @@ import { PurchaseModal } from '~/components/PurchaseModal';
 import { SwapModal } from '~/components/SwapModal';
 import { EN } from '~/config/localisation/languageCodes';
 import { motion } from 'framer-motion';
-
+// import { Unity, useUnityContext } from 'react-unity-webgl';
 import Layout from '~/components/Layout2';
 import { useEagerConnect, useInactiveListener } from '~/hooks';
 import Moveable, { type OnResize, type OnDrag, type OnScale } from 'react-moveable';
@@ -1991,6 +1991,219 @@ const DraggableWindow: React.FC<any> = React.memo(
 // `
 
 // let currentRouteIndex = 1001
+const RouteHandler = function ({ routes, brand, onPresentPurchaseModal, onPresentSwapModal }) {
+  const params = useParams();
+  const location2 = useLocation();
+  const { setTab } = useMarket();
+  const settings = useSettings();
+
+  console.log('Route change', location2.pathname);
+
+  const route = routes.find((r) => matchPath(r.path, location2.pathname));
+
+  if (!route) {
+    console.log('Page not found', location2, routes);
+    return null;
+  }
+
+  // // @ts-ignore
+  // if (window.unityInstance && route.path !== '/') {
+  //   // // @ts-ignore
+  //   // window.unityInstance.Quit();
+  //   // // @ts-ignore
+  //   // window.unityInstance = null;
+  // }
+
+  // Updated matchPath usage
+  const match = matchPath(route.path, location2.pathname);
+
+  const currentRouteIndex = Math.max(...routes.map((r) => (r.props.routeIndex > 0 ? r.props.routeIndex : 1000)));
+  const currentRoute = routes.find((r) => r.props.routeIndex === currentRouteIndex);
+
+  if (
+    currentRouteIndex === 1000 ||
+    route.props.routeIndex !== currentRouteIndex ||
+    (match?.pathname.startsWith('/swap/add') && currentRoute.match?.pathname !== match?.pathname)
+  ) {
+    console.log('Page setting up', routes, location2, route);
+
+    // const match = matchPath(location2.pathname, route.path)
+
+    // const rIndex = routes.findIndex((r) => r.path === route.path)
+    // route = {...route}
+    // routes.splice(rIndex, 1)
+    // routes.push(route)
+    // console.log('vvv3', routes)
+
+    route.props = {
+      // ...props2,
+      // ...pageState[page],
+      // ...route.props,
+      routes,
+      params,
+      location: location2,
+      persist: route.persist,
+      active: route.props.active,
+      open: true,
+      toolbarNav: route.toolbarNav,
+      routePath: route.path,
+      routeIndex: currentRouteIndex + 1,
+      windowPosition: { x: 0, y: 0 },
+      windowSize: { width: '100%', height: '100%' },
+
+      // match,
+      // history: history2,
+      // active: lastPageActive === page,
+      // zIndex:
+      //   lastPageActive === page
+      //     ? 50
+      //     : pageSort.items.findIndex((v) => v === page) !== -1
+      //     ? pageSort.items.findIndex((v) => v === page) + 1
+      //     : 1,
+      onFocus: (e, data) => {
+        // if (lastPageActive !== page) {
+        //   setPendingPageUpdate({
+        //     path,
+        //     page,
+        //     data: { focused: true, minimized: false },
+        //   });
+        // }
+        //setTimeout(() => history.push(path), 1000);
+      },
+      onDragStart: (e, data) => {},
+      onDragStop: (e, data) => {
+        // const { x, y } = data;
+        // setPendingPageUpdate({
+        //   path,
+        //   page,
+        //   data: { focused: true, x, y },
+        // });
+        //setTimeout(() => history.push(path), 1000);
+      },
+      onMinimize: (minimized) => {
+        // @ts-ignore
+        // const previousLocation = location.state ? location.state.from! : "/";
+        // setPendingPageUpdate({
+        //   path: previousLocation,
+        //   page,
+        //   data: { focused: false, open: true, minimized },
+        // });
+      },
+      onClose: (path) => {
+        // @ts-ignore
+        // const previousLocation = location.state ? location.state.from! : "/";
+        // setPendingPageUpdate({
+        //   path: previousLocation,
+        //   page,
+        //   close: true,
+        //   data: { focused: false, open: false },
+        // });
+        //setTimeout(() => history.push(previousLocation), 1000);
+
+        const r2 = routes.find((r) => r.path === path);
+
+        r2.props.open = false;
+        r2.props.active = false;
+        r2.props.persist = false;
+        r2.props.routeIndex = 1000;
+        const r3 = routes.filter((r) => !!r.props.open);
+
+        if (r3.length > 0) {
+          history.push(r3.sort((a, b) => a.props.routeIndex - b.props.routeIndex)[r3.length - 1].path);
+        } else {
+          history.push('/desktop');
+        }
+      },
+    };
+
+    // setCurrentRouteIndex(currentRouteIndex + 1)
+    // for (const r of query.routes) {
+    //   r.props.active = false
+    // }
+
+    route.props.active = true;
+
+    route.props.routeIndex = currentRouteIndex + 1;
+
+    route.props.match = match;
+
+    route.props.history = history;
+
+    onRouteChange(location2.pathname);
+    // console.log('zzz', currentRoute.props.location.search, location2.search)
+    if (
+      (currentRoute.path !== '/market' ||
+        currentRoute.props.location.search === '?query=0x191727d22f2693100acef8e48F8FeaEaa06d30b1') &&
+      route.path === '/market' &&
+      location2.search !== '?query=0x191727d22f2693100acef8e48F8FeaEaa06d30b1'
+    ) {
+      console.log('Resetting market params', location2, params);
+      setTab(2);
+    }
+  }
+
+  // if (!props.open || props.minimized) {
+  //   // console.log('Page is closed or minimized:', page)
+  //   return <></>;
+  // }
+
+  // console.log('vvvv2', route)
+
+  const RouteComponent = useMemo(() => {
+    if (!route.props.open) return null;
+
+    return <route.component {...route.props} />;
+  }, [
+    // route.component,
+    route.path,
+    route.props.open,
+    route.props.minimized,
+    route.props.active,
+    // route.props.routeIndex,
+    // route.props.params, // or stringify if deeply nested
+    // route.props.active,
+    // route.props.location.pathname, // include anything that matters
+    // add more dependencies as needed
+  ]);
+
+  useEffect(function () {
+    return function () {
+      console.log('unmount RouteHandler', route);
+    };
+  }, []);
+
+  return (
+    <DraggableWindow
+      settings={settings}
+      path={match.pathname || route.path}
+      {...route.props}
+      brand={brand}
+      key={match.pathname || route.path}
+      onPresentPurchaseModal={onPresentPurchaseModal}
+      onPresentSwapModal={onPresentSwapModal}>
+      <Suspense
+        fallback={
+          <Skeleton
+            height="300px"
+            m="20px"
+            css={css`
+              max-width: 1200px;
+              margin: 30px auto;
+            `}
+          />
+        }>
+        {RouteComponent}
+      </Suspense>
+    </DraggableWindow>
+  );
+
+  // <AppRoutes key={route.matchUrl || route.path} route={route} />
+};
+
+// @ts-ignore
+// RouteHandler2.whyDidYouRender = true;
+
+// const RouteHandler = React.memo(RouteHandler2);
 
 const AppContent = ({
   pendingPageUpdate,
@@ -2034,10 +2247,10 @@ const AppContent = ({
 
   const routes = pageState;
 
-  const [refresh, setRefresh] = useState(false);
-  const [lastPageActive, setLastPageActive] = useState(''); //useState(undefined);
+  // const [refresh, setRefresh] = useState(false);
+  // const [lastPageActive, setLastPageActive] = useState(''); //useState(undefined);
 
-  const [currentLocationPath, setCurrentLocationPath] = useState(location.pathname);
+  // const [currentLocationPath, setCurrentLocationPath] = useState(location.pathname);
 
   // const { address: account } = useWeb3()
 
@@ -2176,198 +2389,6 @@ const AppContent = ({
   //   }
   // }, [location.pathname, pendingPageUpdate, currentLocationPath]);
 
-  const RouteHandler = function ({ ...query }) {
-    const params = useParams();
-    const location2 = useLocation();
-    const { setTab } = useMarket();
-    const settings = useSettings();
-
-    console.log('Route change', location2.pathname);
-
-    const route = query.routes.find((r) => matchPath(r.path, location2.pathname));
-
-    if (!route) {
-      console.log('Page not found', location2, query);
-      return null;
-    }
-
-    // @ts-ignore
-    if (window.unityInstance && route.path !== '/') {
-      // // @ts-ignore
-      // window.unityInstance.Quit();
-      // // @ts-ignore
-      // window.unityInstance = null;
-    }
-
-    // Updated matchPath usage
-    const match = matchPath(route.path, location2.pathname);
-
-    const currentRouteIndex = Math.max(
-      ...query.routes.map((r) => (r.props.routeIndex > 0 ? r.props.routeIndex : 1000))
-    );
-    const currentRoute = query.routes.find((r) => r.props.routeIndex === currentRouteIndex);
-
-    if (
-      currentRouteIndex === 1000 ||
-      route.props.routeIndex !== currentRouteIndex ||
-      (match?.pathname.startsWith('/swap/add') && currentRoute.match?.pathname !== match?.pathname)
-    ) {
-      console.log('Page setting up', query, location2, route);
-
-      // const match = matchPath(location2.pathname, route.path)
-
-      // const rIndex = routes.findIndex((r) => r.path === route.path)
-      // route = {...route}
-      // routes.splice(rIndex, 1)
-      // routes.push(route)
-      // console.log('vvv3', routes)
-
-      route.props = {
-        // ...props2,
-        // ...pageState[page],
-        ...route.props,
-        ...query,
-        params,
-        location: location2,
-        persist: route.persist,
-        active: route.props.active,
-        open: true,
-        toolbarNav: route.toolbarNav,
-        routePath: route.path,
-        routeIndex: currentRouteIndex + 1,
-        windowPosition: window.localStorage.getItem(`WindowPosition-${route.path}`)
-          ? JSON.parse(window.localStorage.getItem(`WindowPosition-${route.path}`))
-          : { x: 0, y: 0 },
-        windowSize: window.localStorage.getItem(`WindowSize-${route.path}`)
-          ? JSON.parse(window.localStorage.getItem(`WindowSize-${route.path}`))
-          : { width: '100%', height: '100%' },
-
-        // match,
-        // history: history2,
-        // active: lastPageActive === page,
-        // zIndex:
-        //   lastPageActive === page
-        //     ? 50
-        //     : pageSort.items.findIndex((v) => v === page) !== -1
-        //     ? pageSort.items.findIndex((v) => v === page) + 1
-        //     : 1,
-        onFocus: (e, data) => {
-          // if (lastPageActive !== page) {
-          //   setPendingPageUpdate({
-          //     path,
-          //     page,
-          //     data: { focused: true, minimized: false },
-          //   });
-          // }
-          //setTimeout(() => history.push(path), 1000);
-        },
-        onDragStart: (e, data) => {},
-        onDragStop: (e, data) => {
-          // const { x, y } = data;
-          // setPendingPageUpdate({
-          //   path,
-          //   page,
-          //   data: { focused: true, x, y },
-          // });
-          //setTimeout(() => history.push(path), 1000);
-        },
-        onMinimize: (minimized) => {
-          // @ts-ignore
-          // const previousLocation = location.state ? location.state.from! : "/";
-          // setPendingPageUpdate({
-          //   path: previousLocation,
-          //   page,
-          //   data: { focused: false, open: true, minimized },
-          // });
-        },
-        onClose: (path) => {
-          // @ts-ignore
-          // const previousLocation = location.state ? location.state.from! : "/";
-          // setPendingPageUpdate({
-          //   path: previousLocation,
-          //   page,
-          //   close: true,
-          //   data: { focused: false, open: false },
-          // });
-          //setTimeout(() => history.push(previousLocation), 1000);
-
-          const r2 = query.routes.find((r) => r.path === path);
-
-          r2.props.open = false;
-          r2.props.active = false;
-          r2.props.persist = false;
-          r2.props.routeIndex = 1000;
-          const r3 = query.routes.filter((r) => !!r.props.open);
-
-          if (r3.length > 0) {
-            history.push(r3.sort((a, b) => a.props.routeIndex - b.props.routeIndex)[r3.length - 1].path);
-          } else {
-            history.push('/desktop');
-          }
-        },
-      };
-
-      // setCurrentRouteIndex(currentRouteIndex + 1)
-      // for (const r of query.routes) {
-      //   r.props.active = false
-      // }
-
-      route.props.active = true;
-
-      route.props.routeIndex = currentRouteIndex + 1;
-
-      route.props.match = match;
-
-      route.props.history = history;
-
-      onRouteChange(location2.pathname);
-      // console.log('zzz', currentRoute.props.location.search, location2.search)
-      if (
-        (currentRoute.path !== '/market' ||
-          currentRoute.props.location.search === '?query=0x191727d22f2693100acef8e48F8FeaEaa06d30b1') &&
-        route.path === '/market' &&
-        location2.search !== '?query=0x191727d22f2693100acef8e48F8FeaEaa06d30b1'
-      ) {
-        console.log('Resetting market params', location2, params);
-        setTab(2);
-      }
-    }
-
-    // if (!props.open || props.minimized) {
-    //   // console.log('Page is closed or minimized:', page)
-    //   return <></>;
-    // }
-
-    // console.log('vvvv2', route)
-
-    return (
-      <DraggableWindow
-        settings={settings}
-        path={match.pathname || route.path}
-        {...route.props}
-        brand={brand}
-        key={match.pathname || route.path}
-        onPresentPurchaseModal={onPresentPurchaseModal}
-        onPresentSwapModal={onPresentSwapModal}>
-        <Suspense
-          fallback={
-            <Skeleton
-              height="300px"
-              m="20px"
-              css={css`
-                max-width: 1200px;
-                margin: 30px auto;
-              `}
-            />
-          }>
-          {route.props.open ? <route.component {...route.props} /> : null}
-        </Suspense>
-      </DraggableWindow>
-    );
-
-    // <AppRoutes key={route.matchUrl || route.path} route={route} />
-  };
-
   // const { toastError, toastSuccess } = useToast()
 
   // useEffect(function () {
@@ -2428,12 +2449,12 @@ const AppContent = ({
   //   }
   // }, [])
 
-  useEffect(function () {
-    if (!window) return;
+  // useEffect(function () {
+  //   if (!window) return;
 
-    console.log('Refreshing views');
-    setRefresh(true);
-  }, []);
+  //   console.log('Refreshing views');
+  //   setRefresh(true);
+  // }, []);
 
   const location3 = useLocation();
 
@@ -2442,6 +2463,12 @@ const AppContent = ({
   };
 
   const routeNotFound = !getRoute();
+
+  // useEffect(function () {
+  //   return function () {
+  //     console.log('unmount AppContent');
+  //   };
+  // }, []);
 
   return (
     <>
@@ -2545,12 +2572,12 @@ const AppContent = ({
             </DraggableWindow>
           );
         })} */}
-        {useMemo(
-          () => (
-            <RouteHandler routes={routes} />
-          ),
-          [refresh, routes]
-        )}
+        <RouteHandler
+          routes={routes}
+          brand={brand}
+          onPresentPurchaseModal={onPresentPurchaseModal}
+          onPresentSwapModal={onPresentSwapModal}
+        />
         {routeNotFound ? <NotFound key="approutes2" defaultNotFoundValue /> : null}
         {/* <Route path="*" component={NotFound} /> */}
         <div id="blackhole"></div>
@@ -2561,6 +2588,8 @@ const AppContent = ({
     </>
   );
 };
+// @ts-ignore
+AppContent.whyDidYouRender = true;
 
 const MEDIA_WIDTHS = {
   upToExtraSmall: 500,
@@ -2622,6 +2651,12 @@ const App: React.FC<any> = (props) => {
 
   // const { isMd, isLg, isXl, isXxl, isXxxl } = useMatchBreakpoints();
   // const isMobile = !isMd && !isLg && !isXl && !isXxl && !isXxxl;
+
+  useEffect(function () {
+    return function () {
+      console.log('unmount App');
+    };
+  }, []);
 
   return (
     <>
@@ -2688,6 +2723,8 @@ const App: React.FC<any> = (props) => {
     </>
   );
 };
+// @ts-ignore
+App.whyDidYouRender = true;
 
 export default React.memo(App);
 

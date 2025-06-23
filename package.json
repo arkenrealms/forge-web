@@ -109,7 +109,7 @@
     "react-textfit": "^1",
     "react-tiny-popover": "^8",
     "react-transition-group": "^4",
-    "react-unity-webgl": "^9",
+    "react-unity-webgl": "~9.8.0",
     "react-virtualized-auto-sizer": "^1",
     "react-window": "^1",
     "react-zoom-pan-pinch": "^3",
@@ -150,7 +150,8 @@
     "axios": "^1",
     "borsh": "~2.0.0",
     "tweetnacl": "~1.0.3",
-    "@solana/spl-token": "~0.4.9"
+    "@solana/spl-token": "~0.4.9",
+    "@welldone-software/why-did-you-render": "~10.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7",

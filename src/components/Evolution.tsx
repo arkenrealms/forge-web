@@ -8,6 +8,7 @@ import { Unity, useUnityContext } from 'react-unity-webgl';
 import { rewardTokenIdMap } from '@arken/node/legacy/data/items';
 import { generateShortId } from '@arken/node/util/db';
 import { decodeItem } from '@arken/node/util/decoder';
+import { sleep } from '@arken/node/util/time';
 import { presets } from '@arken/evolution-protocol/presets';
 import { Slider } from 'antd';
 import styled, { createGlobalStyle, css } from 'styled-components';
@@ -28,12 +29,6 @@ import ActionGrid from '~/components/ActionGrid';
 import UpgradeGrid from '~/components/UpgradeGrid';
 import Inventory from '~/components/Inventory';
 import Rewards from '~/components/Rewards';
-import Paragraph from '~/components/Paragraph';
-import SeasonRankings from '~/components/SeasonRankings';
-import useBrand from '~/hooks/useBrand';
-import useCache from '~/hooks/useCache';
-import { useArkenChest } from '~/hooks/useContract';
-import useFetch from '~/hooks/useFetch';
 import {
   ProForm,
   ProFormDatePicker,
@@ -207,7 +202,7 @@ let focusInterval;
 let originalAlert;
 
 const testMode = true;
-const logCommonEvents = true;
+const logCommonEvents = false;
 let gameInitialized = false;
 // let accountInitialized = false
 let currentPlayerId;
@@ -852,7 +847,14 @@ const SettingsModal = ({ auth }) => {
           {auth?.profile?.address === '0x954246b18fee13712C48E5a7Da5b78D88e8891d5' ? (
             <>
               <Button
-                onClick={() => {
+                onClick={async (e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+
+                  login(auth);
+
+                  await sleep(1000);
+
                   // @ts-ignore
                   window.socket.emit('trpc', {
                     id: generateShortId(),
@@ -1750,9 +1752,9 @@ const BoxHeading = styled(Heading)`
 const average = (arr) => arr.reduce((p, c) => p + c, 0) / arr.length;
 
 let realm2;
-let unityInstance;
+// let unityInstance;
 let account2;
-let sig2;
+// let sig2;
 
 // // @ts-ignore
 // window.socket = {
@@ -1766,7 +1768,7 @@ const assumedTimeDiffList = [];
 
 const GameWrapper = ({ setIsGameStarted }) => {
   const gameRef = useRef(null);
-  const { unityProvider, UNSAFE__unityInstance, loadingProgression, unload } = useUnityContext({
+  const { unityProvider, sendMessage, loadingProgression, initialisationError, unload } = useUnityContext({
     loaderUrl: '/Build/EvolutionIsles/EvolutionIsles.loader.js',
     dataUrl: '/Build/EvolutionIsles/EvolutionIsles.data',
     frameworkUrl: '/Build/EvolutionIsles/EvolutionIsles.framework.js',
@@ -1784,8 +1786,8 @@ const GameWrapper = ({ setIsGameStarted }) => {
     },
   });
   //@ts-ignore
-  window.unityInstance = unityInstance = UNSAFE__unityInstance;
-
+  window.sendMessageToUnity = sendMessage;
+  // console.log('wtf', UNSAFE__unityInstance);
   // const handleUnityUnmounting = async () => {
   //   await unload().catch((err) => console.log('err===>', err));
   // };
@@ -1806,25 +1808,52 @@ const GameWrapper = ({ setIsGameStarted }) => {
 
   return (
     <>
-      {loadingProgression !== 1 ? (
-        <StyledNotFound>
-          <Heading size="xxl" style={{ margin: '0 auto' }}>
-            {(loadingProgression * 100).toFixed(0)}%
-          </Heading>
-        </StyledNotFound>
-      ) : null}
-      <Unity
-        ref={gameRef}
-        unityProvider={unityProvider}
-        // matchWebGLToCanvasSize={false}
-        style={{
-          width: loadingProgression === 1 ? '100%' : '0%',
-          height: loadingProgression === 1 ? 'calc(100% - 99px)' : '0%',
-        }}
-      />
+      {initialisationError ? (
+        initialisationError
+      ) : (
+        <>
+          {loadingProgression !== 1 ? (
+            <StyledNotFound>
+              <Heading size="xxl" style={{ margin: '0 auto' }}>
+                {(loadingProgression * 100).toFixed(0)}%
+              </Heading>
+            </StyledNotFound>
+          ) : null}
+          <Unity
+            ref={gameRef}
+            unityProvider={unityProvider}
+            // matchWebGLToCanvasSize={false}
+            style={{
+              width: loadingProgression === 1 ? '100%' : '0%',
+              height: loadingProgression === 1 ? 'calc(100% - 99px)' : '0%',
+            }}
+          />
+        </>
+      )}
     </>
   );
 };
+
+function login(auth) {
+  const network = 'bsc';
+
+  // if (!account) return;
+
+  // @ts-ignore
+  clients.evolutionShard.socket.emit('trpc', {
+    id: generateShortId(),
+    method: 'login',
+    type: 'mutate',
+    params: {
+      name: auth?.profile?.name || 'Unknown',
+      network: network,
+      address: auth?.address,
+      device: localConfig.isMobile ? 'mobile' : 'desktop',
+      version: '1.9.0',
+      signature: auth?.token,
+    },
+  });
+}
 
 const Isles: any = ({ open }) => {
   const location = useLocation();
@@ -1874,7 +1903,7 @@ const Isles: any = ({ open }) => {
   const [onPresentEventsModal] = useModal(<EventsModal />);
   const [onPresentChestModal] = useModal(<ChestModal />);
   const [onPresentQuestModal] = useModal(<QuestModal />);
-
+  console.log('gameInfo', gameInfo);
   // useEffect(
   //   function () {
   //     if (!account) return;
@@ -2005,7 +2034,7 @@ const Isles: any = ({ open }) => {
     //   setProgression(p);
 
     //   if (p === 1) {
-    //     UNSAFE__unityInstance.SendMessage('NetworkManager', 'Connect');
+    //     UNSAFE__sendMessage('NetworkManager', 'Connect');
     //   }
     // });
   };
@@ -2029,10 +2058,18 @@ const Isles: any = ({ open }) => {
     setRealm(r);
   };
 
-  const now = new Date().getTime() / 1000;
+  // useEffect(() => {
+  //   // @ts-ignore
+  //   window.stateDebug = state;
+  // }, [state]);
+
+  // const now = new Date().getTime() / 1000;
+
+  const [cacheKey, setCacheKey] = useState('');
 
   useEffect(
     function () {
+      console.log('state.current', 'zzz', state);
       // @ts-ignore
       if (window.socket || !auth?.address || !auth.token) return;
 
@@ -2047,28 +2084,11 @@ const Isles: any = ({ open }) => {
         // ':' +
         // sig2;
         // console.log(pack);
-        // unityInstance.SendMessage('NetworkManager', 'emitSetInfo', pack);
-        // unityInstance.SendMessage('NetworkManager', 'onReadyToJoinGame')
+        // sendMessage('NetworkManager', 'emitSetInfo', pack);
+        // sendMessage('NetworkManager', 'onReadyToJoinGame')
         // setLoaded(true);
 
-        const network = 'bsc';
-
-        // if (!account) return;
-
-        // @ts-ignore
-        clients.evolutionShard.socket.emit('trpc', {
-          id: generateShortId(),
-          method: 'login',
-          type: 'mutate',
-          params: {
-            name: auth?.profile?.name || 'Unknown',
-            network: network,
-            address: auth?.address,
-            device: localConfig.isMobile ? 'mobile' : 'desktop',
-            version: '1.9.0',
-            signature: auth?.token,
-          },
-        });
+        login(auth);
       };
 
       clients.evolutionShard.socket.on('disconnect', function () {
@@ -2077,7 +2097,7 @@ const Isles: any = ({ open }) => {
 
       clients.evolutionShard.socket.on('trpc', function (msg) {
         // @ts-ignore
-        if (!window.unityInstance) return;
+        if (!window.sendMessageToUnity) return;
 
         // @ts-ignore
         // let json = String.fromCharCode.apply(null, new Uint8Array(msg));
@@ -2117,14 +2137,26 @@ const Isles: any = ({ open }) => {
                   type: 'mutate',
                 });
 
+                setCacheKey('cache' + Math.floor(Math.random() * 10000));
+
                 continue;
               } else if (eventName === 'onJoinGame') {
                 currentPlayerId = event[1].split(':')[0];
-
+                console.log('state.current set joined');
                 state.current = 'joined';
+                console.log('state.current', 'bbb', state);
+                // @ts-ignore
+                // window.sendMessageToUnity('NetworkManager', 'onChangeGame', 'MemeIsles');
+                // @ts-ignore
+                window.sendMessageToUnity('NetworkManager', eventName, event[1] ? event[1] : '');
 
-                unityInstance.SendMessage('NetworkManager', 'onChangeGame', 'MemeIsles');
-                unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
+                setCacheKey('cache' + Math.floor(Math.random() * 10000));
+              } else if (eventName === 'onChangeGame') {
+                const gameKey = event[1].split(':')[0];
+                // @ts-ignore
+                window.sendMessageToUnity('NetworkManager', 'onChangeGame', gameKey);
+
+                setCacheKey('cache' + Math.floor(Math.random() * 10000));
               } else if (eventName === 'onSpectate') {
                 const clientId = event[1].split(':')[0];
 
@@ -2327,7 +2359,8 @@ const Isles: any = ({ open }) => {
                   console.info('WEB => UNITY', eventName, event[1]);
                 }
 
-                unityInstance.SendMessage('NetworkManager', eventName, event[1] ? event[1] : '');
+                // @ts-ignore
+                window.sendMessageToUnity('NetworkManager', eventName, event[1] ? event[1] : '');
               } else {
                 console.info('WEB -> UNITY IGNORED', state.current, eventName, event[1]);
               }
@@ -2365,6 +2398,8 @@ const Isles: any = ({ open }) => {
 
           if (args?.[1]?.method === 'load') {
             state.current = 'loading';
+            console.log('state.current set loading');
+            // state.current = 'loading';
 
             // if (socket) {
             //   socket.disconnect();
@@ -2373,7 +2408,7 @@ const Isles: any = ({ open }) => {
 
             // socket = getSocket('https://' + realm2.endpoint);
 
-            // unityInstance.SendMessage('NetworkManager', 'onWebInit', account2 + ':' + sig2);
+            // sendMessage('NetworkManager', 'onWebInit', account2 + ':' + sig2);
           }
 
           if (args.length > 1 && typeof args[1] === 'string') {
@@ -2406,7 +2441,7 @@ const Isles: any = ({ open }) => {
               //   encoder.encode(
               //     JSON.stringify({
               //       id: jsonObject.id, // generateShortId(),
-              //       method: jsonObject.method,//args[0],
+              //       method: jsonObject.method, //args[0],
               //       type: 'mutate',
               //       params: jsonObject.params,
               //     })
@@ -2424,12 +2459,12 @@ const Isles: any = ({ open }) => {
     [auth]
   );
 
-  // unityInstance.SendMessage(
+  // sendMessage(
   //   'NetworkManager',
   //   'onJoinGame',
   //   'qUcc5CvuMEoJmoOiAAD6:Guest420:3:false:600:-12.6602:-10.33721'
   // );
-  // unityInstance.SendMessage('NetworkManager', 'onJoinGame', 'VL570mqtH6h33SWWAAAc:Killer:3:6');
+  // sendMessage('NetworkManager', 'onJoinGame', 'VL570mqtH6h33SWWAAAc:Killer:3:6');
   return (
     <div
       css={css`
@@ -2554,7 +2589,8 @@ const Isles: any = ({ open }) => {
                           </Button>
                         </>
                       ) : (
-                        <ConnectNetwork />
+                        <div></div>
+                        // <ConnectNetwork />
                       )}
                     </div>
                     <div>
@@ -3037,7 +3073,7 @@ const Isles: any = ({ open }) => {
                               text-shadow: -1px 1px 0 rgba(0, 0, 0, 0.8);
                             }
                           `}>
-                          {gameInfo.preset.guide?.map((item: any) => (
+                          {gameInfo?.preset?.guide?.map((item: any) => (
                             <div key={item} css={css``}>
                               {item}
                             </div>
@@ -3165,6 +3201,7 @@ const Isles: any = ({ open }) => {
                 top: 0;
                 right: 10px;
                 width: 500px;
+                z-index: 101;
                 background: ${isMenuOpened ? '#1c1c2e' : 'none'};
                 border: ${isMenuOpened ? '2px solid #666' : '2px solid transparent'};
                 border-top: none;
@@ -3341,12 +3378,12 @@ const Isles: any = ({ open }) => {
                                 type: 'mutate',
                                 params: serialize([]),
                               });
-                              // unityInstance.SendMessage(
+                              // sendMessage(
                               //   'NetworkManager',
                               //   'onJoinGame',
                               //   'qUcc5CvuMEoJmoOiAAD6:Guest420:3:false:600:-12.6602:-10.33721'
                               // );
-                              // unityInstance.SendMessage('NetworkManager', 'onJoinGame', 'VL570mqtH6h33SWWAAAc:Killer:3:6');
+                              // sendMessage('NetworkManager', 'onJoinGame', 'VL570mqtH6h33SWWAAAc:Killer:3:6');
                             }}
                             style={{ width: 150 }}>
                             Revive
@@ -3522,10 +3559,14 @@ const Isles: any = ({ open }) => {
             </div>
           </>
         ) : null}
+        <div style={{ width: 0, height: 0, overflow: 'hidden' }}>{cacheKey}</div>
         {auth?.address && auth?.token ? <GameWrapper setIsGameStarted={setIsGameStarted} /> : null}
       </Page>
     </div>
   );
 };
+
+// @ts-ignore
+// Isles.whyDidYouRender = true;
 
 export default Isles;

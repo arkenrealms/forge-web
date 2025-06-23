@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useMemo, useRef, useState, useContext, useCallback } from 'react';
+import _ from 'lodash';
 import useWeb3 from '~/hooks/useWeb3';
 import useMatchBreakpoints from '~/hooks/useMatchBreakpoints';
 import history from '~/routerHistory';
@@ -149,10 +150,14 @@ const MarketContextProvider = ({ children }) => {
 
         // console.log('vnvnvnv', res);
 
-        setTrades((t) => ({
-          ...t,
+        const newTrades = {
+          ...trades,
           [tab]: res,
-        }));
+        };
+
+        // if (_.isEqual(trades, newTrades)) return;
+
+        setTrades(newTrades);
 
         const _tradesByToken = {};
 

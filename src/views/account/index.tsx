@@ -28,10 +28,10 @@ const TaskCenter = ({ match }) => {
   const { profile, hasProfile } = useProfile(address);
   const { t } = useTranslation();
   const cache = useCache();
-  const achievements = cache.achievements[address]?.map((a) => achievementData.find((b) => b.id === a)) || [];
+  const achievements = cache?.achievements?.[address]?.map((a) => achievementData.find((b) => b.id === a)) || [];
 
   useEffect(() => {
-    cache.fetchAddress(address);
+    cache?.fetchAddress?.(address);
   }, [cache, address]);
   //   if (!address) {
   //     return <Page><WalletNotConnected /></Page>

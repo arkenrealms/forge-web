@@ -60,6 +60,8 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
     }
 
   body.brand-arken {
+    color: #d0b27a;
+
     * {
       font-family: 'Alegreya Sans', sans-serif, Cambria, Verdana, monospace;
       text-transform: none;
@@ -93,7 +95,7 @@ const GlobalStyle = createGlobalStyle<{ useExocetFont: boolean }>`
       background: radial-gradient(circle at 50% 70px, rgba(57, 57, 86, 0.3) 0%, rgba(22, 22, 39, 0.3) 100%);
       backdrop-filter: blur(50px);
       border: 1px solid rgba(0, 0, 0, 0.5);
-      filter: drop-shadow(rgba(0,0,0,0.6) 1px 1px 1px) drop-shadow(rgba(0,0,0,0.6) 0px 0px 4px);
+      // filter: drop-shadow(rgba(0,0,0,0.6) 1px 1px 1px) drop-shadow(rgba(0,0,0,0.6) 0px 0px 4px);
     }
 
     .app__fullpage-window__content {

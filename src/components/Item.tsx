@@ -162,7 +162,7 @@ const Item: React.FC<Props> = ({
 
   const { name, icon: _icon, tokenId, value, category, bonus, details, isNew } = item;
   const { tokenSkins, userNotes } = useCache();
-  const icon = tokenId && tokenSkins[tokenId] ? `https://s1.envoy.arken.asi.sh${tokenSkins[tokenId]}` : _icon;
+  const icon = tokenId && tokenSkins?.[tokenId] ? `https://s1.envoy.arken.asi.sh${tokenSkins[tokenId]}` : _icon;
   const {
     itemPreviewed,
     setItemPreviewed,
@@ -341,7 +341,7 @@ const Item: React.FC<Props> = ({
               <img alt={name} src={icon} style={{ imageRendering: '-webkit-optimize-contrast' }} />
             </ItemForeground>
           ) : null}
-          {selectMode && itemMultiSelected[item.tokenId] ? (
+          {selectMode && itemMultiSelected?.[item.tokenId] ? (
             <SelectOverlay>
               <BsCheckSquareFill style={{ marginLeft: 7 }} />
             </SelectOverlay>
@@ -352,9 +352,9 @@ const Item: React.FC<Props> = ({
             </AccentIcon>
           ) : null}
           <ItemTags>
-            {item.tokenId && tokenSkins[item.tokenId] ? <ItemTag color="yellow">&bull;</ItemTag> : null}
-            {item.tokenId && tokenSkins[item.tokenId] === null ? <ItemTag color="orange">&bull;</ItemTag> : null}
-            {item.tokenId && userNotes[item.tokenId] ? <ItemTag color="green">&bull;</ItemTag> : null}
+            {item.tokenId && tokenSkins?.[item.tokenId] ? <ItemTag color="yellow">&bull;</ItemTag> : null}
+            {item.tokenId && tokenSkins?.[item.tokenId] === null ? <ItemTag color="orange">&bull;</ItemTag> : null}
+            {item.tokenId && userNotes?.[item.tokenId] ? <ItemTag color="green">&bull;</ItemTag> : null}
           </ItemTags>
           {isSelectable && isSelected && <TrianglesBox />}
           {bonus && <BonusIcon bonusType={bonus} className="absolute top-0 left-0" />}

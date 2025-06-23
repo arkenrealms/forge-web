@@ -65,7 +65,7 @@ const StyledCard = styled(Card)`
 
 let init = false;
 
-export const ConnectNetwork = ({ showConnect = true, ...rest }) => {
+export const ConnectNetwork = ({ showConnect = true, onFinish = () => {}, ...rest }) => {
   const { account, connector } = useWeb3();
   const [showLearnMore, setShowLearnMore] = useState(false);
   const { login, logout, error } = useAuth();
@@ -246,7 +246,15 @@ export const ConnectNetwork = ({ showConnect = true, ...rest }) => {
   );
 
   if (account) {
-    return <></>;
+    return (
+      <>
+        <div>
+          <p>Connected.</p>
+        </div>
+        <br />
+        <Button onClick={onFinish}>Close</Button>
+      </>
+    );
   }
 
   if (error) {

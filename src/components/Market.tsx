@@ -7,6 +7,7 @@ import { BsPlusSquare } from 'react-icons/bs';
 import { CgClose } from 'react-icons/cg';
 import { Link as RouterLink, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import ReactSelect, { components } from 'react-select';
+import history from '~/routerHistory';
 import CreatableSelect from 'react-select/creatable';
 import styled, { css, keyframes } from 'styled-components';
 import Input from '~/components/Input/Input';
@@ -423,23 +424,23 @@ const ItemCard = ({ trade, account, advanced }) => {
   );
 };
 
-const parseMatch = (location) => {
-  const match = {
-    params: queryString.parse(location?.search || ''),
-  };
+// const parseMatch = (location) => {
+//   const match = {
+//     params: queryString.parse(location?.search || ''),
+//   };
 
-  for (const key in match.params) {
-    if (match.params[key] === 'false') {
-      // @ts-ignore
-      match.params[key] = false;
-    } else if (match.params[key] === 'true') {
-      // @ts-ignore
-      match.params[key] = true;
-    }
-  }
+//   for (const key in match.params) {
+//     if (match.params[key] === 'false') {
+//       // @ts-ignore
+//       match.params[key] = false;
+//     } else if (match.params[key] === 'true') {
+//       // @ts-ignore
+//       match.params[key] = true;
+//     }
+//   }
 
-  return match;
-};
+//   return match;
+// };
 
 const RainbowLight = keyframes`
 	0% {
@@ -488,11 +489,12 @@ const StyledCardAccent = styled.div`
 const cubeItem = normalizeItem(itemData[ItemsMainCategoriesType.OTHER].find((r) => r.name === "Founder's Cube"));
 
 const Market = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { t } = useTranslation();
   const { address: account } = useWeb3();
-  const location = useLocation();
-  const match = parseMatch(location);
+  // const location = useLocation();
+  // const match = parseMatch(location);
+  const match: any = { params: {} };
   const marketParams = useMarket();
   const cache = useCache();
   const [selectMode, setSelectMode] = useState(false);
@@ -617,7 +619,7 @@ const Market = () => {
 
         // searchParams.append('query', key === 'tab' ? '' : query)
         // query: key === 'tab' ? '' : [...searchOptions.map(s => s.value), query],
-        navigate({
+        history.push({
           pathname: '/market',
           search:
             '?' +
@@ -631,7 +633,6 @@ const Market = () => {
       // }, 200)
     },
     [
-      navigate,
       tab,
       advanced,
       meOnly,
@@ -669,7 +670,7 @@ const Market = () => {
         page: defaultFilters.page.toString(),
       });
 
-      navigate({
+      history.push({
         pathname: '/market',
         search:
           '?' +
@@ -679,7 +680,7 @@ const Market = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [defaultFilters, navigate, account]);
+  }, [defaultFilters, account]);
 
   useEffect(() => {
     // if (init) return

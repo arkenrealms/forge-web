@@ -166,7 +166,7 @@ const PublicProfile = ({ match }) => {
 
       setProfile(p);
 
-      cache.fetchAddress(address);
+      cache?.fetchAddress?.(address);
     }
 
     init();

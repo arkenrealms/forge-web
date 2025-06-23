@@ -457,7 +457,7 @@ export default function () {
               </div>
             </Flex>
           </CardHeader>
-          <CardBody style={{ padding: '25px 10px 10px' }}>
+          <CardBody style={{ padding: '25px 10px 10px', overflow: 'auto', height: '500px' }}>
             {payments ? (
               <>
                 {payments.map((payment) => (

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { getWeb3NoAccount } from '~/utils/web3'
-import BigNumber from 'bignumber.js'
-import useWeb3 from '~/hooks/useWeb3'
-import useBrand from '~/hooks/useBrand'
-import { useBarracks, useMasterchef } from '~/hooks/useContract'
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { getWeb3NoAccount } from '~/utils/web3';
+import BigNumber from 'bignumber.js';
+import useWeb3 from '~/hooks/useWeb3';
+import useBrand from '~/hooks/useBrand';
+import { useBarracks, useMasterchef } from '~/hooks/useContract';
 
 const initState = {
   update: (key, value) => {},
@@ -14,78 +14,78 @@ const initState = {
   isGamer: true,
   isAdvancedGamer: false,
   isAdvancedUser: false,
-}
+};
 
-const SettingsContext = React.createContext(initState)
+const SettingsContext = React.createContext(initState);
 
-let init = false
+let init = false;
 
-let requestedAnimationFrame
-let fpsInitialized = false
+let requestedAnimationFrame;
+let fpsInitialized = false;
 
 const updateQuality = (quality) => {
-  window.localStorage.setItem('appQuality', quality)
+  window.localStorage.setItem('appQuality', quality);
 
-  document.body.classList.remove(`good-quality`)
-  document.body.classList.remove(`avg-quality`)
-  document.body.classList.remove(`bad-quality`)
-  document.body.classList.add(`${quality}-quality`)
+  document.body.classList.remove(`good-quality`);
+  document.body.classList.remove(`avg-quality`);
+  document.body.classList.remove(`bad-quality`);
+  document.body.classList.add(`${quality}-quality`);
 
-  const toggleEl = document.querySelectorAll('[aria-label="Toggle menu"]')[0]
+  const toggleEl = document.querySelectorAll('[aria-label="Toggle menu"]')[0];
   if (toggleEl) {
     if (quality === 'bad') {
       // @ts-ignore
-      toggleEl.children[0].style['animation-name'] = 'none'
+      toggleEl.children[0].style['animation-name'] = 'none';
     } else {
       // @ts-ignore
-      toggleEl.children[0].style['animation-name'] = 'spin'
+      toggleEl.children[0].style['animation-name'] = 'spin';
     }
   }
-}
+};
 
 const SettingsContextProvider = ({ children }) => {
-  const { brand } = useBrand()
-  const [quality, _setQuality] = useState(initState.quality)
-  const [isGamer, _setIsGamer] = useState(initState.isGamer)
-  const [isCrypto, _setIsCrypto] = useState(brand === 'arken' ? true : initState.isCrypto)
-  const [isAdvancedCrypto, _setIsAdvancedCrypto] = useState(brand === 'arken' ? true : initState.isAdvancedCrypto)
-  const [isAdvancedGamer, _setIsAdvancedGamer] = useState(brand === 'arken' ? true : initState.isAdvancedGamer)
-  const [isAdvancedUser, _setIsAdvancedUser] = useState(brand === 'arken' ? false : initState.isAdvancedUser)
-  const { web3, address: account } = useWeb3()
+  const { brand } = useBrand();
+  const [quality, _setQuality] = useState(initState.quality);
+  const [isGamer, _setIsGamer] = useState(initState.isGamer);
+  const [isCrypto, _setIsCrypto] = useState(brand === 'arken' ? true : initState.isCrypto);
+  const [isAdvancedCrypto, _setIsAdvancedCrypto] = useState(brand === 'arken' ? true : initState.isAdvancedCrypto);
+  const [isAdvancedGamer, _setIsAdvancedGamer] = useState(brand === 'arken' ? true : initState.isAdvancedGamer);
+  const [isAdvancedUser, _setIsAdvancedUser] = useState(brand === 'arken' ? false : initState.isAdvancedUser);
+  const { web3, address: account } = useWeb3();
 
   const setQuality = (grade) => {
     // _setQuality(grade)
-    updateQuality(grade)
-  }
+    updateQuality(grade);
+  };
 
   useEffect(() => {
-    if (init || !window || !window.localStorage) return
+    if (init || !window || !window.localStorage) return;
 
-    init = true
+    init = true;
 
-    if (window.localStorage.getItem('isCrypto')) _setIsCrypto(window.localStorage.getItem('isCrypto') === 'true')
-    if (window.localStorage.getItem('isGamer')) _setIsGamer(window.localStorage.getItem('isGamer') === 'true')
+    if (window.localStorage.getItem('isCrypto')) _setIsCrypto(window.localStorage.getItem('isCrypto') === 'true');
+    if (window.localStorage.getItem('isGamer')) _setIsGamer(window.localStorage.getItem('isGamer') === 'true');
     if (window.localStorage.getItem('isAdvancedCrypto'))
-      _setIsAdvancedCrypto(window.localStorage.getItem('isAdvancedCrypto') === 'true')
+      _setIsAdvancedCrypto(window.localStorage.getItem('isAdvancedCrypto') === 'true');
     if (window.localStorage.getItem('isAdvancedGamer'))
-      _setIsAdvancedGamer(window.localStorage.getItem('isAdvancedGamer') === 'true')
+      _setIsAdvancedGamer(window.localStorage.getItem('isAdvancedGamer') === 'true');
     if (window.localStorage.getItem('isAdvancedUser'))
-      _setIsAdvancedUser(window.localStorage.getItem('isAdvancedUser') === 'true')
+      _setIsAdvancedUser(window.localStorage.getItem('isAdvancedUser') === 'true');
 
     if (document.body.classList.value?.includes('override-bad-quality')) {
-      updateQuality('bad')
+      updateQuality('bad');
       // Dont benchmark
-      return
+      return;
     }
 
-    updateQuality(window.localStorage.getItem('appQuality') || initState.quality)
-  }, [web3, account])
+    updateQuality(window.localStorage.getItem('appQuality') || initState.quality);
+  }, [web3, account]);
 
   useEffect(() => {
     // if (fpsInitialized || !window || !window.localStorage || window.location.hostname === 'localhost') return
-    fpsInitialized = true
+    fpsInitialized = true;
 
-    let fpsVals = []
+    let fpsVals = [];
 
     const onBenchmarkFinished = () => {
       //   [].slice.apply(document.images).filter(is_gif_image).map(freeze_gif)
@@ -109,85 +109,88 @@ const SettingsContextProvider = ({ children }) => {
       //     }
       //   }
 
-      const avgFps = Math.round(fpsVals.reduce((sum, fps) => sum + fps, 0) / fpsVals.length)
+      const avgFps = Math.round(fpsVals.reduce((sum, fps) => sum + fps, 0) / fpsVals.length);
 
-      let grade = 'good'
+      let grade = 'good';
       if (avgFps < 50 && avgFps > 40) {
-        grade = 'avg'
+        grade = 'avg';
       } else if (avgFps <= 40) {
-        grade = 'bad'
+        grade = 'bad';
       }
 
-      console.info(`Performance: ${grade} (${avgFps} FPS)`)
+      console.info(`Performance: ${grade} (${avgFps} FPS)`);
 
       if (document.body.classList.value?.includes('override-bad-quality')) {
-        grade = 'bad'
+        grade = 'bad';
       }
 
-      setQuality(grade)
+      setQuality(grade);
 
       if (document.body.classList.value?.includes('override-bad-quality')) {
-        updateQuality('bad')
+        updateQuality('bad');
         // Dont benchmark
-        return
+        return;
       }
 
       if (grade === 'good') {
         // It got a good grade so we can benchmark again
         setTimeout(() => {
-          benchmark()
-        }, 5 * 1000)
+          benchmark();
+        }, 30 * 1000);
       } else {
         // Dont reattempt often or it'll slow them down
-        setTimeout(() => {
-          benchmark()
-        }, 5 * 60 * 1000)
+        setTimeout(
+          () => {
+            benchmark();
+          },
+          5 * 60 * 1000
+        );
       }
-    }
+    };
 
     const benchmark = () => {
       // console.log('Benchmarking')
-      fpsVals = []
+      fpsVals = [];
 
-      const times = []
-      let loop = 0
+      const times = [];
+      let loop = 0;
 
       const refreshLoop = () => {
-        if (requestedAnimationFrame) cancelAnimationFrame(requestedAnimationFrame)
+        if (requestedAnimationFrame) cancelAnimationFrame(requestedAnimationFrame);
 
         requestedAnimationFrame = window.requestAnimationFrame(() => {
-          loop++
-          const now = performance.now()
+          loop++;
+          const now = performance.now();
           while (times.length > 0 && times[0] <= now - 1000) {
-            times.shift()
+            times.shift();
           }
-          times.push(now)
+          times.push(now);
 
-          if (loop > 60) fpsVals.push(times.length)
+          if (loop > 60) fpsVals.push(times.length);
 
           if (loop > 180) {
-            onBenchmarkFinished()
+            onBenchmarkFinished();
           } else {
-            refreshLoop()
+            refreshLoop();
           }
-        })
-      }
+        });
+      };
 
-      refreshLoop()
-    }
+      refreshLoop();
+    };
 
-    benchmark()
-  }, [])
+    benchmark();
+  }, []);
 
   const update = (key, value) => {
-    window.localStorage.setItem(key, value)
+    window.localStorage.setItem(key, value);
 
-    if (key === 'isCrypto') _setIsCrypto(value)
-    if (key === 'isGamer') _setIsGamer(value)
-    if (key === 'isAdvancedCrypto') _setIsAdvancedCrypto(value)
-    if (key === 'isAdvancedGamer') _setIsAdvancedGamer(value)
-    if (key === 'isAdvancedUser') _setIsAdvancedUser(value)
-  }
+    if (key === 'isCrypto') _setIsCrypto(value);
+    if (key === 'isGamer') _setIsGamer(value);
+    if (key === 'isAdvancedCrypto') _setIsAdvancedCrypto(value);
+    if (key === 'isAdvancedGamer') _setIsAdvancedGamer(value);
+    if (key === 'isAdvancedUser') _setIsAdvancedUser(value);
+  };
 
   return (
     <SettingsContext.Provider
@@ -203,7 +206,7 @@ const SettingsContextProvider = ({ children }) => {
       }}>
       {children}
     </SettingsContext.Provider>
-  )
-}
+  );
+};
 
-export { SettingsContext, SettingsContextProvider }
+export { SettingsContext, SettingsContextProvider };

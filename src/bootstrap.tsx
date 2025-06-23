@@ -4,6 +4,13 @@ import LogRocket from 'logrocket';
 import { createBrowserHistory } from 'history';
 import App from './App';
 
+if (process.env.NODE_ENV === 'development') {
+  const whyDidYouRender = require('@welldone-software/why-did-you-render');
+  whyDidYouRender(React, {
+    trackAllPureComponents: true,
+  });
+}
+
 async function bootstrap() {
   const logRocketConfig = {
     console: {

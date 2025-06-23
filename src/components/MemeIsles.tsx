@@ -5,7 +5,7 @@ import { formatDistance } from 'date-fns';
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
-import { Unity, useUnityContext } from 'react-unity-webgl';
+// import { Unity, useUnityContext } from 'react-unity-webgl';
 import { rewardTokenIdMap } from '@arken/node/legacy/data/items';
 import { decodeItem } from '@arken/node/util/decoder';
 import io from 'socket.io-client';
@@ -756,25 +756,25 @@ const Isles: any = ({ open }) => {
   account2 = account;
   const { web3 } = useWeb3();
   const gameRef = useRef(null);
-  const { unityProvider, UNSAFE__unityInstance, loadingProgression } = useUnityContext({
-    loaderUrl: '/Build/MemeIsles/MemeIsles.loader.js',
-    dataUrl: '/Build/MemeIsles/MemeIsles.data',
-    frameworkUrl: '/Build/MemeIsles/MemeIsles.framework.js',
-    codeUrl: '/Build/MemeIsles/MemeIsles.wasm',
-    webglContextAttributes: {
-      alpha: false,
-      depth: false,
-      stencil: false, // also interesting to test 'false'
-      antialias: false,
-      premultipliedAlpha: false,
-      preserveDrawingBuffer: false,
-      // powerPreference: 'high-performance',
-      failIfMajorPerformanceCaveat: false,
-      desynchronized: false,
-    },
-  });
-  unityInstance = UNSAFE__unityInstance;
-  const [isGameStarted, setIsGameStarted] = useState(loadingProgression !== 1);
+  // const { unityProvider, UNSAFE__unityInstance, loadingProgression } = useUnityContext({
+  //   loaderUrl: '/Build/MemeIsles/MemeIsles.loader.js',
+  //   dataUrl: '/Build/MemeIsles/MemeIsles.data',
+  //   frameworkUrl: '/Build/MemeIsles/MemeIsles.framework.js',
+  //   codeUrl: '/Build/MemeIsles/MemeIsles.wasm',
+  //   webglContextAttributes: {
+  //     alpha: false,
+  //     depth: false,
+  //     stencil: false, // also interesting to test 'false'
+  //     antialias: false,
+  //     premultipliedAlpha: false,
+  //     preserveDrawingBuffer: false,
+  //     // powerPreference: 'high-performance',
+  //     failIfMajorPerformanceCaveat: false,
+  //     desynchronized: false,
+  //   },
+  // });
+  // unityInstance = UNSAFE__unityInstance;
+  // const [isGameStarted, setIsGameStarted] = useState(loadingProgression !== 1);
   const [_realm, setRealm] = useState(null);
   const [username, setUsername] = useState(config.username);
   const [address, setAddress] = useState(config.address);
@@ -874,7 +874,7 @@ const Isles: any = ({ open }) => {
 
     document.body.classList.add(`override-bad-quality`);
 
-    setIsGameStarted(true);
+    // setIsGameStarted(true);
 
     gameInitialized = true;
 
@@ -995,136 +995,6 @@ const Isles: any = ({ open }) => {
         }
       `}>
       <GlobalStyles />
-      {!isGameStarted ? (
-        <>
-          <Page>
-            <Card2 style={{ marginTop: 20 }}>
-              <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-                {t('Play Now')}
-              </BoxHeading>
-              <hr />
-              <CardBody>
-                <Cards>
-                  <div style={{ position: 'relative' }}></div>
-                  <div style={{ position: 'relative', minHeight: 300 }}>
-                    <Flex flexDirection="column" alignItems="center" justifyContent="start">
-                      {realms ? (
-                        <ControlContainer>
-                          <ViewControls>
-                            {realms.map((r) => {
-                              return (
-                                <ToggleWrapper key={r.key}>
-                                  <Toggle
-                                    checked={realm?.key === r.key}
-                                    disabled={!isAdmin && r.status !== 'online'}
-                                    onChange={() => updateRealm(r)}
-                                    scale="sm"
-                                  />
-                                  <Text style={{ textAlign: 'left' }}>
-                                    {' '}
-                                    {t(r.name)} {r.regionCode}
-                                    {(!realm || (realm.key === r.key && !isServerOffline) || realm.key !== r.key) &&
-                                    r.status === 'Online'
-                                      ? ` (${r.clientCount} online)`
-                                      : t(` (offline)`)}
-                                  </Text>
-                                </ToggleWrapper>
-                              );
-                            })}
-                            <div style={{ width: '100%', height: '20px' }} onClick={addLocalRealm}></div>
-                          </ViewControls>
-                        </ControlContainer>
-                      ) : null}
-                      {!realms ? <p>Loading realms...</p> : null}
-                      {realms?.length === 0 ? <p>No realms online</p> : null}
-                    </Flex>
-                    <div
-                      css={css`
-                        position: absolute;
-                        left: 0;
-                        bottom: 0;
-                        text-align: center;
-                        width: 100%;
-                        padding: 20px;
-                      `}>
-                      <HeadingFire fireStrength={1} color1="#fd3" color2="#ff3" color3="#f80" color4="#f20">
-                        <SpecialButton title="ENTER WORLD" onClick={startOldGame} />
-                      </HeadingFire>
-                    </div>
-                  </div>
-                  <div>
-                    <p style={{ fontSize: '0.9em' }}>
-                      <Button scale="sm" variant="text" onClick={onPresentRulesModal}>
-                        View Rules
-                      </Button>
-                    </p>
-                    <p style={{ fontSize: '0.9em' }}>
-                      <Button scale="sm" variant="text" onClick={onPresentWarningsModal}>
-                        View Warnings
-                      </Button>
-                    </p>
-                  </div>
-                </Cards>
-              </CardBody>
-            </Card2>
-            <br />
-
-            <Card3>
-              <CardBody>
-                <br />
-                <br />
-                <Button as={RouterLink} to="/evolution/tutorial">
-                  View Tutorial
-                </Button>
-                {/* <p>
-                  {t(
-                    `Arken is the next evolution of DeFi farming. Farming is when you use your tokens to earn bonus tokens by staking them. Every week a new token is created (called a rune). It's farmed until the max supply of 50,000. That rune can then be combined with other runes to create NFTs. Those NFTs can be used to improve your earnings.`,
-                  )}
-                </p> */}
-              </CardBody>
-            </Card3>
-          </Page>
-        </>
-      ) : null}
-      {isGameStarted ? (
-        <Page style={{ padding: 0, maxWidth: 'none', lineHeight: 0 }}>
-          {loadingProgression !== 1 ? (
-            <StyledNotFound>
-              <Heading size="xxl">{(loadingProgression * 100).toFixed(0)}%</Heading>
-            </StyledNotFound>
-          ) : null}
-          <div
-            css={css`
-              position: absolute;
-              top: 30px;
-              left: 30px;
-              background: #1c1c2f;
-
-              .app__styled-card2 {
-                box-shadow: none !important;
-              }
-            `}>
-            <Card2>
-              <Card>
-                <BoxHeading as="h2" size="xl" style={{ textAlign: 'center', marginTop: 15 }}>
-                  UI
-                </BoxHeading>
-                <hr />
-                <CardBody></CardBody>
-              </Card>
-            </Card2>
-          </div>
-          <Unity
-            ref={gameRef}
-            unityProvider={unityProvider}
-            // matchWebGLToCanvasSize={false}
-            style={{
-              width: loadingProgression === 1 ? '100%' : '0%',
-              height: loadingProgression === 1 ? '100%' : '0%',
-            }}
-          />
-        </Page>
-      ) : null}
     </div>
   );
 };
