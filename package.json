@@ -152,7 +152,8 @@
     "borsh": "~2.0.0",
     "tweetnacl": "~1.0.3",
     "@solana/spl-token": "~0.4.9",
-    "@welldone-software/why-did-you-render": "~10.0.1"
+    "@welldone-software/why-did-you-render": "~10.0.1",
+    "url": "~0.11.4"
   },
   "devDependencies": {
     "@babel/core": "^7",
