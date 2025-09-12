@@ -64,6 +64,7 @@
     "browserify-fs": "^1",
     "canvas-confetti": "^1",
     "classnames": "^2",
+    "cids": "^1",
     "cross-fetch": "^4",
     "customize-cra": "^1",
     "date-fns": "^2",
