@@ -10,6 +10,7 @@ import ItemsGrid from '~/components/ItemsGrid';
 import ItemsContext from '~/contexts/ItemsContext';
 import useWeb3 from '~/hooks/useWeb3';
 import { useRunePrice } from '~/state/hooks';
+import { trpc, clients } from '~/utils/trpc';
 import SoundContext from '~/contexts/SoundContext';
 import useRuneBalance from '~/hooks/useRuneBalance';
 import { getBalanceNumber } from '~/utils/formatBalance';
@@ -97,11 +98,15 @@ const InventoryInner = ({
   direction: direction2,
   defaultBranch,
   children,
+  items = [],
 }) => {
   const { account: _account } = useWeb3();
   const account = address || _account;
   const { fetchAddress } = useCache();
-  const { nfts: itemTokenIds, items: decodedItemData, refresh: walletRefresh, setUserAddress } = useGetWalletItems();
+  const { refresh: walletRefresh, setUserAddress } = useGetWalletItems();
+
+  const itemTokenIds = {};
+  const decodedItemData = items;
   // const origItems = getItems(itemData, rows * columns)
 
   const refresh = () => {
@@ -129,7 +134,7 @@ const InventoryInner = ({
   useEffect(() => {
     console.log('Setting inventory user address', account);
     setUserAddress(account);
-    fetchAddress(account);
+    fetchAddress?.(account);
     // try {
     //   throw Error('sss')
     // } catch(e) {
@@ -692,6 +697,7 @@ const Inventory = ({
   children = null,
   defaultBranch = undefined,
   selectMode = false,
+  items = [],
 }) => {
   const [playSelect] = useSound('/assets/sounds/select.mp3');
   const [playAction] = useSound('/assets/sounds/action.mp3', { volume: 0.5 });
@@ -725,7 +731,8 @@ const Inventory = ({
         filterSort={filterSort}
         filterQuery={filterQuery}
         selectMode={selectMode}
-        defaultBranch={defaultBranch}>
+        defaultBranch={defaultBranch}
+        items={items}>
         {children}
       </InventoryInner>
     </SoundContext.Provider>

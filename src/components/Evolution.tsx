@@ -702,7 +702,13 @@ const MarketModal = () => {
   );
 };
 
-const InventoryModal = ({ auth }) => {
+const InventoryModal = ({ account }) => {
+  const { data: profile } = trpc.seer.profile.getProfile.useQuery<Arken.Profile.Types.Profile>({
+    where: { address: { equals: account || '0x1a367CA7bD311F279F1dfAfF1e60c4d797Faa6eb' } },
+  });
+
+  const items = profile?.character?.items || [];
+
   return (
     <Modal title="Inventory" onDismiss={() => {}} style={{ minWidth: 900 }}>
       <ModalContent>
@@ -784,7 +790,7 @@ const InventoryModal = ({ auth }) => {
             </Button>
           </CardBody>
         </Card> */}
-        <Inventory columns={6} rows={7} showFull hideExtras />
+        <Inventory columns={6} rows={7} showFull hideExtras items={items} />
       </ModalContent>
       <Actions></Actions>
     </Modal>
@@ -1895,7 +1901,7 @@ const Isles: any = ({ open }) => {
   const [onPresentPartyModal] = useModal(<PartyModal />);
   const [onPresentGuildModal] = useModal(<GuildModal />);
   const [onPresentMarketModal] = useModal(<MarketModal />);
-  const [onPresentInventoryModal] = useModal(<InventoryModal auth={auth} />);
+  const [onPresentInventoryModal] = useModal(<InventoryModal account={account} />);
   const [onPresentPVPModal] = useModal(<PVPModal />);
   const [onPresentCraftModal] = useModal(<CraftModal />);
   const [onPresentLeaderboardModal] = useModal(<LeaderboardModal />);

@@ -178,6 +178,7 @@
     "babel-plugin-transform-decorators-legacy": "^1",
     "css-loader": "^5",
     "del-cli": "^5",
+    "path-browserify": "^1.0.0",
     "dotenv": "^16",
     "dotenv-cli": "^7",
     "dotenv-webpack": "^6",
