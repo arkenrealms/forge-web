@@ -1,19 +1,41 @@
-# Build stage
-FROM node:20 AS build
+FROM node:20
 
-ARG PUBLIC_URL
-ARG BUILD_PATH
-ARG BUILD_NUMBER
-ARG REACT_APP_SERVICE_URI
-ARG REACT_APP_PUBLIC_URI
-ARG REACT_APP_AUTHORIZATION_ENABLED
+ARG CACHEBUST=5
 
 ENV NODE_OPTIONS=--max-old-space-size=8192
 ENV INLINE_RUNTIME_CHUNK=false
 
-WORKDIR /app
-COPY packages ./packages
-COPY *.json ./
+WORKDIR /usr/src/app
+RUN apt-get update && apt-get install -y vim && rm -rf /var/lib/apt/lists/*
+RUN npm install -g @microsoft/rush ts-node-dev pm2
 
-WORKDIR /app/packages/cerebro-ui
-RUN npm build
+WORKDIR /usr/src/app
+RUN git clone https://github.com/arkenrealms/arken.git
+WORKDIR /usr/src/app/arken
+RUN git submodule init
+RUN git submodule update --remote --recursive
+RUN rm rush.json
+RUN mv rush.forge.json rush.json
+WORKDIR /usr/src/app/arken/packages/seer
+RUN git checkout main
+RUN git submodule init
+RUN git submodule update --remote --recursive
+WORKDIR /usr/src/app/arken/packages/evolution
+RUN git checkout main
+RUN git submodule init
+RUN git submodule update --remote --recursive
+WORKDIR /usr/src/app/arken/packages/forge
+RUN git checkout main
+RUN git submodule init
+RUN git submodule update --remote --recursive
+WORKDIR /usr/src/app/arken/packages/forge/packages/web
+RUN git checkout main
+
+RUN rush update
+
+RUN rushx build
+
+EXPOSE 8021
+
+CMD ["sleep", "infinity"]
+# CMD ["rushx dev"]
