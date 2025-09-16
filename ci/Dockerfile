@@ -46,7 +46,7 @@ WORKDIR /usr/src/app/arken/packages/forge/packages/web
 RUN cp .env.sample .env
 
 # Build
-RUN rushx build
+RUN rushx build > build.log 2>&1 || (cat build.log && exit 1)
 
 # ----------------------------
 # Stage 2: Runtime
