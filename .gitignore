@@ -6,6 +6,7 @@ dist
 test-results
 coverage
 junit.xml
+.DS_Store
 
 .env
 *.log

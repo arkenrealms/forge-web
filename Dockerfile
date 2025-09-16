@@ -25,7 +25,7 @@ RUN rush update
 WORKDIR /usr/src/app/arken/packages/forge/packages/web
 
 # Copy env
-COPY arken/packages/forge/packages/web/.env.sample .env
+COPY .env.sample .env
 
 # Build
 RUN rushx build
