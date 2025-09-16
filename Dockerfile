@@ -1,42 +1,49 @@
-FROM node:20
-
-ARG CACHEBUST=17
+# ----------------------------
+# Stage 1: Builder
+# ----------------------------
+FROM node:20 AS builder
 
 ENV NODE_OPTIONS=--max-old-space-size=8192
-ENV INLINE_RUNTIME_CHUNK=false
-
 WORKDIR /usr/src/app
-RUN apt-get update && apt-get install -y vim && rm -rf /var/lib/apt/lists/*
-RUN npm install -g @microsoft/rush ts-node-dev pm2
 
-WORKDIR /usr/src/app
+# Install Rush globally
+RUN npm install -g @microsoft/rush
+
+# Clone repo + submodules
 RUN git clone https://github.com/arkenrealms/arken.git
 WORKDIR /usr/src/app/arken
-RUN git submodule init
-RUN git submodule update --remote --recursive
-RUN rm rush.json
-RUN mv rush.forge.json rush.json
-WORKDIR /usr/src/app/arken/packages/seer
 RUN git checkout main
-RUN git submodule init
-RUN git submodule update --remote --recursive
-WORKDIR /usr/src/app/arken/packages/evolution
-RUN git checkout main
-RUN git submodule init
-RUN git submodule update --remote --recursive
-WORKDIR /usr/src/app/arken/packages/forge
-RUN git checkout main
-RUN git submodule init
-RUN git submodule update --remote --recursive
-WORKDIR /usr/src/app/arken/packages/forge/packages/web
-RUN git checkout main
+RUN git submodule update --init --recursive
 
+# Swap rush.json
+RUN rm rush.json && mv rush.forge.json rush.json
+
+# Install deps
 RUN rush update
 
-COPY .env.sample .env
-# RUN rushx dev
+# Move into forge-web
+WORKDIR /usr/src/app/arken/packages/forge/packages/web
+
+# Copy env
+COPY arken/packages/forge/packages/web/.env.sample .env
+
+# Build
+RUN rushx build
+
+# ----------------------------
+# Stage 2: Runtime
+# ----------------------------
+FROM node:20-slim AS runtime
+
+WORKDIR /usr/src/app
+
+# Copy build artifacts only
+COPY --from=builder /usr/src/app/arken/packages/forge/packages/web/build ./build
+
+# Install a lightweight static server
+RUN npm install -g serve
 
 EXPOSE 8021
 
-CMD ["rushx", "dev"]
-# CMD ["rushx dev"]
+# Serve production build
+CMD ["serve", "-s", "build", "-l", "8021"]
