@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled, { css, DefaultTheme } from 'styled-components';
 import { space } from 'styled-system';
 import { CardProps } from './types';
@@ -9,6 +9,7 @@ interface StyledCardProps extends CardProps {
   isSuccess?: boolean;
   isWarning?: boolean;
   isDisabled?: boolean;
+  children?: ReactNode;
 }
 
 /**

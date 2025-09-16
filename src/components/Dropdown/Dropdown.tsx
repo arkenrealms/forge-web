@@ -44,7 +44,7 @@ const Dropdown: React.FC<DropdownProps> = ({ target, position = 'bottom', childr
   return (
     <Container onClick={onClick}>
       {target}
-      <DropdownContent position={position}>{children}</DropdownContent>
+      <DropdownContent position={position as Position}>{children}</DropdownContent>
     </Container>
   );
 };
