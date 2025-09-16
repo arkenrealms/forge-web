@@ -4,7 +4,7 @@ services:
   arken-forge-web:
     container_name: arken-forge-web
     build:
-      context: .. # repo root (forge-web)
+      context: . # repo root (forge-web)
       dockerfile: Dockerfile # uses the Dockerfile at repo root
     restart: unless-stopped
     ports:
