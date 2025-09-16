@@ -34,9 +34,9 @@ RUN git checkout main
 RUN rush update
 
 COPY .env.sample .env
-RUN rushx build
+# RUN rushx dev
 
 EXPOSE 8021
 
-CMD ["sleep", "infinity"]
+CMD ["rushx", "dev"]
 # CMD ["rushx dev"]
