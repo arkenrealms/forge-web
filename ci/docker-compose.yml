@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   arken-forge-web:
@@ -8,11 +8,13 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     ports:
-      - "8021:8021"
+      - '8021:8021'
     environment:
       NODE_ENV: production
-    mem_limit: 2g
-    memswap_limit: 4g
+      ARKEN_ENV: production
+      NODE_OPTIONS: '--max-old-space-size=4096'
+    mem_limit: 4g
+    memswap_limit: 8g
     volumes:
       - forge-npm-cache:/root/.npm
       - forge-rush-cache:/root/.rush
