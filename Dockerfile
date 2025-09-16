@@ -24,7 +24,7 @@ RUN rush update
 # Move into forge-web
 WORKDIR /usr/src/app/arken/packages/forge/packages/web
 
-# Copy env from *local forge-web repo* into cloned monorepo
+# Copy env from this repo
 COPY .env.sample /usr/src/app/arken/packages/forge/packages/web/.env
 
 # Build
@@ -45,5 +45,4 @@ RUN npm install -g serve
 
 EXPOSE 8021
 
-# Serve production build
 CMD ["serve", "-s", "build", "-l", "8021"]

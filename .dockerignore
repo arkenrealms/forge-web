@@ -1,7 +1,7 @@
 # ignore coverage report
 coverage
 
-# ignore dotenv
+# ignore dotenv (only the actual env file, not samples)
 .env
 
 # ignore npm installed packages
@@ -9,8 +9,14 @@ node_modules
 
 # ignore built ts files
 dist
+build
 
 # ignore log files but keep folder
 *.log
 logs/*
 !logs/.keep
+
+# ignore git and docker files
+.git
+.gitignore
+.dockerignore
