@@ -24,8 +24,8 @@ RUN rush update
 # Move into forge-web
 WORKDIR /usr/src/app/arken/packages/forge/packages/web
 
-# Copy env
-COPY .env.sample .env
+# Copy env from *local forge-web repo* into cloned monorepo
+COPY .env.sample /usr/src/app/arken/packages/forge/packages/web/.env
 
 # Build
 RUN rushx build

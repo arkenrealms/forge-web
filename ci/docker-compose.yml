@@ -4,8 +4,8 @@ services:
   arken-forge-web:
     container_name: arken-forge-web
     build:
-      context: ../
-      dockerfile: arken/packages/forge/packages/web/Dockerfile
+      context: .
+      dockerfile: Dockerfile
     restart: unless-stopped
     ports:
       - '8021:8021'
