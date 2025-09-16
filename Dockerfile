@@ -1,6 +1,6 @@
 FROM node:20
 
-ARG CACHEBUST=5
+ARG CACHEBUST=17
 
 ENV NODE_OPTIONS=--max-old-space-size=8192
 ENV INLINE_RUNTIME_CHUNK=false
@@ -33,6 +33,7 @@ RUN git checkout main
 
 RUN rush update
 
+COPY .env.sample .env
 RUN rushx build
 
 EXPOSE 8021
