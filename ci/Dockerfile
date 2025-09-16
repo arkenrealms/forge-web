@@ -56,7 +56,7 @@ FROM node:20-slim AS runtime
 WORKDIR /usr/src/app
 
 # Copy build artifacts only
-COPY --from=builder /usr/src/app/arken/packages/forge/packages/web/build ./build
+# COPY --from=builder /usr/src/app/arken/packages/forge/packages/web/build ./build
 
 # Install a lightweight static server
 RUN npm install -g serve
@@ -64,4 +64,4 @@ RUN npm install -g serve
 EXPOSE 8021
 
 # Serve production build
-CMD ["serve", "-s", "build", "-l", "8021"]
+# CMD ["serve", "-s", "build", "-l", "8021"]
